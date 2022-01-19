@@ -50,7 +50,7 @@ const App = () => {
               <Button sx={styleApp01} variant="contained" onClick={() => setValue('3')}>
                 <b>Статистика</b>
               </Button>
-              <Header />
+              {/* <Header /> */}
             </Stack>
           </Box>
           <TabPanel value="1">

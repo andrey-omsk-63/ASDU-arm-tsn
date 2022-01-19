@@ -118,7 +118,7 @@ const PointsXt112Comp21 = (props: { xctrl: Welcome1; crossroad: number }) => {
   const steepHorizon = 12 / axisHorizon;
   const axisVertical = vertical * 1;
   const steepVertical = 84.4 / axisVertical;
-  let matrix = [[]];
+  let matrix: string[][] = [[]];
   let scale = 5;
 
   let coler = 'red';
@@ -136,7 +136,7 @@ const PointsXt112Comp21 = (props: { xctrl: Welcome1; crossroad: number }) => {
 
     MakeMatrix();
 
-    const PointsXt112Comp1Tab4StrOptim = (j) => {
+    const PointsXt112Comp1Tab4StrOptim = (j:number) => {
       resStr = [];
       coler = 'red';
       colerOld = matrix[j / scale][0 / scale];
