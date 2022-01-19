@@ -20,6 +20,33 @@ import {
 import { Line } from 'react-chartjs-2';
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
+export interface Welcome2 {
+  id: number;
+  area: number;
+  date: Date;
+  region: number;
+  Statistics: Statistic[];
+}
+
+export interface Statistic {
+  Min: number;
+  Hour: number;
+  TLen: number;
+  Type: number;
+  Datas: Data[];
+  Period: number;
+}
+
+export interface Data {
+  GP: number;
+  Speed: number;
+  Chanel: number;
+  Status: number;
+  Density: number;
+  Intensiv: number;
+  Occupant: number;
+}
+
 const colorsGraf = [
   'red',
   'orange',
@@ -39,10 +66,25 @@ const colorsGraf = [
   'maroon',
   '',
 ];
-const labels = [];
-let canal = [];
 
-const data = {
+export interface DataGl {
+  labels: string[];
+  datasets: Datasets[];
+}
+
+export interface Datasets {
+  label: string;
+  data: number[];
+  borderWidth: number;
+  borderColor: string;
+  backgroundColor: string;
+  pointRadius: number;
+}
+
+const labels: string[] = [];
+let canal: number[] = [];
+
+const data: DataGl = {
   labels,
   datasets: [],
 };
@@ -92,17 +134,21 @@ const Statistic110 = () => {
     lineHeight: 2,
   };
 
-  const [points, setPoints] = React.useState({});
+  //const [points, setPoints] = React.useState({});
+  const [points, setPoints] = React.useState<Statistic>({} as Statistic);
   const [isOpen, setIsOpen] = React.useState(false);
   const [value, setValue] = React.useState('0');
-  let resStr = [];
-  let resSps = [];
-  let matrix = [];
+
+  let resStr: any = [];
+  let resSps: any = [];
+
+  let matrix: Statistic;
+
   let kakchestvo = ' ';
 
   const StatGraf00 = () => {
     let datas = [];
-    let datasetsMask = {
+    let datasetsMask: Datasets = {
       label: 'Канал ',
       data: [],
       borderWidth: 1,
@@ -161,7 +207,7 @@ const Statistic110 = () => {
       maintainAspectRatio: false,
       plugins: {
         legend: {
-          position: 'top',
+          position: 'top' as const,
         },
         title: {
           display: false,
@@ -183,7 +229,8 @@ const Statistic110 = () => {
       textAlign: 'center',
       lineHeight: 2,
     };
-    const KnobBat = (props) => {
+
+    const KnobBat = (props: { num: string }) => {
       const styleBatton = {
         fontSize: 11,
         backgroundColor: '#F1F3F4',
@@ -352,7 +399,7 @@ const Statistic110 = () => {
   };
 
   const CreateMatrix = () => {
-    const step = points[0].TLen;
+    const step: number = points[0].TLen;
     const typer = points[0].Type;
     let rows = 1440 / step;
     let time = -step;
@@ -366,6 +413,7 @@ const Statistic110 = () => {
         TLen: step,
         Type: typer,
         Datas: [],
+        Period: 0,
       };
     }
   };

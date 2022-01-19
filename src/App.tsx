@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import TabContext from '@mui/lab/TabContext';
 import TabPanel from '@mui/lab/TabPanel';
 
-import Header from './components/Header/Header';
+//import Header from './components/Header/Header';
 import Management from './components/Management/Management';
 import Points from './components/Points/Points';
 import Statistics from './components/Statistics/Statistics';
