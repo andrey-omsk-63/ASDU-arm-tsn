@@ -12,7 +12,7 @@ const Statistics = () => {
   const [value, setValue] = React.useState('1');
 
   return (
-    <Box sx={{ marginTop: -2, marginLeft: -3, marginRight: -6 }}>
+    <Box sx={{ marginTop: -2, marginLeft: -3, marginRight: -7 }}>
       <TabContext value={value}>
         <Box>
           <Stack sx={{ marginTop: -2 }} direction="row">

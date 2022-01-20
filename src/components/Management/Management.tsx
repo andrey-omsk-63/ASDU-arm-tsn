@@ -15,10 +15,10 @@ const Management = () => {
     padding: 1,
     margin: 1,
     marginLeft: -0.5,
-    marginRight: 0,
     marginTop: 0.5,
     marginBottom: 0,
-    border: 0,
+    //marginRight: 0,
+    //border: 0,
   };
 
   const FourKnops = () => {
@@ -38,7 +38,7 @@ const Management = () => {
   };
 
   return (
-    <Box sx={{ fontSize: 12, marginTop: -3, marginLeft: -1, marginRight: -4 }}>
+    <Box sx={{ fontSize: 12, marginTop: -3, marginLeft: -1, marginRight: -6 }}>
       <Grid container sx={{ marginLeft: -3 }}>
         <ManagementLeftGrid />
         <Grid item xs>

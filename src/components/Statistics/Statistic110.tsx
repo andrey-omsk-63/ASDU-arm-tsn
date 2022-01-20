@@ -134,15 +134,14 @@ const Statistic110 = () => {
     lineHeight: 2,
   };
 
-  //const [points, setPoints] = React.useState({});
-  const [points, setPoints] = React.useState<Statistic>({} as Statistic);
+  const [points, setPoints] = React.useState<Array<Statistic>>([]);
   const [isOpen, setIsOpen] = React.useState(false);
   const [value, setValue] = React.useState('0');
 
   let resStr: any = [];
   let resSps: any = [];
 
-  let matrix: Statistic;
+  let matrix: Array<Statistic> = [];
 
   let kakchestvo = ' ';
 
@@ -190,7 +189,6 @@ const Statistic110 = () => {
 
         data.datasets.push(datasetsMask);
         canal.push(val);
-        //console.log('canal:', canal);
       }
     }
 

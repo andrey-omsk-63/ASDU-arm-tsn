@@ -10,6 +10,32 @@ import Management from './components/Management/Management';
 import Points from './components/Points/Points';
 import Statistics from './components/Statistics/Statistics';
 
+// const WS = new WebSocket('wss://' + window.location.host + window.location.pathname + 'W' + window.location.search)
+const WS = new WebSocket('wss://192.168.115.134:4443/user/Andrey_omsk/charPointsW')
+
+WS.onopen = function (event) {
+  console.log(event);
+}
+
+WS.onclose = function (event) {
+  console.log(event);
+}
+
+WS.onerror = function (event) {
+  console.log(event);
+}
+
+WS.onmessage = function (event) {
+  let allData = JSON.parse(event.data);
+  let data = allData.data;
+  switch (allData.type) {
+    case 'xctrlInfo':
+      console.log(data);
+      break;
+
+  }
+}
+
 const App = () => {
   const styleApp01 = {
     fontSize: 12,

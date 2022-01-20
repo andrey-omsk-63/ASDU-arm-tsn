@@ -20,7 +20,7 @@ const ManagementLeftGrid = () => {
           border: 1,
           borderRadius: 1,
           borderColor: 'primary.main',
-          margin: 1,
+          margin: 1.2,
           height: '94.6vh',
         }}>
         <Grid container>

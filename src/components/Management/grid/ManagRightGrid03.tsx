@@ -16,8 +16,8 @@ const ManagementRightGrid03 = () => {
     borderRadius: 1,
     borderColor: 'primary.main',
     marginTop: 0.5,
-    marginLeft: -0.5,
-    marginRight: 0.5,
+    marginLeft: -0.7,
+    //marginRight: -0.5,
     height: '86.0vh',
   };
 
