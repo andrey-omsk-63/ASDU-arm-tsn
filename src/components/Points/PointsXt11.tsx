@@ -98,10 +98,10 @@ const PointsXt11 = (props: { open: boolean; xctrll: XctrlInfo; xt: string; IP: s
 
   const isOpen = props.open;
   //setPoints(props.xctrll);
-  const points = props.xctrll;
+  const points: XctrlInfo = props.xctrll;
 
   console.log('PointsXt11:', points);
-  console.log('points.xctrls:', props.xctrll.xctrls);
+  //console.log('points.xctrls:', points[0]);
 
   const [valueLevel2, setValueLavel2] = React.useState('1');
   //const [crossroad, setCrossroad] = React.useState(0);
