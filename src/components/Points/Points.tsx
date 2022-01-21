@@ -7,10 +7,13 @@ import TabPanel from '@mui/lab/TabPanel';
 
 import PointsXt11 from './PointsXt11';
 
-const Points = (props: {open: boolean}) => {
-  
+import { XctrlInfo } from '../../interfaceGl.d';
+
+const Points = (props: { open: boolean; xctrl: XctrlInfo }) => {
+  console.log('Pointss:', props.xctrl);
+
   const stylePXt1 = {
-    fontSize: 10,
+    fontSiz: 10,
     maxHeight: '20px',
     minHeight: '20px',
     backgroundColor: '#F1F3F4',
@@ -19,6 +22,8 @@ const Points = (props: {open: boolean}) => {
   };
 
   const [value, setValue] = React.useState('1');
+  const open = props.open;
+  const xctrll = props.xctrl;
 
   return (
     <Box sx={{ fontSize: 12, marginTop: -2, marginLeft: -3, marginRight: -7 }}>
@@ -35,10 +40,20 @@ const Points = (props: {open: boolean}) => {
           </Stack>
         </Box>
         <TabPanel value="1">
-          <PointsXt11 xt='XT:1:1' IP={'http://localhost:3000/xctrl.json'} />
+          <PointsXt11
+            open={open}
+            xctrll={xctrll}
+            xt="XT:1:1"
+            IP={'http://localhost:3000/xctrl.json'}
+          />
         </TabPanel>
         <TabPanel value="2">
-          <PointsXt11 xt='XT:1:2' IP={'http://localhost:3000/otladka.json'} />
+          <PointsXt11
+            open={open}
+            xctrll={xctrll}
+            xt="XT:2:1"
+            IP={'http://localhost:3000/otladka.json'}
+          />
         </TabPanel>
       </TabContext>
     </Box>

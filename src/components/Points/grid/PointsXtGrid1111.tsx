@@ -2,77 +2,79 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
+import { XctrlInfo } from '../../../interfaceGl.d';
+
 export interface Welcome1 {
-  ext:      Array<number[]>;
-  use:      boolean;
-  area:     number;
-  step:     number;
-  time:     number;
-  ltime:    number;
-  pknow:    number;
-  pkcalc:   number;
-  pklast:   number;
-  region:   number;
-  status:   any[];
-  switch:   boolean;
-  xctrls:   Xctrl[];
-  yellow:   Yellow;
-  devices:  number[];
-  release:  boolean;
-  results:  { [key: string]: Result[] };
-  subarea:  number;
+  ext: Array<number[]>;
+  use: boolean;
+  area: number;
+  step: number;
+  time: number;
+  ltime: number;
+  pknow: number;
+  pkcalc: number;
+  pklast: number;
+  region: number;
+  status: any[];
+  switch: boolean;
+  xctrls: Xctrl[];
+  yellow: Yellow;
+  devices: number[];
+  release: boolean;
+  results: { [key: string]: Result[] };
+  subarea: number;
   prioryty: Array<number[]>;
 }
 
 export interface Result {
-  Good:  boolean;
-  Time:  number;
+  Good: boolean;
+  Time: number;
   Value: number[];
 }
 
 export interface Xctrl {
-  left:       number;
-  name:       string;
-  right:      number;
-  status:     any[];
-  StrategyA:  StrategyA[];
-  StrategyB:  StrategyB[];
+  left: number;
+  name: string;
+  right: number;
+  status: any[];
+  StrategyA: StrategyA[];
+  StrategyB: StrategyB[];
   Calculates: Calculate[];
 }
 
 export interface Calculate {
-  id:     number;
-  area:   number;
-  chanL:  number[];
-  chanR:  number[];
+  id: number;
+  area: number;
+  chanL: number[];
+  chanR: number[];
   region: number;
 }
 
 export interface StrategyA {
-  pk:     number;
-  desc:   string;
-  xleft:  number;
+  pk: number;
+  desc: string;
+  xleft: number;
   xright: number;
 }
 
 export interface StrategyB {
-  pkl:    number;
-  pkr:    number;
-  pks:    number;
-  desc:   string;
-  vleft:  number;
-  xleft:  number;
+  pkl: number;
+  pkr: number;
+  pks: number;
+  desc: string;
+  vleft: number;
+  xleft: number;
   vright: number;
   xright: number;
 }
 
 export interface Yellow {
-  make:  boolean;
-  stop:  number;
+  make: boolean;
+  stop: number;
   start: number;
 }
 
-const PointsXtGrid1111 = (props: {open: boolean, xctrl: Welcome1}) => {
+const PointsXtGrid1111 = (props: { open: boolean; xctrl: Welcome1 }) => {
   let resStr = [];
 
   const styleXTG02 = {

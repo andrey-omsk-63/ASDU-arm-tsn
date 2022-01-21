@@ -6,77 +6,79 @@ import PointsXtGrid1111 from './grid/PointsXtGrid1111';
 import PointsXtGrid1112 from './grid/PointsXtGrid1112';
 import PointsXtGrid1114 from './grid/PointsXtGrid1114';
 
-export interface Welcome1 {
-  ext:      Array<number[]>;
-  use:      boolean;
-  area:     number;
-  step:     number;
-  time:     number;
-  ltime:    number;
-  pknow:    number;
-  pkcalc:   number;
-  pklast:   number;
-  region:   number;
-  status:   any[];
-  switch:   boolean;
-  xctrls:   Xctrl[];
-  yellow:   Yellow;
-  devices:  number[];
-  release:  boolean;
-  results:  { [key: string]: Result[] };
-  subarea:  number;
-  prioryty: Array<number[]>;
-}
+import { XctrlInfo } from '../../interfaceGl.d';
 
-export interface Result {
-  Good:  boolean;
-  Time:  number;
-  Value: number[];
-}
+// export interface Welcome1 {
+//   ext:      Array<number[]>;
+//   use:      boolean;
+//   area:     number;
+//   step:     number;
+//   time:     number;
+//   ltime:    number;
+//   pknow:    number;
+//   pkcalc:   number;
+//   pklast:   number;
+//   region:   number;
+//   status:   any[];
+//   switch:   boolean;
+//   xctrls:   Xctrl[];
+//   yellow:   Yellow;
+//   devices:  number[];
+//   release:  boolean;
+//   results:  { [key: string]: Result[] };
+//   subarea:  number;
+//   prioryty: Array<number[]>;
+// }
 
-export interface Xctrl {
-  left:       number;
-  name:       string;
-  right:      number;
-  status:     any[];
-  StrategyA:  StrategyA[];
-  StrategyB:  StrategyB[];
-  Calculates: Calculate[];
-}
+// export interface Result {
+//   Good:  boolean;
+//   Time:  number;
+//   Value: number[];
+// }
 
-export interface Calculate {
-  id:     number;
-  area:   number;
-  chanL:  number[];
-  chanR:  number[];
-  region: number;
-}
+// export interface Xctrl {
+//   left:       number;
+//   name:       string;
+//   right:      number;
+//   status:     any[];
+//   StrategyA:  StrategyA[];
+//   StrategyB:  StrategyB[];
+//   Calculates: Calculate[];
+// }
 
-export interface StrategyA {
-  pk:     number;
-  desc:   string;
-  xleft:  number;
-  xright: number;
-}
+// export interface Calculate {
+//   id:     number;
+//   area:   number;
+//   chanL:  number[];
+//   chanR:  number[];
+//   region: number;
+// }
 
-export interface StrategyB {
-  pkl:    number;
-  pkr:    number;
-  pks:    number;
-  desc:   string;
-  vleft:  number;
-  xleft:  number;
-  vright: number;
-  xright: number;
-}
+// export interface StrategyA {
+//   pk:     number;
+//   desc:   string;
+//   xleft:  number;
+//   xright: number;
+// }
 
-export interface Yellow {
-  make:  boolean;
-  stop:  number;
-  start: number;
-}
+// export interface StrategyB {
+//   pkl:    number;
+//   pkr:    number;
+//   pks:    number;
+//   desc:   string;
+//   vleft:  number;
+//   xleft:  number;
+//   vright: number;
+//   xright: number;
+// }
 
-const PointsXt111 = (props: {open: boolean, xctrl: Welcome1}) => {
+// export interface Yellow {
+//   make:  boolean;
+//   stop:  number;
+//   start: number;
+// }
+
+const PointsXt111 = (props: { open: boolean; xctrll: XctrlInfo }) => {
   const styleXt02 = {
     border: 1,
     borderRadius: 1,
@@ -132,8 +134,8 @@ const PointsXt111 = (props: {open: boolean, xctrl: Welcome1}) => {
   let resStr2 = 'Выключенo';
 
   if (props.open) {
-    if (props.xctrl.switch) resStr1 = 'Включён';
-    if (props.xctrl.release) resStr2 = 'Включeнo';
+    if (props.xctrll.switch) resStr1 = 'Включён';
+    if (props.xctrll.release) resStr2 = 'Включeнo';
   }
 
   return (
@@ -153,7 +155,7 @@ const PointsXt111 = (props: {open: boolean, xctrl: Welcome1}) => {
                 &nbsp;
                 <b>
                   &nbsp; Время&nbsp;
-                  {TimeStr(props.xctrl.time)} &nbsp;
+                  {TimeStr(props.xctrll.time)} &nbsp;
                 </b>
                 &nbsp;&nbsp;Расчёт не возможен&nbsp;&nbsp;
                 <b>Управление по ВР</b>
@@ -165,13 +167,13 @@ const PointsXt111 = (props: {open: boolean, xctrl: Welcome1}) => {
                 <Box sx={{ marginRight: -1.5 }}>
                   <Grid container>
                     <Grid item xs={4} sx={styleXt04}>
-                      <PointsXtGrid1111 open={props.open} xctrl={props.xctrl} />
+                      {/* <PointsXtGrid1111 open={props.open} xctrll={props.xctrll} /> */}
                     </Grid>
                     <Grid item xs={4} sx={styleXt05}>
-                      <PointsXtGrid1112 open={props.open} xctrl={props.xctrl} />
+                      {/* <PointsXtGrid1112 open={props.open} xctrll={props.xctrll} /> */}
                     </Grid>
                     <Grid item xs sx={styleXt04}>
-                      <PointsXtGrid1114 open={props.open} xctrl={props.xctrl} />
+                      {/* <PointsXtGrid1114 open={props.open} xctrll={props.xctrll} /> */}
                     </Grid>
                   </Grid>
                 </Box>

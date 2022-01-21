@@ -6,83 +6,84 @@ import TabContext from '@mui/lab/TabContext';
 import TabPanel from '@mui/lab/TabPanel';
 import Modal from '@mui/material/Modal';
 
-import axios from 'axios';
+//import axios from 'axios';
 
 import PointsXt111 from './PointsXt111';
 import PointsXt112 from './PointsXt112';
 
-export interface Welcome1 {
-  ext:      Array<number[]>;
-  use:      boolean;
-  area:     number;
-  step:     number;
-  time:     number;
-  ltime:    number;
-  pknow:    number;
-  pkcalc:   number;
-  pklast:   number;
-  region:   number;
-  status:   any[];
-  switch:   boolean;
-  xctrls:   Xctrl[];
-  yellow:   Yellow;
-  devices:  number[];
-  release:  boolean;
-  results:  { [key: string]: Result[] };
-  subarea:  number;
-  prioryty: Array<number[]>;
-}
+import { XctrlInfo } from '../../interfaceGl.d';
 
-export interface Result {
-  Good:  boolean;
-  Time:  number;
-  Value: number[];
-}
+// export interface Welcome1 {
+//   ext: Array<number[]>;
+//   use: boolean;
+//   area: number;
+//   step: number;
+//   time: number;
+//   ltime: number;
+//   pknow: number;
+//   pkcalc: number;
+//   pklast: number;
+//   region: number;
+//   status: any[];
+//   switch: boolean;
+//   xctrls: Xctrl[];
+//   yellow: Yellow;
+//   devices: number[];
+//   release: boolean;
+//   results: { [key: string]: Result[] };
+//   subarea: number;
+//   prioryty: Array<number[]>;
+// }
 
-export interface Xctrl {
-  left:       number;
-  name:       string;
-  right:      number;
-  status:     any[];
-  StrategyA:  StrategyA[];
-  StrategyB:  StrategyB[];
-  Calculates: Calculate[];
-}
+// export interface Result {
+//   Good: boolean;
+//   Time: number;
+//   Value: number[];
+// }
 
-export interface Calculate {
-  id:     number;
-  area:   number;
-  chanL:  number[];
-  chanR:  number[];
-  region: number;
-}
+// export interface Xctrl {
+//   left: number;
+//   name: string;
+//   right: number;
+//   status: any[];
+//   StrategyA: StrategyA[];
+//   StrategyB: StrategyB[];
+//   Calculates: Calculate[];
+// }
 
-export interface StrategyA {
-  pk:     number;
-  desc:   string;
-  xleft:  number;
-  xright: number;
-}
+// export interface Calculate {
+//   id: number;
+//   area: number;
+//   chanL: number[];
+//   chanR: number[];
+//   region: number;
+// }
 
-export interface StrategyB {
-  pkl:    number;
-  pkr:    number;
-  pks:    number;
-  desc:   string;
-  vleft:  number;
-  xleft:  number;
-  vright: number;
-  xright: number;
-}
+// export interface StrategyA {
+//   pk: number;
+//   desc: string;
+//   xleft: number;
+//   xright: number;
+// }
 
-export interface Yellow {
-  make:  boolean;
-  stop:  number;
-  start: number;
-}
+// export interface StrategyB {
+//   pkl: number;
+//   pkr: number;
+//   pks: number;
+//   desc: string;
+//   vleft: number;
+//   xleft: number;
+//   vright: number;
+//   xright: number;
+// }
 
+// export interface Yellow {
+//   make: boolean;
+//   stop: number;
+//   start: number;
+// }
 
-const PointsXt11 = (props: {xt: string, IP: string}) => {
+const PointsXt11 = (props: { open: boolean; xctrll: XctrlInfo; xt: string; IP: string }) => {
   const stylePXt1 = {
     fontSize: 10,
     maxHeight: '20px',
@@ -92,19 +93,26 @@ const PointsXt11 = (props: {xt: string, IP: string}) => {
     marginRight: 1,
   };
 
-  const [points, setPoints] = React.useState<Welcome1>({} as Welcome1);
-  const [isOpen, setIsOpen] = React.useState(false);
-  
+  //const [points, setPoints] = React.useState<XctrlInfo>({} as XctrlInfo);
+  //const [isOpen, setIsOpen] = React.useState(false);
+
+  const isOpen = props.open;
+  //setPoints(props.xctrll);
+  const points = props.xctrll;
+
+  console.log('PointsXt11:', points);
+  console.log('points.xctrls:', props.xctrll.xctrls);
+
   const [valueLevel2, setValueLavel2] = React.useState('1');
-  const [crossroad, setCrossroad] = React.useState(0);
-  const ipAdress = props.IP;
+  //const [crossroad, setCrossroad] = React.useState(0);
+  //const ipAdress = props.IP;
 
   const MenuName = () => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
 
     const handleClose = (numer: number) => {
-      setCrossroad(numer);
+      //setCrossroad(numer);
       setValueLavel2('2');
       setOpen(false);
     };
@@ -160,12 +168,12 @@ const PointsXt11 = (props: {xt: string, IP: string}) => {
     }
   };
 
-  React.useEffect(() => {
-    axios.get(ipAdress).then(({ data }) => {
-      setPoints(data);
-      setIsOpen(true);
-    });
-  }, [ipAdress]);
+  // React.useEffect(() => {
+  //   axios.get(ipAdress).then(({ data }) => {
+  //     setPoints(data);
+  //     setIsOpen(true);
+  //   });
+  // }, [ipAdress]);
 
   return (
     <Box sx={{ marginTop: -2, marginLeft: -3, marginRight: -6 }}>
@@ -179,10 +187,10 @@ const PointsXt11 = (props: {xt: string, IP: string}) => {
           </Stack>
         </Box>
         <TabPanel value="1">
-          <PointsXt111 open={isOpen} xctrl={points} />
+          <PointsXt111 open={isOpen} xctrll={points} />
         </TabPanel>
         <TabPanel value="2">
-          <PointsXt112 open={isOpen} xctrl={points} crossroad={crossroad} />
+          {/* <PointsXt112 open={isOpen} xctrll={points} crossroad={crossroad} /> */}
         </TabPanel>
       </TabContext>
     </Box>
