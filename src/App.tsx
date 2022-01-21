@@ -11,7 +11,7 @@ import Points from './components/Points/Points';
 import Statistics from './components/Statistics/Statistics';
 
 // const WS = new WebSocket('wss://' + window.location.host + window.location.pathname + 'W' + window.location.search)
-const WS = new WebSocket('wss://192.168.115.134:4443/user/Andrey_omsk/charPointsW')
+const WS = new WebSocket('wss://192.168.115.134:4443/user/MMM/charPointsW')
 
 WS.onopen = function (event) {
   console.log(event);
