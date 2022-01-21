@@ -425,7 +425,7 @@ const Statistic110 = () => {
   };
 
   React.useEffect(() => {
-    axios.get('http://localhost:3000/stat01.json').then(({ data }) => {
+    axios.get('http://localhost:3000/statistics.json').then(({ data }) => {
       setPoints(data.Statistics);
       setIsOpen(true);
     });

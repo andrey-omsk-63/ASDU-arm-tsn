@@ -1,0 +1,3618 @@
+{
+    "type": "xctrlInfo",
+    "data": {
+        "areaInfo": {
+            "Воронеж": {
+                "1": "Правый берег",
+                "2": "Левый берег"
+            },
+            "Зеленоград": {
+                "1": "Город"
+            },
+            "Иркутск": {
+                "1": "Правый берег",
+                "2": "Левый берег"
+            },
+            "Иркутск дирекция": {
+                "1": "Правый берег",
+                "2": "Левый берег"
+            },
+            "Калмыкия": {
+                "1": "Элиста"
+            },
+            "Мосавтодор": {
+                "1": "Первая половина",
+                "2": "Вторая половина",
+                "3": "Третий кусок"
+            },
+            "Тула": {
+                "1": "Город",
+                "2": "Новомосковск"
+            },
+            "Хабаровск": {
+                "1": "Город",
+                "2": "Область"
+            },
+            "Южно-Сахалинск": {
+                "1": "Город"
+            }
+        },
+        "regionInfo": {
+            "1": "Мосавтодор",
+            "2": "Хабаровск",
+            "3": "Тула",
+            "4": "Калмыкия",
+            "5": "Воронеж",
+            "6": "Иркутск дирекция",
+            "7": "Зеленоград",
+            "8": "Южно-Сахалинск",
+            "9": "Иркутск",
+            "Воронеж": "5",
+            "Все регионы": "*",
+            "Зеленоград": "7",
+            "Иркутск": "9",
+            "Иркутск дирекция": "6",
+            "Калмыкия": "4",
+            "Мосавтодор": "1",
+            "Тула": "3",
+            "Хабаровск": "2",
+            "Южно-Сахалинск": "8"
+        },
+        "xctrlInfo": [
+            {
+                "region": 6,
+                "area": 1,
+                "subarea": 1,
+                "switch": true,
+                "release": true,
+                "use": true,
+                "yellow": {
+                    "make": true,
+                    "start": 0,
+                    "stop": 0
+                },
+                "step": 15,
+                "ltime": 675,
+                "pkcalc": 1,
+                "pknow": 1,
+                "pklast": 0,
+                "status": null,
+                "xctrls": [
+                    {
+                        "name": "Хомутово",
+                        "left": 1500,
+                        "right": 1500,
+                        "status": [],
+                        "StrategyA": [],
+                        "StrategyB": [
+                            {
+                                "xleft": 350,
+                                "xright": 1200,
+                                "vleft": 1,
+                                "vright": 1,
+                                "pkl": 1,
+                                "pks": 1,
+                                "pkr": 1,
+                                "desc": "без 2ф"
+                            },
+                            {
+                                "xleft": 700,
+                                "xright": 1200,
+                                "vleft": 1,
+                                "vright": 1,
+                                "pkl": 2,
+                                "pks": 2,
+                                "pkr": 2,
+                                "desc": "2ф"
+                            }
+                        ],
+                        "Calculates": [
+                            {
+                                "region": 6,
+                                "area": 1,
+                                "id": 1,
+                                "chanL": [
+                                    5
+                                ],
+                                "chanR": [
+                                    2
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "ext": [
+                    [
+                        1,
+                        1
+                    ],
+                    [
+                        2,
+                        2
+                    ],
+                    [
+                        0,
+                        0
+                    ],
+                    [
+                        0,
+                        0
+                    ],
+                    [
+                        0,
+                        0
+                    ],
+                    [
+                        0,
+                        0
+                    ],
+                    [
+                        0,
+                        0
+                    ],
+                    [
+                        0,
+                        0
+                    ],
+                    [
+                        0,
+                        0
+                    ],
+                    [
+                        0,
+                        0
+                    ],
+                    [
+                        0,
+                        0
+                    ],
+                    [
+                        0,
+                        0
+                    ]
+                ],
+                "prioryty": [
+                    [
+                        8,
+                        7,
+                        9
+                    ],
+                    [
+                        5,
+                        4,
+                        6
+                    ],
+                    [
+                        2,
+                        1,
+                        3
+                    ],
+                    [
+                        0,
+                        0,
+                        0
+                    ]
+                ],
+                "time": 675,
+                "results": {
+                    "result": [
+                        {
+                            "Time": 15,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 30,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 45,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 60,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 75,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 90,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 105,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 120,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 135,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 150,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 165,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 180,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 195,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 210,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 225,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 240,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 255,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 270,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 285,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 300,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 315,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 330,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 345,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 360,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 375,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 390,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 405,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 420,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 435,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 450,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 465,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 480,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 495,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 510,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 525,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 540,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 555,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 570,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 585,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 600,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 615,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 630,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 645,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 660,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 675,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 690,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 705,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 720,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 735,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 750,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 765,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 780,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 795,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 810,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 825,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 840,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 855,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 870,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 885,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 900,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 915,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 930,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 945,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 960,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 975,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 990,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1005,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1020,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1035,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1050,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1065,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1080,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1095,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1110,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1125,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1140,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1155,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1170,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1185,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1200,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1215,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1230,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1245,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1260,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1275,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1290,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1305,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1320,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1335,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1350,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1365,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1380,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1395,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1410,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1425,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1440,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        }
+                    ],
+                    "Хомутово": [
+                        {
+                            "Time": 15,
+                            "Value": [
+                                4,
+                                8,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 30,
+                            "Value": [
+                                4,
+                                8,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 45,
+                            "Value": [
+                                4,
+                                20,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 60,
+                            "Value": [
+                                0,
+                                0,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 75,
+                            "Value": [
+                                0,
+                                0,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 90,
+                            "Value": [
+                                0,
+                                0,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 105,
+                            "Value": [
+                                0,
+                                0,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 120,
+                            "Value": [
+                                0,
+                                0,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 135,
+                            "Value": [
+                                0,
+                                0,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 150,
+                            "Value": [
+                                0,
+                                0,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 165,
+                            "Value": [
+                                0,
+                                0,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 180,
+                            "Value": [
+                                0,
+                                0,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 195,
+                            "Value": [
+                                0,
+                                0,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 210,
+                            "Value": [
+                                0,
+                                0,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 225,
+                            "Value": [
+                                0,
+                                0,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 240,
+                            "Value": [
+                                0,
+                                0,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 255,
+                            "Value": [
+                                0,
+                                0,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 270,
+                            "Value": [
+                                0,
+                                0,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 285,
+                            "Value": [
+                                0,
+                                4,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 300,
+                            "Value": [
+                                0,
+                                0,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 315,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 330,
+                            "Value": [
+                                0,
+                                8,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 345,
+                            "Value": [
+                                0,
+                                0,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 360,
+                            "Value": [
+                                4,
+                                12,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 375,
+                            "Value": [
+                                0,
+                                36,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 390,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 405,
+                            "Value": [
+                                0,
+                                20,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 420,
+                            "Value": [
+                                0,
+                                20,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 435,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 450,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 465,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 480,
+                            "Value": [
+                                0,
+                                32,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 495,
+                            "Value": [
+                                0,
+                                24,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 510,
+                            "Value": [
+                                0,
+                                52,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 525,
+                            "Value": [
+                                0,
+                                36,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 540,
+                            "Value": [
+                                20,
+                                48,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 555,
+                            "Value": [
+                                24,
+                                80,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 570,
+                            "Value": [
+                                64,
+                                112,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 585,
+                            "Value": [
+                                92,
+                                128,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 600,
+                            "Value": [
+                                76,
+                                100,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 615,
+                            "Value": [
+                                60,
+                                80,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 630,
+                            "Value": [
+                                68,
+                                80,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 645,
+                            "Value": [
+                                56,
+                                64,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 660,
+                            "Value": [
+                                52,
+                                84,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 675,
+                            "Value": [
+                                68,
+                                84,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 690,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 705,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 720,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 735,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 750,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 765,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 780,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 795,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 810,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 825,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 840,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 855,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 870,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 885,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 900,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 915,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 930,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 945,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 960,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 975,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 990,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1005,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1020,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1035,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1050,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1065,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1080,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1095,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1110,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1125,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1140,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1155,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1170,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1185,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1200,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1215,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1230,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1245,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1260,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1275,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1290,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1305,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1320,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1335,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1350,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1365,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1380,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1395,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1410,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1425,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1440,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        }
+                    ]
+                },
+                "devices": [
+                    259492
+                ]
+            },
+            {
+                "region": 6,
+                "area": 2,
+                "subarea": 1,
+                "switch": true,
+                "release": false,
+                "use": true,
+                "yellow": {
+                    "make": true,
+                    "start": 0,
+                    "stop": 0
+                },
+                "step": 15,
+                "ltime": 675,
+                "pkcalc": 1,
+                "pknow": 0,
+                "pklast": 0,
+                "status": null,
+                "xctrls": [
+                    {
+                        "name": "Смоленщина выезд",
+                        "left": 1000,
+                        "right": 1300,
+                        "status": [],
+                        "StrategyA": [],
+                        "StrategyB": [
+                            {
+                                "xleft": 145,
+                                "xright": 1200,
+                                "vleft": 1,
+                                "vright": 1,
+                                "pkl": 1,
+                                "pks": 1,
+                                "pkr": 1,
+                                "desc": "ТВП"
+                            },
+                            {
+                                "xleft": 1000,
+                                "xright": 1200,
+                                "vleft": 1,
+                                "vright": 1,
+                                "pkl": 2,
+                                "pks": 2,
+                                "pkr": 2,
+                                "desc": "МГР"
+                            }
+                        ],
+                        "Calculates": [
+                            {
+                                "region": 6,
+                                "area": 2,
+                                "id": 2,
+                                "chanL": [
+                                    3
+                                ],
+                                "chanR": [
+                                    2
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "ext": [
+                    [
+                        1,
+                        2
+                    ],
+                    [
+                        2,
+                        1
+                    ],
+                    [
+                        0,
+                        0
+                    ],
+                    [
+                        0,
+                        0
+                    ],
+                    [
+                        0,
+                        0
+                    ],
+                    [
+                        0,
+                        0
+                    ],
+                    [
+                        0,
+                        0
+                    ],
+                    [
+                        0,
+                        0
+                    ],
+                    [
+                        0,
+                        0
+                    ],
+                    [
+                        0,
+                        0
+                    ],
+                    [
+                        0,
+                        0
+                    ],
+                    [
+                        0,
+                        0
+                    ]
+                ],
+                "prioryty": [
+                    [
+                        8,
+                        7,
+                        9
+                    ],
+                    [
+                        5,
+                        4,
+                        6
+                    ],
+                    [
+                        2,
+                        1,
+                        3
+                    ],
+                    [
+                        0,
+                        0,
+                        0
+                    ]
+                ],
+                "time": 675,
+                "results": {
+                    "result": [
+                        {
+                            "Time": 15,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 30,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 45,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 60,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 75,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 90,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 105,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 120,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 135,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 150,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 165,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 180,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 195,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 210,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 225,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 240,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 255,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 270,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 285,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 300,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 315,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 330,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 345,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 360,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 375,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 390,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 405,
+                            "Value": [
+                                2,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 420,
+                            "Value": [
+                                2,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 435,
+                            "Value": [
+                                2,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 450,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 465,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 480,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 495,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 510,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 525,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 540,
+                            "Value": [
+                                1,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 555,
+                            "Value": [
+                                2,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 570,
+                            "Value": [
+                                2,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 585,
+                            "Value": [
+                                2,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 600,
+                            "Value": [
+                                2,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 615,
+                            "Value": [
+                                2,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 630,
+                            "Value": [
+                                2,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 645,
+                            "Value": [
+                                2,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 660,
+                            "Value": [
+                                2,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 675,
+                            "Value": [
+                                2,
+                                0
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 690,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 705,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 720,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 735,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 750,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 765,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 780,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 795,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 810,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 825,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 840,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 855,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 870,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 885,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 900,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 915,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 930,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 945,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 960,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 975,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 990,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1005,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1020,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1035,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1050,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1065,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1080,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1095,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1110,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1125,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1140,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1155,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1170,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1185,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1200,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1215,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1230,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1245,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1260,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1275,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1290,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1305,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1320,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1335,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1350,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1365,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1380,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1395,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1410,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1425,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1440,
+                            "Value": [
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        }
+                    ],
+                    "Смоленщина выезд": [
+                        {
+                            "Time": 15,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 30,
+                            "Value": [
+                                0,
+                                4,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 45,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 60,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 75,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 90,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 105,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 120,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 135,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 150,
+                            "Value": [
+                                0,
+                                4,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 165,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 180,
+                            "Value": [
+                                4,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 195,
+                            "Value": [
+                                0,
+                                4,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 210,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 225,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 240,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 255,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 270,
+                            "Value": [
+                                8,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 285,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 300,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 315,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 330,
+                            "Value": [
+                                8,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 345,
+                            "Value": [
+                                4,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 360,
+                            "Value": [
+                                28,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 375,
+                            "Value": [
+                                28,
+                                36,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 390,
+                            "Value": [
+                                104,
+                                60,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 405,
+                            "Value": [
+                                232,
+                                76,
+                                2
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 420,
+                            "Value": [
+                                240,
+                                88,
+                                2
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 435,
+                            "Value": [
+                                244,
+                                64,
+                                2
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 450,
+                            "Value": [
+                                104,
+                                76,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 465,
+                            "Value": [
+                                92,
+                                44,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 480,
+                            "Value": [
+                                48,
+                                20,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 495,
+                            "Value": [
+                                56,
+                                16,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 510,
+                            "Value": [
+                                56,
+                                32,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 525,
+                            "Value": [
+                                116,
+                                60,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 540,
+                            "Value": [
+                                120,
+                                264,
+                                1
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 555,
+                            "Value": [
+                                228,
+                                432,
+                                2
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 570,
+                            "Value": [
+                                212,
+                                428,
+                                2
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 585,
+                            "Value": [
+                                300,
+                                472,
+                                2
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 600,
+                            "Value": [
+                                272,
+                                528,
+                                2
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 615,
+                            "Value": [
+                                180,
+                                456,
+                                2
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 630,
+                            "Value": [
+                                256,
+                                396,
+                                2
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 645,
+                            "Value": [
+                                240,
+                                432,
+                                2
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 660,
+                            "Value": [
+                                156,
+                                376,
+                                2
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 675,
+                            "Value": [
+                                220,
+                                412,
+                                2
+                            ],
+                            "Good": true
+                        },
+                        {
+                            "Time": 690,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 705,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 720,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 735,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 750,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 765,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 780,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 795,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 810,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 825,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 840,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 855,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 870,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 885,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 900,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 915,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 930,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 945,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 960,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 975,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 990,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1005,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1020,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1035,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1050,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1065,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1080,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1095,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1110,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1125,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1140,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1155,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1170,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1185,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1200,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1215,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1230,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1245,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1260,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1275,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1290,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1305,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1320,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1335,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1350,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1365,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1380,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1395,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1410,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1425,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        },
+                        {
+                            "Time": 1440,
+                            "Value": [
+                                0,
+                                0,
+                                0
+                            ],
+                            "Good": false
+                        }
+                    ]
+                },
+                "devices": [
+                    163344
+                ]
+            }
+        ]
+    }
+}

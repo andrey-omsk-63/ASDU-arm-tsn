@@ -7,7 +7,7 @@ import TabPanel from '@mui/lab/TabPanel';
 
 import PointsXt11 from './PointsXt11';
 
-const Points = () => {
+const Points = (props: {open: boolean}) => {
   
   const stylePXt1 = {
     fontSize: 10,
