@@ -2,77 +2,11 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 
-export interface Welcome1 {
-  ext: Array<number[]>;
-  use: boolean;
-  area: number;
-  step: number;
-  time: number;
-  ltime: number;
-  pknow: number;
-  pkcalc: number;
-  pklast: number;
-  region: number;
-  status: any[];
-  switch: boolean;
-  xctrls: Xctrl[];
-  yellow: Yellow;
-  devices: number[];
-  release: boolean;
-  results: { [key: string]: Result[] };
-  subarea: number;
-  prioryty: Array<number[]>;
-}
+import { XctrlInfo } from '../../../interfaceGl.d';
 
-export interface Result {
-  Good: boolean;
-  Time: number;
-  Value: number[];
-}
+const PointsXt112Comp21 = (props: { xctrll: XctrlInfo[]; crossroad: number }) => {
+  const points = props.xctrll[0];
 
-export interface Xctrl {
-  left: number;
-  name: string;
-  right: number;
-  status: any[];
-  StrategyA: StrategyA[];
-  StrategyB: StrategyB[];
-  Calculates: Calculate[];
-}
-
-export interface Calculate {
-  id: number;
-  area: number;
-  chanL: number[];
-  chanR: number[];
-  region: number;
-}
-
-export interface StrategyA {
-  pk: number;
-  desc: string;
-  xleft: number;
-  xright: number;
-}
-
-export interface StrategyB {
-  pkl: number;
-  pkr: number;
-  pks: number;
-  desc: string;
-  vleft: number;
-  xleft: number;
-  vright: number;
-  xright: number;
-}
-
-export interface Yellow {
-  make: boolean;
-  stop: number;
-  start: number;
-}
-
-const PointsXt112Comp21 = (props: { xctrl: Welcome1; crossroad: number }) => {
   const crRoad = props.crossroad;
   const colorsGraf = [
     'orange',
@@ -111,9 +45,9 @@ const PointsXt112Comp21 = (props: { xctrl: Welcome1; crossroad: number }) => {
 
   const [value, setValue] = React.useState(0);
 
-  let dlMas = props.xctrl.xctrls[crRoad].StrategyA.length;
-  const horizon = props.xctrl.xctrls[crRoad].right;
-  const vertical = props.xctrl.xctrls[crRoad].left;
+  let dlMas = points.xctrls[crRoad].StrategyA.length;
+  const horizon = points.xctrls[crRoad].right;
+  const vertical = points.xctrls[crRoad].left;
   const axisHorizon = horizon * 1;
   const steepHorizon = 12 / axisHorizon;
   const axisVertical = vertical * 1;
@@ -136,7 +70,7 @@ const PointsXt112Comp21 = (props: { xctrl: Welcome1; crossroad: number }) => {
 
     MakeMatrix();
 
-    const PointsXt112Comp1Tab4StrOptim = (j:number) => {
+    const PointsXt112Comp1Tab4StrOptim = (j: number) => {
       resStr = [];
       coler = 'red';
       colerOld = matrix[j / scale][0 / scale];
@@ -198,8 +132,8 @@ const PointsXt112Comp21 = (props: { xctrl: Welcome1; crossroad: number }) => {
         let flag = true;
 
         for (let ij = 0; ij < dlMas; ij++) {
-          coorPointY = props.xctrl.xctrls[crRoad].StrategyA[ij].xleft;
-          coorPointX = props.xctrl.xctrls[crRoad].StrategyA[ij].xright;
+          coorPointY = points.xctrls[crRoad].StrategyA[ij].xleft;
+          coorPointX = points.xctrls[crRoad].StrategyA[ij].xright;
           if (coorPointY === j && coorPointX === i) {
             coler = 'black';
             flag = false;

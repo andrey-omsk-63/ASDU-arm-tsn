@@ -4,82 +4,16 @@ import Stack from '@mui/material/Stack';
 
 import PointsXt112Comp21 from './PointsXt112Comp21';
 
-export interface Welcome1 {
-  ext: Array<number[]>;
-  use: boolean;
-  area: number;
-  step: number;
-  time: number;
-  ltime: number;
-  pknow: number;
-  pkcalc: number;
-  pklast: number;
-  region: number;
-  status: any[];
-  switch: boolean;
-  xctrls: Xctrl[];
-  yellow: Yellow;
-  devices: number[];
-  release: boolean;
-  results: { [key: string]: Result[] };
-  subarea: number;
-  prioryty: Array<number[]>;
-}
-
-export interface Result {
-  Good: boolean;
-  Time: number;
-  Value: number[];
-}
-
-export interface Xctrl {
-  left: number;
-  name: string;
-  right: number;
-  status: any[];
-  StrategyA: StrategyA[];
-  StrategyB: StrategyB[];
-  Calculates: Calculate[];
-}
-
-export interface Calculate {
-  id: number;
-  area: number;
-  chanL: number[];
-  chanR: number[];
-  region: number;
-}
-
-export interface StrategyA {
-  pk: number;
-  desc: string;
-  xleft: number;
-  xright: number;
-}
-
-export interface StrategyB {
-  pkl: number;
-  pkr: number;
-  pks: number;
-  desc: string;
-  vleft: number;
-  xleft: number;
-  vright: number;
-  xright: number;
-}
-
-export interface Yellow {
-  make: boolean;
-  stop: number;
-  start: number;
-}
+import { XctrlInfo } from '../../../interfaceGl.d';
 
 const PointsXt112Comp2 = (props: {
   open: boolean;
-  xctrl: Welcome1;
+  xctrll: XctrlInfo[];
   value: string;
   crossroad: number;
 }) => {
+  const points = props.xctrll[0];
+
   const styleXTG011 = {
     fontSize: 11,
     //borderRight: 1,
@@ -145,21 +79,21 @@ const PointsXt112Comp2 = (props: {
   const PointsXt112Comp2Tab1Stroka = () => {
     let resStr = [];
 
-    for (let i = 0; i < props.xctrl.xctrls[props.crossroad].StrategyA.length; i++) {
+    for (let i = 0; i < points.xctrls[props.crossroad].StrategyA.length; i++) {
       resStr.push(
         <Grid key={Math.random()} container item xs={12}>
           <Grid key={Math.random()} xs={2} item sx={styleXTG01}>
-            {props.xctrl.xctrls[props.crossroad].StrategyA[i].pk}
+            {points.xctrls[props.crossroad].StrategyA[i].pk}
           </Grid>
           <Grid key={Math.random()} xs={3} item sx={styleXTG01}>
-            {props.xctrl.xctrls[props.crossroad].StrategyA[i].xleft}
+            {points.xctrls[props.crossroad].StrategyA[i].xleft}
           </Grid>
           <Grid key={Math.random()} xs={3.5} item sx={styleXTG01}>
-            {props.xctrl.xctrls[props.crossroad].StrategyA[i].xright}
+            {points.xctrls[props.crossroad].StrategyA[i].xright}
           </Grid>
 
           <Grid key={Math.random()} xs={3.5} item sx={styleXTG011}>
-            {props.xctrl.xctrls[props.crossroad].StrategyA[i].desc}
+            {points.xctrls[props.crossroad].StrategyA[i].desc}
           </Grid>
         </Grid>,
       );
@@ -182,7 +116,7 @@ const PointsXt112Comp2 = (props: {
 
           <Grid item xs sx={styleXTG04}>
             <Grid container>
-              <PointsXt112Comp21 xctrl={props.xctrl} crossroad={props.crossroad} />
+              <PointsXt112Comp21 xctrll={props.xctrll} crossroad={props.crossroad} />
             </Grid>
           </Grid>
         </Stack>

@@ -9,9 +9,7 @@ import PointsXt11 from './PointsXt11';
 
 import { XctrlInfo } from '../../interfaceGl.d';
 
-const Points = (props: { open: boolean; xctrl: XctrlInfo }) => {
-  console.log('Pointss:', props.xctrl);
-
+const Points = (props: { open: boolean; xctrll: XctrlInfo[] }) => {
   const stylePXt1 = {
     fontSiz: 10,
     maxHeight: '20px',
@@ -23,7 +21,6 @@ const Points = (props: { open: boolean; xctrl: XctrlInfo }) => {
 
   const [value, setValue] = React.useState('1');
   const open = props.open;
-  const xctrll = props.xctrl;
 
   return (
     <Box sx={{ fontSize: 12, marginTop: -2, marginLeft: -3, marginRight: -7 }}>
@@ -40,20 +37,10 @@ const Points = (props: { open: boolean; xctrl: XctrlInfo }) => {
           </Stack>
         </Box>
         <TabPanel value="1">
-          <PointsXt11
-            open={open}
-            xctrll={xctrll}
-            xt="XT:1:1"
-            IP={'http://localhost:3000/xctrl.json'}
-          />
+          <PointsXt11 open={open} xctrll={props.xctrll} xt="XT:1:1" />
         </TabPanel>
         <TabPanel value="2">
-          <PointsXt11
-            open={open}
-            xctrll={xctrll}
-            xt="XT:2:1"
-            IP={'http://localhost:3000/otladka.json'}
-          />
+          <PointsXt11 open={open} xctrll={props.xctrll} xt="XT:2:1" />
         </TabPanel>
       </TabContext>
     </Box>

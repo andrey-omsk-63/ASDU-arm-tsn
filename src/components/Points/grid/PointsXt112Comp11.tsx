@@ -2,78 +2,12 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 
-export interface Welcome1 {
-  ext: Array<number[]>;
-  use: boolean;
-  area: number;
-  step: number;
-  time: number;
-  ltime: number;
-  pknow: number;
-  pkcalc: number;
-  pklast: number;
-  region: number;
-  status: any[];
-  switch: boolean;
-  xctrls: Xctrl[];
-  yellow: Yellow;
-  devices: number[];
-  release: boolean;
-  results: { [key: string]: Result[] };
-  subarea: number;
-  prioryty: Array<number[]>;
-}
+import { XctrlInfo } from '../../../interfaceGl.d';
 
-export interface Result {
-  Good: boolean;
-  Time: number;
-  Value: number[];
-}
-
-export interface Xctrl {
-  left: number;
-  name: string;
-  right: number;
-  status: any[];
-  StrategyA: StrategyA[];
-  StrategyB: StrategyB[];
-  Calculates: Calculate[];
-}
-
-export interface Calculate {
-  id: number;
-  area: number;
-  chanL: number[];
-  chanR: number[];
-  region: number;
-}
-
-export interface StrategyA {
-  pk: number;
-  desc: string;
-  xleft: number;
-  xright: number;
-}
-
-export interface StrategyB {
-  pkl: number;
-  pkr: number;
-  pks: number;
-  desc: string;
-  vleft: number;
-  xleft: number;
-  vright: number;
-  xright: number;
-}
-
-export interface Yellow {
-  make: boolean;
-  stop: number;
-  start: number;
-}
-
-const PointsXt112Comp11 = (props: { xctrl: Welcome1; crossroad: number }) => {
+const PointsXt112Comp11 = (props: { xctrll: XctrlInfo[]; crossroad: number }) => {
+  const points = props.xctrll[0];
   const crRoad = props.crossroad;
+
   const colorsGraf = [
     'orange',
     'Turquoise',
@@ -111,21 +45,19 @@ const PointsXt112Comp11 = (props: { xctrl: Welcome1; crossroad: number }) => {
 
   const [value, setValue] = React.useState(0);
 
-  let dlMas = props.xctrl.xctrls[crRoad].StrategyB.length;
-  const horizon = props.xctrl.xctrls[crRoad].StrategyB[dlMas - 1].xright;
-  const vertical = props.xctrl.xctrls[crRoad].StrategyB[dlMas - 1].xleft;
+  let dlMas = points.xctrls[crRoad].StrategyB.length;
+  const horizon = points.xctrls[crRoad].StrategyB[dlMas - 1].xright;
+  const vertical = points.xctrls[crRoad].StrategyB[dlMas - 1].xleft;
   const axisHorizon = horizon * 1;
   const steepHorizon = 12 / axisHorizon;
   const axisVertical = vertical * 1;
   const steepVertical = 84.4 / axisVertical;
 
-  //let matrix = [[]];
   let matrix: string[][] = [[]];
 
   let scale: number = 5;
   let coler = 'red';
   let colerOld = '';
-  // let colerOld = [];
   let masStr = [];
   let masCol = [];
   let colBl = 0;
@@ -194,11 +126,10 @@ const PointsXt112Comp11 = (props: { xctrl: Welcome1; crossroad: number }) => {
     let j = 0;
 
     const MakeMatrixColor = (num: number) => {
-      luchP = props.xctrl.xctrls[crRoad].StrategyB[num].vleft;
-      luchO = props.xctrl.xctrls[crRoad].StrategyB[num].vright;
+      luchP = points.xctrls[crRoad].StrategyB[num].vleft;
+      luchO = points.xctrls[crRoad].StrategyB[num].vright;
       ratio =
-        props.xctrl.xctrls[crRoad].StrategyB[num].xright /
-        props.xctrl.xctrls[crRoad].StrategyB[num].xleft;
+        points.xctrls[crRoad].StrategyB[num].xright / points.xctrls[crRoad].StrategyB[num].xleft;
       coler = colorsGraf[num * 3];
       if (luchP !== 1 || luchO !== 1) {
         if (i < j * luchO * ratio) coler = colorsGraf[num * 3 + 1];
@@ -212,43 +143,43 @@ const PointsXt112Comp11 = (props: { xctrl: Welcome1; crossroad: number }) => {
       for (i = 0; i < horizon; i += scale) {
         if (
           dlMas >= 1 &&
-          props.xctrl.xctrls[crRoad].StrategyB[0].xright >= i &&
-          props.xctrl.xctrls[crRoad].StrategyB[0].xleft >= j
+          points.xctrls[crRoad].StrategyB[0].xright >= i &&
+          points.xctrls[crRoad].StrategyB[0].xleft >= j
         ) {
           MakeMatrixColor(0);
         } else {
           if (
             dlMas >= 2 &&
-            props.xctrl.xctrls[crRoad].StrategyB[1].xright >= i &&
-            props.xctrl.xctrls[crRoad].StrategyB[1].xleft >= j
+            points.xctrls[crRoad].StrategyB[1].xright >= i &&
+            points.xctrls[crRoad].StrategyB[1].xleft >= j
           ) {
             MakeMatrixColor(1);
           } else {
             if (
               dlMas >= 3 &&
-              props.xctrl.xctrls[crRoad].StrategyB[2].xright >= i &&
-              props.xctrl.xctrls[crRoad].StrategyB[2].xleft >= j
+              points.xctrls[crRoad].StrategyB[2].xright >= i &&
+              points.xctrls[crRoad].StrategyB[2].xleft >= j
             ) {
               MakeMatrixColor(2);
             } else {
               if (
                 dlMas >= 4 &&
-                props.xctrl.xctrls[crRoad].StrategyB[3].xright >= i &&
-                props.xctrl.xctrls[crRoad].StrategyB[3].xleft >= j
+                points.xctrls[crRoad].StrategyB[3].xright >= i &&
+                points.xctrls[crRoad].StrategyB[3].xleft >= j
               ) {
                 MakeMatrixColor(3);
               } else {
                 if (
                   dlMas >= 5 &&
-                  props.xctrl.xctrls[crRoad].StrategyB[4].xright >= i &&
-                  props.xctrl.xctrls[crRoad].StrategyB[4].xleft >= j
+                  points.xctrls[crRoad].StrategyB[4].xright >= i &&
+                  points.xctrls[crRoad].StrategyB[4].xleft >= j
                 ) {
                   MakeMatrixColor(4);
                 } else {
                   if (
                     dlMas >= 6 &&
-                    props.xctrl.xctrls[crRoad].StrategyB[5].xright >= i &&
-                    props.xctrl.xctrls[crRoad].StrategyB[5].xleft >= j
+                    points.xctrls[crRoad].StrategyB[5].xright >= i &&
+                    points.xctrls[crRoad].StrategyB[5].xleft >= j
                   ) {
                     MakeMatrixColor(5);
                   }

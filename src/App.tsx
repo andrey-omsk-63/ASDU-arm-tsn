@@ -61,7 +61,8 @@ const App = () => {
     color: 'black',
   };
 
-  const [points, setPoints] = React.useState<XctrlInfo>({} as XctrlInfo);
+  //const [points, setPoints] = React.useState<XctrlInfo>({} as XctrlInfo);
+  const [points, setPoints] = React.useState<Array<XctrlInfo>>([]);
 
   const [isOpen, setIsOpen] = React.useState(false);
 
@@ -72,13 +73,8 @@ const App = () => {
     axios.get(ipAdress).then(({ data }) => {
       setPoints(data.data.xctrlInfo);
       setIsOpen(true);
-
-      console.log('data:', data);
-      //console.log('data.xctrlInfo:', data.data.xctrlInfo);
     });
   }, [ipAdress]);
-
-  if (isOpen) console.log('points:', points);
 
   return (
     <>
@@ -104,7 +100,7 @@ const App = () => {
             <Management />
           </TabPanel>
           <TabPanel value="2">
-            <Points open={isOpen} xctrl={points} />
+            <Points open={isOpen} xctrll={points} />
           </TabPanel>
           <TabPanel value="3">
             <Statistics />

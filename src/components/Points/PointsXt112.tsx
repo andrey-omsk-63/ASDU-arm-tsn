@@ -8,78 +8,10 @@ import PointsXt112Comp1 from './grid/PointsXt112Comp1';
 import PointsXt112Comp2 from './grid/PointsXt112Comp2';
 import PointsXt112Comp3 from './grid/PointsXt112Comp3';
 
-export interface Welcome1 {
-  ext:      Array<number[]>;
-  use:      boolean;
-  area:     number;
-  step:     number;
-  time:     number;
-  ltime:    number;
-  pknow:    number;
-  pkcalc:   number;
-  pklast:   number;
-  region:   number;
-  status:   any[];
-  switch:   boolean;
-  xctrls:   Xctrl[];
-  yellow:   Yellow;
-  devices:  number[];
-  release:  boolean;
-  results:  { [key: string]: Result[] };
-  subarea:  number;
-  prioryty: Array<number[]>;
-}
+import { XctrlInfo } from '../../interfaceGl.d';
 
-export interface Result {
-  Good:  boolean;
-  Time:  number;
-  Value: number[];
-}
-
-export interface Xctrl {
-  left:       number;
-  name:       string;
-  right:      number;
-  status:     any[];
-  StrategyA:  StrategyA[];
-  StrategyB:  StrategyB[];
-  Calculates: Calculate[];
-}
-
-export interface Calculate {
-  id:     number;
-  area:   number;
-  chanL:  number[];
-  chanR:  number[];
-  region: number;
-}
-
-export interface StrategyA {
-  pk:     number;
-  desc:   string;
-  xleft:  number;
-  xright: number;
-}
-
-export interface StrategyB {
-  pkl:    number;
-  pkr:    number;
-  pks:    number;
-  desc:   string;
-  vleft:  number;
-  xleft:  number;
-  vright: number;
-  xright: number;
-}
-
-export interface Yellow {
-  make:  boolean;
-  stop:  number;
-  start: number;
-}
-
-
-const PointsXt112 = (props: {open: boolean, xctrl: Welcome1, crossroad: number}) => {
+const PointsXt112 = (props: { open: boolean; xctrll: XctrlInfo[]; crossroad: number }) => {
+  //const points = props.xctrll[0];
   const [value, setValue] = React.useState('1');
 
   const PointsXt112Menu = () => {
@@ -132,19 +64,19 @@ const PointsXt112 = (props: {open: boolean, xctrl: Welcome1, crossroad: number})
               <Grid item xs={12}>
                 <PointsXt112Comp1
                   open={props.open}
-                  xctrl={props.xctrl}
+                  xctrll={props.xctrll}
                   value={value}
                   crossroad={props.crossroad}
                 />
                 <PointsXt112Comp2
                   open={props.open}
-                  xctrl={props.xctrl}
+                  xctrll={props.xctrll}
                   value={value}
                   crossroad={props.crossroad}
                 />
                 <PointsXt112Comp3
                   open={props.open}
-                  xctrl={props.xctrl}
+                  xctrll={props.xctrll}
                   value={value}
                   crossroad={props.crossroad}
                 />

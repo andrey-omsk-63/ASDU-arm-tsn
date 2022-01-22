@@ -2,6 +2,8 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
+import { XctrlInfo } from '../../../interfaceGl.d';
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -14,76 +16,6 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
-
-export interface Welcome1 {
-  ext: Array<number[]>;
-  use: boolean;
-  area: number;
-  step: number;
-  time: number;
-  ltime: number;
-  pknow: number;
-  pkcalc: number;
-  pklast: number;
-  region: number;
-  status: any[];
-  switch: boolean;
-  xctrls: Xctrl[];
-  yellow: Yellow;
-  devices: number[];
-  release: boolean;
-  results: { [key: string]: Result[] };
-  subarea: number;
-  prioryty: Array<number[]>;
-}
-
-export interface Result {
-  Good: boolean;
-  Time: number;
-  Value: number[];
-}
-
-export interface Xctrl {
-  left: number;
-  name: string;
-  right: number;
-  status: any[];
-  StrategyA: StrategyA[];
-  StrategyB: StrategyB[];
-  Calculates: Calculate[];
-}
-
-export interface Calculate {
-  id: number;
-  area: number;
-  chanL: number[];
-  chanR: number[];
-  region: number;
-}
-
-export interface StrategyA {
-  pk: number;
-  desc: string;
-  xleft: number;
-  xright: number;
-}
-
-export interface StrategyB {
-  pkl: number;
-  pkr: number;
-  pks: number;
-  desc: string;
-  vleft: number;
-  xleft: number;
-  vright: number;
-  xright: number;
-}
-
-export interface Yellow {
-  make: boolean;
-  stop: number;
-  start: number;
-}
 
 export interface DataGl {
   labels: string[];
@@ -101,10 +33,12 @@ export interface Datasets {
 
 const PointsXt112Comp3 = (props: {
   open: boolean;
-  xctrl: Welcome1;
+  xctrll: XctrlInfo[];
   value: string;
   crossroad: number;
 }) => {
+  const points = props.xctrll[0];
+
   const labels: string[] = [];
   let data: DataGl = {
     labels,
@@ -158,8 +92,8 @@ const PointsXt112Comp3 = (props: {
   };
 
   const PointsGraf00 = () => {
-    const colMin = 60 / props.xctrl.results[namer][0].Time;
-    for (let i = 0; i < props.xctrl.results[namer].length; i++) {
+    const colMin = 60 / points.results[namer][0].Time;
+    for (let i = 0; i < points.results[namer].length; i++) {
       let int = '';
       if (i % colMin === 0) {
         if (i / colMin < 10) int += '0';
@@ -170,14 +104,14 @@ const PointsXt112Comp3 = (props: {
     }
     //график прямого
     let datas = [];
-    for (let i = 0; i < props.xctrl.results[namer].length; i++) {
-      datas.push(props.xctrl.results[namer][i].Value[0]);
+    for (let i = 0; i < points.results[namer].length; i++) {
+      datas.push(points.results[namer][i].Value[0]);
     }
     data.datasets[0].data = datas;
     //график обратного
     datas = [];
-    for (let i = 0; i < props.xctrl.results[namer].length; i++) {
-      datas.push(props.xctrl.results[namer][i].Value[1]);
+    for (let i = 0; i < points.results[namer].length; i++) {
+      datas.push(points.results[namer][i].Value[1]);
     }
     data.datasets[1].data = datas;
 
@@ -240,30 +174,30 @@ const PointsXt112Comp3 = (props: {
     return timLiner;
   };
 
-  const namer = props.xctrl.xctrls[0].name;
+  const namer = points.xctrls[0].name;
 
   const PointsXt112Comp3Tab1Stroka = () => {
     let resStr = [];
     let pusto = false;
     let kakchestvo = '';
-    for (let i = 0; i < props.xctrl.results[namer].length; i++) {
-      if (!props.xctrl.results[namer][i].Good) {
+    for (let i = 0; i < points.results[namer].length; i++) {
+      if (!points.results[namer][i].Good) {
         pusto = true;
         kakchestvo = 'Нет данных';
       }
       resStr.push(
         <Grid key={Math.random()} container item xs={12}>
           <Grid key={Math.random()} xs={0.5} item sx={styleXTG011}>
-            {TimeStr(props.xctrl.results[namer][i].Time)}
+            {TimeStr(points.results[namer][i].Time)}
           </Grid>
           <Grid key={Math.random()} xs={1} item sx={pusto ? styleXTG011 : styleXTG01}>
-            {props.xctrl.results[namer][i].Value[0]}
+            {points.results[namer][i].Value[0]}
           </Grid>
           <Grid key={Math.random()} xs={1} item sx={pusto ? styleXTG011 : styleXTG01}>
-            {props.xctrl.results[namer][i].Value[1]}
+            {points.results[namer][i].Value[1]}
           </Grid>
           <Grid key={Math.random()} xs={1} item sx={pusto ? styleXTG011 : styleXTG01}>
-            {props.xctrl.results[namer][i].Value[2]}
+            {points.results[namer][i].Value[2]}
           </Grid>
           <Grid key={Math.random()} xs={1} item sx={styleXTG011}>
             {kakchestvo}

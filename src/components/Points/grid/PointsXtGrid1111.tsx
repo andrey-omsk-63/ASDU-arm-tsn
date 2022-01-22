@@ -4,77 +4,8 @@ import Box from '@mui/material/Box';
 
 import { XctrlInfo } from '../../../interfaceGl.d';
 
-export interface Welcome1 {
-  ext: Array<number[]>;
-  use: boolean;
-  area: number;
-  step: number;
-  time: number;
-  ltime: number;
-  pknow: number;
-  pkcalc: number;
-  pklast: number;
-  region: number;
-  status: any[];
-  switch: boolean;
-  xctrls: Xctrl[];
-  yellow: Yellow;
-  devices: number[];
-  release: boolean;
-  results: { [key: string]: Result[] };
-  subarea: number;
-  prioryty: Array<number[]>;
-}
-
-export interface Result {
-  Good: boolean;
-  Time: number;
-  Value: number[];
-}
-
-export interface Xctrl {
-  left: number;
-  name: string;
-  right: number;
-  status: any[];
-  StrategyA: StrategyA[];
-  StrategyB: StrategyB[];
-  Calculates: Calculate[];
-}
-
-export interface Calculate {
-  id: number;
-  area: number;
-  chanL: number[];
-  chanR: number[];
-  region: number;
-}
-
-export interface StrategyA {
-  pk: number;
-  desc: string;
-  xleft: number;
-  xright: number;
-}
-
-export interface StrategyB {
-  pkl: number;
-  pkr: number;
-  pks: number;
-  desc: string;
-  vleft: number;
-  xleft: number;
-  vright: number;
-  xright: number;
-}
-
-export interface Yellow {
-  make: boolean;
-  stop: number;
-  start: number;
-}
-
-const PointsXtGrid1111 = (props: { open: boolean; xctrl: Welcome1 }) => {
+const PointsXtGrid1111 = (props: { open: boolean; xctrll: XctrlInfo[] }) => {
+  const points = props.xctrll[0];
   let resStr = [];
 
   const styleXTG02 = {
@@ -133,18 +64,18 @@ const PointsXtGrid1111 = (props: { open: boolean; xctrl: Welcome1 }) => {
   const StrokaPXG1111 = () => {
     resStr = [];
 
-    if (Object.keys(props.xctrl.results).length > 0) {
-      for (let i = 0; i < props.xctrl.results.result.length; i++) {
+    if (Object.keys(points.results).length > 0) {
+      for (let i = 0; i < points.results.result.length; i++) {
         resStr.push(
           <Grid key={Math.random()} container xs={12} item>
             <Grid key={Math.random()} xs={2} item sx={styleXTG03}>
-              {TimeStr(props.xctrl.results.result[i].Time)}
+              {TimeStr(points.results.result[i].Time)}
             </Grid>
             <Grid key={Math.random()} xs={3} item sx={styleXTG03}>
-              {props.xctrl.results.result[i].Value[0]}
+              {points.results.result[i].Value[0]}
             </Grid>
             <Grid key={Math.random()} xs={3} item sx={styleXTG03}>
-              {props.xctrl.results.result[i].Value[1]}
+              {points.results.result[i].Value[1]}
             </Grid>
             <Grid key={Math.random()} xs={4} item sx={styleXTG03}>
               н/д
@@ -161,7 +92,7 @@ const PointsXtGrid1111 = (props: { open: boolean; xctrl: Welcome1 }) => {
       <Box sx={{ marginRight: 0.74, border: 0 }}>
         <HeaderPXG1111 />
       </Box>
-      <Box sx={{ overflowX: 'auto', height: '75vh', border: 0 }}>
+      <Box sx={{ overflowX: 'auto', height: '75vh' }}>
         {props.open && <div>{StrokaPXG1111()}</div>}
       </Box>
     </Grid>
