@@ -22,6 +22,47 @@ import {
 import { Line } from 'react-chartjs-2';
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
+export interface Welcome7 {
+  id: number;
+  area: number;
+  date: Date;
+  region: number;
+  Statistics: Statistic[];
+}
+
+export interface Statistic {
+  Min: number;
+  Hour: number;
+  TLen: number;
+  Type: number;
+  Datas: Data[];
+  Period: number;
+}
+
+export interface Data {
+  GP: number;
+  Speed: number;
+  Chanel: number;
+  Status: number;
+  Density: number;
+  Intensiv: number;
+  Occupant: number;
+}
+
+export interface DataGl {
+  labels: string[];
+  datasets: Datasets[];
+}
+
+export interface Datasets {
+  label: string;
+  data: number[];
+  borderWidth: number;
+  borderColor: string;
+  // backgroundColor: string;
+  pointRadius: number;
+}
+
 const Statistic1115 = () => {
   const styleSt02 = {
     textIndent: 6,
@@ -72,14 +113,15 @@ const Statistic1115 = () => {
   };
 
   const [value, setValue] = React.useState('0');
-  const [points, setPoints] = React.useState({});
+  //const [points, setPoints] = React.useState({});
+  const [points, setPoints] = React.useState<Array<Statistic>>([]);
   const [isOpen, setIsOpen] = React.useState(false);
-  let resStr = [];
-  let resSps = [];
-  let matrix = [];
+  let resStr: any = [];
+  let resSps: any = [];
+  let matrix: Statistic[] = [];
   let kakchestvo = ' ';
-  const labels = [];
-  const datas = [];
+  const labels: string[] = [];
+  let datas: number[] = [];
 
   const StatGraf00 = () => {
     if (isOpen && value !== '0') {
@@ -121,7 +163,7 @@ const Statistic1115 = () => {
       maintainAspectRatio: false,
       plugins: {
         legend: {
-          position: 'top',
+          position: 'top' as const,
         },
         title: {
           display: false,
@@ -130,7 +172,7 @@ const Statistic1115 = () => {
       },
     };
 
-    const data = {
+    let data: DataGl = {
       labels,
       datasets: [
         {
@@ -149,7 +191,6 @@ const Statistic1115 = () => {
         // },
       ],
     };
-    console.log(data);
     return <Line options={options} data={data} />;
   };
 
@@ -174,7 +215,7 @@ const Statistic1115 = () => {
       minHeight: '23px',
     };
 
-    const KnobBat = (props) => {
+    const KnobBat = (props: { num: string }) => {
       return (
         <Grid item xs={0.75} sx={styleSt03}>
           <Button
@@ -251,7 +292,7 @@ const Statistic1115 = () => {
     );
   };
 
-  const StatStroka = (numMas) => {
+  const StatStroka = (numMas: number) => {
     if (isOpen) {
       kakchestvo = ' ';
       resStr = [];
@@ -340,6 +381,7 @@ const Statistic1115 = () => {
         TLen: step,
         Type: typer,
         Datas: [],
+        Period: 0,
       };
     }
   };
