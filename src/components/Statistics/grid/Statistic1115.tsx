@@ -113,7 +113,6 @@ const Statistic1115 = () => {
   };
 
   const [value, setValue] = React.useState('0');
-  //const [points, setPoints] = React.useState({});
   const [points, setPoints] = React.useState<Array<Statistic>>([]);
   const [isOpen, setIsOpen] = React.useState(false);
   let resStr: any = [];
@@ -414,11 +413,11 @@ const Statistic1115 = () => {
           <StatGraf00 />
         </Grid>
       </Grid>
-      <Grid container item sx={{ marginTop: 0.5, height: '56vh', border: 0 }}>
+      <Grid container item sx={{ marginTop: 0.5, height: '56vh' }}>
         <Grid item xs={24} sx={{ border: 1, borderRadius: 1, borderColor: 'primary.main' }}>
-          <Box sx={{ border: 0, height: '100%' }}>
+          <Box sx={{ height: '100%' }}>
             <Statistic1114 />
-            <Box sx={{ overflowX: 'auto', height: '56vh', border: 0 }}>
+            <Box sx={{ overflowX: 'auto', height: '56vh' }}>
               <Grid container item>
                 {resSps}
               </Grid>
