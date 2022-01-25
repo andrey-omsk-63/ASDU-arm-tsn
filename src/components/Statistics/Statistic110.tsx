@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
-import axios from 'axios';
+//import axios from 'axios';
 
 import {
   Chart as ChartJS,
@@ -89,7 +89,11 @@ const data: DataGl = {
   datasets: [],
 };
 
-const Statistic110 = () => {
+const Statistic110 = (props: { open: boolean; statist: Statistic[] }) => {
+
+  const isOpen = props.open;
+  const points = props.statist;
+
   const styleSt02 = {
     textIndent: 6,
     borderRight: 1,
@@ -134,8 +138,8 @@ const Statistic110 = () => {
     lineHeight: 2,
   };
 
-  const [points, setPoints] = React.useState<Array<Statistic>>([]);
-  const [isOpen, setIsOpen] = React.useState(false);
+  //const [points, setPoints] = React.useState<Array<Statistic>>([]);
+  //const [isOpen, setIsOpen] = React.useState(false);
   const [value, setValue] = React.useState('0');
 
   let resStr: any = [];
@@ -424,12 +428,12 @@ const Statistic110 = () => {
     }
   };
 
-  React.useEffect(() => {
-    axios.get('http://localhost:3000/statistics.json').then(({ data }) => {
-      setPoints(data.Statistics);
-      setIsOpen(true);
-    });
-  }, []);
+  // React.useEffect(() => {
+  //   axios.get('http://localhost:3000/statistics.json').then(({ data }) => {
+  //     setPoints(data.Statistics);
+  //     setIsOpen(true);
+  //   });
+  // }, []);
 
   if (isOpen) {
     CreateMatrix();
@@ -444,10 +448,10 @@ const Statistic110 = () => {
           <StatGraf00 />
         </Grid>
       </Grid>
-      <Grid container item sx={{ marginTop: 0.5, height: '56vh', border: 0 }}>
+      <Grid container item sx={{ marginTop: 0.5, height: '56vh' }}>
         <Grid item xs={24} sx={{ border: 1, borderRadius: 1, borderColor: 'primary.main' }}>
           <StatisticHeader />
-          <Box sx={{ overflowX: 'auto', height: '59vh', border: 0 }}>
+          <Box sx={{ overflowX: 'auto', height: '59vh' }}>
             <Grid container item>
               {resSps}
             </Grid>

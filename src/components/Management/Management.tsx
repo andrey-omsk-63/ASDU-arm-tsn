@@ -10,7 +10,12 @@ import ManagementKnobSK from './modal/ManagKnobSK';
 import ManagementKnobNK from './modal/ManagKnobNK';
 import ManagementKnobXT from './modal/ManagKnobXT';
 
+import axios from 'axios';
+
+import { Data } from '../../interfaceGl.d';
+
 const Management = () => {
+  
   const styleMgl = {
     padding: 1,
     margin: 1,
@@ -20,6 +25,11 @@ const Management = () => {
     //marginRight: 0,
     //border: 0,
   };
+
+  const [points, setPoints] = React.useState<Data>({} as Data);
+  //const [points, setPoints] = React.useState<Array<Data>>([]);
+  const [isOpen, setIsOpen] = React.useState(false);
+  const ipAdress: string = 'http://localhost:3000/getAreaOtl.json';
 
   const FourKnops = () => {
     return (
@@ -36,6 +46,17 @@ const Management = () => {
       </Grid>
     );
   };
+
+  React.useEffect(() => {
+    axios.get(ipAdress).then(({ data }) => {
+      setPoints(data.data);
+      setIsOpen(true);
+      
+    });
+  }, [ipAdress]);
+
+  console.log('MNG:', points.tflight )
+
 
   return (
     <Box sx={{ fontSize: 12, marginTop: -3, marginLeft: -1, marginRight: -6 }}>

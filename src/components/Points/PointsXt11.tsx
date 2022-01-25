@@ -12,7 +12,10 @@ import PointsXt112 from './PointsXt112';
 import { XctrlInfo } from '../../interfaceGl.d';
 
 const PointsXt11 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number }) => {
-  console.log('PointsXt11:', props.xtt);
+
+  const isOpen = props.open;
+  const xtProps = props.xtt;
+  const points = props.xctrll[xtProps];
 
   const stylePXt1 = {
     fontSize: 10,
@@ -22,10 +25,6 @@ const PointsXt11 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number }) 
     color: 'black',
     marginRight: 1,
   };
-
-  const isOpen = props.open;
-  const xtProps = props.xtt;
-  const points = props.xctrll[xtProps];
 
   const [valueLevel2, setValueLavel2] = React.useState('1');
   let crossroad = 0;

@@ -1,0 +1,181 @@
+{
+  "type": "getArea",
+  "data": {
+    "tflight": [
+      {
+        "ID": 1,
+        "region": {
+          "num": "1",
+          "nameRegion": "Мосавтодор"
+        },
+        "area": {
+          "num": "1",
+          "nameArea": "Первая половина"
+        },
+        "subarea": 2,
+        "idevice": 159519,
+        "tlsost": {
+          "num": 28,
+          "description": "Обрыв линий связи",
+          "control": false
+        },
+        "description": "ДК 1. г. Наро - Фоминск, ул. Шибанкова - ул. Ермолаева",
+        "phases": null,
+        "points": {
+          "Y": 0,
+          "X": 0
+        },
+        "inputError": false,
+        "pk": 2,
+        "nk": 1,
+        "ck": 1,
+        "techMode": "9"
+      },
+      {
+        "ID": 6,
+        "region": {
+          "num": "1",
+          "nameRegion": "Мосавтодор"
+        },
+        "area": {
+          "num": "1",
+          "nameArea": "Первая половина"
+        },
+        "subarea": 2,
+        "idevice": 53712,
+        "tlsost": {
+          "num": 1,
+          "description": "Координированное управление",
+          "control": true
+        },
+        "description": "ДК 6. Наро-Фоминск, ул. Маршала Жукова - ООТ Горсовет ",
+        "phases": null,
+        "points": {
+          "Y": 0,
+          "X": 0
+        },
+        "inputError": false,
+        "pk": 4,
+        "nk": 1,
+        "ck": 1,
+        "techMode": "2"
+      },
+      {
+        "ID": 7,
+        "region": {
+          "num": "1",
+          "nameRegion": "Мосавтодор"
+        },
+        "area": {
+          "num": "1",
+          "nameArea": "Первая половина"
+        },
+        "subarea": 2,
+        "idevice": 496346,
+        "tlsost": {
+          "num": 1,
+          "description": "Координированное управление",
+          "control": true
+        },
+        "description": "ДК 7, г.Наро-Фоминск, ул.Маршала Жукова - ул. Кольцевая",
+        "phases": null,
+        "points": {
+          "Y": 0,
+          "X": 0
+        },
+        "inputError": false,
+        "pk": 1,
+        "nk": 1,
+        "ck": 1,
+        "techMode": "2"
+      },
+      {
+        "ID": 8,
+        "region": {
+          "num": "1",
+          "nameRegion": "Мосавтодор"
+        },
+        "area": {
+          "num": "1",
+          "nameArea": "Первая половина"
+        },
+        "subarea": 1,
+        "idevice": 392974,
+        "tlsost": {
+          "num": 18,
+          "description": "Нет связи с УСДК/ДК",
+          "control": false
+        },
+        "description": "ДК 8, г. Наро-Фоминск, ул. Тунельная - ул. Полубоярова ",
+        "phases": null,
+        "points": {
+          "Y": 0,
+          "X": 0
+        },
+        "inputError": false,
+        "pk": 2,
+        "nk": 1,
+        "ck": 1,
+        "techMode": "2"
+      },
+      {
+        "ID": 11,
+        "region": {
+          "num": "1",
+          "nameRegion": "Мосавтодор"
+        },
+        "area": {
+          "num": "1",
+          "nameArea": "Первая половина"
+        },
+        "subarea": 2,
+        "idevice": 484759,
+        "tlsost": {
+          "num": 18,
+          "description": "Нет связи с УСДК/ДК",
+          "control": false
+        },
+        "description": "ДК 11, г. Наро-Фоминск, ул. Московская, пожарная часть ",
+        "phases": null,
+        "points": {
+          "Y": 0,
+          "X": 0
+        },
+        "inputError": false,
+        "pk": 1,
+        "nk": 1,
+        "ck": 1,
+        "techMode": "2"
+      },
+      {
+        "ID": 44,
+        "region": {
+          "num": "1",
+          "nameRegion": "Мосавтодор"
+        },
+        "area": {
+          "num": "1",
+          "nameArea": "Первая половина"
+        },
+        "subarea": 3,
+        "idevice": 320071,
+        "tlsost": {
+          "num": 18,
+          "description": "Нет связи с УСДК/ДК",
+          "control": false
+        },
+        "description": "ДК 44, М-1 Минское ш., км.85+650, Дорохово, ул. Первомайская",
+        "phases": null,
+        "points": {
+          "Y": 0,
+          "X": 0
+        },
+        "inputError": false,
+        "pk": 5,
+        "nk": 1,
+        "ck": 1,
+        "techMode": "2"
+      }
+    ]
+  }
+}

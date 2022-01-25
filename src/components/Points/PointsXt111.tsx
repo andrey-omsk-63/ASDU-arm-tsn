@@ -34,8 +34,8 @@ const PointsXt111 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number })
     padding: 1,
     margin: 1,
     marginTop: -1.5,
-    marginLeft: -0.5,
-    height: '80vh',
+    marginLeft: -1,
+    height: '83vh',
   };
 
   const styleXt05 = {
@@ -47,7 +47,7 @@ const PointsXt111 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number })
     marginTop: -1.5,
     marginLeft: -0.5,
     marginRight: 1.5,
-    height: '80vh',
+    height: '83vh',
   };
 
   const TimeStr = (tim: number) => {
