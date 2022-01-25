@@ -10,8 +10,14 @@ import PointsXt112Comp3 from './grid/PointsXt112Comp3';
 
 import { XctrlInfo } from '../../interfaceGl.d';
 
-const PointsXt112 = (props: { open: boolean; xctrll: XctrlInfo[]; crossroad: number }) => {
-  //const points = props.xctrll[0];
+const PointsXt112 = (props: {
+  open: boolean;
+  xctrll: XctrlInfo[];
+  xtt: number;
+  crossroad: number;
+}) => {
+  const xtProps = props.xtt;
+  //const points = props.xctrll[xtProps];
   const [value, setValue] = React.useState('1');
 
   const PointsXt112Menu = () => {
@@ -65,18 +71,21 @@ const PointsXt112 = (props: { open: boolean; xctrll: XctrlInfo[]; crossroad: num
                 <PointsXt112Comp1
                   open={props.open}
                   xctrll={props.xctrll}
+                  xtt={xtProps}
                   value={value}
                   crossroad={props.crossroad}
                 />
                 <PointsXt112Comp2
                   open={props.open}
                   xctrll={props.xctrll}
+                  xtt={xtProps}
                   value={value}
                   crossroad={props.crossroad}
                 />
                 <PointsXt112Comp3
                   open={props.open}
                   xctrll={props.xctrll}
+                  xtt={xtProps}
                   value={value}
                   crossroad={props.crossroad}
                 />

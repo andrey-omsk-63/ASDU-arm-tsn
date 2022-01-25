@@ -3,8 +3,9 @@ import Grid from '@mui/material/Grid';
 
 import { XctrlInfo } from '../../../interfaceGl.d';
 
-const PointsXtGrid1114 = (props: { open: boolean; xctrll: XctrlInfo[] }) => {
-  const points = props.xctrll[0];
+const PointsXtGrid1114 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number }) => {
+  const xtProps = props.xtt;
+  const points = props.xctrll[xtProps];
   let resStr = [];
 
   const styleXTG02 = {

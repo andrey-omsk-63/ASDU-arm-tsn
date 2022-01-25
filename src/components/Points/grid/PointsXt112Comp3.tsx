@@ -34,10 +34,12 @@ export interface Datasets {
 const PointsXt112Comp3 = (props: {
   open: boolean;
   xctrll: XctrlInfo[];
+  xtt: number;
   value: string;
   crossroad: number;
 }) => {
-  const points = props.xctrll[0];
+  const xtProps = props.xtt;
+  const points = props.xctrll[xtProps];
 
   const labels: string[] = [];
   let data: DataGl = {

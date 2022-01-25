@@ -10,10 +10,12 @@ import { XctrlInfo } from '../../../interfaceGl.d';
 const PointsXt112Comp1 = (props: {
   open: boolean;
   xctrll: XctrlInfo[];
+  xtt: number;
   value: string;
   crossroad: number;
 }) => {
-  const points = props.xctrll[0];
+  const xtProps = props.xtt;
+  const points = props.xctrll[xtProps];
 
   const styleXTG00 = {
     fontSize: 11,
@@ -248,7 +250,7 @@ const PointsXt112Comp1 = (props: {
 
           <Grid item xs sx={styleXTG04}>
             <Grid container>
-              <PointsXt112Comp11 xctrll={props.xctrll} crossroad={props.crossroad} />
+              <PointsXt112Comp11 xctrll={props.xctrll} xtt={xtProps} crossroad={props.crossroad} />
             </Grid>
           </Grid>
         </Stack>

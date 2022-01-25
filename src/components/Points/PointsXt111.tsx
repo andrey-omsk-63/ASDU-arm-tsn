@@ -8,8 +8,9 @@ import PointsXtGrid1114 from './grid/PointsXtGrid1114';
 
 import { XctrlInfo } from '../../interfaceGl.d';
 
-const PointsXt111 = (props: { open: boolean; xctrll: XctrlInfo[] }) => {
-  const points = props.xctrll[0];
+const PointsXt111 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number }) => {
+  const xtProps = props.xtt;
+  const points = props.xctrll[xtProps];
 
   const styleXt02 = {
     border: 1,
@@ -99,13 +100,13 @@ const PointsXt111 = (props: { open: boolean; xctrll: XctrlInfo[] }) => {
                 <Box sx={{ marginRight: -1.5 }}>
                   <Grid container>
                     <Grid item xs={4} sx={styleXt04}>
-                      <PointsXtGrid1111 open={props.open} xctrll={props.xctrll} />
+                      <PointsXtGrid1111 open={props.open} xctrll={props.xctrll} xtt={xtProps} />
                     </Grid>
                     <Grid item xs={4} sx={styleXt05}>
-                      <PointsXtGrid1112 open={props.open} xctrll={props.xctrll} />
+                      <PointsXtGrid1112 open={props.open} xctrll={props.xctrll} xtt={xtProps} />
                     </Grid>
                     <Grid item xs sx={styleXt04}>
-                      <PointsXtGrid1114 open={props.open} xctrll={props.xctrll} />
+                      <PointsXtGrid1114 open={props.open} xctrll={props.xctrll} xtt={xtProps} />
                     </Grid>
                   </Grid>
                 </Box>

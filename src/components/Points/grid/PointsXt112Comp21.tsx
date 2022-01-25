@@ -4,10 +4,11 @@ import Button from '@mui/material/Button';
 
 import { XctrlInfo } from '../../../interfaceGl.d';
 
-const PointsXt112Comp21 = (props: { xctrll: XctrlInfo[]; crossroad: number }) => {
-  const points = props.xctrll[0];
-
+const PointsXt112Comp21 = (props: { xctrll: XctrlInfo[]; xtt: number; crossroad: number }) => {
+  const xtProps = props.xtt;
+  const points = props.xctrll[xtProps];
   const crRoad = props.crossroad;
+
   const colorsGraf = [
     'orange',
     'Turquoise',

@@ -11,7 +11,9 @@ import PointsXt112 from './PointsXt112';
 
 import { XctrlInfo } from '../../interfaceGl.d';
 
-const PointsXt11 = (props: { open: boolean; xctrll: XctrlInfo[]; xt: string }) => {
+const PointsXt11 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number }) => {
+  console.log('PointsXt11:', props.xtt);
+
   const stylePXt1 = {
     fontSize: 10,
     maxHeight: '20px',
@@ -22,7 +24,8 @@ const PointsXt11 = (props: { open: boolean; xctrll: XctrlInfo[]; xt: string }) =
   };
 
   const isOpen = props.open;
-  const points = props.xctrll[0];
+  const xtProps = props.xtt;
+  const points = props.xctrll[xtProps];
 
   const [valueLevel2, setValueLavel2] = React.useState('1');
   let crossroad = 0;
@@ -63,7 +66,9 @@ const PointsXt11 = (props: { open: boolean; xctrll: XctrlInfo[]; xt: string }) =
         for (let i = 0; i < points.xctrls.length; i++) {
           resStr.push(
             <Button key={i} sx={stylePXt1} variant="contained" onClick={() => handleClose(i)}>
-              <b>XT:1:1:&nbsp;&nbsp;{points.xctrls[i].name}</b>
+              <b>
+                XT:{xtProps + 1}:1:&nbsp;&nbsp;{points.xctrls[i].name}
+              </b>
             </Button>,
           );
         }
@@ -73,7 +78,7 @@ const PointsXt11 = (props: { open: boolean; xctrll: XctrlInfo[]; xt: string }) =
       return (
         <div>
           <Button sx={stylePXt1} variant="contained" onClick={handleOpen}>
-            <b>{props.xt} &nbsp; Перечень перекрёстков</b>
+            <b>XT:{xtProps + 1}:1 &nbsp; Перечень перекрёстков</b>
           </Button>
           <Modal
             open={open}
@@ -89,7 +94,7 @@ const PointsXt11 = (props: { open: boolean; xctrll: XctrlInfo[]; xt: string }) =
   };
 
   return (
-    <Box sx={{ marginTop: -2, marginLeft: -3, marginRight: -6 }}>
+    <Box sx={{ marginTop: 2.5, marginLeft: -2.5, marginRight: -10 }}>
       <TabContext value={valueLevel2}>
         <Box>
           <Stack sx={{ marginTop: -2 }} direction="row">
@@ -100,10 +105,10 @@ const PointsXt11 = (props: { open: boolean; xctrll: XctrlInfo[]; xt: string }) =
           </Stack>
         </Box>
         <TabPanel value="1">
-          <PointsXt111 open={isOpen} xctrll={props.xctrll} />
+          <PointsXt111 open={isOpen} xctrll={props.xctrll} xtt={xtProps} />
         </TabPanel>
         <TabPanel value="2">
-          <PointsXt112 open={isOpen} xctrll={props.xctrll} crossroad={crossroad} />
+          <PointsXt112 open={isOpen} xctrll={props.xctrll} xtt={xtProps} crossroad={crossroad} />
         </TabPanel>
       </TabContext>
     </Box>
