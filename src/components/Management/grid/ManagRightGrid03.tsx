@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 
 import { Tflight } from '../../../interfaceMNG.d';
 
@@ -50,13 +51,16 @@ const ManagementRightGrid03 = (props: { open: boolean; tflightt: Tflight[] }) =>
           <Grid item xs={0.4} sx={styleMRG03}>
             <b>ДК</b>
           </Grid>
+          <Grid item xs={1.5} sx={styleMRG03}>
+            <b>Район</b>
+          </Grid>
           <Grid item xs={4} sx={styleMRG03}>
             <b>Наименование</b>
           </Grid>
-          <Grid item xs={2} sx={styleMRG03}>
+          <Grid item xs={1.5} sx={styleMRG03}>
             <b>Устройство</b>
           </Grid>
-          <Grid item xs={3} sx={styleMRG03}>
+          <Grid item xs={2} sx={styleMRG03}>
             <b>Состояние</b>
           </Grid>
           <Grid item xs={0.5} sx={styleMRG03}>
@@ -71,6 +75,9 @@ const ManagementRightGrid03 = (props: { open: boolean; tflightt: Tflight[] }) =>
           <Grid item xs={0.8} sx={styleMRG03}>
             <b>Статус</b>
           </Grid>
+          {/* <Grid item xs={0.01} sx={styleMRG03}>
+           
+          </Grid> */}
         </Grid>
       </>
     );
@@ -87,13 +94,17 @@ const ManagementRightGrid03 = (props: { open: boolean; tflightt: Tflight[] }) =>
           <Grid item key={Math.random()} xs={0.4} sx={styleMRG02}>
             {points[i].ID}
           </Grid>
-          <Grid item key={Math.random()} xs={4} sx={styleMRG02}>
+          <Grid item key={Math.random()} xs={1.5} sx={styleMRG02}>
             {points[i].area.nameArea}
           </Grid>
-          <Grid item key={Math.random()} xs={2} sx={styleMRG02}>
+          <Grid item key={Math.random()} xs={4} sx={styleMRG02}>
+            {points[i].description}
+          </Grid>
+
+          <Grid item key={Math.random()} xs={1.5} sx={styleMRG02}>
             {points[i].idevice}
           </Grid>
-          <Grid item key={Math.random()} xs={3} sx={styleMRG02}>
+          <Grid item key={Math.random()} xs={2} sx={styleMRG02}>
             {points[i].tlsost.description}
           </Grid>
           <Grid item key={Math.random()} xs={0.5} sx={styleMRG02}>
@@ -116,9 +127,15 @@ const ManagementRightGrid03 = (props: { open: boolean; tflightt: Tflight[] }) =>
 
   return (
     <Grid item container sx={styleMRG04}>
+
       <Grid item xs={12}>
-        <HeaderMRG03 />
-        {props.open && <div>{StrokaMRG03()}</div>}
+        <Box sx={{ marginRight: 0.71, border: 0 }}>
+        
+          <HeaderMRG03 />
+        </Box>
+        <Box sx={{ overflowX: 'auto', height: '83vh', border: 0 }}>
+          {props.open && <div>{StrokaMRG03()}</div>}
+        </Box>
       </Grid>
     </Grid>
   );
