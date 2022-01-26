@@ -12,10 +12,9 @@ import ManagementKnobXT from './modal/ManagKnobXT';
 
 import axios from 'axios';
 
-import { Data } from '../../interfaceGl.d';
+import { Tflight } from '../../interfaceMNG.d';
 
 const Management = () => {
-  
   const styleMgl = {
     padding: 1,
     margin: 1,
@@ -26,8 +25,7 @@ const Management = () => {
     //border: 0,
   };
 
-  const [points, setPoints] = React.useState<Data>({} as Data);
-  //const [points, setPoints] = React.useState<Array<Data>>([]);
+  const [points, setPoints] = React.useState<Array<Tflight>>([]);
   const [isOpen, setIsOpen] = React.useState(false);
   const ipAdress: string = 'http://localhost:3000/getAreaOtl.json';
 
@@ -49,14 +47,10 @@ const Management = () => {
 
   React.useEffect(() => {
     axios.get(ipAdress).then(({ data }) => {
-      setPoints(data.data);
+      setPoints(data.data.tflight);
       setIsOpen(true);
-      
     });
   }, [ipAdress]);
-
-  console.log('MNG:', points.tflight )
-
 
   return (
     <Box sx={{ fontSize: 12, marginTop: -3, marginLeft: -1, marginRight: -6 }}>
@@ -68,7 +62,7 @@ const Management = () => {
             <Grid item xs={12} sx={styleMgl}>
               Всего ДК 2 на связи 0.00% подчинены 0.00% <b>Назначен ВР Выполняется ХТ</b>
             </Grid>
-            <ManagementRightGrid03 />
+            <ManagementRightGrid03 open={isOpen} tflightt={points} />
           </Grid>
         </Grid>
       </Grid>
