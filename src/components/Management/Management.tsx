@@ -21,8 +21,6 @@ const Management = () => {
     marginLeft: -0.5,
     marginTop: 0.5,
     marginBottom: 0,
-    //marginRight: 0,
-    //border: 0,
   };
 
   const [points, setPoints] = React.useState<Array<Tflight>>([]);
@@ -55,7 +53,7 @@ const Management = () => {
   return (
     <Box sx={{ fontSize: 12, marginTop: -3, marginLeft: -1, marginRight: -6 }}>
       <Grid container sx={{ marginLeft: -3 }}>
-        <ManagementLeftGrid />
+        <ManagementLeftGrid open={isOpen} tflightt={points} />
         <Grid item xs>
           <Grid container>
             <FourKnops />

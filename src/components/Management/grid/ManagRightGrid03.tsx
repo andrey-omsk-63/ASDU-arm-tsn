@@ -37,7 +37,6 @@ const ManagementRightGrid03 = (props: { open: boolean; tflightt: Tflight[] }) =>
     borderColor: 'primary.main',
     marginTop: 0.5,
     marginLeft: -0.7,
-    //marginRight: -0.5,
     height: '86.0vh',
   };
 
@@ -75,9 +74,6 @@ const ManagementRightGrid03 = (props: { open: boolean; tflightt: Tflight[] }) =>
           <Grid item xs={0.8} sx={styleMRG03}>
             <b>Статус</b>
           </Grid>
-          {/* <Grid item xs={0.01} sx={styleMRG03}>
-           
-          </Grid> */}
         </Grid>
       </>
     );
@@ -127,13 +123,11 @@ const ManagementRightGrid03 = (props: { open: boolean; tflightt: Tflight[] }) =>
 
   return (
     <Grid item container sx={styleMRG04}>
-
       <Grid item xs={12}>
         <Box sx={{ marginRight: 0.71, border: 0 }}>
-        
           <HeaderMRG03 />
         </Box>
-        <Box sx={{ overflowX: 'auto', height: '83vh', border: 0 }}>
+        <Box sx={{ overflowX: 'auto', height: '82.5vh', border: 0 }}>
           {props.open && <div>{StrokaMRG03()}</div>}
         </Box>
       </Grid>
