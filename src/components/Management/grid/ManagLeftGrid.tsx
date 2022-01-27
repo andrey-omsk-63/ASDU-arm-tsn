@@ -4,10 +4,57 @@ import Box from '@mui/material/Box';
 
 import { Tflight } from '../../../interfaceMNG.d';
 
+export interface DataMas {
+  masss: ArrMass[];
+}
+
+export interface ArrMass {
+  area: AreaM;
+  subarea: number;
+}
+
+export interface AreaM {
+  num: string;
+  nameArea: string;
+}
+
 const ManagementLeftGrid = (props: { open: boolean; tflightt: Tflight[] }) => {
   const points = props.tflightt;
 
-  if (props.open) console.log('MLG:', points[0].region.nameRegion);
+  //if (props.open) console.log(points.find({subarea: "1"}));
+  if (props.open) {
+    //console.log(points[0].ID);
+    // let mass: Array<Tflight> = points.filter(tflight => tflight.ID == 8);
+    // let mass: Array<Tflight> = [];
+    // mass = points.filter(tflight => tflight.area.num === '2');
+    // console.log('mass1:', mass);
+    // mass = points.filter(tflight => tflight.area.num === '2' && tflight.subarea === 2);
+    // console.log('mass2:', mass);
+    // console.log('mass0:', points);
+    console.log('points:', points);
+
+    let mass: Array<ArrMass> = [];
+    mass[0] = {
+      area: points[0].area,
+      subarea: points[0].subarea,
+      
+    };
+    let j = 0
+    for (let i = 1; i < points.length; i++) {
+      console.log('j:', j, 'i:', i, mass[j].area, points[i].area)
+      if (mass[j].area !== points[i].area || mass[j].subarea !== points[i].subarea) {
+        j++
+        mass[j] = {
+          area: points[i].area,
+          subarea: points[i].subarea,
+          
+        };
+        
+      }
+      
+    }
+    console.log('mass:', mass);
+  }
 
   const styleMG01 = {
     border: 1,
@@ -36,18 +83,7 @@ const ManagementLeftGrid = (props: { open: boolean; tflightt: Tflight[] }) => {
             Подрайон:{props.nom}:1
           </Grid>
         </Grid>
-        {/* <Grid container>
-          <Grid item xs={2} sx={styleMG03}></Grid>
-          <Grid item xs={10} sx={styleMG03}>
-            Подрайон:{props.nom}:2
-          </Grid>
-        </Grid>
-        <Grid container>
-          <Grid item xs={2} sx={styleMG03}></Grid>
-          <Grid item xs={10} sx={styleMG03}>
-            Подрайон:{props.nom}:3
-          </Grid>
-        </Grid> */}
+
       </>
     );
   };
@@ -61,32 +97,11 @@ const ManagementLeftGrid = (props: { open: boolean; tflightt: Tflight[] }) => {
           </Grid>
         </Grid>
         <SpisAreaMLG nom={Number(points[0].area.num)} name={points[0].area.nameArea} />
-        <SpisAreaMLG nom={2} name={'Вторая половина'} />
-        <SpisAreaMLG nom={3} name={'Третий кусок'} />
-        <SpisAreaMLG nom={4} name={'Четвёртый кусок'} />
-        <SpisAreaMLG nom={5} name={'Жопка'} />
-
-        {/* <Grid container>
-          <Grid item xs={6} sx={styleMG03}>
-            <b>Регион</b>&nbsp;&nbsp;&nbsp;&nbsp;<b>Иркутск</b>
-          </Grid>
-        </Grid>
-        <SpisAreaMLG nom={1} name={'Правый берег'} />
-        <SpisAreaMLG nom={2} name={'Левый берег'} />
-        <SpisAreaMLG nom={3} name={'Третий кусок'} />
-        <SpisAreaMLG nom={4} name={'Четвёртый кусок'} />
-        <SpisAreaMLG nom={5} name={'Жопка'} />
-
-        <Grid container>
-          <Grid item xs={6} sx={styleMG03}>
-            <b>Регион</b>&nbsp;&nbsp;&nbsp;&nbsp;<b>Воронеж</b>
-          </Grid>
-        </Grid>
-        <SpisAreaMLG nom={1} name={'Правый берег'} />
-        <SpisAreaMLG nom={2} name={'Левый берег'} />
+        {/* <SpisAreaMLG nom={2} name={'Вторая половина'} />
         <SpisAreaMLG nom={3} name={'Третий кусок'} />
         <SpisAreaMLG nom={4} name={'Четвёртый кусок'} />
         <SpisAreaMLG nom={5} name={'Жопка'} /> */}
+
       </>
     );
   };

@@ -3,6 +3,35 @@
   "data": {
     "tflight": [
       {
+        "ID": 8,
+        "region": {
+          "num": "1",
+          "nameRegion": "Мосавтодор"
+        },
+        "area": {
+          "num": "1",
+          "nameArea": "Первая половина"
+        },
+        "subarea": 1,
+        "idevice": 392974,
+        "tlsost": {
+          "num": 18,
+          "description": "Нет связи с УСДК/ДК",
+          "control": false
+        },
+        "description": "ДК 8, г. Наро-Фоминск, ул. Тунельная - ул. Полубоярова ",
+        "phases": null,
+        "points": {
+          "Y": 0,
+          "X": 0
+        },
+        "inputError": false,
+        "pk": 2,
+        "nk": 1,
+        "ck": 1,
+        "techMode": "выбор ПК по недельной карте ВР-НК"
+      },
+      {
         "ID": 1,
         "region": {
           "num": "1",
@@ -30,64 +59,6 @@
         "nk": 1,
         "ck": 1,
         "techMode": "выбор ПК по годовой карте"
-      },
-      {
-        "ID": 2,
-        "region": {
-          "num": "1",
-          "nameRegion": "Мосавтодор"
-        },
-        "area": {
-          "num": "2",
-          "nameArea": "Вторая половина"
-        },
-        "subarea": 2,
-        "idevice": 270106,
-        "tlsost": {
-          "num": 18,
-          "description": "Нет связи с УСДК/ДК",
-          "control": false
-        },
-        "description": "ДК 202,  а/д Ярославское шоссе, км 31.690   (г.Пушкино - поворот на Ивантеевку)",
-        "phases": null,
-        "points": {
-          "Y": 0,
-          "X": 0
-        },
-        "inputError": false,
-        "pk": 0,
-        "nk": 0,
-        "ck": 0,
-        "techMode": ""
-      },
-      {
-        "ID": 3,
-        "region": {
-          "num": "1",
-          "nameRegion": "Мосавтодор"
-        },
-        "area": {
-          "num": "2",
-          "nameArea": "Вторая половина"
-        },
-        "subarea": 6,
-        "idevice": 499789,
-        "tlsost": {
-          "num": 18,
-          "description": "Нет связи с УСДК/ДК",
-          "control": false
-        },
-        "description": "ДК 203,   а/д Ярославское шоссе, км 32.630   (г.Пушкино, Ярославское ш. - \"Макдональдс\")",
-        "phases": null,
-        "points": {
-          "Y": 0,
-          "X": 0
-        },
-        "inputError": false,
-        "pk": 0,
-        "nk": 0,
-        "ck": 0,
-        "techMode": ""
       },
       {
         "ID": 6,
@@ -143,35 +114,6 @@
         },
         "inputError": false,
         "pk": 1,
-        "nk": 1,
-        "ck": 1,
-        "techMode": "выбор ПК по недельной карте ВР-НК"
-      },
-      {
-        "ID": 8,
-        "region": {
-          "num": "1",
-          "nameRegion": "Мосавтодор"
-        },
-        "area": {
-          "num": "1",
-          "nameArea": "Первая половина"
-        },
-        "subarea": 1,
-        "idevice": 392974,
-        "tlsost": {
-          "num": 18,
-          "description": "Нет связи с УСДК/ДК",
-          "control": false
-        },
-        "description": "ДК 8, г. Наро-Фоминск, ул. Тунельная - ул. Полубоярова ",
-        "phases": null,
-        "points": {
-          "Y": 0,
-          "X": 0
-        },
-        "inputError": false,
-        "pk": 2,
         "nk": 1,
         "ck": 1,
         "techMode": "выбор ПК по недельной карте ВР-НК"
@@ -409,35 +351,6 @@
         "techMode": ""
       },
       {
-        "ID": 31,
-        "region": {
-          "num": "1",
-          "nameRegion": "Мосавтодор"
-        },
-        "area": {
-          "num": "3",
-          "nameArea": "Третий кусок"
-        },
-        "subarea": 6,
-        "idevice": 220845,
-        "tlsost": {
-          "num": 18,
-          "description": "Нет связи с УСДК/ДК",
-          "control": false
-        },
-        "description": "ДК 331, Егорьевское ш, км 0+500, поселок ВУГИ",
-        "phases": null,
-        "points": {
-          "Y": 0,
-          "X": 0
-        },
-        "inputError": false,
-        "pk": 0,
-        "nk": 0,
-        "ck": 0,
-        "techMode": ""
-      },
-      {
         "ID": 32,
         "region": {
           "num": "1",
@@ -496,52 +409,23 @@
         "techMode": ""
       },
       {
-        "ID": 33,
+        "ID": 37,
         "region": {
           "num": "1",
           "nameRegion": "Мосавтодор"
         },
         "area": {
-          "num": "3",
-          "nameArea": "Третий кусок"
-        },
-        "subarea": 6,
-        "idevice": 133,
-        "tlsost": {
-          "num": 18,
-          "description": "Нет связи с УСДК/ДК",
-          "control": false
-        },
-        "description": "ДК 333,  МЕТК км. 2.500 (Люберецкий район)  (п.Томилино, ул. Гаршина - ул. Потехина)",
-        "phases": null,
-        "points": {
-          "Y": 0,
-          "X": 0
-        },
-        "inputError": false,
-        "pk": 7,
-        "nk": 1,
-        "ck": 1,
-        "techMode": ""
-      },
-      {
-        "ID": 34,
-        "region": {
           "num": "1",
-          "nameRegion": "Мосавтодор"
+          "nameArea": "Первая половина"
         },
-        "area": {
-          "num": "2",
-          "nameArea": "Вторая половина"
-        },
-        "subarea": 3,
-        "idevice": 46481311,
+        "subarea": 2,
+        "idevice": 504683,
         "tlsost": {
           "num": 18,
           "description": "Нет связи с УСДК/ДК",
           "control": false
         },
-        "description": "ДК 234, г. Мытищи,  ул. Мира - ул. Летная",
+        "description": "ДК 37, А-100, Можайское ш., км 51.600, Часцы, пов-т на Брехова",
         "phases": null,
         "points": {
           "Y": 0,
@@ -551,35 +435,6 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
-      },
-      {
-        "ID": 34,
-        "region": {
-          "num": "1",
-          "nameRegion": "Мосавтодор"
-        },
-        "area": {
-          "num": "3",
-          "nameArea": "Третий кусок"
-        },
-        "subarea": 6,
-        "idevice": 202020,
-        "tlsost": {
-          "num": 18,
-          "description": "Нет связи с УСДК/ДК",
-          "control": false
-        },
-        "description": "ДК 334,  Егорьевское ш, км 2+820, пос. Томилино, ост ТЗПП",
-        "phases": null,
-        "points": {
-          "Y": 0,
-          "X": 0
-        },
-        "inputError": false,
-        "pk": 1,
-        "nk": 1,
-        "ck": 1,
         "techMode": ""
       },
       {
@@ -618,35 +473,6 @@
           "nameRegion": "Мосавтодор"
         },
         "area": {
-          "num": "3",
-          "nameArea": "Третий кусок"
-        },
-        "subarea": 7,
-        "idevice": 9268474,
-        "tlsost": {
-          "num": 18,
-          "description": "Нет связи с УСДК/ДК",
-          "control": false
-        },
-        "description": "ДК 335,  Егорьевское ш, км 3+800, п. Красково, ост. Совхоз (Церковь)",
-        "phases": null,
-        "points": {
-          "Y": 0,
-          "X": 0
-        },
-        "inputError": false,
-        "pk": 9,
-        "nk": 1,
-        "ck": 1,
-        "techMode": ""
-      },
-      {
-        "ID": 35,
-        "region": {
-          "num": "1",
-          "nameRegion": "Мосавтодор"
-        },
-        "area": {
           "num": "1",
           "nameArea": "Первая половина"
         },
@@ -676,35 +502,6 @@
           "nameRegion": "Мосавтодор"
         },
         "area": {
-          "num": "3",
-          "nameArea": "Третий кусок"
-        },
-        "subarea": 7,
-        "idevice": 145904,
-        "tlsost": {
-          "num": 18,
-          "description": "Нет связи с УСДК/ДК",
-          "control": false
-        },
-        "description": "ДК 336,  Егорьевское ш, км 4+100, п. Красково, ул.К. Маркса - ул. Школьная",
-        "phases": null,
-        "points": {
-          "Y": 0,
-          "X": 0
-        },
-        "inputError": false,
-        "pk": 0,
-        "nk": 0,
-        "ck": 0,
-        "techMode": ""
-      },
-      {
-        "ID": 36,
-        "region": {
-          "num": "1",
-          "nameRegion": "Мосавтодор"
-        },
-        "area": {
           "num": "1",
           "nameArea": "Первая половина"
         },
@@ -716,93 +513,6 @@
           "control": false
         },
         "description": "ДК 36. ММК, А-100, Можайское ш., км 45.000,  Б.Вязёмы, ул. Советская",
-        "phases": null,
-        "points": {
-          "Y": 0,
-          "X": 0
-        },
-        "inputError": false,
-        "pk": 0,
-        "nk": 0,
-        "ck": 0,
-        "techMode": ""
-      },
-      {
-        "ID": 37,
-        "region": {
-          "num": "1",
-          "nameRegion": "Мосавтодор"
-        },
-        "area": {
-          "num": "3",
-          "nameArea": "Третий кусок"
-        },
-        "subarea": 7,
-        "idevice": 536725,
-        "tlsost": {
-          "num": 18,
-          "description": "Нет связи с УСДК/ДК",
-          "control": false
-        },
-        "description": "ДК 337,  Егорьевское ш, км 4+900, п. Красково, ул. К.Маркса - ост. Больница",
-        "phases": null,
-        "points": {
-          "Y": 0,
-          "X": 0
-        },
-        "inputError": false,
-        "pk": 0,
-        "nk": 0,
-        "ck": 0,
-        "techMode": ""
-      },
-      {
-        "ID": 37,
-        "region": {
-          "num": "1",
-          "nameRegion": "Мосавтодор"
-        },
-        "area": {
-          "num": "1",
-          "nameArea": "Первая половина"
-        },
-        "subarea": 2,
-        "idevice": 504683,
-        "tlsost": {
-          "num": 18,
-          "description": "Нет связи с УСДК/ДК",
-          "control": false
-        },
-        "description": "ДК 37, А-100, Можайское ш., км 51.600, Часцы, пов-т на Брехова",
-        "phases": null,
-        "points": {
-          "Y": 0,
-          "X": 0
-        },
-        "inputError": false,
-        "pk": 0,
-        "nk": 0,
-        "ck": 0,
-        "techMode": ""
-      },
-      {
-        "ID": 38,
-        "region": {
-          "num": "1",
-          "nameRegion": "Мосавтодор"
-        },
-        "area": {
-          "num": "3",
-          "nameArea": "Третий кусок"
-        },
-        "subarea": 2,
-        "idevice": 606534,
-        "tlsost": {
-          "num": 18,
-          "description": "Нет связи с УСДК/ДК",
-          "control": false
-        },
-        "description": "ДК 338,  Егорьевское ш, км 5+300, п. Красково - Кореневское ш.",
         "phases": null,
         "points": {
           "Y": 0,
@@ -902,35 +612,6 @@
         "techMode": ""
       },
       {
-        "ID": 41,
-        "region": {
-          "num": "1",
-          "nameRegion": "Мосавтодор"
-        },
-        "area": {
-          "num": "2",
-          "nameArea": "Вторая половина"
-        },
-        "subarea": 3,
-        "idevice": 40467711,
-        "tlsost": {
-          "num": 18,
-          "description": "Нет связи с УСДК/ДК",
-          "control": false
-        },
-        "description": "ДК 241. Мытищи, ул. Летная 27",
-        "phases": null,
-        "points": {
-          "Y": 0,
-          "X": 0
-        },
-        "inputError": false,
-        "pk": 0,
-        "nk": 0,
-        "ck": 0,
-        "techMode": ""
-      },
-      {
         "ID": 42,
         "region": {
           "num": "1",
@@ -957,64 +638,6 @@
         "pk": 4,
         "nk": 1,
         "ck": 1,
-        "techMode": ""
-      },
-      {
-        "ID": 42,
-        "region": {
-          "num": "1",
-          "nameRegion": "Мосавтодор"
-        },
-        "area": {
-          "num": "3",
-          "nameArea": "Третий кусок"
-        },
-        "subarea": 8,
-        "idevice": 49201,
-        "tlsost": {
-          "num": 18,
-          "description": "Нет связи с УСДК/ДК",
-          "control": false
-        },
-        "description": "ДК 342 Егорьевское ш., км 12+100, п. Осеченки, пов.-т на Зюзино",
-        "phases": null,
-        "points": {
-          "Y": 0,
-          "X": 0
-        },
-        "inputError": false,
-        "pk": 0,
-        "nk": 0,
-        "ck": 0,
-        "techMode": ""
-      },
-      {
-        "ID": 43,
-        "region": {
-          "num": "1",
-          "nameRegion": "Мосавтодор"
-        },
-        "area": {
-          "num": "3",
-          "nameArea": "Третий кусок"
-        },
-        "subarea": 6,
-        "idevice": 519634,
-        "tlsost": {
-          "num": 18,
-          "description": "Нет связи с УСДК/ДК",
-          "control": false
-        },
-        "description": "ДК 343. Егорьевское ш., д. Донино",
-        "phases": null,
-        "points": {
-          "Y": 0,
-          "X": 0
-        },
-        "inputError": false,
-        "pk": 0,
-        "nk": 0,
-        "ck": 0,
         "techMode": ""
       },
       {
@@ -1256,35 +879,6 @@
           "nameRegion": "Мосавтодор"
         },
         "area": {
-          "num": "2",
-          "nameArea": "Вторая половина"
-        },
-        "subarea": 3,
-        "idevice": 1261433,
-        "tlsost": {
-          "num": 18,
-          "description": "Нет связи с УСДК/ДК",
-          "control": false
-        },
-        "description": "ДК 253. г. Королев, ул. Пионерская - булочная",
-        "phases": null,
-        "points": {
-          "Y": 0,
-          "X": 0
-        },
-        "inputError": false,
-        "pk": 2,
-        "nk": 1,
-        "ck": 1,
-        "techMode": ""
-      },
-      {
-        "ID": 53,
-        "region": {
-          "num": "1",
-          "nameRegion": "Мосавтодор"
-        },
-        "area": {
           "num": "1",
           "nameArea": "Первая половина"
         },
@@ -1296,35 +890,6 @@
           "control": false
         },
         "description": "ДК 53. г. Можайск, ул . 1-я Железнодорожная - автостанция",
-        "phases": null,
-        "points": {
-          "Y": 0,
-          "X": 0
-        },
-        "inputError": false,
-        "pk": 0,
-        "nk": 0,
-        "ck": 0,
-        "techMode": ""
-      },
-      {
-        "ID": 54,
-        "region": {
-          "num": "1",
-          "nameRegion": "Мосавтодор"
-        },
-        "area": {
-          "num": "2",
-          "nameArea": "Вторая половина"
-        },
-        "subarea": 3,
-        "idevice": 123456,
-        "tlsost": {
-          "num": 18,
-          "description": "Нет связи с УСДК/ДК",
-          "control": false
-        },
-        "description": "ДК 254, г.Королев, ул. Пионерская - ул.Чайковского",
         "phases": null,
         "points": {
           "Y": 0,
@@ -1366,23 +931,110 @@
         "techMode": ""
       },
       {
-        "ID": 55,
+        "ID": 61,
         "region": {
           "num": "1",
           "nameRegion": "Мосавтодор"
         },
         "area": {
-          "num": "2",
-          "nameArea": "Вторая половина"
+          "num": "1",
+          "nameArea": "Первая половина"
         },
         "subarea": 3,
-        "idevice": 1010101,
+        "idevice": 68970,
         "tlsost": {
           "num": 18,
           "description": "Нет связи с УСДК/ДК",
           "control": false
         },
-        "description": "ДК 255, г. Королев, ул. Калининградская - пр-д Циолковского",
+        "description": "ДК 61.  Тучково, ул. Лебеденко -  ул. Гравийная, мкр. Восточный",
+        "phases": null,
+        "points": {
+          "Y": 0,
+          "X": 0
+        },
+        "inputError": false,
+        "pk": 0,
+        "nk": 0,
+        "ck": 0,
+        "techMode": ""
+      },
+      {
+        "ID": 64,
+        "region": {
+          "num": "1",
+          "nameRegion": "Мосавтодор"
+        },
+        "area": {
+          "num": "1",
+          "nameArea": "Первая половина"
+        },
+        "subarea": 3,
+        "idevice": 60437,
+        "tlsost": {
+          "num": 18,
+          "description": "Нет связи с УСДК/ДК",
+          "control": false
+        },
+        "description": "ДК 64, 12+000 км, МБК-Минское-Волоколамское,  Нестерово,в/часть",
+        "phases": null,
+        "points": {
+          "Y": 0,
+          "X": 0
+        },
+        "inputError": false,
+        "pk": 0,
+        "nk": 0,
+        "ck": 0,
+        "techMode": ""
+      },
+      {
+        "ID": 139,
+        "region": {
+          "num": "1",
+          "nameRegion": "Мосавтодор"
+        },
+        "area": {
+          "num": "1",
+          "nameArea": "Первая половина"
+        },
+        "subarea": 3,
+        "idevice": 383693,
+        "tlsost": {
+          "num": 18,
+          "description": "Нет связи с УСДК/ДК",
+          "control": false
+        },
+        "description": "ДК 139, Егорьевское ш, км 7+000, п. Малаховка - ул. Карла Либкнехта",
+        "phases": null,
+        "points": {
+          "Y": 0,
+          "X": 0
+        },
+        "inputError": false,
+        "pk": 0,
+        "nk": 0,
+        "ck": 0,
+        "techMode": ""
+      },
+      {
+        "ID": 237,
+        "region": {
+          "num": "1",
+          "nameRegion": "Мосавтодор"
+        },
+        "area": {
+          "num": "1",
+          "nameArea": "Первая половина"
+        },
+        "subarea": 3,
+        "idevice": 312304,
+        "tlsost": {
+          "num": 18,
+          "description": "Нет связи с УСДК/ДК",
+          "control": false
+        },
+        "description": "ДК 44, М-1 Минское ш., км.85+650, Дорохово, ул. Первомайская1",
         "phases": null,
         "points": {
           "Y": 0,
@@ -1412,6 +1064,238 @@
           "control": false
         },
         "description": "ДК 57, а/д Звенигород-Колюб.-Нестерово-, км 2+000,Саввинский скит",
+        "phases": null,
+        "points": {
+          "Y": 0,
+          "X": 0
+        },
+        "inputError": false,
+        "pk": 0,
+        "nk": 0,
+        "ck": 0,
+        "techMode": ""
+      },
+      {
+        "ID": 2,
+        "region": {
+          "num": "1",
+          "nameRegion": "Мосавтодор"
+        },
+        "area": {
+          "num": "2",
+          "nameArea": "Вторая половина"
+        },
+        "subarea": 2,
+        "idevice": 270106,
+        "tlsost": {
+          "num": 18,
+          "description": "Нет связи с УСДК/ДК",
+          "control": false
+        },
+        "description": "ДК 202,  а/д Ярославское шоссе, км 31.690   (г.Пушкино - поворот на Ивантеевку)",
+        "phases": null,
+        "points": {
+          "Y": 0,
+          "X": 0
+        },
+        "inputError": false,
+        "pk": 0,
+        "nk": 0,
+        "ck": 0,
+        "techMode": ""
+      },
+      {
+        "ID": 65,
+        "region": {
+          "num": "1",
+          "nameRegion": "Мосавтодор"
+        },
+        "area": {
+          "num": "2",
+          "nameArea": "Вторая половина"
+        },
+        "subarea": 2,
+        "idevice": 437752,
+        "tlsost": {
+          "num": 18,
+          "description": "Нет связи с УСДК/ДК",
+          "control": false
+        },
+        "description": "ДК 265, г. Королев, пр-т. Космонавтов  - Сбербанк",
+        "phases": null,
+        "points": {
+          "Y": 0,
+          "X": 0
+        },
+        "inputError": false,
+        "pk": 0,
+        "nk": 0,
+        "ck": 0,
+        "techMode": ""
+      },
+      {
+        "ID": 34,
+        "region": {
+          "num": "1",
+          "nameRegion": "Мосавтодор"
+        },
+        "area": {
+          "num": "2",
+          "nameArea": "Вторая половина"
+        },
+        "subarea": 3,
+        "idevice": 46481311,
+        "tlsost": {
+          "num": 18,
+          "description": "Нет связи с УСДК/ДК",
+          "control": false
+        },
+        "description": "ДК 234, г. Мытищи,  ул. Мира - ул. Летная",
+        "phases": null,
+        "points": {
+          "Y": 0,
+          "X": 0
+        },
+        "inputError": false,
+        "pk": 0,
+        "nk": 0,
+        "ck": 0,
+        "techMode": ""
+      },
+      {
+        "ID": 41,
+        "region": {
+          "num": "1",
+          "nameRegion": "Мосавтодор"
+        },
+        "area": {
+          "num": "2",
+          "nameArea": "Вторая половина"
+        },
+        "subarea": 3,
+        "idevice": 40467711,
+        "tlsost": {
+          "num": 18,
+          "description": "Нет связи с УСДК/ДК",
+          "control": false
+        },
+        "description": "ДК 241. Мытищи, ул. Летная 27",
+        "phases": null,
+        "points": {
+          "Y": 0,
+          "X": 0
+        },
+        "inputError": false,
+        "pk": 0,
+        "nk": 0,
+        "ck": 0,
+        "techMode": ""
+      },
+      {
+        "ID": 53,
+        "region": {
+          "num": "1",
+          "nameRegion": "Мосавтодор"
+        },
+        "area": {
+          "num": "2",
+          "nameArea": "Вторая половина"
+        },
+        "subarea": 3,
+        "idevice": 1261433,
+        "tlsost": {
+          "num": 18,
+          "description": "Нет связи с УСДК/ДК",
+          "control": false
+        },
+        "description": "ДК 253. г. Королев, ул. Пионерская - булочная",
+        "phases": null,
+        "points": {
+          "Y": 0,
+          "X": 0
+        },
+        "inputError": false,
+        "pk": 2,
+        "nk": 1,
+        "ck": 1,
+        "techMode": ""
+      },
+      {
+        "ID": 54,
+        "region": {
+          "num": "1",
+          "nameRegion": "Мосавтодор"
+        },
+        "area": {
+          "num": "2",
+          "nameArea": "Вторая половина"
+        },
+        "subarea": 3,
+        "idevice": 123456,
+        "tlsost": {
+          "num": 18,
+          "description": "Нет связи с УСДК/ДК",
+          "control": false
+        },
+        "description": "ДК 254, г.Королев, ул. Пионерская - ул.Чайковского",
+        "phases": null,
+        "points": {
+          "Y": 0,
+          "X": 0
+        },
+        "inputError": false,
+        "pk": 0,
+        "nk": 0,
+        "ck": 0,
+        "techMode": ""
+      },
+      {
+        "ID": 55,
+        "region": {
+          "num": "1",
+          "nameRegion": "Мосавтодор"
+        },
+        "area": {
+          "num": "2",
+          "nameArea": "Вторая половина"
+        },
+        "subarea": 3,
+        "idevice": 1010101,
+        "tlsost": {
+          "num": 18,
+          "description": "Нет связи с УСДК/ДК",
+          "control": false
+        },
+        "description": "ДК 255, г. Королев, ул. Калининградская - пр-д Циолковского",
+        "phases": null,
+        "points": {
+          "Y": 0,
+          "X": 0
+        },
+        "inputError": false,
+        "pk": 0,
+        "nk": 0,
+        "ck": 0,
+        "techMode": ""
+      },
+      {
+        "ID": 78,
+        "region": {
+          "num": "1",
+          "nameRegion": "Мосавтодор"
+        },
+        "area": {
+          "num": "2",
+          "nameArea": "Вторая половина"
+        },
+        "subarea": 3,
+        "idevice": 358049,
+        "tlsost": {
+          "num": 18,
+          "description": "Нет связи с УСДК/ДК",
+          "control": false
+        },
+        "description": "ДК 278, г. Королев, пр-т Королева - ул. Коммунальная",
         "phases": null,
         "points": {
           "Y": 0,
@@ -1482,35 +1366,6 @@
         "techMode": ""
       },
       {
-        "ID": 61,
-        "region": {
-          "num": "1",
-          "nameRegion": "Мосавтодор"
-        },
-        "area": {
-          "num": "1",
-          "nameArea": "Первая половина"
-        },
-        "subarea": 3,
-        "idevice": 68970,
-        "tlsost": {
-          "num": 18,
-          "description": "Нет связи с УСДК/ДК",
-          "control": false
-        },
-        "description": "ДК 61.  Тучково, ул. Лебеденко -  ул. Гравийная, мкр. Восточный",
-        "phases": null,
-        "points": {
-          "Y": 0,
-          "X": 0
-        },
-        "inputError": false,
-        "pk": 0,
-        "nk": 0,
-        "ck": 0,
-        "techMode": ""
-      },
-      {
         "ID": 63,
         "region": {
           "num": "1",
@@ -1557,64 +1412,6 @@
           "control": false
         },
         "description": "ДК 264, г. Королев, пр-т Космонавтов - ул. Горького, север",
-        "phases": null,
-        "points": {
-          "Y": 0,
-          "X": 0
-        },
-        "inputError": false,
-        "pk": 0,
-        "nk": 0,
-        "ck": 0,
-        "techMode": ""
-      },
-      {
-        "ID": 64,
-        "region": {
-          "num": "1",
-          "nameRegion": "Мосавтодор"
-        },
-        "area": {
-          "num": "1",
-          "nameArea": "Первая половина"
-        },
-        "subarea": 3,
-        "idevice": 60437,
-        "tlsost": {
-          "num": 18,
-          "description": "Нет связи с УСДК/ДК",
-          "control": false
-        },
-        "description": "ДК 64, 12+000 км, МБК-Минское-Волоколамское,  Нестерово,в/часть",
-        "phases": null,
-        "points": {
-          "Y": 0,
-          "X": 0
-        },
-        "inputError": false,
-        "pk": 0,
-        "nk": 0,
-        "ck": 0,
-        "techMode": ""
-      },
-      {
-        "ID": 65,
-        "region": {
-          "num": "1",
-          "nameRegion": "Мосавтодор"
-        },
-        "area": {
-          "num": "2",
-          "nameArea": "Вторая половина"
-        },
-        "subarea": 2,
-        "idevice": 437752,
-        "tlsost": {
-          "num": 18,
-          "description": "Нет связи с УСДК/ДК",
-          "control": false
-        },
-        "description": "ДК 265, г. Королев, пр-т. Космонавтов  - Сбербанк",
         "phases": null,
         "points": {
           "Y": 0,
@@ -1772,35 +1569,6 @@
         "techMode": ""
       },
       {
-        "ID": 78,
-        "region": {
-          "num": "1",
-          "nameRegion": "Мосавтодор"
-        },
-        "area": {
-          "num": "2",
-          "nameArea": "Вторая половина"
-        },
-        "subarea": 3,
-        "idevice": 358049,
-        "tlsost": {
-          "num": 18,
-          "description": "Нет связи с УСДК/ДК",
-          "control": false
-        },
-        "description": "ДК 278, г. Королев, пр-т Королева - ул. Коммунальная",
-        "phases": null,
-        "points": {
-          "Y": 0,
-          "X": 0
-        },
-        "inputError": false,
-        "pk": 0,
-        "nk": 0,
-        "ck": 0,
-        "techMode": ""
-      },
-      {
         "ID": 79,
         "region": {
           "num": "1",
@@ -1876,6 +1644,35 @@
           "control": false
         },
         "description": "ДК 282, г. Королев, Болшевское ш. - ул. Комитетский лес",
+        "phases": null,
+        "points": {
+          "Y": 0,
+          "X": 0
+        },
+        "inputError": false,
+        "pk": 0,
+        "nk": 0,
+        "ck": 0,
+        "techMode": ""
+      },
+      {
+        "ID": 3,
+        "region": {
+          "num": "1",
+          "nameRegion": "Мосавтодор"
+        },
+        "area": {
+          "num": "2",
+          "nameArea": "Вторая половина"
+        },
+        "subarea": 6,
+        "idevice": 499789,
+        "tlsost": {
+          "num": 18,
+          "description": "Нет связи с УСДК/ДК",
+          "control": false
+        },
+        "description": "ДК 203,   а/д Ярославское шоссе, км 32.630   (г.Пушкино, Ярославское ш. - \"Макдональдс\")",
         "phases": null,
         "points": {
           "Y": 0,
@@ -2062,23 +1859,23 @@
         "techMode": ""
       },
       {
-        "ID": 139,
+        "ID": 38,
         "region": {
           "num": "1",
           "nameRegion": "Мосавтодор"
         },
         "area": {
-          "num": "1",
-          "nameArea": "Первая половина"
+          "num": "3",
+          "nameArea": "Третий кусок"
         },
-        "subarea": 3,
-        "idevice": 383693,
+        "subarea": 2,
+        "idevice": 606534,
         "tlsost": {
           "num": 18,
           "description": "Нет связи с УСДК/ДК",
           "control": false
         },
-        "description": "ДК 139, Егорьевское ш, км 7+000, п. Малаховка - ул. Карла Либкнехта",
+        "description": "ДК 338,  Егорьевское ш, км 5+300, п. Красково - Кореневское ш.",
         "phases": null,
         "points": {
           "Y": 0,
@@ -2236,35 +2033,6 @@
         "techMode": ""
       },
       {
-        "ID": 237,
-        "region": {
-          "num": "1",
-          "nameRegion": "Мосавтодор"
-        },
-        "area": {
-          "num": "1",
-          "nameArea": "Первая половина"
-        },
-        "subarea": 3,
-        "idevice": 312304,
-        "tlsost": {
-          "num": 18,
-          "description": "Нет связи с УСДК/ДК",
-          "control": false
-        },
-        "description": "ДК 44, М-1 Минское ш., км.85+650, Дорохово, ул. Первомайская1",
-        "phases": null,
-        "points": {
-          "Y": 0,
-          "X": 0
-        },
-        "inputError": false,
-        "pk": 0,
-        "nk": 0,
-        "ck": 0,
-        "techMode": ""
-      },
-      {
         "ID": 254,
         "region": {
           "num": "1",
@@ -2291,6 +2059,238 @@
         "pk": 1,
         "nk": 1,
         "ck": 1,
+        "techMode": ""
+      },
+      {
+        "ID": 31,
+        "region": {
+          "num": "1",
+          "nameRegion": "Мосавтодор"
+        },
+        "area": {
+          "num": "3",
+          "nameArea": "Третий кусок"
+        },
+        "subarea": 6,
+        "idevice": 220845,
+        "tlsost": {
+          "num": 18,
+          "description": "Нет связи с УСДК/ДК",
+          "control": false
+        },
+        "description": "ДК 331, Егорьевское ш, км 0+500, поселок ВУГИ",
+        "phases": null,
+        "points": {
+          "Y": 0,
+          "X": 0
+        },
+        "inputError": false,
+        "pk": 0,
+        "nk": 0,
+        "ck": 0,
+        "techMode": ""
+      },
+      {
+        "ID": 33,
+        "region": {
+          "num": "1",
+          "nameRegion": "Мосавтодор"
+        },
+        "area": {
+          "num": "3",
+          "nameArea": "Третий кусок"
+        },
+        "subarea": 6,
+        "idevice": 133,
+        "tlsost": {
+          "num": 18,
+          "description": "Нет связи с УСДК/ДК",
+          "control": false
+        },
+        "description": "ДК 333,  МЕТК км. 2.500 (Люберецкий район)  (п.Томилино, ул. Гаршина - ул. Потехина)",
+        "phases": null,
+        "points": {
+          "Y": 0,
+          "X": 0
+        },
+        "inputError": false,
+        "pk": 7,
+        "nk": 1,
+        "ck": 1,
+        "techMode": ""
+      },
+      {
+        "ID": 34,
+        "region": {
+          "num": "1",
+          "nameRegion": "Мосавтодор"
+        },
+        "area": {
+          "num": "3",
+          "nameArea": "Третий кусок"
+        },
+        "subarea": 6,
+        "idevice": 202020,
+        "tlsost": {
+          "num": 18,
+          "description": "Нет связи с УСДК/ДК",
+          "control": false
+        },
+        "description": "ДК 334,  Егорьевское ш, км 2+820, пос. Томилино, ост ТЗПП",
+        "phases": null,
+        "points": {
+          "Y": 0,
+          "X": 0
+        },
+        "inputError": false,
+        "pk": 1,
+        "nk": 1,
+        "ck": 1,
+        "techMode": ""
+      },
+      {
+        "ID": 43,
+        "region": {
+          "num": "1",
+          "nameRegion": "Мосавтодор"
+        },
+        "area": {
+          "num": "3",
+          "nameArea": "Третий кусок"
+        },
+        "subarea": 6,
+        "idevice": 519634,
+        "tlsost": {
+          "num": 18,
+          "description": "Нет связи с УСДК/ДК",
+          "control": false
+        },
+        "description": "ДК 343. Егорьевское ш., д. Донино",
+        "phases": null,
+        "points": {
+          "Y": 0,
+          "X": 0
+        },
+        "inputError": false,
+        "pk": 0,
+        "nk": 0,
+        "ck": 0,
+        "techMode": ""
+      },
+      {
+        "ID": 35,
+        "region": {
+          "num": "1",
+          "nameRegion": "Мосавтодор"
+        },
+        "area": {
+          "num": "3",
+          "nameArea": "Третий кусок"
+        },
+        "subarea": 7,
+        "idevice": 9268474,
+        "tlsost": {
+          "num": 18,
+          "description": "Нет связи с УСДК/ДК",
+          "control": false
+        },
+        "description": "ДК 335,  Егорьевское ш, км 3+800, п. Красково, ост. Совхоз (Церковь)",
+        "phases": null,
+        "points": {
+          "Y": 0,
+          "X": 0
+        },
+        "inputError": false,
+        "pk": 9,
+        "nk": 1,
+        "ck": 1,
+        "techMode": ""
+      },
+      {
+        "ID": 36,
+        "region": {
+          "num": "1",
+          "nameRegion": "Мосавтодор"
+        },
+        "area": {
+          "num": "3",
+          "nameArea": "Третий кусок"
+        },
+        "subarea": 7,
+        "idevice": 145904,
+        "tlsost": {
+          "num": 18,
+          "description": "Нет связи с УСДК/ДК",
+          "control": false
+        },
+        "description": "ДК 336,  Егорьевское ш, км 4+100, п. Красково, ул.К. Маркса - ул. Школьная",
+        "phases": null,
+        "points": {
+          "Y": 0,
+          "X": 0
+        },
+        "inputError": false,
+        "pk": 0,
+        "nk": 0,
+        "ck": 0,
+        "techMode": ""
+      },
+      {
+        "ID": 37,
+        "region": {
+          "num": "1",
+          "nameRegion": "Мосавтодор"
+        },
+        "area": {
+          "num": "3",
+          "nameArea": "Третий кусок"
+        },
+        "subarea": 7,
+        "idevice": 536725,
+        "tlsost": {
+          "num": 18,
+          "description": "Нет связи с УСДК/ДК",
+          "control": false
+        },
+        "description": "ДК 337,  Егорьевское ш, км 4+900, п. Красково, ул. К.Маркса - ост. Больница",
+        "phases": null,
+        "points": {
+          "Y": 0,
+          "X": 0
+        },
+        "inputError": false,
+        "pk": 0,
+        "nk": 0,
+        "ck": 0,
+        "techMode": ""
+      },
+      {
+        "ID": 42,
+        "region": {
+          "num": "1",
+          "nameRegion": "Мосавтодор"
+        },
+        "area": {
+          "num": "3",
+          "nameArea": "Третий кусок"
+        },
+        "subarea": 8,
+        "idevice": 49201,
+        "tlsost": {
+          "num": 18,
+          "description": "Нет связи с УСДК/ДК",
+          "control": false
+        },
+        "description": "ДК 342 Егорьевское ш., км 12+100, п. Осеченки, пов.-т на Зюзино",
+        "phases": null,
+        "points": {
+          "Y": 0,
+          "X": 0
+        },
+        "inputError": false,
+        "pk": 0,
+        "nk": 0,
+        "ck": 0,
         "techMode": ""
       }
     ]
