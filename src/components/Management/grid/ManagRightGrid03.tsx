@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 
 import { Tflight } from '../../../interfaceMNG.d';
 
-const ManagementRightGrid03 = (props: { open: boolean; tflightt: Tflight[] }) => {
+const ManagementRightGrid03 = (props: { open: boolean; tflightt: Tflight[], mode: number }) => {
   const points = props.tflightt;
 
   const styleMRG01 = {
