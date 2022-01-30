@@ -9,9 +9,8 @@ import PointsXt11 from './PointsXt11';
 import { XctrlInfo } from '../../interfaceGl.d';
 
 const Points = (props: { open: boolean; xctrll: XctrlInfo[] }) => {
-
   const stylePXt1 = {
-    fontSize: 14,
+    fontSize: 13.5,
     maxHeight: '20px',
     minHeight: '20px',
     backgroundColor: '#F1F3F4',
@@ -31,13 +30,10 @@ const Points = (props: { open: boolean; xctrll: XctrlInfo[] }) => {
     let labl: string = '';
     for (let i = 0; i < props.xctrll.length; i++) {
       labl = 'XT:' + (i + 1).toString() + ':1';
-      resSps.push(
-        <Tab key={i} sx={stylePXt1} label={labl} />,
-      );
+      resSps.push(<Tab key={i} sx={stylePXt1} label={labl} />);
     }
     return resSps;
   };
-
 
   return (
     <>

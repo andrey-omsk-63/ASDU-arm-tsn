@@ -5,8 +5,6 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
-//import axios from 'axios';
-
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -18,33 +16,43 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 export interface Welcome2 {
-  id: number;
-  area: number;
-  date: Date;
-  region: number;
-  Statistics: Statistic[];
-}
-
-export interface Statistic {
-  Min: number;
-  Hour: number;
-  TLen: number;
-  Type: number;
-  Datas: Data[];
-  Period: number;
+  type: string;
+  data: Data;
 }
 
 export interface Data {
-  GP: number;
-  Speed: number;
-  Chanel: number;
-  Status: number;
-  Density: number;
-  Intensiv: number;
-  Occupant: number;
+  statistics: Statistic[];
+}
+
+export interface Statistic {
+  region: number;
+  area: number;
+  id: number;
+  date: Date;
+  Statistics: StatisticElement[];
+}
+
+export interface StatisticElement {
+  Period: number;
+  Type: number;
+  TLen: number;
+  Hour: number;
+  Min: number;
+  Datas: DataElement[];
+}
+
+export interface DataElement {
+  ch: number;
+  st: number;
+  in: number;
+  sp: number;
+  d: number;
+  o: number;
+  g: number;
 }
 
 const colorsGraf = [
@@ -90,9 +98,12 @@ const data: DataGl = {
 };
 
 const Statistic110 = (props: { open: boolean; statist: Statistic[] }) => {
+  //  const Statistic110 = (props: { open: boolean; statist: Data }) => {
 
   const isOpen = props.open;
   const points = props.statist;
+
+  console.log('Points:', points);
 
   const styleSt02 = {
     textIndent: 6,
@@ -145,7 +156,7 @@ const Statistic110 = (props: { open: boolean; statist: Statistic[] }) => {
   let resStr: any = [];
   let resSps: any = [];
 
-  let matrix: Array<Statistic> = [];
+  let matrix: Array<StatisticElement> = [];
 
   let kakchestvo = ' ';
 
@@ -182,7 +193,7 @@ const Statistic110 = (props: { open: boolean; statist: Statistic[] }) => {
       } else {
         for (let i = 0; i < matrix.length; i++) {
           let int = 0;
-          if (matrix[i].Datas.length !== 0) int = matrix[i].Datas[val].Intensiv;
+          if (matrix[i].Datas.length !== 0) int = matrix[i].Datas[val].in;
           datas.push(int);
         }
 
@@ -232,8 +243,9 @@ const Statistic110 = (props: { open: boolean; statist: Statistic[] }) => {
       lineHeight: 2,
     };
 
-    const KnobBat = (props: { num: string }) => {
+    const KnobBat = (props: { num: string; xss: number }) => {
       const styleBatton = {
+        marginLeft: 0.4,
         fontSize: 11,
         backgroundColor: '#F1F3F4',
         color: 'black',
@@ -244,12 +256,8 @@ const Statistic110 = (props: { open: boolean; statist: Statistic[] }) => {
       };
 
       return (
-        <Grid item xs={0.75} sx={styleSt03}>
-          <Button
-            size="small"
-            sx={styleBatton}
-            variant="contained"
-            onClick={() => setValue(props.num)}>
+        <Grid key={Math.random()} item xs={props.xss} sx={styleSt03}>
+          <Button sx={styleBatton} variant="contained" onClick={() => setValue(props.num)}>
             <b>{props.num}</b>
           </Button>
         </Grid>
@@ -258,57 +266,50 @@ const Statistic110 = (props: { open: boolean; statist: Statistic[] }) => {
 
     const KnobBatCl = () => {
       const styleClear = {
-        position: 'relative',
-        top: '-2.8vh',
-        left: '-7.5vh',
+        position: 'absolute',
+        marginTop: '-2.8vh',
+        left: '0.4vh',
       };
+
       const styleBattonCl = {
-        fontSize: 9,
+        fontSize: 10.1,
         backgroundColor: '#F1F3F4',
         color: 'red',
-        maxWidth: '7vh',
-        maxHeight: '15px',
-        minWidth: '7vh',
-        minHeight: '15px',
+        maxWidth: '5vh',
+        maxHeight: '12px',
+        minWidth: '5vh',
+        minHeight: '12px',
+        textTransform: 'unset !important',
       };
 
       return (
         <Box sx={styleClear}>
-          <Button
-            size="small"
-            sx={styleBattonCl}
-            variant="contained"
-            onClick={() => setValue('17')}>
-            <b>Очистить</b>
+          <Button sx={styleBattonCl} variant="contained" onClick={() => setValue('17')}>
+            <b>Чистка</b>
           </Button>
         </Box>
       );
     };
 
     const MenuKnobBat = () => {
+      const SpisBatt = (leng: number) => {
+        let resStr = [];
+        let xss = 12 / leng;
+        for (let i = 1; i <= leng; i++) {
+          resStr.push(
+            <Grid item key={i} xs={xss}>
+              <KnobBat num={i.toString()} xss={xss} key={Math.random()} />
+            </Grid>,
+          );
+        }
+        return resStr;
+      };
+
       return (
         <Grid container>
-          <Grid item xs={12} sx={{ border: 0, height: 24 }}>
+          <Grid item xs={12} sx={{ height: 24 }}>
             <Stack direction="row">
-              <Grid container>
-                <KnobBat num="1" />
-                <KnobBat num="2" />
-                <KnobBat num="3" />
-                <KnobBat num="4" />
-                <KnobBat num="5" />
-                <KnobBat num="6" />
-                <KnobBat num="7" />
-                <KnobBat num="8" />
-                <KnobBat num="9" />
-                <KnobBat num="10" />
-                <KnobBat num="11" />
-                <KnobBat num="12" />
-                <KnobBat num="13" />
-                <KnobBat num="14" />
-                <KnobBat num="15" />
-                <KnobBat num="16" />
-                <KnobBatCl />
-              </Grid>
+              <Grid container>{SpisBatt(8)}</Grid>
             </Stack>
           </Grid>
         </Grid>
@@ -319,9 +320,12 @@ const Statistic110 = (props: { open: boolean; statist: Statistic[] }) => {
       <Grid container item sx={{ height: 24 }}>
         <Grid container sx={{ border: 0, marginRight: 0.7 }}>
           <Grid item xs={0.5} sx={styleSt03}></Grid>
-          <Grid item xs={8.16} sx={{ border: 0 }}>
+
+          <Grid item xs={0.51 * 8} sx={styleSt03}>
             <MenuKnobBat />
+            <KnobBatCl />
           </Grid>
+
           <Grid item xs={3.3} sx={styleSt03}>
             <b>Качество</b>
           </Grid>
@@ -351,7 +355,7 @@ const Statistic110 = (props: { open: boolean; statist: Statistic[] }) => {
 
       if (matrix[numMas].Datas.length === 0) {
         //нет данных
-        for (let i = 0; i < points[0].Datas.length; i++) {
+        for (let i = 0; i < points[0].Statistics[0].Datas.length; i++) {
           resStr.push(<Grid key={i} item xs={0.51} sx={styleSt02}></Grid>);
         }
         //формирование конца строки
@@ -363,15 +367,16 @@ const Statistic110 = (props: { open: boolean; statist: Statistic[] }) => {
       } else {
         //есть данные
         let i = 0;
+        console.log('matrix:', matrix);
         for (const elem of matrix[numMas].Datas) {
           i++;
-          if (elem.Status !== 0) {
+          if (elem.st !== 0) {
             kakchestvo += i;
             kakchestvo += ', ';
           }
           resStr.push(
-            <Grid key={Math.random()} item xs={0.51} sx={elem.Status === 0 ? styleSt03 : styleSt04}>
-              {elem.Intensiv}
+            <Grid key={Math.random()} item xs={0.51} sx={elem.st === 0 ? styleSt03 : styleSt04}>
+              {elem.in}
             </Grid>,
           );
         }
@@ -401,8 +406,10 @@ const Statistic110 = (props: { open: boolean; statist: Statistic[] }) => {
   };
 
   const CreateMatrix = () => {
-    const step: number = points[0].TLen;
-    const typer = points[0].Type;
+    //console.log('111', points);
+
+    const step: number = points[0].Statistics[0].TLen;
+    const typer = points[0].Statistics[0].Type;
     let rows = 1440 / step;
     let time = -step;
     for (let i = 0; i < rows; i++) {
@@ -410,30 +417,24 @@ const Statistic110 = (props: { open: boolean; statist: Statistic[] }) => {
       let hours = Math.trunc(time / 60);
       let minutes = time % 60;
       matrix[i] = {
-        Min: minutes,
-        Hour: hours,
-        TLen: step,
-        Type: typer,
-        Datas: [],
         Period: 0,
+        Type: typer,
+        TLen: step,
+        Hour: hours,
+        Min: minutes,
+        Datas: [],
       };
     }
   };
 
   const CompletMatrix = () => {
-    const step = points[0].TLen;
-    for (let i = 0; i < points.length; i++) {
-      let numInMatrix = (points[i].Hour * 60 + points[i].Min) / step;
-      matrix[numInMatrix].Datas = points[i].Datas;
+    const step = points[0].Statistics[0].TLen;
+    //console.log('ZZZZ', points.length, 'xxxxxxx', points[0].Statistics[0]);
+    for (let i = 0; i < points[0].Statistics.length; i++) {
+      let numInMatrix = (points[0].Statistics[i].Hour * 60 + points[0].Statistics[i].Min) / step;
+      matrix[numInMatrix].Datas = points[0].Statistics[i].Datas;
     }
   };
-
-  // React.useEffect(() => {
-  //   axios.get('http://localhost:3000/statistics.json').then(({ data }) => {
-  //     setPoints(data.Statistics);
-  //     setIsOpen(true);
-  //   });
-  // }, []);
 
   if (isOpen) {
     CreateMatrix();

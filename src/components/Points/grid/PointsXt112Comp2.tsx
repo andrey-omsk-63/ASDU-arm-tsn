@@ -18,7 +18,6 @@ const PointsXt112Comp2 = (props: {
 
   const styleXTG011 = {
     fontSize: 11,
-    //borderRight: 1,
     borderBottom: 1,
     borderColor: 'primary.main',
     padding: 0.2,

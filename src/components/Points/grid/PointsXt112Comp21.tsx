@@ -36,12 +36,13 @@ const PointsXt112Comp21 = (props: { xctrll: XctrlInfo[]; xtt: number; crossroad:
   ];
 
   const styleXTG02 = {
-    fontSize: 11,
+    fontSize: 12.5,
     maxHeight: '15px',
     minHeight: '15px',
     backgroundColor: '#F1F3F4',
     color: 'black',
     marginRight: 1,
+    textTransform: 'unset !important',
   };
 
   const [value, setValue] = React.useState(0);

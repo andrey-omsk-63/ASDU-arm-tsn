@@ -4,8 +4,26 @@ import Box from '@mui/material/Box';
 
 import { Tflight } from '../../../interfaceMNG.d';
 
-const ManagementRightGrid03 = (props: { open: boolean; tflightt: Tflight[], mode: number }) => {
-  const points = props.tflightt;
+const ManagementRightGrid03 = (props: {
+  open: boolean;
+  tflightt: Tflight[];
+  mode: number;
+  areaa: string;
+  subArea: number;
+}) => {
+  let points = props.tflightt;
+
+  if (props.mode === 3) {
+    let masSpis = points.filter(
+      (points) => points.area.num === props.areaa && points.subarea === props.subArea,
+    );
+    points = masSpis;
+  } else {
+    if (props.mode === 2) {
+      let masSpis = points.filter((points) => points.area.num === props.areaa);
+      points = masSpis;
+    }
+  }
 
   const styleMRG01 = {
     borderBottom: 1,
@@ -15,7 +33,7 @@ const ManagementRightGrid03 = (props: { open: boolean; tflightt: Tflight[], mode
   };
 
   const styleMRG02 = {
-    borderRight: 1,
+    //borderRight: 1,
     borderBottom: 1,
     borderColor: 'primary.main',
     padding: 0.4,
@@ -124,11 +142,25 @@ const ManagementRightGrid03 = (props: { open: boolean; tflightt: Tflight[], mode
   return (
     <Grid item container sx={styleMRG04}>
       <Grid item xs={12}>
+        {/* <Box
+          sx={{
+            marginRight: 0.71,
+            border: 0,
+          }}>
+          <HeaderMRG03 />
+        </Box> */}
+        {/* <Box sx={{ overflowX: 'auto', height: '82.5vh', border: 0 }}> */}
         <Box sx={{ marginRight: 0.71, border: 0 }}>
           <HeaderMRG03 />
         </Box>
         <Box sx={{ overflowX: 'auto', height: '82.5vh', border: 0 }}>
-          {props.open && <div>{StrokaMRG03()}</div>}
+          <Box
+            sx={{
+              marginRight: 0.71,
+              border: 0,
+            }}>
+            {props.open && <div>{StrokaMRG03()}</div>}
+          </Box>
         </Box>
       </Grid>
     </Grid>

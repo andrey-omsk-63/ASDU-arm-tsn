@@ -37,41 +37,44 @@ const ManagementLeftGrid = (props: { open: boolean; tflightt: Tflight[] }) => {
   };
 
   const styleButt01 = {
-    fontSize: 10,
-    marginRight: 1,
+    fontSize: 12,
     maxHeight: '21px',
     minHeight: '21px',
-    //width: '12vh',
-    //backgroundColor: '#F1F3F4',
     backgroundColor: 'white',
     color: 'black',
+    textTransform: 'unset !important',
   };
 
   const styleButt02 = {
-    fontSize: 12.9,
-    marginRight: 1,
+    fontSize: 15,
     maxHeight: '21px',
     minHeight: '21px',
-    //width: '12vh',
-    //backgroundColor: '#F1F3F4',
     backgroundColor: 'white',
-    color: 'black',
+    color: '#5B1080',
+    textTransform: 'unset !important',
   };
+
+  const [mode, setMode] = React.useState(1);
+  const [areaa, setAreaa] = React.useState('1');
+  const [subArea, setSubArea] = React.useState(1);
 
   let mass: any = [];
   let masRab: any = [];
   let masAreaNum: any = [];
 
   const handleClickGl = () => {
-    console.log('clickGl:')
+    setMode(1);
   };
 
-  const handleClick = () => {
-    console.log('click:')
+  const handleClock = (area: string) => {
+    setAreaa(area);
+    setMode(2);
   };
 
-  const handleClock = () => {
-    console.log('clock:')
+  const handleClick = (area: string, subarea: number) => {
+    setAreaa(area);
+    setSubArea(subarea);
+    setMode(3);
   };
 
   if (props.open) {
@@ -97,26 +100,25 @@ const ManagementLeftGrid = (props: { open: boolean; tflightt: Tflight[] }) => {
     masAreaNum = masRab.filter((element: any, index: any) => {
       return masRab.indexOf(element) === index;
     });
-
-    //console.log('mass:', mass);
-    // console.log('masRab:', masRab);
-    // console.log('masAreaNum:', masAreaNum);
   }
 
   const SpisAreaMLG = (props: { nom: string }) => {
-    masRab = [];
-    masRab = mass.filter((mass: { areaNum: string }) => mass.areaNum === props.nom);
-    //console.log('masRab1:', masRab);
+    let masSpis: any = [];
+    masSpis = mass.filter((mass: { areaNum: string }) => mass.areaNum === props.nom);
 
     const SpisSubAreaMLG = () => {
       let resStr = [];
-      for (let i = 0; i < masRab.length; i++) {
+
+      for (let i = 0; i < masSpis.length; i++) {
         resStr.push(
           <Grid container key={Math.random()}>
             <Grid key={Math.random()} item xs={1} sx={styleMG03}></Grid>
             <Grid key={Math.random()} item xs={11} sx={styleMG03}>
-              <Button key={i} sx={styleButt01} onClick={handleClick}>
-                Подрайон:{masRab[i].areaNum}:{masRab[i].subarea}
+              <Button
+                key={i}
+                sx={styleButt01}
+                onClick={() => handleClick(props.nom, masSpis[i].subarea)}>
+                Подрайон:{masSpis[i].areaNum}:{masSpis[i].subarea}
               </Button>
             </Grid>
           </Grid>,
@@ -130,8 +132,10 @@ const ManagementLeftGrid = (props: { open: boolean; tflightt: Tflight[] }) => {
         <Grid container>
           <Grid item xs={0.5} sx={styleMG03}></Grid>
           <Grid item xs={11.5} sx={styleMG03}>
-            <Button sx={styleButt01} onClick={handleClock}>
-              Район:{masRab[0].areaNum}&nbsp;&nbsp;{masRab[0].areaName}
+            <Button sx={styleButt01} onClick={() => handleClock(props.nom)}>
+              <b>
+                Район:{masSpis[0].areaNum}&nbsp;&nbsp;{masSpis[0].areaName}
+              </b>
             </Button>
           </Grid>
           {SpisSubAreaMLG()}
@@ -168,11 +172,8 @@ const ManagementLeftGrid = (props: { open: boolean; tflightt: Tflight[] }) => {
       <Grid item xs={12} sx={{ border: 0, marginLeft: -0.5, marginTop: 1 }}>
         <Stack direction="row">
           <ManagementKnobPK />
-
           <ManagementKnobSK />
-
           <ManagementKnobNK />
-
           <ManagementKnobXT />
         </Stack>
       </Grid>
@@ -182,9 +183,7 @@ const ManagementLeftGrid = (props: { open: boolean; tflightt: Tflight[] }) => {
   return (
     <>
       <Grid item xs={2.5} sx={styleMG01}>
-        <Box sx={{ overflowX: 'auto', height: '94.3vh' }}>
-          {props.open && <SpisMLG />}
-        </Box>
+        <Box sx={{ overflowX: 'auto', height: '94.3vh' }}>{props.open && <SpisMLG />}</Box>
       </Grid>
       <Grid item xs>
         <Grid container>
@@ -192,7 +191,13 @@ const ManagementLeftGrid = (props: { open: boolean; tflightt: Tflight[] }) => {
           <Grid item xs={12} sx={styleMgl}>
             Всего ДК 2 на связи 0.00% подчинены 0.00% <b>Назначен ВР Выполняется ХТ</b>
           </Grid>
-          <ManagementRightGrid03 open={props.open} tflightt={points} mode={0} />
+          <ManagementRightGrid03
+            open={props.open}
+            tflightt={points}
+            mode={mode}
+            areaa={areaa}
+            subArea={subArea}
+          />
         </Grid>
       </Grid>
     </>

@@ -11,32 +11,40 @@ import Statistic112 from './Statistic112';
 import axios from 'axios';
 
 export interface Welcome2 {
-  id: number;
-  area: number;
-  date: Date;
-  region: number;
-  Statistics: Statistic[];
-}
-
-export interface Statistic {
-  Min: number;
-  Hour: number;
-  TLen: number;
-  Type: number;
-  Datas: Data[];
-  Period: number;
+  type: string;
+  data: Data;
 }
 
 export interface Data {
-  GP: number;
-  Speed: number;
-  Chanel: number;
-  Status: number;
-  Density: number;
-  Intensiv: number;
-  Occupant: number;
+  statistics: [];
 }
 
+export interface Statistic {
+  region: number;
+  area: number;
+  id: number;
+  date: Date;
+  Statistics: StatisticElement[];
+}
+
+export interface StatisticElement {
+  Period: number;
+  Type: number;
+  TLen: number;
+  Hour: number;
+  Min: number;
+  Datas: DataElement[];
+}
+
+export interface DataElement {
+  ch: number;
+  st: number;
+  in: number;
+  sp: number;
+  d: number;
+  o: number;
+  g: number;
+}
 
 // const WS = new WebSocket('wss://' + window.location.host + window.location.pathname + 'W' + window.location.search)
 // const WS = new WebSocket('wss://192.168.115.134:4443/user/MMM/charPointsW')
@@ -64,21 +72,22 @@ export interface Data {
 //   }
 // };
 
-
 const Statistics = () => {
-
   const [value, setValue] = React.useState('1');
   const [points, setPoints] = React.useState<Array<Statistic>>([]);
+  //const [points, setPoints] = React.useState<Data>({} as Data);
   const [isOpen, setIsOpen] = React.useState(false);
   const ipAdress: string = 'http://localhost:3000/statistics.json';
 
   React.useEffect(() => {
     axios.get(ipAdress).then(({ data }) => {
-      setPoints(data.Statistics);
+      console.log('000', data);
+      setPoints(data.data.statistics);
       setIsOpen(true);
     });
   }, [ipAdress]);
 
+  if (isOpen) console.log('!!!', points);
   return (
     <Box sx={{ marginTop: -2, marginLeft: -3, marginRight: -7 }}>
       <TabContext value={value}>

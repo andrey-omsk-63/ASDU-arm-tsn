@@ -12,18 +12,18 @@ import PointsXt112 from './PointsXt112';
 import { XctrlInfo } from '../../interfaceGl.d';
 
 const PointsXt11 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number }) => {
-
   const isOpen = props.open;
   const xtProps = props.xtt;
   const points = props.xctrll[xtProps];
 
   const stylePXt1 = {
-    fontSize: 10,
+    fontSize: 13.3,
     maxHeight: '20px',
     minHeight: '20px',
     backgroundColor: '#F1F3F4',
     color: 'black',
     marginRight: 1,
+    textTransform: 'unset !important',
   };
 
   const [valueLevel2, setValueLavel2] = React.useState('1');

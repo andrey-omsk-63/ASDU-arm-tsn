@@ -31,13 +31,14 @@ const PointsXt112 = (props: {
     };
 
     const styleXTG02 = {
-      fontSize: 11,
+      fontSize: 12.5,
       maxHeight: '21px',
       minHeight: '21px',
       transform: 'rotate(270deg)',
       backgroundColor: '#F1F3F4',
       color: 'black',
       marginBottom: 6.5,
+      textTransform: 'unset !important',
     };
 
     return (

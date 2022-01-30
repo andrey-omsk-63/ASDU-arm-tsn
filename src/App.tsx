@@ -42,23 +42,25 @@ import { XctrlInfo } from './interfaceGl.d';
 
 const App = () => {
   const styleApp01 = {
-    fontSize: 12,
+    fontSize: 14,
     marginRight: 1,
     width: '12vh',
     maxHeight: '21px',
     minHeight: '21px',
     backgroundColor: '#F1F3F4',
     color: 'black',
+    textTransform: 'unset !important',
   };
 
   const styleApp02 = {
-    fontSize: 12,
+    fontSize: 14,
     marginRight: 1,
     maxHeight: '21px',
     minHeight: '21px',
-    width: '24vh',
+    width: '22.5vh',
     backgroundColor: '#F1F3F4',
     color: 'black',
+    textTransform: 'unset !important',
   };
 
   //const [points, setPoints] = React.useState<XctrlInfo>({} as XctrlInfo);
