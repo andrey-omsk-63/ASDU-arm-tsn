@@ -13,6 +13,7 @@ import ManagementKnobXT from './ManagKnobXT';
 import { Tflight } from '../../../interfaceMNG.d';
 
 const ManagementLeftGrid = (props: { open: boolean; tflightt: Tflight[] }) => {
+
   const points = props.tflightt;
 
   const styleMG01 = {

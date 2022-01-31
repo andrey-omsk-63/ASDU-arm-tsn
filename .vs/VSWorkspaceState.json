@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\components",
+    "\\src\\components\\Header",
+    "\\src\\components\\Header\\modal",
+    "\\src\\components\\Management",
+    "\\src\\components\\Management\\grid"
+  ],
+  "SelectedNode": "\\src\\components\\Management\\grid\\ManagRightGrid03.tsx",
+  "PreviewInSolutionExplorer": false
+}
