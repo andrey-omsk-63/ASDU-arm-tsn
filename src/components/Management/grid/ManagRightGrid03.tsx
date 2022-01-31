@@ -33,7 +33,7 @@ const ManagementRightGrid03 = (props: {
   };
 
   const styleMRG02 = {
-    //borderRight: 1,
+    borderRight: 1,
     borderBottom: 1,
     borderColor: 'primary.main',
     padding: 0.4,
@@ -41,7 +41,7 @@ const ManagementRightGrid03 = (props: {
   };
 
   const styleMRG03 = {
-    borderRight: 1,
+    //borderRight: 1,
     borderBottom: 1,
     borderColor: 'primary.main',
     padding: 0.4,
@@ -59,112 +59,169 @@ const ManagementRightGrid03 = (props: {
   };
 
   const HeaderMRG03 = () => {
+
+    const StrokaHeaderMode1 = () => {
+      let resStr = [];
+      resStr.push(
+       
+          <Grid item key={Math.random()} container>
+            <Grid item key={Math.random()} xs={0.3} sx={styleMRG03}>
+              <b>№</b>
+            </Grid>
+            <Grid item key={Math.random()} xs={2} sx={styleMRG03}>
+              <b>Район</b>
+            </Grid>
+            <Grid item key={Math.random()} xs={3.5} sx={styleMRG03}>
+              <b>Устройствa</b>
+            </Grid>
+            <Grid item key={Math.random()} xs={2.5} sx={styleMRG03}>
+              <b>Текущее состояние</b>
+            </Grid>
+            <Grid item key={Math.random()} xs={2.5} sx={styleMRG03}>
+              <b>Состояние ХТ</b>
+            </Grid>
+          </Grid>,
+        
+      );
+      return resStr;
+    };
+
+    const StrokaHeaderMode2 = () => {
+      let resStr = [];
+      resStr.push(
+       
+          <Grid item key={Math.random()} container>
+            <Grid item key={Math.random()} xs={0.3} sx={styleMRG03}>
+              <b>№</b>
+            </Grid>
+            <Grid item key={Math.random()} xs={2} sx={styleMRG03}>
+              <b>Район</b>
+            </Grid>
+            <Grid item key={Math.random()} xs={1} sx={styleMRG03}>
+              <b>Подрайон</b>
+            </Grid>
+            <Grid item key={Math.random()} xs={3.5} sx={styleMRG03}>
+              <b>Устройствa</b>
+            </Grid>
+            <Grid item key={Math.random()} xs={2.5} sx={styleMRG03}>
+              <b>Текущее состояние</b>
+            </Grid>
+            <Grid item key={Math.random()} xs={2.5} sx={styleMRG03}>
+              <b>Состояние ХТ</b>
+            </Grid>
+          </Grid>,
+       
+      );
+      return resStr;
+    };
+
+    const StrokaHeaderMode3 = () => {
+      let resStr = [];
+      resStr.push(
+       
+          <Grid item key={Math.random()} container>
+            <Grid item key={Math.random()} xs={0.3} sx={styleMRG03}>
+              <b>№</b>
+            </Grid>
+            <Grid item key={Math.random()} xs={1.5} sx={styleMRG03}>
+              <b>Район</b>
+            </Grid>
+            <Grid item key={Math.random()} xs={0.4} sx={styleMRG03}>
+              <b>ДК</b>
+            </Grid>
+            <Grid item key={Math.random()} xs={4} sx={styleMRG03}>
+              <b>Наименование</b>
+            </Grid>
+            <Grid item key={Math.random()} xs={1.5} sx={styleMRG03}>
+              <b>Устройство</b>
+            </Grid>
+            <Grid item key={Math.random()} xs={2} sx={styleMRG03}>
+              <b>Состояние</b>
+            </Grid>
+            <Grid item key={Math.random()} xs={0.5} sx={styleMRG03}>
+              <b>ПК</b>
+            </Grid>
+            <Grid item key={Math.random()} xs={0.5} sx={styleMRG03}>
+              <b>СК</b>
+            </Grid>
+            <Grid item key={Math.random()} xs={0.5} sx={styleMRG03}>
+              <b>НК</b>
+            </Grid>
+            <Grid item key={Math.random()} xs={0.8} sx={styleMRG03}>
+              <b>Статус</b>
+            </Grid>
+          </Grid>,
+     
+      );
+      return resStr;
+    };
+
     return (
-      <>
-        <Grid item container>
-          <Grid item xs={0.3} sx={styleMRG03}>
-            <b>№</b>
-          </Grid>
-          <Grid item xs={0.4} sx={styleMRG03}>
-            <b>ДК</b>
-          </Grid>
-          <Grid item xs={1.5} sx={styleMRG03}>
-            <b>Район</b>
-          </Grid>
-          <Grid item xs={4} sx={styleMRG03}>
-            <b>Наименование</b>
-          </Grid>
-          <Grid item xs={1.5} sx={styleMRG03}>
-            <b>Устройство</b>
-          </Grid>
-          <Grid item xs={2} sx={styleMRG03}>
-            <b>Состояние</b>
-          </Grid>
-          <Grid item xs={0.5} sx={styleMRG03}>
-            <b>ПК</b>
-          </Grid>
-          <Grid item xs={0.5} sx={styleMRG03}>
-            <b>СК</b>
-          </Grid>
-          <Grid item xs={0.5} sx={styleMRG03}>
-            <b>НК</b>
-          </Grid>
-          <Grid item xs={0.8} sx={styleMRG03}>
-            <b>Статус</b>
-          </Grid>
-        </Grid>
-      </>
+      props.mode === 1 ? (<div>{StrokaHeaderMode1()}</div>) :
+        (props.mode === 2 ? (<div>{StrokaHeaderMode2()}</div>) :
+          (<div>{StrokaHeaderMode3()}</div>))
     );
   };
 
-  const StrokaMRG03 = () => {
-    let resStr = [];
-    for (let i = 0; i < points.length; i++) {
-      resStr.push(
-        <Grid item key={Math.random()} container>
-          <Grid item key={Math.random()} xs={0.3} sx={styleMRG02}>
-            {i + 1}
-          </Grid>
-          <Grid item key={Math.random()} xs={0.4} sx={styleMRG02}>
-            {points[i].ID}
-          </Grid>
-          <Grid item key={Math.random()} xs={1.5} sx={styleMRG02}>
-            {points[i].area.nameArea}
-          </Grid>
-          <Grid item key={Math.random()} xs={4} sx={styleMRG02}>
-            {points[i].description}
-          </Grid>
+const StrokaMRG03 = () => {
+  let resStr = [];
+  for (let i = 0; i < points.length; i++) {
+    resStr.push(
+      <Grid item key={Math.random()} container>
+        <Grid item key={Math.random()} xs={0.3} sx={styleMRG02}>
+          {i + 1}
+        </Grid>
 
-          <Grid item key={Math.random()} xs={1.5} sx={styleMRG02}>
-            {points[i].idevice}
-          </Grid>
-          <Grid item key={Math.random()} xs={2} sx={styleMRG02}>
-            {points[i].tlsost.description}
-          </Grid>
-          <Grid item key={Math.random()} xs={0.5} sx={styleMRG02}>
-            {points[i].pk}
-          </Grid>
-          <Grid item key={Math.random()} xs={0.5} sx={styleMRG02}>
-            {points[i].ck}
-          </Grid>
-          <Grid item key={Math.random()} xs={0.5} sx={styleMRG02}>
-            {points[i].nk}
-          </Grid>
-          <Grid item key={Math.random()} xs={0.8} sx={styleMRG01}>
-            {points[i].techMode}
-          </Grid>
-        </Grid>,
-      );
-    }
-    return resStr;
-  };
+        <Grid item key={Math.random()} xs={1.5} sx={styleMRG02}>
+          {points[i].area.nameArea}
+        </Grid>
 
-  return (
-    <Grid item container sx={styleMRG04}>
-      <Grid item xs={12}>
-        {/* <Box
-          sx={{
-            marginRight: 0.71,
-            border: 0,
-          }}>
-          <HeaderMRG03 />
-        </Box> */}
-        {/* <Box sx={{ overflowX: 'auto', height: '82.5vh', border: 0 }}> */}
-        <Box sx={{ marginRight: 0.71, border: 0 }}>
-          <HeaderMRG03 />
-        </Box>
-        <Box sx={{ overflowX: 'auto', height: '82.5vh', border: 0 }}>
-          <Box
-            sx={{
-              marginRight: 0.71,
-              border: 0,
-            }}>
-            {props.open && <div>{StrokaMRG03()}</div>}
-          </Box>
-        </Box>
-      </Grid>
+        <Grid item key={Math.random()} xs={0.4} sx={styleMRG02}>
+          {points[i].ID}
+        </Grid>
+
+        <Grid item key={Math.random()} xs={4} sx={styleMRG02}>
+          {points[i].description}
+        </Grid>
+
+        <Grid item key={Math.random()} xs={1.5} sx={styleMRG02}>
+          {points[i].idevice}
+        </Grid>
+        <Grid item key={Math.random()} xs={2} sx={styleMRG02}>
+          {points[i].tlsost.description}
+        </Grid>
+        <Grid item key={Math.random()} xs={0.5} sx={styleMRG02}>
+          {points[i].pk}
+        </Grid>
+        <Grid item key={Math.random()} xs={0.5} sx={styleMRG02}>
+          {points[i].ck}
+        </Grid>
+        <Grid item key={Math.random()} xs={0.5} sx={styleMRG02}>
+          {points[i].nk}
+        </Grid>
+        <Grid item key={Math.random()} xs={0.8} sx={styleMRG01}>
+          {points[i].techMode}
+        </Grid>
+      </Grid>,
+    );
+  }
+  return resStr;
+};
+
+return (
+  <Grid item container sx={styleMRG04}>
+    <Grid item xs={12}>
+
+      <HeaderMRG03 key={Math.random()} />
+
+      <Box sx={{ overflowX: 'auto', height: '82.5vh', border: 0 }}>
+        {/* <Box sx={{ marginRight: 0.71, }}> */}
+        {props.open && <div>{StrokaMRG03()}</div>}
+        {/* </Box> */}
+      </Box>
     </Grid>
-  );
+  </Grid>
+);
 };
 
 export default ManagementRightGrid03;

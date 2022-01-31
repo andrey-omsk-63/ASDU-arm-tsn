@@ -135,7 +135,7 @@ const ManagementLeftGrid = (props: { open: boolean; tflightt: Tflight[] }) => {
           <Grid item xs={11.5} sx={styleMG03}>
             <Button sx={styleButt01} onClick={() => handleClock(props.nom)}>
               <b>
-                Район:{masSpis[0].areaNum}&nbsp;&nbsp;{masSpis[0].areaName}
+                Район:{masSpis[0].areaNum}&nbsp;{masSpis[0].areaName}
               </b>
             </Button>
           </Grid>

@@ -15,8 +15,7 @@ import faker from 'faker';
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 const options = {
-  responsive: true,
-  plugins: {
+  responsive: true, plugins: {
     legend: {
       // position: 'top' as const,
       position: 'top',
@@ -66,8 +65,6 @@ const data = {
   ],
 };
 
-const Statistic112 = () => {
-  return <Line options={options} data={data} />;
-};
+const Statistic112 = () => { return <Line options={options} data={data} />; };
 
 export default Statistic112;
