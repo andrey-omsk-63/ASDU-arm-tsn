@@ -25,14 +25,30 @@ const ManagementRightGrid03 = (props: {
     }
   }
 
+  const styleMgl = {
+    padding: 1,
+    margin: 1,
+    marginLeft: -0.5,
+    marginTop: 0.5,
+    marginBottom: 0,
+  };
+
   const styleMRG01 = {
     borderBottom: 1,
     borderColor: 'primary.main',
     padding: 0.4,
-    textAlign: 'center',
+    //textAlign: 'center',
   };
 
   const styleMRG02 = {
+    borderRight: 1,
+    borderBottom: 1,
+    borderColor: 'primary.main',
+    padding: 0.4,
+    //textAlign: 'center',
+  };
+
+  const styleMRG02Center = {
     borderRight: 1,
     borderBottom: 1,
     borderColor: 'primary.main',
@@ -58,6 +74,9 @@ const ManagementRightGrid03 = (props: {
     height: '86.0vh',
   };
 
+  //const [value, setValue] = React.useState('1');
+  let sumDk = points.length;
+
   const HeaderMRG03 = () => {
     const StrokaHeaderMode1 = () => {
       let resStr = [];
@@ -66,10 +85,10 @@ const ManagementRightGrid03 = (props: {
           <Grid item key={Math.random()} xs={0.3} sx={styleMRG03}>
             <b>№</b>
           </Grid>
-          <Grid item key={Math.random()} xs={2} sx={styleMRG03}>
+          <Grid item key={Math.random()} xs={0.7} sx={styleMRG03}>
             <b>Район</b>
           </Grid>
-          <Grid item key={Math.random()} xs={3.5} sx={styleMRG03}>
+          <Grid item key={Math.random()} xs={4.8} sx={styleMRG03}>
             <b>Устройствa</b>
           </Grid>
           <Grid item key={Math.random()} xs={2.5} sx={styleMRG03}>
@@ -90,19 +109,16 @@ const ManagementRightGrid03 = (props: {
           <Grid item key={Math.random()} xs={0.3} sx={styleMRG03}>
             <b>№</b>
           </Grid>
-          <Grid item key={Math.random()} xs={2} sx={styleMRG03}>
-            <b>Район</b>
-          </Grid>
           <Grid item key={Math.random()} xs={1.1} sx={styleMRG03}>
             <b>Подрайон</b>
           </Grid>
-          <Grid item key={Math.random()} xs={3.5} sx={styleMRG03}>
+          <Grid item key={Math.random()} xs={4.5} sx={styleMRG03}>
             <b>Устройствa</b>
           </Grid>
-          <Grid item key={Math.random()} xs={2.5} sx={styleMRG03}>
+          <Grid item key={Math.random()} xs={2.4} sx={styleMRG03}>
             <b>Текущее состояние</b>
           </Grid>
-          <Grid item key={Math.random()} xs={2.5} sx={styleMRG03}>
+          <Grid item key={Math.random()} xs={3.7} sx={styleMRG03}>
             <b>Состояние ХТ</b>
           </Grid>
         </Grid>,
@@ -117,8 +133,8 @@ const ManagementRightGrid03 = (props: {
           <Grid item key={Math.random()} xs={0.3} sx={styleMRG03}>
             <b>№</b>
           </Grid>
-          <Grid item key={Math.random()} xs={1.5} sx={styleMRG03}>
-            <b>Район</b>
+          <Grid item key={Math.random()} xs={1.1} sx={styleMRG03}>
+            <b>Подрайон</b>
           </Grid>
           <Grid item key={Math.random()} xs={0.4} sx={styleMRG03}>
             <b>ДК</b>
@@ -141,7 +157,7 @@ const ManagementRightGrid03 = (props: {
           <Grid item key={Math.random()} xs={0.5} sx={styleMRG03}>
             <b>НК</b>
           </Grid>
-          <Grid item key={Math.random()} xs={0.8} sx={styleMRG03}>
+          <Grid item key={Math.random()} xs={1.2} sx={styleMRG03}>
             <b>Статус</b>
           </Grid>
         </Grid>,
@@ -163,26 +179,74 @@ const ManagementRightGrid03 = (props: {
       let mass: any = [];
       mass[0] = {
         areaNum: points[0].area.num,
-        areaName: points[0].area.nameArea,
         koldk: 1,
+        sost: 0,
       };
-
+      
       let j = 0;
-      for (let i = 1; i < points.length; i++) {
+      for (let i = 1; i < sumDk; i++) {
         if (mass[j].areaNum !== points[i].area.num) {
           j++;
-
           mass[j] = {
             areaNum: points[i].area.num,
-            areaName: points[i].area.nameArea,
             koldk: 1,
+            sost: 0,
           };
         } else {
           mass[j].koldk++;
+          if (points[i].tlsost.control) { mass[j].sost++ }
         }
       }
-      //console.log('mass:', mass);
+      let resStr = [];
+      for (let i = 0; i < mass.length; i++) {
+        let prosent = 100 * mass[i].sost / mass[i].koldk
+        resStr.push(
+          <Grid item key={Math.random()} container>
+            <Grid item key={Math.random()} xs={0.3} sx={styleMRG02}>
+              {i + 1}
+            </Grid>
+            <Grid item key={Math.random()} xs={0.7} sx={styleMRG02Center}>
+              {mass[i].areaNum}
+            </Grid>
+            <Grid item key={Math.random()} xs={4.8} sx={styleMRG02}>
+              Всего ДК&nbsp;{mass[i].koldk}&nbsp;на связи&nbsp;{prosent.toFixed(2)}%
+              подчинены&nbsp;{prosent.toFixed(2)}%
+            </Grid>
+            <Grid item key={Math.random()} xs={2.5} sx={styleMRG02}>
+              Назначен ВР
+            </Grid>
+            <Grid item key={Math.random()} xs={3.7} sx={styleMRG01}>
+              ХТ для данного района отсутствует
+            </Grid>
+          </Grid>,
+        );
+      }
+      return resStr;
+    };
 
+    const StrokaSpsMode2 = () => {
+      let mass: any = [];
+      mass[0] = {
+        areaNum: points[0].area.num,
+        subareaNum: points[0].subarea,
+        koldk: 1,
+        sost: 0,
+      };
+      let j = 0;
+      for (let i = 1; i < points.length; i++) {
+        if (mass[j].subareaNum !== points[i].subarea) {
+          j++;
+          mass[j] = {
+            areaNum: points[i].area.num,
+            subareaNum: points[i].subarea,
+            koldk: 1,
+            sost: 0,
+          };
+        } else {
+          mass[j].koldk++;
+          if (points[i].tlsost.control) { mass[j].sost++ }
+        }
+      }
       let resStr = [];
       for (let i = 0; i < mass.length; i++) {
         resStr.push(
@@ -190,16 +254,14 @@ const ManagementRightGrid03 = (props: {
             <Grid item key={Math.random()} xs={0.3} sx={styleMRG02}>
               {i + 1}
             </Grid>
-
-            <Grid item key={Math.random()} xs={2} sx={styleMRG02}>
-              {mass[i].areaNum}&nbsp;{mass[i].areaName}
+            <Grid item key={Math.random()} xs={1.1} sx={styleMRG02Center}>
+              {mass[i].areaNum}:{mass[i].subareaNum}
             </Grid>
-
-            <Grid item key={Math.random()} xs={3.5} sx={styleMRG02}>
-              Всего ДК&nbsp;{mass[i].koldk}&nbsp;на связи 0.00%
+            <Grid item key={Math.random()} xs={4.5} sx={styleMRG02}>
+              Всего ДК&nbsp;{mass[i].koldk}&nbsp;на связи&nbsp;{mass[i].sost}
+              &nbsp;подчинены&nbsp;{mass[i].sost}
             </Grid>
-
-            <Grid item key={Math.random()} xs={2.5} sx={styleMRG02}>
+            <Grid item key={Math.random()} xs={2.4} sx={styleMRG02}>
               Назначен ВР
             </Grid>
             <Grid item key={Math.random()} xs={3.7} sx={styleMRG01}>
@@ -216,34 +278,34 @@ const ManagementRightGrid03 = (props: {
       for (let i = 0; i < points.length; i++) {
         resStr.push(
           <Grid item key={Math.random()} container>
-            <Grid item key={Math.random()} xs={0.3} sx={styleMRG02}>
+            <Grid item key={Math.random()} xs={0.3} sx={styleMRG02Center}>
               {i + 1}
             </Grid>
-            <Grid item key={Math.random()} xs={1.5} sx={styleMRG02}>
-              {points[i].area.nameArea}&nbsp;{points[i].area.num}:{points[i].subarea}
+            <Grid item key={Math.random()} xs={1.1} sx={styleMRG02Center}>
+              {points[i].area.num}:{points[i].subarea}
             </Grid>
-            <Grid item key={Math.random()} xs={0.4} sx={styleMRG02}>
+            <Grid item key={Math.random()} xs={0.4} sx={styleMRG02Center}>
               {points[i].ID}
             </Grid>
             <Grid item key={Math.random()} xs={4} sx={styleMRG02}>
               {points[i].description}
             </Grid>
-            <Grid item key={Math.random()} xs={1.5} sx={styleMRG02}>
+            <Grid item key={Math.random()} xs={1.5} sx={styleMRG02Center}>
               {points[i].idevice}
             </Grid>
             <Grid item key={Math.random()} xs={2} sx={styleMRG02}>
               {points[i].tlsost.description}
             </Grid>
-            <Grid item key={Math.random()} xs={0.5} sx={styleMRG02}>
+            <Grid item key={Math.random()} xs={0.5} sx={styleMRG02Center}>
               {points[i].pk}
             </Grid>
-            <Grid item key={Math.random()} xs={0.5} sx={styleMRG02}>
+            <Grid item key={Math.random()} xs={0.5} sx={styleMRG02Center}>
               {points[i].ck}
             </Grid>
-            <Grid item key={Math.random()} xs={0.5} sx={styleMRG02}>
+            <Grid item key={Math.random()} xs={0.5} sx={styleMRG02Center}>
               {points[i].nk}
             </Grid>
-            <Grid item key={Math.random()} xs={0.8} sx={styleMRG01}>
+            <Grid item key={Math.random()} xs={1.2} sx={styleMRG01}>
               {points[i].techMode}
             </Grid>
           </Grid>,
@@ -255,23 +317,28 @@ const ManagementRightGrid03 = (props: {
     return props.mode === 1 ? (
       <div>{StrokaSpsMode1()}</div>
     ) : props.mode === 2 ? (
-      <div>{StrokaSpsMode3()}</div>
+      <div>{StrokaSpsMode2()}</div>
     ) : (
       <div>{StrokaSpsMode3()}</div>
     );
   };
 
   return (
-    <Grid item container sx={styleMRG04}>
-      <Grid item xs={12}>
-        <HeaderMRG03 />
-        <Box sx={{ overflowX: 'auto', height: '82.5vh', border: 0 }}>
-          {/* <Box sx={{ marginRight: 0.71, }}> */}
-          {props.open && <StrokaMRG03 />}
-          {/* </Box> */}
-        </Box>
+    <>
+      <Grid item xs={12} sx={styleMgl}>
+        Всего ДК&nbsp;{sumDk}&nbsp;на связи 0.01% подчинены 0.00% <b>Назначен ВР Выполняется ХТ</b>
       </Grid>
-    </Grid>
+      <Grid item container sx={styleMRG04}>
+        <Grid item xs={12}>
+          <HeaderMRG03 />
+          <Box sx={{ overflowX: 'auto', height: '82.5vh', border: 0 }}>
+            {/* <Box sx={{ marginRight: 0.71, }}> */}
+            {props.open && <StrokaMRG03 />}
+            {/* </Box> */}
+          </Box>
+        </Grid>
+      </Grid>
+    </>
   );
 };
 

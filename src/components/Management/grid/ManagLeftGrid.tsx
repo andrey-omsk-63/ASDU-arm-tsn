@@ -29,13 +29,13 @@ const ManagementLeftGrid = (props: { open: boolean; tflightt: Tflight[] }) => {
     padding: 0.3,
   };
 
-  const styleMgl = {
-    padding: 1,
-    margin: 1,
-    marginLeft: -0.5,
-    marginTop: 0.5,
-    marginBottom: 0,
-  };
+  // const styleMgl = {
+  //   padding: 1,
+  //   margin: 1,
+  //   marginLeft: -0.5,
+  //   marginTop: 0.5,
+  //   marginBottom: 0,
+  // };
 
   const styleButt01 = {
     fontSize: 12,
@@ -189,9 +189,9 @@ const ManagementLeftGrid = (props: { open: boolean; tflightt: Tflight[] }) => {
       <Grid item xs>
         <Grid container>
           <FourKnops />
-          <Grid item xs={12} sx={styleMgl}>
+          {/* <Grid item xs={12} sx={styleMgl}>
             Всего ДК 2 на связи 0.00% подчинены 0.00% <b>Назначен ВР Выполняется ХТ</b>
-          </Grid>
+          </Grid> */}
           <ManagementRightGrid03
             open={props.open}
             tflightt={points}

@@ -1,5 +1,5 @@
 {
-  "type": "getArea",
+  "type": "getDevices",
   "data": {
     "tflight": [
       {
@@ -29,7 +29,17 @@
         "pk": 2,
         "nk": 1,
         "ck": 1,
-        "techMode": "выбор ПК по недельной карте ВР-НК"
+        "techMode": "выбор ПК по недельной карте ВР-НК",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": true,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 1,
@@ -44,8 +54,8 @@
         "subarea": 2,
         "idevice": 159519,
         "tlsost": {
-          "num": 18,
-          "description": "Нет связи с УСДК/ДК",
+          "num": 28,
+          "description": "Обрыв линий связи",
           "control": false
         },
         "description": "ДК 1. г. Наро - Фоминск, ул. Шибанкова - ул. Ермолаева",
@@ -58,7 +68,17 @@
         "pk": 2,
         "nk": 1,
         "ck": 1,
-        "techMode": "выбор ПК по годовой карте"
+        "techMode": "выбор ПК по годовой карте",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": true
       },
       {
         "ID": 6,
@@ -73,9 +93,9 @@
         "subarea": 2,
         "idevice": 53712,
         "tlsost": {
-          "num": 18,
-          "description": "Нет связи с УСДК/ДК",
-          "control": false
+          "num": 1,
+          "description": "Координированное управление",
+          "control": true
         },
         "description": "ДК 6. Наро-Фоминск, ул. Маршала Жукова - ООТ Горсовет ",
         "phases": null,
@@ -84,10 +104,20 @@
           "X": 0
         },
         "inputError": false,
-        "pk": 3,
+        "pk": 1,
         "nk": 1,
         "ck": 1,
-        "techMode": "выбор ПК по недельной карте ВР-НК"
+        "techMode": "выбор ПК по недельной карте ВР-НК",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": true
       },
       {
         "ID": 7,
@@ -102,9 +132,9 @@
         "subarea": 2,
         "idevice": 496346,
         "tlsost": {
-          "num": 1,
-          "description": "Координированное управление",
-          "control": true
+          "num": 18,
+          "description": "Нет связи с УСДК/ДК",
+          "control": false
         },
         "description": "ДК 7, г.Наро-Фоминск, ул.Маршала Жукова - ул. Кольцевая",
         "phases": null,
@@ -116,7 +146,17 @@
         "pk": 1,
         "nk": 1,
         "ck": 1,
-        "techMode": "выбор ПК по недельной карте ВР-НК"
+        "techMode": "выбор ПК по времени по суточной карте ВР-СК",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": true
       },
       {
         "ID": 11,
@@ -145,7 +185,17 @@
         "pk": 1,
         "nk": 1,
         "ck": 1,
-        "techMode": "выбор ПК по недельной карте ВР-НК"
+        "techMode": "выбор ПК по недельной карте ВР-НК",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 16,
@@ -174,7 +224,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 23,
@@ -203,7 +263,17 @@
         "pk": 9,
         "nk": 1,
         "ck": 1,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 26,
@@ -232,7 +302,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 27,
@@ -261,7 +341,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 28,
@@ -290,7 +380,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 30,
@@ -319,7 +419,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 31,
@@ -348,7 +458,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 32,
@@ -377,7 +497,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 33,
@@ -406,7 +536,17 @@
         "pk": 11,
         "nk": 1,
         "ck": 1,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 37,
@@ -435,7 +575,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 34,
@@ -464,7 +614,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 35,
@@ -493,7 +653,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 36,
@@ -522,7 +692,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 38,
@@ -551,7 +731,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 39,
@@ -580,7 +770,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 40,
@@ -609,7 +809,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 42,
@@ -638,7 +848,17 @@
         "pk": 4,
         "nk": 1,
         "ck": 1,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 44,
@@ -667,7 +887,17 @@
         "pk": 5,
         "nk": 1,
         "ck": 1,
-        "techMode": "выбор ПК по недельной карте ВР-НК"
+        "techMode": "выбор ПК по недельной карте ВР-НК",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 46,
@@ -696,7 +926,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 47,
@@ -725,7 +965,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 48,
@@ -754,7 +1004,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 49,
@@ -783,7 +1043,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 50,
@@ -812,7 +1082,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 51,
@@ -841,7 +1121,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 52,
@@ -870,7 +1160,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 53,
@@ -899,7 +1199,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 54,
@@ -928,7 +1238,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 61,
@@ -957,7 +1277,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 64,
@@ -986,7 +1316,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 139,
@@ -1015,7 +1355,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 237,
@@ -1044,7 +1394,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 57,
@@ -1073,7 +1433,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 2,
@@ -1102,7 +1472,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 65,
@@ -1131,7 +1511,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 34,
@@ -1160,7 +1550,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 41,
@@ -1189,7 +1589,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 53,
@@ -1218,7 +1628,17 @@
         "pk": 2,
         "nk": 1,
         "ck": 1,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 54,
@@ -1247,7 +1667,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 55,
@@ -1276,7 +1706,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 78,
@@ -1305,7 +1745,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 57,
@@ -1334,7 +1784,17 @@
         "pk": 4,
         "nk": 1,
         "ck": 1,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 61,
@@ -1363,7 +1823,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 63,
@@ -1392,7 +1862,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 64,
@@ -1421,7 +1901,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 67,
@@ -1450,7 +1940,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 71,
@@ -1479,7 +1979,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 72,
@@ -1508,7 +2018,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 73,
@@ -1537,7 +2057,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 76,
@@ -1566,7 +2096,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 79,
@@ -1595,7 +2135,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 81,
@@ -1624,7 +2174,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 82,
@@ -1653,7 +2213,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 3,
@@ -1682,7 +2252,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 83,
@@ -1711,7 +2291,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 84,
@@ -1740,7 +2330,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 85,
@@ -1769,7 +2369,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 91,
@@ -1798,7 +2408,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 93,
@@ -1827,7 +2447,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 95,
@@ -1856,7 +2486,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 38,
@@ -1885,7 +2525,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 200,
@@ -1914,7 +2564,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 216,
@@ -1943,7 +2603,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 222,
@@ -1972,7 +2642,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 223,
@@ -2001,7 +2681,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 224,
@@ -2030,7 +2720,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 254,
@@ -2059,7 +2759,17 @@
         "pk": 1,
         "nk": 1,
         "ck": 1,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 31,
@@ -2088,7 +2798,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 33,
@@ -2117,7 +2837,17 @@
         "pk": 7,
         "nk": 1,
         "ck": 1,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 34,
@@ -2146,7 +2876,17 @@
         "pk": 1,
         "nk": 1,
         "ck": 1,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 43,
@@ -2175,7 +2915,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 35,
@@ -2204,7 +2954,17 @@
         "pk": 9,
         "nk": 1,
         "ck": 1,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 36,
@@ -2233,7 +2993,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 37,
@@ -2262,7 +3032,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       },
       {
         "ID": 42,
@@ -2291,7 +3071,17 @@
         "pk": 0,
         "nk": 0,
         "ck": 0,
-        "techMode": ""
+        "techMode": "",
+        "StatusCommandDU": {
+          "IsPK": false,
+          "IsCK": false,
+          "IsNK": false,
+          "IsDUDK1": false,
+          "IsDUDK2": false,
+          "IsReqSFDK1": false,
+          "IsReqSFDK2": false
+        },
+        "scon": false
       }
     ]
   }
