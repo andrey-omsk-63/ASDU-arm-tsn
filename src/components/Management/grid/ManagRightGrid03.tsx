@@ -12,17 +12,73 @@ const ManagementRightGrid03 = (props: {
   subArea: number;
 }) => {
   let points = props.tflightt;
+  let masSpis = [];
+  let mass: any = [];
+  let j = 0;
 
-  if (props.mode === 3) {
-    let masSpis = points.filter(
-      (points) => points.area.num === props.areaa && points.subarea === props.subArea,
-    );
-    points = masSpis;
-  } else {
-    if (props.mode === 2) {
-      let masSpis = points.filter((points) => points.area.num === props.areaa);
+  switch (props.mode) {
+    case 1:
+      points = props.tflightt;
+      if (props.open) {
+        mass[0] = {
+          areaNum: points[0].area.num,
+          koldk: 1,
+          sost: 0,
+        };
+        j = 0;
+        for (let i = 1; i < points.length; i++) {
+          if (mass[j].areaNum !== points[i].area.num) {
+            j++;
+            mass[j] = {
+              areaNum: points[i].area.num,
+              koldk: 1,
+              sost: 0,
+            };
+          } else {
+            mass[j].koldk++;
+            if (points[i].tlsost.control) {
+              mass[j].sost++;
+            }
+          }
+        }
+      }
+      break;
+
+    case 2:
+      masSpis = points.filter((points) => points.area.num === props.areaa);
       points = masSpis;
-    }
+      if (props.open) {
+        mass[0] = {
+          areaNum: points[0].area.num,
+          subareaNum: points[0].subarea,
+          koldk: 1,
+          sost: 0,
+        };
+        j = 0;
+        for (let i = 1; i < points.length; i++) {
+          if (mass[j].subareaNum !== points[i].subarea) {
+            j++;
+            mass[j] = {
+              areaNum: points[i].area.num,
+              subareaNum: points[i].subarea,
+              koldk: 1,
+              sost: 0,
+            };
+          } else {
+            mass[j].koldk++;
+            if (points[i].tlsost.control) {
+              mass[j].sost++;
+            }
+          }
+        }
+      }
+      break;
+
+    default:
+      masSpis = points.filter(
+        (points) => points.area.num === props.areaa && points.subarea === props.subArea,
+      );
+      points = masSpis;
   }
 
   const styleMgl = {
@@ -37,7 +93,6 @@ const ManagementRightGrid03 = (props: {
     borderBottom: 1,
     borderColor: 'primary.main',
     padding: 0.4,
-    //textAlign: 'center',
   };
 
   const styleMRG02 = {
@@ -45,7 +100,6 @@ const ManagementRightGrid03 = (props: {
     borderBottom: 1,
     borderColor: 'primary.main',
     padding: 0.4,
-    //textAlign: 'center',
   };
 
   const styleMRG02Center = {
@@ -57,7 +111,6 @@ const ManagementRightGrid03 = (props: {
   };
 
   const styleMRG03 = {
-    //borderRight: 1,
     borderBottom: 1,
     borderColor: 'primary.main',
     padding: 0.4,
@@ -74,7 +127,6 @@ const ManagementRightGrid03 = (props: {
     height: '86.0vh',
   };
 
-  //const [value, setValue] = React.useState('1');
   let sumDk = points.length;
 
   const HeaderMRG03 = () => {
@@ -176,30 +228,9 @@ const ManagementRightGrid03 = (props: {
 
   const StrokaMRG03 = () => {
     const StrokaSpsMode1 = () => {
-      let mass: any = [];
-      mass[0] = {
-        areaNum: points[0].area.num,
-        koldk: 1,
-        sost: 0,
-      };
-      
-      let j = 0;
-      for (let i = 1; i < sumDk; i++) {
-        if (mass[j].areaNum !== points[i].area.num) {
-          j++;
-          mass[j] = {
-            areaNum: points[i].area.num,
-            koldk: 1,
-            sost: 0,
-          };
-        } else {
-          mass[j].koldk++;
-          if (points[i].tlsost.control) { mass[j].sost++ }
-        }
-      }
       let resStr = [];
       for (let i = 0; i < mass.length; i++) {
-        let prosent = 100 * mass[i].sost / mass[i].koldk
+        let prosent = (100 * mass[i].sost) / mass[i].koldk;
         resStr.push(
           <Grid item key={Math.random()} container>
             <Grid item key={Math.random()} xs={0.3} sx={styleMRG02}>
@@ -209,8 +240,8 @@ const ManagementRightGrid03 = (props: {
               {mass[i].areaNum}
             </Grid>
             <Grid item key={Math.random()} xs={4.8} sx={styleMRG02}>
-              Всего ДК&nbsp;{mass[i].koldk}&nbsp;на связи&nbsp;{prosent.toFixed(2)}%
-              подчинены&nbsp;{prosent.toFixed(2)}%
+              Всего ДК&nbsp;{mass[i].koldk}&nbsp;на связи&nbsp;{prosent.toFixed(2)}% подчинены&nbsp;
+              {prosent.toFixed(2)}%
             </Grid>
             <Grid item key={Math.random()} xs={2.5} sx={styleMRG02}>
               Назначен ВР
@@ -225,28 +256,6 @@ const ManagementRightGrid03 = (props: {
     };
 
     const StrokaSpsMode2 = () => {
-      let mass: any = [];
-      mass[0] = {
-        areaNum: points[0].area.num,
-        subareaNum: points[0].subarea,
-        koldk: 1,
-        sost: 0,
-      };
-      let j = 0;
-      for (let i = 1; i < points.length; i++) {
-        if (mass[j].subareaNum !== points[i].subarea) {
-          j++;
-          mass[j] = {
-            areaNum: points[i].area.num,
-            subareaNum: points[i].subarea,
-            koldk: 1,
-            sost: 0,
-          };
-        } else {
-          mass[j].koldk++;
-          if (points[i].tlsost.control) { mass[j].sost++ }
-        }
-      }
       let resStr = [];
       for (let i = 0; i < mass.length; i++) {
         resStr.push(
@@ -323,18 +332,25 @@ const ManagementRightGrid03 = (props: {
     );
   };
 
-  return (
-    <>
+  const StrokaInfo = () => {
+    return (
       <Grid item xs={12} sx={styleMgl}>
         Всего ДК&nbsp;{sumDk}&nbsp;на связи 0.01% подчинены 0.00% <b>Назначен ВР Выполняется ХТ</b>
       </Grid>
+    );
+  };
+
+  return (
+    <>
+      <StrokaInfo />
+      {/* <Grid item xs={12} sx={styleMgl}>
+        Всего ДК&nbsp;{sumDk}&nbsp;на связи 0.01% подчинены 0.00% <b>Назначен ВР Выполняется ХТ</b>
+      </Grid> */}
       <Grid item container sx={styleMRG04}>
         <Grid item xs={12}>
           <HeaderMRG03 />
           <Box sx={{ overflowX: 'auto', height: '82.5vh', border: 0 }}>
-            {/* <Box sx={{ marginRight: 0.71, }}> */}
             {props.open && <StrokaMRG03 />}
-            {/* </Box> */}
           </Box>
         </Grid>
       </Grid>
