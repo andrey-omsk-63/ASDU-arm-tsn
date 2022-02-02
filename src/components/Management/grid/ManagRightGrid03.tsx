@@ -11,75 +11,6 @@ const ManagementRightGrid03 = (props: {
   areaa: string;
   subArea: number;
 }) => {
-  let points = props.tflightt;
-  let masSpis = [];
-  let mass: any = [];
-  let j = 0;
-
-  switch (props.mode) {
-    case 1:
-      points = props.tflightt;
-      if (props.open) {
-        mass[0] = {
-          areaNum: points[0].area.num,
-          koldk: 1,
-          sost: 0,
-        };
-        j = 0;
-        for (let i = 1; i < points.length; i++) {
-          if (mass[j].areaNum !== points[i].area.num) {
-            j++;
-            mass[j] = {
-              areaNum: points[i].area.num,
-              koldk: 1,
-              sost: 0,
-            };
-          } else {
-            mass[j].koldk++;
-            if (points[i].tlsost.control) {
-              mass[j].sost++;
-            }
-          }
-        }
-      }
-      break;
-
-    case 2:
-      masSpis = points.filter((points) => points.area.num === props.areaa);
-      points = masSpis;
-      if (props.open) {
-        mass[0] = {
-          areaNum: points[0].area.num,
-          subareaNum: points[0].subarea,
-          koldk: 1,
-          sost: 0,
-        };
-        j = 0;
-        for (let i = 1; i < points.length; i++) {
-          if (mass[j].subareaNum !== points[i].subarea) {
-            j++;
-            mass[j] = {
-              areaNum: points[i].area.num,
-              subareaNum: points[i].subarea,
-              koldk: 1,
-              sost: 0,
-            };
-          } else {
-            mass[j].koldk++;
-            if (points[i].tlsost.control) {
-              mass[j].sost++;
-            }
-          }
-        }
-      }
-      break;
-
-    default:
-      masSpis = points.filter(
-        (points) => points.area.num === props.areaa && points.subarea === props.subArea,
-      );
-      points = masSpis;
-  }
 
   const styleMgl = {
     padding: 1,
@@ -127,7 +58,86 @@ const ManagementRightGrid03 = (props: {
     height: '86.0vh',
   };
 
-  let sumDk = points.length;
+
+  let points = props.tflightt;
+  let masSpis = [];
+  let mass: any = [];
+  let sostGl = 0;
+  let j = 0;
+
+
+  switch (props.mode) {
+    case 1:
+      points = props.tflightt;
+      if (props.open) {
+        mass[0] = {
+          areaNum: points[0].area.num,
+          koldk: 1,
+          sost: 0,
+        };
+        j = 0;
+        for (let i = 1; i < points.length; i++) {
+          if (mass[j].areaNum !== points[i].area.num) {
+            j++;
+            mass[j] = {
+              areaNum: points[i].area.num,
+              koldk: 1,
+              sost: 0,
+            };
+          } else {
+            mass[j].koldk++;
+            if (points[i].tlsost.control) {
+              mass[j].sost++;
+              sostGl++;
+            }
+          }
+        }
+      }
+      break;
+
+    case 2:
+      masSpis = points.filter((points) => points.area.num === props.areaa);
+      points = masSpis;
+      if (props.open) {
+        mass[0] = {
+          areaNum: points[0].area.num,
+          subareaNum: points[0].subarea,
+          koldk: 1,
+          sost: 0,
+        };
+        j = 0;
+        for (let i = 1; i < points.length; i++) {
+          if (mass[j].subareaNum !== points[i].subarea) {
+            j++;
+            mass[j] = {
+              areaNum: points[i].area.num,
+              subareaNum: points[i].subarea,
+              koldk: 1,
+              sost: 0,
+            };
+          } else {
+            mass[j].koldk++;
+            if (points[i].tlsost.control) {
+              mass[j].sost++;
+              sostGl++;
+            }
+          }
+        }
+      }
+      break;
+
+    default:
+      masSpis = points.filter(
+        (points) => points.area.num === props.areaa && points.subarea === props.subArea,
+      );
+      points = masSpis;
+      for (let i = 1; i < points.length; i++) {
+        if (points[i].tlsost.control) {
+          sostGl++;
+        }
+      }
+
+  }
 
   const HeaderMRG03 = () => {
     const StrokaHeaderMode1 = () => {
@@ -333,9 +343,22 @@ const ManagementRightGrid03 = (props: {
   };
 
   const StrokaInfo = () => {
+    let sumDk = points.length;
+    let prosSv = '';
+    let prosPch = '';
+    if (props.mode !== 3) {
+      prosSv = (((100 * sostGl) / sumDk).toFixed(2).toString() + '%')
+      prosPch = '0.00%';
+    } else {
+      prosSv = sostGl.toString()
+      prosPch = '0';
+    }
+    
     return (
       <Grid item xs={12} sx={styleMgl}>
-        Всего ДК&nbsp;{sumDk}&nbsp;на связи 0.01% подчинены 0.00% <b>Назначен ВР Выполняется ХТ</b>
+        Всего ДК&nbsp;{sumDk}&nbsp;на связи&nbsp;{prosSv}&nbsp;
+        подчинены&nbsp;{prosPch}&nbsp;
+        <b>Назначен ВР Выполняется ХТ</b>
       </Grid>
     );
   };
@@ -343,9 +366,6 @@ const ManagementRightGrid03 = (props: {
   return (
     <>
       <StrokaInfo />
-      {/* <Grid item xs={12} sx={styleMgl}>
-        Всего ДК&nbsp;{sumDk}&nbsp;на связи 0.01% подчинены 0.00% <b>Назначен ВР Выполняется ХТ</b>
-      </Grid> */}
       <Grid item container sx={styleMRG04}>
         <Grid item xs={12}>
           <HeaderMRG03 />

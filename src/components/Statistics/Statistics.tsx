@@ -6,45 +6,11 @@ import TabContext from '@mui/lab/TabContext';
 import TabPanel from '@mui/lab/TabPanel';
 
 import Statistic110 from './Statistic110';
-import Statistic112 from './Statistic112';
+//import Statistic112 from './Statistic112';
 
 import axios from 'axios';
 
-export interface Welcome2 {
-  type: string;
-  data: Data;
-}
-
-export interface Data {
-  statistics: [];
-}
-
-export interface Statistic {
-  region: number;
-  area: number;
-  id: number;
-  date: Date;
-  Statistics: StatisticElement[];
-}
-
-export interface StatisticElement {
-  Period: number;
-  Type: number;
-  TLen: number;
-  Hour: number;
-  Min: number;
-  Datas: DataElement[];
-}
-
-export interface DataElement {
-  ch: number;
-  st: number;
-  in: number;
-  sp: number;
-  d: number;
-  o: number;
-  g: number;
-}
+import { Statistic } from '../../interfaceStat.d';
 
 // const WS = new WebSocket('wss://' + window.location.host + window.location.pathname + 'W' + window.location.search)
 // const WS = new WebSocket('wss://192.168.115.134:4443/user/MMM/charPointsW')
@@ -73,6 +39,16 @@ export interface DataElement {
 // };
 
 const Statistics = () => {
+
+  const styleBut01 = {
+    fontSize: 12,
+    maxHeight: '20px',
+    minHeight: '20px',
+    backgroundColor: '#F1F3F4',
+    color: 'black',
+    marginRight: 1,
+  }
+
   const [value, setValue] = React.useState('1');
   const [points, setPoints] = React.useState<Array<Statistic>>([]);
   //const [points, setPoints] = React.useState<Data>({} as Data);
@@ -81,7 +57,7 @@ const Statistics = () => {
 
   React.useEffect(() => {
     axios.get(ipAdress).then(({ data }) => {
-      console.log('000', data);
+      //console.log('000', data);
       setPoints(data.data.statistics);
       setIsOpen(true);
     });
@@ -93,41 +69,19 @@ const Statistics = () => {
       <TabContext value={value}>
         <Box>
           <Stack sx={{ marginTop: -2 }} direction="row">
-            <Button
-              size="small"
-              sx={{
-                fontSize: 10,
-                maxHeight: '20px',
-                minHeight: '20px',
-                backgroundColor: '#F1F3F4',
-                color: 'black',
-                marginRight: 1,
-              }}
-              variant="contained"
-              onClick={() => setValue('1')}>
+            <Button sx={styleBut01} variant="contained" onClick={() => setValue('1')}>
               1:1
             </Button>
-
-            <Button
-              size="small"
-              sx={{
-                fontSize: 10,
-                maxHeight: '20px',
-                minHeight: '20px',
-                backgroundColor: '#F1F3F4',
-                color: 'black',
-              }}
-              variant="contained"
-              onClick={() => setValue('2')}>
+            <Button sx={styleBut01} variant="contained" onClick={() => setValue('2')}>
               2:2
             </Button>
           </Stack>
         </Box>
         <TabPanel value="1">
-          <Statistic110 open={isOpen} statist={points} />
+          <Statistic110 open={isOpen} statist={points} areaid={0} />
         </TabPanel>
         <TabPanel value="2">
-          <Statistic112 />
+          <Statistic110 open={isOpen} statist={points} areaid={1} />
         </TabPanel>
       </TabContext>
     </Box>
