@@ -1,12 +1,9 @@
 import * as React from 'react';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import TabContext from '@mui/lab/TabContext';
-import TabPanel from '@mui/lab/TabPanel';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 
 import Statistic110 from './Statistic110';
-//import Statistic112 from './Statistic112';
 
 import axios from 'axios';
 
@@ -38,18 +35,18 @@ import { Statistic } from '../../interfaceStat.d';
 //   }
 // };
 
-const Statistics = () => {
+let tekValue = 0;
 
-  const styleBut01 = {
-    fontSize: 12,
+const Statistics = () => {
+  const styleSt1 = {
+    fontSize: 13.5,
     maxHeight: '20px',
     minHeight: '20px',
     backgroundColor: '#F1F3F4',
     color: 'black',
-    marginRight: 1,
-  }
+    marginRight: 0.5,
+  };
 
-  const [value, setValue] = React.useState('1');
   const [points, setPoints] = React.useState<Array<Statistic>>([]);
   //const [points, setPoints] = React.useState<Data>({} as Data);
   const [isOpen, setIsOpen] = React.useState(false);
@@ -57,35 +54,72 @@ const Statistics = () => {
 
   React.useEffect(() => {
     axios.get(ipAdress).then(({ data }) => {
-      //console.log('000', data);
       setPoints(data.data.statistics);
       setIsOpen(true);
     });
   }, [ipAdress]);
 
-  if (isOpen) console.log('!!!', points);
+  //if (isOpen) console.log('!!!', points);
+
+  const [value, setValue] = React.useState(tekValue);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+    tekValue = newValue;
+  };
+
+  const SpisXT = () => {
+    let resSps: any = [];
+    let labl: string = '';
+    for (let i = 0; i < points.length; i++) {
+      labl = 'XT:' + (i + 1).toString() + ':1';
+      resSps.push(<Tab key={i} sx={styleSt1} label={labl} />);
+    }
+    return resSps;
+  };
+
   return (
-    <Box sx={{ marginTop: -2, marginLeft: -3, marginRight: -7 }}>
-      <TabContext value={value}>
-        <Box>
-          <Stack sx={{ marginTop: -2 }} direction="row">
-            <Button sx={styleBut01} variant="contained" onClick={() => setValue('1')}>
-              1:1
-            </Button>
-            <Button sx={styleBut01} variant="contained" onClick={() => setValue('2')}>
-              2:2
-            </Button>
-          </Stack>
-        </Box>
-        <TabPanel value="1">
-          <Statistic110 open={isOpen} statist={points} areaid={0} />
-        </TabPanel>
-        <TabPanel value="2">
-          <Statistic110 open={isOpen} statist={points} areaid={1} />
-        </TabPanel>
-      </TabContext>
-    </Box>
+    <>
+      <Box sx={{ maxWidth: 850, fontSize: 12, marginTop: -2, marginLeft: -3, marginRight: -7 }}>
+        <Tabs
+          sx={{ maxHeight: '20px', minHeight: '20px' }}
+          value={value}
+          onChange={handleChange}
+          variant="scrollable"
+          scrollButtons={true}
+          allowScrollButtonsMobile>
+          {SpisXT()}
+        </Tabs>
+      </Box>
+      <Statistic110 open={isOpen} statist={points} areaid={value} />
+    </>
   );
 };
 
 export default Statistics;
+
+//import Stack from '@mui/material/Stack';
+//import Button from '@mui/material/Button';
+//import TabContext from '@mui/lab/TabContext';
+//import TabPanel from '@mui/lab/TabPanel';
+
+// <Box sx={{ marginTop: -2, marginLeft: -3, marginRight: -7 }}>
+//   <TabContext value={value}>
+//     <Box>
+//       <Stack sx={{ marginTop: -2 }} direction="row">
+//         <Button sx={styleBut01} variant="contained" onClick={() => setValue('1')}>
+//           1:1
+//         </Button>
+//         <Button sx={styleBut01} variant="contained" onClick={() => setValue('2')}>
+//           2:2
+//         </Button>
+//       </Stack>
+//     </Box>
+//     <TabPanel value="1">
+//       <Statistic110 open={isOpen} statist={points} areaid={0} />
+//     </TabPanel>
+//     <TabPanel value="2">
+//       <Statistic110 open={isOpen} statist={points} areaid={1} />
+//     </TabPanel>
+//   </TabContext>
+// </Box>

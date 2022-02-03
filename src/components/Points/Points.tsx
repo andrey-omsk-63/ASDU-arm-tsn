@@ -8,6 +8,8 @@ import PointsXt11 from './PointsXt11';
 
 import { XctrlInfo } from '../../interfaceGl.d';
 
+let tekValue = 0;
+
 const Points = (props: { open: boolean; xctrll: XctrlInfo[] }) => {
   const stylePXt1 = {
     fontSize: 13.5,
@@ -19,10 +21,11 @@ const Points = (props: { open: boolean; xctrll: XctrlInfo[] }) => {
   };
 
   const open = props.open;
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(tekValue);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
+    tekValue = newValue;
   };
 
   const SpisXT = () => {

@@ -27,18 +27,21 @@ const colorsGraf = [
   'black',
   'blue',
   'green',
-  'Pink',
+  'Violet',
   'lime',
-  'Yellow',
   'Silver',
   'teal',
   'YellowGreen',
   'purple',
   '',
-  'Aqua',
+  'Turquoise',
   'RosyBrown',
   'maroon',
-  '',
+  'Coral',
+  'Aqua',
+  'Tomato',
+  'Pink',
+  'Yellow',
 ];
 
 export interface DataGl {
@@ -55,41 +58,34 @@ export interface Datasets {
   pointRadius: number;
 }
 
-// const labels: string[] = [];
-// let canal: number[] = [];
+const labels: string[] = [];
+const data: DataGl = {
+  labels,
+  datasets: [],
+};
+let canal: number[] = [];
+let oldAreaid = -1;
 
-// const data: DataGl = {
-//   labels,
-//   datasets: [],
-// };
-
-// let oldAreaid = -1;
-
-const Statistic110 = (props: { open: boolean; statist: Statistic[]; areaid: number; }) => {
-  //  const Statistic110 = (props: { open: boolean; statist: Data }) => {
-
+const Statistic110 = (props: { open: boolean; statist: Statistic[]; areaid: number }) => {
   const isOpen = props.open;
   const points = props.statist;
   const areaId = props.areaid;
-  let colChanel = 0
-
-  const labels: string[] = [];
-  let canal: number[] = [];
-
-  const data: DataGl = {
-    labels,
-    datasets: [],
-  };
-
-  //let oldAreaid = -1;
+  let colChanel = 0;
+  const [value, setValue] = React.useState('0');
 
   if (isOpen) {
-    colChanel = points[areaId].Statistics[areaId].Datas.length
-    // if (oldAreaid !== areaId) {   // очистка графиков
-    //   data.datasets = [];
-    //   canal = [];
-    //   oldAreaid = areaId
-    // }
+    colChanel = points[areaId].Statistics[areaId].Datas.length;
+    if (oldAreaid !== areaId) {
+      // очистка графиков
+      setValue('0');
+      data.datasets = [];
+      canal = [];
+      //labels = [];
+      while (labels.length > 0) {
+        labels.pop();
+      }
+      oldAreaid = areaId;
+    }
   }
 
   const styleSt02 = {
@@ -139,7 +135,6 @@ const Statistic110 = (props: { open: boolean; statist: Statistic[]; areaid: numb
   };
 
   //const [points, setPoints] = React.useState<Array<Statistic>>([]);
-  const [value, setValue] = React.useState('0');
 
   let resStr: any = [];
   let resSps: any = [];
@@ -162,7 +157,6 @@ const Statistic110 = (props: { open: boolean; statist: Statistic[]; areaid: numb
     if (isOpen && val >= 0 && !canal.includes(val)) {
       if (isOpen && value !== '0' && labels.length === 0) {
         const colMin = 60 / matrix[0].TLen;
-
         for (let i = 0; i < matrix.length; i++) {
           let int = '';
           if (i % colMin === 0) {
@@ -173,29 +167,27 @@ const Statistic110 = (props: { open: boolean; statist: Statistic[]; areaid: numb
           labels.push(int);
         }
       }
-      if (val === 16) {     // очистка графиков
+      if (val === 16) {
+        // очистка графиков
         data.datasets = [];
         canal = [];
       } else {
-        console.log('matrix1', matrix)
         for (let i = 0; i < matrix.length; i++) {
           let int = 0;
           if (matrix[i].Datas.length !== 0) int = matrix[i].Datas[val].in;
           datas.push(int);
         }
-
         datasetsMask.label += value;
         datasetsMask.data = datas;
         datasetsMask.borderColor = colorsGraf[val];
         datasetsMask.backgroundColor = colorsGraf[val];
-
         data.datasets.push(datasetsMask);
         canal.push(val);
       }
     }
 
     return (
-      <Grid item xs sx={{ height: '28vh', }}>
+      <Grid item xs sx={{ height: '28vh' }}>
         <StatGraf01 />
       </Grid>
     );
@@ -341,7 +333,6 @@ const Statistic110 = (props: { open: boolean; statist: Statistic[]; areaid: numb
 
       if (matrix[numMas].Datas.length === 0) {
         //нет данных
-        //for (let i = 0; i < points[0].Statistics[0].Datas.length; i++) {
         for (let i = 0; i < colChanel; i++) {
           resStr.push(<Grid key={i} item xs={0.51} sx={styleSt02}></Grid>);
         }
@@ -354,7 +345,6 @@ const Statistic110 = (props: { open: boolean; statist: Statistic[]; areaid: numb
       } else {
         //есть данные
         let i = 0;
-        //console.log('matrix:', matrix);
         for (const elem of matrix[numMas].Datas) {
           i++;
           if (elem.st !== 0) {
@@ -416,7 +406,8 @@ const Statistic110 = (props: { open: boolean; statist: Statistic[]; areaid: numb
     const step = points[areaId].Statistics[0].TLen;
 
     for (let i = 0; i < points[areaId].Statistics.length; i++) {
-      let numInMatrix = (points[areaId].Statistics[i].Hour * 60 + points[areaId].Statistics[i].Min) / step;
+      let numInMatrix =
+        (points[areaId].Statistics[i].Hour * 60 + points[areaId].Statistics[i].Min) / step;
       matrix[numInMatrix].Datas = points[areaId].Statistics[i].Datas;
     }
   };
@@ -428,7 +419,7 @@ const Statistic110 = (props: { open: boolean; statist: Statistic[]; areaid: numb
   }
 
   return (
-    <Box sx={{ marginTop: -2, marginLeft: -3, marginRight: 2 }}>
+    <Box sx={{ marginTop: 0.8, marginLeft: -3, marginRight: 2 }}>
       <Grid container item sx={{ margin: 0, height: '28vh' }}>
         <Grid item xs={12} sx={{ border: 1, borderRadius: 1, borderColor: 'primary.main' }}>
           <StatGraf00 />

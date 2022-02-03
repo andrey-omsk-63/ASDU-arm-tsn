@@ -11,7 +11,6 @@ const ManagementRightGrid03 = (props: {
   areaa: string;
   subArea: number;
 }) => {
-
   const styleMgl = {
     padding: 1,
     margin: 1,
@@ -58,13 +57,11 @@ const ManagementRightGrid03 = (props: {
     height: '86.0vh',
   };
 
-
   let points = props.tflightt;
   let masSpis = [];
   let mass: any = [];
   let sostGl = 0;
   let j = 0;
-
 
   switch (props.mode) {
     case 1:
@@ -136,7 +133,6 @@ const ManagementRightGrid03 = (props: {
           sostGl++;
         }
       }
-
   }
 
   const HeaderMRG03 = () => {
@@ -347,17 +343,16 @@ const ManagementRightGrid03 = (props: {
     let prosSv = '';
     let prosPch = '';
     if (props.mode !== 3) {
-      prosSv = (((100 * sostGl) / sumDk).toFixed(2).toString() + '%')
+      prosSv = ((100 * sostGl) / sumDk).toFixed(2).toString() + '%';
       prosPch = '0.00%';
     } else {
-      prosSv = sostGl.toString()
+      prosSv = sostGl.toString();
       prosPch = '0';
     }
-    
+
     return (
       <Grid item xs={12} sx={styleMgl}>
-        Всего ДК&nbsp;{sumDk}&nbsp;на связи&nbsp;{prosSv}&nbsp;
-        подчинены&nbsp;{prosPch}&nbsp;
+        Всего ДК&nbsp;{sumDk}&nbsp;на связи&nbsp;{prosSv}&nbsp; подчинены&nbsp;{prosPch}&nbsp;
         <b>Назначен ВР Выполняется ХТ</b>
       </Grid>
     );
