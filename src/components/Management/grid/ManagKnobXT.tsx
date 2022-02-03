@@ -1,17 +1,17 @@
 import React from 'react';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
-import TabContext from '@mui/lab/TabContext';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import TabPanel from '@mui/lab/TabPanel';
 
 const ManagementKnobXT = () => {
-  const [value, setValue] = React.useState('0');
+  const [value, setValue] = React.useState(0);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
+  const handleClose = () => {
+    setOpen(false);
+    setValue(0)
+  }
   const stylePK = {
     position: 'absolute',
     top: '22.8%',
@@ -28,11 +28,18 @@ const ManagementKnobXT = () => {
     fontSize: 10,
     backgroundColor: '#F1F3F4',
     color: 'black',
-    marginRight: 1,
-    // position: 'absolute',
-    // top: '9.4%',
-    // left: '41.4%',
   };
+
+  const styleBatMenu = {
+    fontSize: 12.9,
+    backgroundColor: '#F1F3F4',
+    color: 'black',
+    marginTop: 1
+  };
+
+  const ButtonDo = () => {
+    console.log('Value XT:', value)
+  }
 
   return (
     <div>
@@ -44,31 +51,18 @@ const ManagementKnobXT = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description">
         <Box sx={stylePK}>
-          <TabContext value={value}>
-            <Stack direction="column">
-              <Button color="inherit" variant="contained" onClick={() => setValue('1')}>
-                Включить
-              </Button>
-              <Button
-                color="inherit"
-                sx={{ marginTop: 1 }}
-                variant="contained"
-                onClick={() => setValue('2')}>
-                Отключить
-              </Button>
-
-              <Button
-                color="inherit"
-                sx={{ marginTop: 1 }}
-                variant="contained"
-                onClick={handleClose}>
-                Выход
-              </Button>
-            </Stack>
-
-            <TabPanel value="1" sx={{ marginBottom: -6 }}></TabPanel>
-            <TabPanel value="2" sx={{ marginBottom: -6 }}></TabPanel>
-          </TabContext>
+          <Stack direction="column">
+            <Button sx={styleBatMenu} variant="contained" onClick={() => setValue(1)}>
+              Включить
+            </Button>
+            <Button sx={styleBatMenu} variant="contained" onClick={() => setValue(2)}>
+              Отключить
+            </Button>
+            <Button sx={styleBatMenu} variant="contained" onClick={handleClose}>
+              Выход
+            </Button>
+            {ButtonDo()}
+          </Stack>
         </Box>
       </Modal>
     </div>

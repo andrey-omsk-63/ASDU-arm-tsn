@@ -110,6 +110,7 @@ const ManagementLeftGrid = (props: { open: boolean; tflightt: Tflight[] }) => {
               <Button
                 key={i}
                 sx={styleButt01}
+                //variant="contained"
                 onClick={() => handleClick(props.nom, masSpis[i].subarea)}>
                 Подрайон:{masSpis[i].areaNum}:{masSpis[i].subarea}
               </Button>
@@ -162,7 +163,7 @@ const ManagementLeftGrid = (props: { open: boolean; tflightt: Tflight[] }) => {
 
   const FourKnops = () => {
     return (
-      <Grid item xs={12} sx={{ border: 0, marginLeft: -0.5, marginTop: 1 }}>
+      <Grid item xs={12} sx={{ marginLeft: -0.5, marginTop: 1 }}>
         <Stack direction="row">
           <ManagementKnobPK />
           <ManagementKnobSK />

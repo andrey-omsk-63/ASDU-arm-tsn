@@ -83,7 +83,7 @@ const ManagementRightGrid03 = (props: {
             };
           } else {
             mass[j].koldk++;
-            if (points[i].tlsost.control) {
+            if (points[i].scon) {
               mass[j].sost++;
               sostGl++;
             }
@@ -114,7 +114,7 @@ const ManagementRightGrid03 = (props: {
             };
           } else {
             mass[j].koldk++;
-            if (points[i].tlsost.control) {
+            if (points[i].scon) {
               mass[j].sost++;
               sostGl++;
             }
@@ -129,7 +129,7 @@ const ManagementRightGrid03 = (props: {
       );
       points = masSpis;
       for (let i = 1; i < points.length; i++) {
-        if (points[i].tlsost.control) {
+        if (points[i].scon) {
           sostGl++;
         }
       }
@@ -342,18 +342,21 @@ const ManagementRightGrid03 = (props: {
     let sumDk = points.length;
     let prosSv = '';
     let prosPch = '';
+    let proXT = 'ХТ для данного района отсутствует';
     if (props.mode !== 3) {
       prosSv = ((100 * sostGl) / sumDk).toFixed(2).toString() + '%';
       prosPch = '0.00%';
+      if (props.mode === 1) proXT = 'ХТ для данного региона отсутствует';
     } else {
       prosSv = sostGl.toString();
       prosPch = '0';
+      proXT = 'ХТ для данного подрайона отсутствует';
     }
 
     return (
       <Grid item xs={12} sx={styleMgl}>
         Всего ДК&nbsp;{sumDk}&nbsp;на связи&nbsp;{prosSv}&nbsp; подчинены&nbsp;{prosPch}&nbsp;
-        <b>Назначен ВР Выполняется ХТ</b>
+        <b>Назначен ВР</b>&nbsp;<em>{proXT}</em>
       </Grid>
     );
   };
