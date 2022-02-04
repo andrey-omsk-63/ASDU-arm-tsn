@@ -46,14 +46,14 @@ const PointsXt11 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number }) 
           dlStrMenu = points.xctrls[i].name.length;
         }
       }
-
+     
       const stylePK = {
         position: 'relative',
         //marginTop: '5vh',
         bottom: '-33vh',
         marginLeft: '60vh',
         transform: 'translate(-50%, -50%)',
-        width: (dlStrMenu + 7) * 9,
+        width: (dlStrMenu + 8) * 10,
         bgcolor: 'background.paper',
         border: '2px solid #000',
         boxShadow: 24,
@@ -65,9 +65,7 @@ const PointsXt11 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number }) 
         for (let i = 0; i < points.xctrls.length; i++) {
           resStr.push(
             <Button key={i} sx={stylePXt1} variant="contained" onClick={() => handleClose(i)}>
-              <b>
-                XT:{xtProps + 1}:1:&nbsp;&nbsp;{points.xctrls[i].name}
-              </b>
+              <b>XT:{xtProps + 1}:1:&nbsp;&nbsp;{points.xctrls[i].name}</b>
             </Button>,
           );
         }

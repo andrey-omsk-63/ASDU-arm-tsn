@@ -61,7 +61,19 @@ const ManagementRightGrid03 = (props: {
   let masSpis = [];
   let mass: any = [];
   let sostGl = 0;
+  let podchGl = 0;
   let j = 0;
+
+  const CounterMode = (i: number, j: number) => {
+    if (points[i].scon) {
+      mass[j].sost++;
+      sostGl++;
+    }
+    if (points[i].techMode === 9) {
+      mass[j].podch++;
+      podchGl++;
+    }
+  }
 
   switch (props.mode) {
     case 1:
@@ -71,7 +83,9 @@ const ManagementRightGrid03 = (props: {
           areaNum: points[0].area.num,
           koldk: 1,
           sost: 0,
+          podch: 0,
         };
+        CounterMode(0, 0)
         j = 0;
         for (let i = 1; i < points.length; i++) {
           if (mass[j].areaNum !== points[i].area.num) {
@@ -80,13 +94,11 @@ const ManagementRightGrid03 = (props: {
               areaNum: points[i].area.num,
               koldk: 1,
               sost: 0,
+              podch: 0,
             };
           } else {
             mass[j].koldk++;
-            if (points[i].scon) {
-              mass[j].sost++;
-              sostGl++;
-            }
+            CounterMode(i, j)
           }
         }
       }
@@ -101,7 +113,9 @@ const ManagementRightGrid03 = (props: {
           subareaNum: points[0].subarea,
           koldk: 1,
           sost: 0,
+          podch: 0,
         };
+        CounterMode(0, 0)
         j = 0;
         for (let i = 1; i < points.length; i++) {
           if (mass[j].subareaNum !== points[i].subarea) {
@@ -111,13 +125,11 @@ const ManagementRightGrid03 = (props: {
               subareaNum: points[i].subarea,
               koldk: 1,
               sost: 0,
+              podch: 0,
             };
           } else {
             mass[j].koldk++;
-            if (points[i].scon) {
-              mass[j].sost++;
-              sostGl++;
-            }
+            CounterMode(i, j)
           }
         }
       }
@@ -128,33 +140,29 @@ const ManagementRightGrid03 = (props: {
         (points) => points.area.num === props.areaa && points.subarea === props.subArea,
       );
       points = masSpis;
-      for (let i = 1; i < points.length; i++) {
-        if (points[i].scon) {
-          sostGl++;
-        }
+      for (let i = 0; i < points.length; i++) {
+        if (points[i].scon) sostGl++;
+        if (points[i].techMode === 9) podchGl++;
       }
   }
 
   const HeaderMRG03 = () => {
+    const StrokaGridHeader = (xss: number, write: string) => {
+      return (
+        <Grid item key={Math.random()} xs={xss} sx={styleMRG03}>
+          <b>{write}</b>
+        </Grid>)
+    }
+
     const StrokaHeaderMode1 = () => {
       let resStr = [];
       resStr.push(
         <Grid item key={Math.random()} container>
-          <Grid item key={Math.random()} xs={0.3} sx={styleMRG03}>
-            <b>№</b>
-          </Grid>
-          <Grid item key={Math.random()} xs={0.7} sx={styleMRG03}>
-            <b>Район</b>
-          </Grid>
-          <Grid item key={Math.random()} xs={4.8} sx={styleMRG03}>
-            <b>Устройствa</b>
-          </Grid>
-          <Grid item key={Math.random()} xs={2.5} sx={styleMRG03}>
-            <b>Текущее состояние</b>
-          </Grid>
-          <Grid item key={Math.random()} xs={3.7} sx={styleMRG03}>
-            <b>Состояние ХТ</b>
-          </Grid>
+          {StrokaGridHeader(0.3, '№')}
+          {StrokaGridHeader(0.7, 'Район')}
+          {StrokaGridHeader(4.8, 'Устройствa')}
+          {StrokaGridHeader(2.5, 'Текущее состояние')}
+          {StrokaGridHeader(3.7, 'Состояние ХТ')}
         </Grid>,
       );
       return resStr;
@@ -164,21 +172,11 @@ const ManagementRightGrid03 = (props: {
       let resStr = [];
       resStr.push(
         <Grid item key={Math.random()} container>
-          <Grid item key={Math.random()} xs={0.3} sx={styleMRG03}>
-            <b>№</b>
-          </Grid>
-          <Grid item key={Math.random()} xs={1.1} sx={styleMRG03}>
-            <b>Подрайон</b>
-          </Grid>
-          <Grid item key={Math.random()} xs={4.5} sx={styleMRG03}>
-            <b>Устройствa</b>
-          </Grid>
-          <Grid item key={Math.random()} xs={2.4} sx={styleMRG03}>
-            <b>Текущее состояние</b>
-          </Grid>
-          <Grid item key={Math.random()} xs={3.7} sx={styleMRG03}>
-            <b>Состояние ХТ</b>
-          </Grid>
+          {StrokaGridHeader(0.3, '№')}
+          {StrokaGridHeader(1.1, 'Подрайон')}
+          {StrokaGridHeader(4.5, 'Устройствa')}
+          {StrokaGridHeader(2.4, 'Текущее состояние')}
+          {StrokaGridHeader(3.7, 'Состояние ХТ')}
         </Grid>,
       );
       return resStr;
@@ -188,36 +186,16 @@ const ManagementRightGrid03 = (props: {
       let resStr = [];
       resStr.push(
         <Grid item key={Math.random()} container>
-          <Grid item key={Math.random()} xs={0.3} sx={styleMRG03}>
-            <b>№</b>
-          </Grid>
-          <Grid item key={Math.random()} xs={1.1} sx={styleMRG03}>
-            <b>Подрайон</b>
-          </Grid>
-          <Grid item key={Math.random()} xs={0.4} sx={styleMRG03}>
-            <b>ДК</b>
-          </Grid>
-          <Grid item key={Math.random()} xs={4} sx={styleMRG03}>
-            <b>Наименование</b>
-          </Grid>
-          <Grid item key={Math.random()} xs={1.5} sx={styleMRG03}>
-            <b>Устройство</b>
-          </Grid>
-          <Grid item key={Math.random()} xs={2} sx={styleMRG03}>
-            <b>Состояние</b>
-          </Grid>
-          <Grid item key={Math.random()} xs={0.5} sx={styleMRG03}>
-            <b>ПК</b>
-          </Grid>
-          <Grid item key={Math.random()} xs={0.5} sx={styleMRG03}>
-            <b>СК</b>
-          </Grid>
-          <Grid item key={Math.random()} xs={0.5} sx={styleMRG03}>
-            <b>НК</b>
-          </Grid>
-          <Grid item key={Math.random()} xs={1.2} sx={styleMRG03}>
-            <b>Статус</b>
-          </Grid>
+          {StrokaGridHeader(0.3, '№')}
+          {StrokaGridHeader(1.1, 'Подрайон')}
+          {StrokaGridHeader(0.4, 'ДК')}
+          {StrokaGridHeader(4.0, 'Наименование')}
+          {StrokaGridHeader(1.5, 'Устройствo')}
+          {StrokaGridHeader(2.0, 'Состояние')}
+          {StrokaGridHeader(0.5, 'ПК')}
+          {StrokaGridHeader(0.5, 'СК')}
+          {StrokaGridHeader(0.5, 'НК')}
+          {StrokaGridHeader(1.2, 'Статус')}
         </Grid>,
       );
       return resStr;
@@ -236,7 +214,8 @@ const ManagementRightGrid03 = (props: {
     const StrokaSpsMode1 = () => {
       let resStr = [];
       for (let i = 0; i < mass.length; i++) {
-        let prosent = (100 * mass[i].sost) / mass[i].koldk;
+        let prosentSv = (100 * mass[i].sost) / mass[i].koldk;
+        let prosentPch = (100 * mass[i].podch) / mass[i].koldk;
         resStr.push(
           <Grid item key={Math.random()} container>
             <Grid item key={Math.random()} xs={0.3} sx={styleMRG02}>
@@ -246,8 +225,8 @@ const ManagementRightGrid03 = (props: {
               {mass[i].areaNum}
             </Grid>
             <Grid item key={Math.random()} xs={4.8} sx={styleMRG02}>
-              Всего ДК&nbsp;{mass[i].koldk}&nbsp;на связи&nbsp;{prosent.toFixed(2)}% подчинены&nbsp;
-              {prosent.toFixed(2)}%
+              Всего ДК&nbsp;{mass[i].koldk}&nbsp;на связи&nbsp;{prosentSv.toFixed(2)}
+              % подчинены&nbsp;{prosentPch.toFixed(2)}%
             </Grid>
             <Grid item key={Math.random()} xs={2.5} sx={styleMRG02}>
               Назначен ВР
@@ -274,7 +253,7 @@ const ManagementRightGrid03 = (props: {
             </Grid>
             <Grid item key={Math.random()} xs={4.5} sx={styleMRG02}>
               Всего ДК&nbsp;{mass[i].koldk}&nbsp;на связи&nbsp;{mass[i].sost}
-              &nbsp;подчинены&nbsp;{mass[i].sost}
+              &nbsp;подчинены&nbsp;{mass[i].podch}
             </Grid>
             <Grid item key={Math.random()} xs={2.4} sx={styleMRG02}>
               Назначен ВР
@@ -321,7 +300,7 @@ const ManagementRightGrid03 = (props: {
               {points[i].nk}
             </Grid>
             <Grid item key={Math.random()} xs={1.2} sx={styleMRG01}>
-              {points[i].techMode}
+              {points[i].techModeString}
             </Grid>
           </Grid>,
         );
@@ -345,11 +324,11 @@ const ManagementRightGrid03 = (props: {
     let proXT = 'ХТ для данного района отсутствует';
     if (props.mode !== 3) {
       prosSv = ((100 * sostGl) / sumDk).toFixed(2).toString() + '%';
-      prosPch = '0.00%';
+      prosPch = ((100 * podchGl) / sumDk).toFixed(2).toString() + '%';
       if (props.mode === 1) proXT = 'ХТ для данного региона отсутствует';
     } else {
       prosSv = sostGl.toString();
-      prosPch = '0';
+      prosPch = podchGl.toString();
       proXT = 'ХТ для данного подрайона отсутствует';
     }
 
