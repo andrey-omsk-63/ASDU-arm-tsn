@@ -55,12 +55,12 @@ const ManagementKnobSK = () => {
     <div>
       <Button size="small" sx={styleBatton} variant="contained" onClick={handleOpen}>
         СК
-        </Button>
+        </Button>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
       <Modal
         open={open}
         aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description">
-        <Box sx={stylePK}>
+        aria-describedby="modal-modal-description">      
+        <Box sx={stylePK}>                                              
           <Stack direction="column">
             {ButtonKnob(0)}
             {ButtonKnob(1)}

@@ -31,10 +31,22 @@ const Points = (props: { open: boolean; xctrll: XctrlInfo[] }) => {
   const SpisXT = () => {
     let resSps: any = [];
     let labl: string = '';
-    for (let i = 0; i < props.xctrll.length; i++) {
-      labl = 'XT:' + (i + 1).toString() + ':1';
-      resSps.push(<Tab key={i} sx={stylePXt1} label={labl} />);
+
+    if (props.xctrll.length === 0) {
+      resSps.push(
+        <Box key={1} sx={stylePXt1}>
+          Нет данных по ХТ
+        </Box>);
+    } else {
+      for (let i = 0; i < props.xctrll.length; i++) {
+        labl = 'XT:' + (i + 1).toString() + ':1';
+        resSps.push(<Tab key={i} sx={stylePXt1} label={labl} />);
+      }
     }
+    // for (let i = 0; i < props.xctrll.length; i++) {
+    //   labl = 'XT:' + (i + 1).toString() + ':1';
+    //   resSps.push(<Tab key={i} sx={stylePXt1} label={labl} />);
+    // }
     return resSps;
   };
 
@@ -51,7 +63,12 @@ const Points = (props: { open: boolean; xctrll: XctrlInfo[] }) => {
           {SpisXT()}
         </Tabs>
       </Box>
-      <PointsXt11 open={open} xctrll={props.xctrll} xtt={value} />
+      <>{props.xctrll.length > 0 &&
+        <>
+          <PointsXt11 open={open} xctrll={props.xctrll} xtt={value} />
+        </>}
+      </>
+
     </>
   );
 };

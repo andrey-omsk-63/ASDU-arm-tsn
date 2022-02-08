@@ -59,7 +59,7 @@ const ManagementKnobXT = () => {
               Отключить
             </Button>
             <Button sx={styleBatMenu} variant="contained" onClick={handleClose}>
-              Выход
+              Отмена                                                                                                 ена
             </Button>
             {ButtonDo()}
           </Stack>

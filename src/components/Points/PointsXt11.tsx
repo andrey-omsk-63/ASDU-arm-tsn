@@ -17,7 +17,7 @@ const PointsXt11 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number }) 
   const points = props.xctrll[xtProps];
 
   const stylePXt1 = {
-    fontSize: 13.3,
+    fontSize: 13.9,
     maxHeight: '20px',
     minHeight: '20px',
     backgroundColor: '#F1F3F4',
@@ -27,26 +27,27 @@ const PointsXt11 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number }) 
   };
 
   const [valueLevel2, setValueLavel2] = React.useState('1');
-  let crossroad = 0;
+  let crossRoad = 0;
 
-  const MenuName = () => {
+  const MenuCrossRoad = () => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
 
     const handleClose = (numer: number) => {
-      crossroad = numer;
+      crossRoad = numer;
       setValueLavel2('2');
       setOpen(false);
     };
     let dlStrMenu = 0;
 
-    if (isOpen) {
+    if (isOpen && points.xctrls.length !== 0) {
+    
       for (let i = 0; i < points.xctrls.length; i++) {
         if (points.xctrls[i].name.length > dlStrMenu) {
           dlStrMenu = points.xctrls[i].name.length;
         }
       }
-     
+
       const stylePK = {
         position: 'relative',
         //marginTop: '5vh',
@@ -98,14 +99,19 @@ const PointsXt11 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number }) 
             <Button sx={stylePXt1} variant="contained" onClick={() => setValueLavel2('1')}>
               <b>Основной:</b>
             </Button>
-            {MenuName()}
+            {MenuCrossRoad()}
           </Stack>
         </Box>
         <TabPanel value="1">
           <PointsXt111 open={isOpen} xctrll={props.xctrll} xtt={xtProps} />
         </TabPanel>
         <TabPanel value="2">
-          <PointsXt112 open={isOpen} xctrll={props.xctrll} xtt={xtProps} crossroad={crossroad} />
+          <>{points.xctrls.length > 0 &&
+            <>
+              <PointsXt112 open={isOpen} xctrll={props.xctrll} xtt={xtProps} crossroad={crossRoad} />
+            </>}
+          </>
+
         </TabPanel>
       </TabContext>
     </Box>

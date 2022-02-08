@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import TabContext from '@mui/lab/TabContext';
 import TabPanel from '@mui/lab/TabPanel';
 
-import axios from 'axios';
+//import axios from 'axios';
 
 //import Header from './components/Header/Header';
 import Management from './components/Management/Management';
@@ -13,34 +13,53 @@ import Points from './components/Points/Points';
 import Statistics from './components/Statistics/Statistics';
 
 import { XctrlInfo } from './interfaceGl.d';
+import { Tflight } from './interfaceMNG.d';
 
-// const WS = new WebSocket('wss://' + window.location.host + window.location.pathname + 'W' + window.location.search)
+let pointsXctrl: XctrlInfo[];
+let pointsTfl: Tflight[];
+let isOpenInf = false;
+let isOpenDev = false;
+
+const WS = new WebSocket('wss://' + window.location.host + window.location.pathname + 'W' + window.location.search)
 // const WS = new WebSocket('wss://192.168.115.134:4443/user/MMM/charPointsW')
 // const WS = new WebSocket('wss://192.168.115.134:4443/user/Andrey_omsk/charPointsW');
 
-// WS.onopen = function (event) {
-//   console.log(event);
-// };
+WS.onopen = function (event) {
+  console.log(event);
+};
 
-// WS.onclose = function (event) {
-//   console.log(event);
-// };
+WS.onclose = function (event) {
+  console.log(event);
+};
 
-// WS.onerror = function (event) {
-//   console.log(event);
-// };
+WS.onerror = function (event) {
+  console.log(event);
+};
 
-// WS.onmessage = function (event) {
-//   let allData = JSON.parse(event.data);
-//   let data = allData.data;
-//   switch (allData.type) {
-//     case 'xctrlInfo':
-//       console.log(data);
-//       break;
-//   }
-// };
+WS.onmessage = function (event) {
+  let allData = JSON.parse(event.data);
+  let data = allData.data;
+  switch (allData.type) {
+    case 'xctrlInfo':
+
+      console.log('data1:', data);
+      pointsXctrl = data.xctrlInfo ?? [];
+      isOpenInf = true;
+      break;
+    case 'getDevices':
+
+      console.log('data_getDevices:', data);
+      pointsTfl = data.tflight ?? [];
+
+      isOpenDev = true;
+      break;
+    default:
+      console.log('data_default:', data)
+  }
+};
 
 const App = () => {
+  
   const styleApp01 = {
     fontSize: 14,
     marginRight: 1,
@@ -64,19 +83,19 @@ const App = () => {
   };
 
   //const [points, setPoints] = React.useState<XctrlInfo>({} as XctrlInfo);
-  const [points, setPoints] = React.useState<Array<XctrlInfo>>([]);
 
-  const [isOpen, setIsOpen] = React.useState(false);
+  // const [points, setPoints] = React.useState<Array<XctrlInfo>>([]);
+  // const [isOpen, setIsOpen] = React.useState(false);
 
   const [value, setValue] = React.useState('1');
-  const ipAdress: string = 'http://localhost:3000/otladkaGlob.json';
+  //const ipAdress: string = 'http://localhost:3000/otladkaGlob.json';
 
-  React.useEffect(() => {
-    axios.get(ipAdress).then(({ data }) => {
-      setPoints(data.data.xctrlInfo);
-      setIsOpen(true);
-    });
-  }, [ipAdress]);
+  // React.useEffect(() => {
+  //   axios.get(ipAdress).then(({ data }) => {
+  //     setPoints(data.data.xctrlInfo);
+  //     setIsOpen(true);
+  //   });
+  // }, [ipAdress]);
 
   return (
     <>
@@ -99,10 +118,10 @@ const App = () => {
             </Stack>
           </Box>
           <TabPanel value="1">
-            <Management />
+            <Management open={isOpenDev} ws={WS} points={pointsTfl} />
           </TabPanel>
           <TabPanel value="2">
-            <Points open={isOpen} xctrll={points} />
+            <Points open={isOpenInf} xctrll={pointsXctrl} />
           </TabPanel>
           <TabPanel value="3">
             <Statistics />

@@ -94,7 +94,7 @@ const PointsXtGrid1111 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: numb
       <Box sx={{ marginRight: 0.74, border: 0 }}>
         <HeaderPXG1111 />
       </Box>
-      <Box sx={{ overflowX: 'auto', height: '76vh' }}>
+      <Box sx={{ overflowX: 'auto', height: '75.5vh' }}>
         {props.open && <div>{StrokaPXG1111()}</div>}
       </Box>
     </Grid>
