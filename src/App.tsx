@@ -20,7 +20,9 @@ let pointsTfl: Tflight[];
 let isOpenInf = false;
 let isOpenDev = false;
 
-const WS = new WebSocket('wss://' + window.location.host + window.location.pathname + 'W' + window.location.search)
+const WS = new WebSocket(
+  'wss://' + window.location.host + window.location.pathname + 'W' + window.location.search,
+);
 // const WS = new WebSocket('wss://192.168.115.134:4443/user/MMM/charPointsW')
 // const WS = new WebSocket('wss://192.168.115.134:4443/user/Andrey_omsk/charPointsW');
 
@@ -41,25 +43,22 @@ WS.onmessage = function (event) {
   let data = allData.data;
   switch (allData.type) {
     case 'xctrlInfo':
-
       console.log('data1:', data);
       pointsXctrl = data.xctrlInfo ?? [];
       isOpenInf = true;
+      console.log('pointsXctrl1:', pointsXctrl);
       break;
     case 'getDevices':
-
       console.log('data_getDevices:', data);
       pointsTfl = data.tflight ?? [];
-
       isOpenDev = true;
       break;
     default:
-      console.log('data_default:', data)
+      console.log('data_default:', data);
   }
 };
 
 const App = () => {
-  
   const styleApp01 = {
     fontSize: 14,
     marginRight: 1,
@@ -82,20 +81,8 @@ const App = () => {
     textTransform: 'unset !important',
   };
 
-  //const [points, setPoints] = React.useState<XctrlInfo>({} as XctrlInfo);
-
-  // const [points, setPoints] = React.useState<Array<XctrlInfo>>([]);
-  // const [isOpen, setIsOpen] = React.useState(false);
-
   const [value, setValue] = React.useState('1');
-  //const ipAdress: string = 'http://localhost:3000/otladkaGlob.json';
-
-  // React.useEffect(() => {
-  //   axios.get(ipAdress).then(({ data }) => {
-  //     setPoints(data.data.xctrlInfo);
-  //     setIsOpen(true);
-  //   });
-  // }, [ipAdress]);
+  console.log('pointsXctrl2:', pointsXctrl);
 
   return (
     <>
@@ -133,3 +120,17 @@ const App = () => {
 };
 
 export default App;
+
+//const [points, setPoints] = React.useState<XctrlInfo>({} as XctrlInfo);
+
+// const [points, setPoints] = React.useState<Array<XctrlInfo>>([]);
+// const [isOpen, setIsOpen] = React.useState(false);
+
+//const ipAdress: string = 'http://localhost:3000/otladkaGlob.json';
+
+// React.useEffect(() => {
+//   axios.get(ipAdress).then(({ data }) => {
+//     setPoints(data.data.xctrlInfo);
+//     setIsOpen(true);
+//   });
+// }, [ipAdress]);
