@@ -6,7 +6,6 @@ import TabContext from '@mui/lab/TabContext';
 import TabPanel from '@mui/lab/TabPanel';
 
 //import axios from 'axios';
-
 //import Header from './components/Header/Header';
 import Management from './components/Management/Management';
 import Points from './components/Points/Points';
@@ -15,50 +14,56 @@ import Statistics from './components/Statistics/Statistics';
 import { XctrlInfo } from './interfaceGl.d';
 import { Tflight } from './interfaceMNG.d';
 
-let pointsXctrl: XctrlInfo[];
-let pointsTfl: Tflight[];
-let isOpenInf = false;
-let isOpenDev = false;
 
-const WS = new WebSocket(
-  'wss://' + window.location.host + window.location.pathname + 'W' + window.location.search,
-);
-// const WS = new WebSocket('wss://192.168.115.134:4443/user/MMM/charPointsW')
-// const WS = new WebSocket('wss://192.168.115.134:4443/user/Andrey_omsk/charPointsW');
-
-WS.onopen = function (event) {
-  console.log(event);
-};
-
-WS.onclose = function (event) {
-  console.log(event);
-};
-
-WS.onerror = function (event) {
-  console.log(event);
-};
-
-WS.onmessage = function (event) {
-  let allData = JSON.parse(event.data);
-  let data = allData.data;
-  switch (allData.type) {
-    case 'xctrlInfo':
-      console.log('data1:', data);
-      pointsXctrl = data.xctrlInfo ?? [];
-      isOpenInf = true;
-      console.log('pointsXctrl1:', pointsXctrl);
-      break;
-    case 'getDevices':
-      console.log('data_getDevices:', data);
-      pointsTfl = data.tflight ?? [];
-      isOpenDev = true;
-      break;
-    default:
-      console.log('data_default:', data);
-  }
-};
 
 const App = () => {
+
+  //let pointsXctrl: XctrlInfo[] = [];
+  const [pointsXctrl, setPointsXctrl] = React.useState<Array<XctrlInfo>>([]);
+  //let pointsTfl: Tflight[]= [];
+  const [pointsTfl, setPointsTfl] = React.useState<Array<Tflight>>([]);
+  //let isOpenInf = false;
+  const [isOpenInf, setIsOpenInf] = React.useState(false);
+  //let isOpenDev = false;
+  const [isOpenDev, setIsOpenDev] = React.useState(false);
+
+  const host = 'wss://' + window.location.host + window.location.pathname + 'W' + window.location.search
+ 
+  const WS = React.useRef(new WebSocket(host))
+
+  React.useEffect(() => {
+    WS.current.onopen = function (event) {
+      console.log(event);
+    };
+
+    WS.current.onclose = function (event) {
+      console.log(event);
+    };
+
+    WS.current.onerror = function (event) {
+      console.log(event);
+    };
+
+    WS.current.onmessage = function (event) {
+      let allData = JSON.parse(event.data);
+      let data = allData.data;
+      switch (allData.type) {
+        case 'xctrlInfo':
+          setPointsXctrl(data.xctrlInfo ?? [])
+          setIsOpenInf(true);
+          console.log('pointsXctrl1:', pointsXctrl);
+          break;
+        case 'getDevices':
+          setPointsTfl(data.tflight ?? []);
+          setIsOpenDev(true);
+          //console.log('pointsTfl1:', pointsTfl);
+          break;
+        default:
+          console.log('data_default:', data);
+      }
+    };
+  }, [host]);
+
   const styleApp01 = {
     fontSize: 14,
     marginRight: 1,
@@ -75,14 +80,15 @@ const App = () => {
     marginRight: 1,
     maxHeight: '21px',
     minHeight: '21px',
-    width: '22.5vh',
+    width: '24vh',
     backgroundColor: '#F1F3F4',
     color: 'black',
     textTransform: 'unset !important',
   };
 
   const [value, setValue] = React.useState('1');
-  console.log('pointsXctrl2:', pointsXctrl);
+  //console.log('pointsXctrl2:', pointsXctrl);
+  //console.log('pointsTfl2:', isOpenDev, pointsTfl);
 
   return (
     <>
@@ -120,6 +126,9 @@ const App = () => {
 };
 
 export default App;
+
+ // const WS = new WebSocket('wss://192.168.115.134:4443/user/MMM/charPointsW')
+  // const WS = new WebSocket('wss://192.168.115.134:4443/user/Andrey_omsk/charPointsW');
 
 //const [points, setPoints] = React.useState<XctrlInfo>({} as XctrlInfo);
 

@@ -11,6 +11,7 @@ const ManagementRightGrid03 = (props: {
   areaa: string;
   subArea: number;
 }) => {
+  
   const styleMgl = {
     padding: 1,
     margin: 1,
@@ -63,6 +64,8 @@ const ManagementRightGrid03 = (props: {
   let sostGl = 0;
   let podchGl = 0;
   let j = 0;
+
+  //console.log('PoinsMGRight:', props.open, points)
 
   const CounterMode = (i: number, j: number) => {
     if (points[i].scon) {

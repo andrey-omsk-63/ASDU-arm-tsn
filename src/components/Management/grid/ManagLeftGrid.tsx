@@ -16,6 +16,8 @@ const ManagementLeftGrid = (props: { open: boolean; tflightt: Tflight[] }) => {
 
   const points = props.tflightt;
 
+  //console.log('PoinsMGLeft:', props.open, points)
+
   const styleMG01 = {
     border: 1,
     borderRadius: 1,
@@ -175,7 +177,7 @@ const ManagementLeftGrid = (props: { open: boolean; tflightt: Tflight[] }) => {
   };
 
   return (
-    <>
+    <Grid container>
       <Grid item xs={2.5} sx={styleMG01}>
         <Box sx={{ overflowX: 'auto', height: '94.3vh' }}>{props.open && <SpisMLG />}</Box>
       </Grid>
@@ -191,7 +193,7 @@ const ManagementLeftGrid = (props: { open: boolean; tflightt: Tflight[] }) => {
           />
         </Grid>
       </Grid>
-    </>
+    </Grid>
   );
 };
 

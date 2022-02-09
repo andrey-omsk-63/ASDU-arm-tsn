@@ -182,32 +182,34 @@ const PointsXt112Comp3 = (props: {
     let resStr = [];
     let pusto = false;
     let kakchestvo = '';
-    for (let i = 0; i < points.results[namer].length; i++) {
-      if (!points.results[namer][i].Good) {
-        pusto = true;
-        kakchestvo = 'Нет данных';
+    if (points.results !== null) {
+      for (let i = 0; i < points.results[namer].length; i++) {
+        if (!points.results[namer][i].Good) {
+          pusto = true;
+          kakchestvo = 'Нет данных';
+        }
+        resStr.push(
+          <Grid key={Math.random()} container item xs={12}>
+            <Grid key={Math.random()} xs={0.5} item sx={styleXTG011}>
+              {TimeStr(points.results[namer][i].Time)}
+            </Grid>
+            <Grid key={Math.random()} xs={1} item sx={pusto ? styleXTG011 : styleXTG01}>
+              {points.results[namer][i].Value[0]}
+            </Grid>
+            <Grid key={Math.random()} xs={1} item sx={pusto ? styleXTG011 : styleXTG01}>
+              {points.results[namer][i].Value[1]}
+            </Grid>
+            <Grid key={Math.random()} xs={1} item sx={pusto ? styleXTG011 : styleXTG01}>
+              {points.results[namer][i].Value[2]}
+            </Grid>
+            <Grid key={Math.random()} xs={1} item sx={styleXTG011}>
+              {kakchestvo}
+            </Grid>
+          </Grid>,
+        );
+        pusto = false;
+        kakchestvo = '';
       }
-      resStr.push(
-        <Grid key={Math.random()} container item xs={12}>
-          <Grid key={Math.random()} xs={0.5} item sx={styleXTG011}>
-            {TimeStr(points.results[namer][i].Time)}
-          </Grid>
-          <Grid key={Math.random()} xs={1} item sx={pusto ? styleXTG011 : styleXTG01}>
-            {points.results[namer][i].Value[0]}
-          </Grid>
-          <Grid key={Math.random()} xs={1} item sx={pusto ? styleXTG011 : styleXTG01}>
-            {points.results[namer][i].Value[1]}
-          </Grid>
-          <Grid key={Math.random()} xs={1} item sx={pusto ? styleXTG011 : styleXTG01}>
-            {points.results[namer][i].Value[2]}
-          </Grid>
-          <Grid key={Math.random()} xs={1} item sx={styleXTG011}>
-            {kakchestvo}
-          </Grid>
-        </Grid>,
-      );
-      pusto = false;
-      kakchestvo = '';
     }
     return resStr;
   };
@@ -218,7 +220,7 @@ const PointsXt112Comp3 = (props: {
         <Box sx={{ marginTop: -0.3, marginLeft: -0, marginRight: 0 }}>
           <Grid container item sx={{ margin: 0, height: '28vh' }}>
             <Grid item xs={12} sx={{ border: 1, borderRadius: 1, borderColor: 'primary.main' }}>
-              <PointsGraf00 />
+              {points.results !== null && <div><PointsGraf00 /></div>}
             </Grid>
           </Grid>
           <Grid container item sx={{ marginTop: 0.5, height: '56vh', border: 0 }}>
