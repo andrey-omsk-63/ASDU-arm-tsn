@@ -7,27 +7,31 @@ import ManagementLeftGrid from './grid/ManagLeftGrid';
 import { Tflight } from '../../interfaceMNG.d';
 
 let pointsEtalon: Tflight[];
-let flagEtalon = true; 
+let flagEtalon = true;
 
-const Management = (props: { open: boolean; ws: React.MutableRefObject<WebSocket>; points: Tflight[] }) => {
-
-  //console.log('PoinsMG:', props.open, props.points)
+const Management = (props: {
+  open: boolean;
+  ws: React.MutableRefObject<WebSocket>;
+  points: Tflight[];
+}) => {
+  console.log('PoinsMG:', props.open, props.points);
 
   let isOpen = props.open;
-  let points = props.points
-  
-  React.useEffect(() => {
+  let points = props.points;
 
+  React.useEffect(() => {
     const handleSend = () => {
       if (props.ws.current.readyState === WebSocket.OPEN) {
-        props.ws.current.send(JSON.stringify({ "type": "getDevices", "region": "1" }))
+        props.ws.current.send(JSON.stringify({ type: 'getDevices', region: '1' }));
       } else {
-        setTimeout(() => { handleSend() }, 1000)
+        setTimeout(() => {
+          handleSend();
+        }, 1000);
       }
       console.log('отработал send');
     };
 
-    handleSend()
+    handleSend();
     //isOpen = true;
   }, [props.ws]);
 
@@ -36,12 +40,32 @@ const Management = (props: { open: boolean; ws: React.MutableRefObject<WebSocket
     flagEtalon = false;
   }
 
-console.log('Etalon:', pointsEtalon, 'new:', points)
+  if (isOpen && !flagEtalon) {
+    for (let i = 0; i < points.length; i++) {
+      for (let j = 0; i < pointsEtalon.length; j++) {
+        if (
+          points[i].ID === pointsEtalon[j].ID &&
+          points[i].region.num === pointsEtalon[j].region.num &&
+          points[i].area.num === pointsEtalon[j].area.num &&
+          points[i].subarea === pointsEtalon[j].subarea
+        ) {
+          console.log('совподение записей i=', i, 'j=', j);
+          pointsEtalon[j] = points[i];
+        }
+      }
+    }
+  }
+
+  console.log('Etalon:', pointsEtalon, 'new:', points);
 
   return (
     <Box sx={{ fontSize: 12, marginTop: -3, marginLeft: -1, marginRight: -6 }}>
       <Grid container sx={{ border: 1, marginLeft: -3 }}>
-        {isOpen && <div><ManagementLeftGrid open={isOpen} tflightt={points} /></div>}
+        {isOpen && (
+          <>
+            <ManagementLeftGrid open={isOpen} tflightt={pointsEtalon} />
+          </>
+        )}
       </Grid>
     </Box>
   );
@@ -50,6 +74,3 @@ console.log('Etalon:', pointsEtalon, 'new:', points)
 export default Management;
 
 //const ipAdress: string = 'http://localhost:3000/getAreaOtl.json';
-
-
-
