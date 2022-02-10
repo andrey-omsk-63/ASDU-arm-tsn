@@ -11,18 +11,22 @@ let flagEtalon = true;
 
 const Management = (props: {
   open: boolean;
-  ws: React.MutableRefObject<WebSocket>;
+  //ws: React.MutableRefObject<WebSocket>;
+  ws: WebSocket;
   points: Tflight[];
 }) => {
-  console.log('PoinsMG:', props.open, props.points);
+
+  //console.log('PoinsMG:', props.open, props.points);
 
   let isOpen = props.open;
   let points = props.points;
 
   React.useEffect(() => {
     const handleSend = () => {
-      if (props.ws.current.readyState === WebSocket.OPEN) {
-        props.ws.current.send(JSON.stringify({ type: 'getDevices', region: '1' }));
+      // if (props.ws.current.readyState === WebSocket.OPEN) {
+      //   props.ws.current.send(JSON.stringify({ type: 'getDevices', region: '1' }));
+      if (props.ws.readyState === WebSocket.OPEN) {
+        props.ws.send(JSON.stringify({ type: 'getDevices', region: '1' }));
       } else {
         setTimeout(() => {
           handleSend();
@@ -32,17 +36,23 @@ const Management = (props: {
     };
 
     handleSend();
-    //isOpen = true;
-  }, [props.ws]);
+  }, []);
+
+  //console.log('Etalon0:', pointsEtalon, 'new:', points);
+  //console.log('isOpen:', isOpen, 'flagEtalon:', flagEtalon);
 
   if (isOpen && flagEtalon) {
     pointsEtalon = points;
     flagEtalon = false;
+    points = [];
   }
+
+  console.log('Etalon1:', pointsEtalon, 'new:', points);
 
   if (isOpen && !flagEtalon) {
     for (let i = 0; i < points.length; i++) {
-      for (let j = 0; i < pointsEtalon.length; j++) {
+      //console.log("i=", i, points.length)
+      for (let j = 0; j < pointsEtalon.length; j++) {
         if (
           points[i].ID === pointsEtalon[j].ID &&
           points[i].region.num === pointsEtalon[j].region.num &&
@@ -56,11 +66,11 @@ const Management = (props: {
     }
   }
 
-  console.log('Etalon:', pointsEtalon, 'new:', points);
+  console.log('Etalon2:', pointsEtalon, 'new:', points);
 
   return (
     <Box sx={{ fontSize: 12, marginTop: -3, marginLeft: -1, marginRight: -6 }}>
-      <Grid container sx={{ border: 1, marginLeft: -3 }}>
+      <Grid container sx={{ border: 0, marginLeft: -3 }}>
         {isOpen && (
           <>
             <ManagementLeftGrid open={isOpen} tflightt={pointsEtalon} />
