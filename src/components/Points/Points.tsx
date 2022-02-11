@@ -6,6 +6,8 @@ import Tab from '@mui/material/Tab';
 
 import PointsXt11 from './PointsXt11';
 
+import axios from 'axios';
+
 import { XctrlInfo } from '../../interfaceGl.d';
 
 let tekValue = 0;
@@ -20,8 +22,12 @@ const Points = (props: { open: boolean; xctrll: XctrlInfo[] }) => {
     marginRight: 0.5,
   };
 
-  const open = props.open;
+  // const open = props.open;
+  // const points = props.xctrll;
   const [value, setValue] = React.useState(tekValue);
+
+  const [points, setPoints] = React.useState<Array<XctrlInfo>>([]);
+  const [isOpen, setIsOpen] = React.useState(false);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -32,14 +38,14 @@ const Points = (props: { open: boolean; xctrll: XctrlInfo[] }) => {
     let resSps: any = [];
     let labl: string = '';
 
-    if (props.xctrll.length === 0) {
+    if (points.length === 0) {
       resSps.push(
         <Box key={1} sx={stylePXt1}>
           Нет данных по ХТ
         </Box>,
       );
     } else {
-      for (let i = 0; i < props.xctrll.length; i++) {
+      for (let i = 0; i < points.length; i++) {
         labl = 'XT:' + (i + 1).toString() + ':1';
         resSps.push(<Tab key={i} sx={stylePXt1} label={labl} />);
       }
@@ -47,9 +53,24 @@ const Points = (props: { open: boolean; xctrll: XctrlInfo[] }) => {
     return resSps;
   };
 
+
+
+
+  const ipAdress: string = 'http://localhost:3000/otladkaGlob.json';
+  React.useEffect(() => {
+    axios.get(ipAdress).then(({ data }) => {
+      console.log('ggg', data.data.xctrlInfo)
+      setPoints(data.data.xctrlInfo);
+      setIsOpen(true);
+    });
+  }, [ipAdress]);
+  console.log('pppp', points, isOpen)
+
   return (
-    <>
-      <Box sx={{ maxWidth: 850, fontSize: 12, marginTop: -2.5, marginLeft: -3, marginRight: -7 }}>
+    <Box sx={{ border: 0, marginTop: -2.8, marginLeft: -3, marginRight: -3 }}>
+      {/* <Box sx={{ border: 1, maxWidth: 850, fontSize: 12, marginTop: -2.5, marginLeft: -3, marginRight: -7 }}>
+       */}
+      <Box sx={{ border: 0, maxWidth: '100%', fontSize: 12, marginTop: 0, marginLeft: -3, marginRight: -7 }}>
         <Tabs
           sx={{ maxHeight: '20px', minHeight: '20px' }}
           value={value}
@@ -61,13 +82,14 @@ const Points = (props: { open: boolean; xctrll: XctrlInfo[] }) => {
         </Tabs>
       </Box>
       <>
-        {props.xctrll.length > 0 && (
+        {points.length > 0 && (
           <>
-            <PointsXt11 open={open} xctrll={props.xctrll} xtt={value} />
+            {/* <PointsXt11 open={open} xctrll={points} xtt={value} /> */}
+            <PointsXt11 open={isOpen} xctrll={points} xtt={value} />
           </>
         )}
       </>
-    </>
+    </Box>
   );
 };
 

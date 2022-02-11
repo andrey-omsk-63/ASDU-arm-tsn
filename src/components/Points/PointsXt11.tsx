@@ -41,7 +41,7 @@ const PointsXt11 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number }) 
     let dlStrMenu = 0;
 
     if (isOpen && points.xctrls.length !== 0) {
-    
+
       for (let i = 0; i < points.xctrls.length; i++) {
         if (points.xctrls[i].name.length > dlStrMenu) {
           dlStrMenu = points.xctrls[i].name.length;
@@ -50,7 +50,6 @@ const PointsXt11 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number }) 
 
       const stylePK = {
         position: 'relative',
-        //marginTop: '5vh',
         bottom: '-33vh',
         marginLeft: '60vh',
         transform: 'translate(-50%, -50%)',
@@ -92,10 +91,12 @@ const PointsXt11 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number }) 
   };
 
   return (
-    <Box sx={{ marginTop: 2.5, marginLeft: -2.5, marginRight: -10 }}>
+    // <Box sx={{ border: 1, marginTop: 2.5, marginLeft: -2.5, marginRight: -10 }}>
+    <Box sx={{ border: 0, marginTop: 0.5, marginLeft: -2, marginRight: -10 }}>
       <TabContext value={valueLevel2}>
         <Box>
-          <Stack sx={{ marginTop: -2 }} direction="row">
+          {/* <Stack sx={{ marginTop: -2 }} direction="row"> */}
+          <Stack sx={{ marginLeft: 2, width: '90%', border: 0 }} direction="row">  
             <Button sx={stylePXt1} variant="contained" onClick={() => setValueLavel2('1')}>
               <b>Основной:</b>
             </Button>

@@ -17,7 +17,7 @@ const PointsXt111 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number })
     borderRadius: 1,
     borderColor: 'primary.main',
     padding: 1,
-    margin: 1,
+    margin: 0,
   };
 
   const styleXt03 = {
@@ -35,7 +35,7 @@ const PointsXt111 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number })
     margin: 1,
     marginTop: -1.5,
     marginLeft: -1,
-    height: '83vh',
+    height: '70%',
   };
 
   const styleXt05 = {
@@ -47,7 +47,7 @@ const PointsXt111 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number })
     marginTop: -1.5,
     marginLeft: -0.5,
     marginRight: 1.5,
-    height: '83vh',
+    height: '70%',
   };
 
   const TimeStr = (tim: number) => {
@@ -72,11 +72,12 @@ const PointsXt111 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number })
   }
 
   return (
-    <Box sx={{ marginTop: -3, marginLeft: -3, marginRight: 3 }}>
-      <Grid container item sx={{ margin: -1, border: 0 }}>
+    // <Box sx={{ border: 1, marginTop: -3, marginLeft: -3, marginRight: 3 }}>
+    <Box sx={{ border: 1, marginTop: -3, marginLeft: -3, marginRight: 3 }}>  
+      <Grid container item sx={{ margin: 0, border: 0 }}>
         <Grid item xs>
           <Grid container>
-            <Grid item xs={12} sx={{ margin: 1, marginBottom: -1, marginLeft: 1 }}>
+            <Grid item xs={12} sx={{ margin: 0, marginBottom: 0, marginLeft: 1 }}>
               Расчёт ХТ
             </Grid>
 

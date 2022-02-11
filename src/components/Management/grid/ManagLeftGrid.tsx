@@ -23,7 +23,7 @@ const ManagementLeftGrid = (props: { open: boolean; tflightt: Tflight[] }) => {
     borderRadius: 1,
     borderColor: 'primary.main',
     margin: 1.2,
-    height: '94.6vh',
+    height: '98.6%',
   };
 
   const styleMG03 = {
@@ -179,7 +179,7 @@ const ManagementLeftGrid = (props: { open: boolean; tflightt: Tflight[] }) => {
   return (
     <Grid container>
       <Grid item xs={2.5} sx={styleMG01}>
-        <Box sx={{ overflowX: 'auto', height: '94.3vh' }}>{props.open && <SpisMLG />}</Box>
+        <Box sx={{ overflowX: 'auto', height: '99.6%' }}>{props.open && <SpisMLG />}</Box>
       </Grid>
       <Grid item xs>
         <Grid container>

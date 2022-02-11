@@ -28,52 +28,52 @@ const App = () => {
   const WS = React.useRef(new WebSocket(host));
   //const WS = new WebSocket(host);
 
-  React.useEffect(() => {
-    WS.current.onopen = function (event) {
-      //WS.onopen = function (event) {
-      console.log('WS.current.onopen:', event);
-    };
+  // React.useEffect(() => {
+  //   WS.current.onopen = function (event) {
+      
+  //     console.log('WS.current.onopen:', event);
+  //   };
 
-    WS.current.onclose = function (event) {
-      //WS.onclose = function (event) {
-      console.log('WS.current.onclose:', event);
-    };
+  //   WS.current.onclose = function (event) {
+      
+  //     console.log('WS.current.onclose:', event);
+  //   };
 
-    WS.current.onerror = function (event) {
-      //WS.onerror = function (event) {
-      console.log('WS.current.onerror:', event);
-    };
+  //   WS.current.onerror = function (event) {
+      
+  //     console.log('WS.current.onerror:', event);
+  //   };
 
-    WS.current.onmessage = function (event) {
-      //WS.onmessage = function (event) {
-      let allData = JSON.parse(event.data);
-      let data = allData.data;
-      switch (allData.type) {
-        case 'xctrlInfo':
-          setPointsXctrl(data.xctrlInfo ?? []);
-          setIsOpenInf(true);
+  //   WS.current.onmessage = function (event) {
+      
+  //     let allData = JSON.parse(event.data);
+  //     let data = allData.data;
+  //     switch (allData.type) {
+  //       case 'xctrlInfo':
+  //         setPointsXctrl(data.xctrlInfo ?? []);
+  //         setIsOpenInf(true);
 
-          break;
-        case 'getDevices':
-          setPointsTfl(data.tflight ?? []);
-          setIsOpenDev(true);
+  //         break;
+  //       case 'getDevices':
+  //         setPointsTfl(data.tflight ?? []);
+  //         setIsOpenDev(true);
 
-          break;
-        case 'getStatistics':
-          setPointsSt(data.statistics ?? []);
-          setIsOpenSt(true);
+  //         break;
+  //       case 'getStatistics':
+  //         setPointsSt(data.statistics ?? []);
+  //         setIsOpenSt(true);
 
-          break;
-        default:
-          console.log('data_default:', data);
-      }
-    };
-  }, [host]);
+  //         break;
+  //       default:
+  //         console.log('data_default:', data);
+  //     }
+  //   };
+  // }, [host]);
 
   const styleApp01 = {
     fontSize: 14,
     marginRight: 1,
-    width: '12vh',
+    width: '12%',
     maxHeight: '21px',
     minHeight: '21px',
     backgroundColor: '#F1F3F4',
@@ -86,7 +86,7 @@ const App = () => {
     marginRight: 1,
     maxHeight: '21px',
     minHeight: '21px',
-    width: '24vh',
+    width: '20%',
     backgroundColor: '#F1F3F4',
     color: 'black',
     textTransform: 'unset !important',
@@ -98,7 +98,7 @@ const App = () => {
 
   return (
     <>
-      <Box sx={{ border: 1, width: '100%', height: '100%', typography: 'body2' }}>
+      <Box sx={{ border: 1, width: '98.5%',  typography: 'body2' }}>
         <TabContext value={value}>
           <Box sx={{ marginLeft: 0.2, backgroundColor: '#F1F5FB' }}>
             <Stack direction="row">
@@ -123,7 +123,7 @@ const App = () => {
             <Points open={isOpenInf} xctrll={pointsXctrl} />
           </TabPanel>
           <TabPanel value="3">
-            <Statistics open={isOpenSt} ws={WS} points={pointsSt} />
+            {/* <Statistics open={isOpenSt} ws={WS} points={pointsSt} /> */}
           </TabPanel>
         </TabContext>
       </Box>

@@ -6,6 +6,8 @@ import ManagementLeftGrid from './grid/ManagLeftGrid';
 
 import { Tflight } from '../../interfaceMNG.d';
 
+import axios from 'axios';
+
 let pointsEtalon: Tflight[];
 let flagEtalon = true;
 
@@ -17,53 +19,62 @@ const Management = (props: {
 }) => {
   //console.log('PoinsMG:', props.open, props.points);
 
-  let isOpen = props.open;
-  let points = props.points;
+  // let isOpen = props.open;
+  // let points = props.points;
 
+  const [points, setPoints] = React.useState<Array<Tflight>>([]);
+  const [isOpen, setIsOpen] = React.useState(false);
+
+
+  const ipAdress: string = 'http://localhost:3000/getAreaOtl.json';
   React.useEffect(() => {
-    const handleSend = () => {
-      if (props.ws.current.readyState === WebSocket.OPEN) {
-        props.ws.current.send(JSON.stringify({ type: 'getDevices', region: '1' }));
-        //if (props.ws.readyState === WebSocket.OPEN) {
-        //  props.ws.send(JSON.stringify({ type: 'getDevices', region: '1' }));
-      } else {
-        setTimeout(() => {
-          handleSend();
-        }, 1000);
-      }
-      console.log('отработал send');
-    };
+    axios.get(ipAdress).then(({ data }) => {
+      console.log('eee', data.data.tflight)
+      setPoints(data.data.tflight);
+      setIsOpen(true);
+    });
+  }, [ipAdress]);
+  console.log('dddd', points,isOpen)
 
-    handleSend();
-  }, []);
+  // React.useEffect(() => {
+  //   const handleSend = () => {
+  //     if (props.ws.current.readyState === WebSocket.OPEN) {
+  //       props.ws.current.send(JSON.stringify({ type: 'getDevices', region: '1' }));
+  //       //if (props.ws.readyState === WebSocket.OPEN) {
+  //       //  props.ws.send(JSON.stringify({ type: 'getDevices', region: '1' }));
+  //     } else {
+  //       setTimeout(() => {
+  //         handleSend();
+  //       }, 1000);
+  //     }
+  //     console.log('отработал send');
+  //   };
 
-  //console.log('Etalon0:', pointsEtalon, 'new:', points);
-  //console.log('isOpen:', isOpen, 'flagEtalon:', flagEtalon);
+  //   handleSend();
+  // }, []);
 
-  if (isOpen && flagEtalon) {
-    pointsEtalon = points;
-    flagEtalon = false;
-    points = [];
-  }
+  // if (isOpen && flagEtalon) {
+  //   pointsEtalon = points;
+  //   flagEtalon = false;
+  //   points = [];
+  // }
 
-  //console.log('Etalon1:', pointsEtalon, 'new:', points);
-
-  if (isOpen && !flagEtalon) {
-    for (let i = 0; i < points.length; i++) {
-      //console.log("i=", i, points.length)
-      for (let j = 0; j < pointsEtalon.length; j++) {
-        if (
-          points[i].ID === pointsEtalon[j].ID &&
-          points[i].region.num === pointsEtalon[j].region.num &&
-          points[i].area.num === pointsEtalon[j].area.num &&
-          points[i].subarea === pointsEtalon[j].subarea
-        ) {
-          console.log('совподение записей i=', i, 'j=', j);
-          pointsEtalon[j] = points[i];
-        }
-      }
-    }
-  }
+  // if (isOpen && !flagEtalon) {
+  //   for (let i = 0; i < points.length; i++) {
+  //     //console.log("i=", i, points.length)
+  //     for (let j = 0; j < pointsEtalon.length; j++) {
+  //       if (
+  //         points[i].ID === pointsEtalon[j].ID &&
+  //         points[i].region.num === pointsEtalon[j].region.num &&
+  //         points[i].area.num === pointsEtalon[j].area.num &&
+  //         points[i].subarea === pointsEtalon[j].subarea
+  //       ) {
+  //         console.log('совподение записей i=', i, 'j=', j);
+  //         pointsEtalon[j] = points[i];
+  //       }
+  //     }
+  //   }
+  // }
 
   //console.log('Etalon2:', pointsEtalon, 'new:', points);
 
@@ -72,7 +83,8 @@ const Management = (props: {
       <Grid container sx={{ border: 0, marginLeft: -3 }}>
         {isOpen && (
           <>
-            <ManagementLeftGrid open={isOpen} tflightt={pointsEtalon} />
+            <ManagementLeftGrid open={isOpen} tflightt={points} />
+            {/* <ManagementLeftGrid open={isOpen} tflightt={pointsEtalon} /> */}
           </>
         )}
       </Grid>
@@ -82,4 +94,4 @@ const Management = (props: {
 
 export default Management;
 
-//const ipAdress: string = 'http://localhost:3000/getAreaOtl.json';
+
