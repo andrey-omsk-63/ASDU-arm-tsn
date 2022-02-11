@@ -5,39 +5,46 @@ import Tab from '@mui/material/Tab';
 
 import Statistic110 from './Statistic110';
 
-import axios from 'axios';
-
 import { Statistic } from '../../interfaceStat.d';
 
-// const WS = new WebSocket('wss://' + window.location.host + window.location.pathname + 'W' + window.location.search)
-// const WS = new WebSocket('wss://192.168.115.134:4443/user/MMM/charPointsW')
-// const WS = new WebSocket('wss://192.168.115.134:4443/user/Andrey_omsk/charPointsW');
-
-// WS.onopen = function (event) {
-//   console.log(event);
-// };
-
-// WS.onclose = function (event) {
-//   console.log(event);
-// };
-
-// WS.onerror = function (event) {
-//   console.log(event);
-// };
-
-// WS.onmessage = function (event) {
-//   let allData = JSON.parse(event.data);
-//   let data = allData.data;
-//   switch (allData.type) {
-//     case 'xctrlInfo':
-//       console.log(data);
-//       break;
-//   }
-// };
-
 let tekValue = 0;
+let pointsEtalon: Statistic[];
+let flagEtalon = true;
 
-const Statistics = () => {
+const Statistics = (props: {
+  open: boolean;
+  ws: React.MutableRefObject<WebSocket>;
+  //ws: WebSocket;
+  points: Statistic[];
+}) => {
+  console.log('PoinsSt:', props.open, props.points);
+
+  let isOpen = props.open;
+  let points = props.points;
+
+  React.useEffect(() => {
+    const handleSend = () => {
+      if (props.ws.current.readyState === WebSocket.OPEN) {
+        props.ws.current.send(JSON.stringify({ type: 'getStatistics', region: '1' }));
+        //if (props.ws.readyState === WebSocket.OPEN) {
+        //  props.ws.send(JSON.stringify({ type: 'getDevices', region: '1' }));
+      } else {
+        setTimeout(() => {
+          handleSend();
+        }, 1000);
+      }
+      console.log('отработал send ST');
+    };
+
+    handleSend();
+  }, []);
+
+  if (isOpen && flagEtalon) {
+    pointsEtalon = points;
+    flagEtalon = false;
+    points = [];
+  }
+
   const styleSt1 = {
     fontSize: 13.5,
     maxHeight: '20px',
@@ -46,20 +53,6 @@ const Statistics = () => {
     color: 'black',
     marginRight: 0.5,
   };
-
-  const [points, setPoints] = React.useState<Array<Statistic>>([]);
-  //const [points, setPoints] = React.useState<Data>({} as Data);
-  const [isOpen, setIsOpen] = React.useState(false);
-  const ipAdress: string = 'http://localhost:3000/statistics.json';
-
-  React.useEffect(() => {
-    axios.get(ipAdress).then(({ data }) => {
-      setPoints(data.data.statistics);
-      setIsOpen(true);
-    });
-  }, [ipAdress]);
-
-  //if (isOpen) console.log('!!!', points);
 
   const [value, setValue] = React.useState(tekValue);
 
@@ -71,7 +64,7 @@ const Statistics = () => {
   const SpisXT = () => {
     let resSps: any = [];
     let labl: string = '';
-    for (let i = 0; i < points.length; i++) {
+    for (let i = 0; i < pointsEtalon.length; i++) {
       labl = 'XT:' + (i + 1).toString() + ':1';
       resSps.push(<Tab key={i} sx={styleSt1} label={labl} />);
     }
@@ -91,35 +84,23 @@ const Statistics = () => {
           {SpisXT()}
         </Tabs>
       </Box>
-      <Statistic110 open={isOpen} statist={points} areaid={value} />
+      <Statistic110 open={isOpen} statist={pointsEtalon} areaid={value} />
     </>
   );
 };
 
 export default Statistics;
 
-//import Stack from '@mui/material/Stack';
-//import Button from '@mui/material/Button';
-//import TabContext from '@mui/lab/TabContext';
-//import TabPanel from '@mui/lab/TabPanel';
+//const [points, setPoints] = React.useState<Array<Statistic>>([]);
+//const [points, setPoints] = React.useState<Data>({} as Data);
+//const [isOpen, setIsOpen] = React.useState(false);
+//const ipAdress: string = 'http://localhost:3000/statistics.json';
 
-// <Box sx={{ marginTop: -2, marginLeft: -3, marginRight: -7 }}>
-//   <TabContext value={value}>
-//     <Box>
-//       <Stack sx={{ marginTop: -2 }} direction="row">
-//         <Button sx={styleBut01} variant="contained" onClick={() => setValue('1')}>
-//           1:1
-//         </Button>
-//         <Button sx={styleBut01} variant="contained" onClick={() => setValue('2')}>
-//           2:2
-//         </Button>
-//       </Stack>
-//     </Box>
-//     <TabPanel value="1">
-//       <Statistic110 open={isOpen} statist={points} areaid={0} />
-//     </TabPanel>
-//     <TabPanel value="2">
-//       <Statistic110 open={isOpen} statist={points} areaid={1} />
-//     </TabPanel>
-//   </TabContext>
-// </Box>
+// React.useEffect(() => {
+//   axios.get(ipAdress).then(({ data }) => {
+//     setPoints(data.data.statistics);
+//     setIsOpen(true);
+//   });
+// }, [ipAdress]);
+
+//if (isOpen) console.log('!!!', points);

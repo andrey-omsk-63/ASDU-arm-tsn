@@ -16,8 +16,6 @@ import { Tflight } from './interfaceMNG.d';
 import { Statistic } from './interfaceStat.d';
 
 const App = () => {
-
-
   const [pointsXctrl, setPointsXctrl] = React.useState<Array<XctrlInfo>>([]);
   const [isOpenInf, setIsOpenInf] = React.useState(false);
   const [pointsTfl, setPointsTfl] = React.useState<Array<Tflight>>([]);
@@ -25,33 +23,34 @@ const App = () => {
   const [pointsSt, setPointsSt] = React.useState<Array<Statistic>>([]);
   const [isOpenSt, setIsOpenSt] = React.useState(false);
 
-  const host = 'wss://' + window.location.host + window.location.pathname + 'W' + window.location.search
-  //const WS = React.useRef(new WebSocket(host));
-  const WS = new WebSocket(host);
+  const host =
+    'wss://' + window.location.host + window.location.pathname + 'W' + window.location.search;
+  const WS = React.useRef(new WebSocket(host));
+  //const WS = new WebSocket(host);
 
   React.useEffect(() => {
-    //WS.current.onopen = function (event) {
-    WS.onopen = function (event) {
+    WS.current.onopen = function (event) {
+      //WS.onopen = function (event) {
       console.log('WS.current.onopen:', event);
     };
 
-    //WS.current.onclose = function (event) {
-    WS.onclose = function (event) {
+    WS.current.onclose = function (event) {
+      //WS.onclose = function (event) {
       console.log('WS.current.onclose:', event);
     };
 
-    //WS.current.onerror = function (event) {
-    WS.onerror = function (event) {
+    WS.current.onerror = function (event) {
+      //WS.onerror = function (event) {
       console.log('WS.current.onerror:', event);
     };
 
-    // WS.current.onmessage = function (event) {
-    WS.onmessage = function (event) {
+    WS.current.onmessage = function (event) {
+      //WS.onmessage = function (event) {
       let allData = JSON.parse(event.data);
       let data = allData.data;
       switch (allData.type) {
         case 'xctrlInfo':
-          setPointsXctrl(data.xctrlInfo ?? [])
+          setPointsXctrl(data.xctrlInfo ?? []);
           setIsOpenInf(true);
 
           break;
@@ -124,7 +123,7 @@ const App = () => {
             <Points open={isOpenInf} xctrll={pointsXctrl} />
           </TabPanel>
           <TabPanel value="3">
-            <Statistics />
+            <Statistics open={isOpenSt} ws={WS} points={pointsSt} />
           </TabPanel>
         </TabContext>
       </Box>
@@ -134,8 +133,8 @@ const App = () => {
 
 export default App;
 
- // const WS = new WebSocket('wss://192.168.115.134:4443/user/MMM/charPointsW')
-  // const WS = new WebSocket('wss://192.168.115.134:4443/user/Andrey_omsk/charPointsW');
+// const WS = new WebSocket('wss://192.168.115.134:4443/user/MMM/charPointsW')
+// const WS = new WebSocket('wss://192.168.115.134:4443/user/Andrey_omsk/charPointsW');
 
 //const [points, setPoints] = React.useState<XctrlInfo>({} as XctrlInfo);
 
