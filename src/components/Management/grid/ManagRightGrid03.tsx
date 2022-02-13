@@ -11,7 +11,6 @@ const ManagementRightGrid03 = (props: {
   areaa: string;
   subArea: number;
 }) => {
-  
   const styleMgl = {
     padding: 1,
     margin: 1,
@@ -54,8 +53,8 @@ const ManagementRightGrid03 = (props: {
     borderRadius: 1,
     borderColor: 'primary.main',
     marginTop: 0.5,
-    marginLeft: -0.7,
-    height: '83vh',
+    //marginLeft: -0.7,
+    height: '84vh',
   };
 
   let points = props.tflightt;
@@ -76,7 +75,7 @@ const ManagementRightGrid03 = (props: {
       mass[j].podch++;
       podchGl++;
     }
-  }
+  };
 
   switch (props.mode) {
     case 1:
@@ -88,7 +87,7 @@ const ManagementRightGrid03 = (props: {
           sost: 0,
           podch: 0,
         };
-        CounterMode(0, 0)
+        CounterMode(0, 0);
         j = 0;
         for (let i = 1; i < points.length; i++) {
           if (mass[j].areaNum !== points[i].area.num) {
@@ -101,7 +100,7 @@ const ManagementRightGrid03 = (props: {
             };
           } else {
             mass[j].koldk++;
-            CounterMode(i, j)
+            CounterMode(i, j);
           }
         }
       }
@@ -118,7 +117,7 @@ const ManagementRightGrid03 = (props: {
           sost: 0,
           podch: 0,
         };
-        CounterMode(0, 0)
+        CounterMode(0, 0);
         j = 0;
         for (let i = 1; i < points.length; i++) {
           if (mass[j].subareaNum !== points[i].subarea) {
@@ -132,7 +131,7 @@ const ManagementRightGrid03 = (props: {
             };
           } else {
             mass[j].koldk++;
-            CounterMode(i, j)
+            CounterMode(i, j);
           }
         }
       }
@@ -154,8 +153,9 @@ const ManagementRightGrid03 = (props: {
       return (
         <Grid item key={Math.random()} xs={xss} sx={styleMRG03}>
           <b>{write}</b>
-        </Grid>)
-    }
+        </Grid>
+      );
+    };
 
     const StrokaHeaderMode1 = () => {
       let resStr = [];
@@ -228,8 +228,8 @@ const ManagementRightGrid03 = (props: {
               {mass[i].areaNum}
             </Grid>
             <Grid item key={Math.random()} xs={4.8} sx={styleMRG02}>
-              Всего ДК&nbsp;{mass[i].koldk}&nbsp;на связи&nbsp;{prosentSv.toFixed(2)}
-              % подчинены&nbsp;{prosentPch.toFixed(2)}%
+              Всего ДК&nbsp;{mass[i].koldk}&nbsp;на связи&nbsp;{prosentSv.toFixed(2)}%
+              подчинены&nbsp;{prosentPch.toFixed(2)}%
             </Grid>
             <Grid item key={Math.random()} xs={2.5} sx={styleMRG02}>
               Назначен ВР
@@ -349,9 +349,7 @@ const ManagementRightGrid03 = (props: {
       <Grid item container sx={styleMRG04}>
         <Grid item xs={12}>
           <HeaderMRG03 />
-          <Box sx={{ overflowX: 'auto', height: '95.5%' }}>
-            {props.open && <StrokaMRG03 />}
-          </Box>
+          <Box sx={{ overflowX: 'auto', height: '95.5%' }}>{props.open && <StrokaMRG03 />}</Box>
         </Grid>
       </Grid>
     </>

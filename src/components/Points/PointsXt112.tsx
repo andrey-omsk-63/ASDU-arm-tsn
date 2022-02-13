@@ -59,7 +59,7 @@ const PointsXt112 = (props: {
   };
 
   return (
-    <Box sx={{ marginTop: -2, marginLeft: -3.5, marginRight: 5 }}>
+    <Box sx={{ border: 0, marginTop: -2, marginLeft: -3.5, marginRight: -3 }}>
       <Grid container item sx={{ border: 0 }}>
         <Grid item xs={12}>
           <Grid container item>

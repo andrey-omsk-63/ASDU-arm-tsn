@@ -3,6 +3,8 @@ import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 
+import axios from 'axios';
+
 import Statistic110 from './Statistic110';
 
 import { Statistic } from '../../interfaceStat.d';
@@ -17,32 +19,46 @@ const Statistics = (props: {
   //ws: WebSocket;
   points: Statistic[];
 }) => {
-  console.log('PoinsSt:', props.open, props.points);
+  //console.log('PoinsSt:', props.open, props.points);
 
-  let isOpen = props.open;
-  let points = props.points;
+  // let isOpen = props.open;
+  // let points = props.points;
+
+  // React.useEffect(() => {
+  //   const handleSend = () => {
+  //     if (props.ws.current.readyState === WebSocket.OPEN) {
+  //       props.ws.current.send(JSON.stringify({ type: 'getStatistics', region: '1' }));
+  //       //if (props.ws.readyState === WebSocket.OPEN) {
+  //       //  props.ws.send(JSON.stringify({ type: 'getDevices', region: '1' }));
+  //     } else {
+  //       setTimeout(() => {
+  //         handleSend();
+  //       }, 1000);
+  //     }
+  //     console.log('отработал send ST');
+  //   };
+
+  //   handleSend();
+  // }, []);
+
+  const [points, setPoints] = React.useState<Array<Statistic>>([]);
+  //const [points, setPoints] = React.useState<Data>({} as Data);
+  const [isOpen, setIsOpen] = React.useState(false);
+  const ipAdress: string = 'http://localhost:3000/statistics.json';
 
   React.useEffect(() => {
-    const handleSend = () => {
-      if (props.ws.current.readyState === WebSocket.OPEN) {
-        props.ws.current.send(JSON.stringify({ type: 'getStatistics', region: '1' }));
-        //if (props.ws.readyState === WebSocket.OPEN) {
-        //  props.ws.send(JSON.stringify({ type: 'getDevices', region: '1' }));
-      } else {
-        setTimeout(() => {
-          handleSend();
-        }, 1000);
-      }
-      console.log('отработал send ST');
-    };
+    axios.get(ipAdress).then(({ data }) => {
+      setPoints(data.data.statistics);
+      setIsOpen(true);
+    });
+  }, [ipAdress]);
 
-    handleSend();
-  }, []);
+  if (isOpen) console.log('!!!', points);
 
   if (isOpen && flagEtalon) {
     pointsEtalon = points;
     flagEtalon = false;
-    points = [];
+    //points = [];
   }
 
   const styleSt1 = {
@@ -73,34 +89,24 @@ const Statistics = (props: {
 
   return (
     <>
-      <Box sx={{ maxWidth: 850, fontSize: 12, marginTop: -2, marginLeft: -3, marginRight: -7 }}>
-        <Tabs
-          sx={{ maxHeight: '20px', minHeight: '20px' }}
-          value={value}
-          onChange={handleChange}
-          variant="scrollable"
-          scrollButtons={true}
-          allowScrollButtonsMobile>
-          {SpisXT()}
-        </Tabs>
-      </Box>
-      <Statistic110 open={isOpen} statist={pointsEtalon} areaid={value} />
+      {isOpen && (
+        <>
+          <Box sx={{ maxWidth: 850, fontSize: 12, marginTop: -2, marginLeft: -3, marginRight: -7 }}>
+            <Tabs
+              sx={{ maxHeight: '20px', minHeight: '20px' }}
+              value={value}
+              onChange={handleChange}
+              variant="scrollable"
+              scrollButtons={true}
+              allowScrollButtonsMobile>
+              {SpisXT()}
+            </Tabs>
+          </Box>
+          <Statistic110 open={isOpen} statist={pointsEtalon} areaid={value} />
+        </>
+      )}
     </>
   );
 };
 
 export default Statistics;
-
-//const [points, setPoints] = React.useState<Array<Statistic>>([]);
-//const [points, setPoints] = React.useState<Data>({} as Data);
-//const [isOpen, setIsOpen] = React.useState(false);
-//const ipAdress: string = 'http://localhost:3000/statistics.json';
-
-// React.useEffect(() => {
-//   axios.get(ipAdress).then(({ data }) => {
-//     setPoints(data.data.statistics);
-//     setIsOpen(true);
-//   });
-// }, [ipAdress]);
-
-//if (isOpen) console.log('!!!', points);

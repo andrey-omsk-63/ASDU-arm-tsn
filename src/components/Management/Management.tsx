@@ -25,16 +25,15 @@ const Management = (props: {
   const [points, setPoints] = React.useState<Array<Tflight>>([]);
   const [isOpen, setIsOpen] = React.useState(false);
 
-
   const ipAdress: string = 'http://localhost:3000/getAreaOtl.json';
   React.useEffect(() => {
     axios.get(ipAdress).then(({ data }) => {
-      console.log('eee', data.data.tflight)
+      console.log('eee', data.data.tflight);
       setPoints(data.data.tflight);
       setIsOpen(true);
     });
   }, [ipAdress]);
-  console.log('dddd', points,isOpen)
+  console.log('dddd', points, isOpen);
 
   // React.useEffect(() => {
   //   const handleSend = () => {
@@ -79,8 +78,8 @@ const Management = (props: {
   //console.log('Etalon2:', pointsEtalon, 'new:', points);
 
   return (
-    <Box sx={{ fontSize: 12, marginTop: -3, marginLeft: -1, marginRight: -6 }}>
-      <Grid container sx={{ border: 0, marginLeft: -3 }}>
+    <Box sx={{ fontSize: 12, marginTop: -3, marginLeft: -3, marginRight: -5 }}>
+      <Grid container sx={{ border: 0, marginLeft: 0 }}>
         {isOpen && (
           <>
             <ManagementLeftGrid open={isOpen} tflightt={points} />
@@ -93,5 +92,3 @@ const Management = (props: {
 };
 
 export default Management;
-
-

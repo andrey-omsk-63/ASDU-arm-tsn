@@ -13,7 +13,6 @@ import ManagementKnobXT from './ManagKnobXT';
 import { Tflight } from '../../../interfaceMNG.d';
 
 const ManagementLeftGrid = (props: { open: boolean; tflightt: Tflight[] }) => {
-
   const points = props.tflightt;
 
   //console.log('PoinsMGLeft:', props.open, points)
@@ -22,8 +21,8 @@ const ManagementLeftGrid = (props: { open: boolean; tflightt: Tflight[] }) => {
     border: 1,
     borderRadius: 1,
     borderColor: 'primary.main',
-    margin: 1.2,
-    height: '98.6%',
+    margin: 0.6,
+    height: '99.2%',
   };
 
   const styleMG03 = {
@@ -165,7 +164,7 @@ const ManagementLeftGrid = (props: { open: boolean; tflightt: Tflight[] }) => {
 
   const FourKnops = () => {
     return (
-      <Grid item xs={12} sx={{ marginLeft: -0.5, marginTop: 1 }}>
+      <Grid item xs={12} sx={{ marginLeft: 0, marginTop: 1 }}>
         <Stack direction="row">
           <ManagementKnobPK />
           <ManagementKnobSK />
@@ -181,7 +180,7 @@ const ManagementLeftGrid = (props: { open: boolean; tflightt: Tflight[] }) => {
       <Grid item xs={2.5} sx={styleMG01}>
         <Box sx={{ overflowX: 'auto', height: '99.6%' }}>{props.open && <SpisMLG />}</Box>
       </Grid>
-      <Grid item xs>
+      <Grid item xs sx={{ border: 0 }}>
         <Grid container>
           <FourKnops />
           <ManagementRightGrid03

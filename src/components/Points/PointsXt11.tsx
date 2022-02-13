@@ -41,7 +41,6 @@ const PointsXt11 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number }) 
     let dlStrMenu = 0;
 
     if (isOpen && points.xctrls.length !== 0) {
-
       for (let i = 0; i < points.xctrls.length; i++) {
         if (points.xctrls[i].name.length > dlStrMenu) {
           dlStrMenu = points.xctrls[i].name.length;
@@ -65,7 +64,9 @@ const PointsXt11 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number }) 
         for (let i = 0; i < points.xctrls.length; i++) {
           resStr.push(
             <Button key={i} sx={stylePXt1} variant="contained" onClick={() => handleClose(i)}>
-              <b>XT:{xtProps + 1}:1:&nbsp;&nbsp;{points.xctrls[i].name}</b>
+              <b>
+                XT:{xtProps + 1}:1:&nbsp;&nbsp;{points.xctrls[i].name}
+              </b>
             </Button>,
           );
         }
@@ -92,11 +93,11 @@ const PointsXt11 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number }) 
 
   return (
     // <Box sx={{ border: 1, marginTop: 2.5, marginLeft: -2.5, marginRight: -10 }}>
-    <Box sx={{ border: 0, marginTop: 0.5, marginLeft: -2, marginRight: -10 }}>
+    <Box sx={{ border: 0 }}>
       <TabContext value={valueLevel2}>
         <Box>
           {/* <Stack sx={{ marginTop: -2 }} direction="row"> */}
-          <Stack sx={{ marginLeft: 2, width: '90%', border: 0 }} direction="row">  
+          <Stack sx={{ marginLeft: 0.5, marginTop: 0.7, border: 0 }} direction="row">
             <Button sx={stylePXt1} variant="contained" onClick={() => setValueLavel2('1')}>
               <b>Основной:</b>
             </Button>
@@ -107,12 +108,18 @@ const PointsXt11 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number }) 
           <PointsXt111 open={isOpen} xctrll={props.xctrll} xtt={xtProps} />
         </TabPanel>
         <TabPanel value="2">
-          <>{points.xctrls.length > 0 &&
-            <>
-              <PointsXt112 open={isOpen} xctrll={props.xctrll} xtt={xtProps} crossroad={crossRoad} />
-            </>}
+          <>
+            {points.xctrls.length > 0 && (
+              <>
+                <PointsXt112
+                  open={isOpen}
+                  xctrll={props.xctrll}
+                  xtt={xtProps}
+                  crossroad={crossRoad}
+                />
+              </>
+            )}
           </>
-
         </TabPanel>
       </TabContext>
     </Box>

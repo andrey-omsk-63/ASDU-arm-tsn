@@ -30,22 +30,22 @@ const App = () => {
 
   // React.useEffect(() => {
   //   WS.current.onopen = function (event) {
-      
+
   //     console.log('WS.current.onopen:', event);
   //   };
 
   //   WS.current.onclose = function (event) {
-      
+
   //     console.log('WS.current.onclose:', event);
   //   };
 
   //   WS.current.onerror = function (event) {
-      
+
   //     console.log('WS.current.onerror:', event);
   //   };
 
   //   WS.current.onmessage = function (event) {
-      
+
   //     let allData = JSON.parse(event.data);
   //     let data = allData.data;
   //     switch (allData.type) {
@@ -98,9 +98,9 @@ const App = () => {
 
   return (
     <>
-      <Box sx={{ border: 1, width: '98.5%',  typography: 'body2' }}>
+      <Box sx={{ border: 0, width: '98.5%', typography: 'body2' }}>
         <TabContext value={value}>
-          <Box sx={{ marginLeft: 0.2, backgroundColor: '#F1F5FB' }}>
+          <Box sx={{ marginLeft: 0.5, backgroundColor: '#F1F5FB' }}>
             <Stack direction="row">
               <Button sx={styleApp01} variant="contained" onClick={() => setValue('1')}>
                 <b>Управление</b>
@@ -123,7 +123,7 @@ const App = () => {
             <Points open={isOpenInf} xctrll={pointsXctrl} />
           </TabPanel>
           <TabPanel value="3">
-            {/* <Statistics open={isOpenSt} ws={WS} points={pointsSt} /> */}
+            <Statistics open={isOpenSt} ws={WS} points={pointsSt} />
           </TabPanel>
         </TabContext>
       </Box>
