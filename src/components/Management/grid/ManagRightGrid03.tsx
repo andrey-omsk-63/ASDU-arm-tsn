@@ -53,8 +53,9 @@ const ManagementRightGrid03 = (props: {
     borderRadius: 1,
     borderColor: 'primary.main',
     marginTop: 0.5,
+    marginBottom: 0.5,
     //marginLeft: -0.7,
-    height: '84vh',
+    //height: '60vh',
   };
 
   let points = props.tflightt;
@@ -349,7 +350,7 @@ const ManagementRightGrid03 = (props: {
       <Grid item container sx={styleMRG04}>
         <Grid item xs={12}>
           <HeaderMRG03 />
-          <Box sx={{ overflowX: 'auto', height: '95.5%' }}>{props.open && <StrokaMRG03 />}</Box>
+          <Box sx={{ border: 0, overflowX: 'auto', height: '81vh' }}>{props.open && <StrokaMRG03 />}</Box>
         </Grid>
       </Grid>
     </>

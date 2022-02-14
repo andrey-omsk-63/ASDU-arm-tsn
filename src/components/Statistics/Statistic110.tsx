@@ -419,7 +419,7 @@ const Statistic110 = (props: { open: boolean; statist: Statistic[]; areaid: numb
   }
 
   return (
-    <Box sx={{ marginTop: 0.8, marginLeft: -3, marginRight: 2 }}>
+    <Box sx={{ marginTop: 0.8, marginLeft: -2.5, marginRight: -4 }}>
       <Grid container item sx={{ margin: 0, height: '28vh' }}>
         <Grid item xs={12} sx={{ border: 1, borderRadius: 1, borderColor: 'primary.main' }}>
           <StatGraf00 />

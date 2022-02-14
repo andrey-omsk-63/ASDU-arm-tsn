@@ -19,21 +19,22 @@ const Management = (props: {
 }) => {
   //console.log('PoinsMG:', props.open, props.points);
 
-  // let isOpen = props.open;
-  // let points = props.points;
+  let isOpen = props.open;
+  let points = props.points;
 
-  const [points, setPoints] = React.useState<Array<Tflight>>([]);
-  const [isOpen, setIsOpen] = React.useState(false);
+  // const [points, setPoints] = React.useState<Array<Tflight>>([]);
+  // const [isOpen, setIsOpen] = React.useState(false);
 
-  const ipAdress: string = 'http://localhost:3000/getAreaOtl.json';
-  React.useEffect(() => {
-    axios.get(ipAdress).then(({ data }) => {
-      console.log('eee', data.data.tflight);
-      setPoints(data.data.tflight);
-      setIsOpen(true);
-    });
-  }, [ipAdress]);
-  console.log('dddd', points, isOpen);
+  // const ipAdress: string = 'http://localhost:3000/getAreaOtl.json';
+  // React.useEffect(() => {
+  //   axios.get(ipAdress).then(({ data }) => {
+  //     console.log('eee', data.data.tflight);
+  //     setPoints(data.data.tflight);
+  //     setIsOpen(true);
+  //   });
+  // }, [ipAdress]);
+
+  //console.log('dddd', points, isOpen);
 
   // React.useEffect(() => {
   //   const handleSend = () => {
@@ -52,38 +53,38 @@ const Management = (props: {
   //   handleSend();
   // }, []);
 
-  // if (isOpen && flagEtalon) {
-  //   pointsEtalon = points;
-  //   flagEtalon = false;
-  //   points = [];
-  // }
+  if (isOpen && flagEtalon) {
+    pointsEtalon = points;
+    flagEtalon = false;
+    points = [];
+  }
 
-  // if (isOpen && !flagEtalon) {
-  //   for (let i = 0; i < points.length; i++) {
-  //     //console.log("i=", i, points.length)
-  //     for (let j = 0; j < pointsEtalon.length; j++) {
-  //       if (
-  //         points[i].ID === pointsEtalon[j].ID &&
-  //         points[i].region.num === pointsEtalon[j].region.num &&
-  //         points[i].area.num === pointsEtalon[j].area.num &&
-  //         points[i].subarea === pointsEtalon[j].subarea
-  //       ) {
-  //         console.log('совподение записей i=', i, 'j=', j);
-  //         pointsEtalon[j] = points[i];
-  //       }
-  //     }
-  //   }
-  // }
+  if (isOpen && !flagEtalon) {
+    for (let i = 0; i < points.length; i++) {
+      //console.log("i=", i, points.length)
+      for (let j = 0; j < pointsEtalon.length; j++) {
+        if (
+          points[i].ID === pointsEtalon[j].ID &&
+          points[i].region.num === pointsEtalon[j].region.num &&
+          points[i].area.num === pointsEtalon[j].area.num &&
+          points[i].subarea === pointsEtalon[j].subarea
+        ) {
+          console.log('совподение записей i=', i, 'j=', j);
+          pointsEtalon[j] = points[i];
+        }
+      }
+    }
+  }
 
-  //console.log('Etalon2:', pointsEtalon, 'new:', points);
+  console.log('Etalon2:', pointsEtalon, 'new:', points);
 
   return (
-    <Box sx={{ fontSize: 12, marginTop: -3, marginLeft: -3, marginRight: -5 }}>
-      <Grid container sx={{ border: 0, marginLeft: 0 }}>
+    <Box sx={{ fontSize: 12,  marginTop: -3, marginLeft: -3, marginRight: -5 }}>
+      <Grid container sx={{ border: 0,  marginLeft: 0 }}>
         {isOpen && (
           <>
-            <ManagementLeftGrid open={isOpen} tflightt={points} />
-            {/* <ManagementLeftGrid open={isOpen} tflightt={pointsEtalon} /> */}
+            {/* <ManagementLeftGrid open={isOpen} tflightt={points} /> */}
+            <ManagementLeftGrid open={isOpen} tflightt={pointsEtalon} />
           </>
         )}
       </Grid>

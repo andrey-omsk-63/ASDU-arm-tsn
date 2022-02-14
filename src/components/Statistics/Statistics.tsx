@@ -21,44 +21,44 @@ const Statistics = (props: {
 }) => {
   //console.log('PoinsSt:', props.open, props.points);
 
-  // let isOpen = props.open;
-  // let points = props.points;
-
-  // React.useEffect(() => {
-  //   const handleSend = () => {
-  //     if (props.ws.current.readyState === WebSocket.OPEN) {
-  //       props.ws.current.send(JSON.stringify({ type: 'getStatistics', region: '1' }));
-  //       //if (props.ws.readyState === WebSocket.OPEN) {
-  //       //  props.ws.send(JSON.stringify({ type: 'getDevices', region: '1' }));
-  //     } else {
-  //       setTimeout(() => {
-  //         handleSend();
-  //       }, 1000);
-  //     }
-  //     console.log('отработал send ST');
-  //   };
-
-  //   handleSend();
-  // }, []);
-
-  const [points, setPoints] = React.useState<Array<Statistic>>([]);
-  //const [points, setPoints] = React.useState<Data>({} as Data);
-  const [isOpen, setIsOpen] = React.useState(false);
-  const ipAdress: string = 'http://localhost:3000/statistics.json';
+  let isOpen = props.open;
+  let points = props.points;
 
   React.useEffect(() => {
-    axios.get(ipAdress).then(({ data }) => {
-      setPoints(data.data.statistics);
-      setIsOpen(true);
-    });
-  }, [ipAdress]);
+    const handleSend = () => {
+      if (props.ws.current.readyState === WebSocket.OPEN) {
+        props.ws.current.send(JSON.stringify({ type: 'getStatistics', region: '1' }));
+        //if (props.ws.readyState === WebSocket.OPEN) {
+        //  props.ws.send(JSON.stringify({ type: 'getDevices', region: '1' }));
+      } else {
+        setTimeout(() => {
+          handleSend();
+        }, 1000);
+      }
+      console.log('отработал send ST');
+    };
 
-  if (isOpen) console.log('!!!', points);
+    handleSend();
+  }, []);
+
+  //const [points, setPoints] = React.useState<Array<Statistic>>([]);
+  //const [points, setPoints] = React.useState<Data>({} as Data);
+  // const [isOpen, setIsOpen] = React.useState(false);
+  // const ipAdress: string = 'http://localhost:3000/statistics.json';
+
+  // React.useEffect(() => {
+  //   axios.get(ipAdress).then(({ data }) => {
+  //     setPoints(data.data.statistics);
+  //     setIsOpen(true);
+  //   });
+  // }, [ipAdress]);
+
+  //if (isOpen) console.log('!!!', points);
 
   if (isOpen && flagEtalon) {
     pointsEtalon = points;
     flagEtalon = false;
-    //points = [];
+    points = [];
   }
 
   const styleSt1 = {

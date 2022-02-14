@@ -56,12 +56,12 @@ const Points = (props: { open: boolean; xctrll: XctrlInfo[] }) => {
   const ipAdress: string = 'http://localhost:3000/otladkaGlob.json';
   React.useEffect(() => {
     axios.get(ipAdress).then(({ data }) => {
-      console.log('ggg', data.data.xctrlInfo);
+      //console.log('ggg', data.data.xctrlInfo);
       setPoints(data.data.xctrlInfo);
       setIsOpen(true);
     });
   }, [ipAdress]);
-  console.log('pppp', points, isOpen);
+  //console.log('pppp', points, isOpen);
 
   return (
     <Box sx={{ border: 0, marginTop: -2.8, marginLeft: -3, marginRight: -5.5 }}>

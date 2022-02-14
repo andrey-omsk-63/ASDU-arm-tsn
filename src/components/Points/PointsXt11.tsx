@@ -111,12 +111,7 @@ const PointsXt11 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number }) 
           <>
             {points.xctrls.length > 0 && (
               <>
-                <PointsXt112
-                  open={isOpen}
-                  xctrll={props.xctrll}
-                  xtt={xtProps}
-                  crossroad={crossRoad}
-                />
+                <PointsXt112 open={isOpen} xctrll={props.xctrll} xtt={xtProps} crossroad={crossRoad} />
               </>
             )}
           </>

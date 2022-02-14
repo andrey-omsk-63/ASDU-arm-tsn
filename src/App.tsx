@@ -28,47 +28,47 @@ const App = () => {
   const WS = React.useRef(new WebSocket(host));
   //const WS = new WebSocket(host);
 
-  // React.useEffect(() => {
-  //   WS.current.onopen = function (event) {
+  React.useEffect(() => {
+    WS.current.onopen = function (event) {
 
-  //     console.log('WS.current.onopen:', event);
-  //   };
+      console.log('WS.current.onopen:', event);
+    };
 
-  //   WS.current.onclose = function (event) {
+    WS.current.onclose = function (event) {
 
-  //     console.log('WS.current.onclose:', event);
-  //   };
+      console.log('WS.current.onclose:', event);
+    };
 
-  //   WS.current.onerror = function (event) {
+    WS.current.onerror = function (event) {
 
-  //     console.log('WS.current.onerror:', event);
-  //   };
+      console.log('WS.current.onerror:', event);
+    };
 
-  //   WS.current.onmessage = function (event) {
+    WS.current.onmessage = function (event) {
 
-  //     let allData = JSON.parse(event.data);
-  //     let data = allData.data;
-  //     switch (allData.type) {
-  //       case 'xctrlInfo':
-  //         setPointsXctrl(data.xctrlInfo ?? []);
-  //         setIsOpenInf(true);
+      let allData = JSON.parse(event.data);
+      let data = allData.data;
+      switch (allData.type) {
+        case 'xctrlInfo':
+          setPointsXctrl(data.xctrlInfo ?? []);
+          setIsOpenInf(true);
 
-  //         break;
-  //       case 'getDevices':
-  //         setPointsTfl(data.tflight ?? []);
-  //         setIsOpenDev(true);
+          break;
+        case 'getDevices':
+          setPointsTfl(data.tflight ?? []);
+          setIsOpenDev(true);
 
-  //         break;
-  //       case 'getStatistics':
-  //         setPointsSt(data.statistics ?? []);
-  //         setIsOpenSt(true);
+          break;
+        case 'getStatistics':
+          setPointsSt(data.statistics ?? []);
+          setIsOpenSt(true);
 
-  //         break;
-  //       default:
-  //         console.log('data_default:', data);
-  //     }
-  //   };
-  // }, [host]);
+          break;
+        default:
+          console.log('data_default:', data);
+      }
+    };
+  }, [host]);
 
   const styleApp01 = {
     fontSize: 14,
