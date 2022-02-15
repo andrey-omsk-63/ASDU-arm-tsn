@@ -71,6 +71,7 @@ const Statistic110 = (props: { open: boolean; statist: Statistic[]; areaid: numb
   const points = props.statist;
   const areaId = props.areaid;
   let colChanel = 0;
+ 
   const [value, setValue] = React.useState('0');
 
   if (isOpen) {

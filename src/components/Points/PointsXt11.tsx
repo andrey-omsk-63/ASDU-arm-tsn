@@ -27,17 +27,19 @@ const PointsXt11 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number }) 
   };
 
   const [valueLevel2, setValueLavel2] = React.useState('1');
-  let crossRoad = 0;
+  const [crossRoad, setCrossRoad] = React.useState(0);
+
 
   const MenuCrossRoad = () => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
 
     const handleClose = (numer: number) => {
-      crossRoad = numer;
+      setCrossRoad(numer)
       setValueLavel2('2');
       setOpen(false);
     };
+
     let dlStrMenu = 0;
 
     if (isOpen && points.xctrls.length !== 0) {
@@ -90,13 +92,11 @@ const PointsXt11 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number }) 
       );
     }
   };
-
+  
   return (
-    // <Box sx={{ border: 1, marginTop: 2.5, marginLeft: -2.5, marginRight: -10 }}>
     <Box sx={{ border: 0 }}>
       <TabContext value={valueLevel2}>
         <Box>
-          {/* <Stack sx={{ marginTop: -2 }} direction="row"> */}
           <Stack sx={{ marginLeft: 0.5, marginTop: 0.7, border: 0 }} direction="row">
             <Button sx={stylePXt1} variant="contained" onClick={() => setValueLavel2('1')}>
               <b>Основной:</b>

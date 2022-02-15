@@ -47,7 +47,7 @@ const ManagementKnobPK = () => {
   }
 
   const ButtonDo = () => {
-    console.log('Value ПК:', value)
+    //console.log('Value ПК:', value)
   }
 
   return (

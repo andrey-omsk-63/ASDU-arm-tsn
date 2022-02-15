@@ -23,8 +23,7 @@ const App = () => {
   const [pointsSt, setPointsSt] = React.useState<Array<Statistic>>([]);
   const [isOpenSt, setIsOpenSt] = React.useState(false);
 
-  const host =
-    'wss://' + window.location.host + window.location.pathname + 'W' + window.location.search;
+  const host = 'wss://' + window.location.host + window.location.pathname + 'W' + window.location.search;
   const WS = React.useRef(new WebSocket(host));
   //const WS = new WebSocket(host);
 
@@ -93,8 +92,9 @@ const App = () => {
   };
 
   const [value, setValue] = React.useState('1');
-  //console.log('pointsXctrl2:', pointsXctrl);
-  console.log('App_pointsTfl2:', isOpenDev, pointsTfl);
+  //console.log('Точки pointsXctrl:', pointsXctrl);
+  //console.log('Упр_pointsTfl2:', isOpenDev, pointsTfl);
+  //console.log('Стат_pointsSt:', isOpenSt, pointsSt);
 
   return (
     <>

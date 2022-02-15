@@ -48,7 +48,7 @@ const ManagementKnobSK = () => {
   }
 
   const ButtonDo = () => {
-    console.log('Value НК:', value)
+    //console.log('Value НК:', value)
   }
 
   return (

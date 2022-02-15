@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 
-import axios from 'axios';
+//import axios from 'axios';
 
 import Statistic110 from './Statistic110';
 
@@ -39,7 +39,7 @@ const Statistics = (props: {
     };
 
     handleSend();
-  }, []);
+  }, [props.ws]);
 
   //const [points, setPoints] = React.useState<Array<Statistic>>([]);
   //const [points, setPoints] = React.useState<Data>({} as Data);
@@ -61,6 +61,21 @@ const Statistics = (props: {
     points = [];
   }
 
+  if (isOpen && !flagEtalon) {
+    for (let i = 0; i < points.length; i++) {
+      
+      for (let j = 0; j < pointsEtalon.length; j++) {
+        if (
+          points[i].id === pointsEtalon[j].id &&
+          points[i].region === pointsEtalon[j].region &&
+          points[i].area === pointsEtalon[j].area 
+        ) {
+          console.log('Ctat совподение записей i=', i, 'j=', j);
+          pointsEtalon[j] = points[i];
+        }
+      }
+    }
+  }
   const styleSt1 = {
     fontSize: 13.5,
     maxHeight: '20px',
@@ -80,16 +95,26 @@ const Statistics = (props: {
   const SpisXT = () => {
     let resSps: any = [];
     let labl: string = '';
-    for (let i = 0; i < pointsEtalon.length; i++) {
-      labl = 'XT:' + (i + 1).toString() + ':1';
-      resSps.push(<Tab key={i} sx={styleSt1} label={labl} />);
+
+    if (points.length === 0) {
+      resSps.push(
+        <Box key={1} sx={styleSt1}>
+          Нет данных по ХТ
+        </Box>,
+      );
+    } else {
+      for (let i = 0; i < pointsEtalon.length; i++) {
+        labl = 'XT:' + (i + 1).toString() + ':1';
+        resSps.push(<Tab key={i} sx={styleSt1} label={labl} />);
+      }
     }
+    
     return resSps;
   };
 
   return (
     <>
-      {isOpen && (
+      {isOpen && points.length > 0 && (
         <>
           <Box sx={{ maxWidth: 850, fontSize: 12, marginTop: -2, marginLeft: -3, marginRight: -7 }}>
             <Tabs
@@ -102,7 +127,13 @@ const Statistics = (props: {
               {SpisXT()}
             </Tabs>
           </Box>
-          <Statistic110 open={isOpen} statist={pointsEtalon} areaid={value} />
+          <>
+            {points.length > 0 && (
+              <>
+                <Statistic110 open={isOpen} statist={pointsEtalon} areaid={value} />
+              </>
+            )}
+          </>
         </>
       )}
     </>
