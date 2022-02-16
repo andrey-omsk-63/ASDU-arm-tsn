@@ -13,8 +13,8 @@ let flagEtalon = true;
 
 const Management = (props: {
   open: boolean;
-  ws: React.MutableRefObject<WebSocket>;
-  //ws: WebSocket;
+  //ws: React.MutableRefObject<WebSocket>;
+  ws: WebSocket;
   points: Tflight[];
 }) => {
   //console.log('PoinsMG:', props.open, props.points);
@@ -41,15 +41,14 @@ const Management = (props: {
     flagEtalon = true;
   }
 
-
   React.useEffect(() => {
     const handleSend = () => {
       if (props.ws !== null) {
-        console.log('!!!!!', props.ws)
-        if (props.ws.current.readyState === WebSocket.OPEN) {
-          props.ws.current.send(JSON.stringify({ type: 'getDevices', region: '1' }));
-          //if (props.ws.readyState === WebSocket.OPEN) {
-          //  props.ws.send(JSON.stringify({ type: 'getDevices', region: '1' }));
+        console.log('!!!!!', props.ws);
+        // if (props.ws.current.readyState === WebSocket.OPEN) {
+        //   props.ws.current.send(JSON.stringify({ type: 'getDevices', region: '1' }));
+        if (props.ws.readyState === WebSocket.OPEN) {
+          props.ws.send(JSON.stringify({ type: 'getDevices', region: '1' }));
         } else {
           setTimeout(() => {
             handleSend();
@@ -57,13 +56,10 @@ const Management = (props: {
         }
         console.log('отработал send');
       }
-      
     };
 
     handleSend();
   }, [props.ws]);
-
-
 
   if (isOpen && flagEtalon) {
     pointsEtalon = points;

@@ -17,7 +17,7 @@ import { Statistic } from './interfaceStat.d';
 
 let oldValue = '1';
 let flag = true;
-let WS: any = null; 
+let WS: any = null;
 
 const App = () => {
   const styleApp01 = {
@@ -49,11 +49,12 @@ const App = () => {
   const [pointsSt, setPointsSt] = React.useState<Array<Statistic>>([]);
   const [isOpenSt, setIsOpenSt] = React.useState(false);
 
-  const host = 'wss://' + window.location.host + window.location.pathname + 'W' + window.location.search;
+  const host =
+    'wss://' + window.location.host + window.location.pathname + 'W' + window.location.search;
   // let WS: React.MutableRefObject<WebSocket> = {};
   //const WS: any = React.useRef(new WebSocket('wss://ws.kraken.com/'));
 
-  //const WS: any = React.useRef(null); 
+  //const WS: any = React.useRef(null);
 
   //const WS = React.useRef(new WebSocket('wss://ws.kraken.com/'));
   if (flag) {
@@ -64,22 +65,23 @@ const App = () => {
   //const WS = new WebSocket(host);
 
   React.useEffect(() => {
+    //WS = new WebSocket(host);
     //WS.current = new WebSocket(host);
     //WS = React.useRef(new WebSocket(host));
 
-    WS.current.onopen = function (event: any) {
+    WS.onopen = function (event: any) {
       console.log('WS.current.onopen:', event);
     };
 
-    WS.current.onclose = function (event: any) {
+    WS.onclose = function (event: any) {
       console.log('WS.current.onclose:', event);
     };
 
-    WS.current.onerror = function (event: any) {
+    WS.onerror = function (event: any) {
       console.log('WS.current.onerror:', event);
     };
 
-    WS.current.onmessage = function (event: any) {
+    WS.onmessage = function (event: any) {
       let allData = JSON.parse(event.data);
       let data = allData.data;
       switch (allData.type) {
@@ -107,20 +109,22 @@ const App = () => {
   //console.log('Стат_pointsSt:', isOpenSt, pointsSt);
 
   const BeginningOfTheEndMNG = () => {
-    console.log('Вызов управления', oldValue)
+    console.log('Вызов управления', oldValue);
+    console.log('WS:', WS);
     oldValue = value;
-  }
+  };
 
   const BeginningOfTheEndHT = () => {
-    console.log('Вызов XT', oldValue)
+    console.log('Вызов XT', oldValue);
     oldValue = value;
-  }
+  };
 
   const BeginningOfTheEndST = () => {
-    console.log('Вызов Stat', oldValue)
+    console.log('Вызов Stat', oldValue);
     oldValue = value;
-  }
+  };
 
+  console.log('!!!WS:', WS);
 
   return (
     <>
@@ -143,8 +147,12 @@ const App = () => {
             </Stack>
           </Box>
           <TabPanel value="1">
-            {BeginningOfTheEndMNG()}
-            <Management open={isOpenDev} ws={WS} points={pointsTfl} />
+            {WS !== null && (
+              <div>
+                {BeginningOfTheEndMNG()}
+                <Management open={isOpenDev} ws={WS} points={pointsTfl} />
+              </div>
+            )}
           </TabPanel>
           <TabPanel value="2">
             {BeginningOfTheEndHT()}
