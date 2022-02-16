@@ -8,10 +8,20 @@ const ManagementKnobXT = () => {
   const [value, setValue] = React.useState(0);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
+
+  const handleCloseSet = (event: any, reason: string) => {
+    console.log('1111', event)
+    if (reason !== 'backdropClick') {
+      setOpen(false);
+      setValue(0);
+    }
+  };
+
   const handleClose = () => {
     setOpen(false);
     setValue(0)
   }
+
   const stylePK = {
     position: 'absolute',
     top: '22.8%',
@@ -38,7 +48,7 @@ const ManagementKnobXT = () => {
   };
 
   const ButtonDo = () => {
-    //console.log('Value XT:', value)
+    console.log('Value XT:', value)
   }
 
   return (
@@ -48,6 +58,8 @@ const ManagementKnobXT = () => {
       </Button>
       <Modal
         open={open}
+        disableEnforceFocus
+        onClose={handleCloseSet}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description">
         <Box sx={stylePK}>
@@ -59,7 +71,7 @@ const ManagementKnobXT = () => {
               Отключить
             </Button>
             <Button sx={styleBatMenu} variant="contained" onClick={handleClose}>
-              Отмена                                                                                                 ена
+              Отмена    
             </Button>
             {ButtonDo()}
           </Stack>

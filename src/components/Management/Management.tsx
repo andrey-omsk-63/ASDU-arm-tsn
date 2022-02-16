@@ -36,22 +36,34 @@ const Management = (props: {
   let isOpen = props.open;
   let points = props.points;
 
+  if (!isOpen) {
+    pointsEtalon = [];
+    flagEtalon = true;
+  }
+
+
   React.useEffect(() => {
     const handleSend = () => {
-      if (props.ws.current.readyState === WebSocket.OPEN) {
-        props.ws.current.send(JSON.stringify({ type: 'getDevices', region: '1' }));
-        //if (props.ws.readyState === WebSocket.OPEN) {
-        //  props.ws.send(JSON.stringify({ type: 'getDevices', region: '1' }));
-      } else {
-        setTimeout(() => {
-          handleSend();
-        }, 1000);
+      if (props.ws !== null) {
+        console.log('!!!!!', props.ws)
+        if (props.ws.current.readyState === WebSocket.OPEN) {
+          props.ws.current.send(JSON.stringify({ type: 'getDevices', region: '1' }));
+          //if (props.ws.readyState === WebSocket.OPEN) {
+          //  props.ws.send(JSON.stringify({ type: 'getDevices', region: '1' }));
+        } else {
+          setTimeout(() => {
+            handleSend();
+          }, 1000);
+        }
+        console.log('отработал send');
       }
-      console.log('отработал send');
+      
     };
 
     handleSend();
   }, [props.ws]);
+
+
 
   if (isOpen && flagEtalon) {
     pointsEtalon = points;
@@ -78,8 +90,8 @@ const Management = (props: {
   //console.log('Etalon2:', pointsEtalon, 'new:', points);
 
   return (
-    <Box sx={{ fontSize: 12,  marginTop: -3, marginLeft: -3, marginRight: -5 }}>
-      <Grid container sx={{ border: 0,  marginLeft: 0 }}>
+    <Box sx={{ fontSize: 12, marginTop: -3, marginLeft: -3, marginRight: -5 }}>
+      <Grid container sx={{ border: 0, marginLeft: 0 }}>
         {isOpen && (
           <>
             {/* <ManagementLeftGrid open={isOpen} tflightt={points} /> */}

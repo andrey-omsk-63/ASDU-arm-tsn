@@ -15,60 +15,11 @@ import { XctrlInfo } from './interfaceGl.d';
 import { Tflight } from './interfaceMNG.d';
 import { Statistic } from './interfaceStat.d';
 
+let oldValue = '1';
+let flag = true;
+let WS: any = null; 
+
 const App = () => {
-  const [pointsXctrl, setPointsXctrl] = React.useState<Array<XctrlInfo>>([]);
-  const [isOpenInf, setIsOpenInf] = React.useState(false);
-  const [pointsTfl, setPointsTfl] = React.useState<Array<Tflight>>([]);
-  const [isOpenDev, setIsOpenDev] = React.useState(false);
-  const [pointsSt, setPointsSt] = React.useState<Array<Statistic>>([]);
-  const [isOpenSt, setIsOpenSt] = React.useState(false);
-
-  const host = 'wss://' + window.location.host + window.location.pathname + 'W' + window.location.search;
-  const WS = React.useRef(new WebSocket(host));
-  //const WS = new WebSocket(host);
-
-  React.useEffect(() => {
-    WS.current.onopen = function (event) {
-
-      console.log('WS.current.onopen:', event);
-    };
-
-    WS.current.onclose = function (event) {
-
-      console.log('WS.current.onclose:', event);
-    };
-
-    WS.current.onerror = function (event) {
-
-      console.log('WS.current.onerror:', event);
-    };
-
-    WS.current.onmessage = function (event) {
-
-      let allData = JSON.parse(event.data);
-      let data = allData.data;
-      switch (allData.type) {
-        case 'xctrlInfo':
-          setPointsXctrl(data.xctrlInfo ?? []);
-          setIsOpenInf(true);
-
-          break;
-        case 'getDevices':
-          setPointsTfl(data.tflight ?? []);
-          setIsOpenDev(true);
-
-          break;
-        case 'getStatistics':
-          setPointsSt(data.statistics ?? []);
-          setIsOpenSt(true);
-
-          break;
-        default:
-          console.log('data_default:', data);
-      }
-    };
-  }, [host]);
-
   const styleApp01 = {
     fontSize: 14,
     marginRight: 1,
@@ -91,10 +42,85 @@ const App = () => {
     textTransform: 'unset !important',
   };
 
+  const [pointsXctrl, setPointsXctrl] = React.useState<Array<XctrlInfo>>([]);
+  const [isOpenInf, setIsOpenInf] = React.useState(false);
+  const [pointsTfl, setPointsTfl] = React.useState<Array<Tflight>>([]);
+  const [isOpenDev, setIsOpenDev] = React.useState(false);
+  const [pointsSt, setPointsSt] = React.useState<Array<Statistic>>([]);
+  const [isOpenSt, setIsOpenSt] = React.useState(false);
+
+  const host = 'wss://' + window.location.host + window.location.pathname + 'W' + window.location.search;
+  // let WS: React.MutableRefObject<WebSocket> = {};
+  //const WS: any = React.useRef(new WebSocket('wss://ws.kraken.com/'));
+
+  //const WS: any = React.useRef(null); 
+
+  //const WS = React.useRef(new WebSocket('wss://ws.kraken.com/'));
+  if (flag) {
+    WS = new WebSocket(host);
+    flag = false;
+  }
+  //const WS = React.useRef(new WebSocket(host));
+  //const WS = new WebSocket(host);
+
+  React.useEffect(() => {
+    //WS.current = new WebSocket(host);
+    //WS = React.useRef(new WebSocket(host));
+
+    WS.current.onopen = function (event: any) {
+      console.log('WS.current.onopen:', event);
+    };
+
+    WS.current.onclose = function (event: any) {
+      console.log('WS.current.onclose:', event);
+    };
+
+    WS.current.onerror = function (event: any) {
+      console.log('WS.current.onerror:', event);
+    };
+
+    WS.current.onmessage = function (event: any) {
+      let allData = JSON.parse(event.data);
+      let data = allData.data;
+      switch (allData.type) {
+        case 'getDevices':
+          setPointsTfl(data.tflight ?? []);
+          setIsOpenDev(true);
+          break;
+        case 'xctrlInfo':
+          setPointsXctrl(data.xctrlInfo ?? []);
+          setIsOpenInf(true);
+          break;
+        case 'getStatistics':
+          setPointsSt(data.statistics ?? []);
+          setIsOpenSt(true);
+          break;
+        default:
+          console.log('data_default:', data);
+      }
+    };
+  }, [WS]);
+
   const [value, setValue] = React.useState('1');
   //console.log('Точки pointsXctrl:', pointsXctrl);
   //console.log('Упр_pointsTfl2:', isOpenDev, pointsTfl);
   //console.log('Стат_pointsSt:', isOpenSt, pointsSt);
+
+  const BeginningOfTheEndMNG = () => {
+    console.log('Вызов управления', oldValue)
+    oldValue = value;
+  }
+
+  const BeginningOfTheEndHT = () => {
+    console.log('Вызов XT', oldValue)
+    oldValue = value;
+  }
+
+  const BeginningOfTheEndST = () => {
+    console.log('Вызов Stat', oldValue)
+    oldValue = value;
+  }
+
 
   return (
     <>
@@ -117,12 +143,15 @@ const App = () => {
             </Stack>
           </Box>
           <TabPanel value="1">
+            {BeginningOfTheEndMNG()}
             <Management open={isOpenDev} ws={WS} points={pointsTfl} />
           </TabPanel>
           <TabPanel value="2">
+            {BeginningOfTheEndHT()}
             <Points open={isOpenInf} xctrll={pointsXctrl} />
           </TabPanel>
           <TabPanel value="3">
+            {BeginningOfTheEndST()}
             <Statistics open={isOpenSt} ws={WS} points={pointsSt} />
           </TabPanel>
         </TabContext>
