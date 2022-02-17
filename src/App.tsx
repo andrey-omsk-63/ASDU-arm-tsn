@@ -16,8 +16,10 @@ import { Tflight } from './interfaceMNG.d';
 import { Statistic } from './interfaceStat.d';
 
 let oldValue = '1';
-let flag = true;
+let flagWS = true;
 let WS: any = null;
+let flagStopMNG = false;
+let flagStopStat = false;
 
 const App = () => {
   const styleApp01 = {
@@ -57,17 +59,14 @@ const App = () => {
   //const WS: any = React.useRef(null);
 
   //const WS = React.useRef(new WebSocket('wss://ws.kraken.com/'));
-  if (flag) {
+  if (flagWS) {
     WS = new WebSocket(host);
-    flag = false;
+    flagWS = false;
   }
   //const WS = React.useRef(new WebSocket(host));
   //const WS = new WebSocket(host);
 
   React.useEffect(() => {
-    //WS = new WebSocket(host);
-    //WS.current = new WebSocket(host);
-    //WS = React.useRef(new WebSocket(host));
 
     WS.onopen = function (event: any) {
       console.log('WS.current.onopen:', event);
@@ -101,30 +100,66 @@ const App = () => {
           console.log('data_default:', data);
       }
     };
-  }, [WS]);
+
+    // const handleSendStopMNG = () => {
+    //   if (WS !== null) {
+    //     if (WS.readyState === WebSocket.OPEN) {
+    //       WS.send(JSON.stringify({ type: 'stopDevices', region: '1' }));
+    //     } else {
+    //       setTimeout(() => {
+    //         handleSendStopMNG();
+    //       }, 1000);
+    //     }
+    //     console.log('отработал send StopMNG');
+    //   }
+    // };
+
+    // if (flagStopMNG){
+    //   handleSendStopMNG();
+    //   flagStopMNG = false;
+    // }
+
+  }, [WS, flagStopMNG]);
 
   const [value, setValue] = React.useState('1');
-  //console.log('Точки pointsXctrl:', pointsXctrl);
-  //console.log('Упр_pointsTfl2:', isOpenDev, pointsTfl);
-  //console.log('Стат_pointsSt:', isOpenSt, pointsSt);
 
   const BeginningOfTheEndMNG = () => {
-    console.log('Вызов управления', oldValue);
-    console.log('WS:', WS);
+    console.log('Вызов управления', oldValue, value);
+
     oldValue = value;
   };
 
   const BeginningOfTheEndHT = () => {
-    console.log('Вызов XT', oldValue);
+    console.log('Вызов XT', oldValue, value);
+    // if (oldValue === '1' && value !== '1') {
+    //   flagStopMNG = true;
+    // }
     oldValue = value;
   };
 
   const BeginningOfTheEndST = () => {
-    console.log('Вызов Stat', oldValue);
+    console.log('Вызов Stat', oldValue, value);
+    // if (oldValue === '1' && value !== '1') {
+    //   flagStopMNG = true;
+    // }
     oldValue = value;
   };
 
-  console.log('!!!WS:', WS);
+  const EndMngAndStat = () => {
+    if (oldValue === '1' && value !== '1') {
+      flagStopMNG = true;
+      console.log('ku-ku')
+    }
+    if (oldValue === '3' && value !== '3') {
+      flagStopStat = true;
+      console.log('Hi-hi')
+    }
+  }
+
+  const FlagMng = () => {
+    flagStopMNG = false
+    console.log('flagStopMNG = false')
+  }
 
   return (
     <>
@@ -146,6 +181,7 @@ const App = () => {
               {/* <Header /> */}
             </Stack>
           </Box>
+          {EndMngAndStat()}
           <TabPanel value="1">
             {WS !== null && (
               <div>
@@ -155,12 +191,23 @@ const App = () => {
             )}
           </TabPanel>
           <TabPanel value="2">
-            {BeginningOfTheEndHT()}
-            <Points open={isOpenInf} xctrll={pointsXctrl} />
+            {WS !== null && (
+              <div>
+                {BeginningOfTheEndHT()}
+                <Points open={isOpenInf} ws={WS} flag={flagStopMNG} xctrll={pointsXctrl} />
+                {FlagMng()}
+              </div>
+            )}
+
           </TabPanel>
           <TabPanel value="3">
-            {BeginningOfTheEndST()}
-            <Statistics open={isOpenSt} ws={WS} points={pointsSt} />
+            {WS !== null && (
+              <div>
+                {BeginningOfTheEndST()}
+                <Statistics open={isOpenSt} ws={WS} flag={flagStopMNG} points={pointsSt} />
+                {FlagMng()}
+              </div>
+            )}
           </TabPanel>
         </TabContext>
       </Box>

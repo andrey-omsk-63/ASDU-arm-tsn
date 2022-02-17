@@ -12,33 +12,56 @@ import { Statistic } from '../../interfaceStat.d';
 let tekValue = 0;
 let pointsEtalon: Statistic[];
 let flagEtalon = true;
+let flagStart = true;
 
 const Statistics = (props: {
   open: boolean;
-  ws: React.MutableRefObject<WebSocket>;
-  //ws: WebSocket;
+  //ws: React.MutableRefObject<WebSocket>;
+  ws: WebSocket;
+  flag: boolean;
   points: Statistic[];
 }) => {
-  //console.log('PoinsSt:', props.open, props.points);
+  console.log('PoinsSt:', props.open, props.points, props.ws);
 
   let isOpen = props.open;
   let points = props.points;
 
   React.useEffect(() => {
     const handleSend = () => {
-      if (props.ws.current.readyState === WebSocket.OPEN) {
-        props.ws.current.send(JSON.stringify({ type: 'getStatistics', region: '1' }));
-        //if (props.ws.readyState === WebSocket.OPEN) {
-        //  props.ws.send(JSON.stringify({ type: 'getDevices', region: '1' }));
-      } else {
-        setTimeout(() => {
-          handleSend();
-        }, 1000);
+      if (props.ws !== null) {
+        if (props.ws.readyState === WebSocket.OPEN) {
+          props.ws.send(JSON.stringify({ type: 'getStatistics', region: '1' }));
+        } else {
+          setTimeout(() => {
+            handleSend();
+          }, 1000);
+        }
+        console.log('отработал send OpenST');
       }
-      console.log('отработал send ST');
     };
-
+    const handleSendStopMNG = () => {
+      if (props.ws !== null) {
+        if (props.ws.readyState === WebSocket.OPEN) {
+          props.ws.send(JSON.stringify({ type: 'stopDevices', region: '1' }));
+        } else {
+          setTimeout(() => {
+            handleSendStopMNG();
+          }, 1000);
+        }
+        console.log('отработал send StopMNG');
+        flagStart = true;
+      }
+    };
     handleSend();
+
+    if (props.flag) {
+      flagStart = false;
+    } else {
+      if (!flagStart) {
+        handleSendStopMNG();
+        flagStart = true;
+      }
+    }
   }, [props.ws]);
 
   //const [points, setPoints] = React.useState<Array<Statistic>>([]);
@@ -63,14 +86,14 @@ const Statistics = (props: {
 
   if (isOpen && !flagEtalon) {
     for (let i = 0; i < points.length; i++) {
-      
+
       for (let j = 0; j < pointsEtalon.length; j++) {
         if (
           points[i].id === pointsEtalon[j].id &&
           points[i].region === pointsEtalon[j].region &&
-          points[i].area === pointsEtalon[j].area 
+          points[i].area === pointsEtalon[j].area
         ) {
-          console.log('Ctat совподение записей i=', i, 'j=', j);
+          console.log('Stat совподение записей i=', i, 'j=', j);
           pointsEtalon[j] = points[i];
         }
       }
@@ -108,7 +131,7 @@ const Statistics = (props: {
         resSps.push(<Tab key={i} sx={styleSt1} label={labl} />);
       }
     }
-    
+
     return resSps;
   };
 

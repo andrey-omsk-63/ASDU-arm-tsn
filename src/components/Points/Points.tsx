@@ -12,7 +12,10 @@ import { XctrlInfo } from '../../interfaceGl.d';
 
 let tekValue = 0;
 
-const Points = (props: { open: boolean; xctrll: XctrlInfo[] }) => {
+const Points = (props: {
+  open: boolean; ws: WebSocket;
+  flag: boolean; xctrll: XctrlInfo[]
+}) => {
   const stylePXt1 = {
     fontSize: 13.5,
     maxHeight: '20px',

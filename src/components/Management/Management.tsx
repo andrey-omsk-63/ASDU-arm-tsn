@@ -42,24 +42,21 @@ const Management = (props: {
   }
 
   React.useEffect(() => {
-    const handleSend = () => {
+    const handleSendOpen = () => {
       if (props.ws !== null) {
-        console.log('!!!!!', props.ws);
-        // if (props.ws.current.readyState === WebSocket.OPEN) {
-        //   props.ws.current.send(JSON.stringify({ type: 'getDevices', region: '1' }));
         if (props.ws.readyState === WebSocket.OPEN) {
           props.ws.send(JSON.stringify({ type: 'getDevices', region: '1' }));
         } else {
           setTimeout(() => {
-            handleSend();
+            handleSendOpen();
           }, 1000);
         }
-        console.log('отработал send');
+        console.log('отработал send OpenMNG');
       }
     };
-
-    handleSend();
+    handleSendOpen();
   }, [props.ws]);
+
 
   if (isOpen && flagEtalon) {
     pointsEtalon = points;
