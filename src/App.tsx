@@ -67,7 +67,6 @@ const App = () => {
   //const WS = new WebSocket(host);
 
   React.useEffect(() => {
-
     WS.onopen = function (event: any) {
       console.log('WS.current.onopen:', event);
     };
@@ -118,19 +117,18 @@ const App = () => {
     //   handleSendStopMNG();
     //   flagStopMNG = false;
     // }
-
   }, [WS, flagStopMNG]);
 
   const [value, setValue] = React.useState('1');
 
   const BeginningOfTheEndMNG = () => {
-    console.log('Вызов управления', oldValue, value);
+    //console.log('Вызов управления', oldValue, value);
 
     oldValue = value;
   };
 
   const BeginningOfTheEndHT = () => {
-    console.log('Вызов XT', oldValue, value);
+    //console.log('Вызов XT', oldValue, value);
     // if (oldValue === '1' && value !== '1') {
     //   flagStopMNG = true;
     // }
@@ -148,22 +146,22 @@ const App = () => {
   const EndMngAndStat = () => {
     if (oldValue === '1' && value !== '1') {
       flagStopMNG = true;
-      console.log('ku-ku')
+      console.log('ku-ku');
     }
     if (oldValue === '3' && value !== '3') {
       flagStopStat = true;
-      console.log('Hi-hi')
+      console.log('Hi-hi');
     }
-  }
+  };
 
   const FlagMng = () => {
-    flagStopMNG = false
-    console.log('flagStopMNG = false')
-  }
+    flagStopMNG = false;
+    console.log('flagStopMNG = false');
+  };
 
   return (
     <>
-      <Box sx={{ border: 0, width: '98.5%', typography: 'body2' }}>
+      <Box sx={{ width: '98.5%', typography: 'body2' }}>
         <TabContext value={value}>
           <Box sx={{ marginLeft: 0.5, backgroundColor: '#F1F5FB' }}>
             <Stack direction="row">
@@ -198,7 +196,6 @@ const App = () => {
                 {FlagMng()}
               </div>
             )}
-
           </TabPanel>
           <TabPanel value="3">
             {WS !== null && (

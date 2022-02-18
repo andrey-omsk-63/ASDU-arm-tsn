@@ -53,7 +53,7 @@ const Statistics = (props: {
       }
     };
     handleSend();
-
+    console.log('props.flag:', props.flag, 'flagStart:', flagStart);
     if (props.flag) {
       flagStart = false;
     } else {
@@ -62,7 +62,7 @@ const Statistics = (props: {
         flagStart = true;
       }
     }
-  }, [props.ws]);
+  }, [props.ws, props.flag]);
 
   //const [points, setPoints] = React.useState<Array<Statistic>>([]);
   //const [points, setPoints] = React.useState<Data>({} as Data);
@@ -86,7 +86,6 @@ const Statistics = (props: {
 
   if (isOpen && !flagEtalon) {
     for (let i = 0; i < points.length; i++) {
-
       for (let j = 0; j < pointsEtalon.length; j++) {
         if (
           points[i].id === pointsEtalon[j].id &&
