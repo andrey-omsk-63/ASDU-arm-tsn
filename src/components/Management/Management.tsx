@@ -45,6 +45,7 @@ const Management = (props: {
     const handleSendOpen = () => {
       if (props.ws !== null) {
         if (props.ws.readyState === WebSocket.OPEN) {
+          props.ws.send(JSON.stringify({ type: 'stopStatistics', region: '1' }));
           props.ws.send(JSON.stringify({ type: 'getDevices', region: '1' }));
         } else {
           setTimeout(() => {

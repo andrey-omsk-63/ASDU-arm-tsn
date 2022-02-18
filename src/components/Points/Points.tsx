@@ -13,8 +13,8 @@ import { XctrlInfo } from '../../interfaceGl.d';
 let tekValue = 0;
 
 const Points = (props: {
-  open: boolean; ws: WebSocket;
-  flag: boolean; xctrll: XctrlInfo[]
+  open: boolean; ws: WebSocket; xctrll: XctrlInfo[]
+  //flag: boolean; 
 }) => {
   const stylePXt1 = {
     fontSize: 13.5,
@@ -38,6 +38,8 @@ const Points = (props: {
     let resSps: any = [];
     let labl: string = '';
 
+    console.log('props.xctrll:', points)
+    
     if (points.length === 0) {
       resSps.push(
         <Box key={1} sx={stylePXt1}>

@@ -48,7 +48,7 @@ const ManagementKnobXT = () => {
   };
 
   const ButtonDo = () => {
-    console.log('Value XT:', value)
+    //console.log('Value XT:', value)
   }
 
   return (

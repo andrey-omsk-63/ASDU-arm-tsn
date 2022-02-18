@@ -18,7 +18,7 @@ const Statistics = (props: {
   open: boolean;
   //ws: React.MutableRefObject<WebSocket>;
   ws: WebSocket;
-  flag: boolean;
+  //flag: boolean;
   points: Statistic[];
 }) => {
   console.log('PoinsSt:', props.open, props.points, props.ws);
@@ -30,39 +30,20 @@ const Statistics = (props: {
     const handleSend = () => {
       if (props.ws !== null) {
         if (props.ws.readyState === WebSocket.OPEN) {
+          props.ws.send(JSON.stringify({ type: 'stopDevices', region: '1' }));
+          //console.log('отработал send stopDevices');
           props.ws.send(JSON.stringify({ type: 'getStatistics', region: '1' }));
+          //console.log('отработал send OpenST');
         } else {
           setTimeout(() => {
             handleSend();
           }, 1000);
         }
-        console.log('отработал send OpenST');
-      }
-    };
-    const handleSendStopMNG = () => {
-      if (props.ws !== null) {
-        if (props.ws.readyState === WebSocket.OPEN) {
-          props.ws.send(JSON.stringify({ type: 'stopDevices', region: '1' }));
-        } else {
-          setTimeout(() => {
-            handleSendStopMNG();
-          }, 1000);
-        }
-        console.log('отработал send StopMNG');
-        flagStart = true;
+
       }
     };
     handleSend();
-    console.log('props.flag:', props.flag, 'flagStart:', flagStart);
-    if (props.flag) {
-      flagStart = false;
-    } else {
-      if (!flagStart) {
-        handleSendStopMNG();
-        flagStart = true;
-      }
-    }
-  }, [props.ws, props.flag]);
+  }, [props.ws]);
 
   //const [points, setPoints] = React.useState<Array<Statistic>>([]);
   //const [points, setPoints] = React.useState<Data>({} as Data);
@@ -85,6 +66,7 @@ const Statistics = (props: {
   }
 
   if (isOpen && !flagEtalon) {
+    let pointsAdd = []
     for (let i = 0; i < points.length; i++) {
       for (let j = 0; j < pointsEtalon.length; j++) {
         if (
@@ -92,12 +74,20 @@ const Statistics = (props: {
           points[i].region === pointsEtalon[j].region &&
           points[i].area === pointsEtalon[j].area
         ) {
-          console.log('Stat совподение записей i=', i, 'j=', j);
+          //console.log('Stat совподение записей i=', i, 'j=', j);
           pointsEtalon[j] = points[i];
+        } else {
+          pointsAdd.push(points[i])
         }
       }
     }
+    // if (pointsAdd.length > 0) {
+    //   for (let i = 0; i < points.length; i++) {
+    //     pointsEtalon.push(pointsAdd[i])
+    //   }
+    // }
   }
+
   const styleSt1 = {
     fontSize: 13.5,
     maxHeight: '20px',

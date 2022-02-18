@@ -18,8 +18,6 @@ import { Statistic } from './interfaceStat.d';
 let oldValue = '1';
 let flagWS = true;
 let WS: any = null;
-let flagStopMNG = false;
-let flagStopStat = false;
 
 const App = () => {
   const styleApp01 = {
@@ -55,16 +53,11 @@ const App = () => {
     'wss://' + window.location.host + window.location.pathname + 'W' + window.location.search;
   // let WS: React.MutableRefObject<WebSocket> = {};
   //const WS: any = React.useRef(new WebSocket('wss://ws.kraken.com/'));
-
-  //const WS: any = React.useRef(null);
-
   //const WS = React.useRef(new WebSocket('wss://ws.kraken.com/'));
   if (flagWS) {
     WS = new WebSocket(host);
     flagWS = false;
   }
-  //const WS = React.useRef(new WebSocket(host));
-  //const WS = new WebSocket(host);
 
   React.useEffect(() => {
     WS.onopen = function (event: any) {
@@ -88,9 +81,15 @@ const App = () => {
           setIsOpenDev(true);
           break;
         case 'xctrlInfo':
+          console.log('data_xctrlUpdate:', data);
           setPointsXctrl(data.xctrlInfo ?? []);
           setIsOpenInf(true);
           break;
+        // case 'xctrlUpdate':
+        //   console.log('data_xctrlUpdate:', data);
+        //   setPointsXctrl(data.xctrlInfo ?? []);
+        //   setIsOpenInf(true);
+        //   break;
         case 'getStatistics':
           setPointsSt(data.statistics ?? []);
           setIsOpenSt(true);
@@ -99,64 +98,23 @@ const App = () => {
           console.log('data_default:', data);
       }
     };
-
-    // const handleSendStopMNG = () => {
-    //   if (WS !== null) {
-    //     if (WS.readyState === WebSocket.OPEN) {
-    //       WS.send(JSON.stringify({ type: 'stopDevices', region: '1' }));
-    //     } else {
-    //       setTimeout(() => {
-    //         handleSendStopMNG();
-    //       }, 1000);
-    //     }
-    //     console.log('отработал send StopMNG');
-    //   }
-    // };
-
-    // if (flagStopMNG){
-    //   handleSendStopMNG();
-    //   flagStopMNG = false;
-    // }
-  }, [WS, flagStopMNG]);
+  }, [WS]);
 
   const [value, setValue] = React.useState('1');
 
   const BeginningOfTheEndMNG = () => {
     //console.log('Вызов управления', oldValue, value);
-
     oldValue = value;
   };
 
   const BeginningOfTheEndHT = () => {
-    //console.log('Вызов XT', oldValue, value);
-    // if (oldValue === '1' && value !== '1') {
-    //   flagStopMNG = true;
-    // }
     oldValue = value;
+    console.log('pointsXctrl:', pointsXctrl)
   };
 
   const BeginningOfTheEndST = () => {
     console.log('Вызов Stat', oldValue, value);
-    // if (oldValue === '1' && value !== '1') {
-    //   flagStopMNG = true;
-    // }
     oldValue = value;
-  };
-
-  const EndMngAndStat = () => {
-    if (oldValue === '1' && value !== '1') {
-      flagStopMNG = true;
-      console.log('ku-ku');
-    }
-    if (oldValue === '3' && value !== '3') {
-      flagStopStat = true;
-      console.log('Hi-hi');
-    }
-  };
-
-  const FlagMng = () => {
-    flagStopMNG = false;
-    console.log('flagStopMNG = false');
   };
 
   return (
@@ -168,18 +126,15 @@ const App = () => {
               <Button sx={styleApp01} variant="contained" onClick={() => setValue('1')}>
                 <b>Управление</b>
               </Button>
-
               <Button sx={styleApp02} variant="contained" onClick={() => setValue('2')}>
                 <b>Характерные точки</b>
               </Button>
-
               <Button sx={styleApp01} variant="contained" onClick={() => setValue('3')}>
                 <b>Статистика</b>
               </Button>
               {/* <Header /> */}
             </Stack>
           </Box>
-          {EndMngAndStat()}
           <TabPanel value="1">
             {WS !== null && (
               <div>
@@ -192,8 +147,7 @@ const App = () => {
             {WS !== null && (
               <div>
                 {BeginningOfTheEndHT()}
-                <Points open={isOpenInf} ws={WS} flag={flagStopMNG} xctrll={pointsXctrl} />
-                {FlagMng()}
+                <Points open={isOpenInf} ws={WS} xctrll={pointsXctrl} />
               </div>
             )}
           </TabPanel>
@@ -201,8 +155,7 @@ const App = () => {
             {WS !== null && (
               <div>
                 {BeginningOfTheEndST()}
-                <Statistics open={isOpenSt} ws={WS} flag={flagStopMNG} points={pointsSt} />
-                {FlagMng()}
+                <Statistics open={isOpenSt} ws={WS} points={pointsSt} />
               </div>
             )}
           </TabPanel>
