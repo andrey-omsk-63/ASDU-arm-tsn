@@ -11,8 +11,11 @@ import Management from './components/Management/Management';
 import Points from './components/Points/Points';
 import Statistics from './components/Statistics/Statistics';
 
-import { XctrlInfo } from './interfaceGl.d';
 import { Tflight } from './interfaceMNG.d';
+
+import { XctrlInfo } from './interfaceGl.d';
+import { XctrlUpdate } from './interfaceGlNew.d';
+
 import { Statistic } from './interfaceStat.d';
 
 let oldValue = '1';
@@ -81,7 +84,7 @@ const App = () => {
           setIsOpenDev(true);
           break;
         case 'xctrlInfo':
-          console.log('data_xctrlUpdate:', data);
+          console.log('data_xctrlInfo:', data);
           setPointsXctrl(data.xctrlInfo ?? []);
           setIsOpenInf(true);
           break;
@@ -109,7 +112,7 @@ const App = () => {
 
   const BeginningOfTheEndHT = () => {
     oldValue = value;
-    console.log('pointsXctrl:', pointsXctrl)
+    console.log('pointsXctrl:', pointsXctrl);
   };
 
   const BeginningOfTheEndST = () => {

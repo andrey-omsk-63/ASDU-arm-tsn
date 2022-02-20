@@ -39,7 +39,6 @@ const Statistics = (props: {
             handleSend();
           }, 1000);
         }
-
       }
     };
     handleSend();
@@ -66,7 +65,7 @@ const Statistics = (props: {
   }
 
   if (isOpen && !flagEtalon) {
-    let pointsAdd = []
+    let pointsAdd = [];
     for (let i = 0; i < points.length; i++) {
       for (let j = 0; j < pointsEtalon.length; j++) {
         if (
@@ -77,7 +76,8 @@ const Statistics = (props: {
           //console.log('Stat совподение записей i=', i, 'j=', j);
           pointsEtalon[j] = points[i];
         } else {
-          pointsAdd.push(points[i])
+          console.log('Stat новая запись i=', i, 'j=', j);
+          pointsAdd.push(points[i]);
         }
       }
     }
