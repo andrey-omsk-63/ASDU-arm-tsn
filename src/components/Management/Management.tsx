@@ -35,6 +35,7 @@ const Management = (props: {
 
   let isOpen = props.open;
   let points = props.points;
+  let pointsAdd: Tflight[] = [];
 
   if (!isOpen) {
     pointsEtalon = [];
@@ -52,7 +53,6 @@ const Management = (props: {
             handleSendOpen();
           }, 1000);
         }
-        console.log('отработал send OpenMNG');
       }
     };
     handleSendOpen();
@@ -66,17 +66,34 @@ const Management = (props: {
   }
 
   if (isOpen && !flagEtalon) {
+    pointsAdd = [];
+    let newRecord = true;
     for (let i = 0; i < points.length; i++) {
+      newRecord = true;
       for (let j = 0; j < pointsEtalon.length; j++) {
+
+        //console.log('points[i]',i,points[i])
+        //console.log('pointsEtalon[j]',j,pointsEtalon[j])
         if (
           points[i].ID === pointsEtalon[j].ID &&
           points[i].region.num === pointsEtalon[j].region.num &&
           points[i].area.num === pointsEtalon[j].area.num &&
           points[i].subarea === pointsEtalon[j].subarea
         ) {
-          console.log('MNG совподение записей i=', i, 'j=', j);
+          //console.log('MNG совподение записей i=', i, 'j=', j);
+          newRecord = false; 
           pointsEtalon[j] = points[i];
-        }
+        } 
+      }
+      if (newRecord) {
+        console.log('MNG новая запись i=', i);
+        pointsAdd.push(points[i]);
+      }
+    }
+    //console.log('pointsAdd:', pointsAdd);
+    if (pointsAdd.length > 0) {
+      for (let i = 0; i < pointsAdd.length; i++) {
+        pointsEtalon.push(pointsAdd[i])
       }
     }
   }
@@ -89,7 +106,7 @@ const Management = (props: {
         {isOpen && (
           <>
             {/* <ManagementLeftGrid open={isOpen} tflightt={points} /> */}
-            <ManagementLeftGrid open={isOpen} tflightt={pointsEtalon} />
+            <ManagementLeftGrid open={isOpen} ws={props.ws} tflightt={pointsEtalon} />
           </>
         )}
       </Grid>

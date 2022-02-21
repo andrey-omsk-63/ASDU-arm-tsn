@@ -12,7 +12,6 @@ import { Statistic } from '../../interfaceStat.d';
 let tekValue = 0;
 let pointsEtalon: Statistic[];
 let flagEtalon = true;
-let flagStart = true;
 
 const Statistics = (props: {
   open: boolean;
@@ -21,19 +20,18 @@ const Statistics = (props: {
   //flag: boolean;
   points: Statistic[];
 }) => {
-  console.log('PoinsSt:', props.open, props.points, props.ws);
+  //console.log('PoinsSt:', props.open, props.points, props.ws);
 
   let isOpen = props.open;
   let points = props.points;
+  //let points: Statistic[] = [];
 
   React.useEffect(() => {
     const handleSend = () => {
       if (props.ws !== null) {
         if (props.ws.readyState === WebSocket.OPEN) {
           props.ws.send(JSON.stringify({ type: 'stopDevices', region: '1' }));
-          //console.log('отработал send stopDevices');
           props.ws.send(JSON.stringify({ type: 'getStatistics', region: '1' }));
-          //console.log('отработал send OpenST');
         } else {
           setTimeout(() => {
             handleSend();
@@ -66,26 +64,31 @@ const Statistics = (props: {
 
   if (isOpen && !flagEtalon) {
     let pointsAdd = [];
+    let newRecord = true;
     for (let i = 0; i < points.length; i++) {
+      newRecord = true;
       for (let j = 0; j < pointsEtalon.length; j++) {
         if (
           points[i].id === pointsEtalon[j].id &&
           points[i].region === pointsEtalon[j].region &&
           points[i].area === pointsEtalon[j].area
         ) {
-          //console.log('Stat совподение записей i=', i, 'j=', j);
+          console.log('Stat совподение записей i=', i, 'j=', j);
+          newRecord = false; 
           pointsEtalon[j] = points[i];
-        } else {
-          console.log('Stat новая запись i=', i, 'j=', j);
-          pointsAdd.push(points[i]);
-        }
+        } 
+      }
+      if (newRecord) {
+        console.log('Stat новая запись i=', i);
+        pointsAdd.push(points[i]);
+      } 
+    }
+    //console.log('pointsAdd:', pointsAdd);
+    if (pointsAdd.length > 0) {
+      for (let i = 0; i < pointsAdd.length; i++) {
+        pointsEtalon.push(pointsAdd[i])
       }
     }
-    // if (pointsAdd.length > 0) {
-    //   for (let i = 0; i < points.length; i++) {
-    //     pointsEtalon.push(pointsAdd[i])
-    //   }
-    // }
   }
 
   const styleSt1 = {
@@ -108,7 +111,7 @@ const Statistics = (props: {
     let resSps: any = [];
     let labl: string = '';
 
-    if (points.length === 0) {
+    if (pointsEtalon.length === 0) {
       resSps.push(
         <Box key={1} sx={styleSt1}>
           Нет данных по ХТ
@@ -126,7 +129,8 @@ const Statistics = (props: {
 
   return (
     <>
-      {isOpen && points.length > 0 && (
+      {/* {isOpen && points.length > 0 && ( */}
+      {isOpen && (
         <>
           <Box sx={{ maxWidth: 850, fontSize: 12, marginTop: -2, marginLeft: -3, marginRight: -7 }}>
             <Tabs
@@ -140,7 +144,7 @@ const Statistics = (props: {
             </Tabs>
           </Box>
           <>
-            {points.length > 0 && (
+            {pointsEtalon.length > 0 && (
               <>
                 <Statistic110 open={isOpen} statist={pointsEtalon} areaid={value} />
               </>

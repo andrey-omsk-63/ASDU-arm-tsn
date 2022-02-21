@@ -14,7 +14,6 @@ let tekValue = 0;
 
 const Points = (props: {
   open: boolean; ws: WebSocket; xctrll: XctrlInfo[]
-  //flag: boolean; 
 }) => {
   const stylePXt1 = {
     fontSize: 13.5,
@@ -29,6 +28,22 @@ const Points = (props: {
   const points = props.xctrll;
   const [value, setValue] = React.useState(tekValue);
 
+  React.useEffect(() => {
+    const handleSend = () => {
+      if (props.ws !== null) {
+        if (props.ws.readyState === WebSocket.OPEN) {
+          props.ws.send(JSON.stringify({ type: 'stopDevices', region: '1' }));
+          props.ws.send(JSON.stringify({ type: 'stopStatistics', region: '1' }));
+        } else {
+          setTimeout(() => {
+            handleSend();
+          }, 1000);
+        }
+      }
+    };
+    handleSend();
+  }, [props.ws]);
+
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
     tekValue = newValue;
@@ -38,7 +53,7 @@ const Points = (props: {
     let resSps: any = [];
     let labl: string = '';
 
-    console.log('props.xctrll:', points)
+    //console.log('props.xctrll:', points)
     
     if (points.length === 0) {
       resSps.push(

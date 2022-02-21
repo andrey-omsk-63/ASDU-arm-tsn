@@ -14,11 +14,10 @@ import Statistics from './components/Statistics/Statistics';
 import { Tflight } from './interfaceMNG.d';
 
 import { XctrlInfo } from './interfaceGl.d';
-import { XctrlUpdate } from './interfaceGlNew.d';
+//import { XctrlUpdate } from './interfaceGlNew.d';
 
 import { Statistic } from './interfaceStat.d';
 
-let oldValue = '1';
 let flagWS = true;
 let WS: any = null;
 
@@ -88,11 +87,6 @@ const App = () => {
           setPointsXctrl(data.xctrlInfo ?? []);
           setIsOpenInf(true);
           break;
-        // case 'xctrlUpdate':
-        //   console.log('data_xctrlUpdate:', data);
-        //   setPointsXctrl(data.xctrlInfo ?? []);
-        //   setIsOpenInf(true);
-        //   break;
         case 'getStatistics':
           setPointsSt(data.statistics ?? []);
           setIsOpenSt(true);
@@ -101,24 +95,9 @@ const App = () => {
           console.log('data_default:', data);
       }
     };
-  }, [WS]);
+  }, []);
 
   const [value, setValue] = React.useState('1');
-
-  const BeginningOfTheEndMNG = () => {
-    //console.log('Вызов управления', oldValue, value);
-    oldValue = value;
-  };
-
-  const BeginningOfTheEndHT = () => {
-    oldValue = value;
-    console.log('pointsXctrl:', pointsXctrl);
-  };
-
-  const BeginningOfTheEndST = () => {
-    console.log('Вызов Stat', oldValue, value);
-    oldValue = value;
-  };
 
   return (
     <>
@@ -139,28 +118,13 @@ const App = () => {
             </Stack>
           </Box>
           <TabPanel value="1">
-            {WS !== null && (
-              <div>
-                {BeginningOfTheEndMNG()}
-                <Management open={isOpenDev} ws={WS} points={pointsTfl} />
-              </div>
-            )}
+            {WS !== null && (<><Management open={isOpenDev} ws={WS} points={pointsTfl} /></>)}
           </TabPanel>
           <TabPanel value="2">
-            {WS !== null && (
-              <div>
-                {BeginningOfTheEndHT()}
-                <Points open={isOpenInf} ws={WS} xctrll={pointsXctrl} />
-              </div>
-            )}
+            {WS !== null && (<><Points open={isOpenInf} ws={WS} xctrll={pointsXctrl} /></>)}
           </TabPanel>
           <TabPanel value="3">
-            {WS !== null && (
-              <div>
-                {BeginningOfTheEndST()}
-                <Statistics open={isOpenSt} ws={WS} points={pointsSt} />
-              </div>
-            )}
+            {WS !== null && (<><Statistics open={isOpenSt} ws={WS} points={pointsSt} /></>)}
           </TabPanel>
         </TabContext>
       </Box>

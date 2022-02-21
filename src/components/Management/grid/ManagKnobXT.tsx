@@ -4,22 +4,50 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
-const ManagementKnobXT = () => {
+const ManagementKnobXT = (props: { ws: WebSocket; }) => {
+
   const [value, setValue] = React.useState(0);
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+  
+  const handleOpen = () => {
+    setOpen(true);
+    const handleSendOpen = () => {
+      if (props.ws !== null) {
+        if (props.ws.readyState === WebSocket.OPEN) {
+          props.ws.send(JSON.stringify({ type: 'stopDevices', region: '1' }));
+        } else {
+          setTimeout(() => {
+            handleSendOpen();
+          }, 1000);
+        }
+      }
+    };
+    handleSendOpen();
+  }
 
-  const handleCloseSet = (event: any, reason: string) => {
-    console.log('1111', event)
-    if (reason !== 'backdropClick') {
-      setOpen(false);
-      setValue(0);
-    }
-  };
+  // const handleCloseSet = (event: any, reason: string) => {
+  //   console.log('1111', event)
+  //   if (reason !== 'backdropClick') {
+  //     setOpen(false);
+  //     setValue(0);
+  //   }
+  // };
 
   const handleClose = () => {
     setOpen(false);
     setValue(0)
+    const handleSendOpen = () => {
+      if (props.ws !== null) {
+        if (props.ws.readyState === WebSocket.OPEN) {
+          props.ws.send(JSON.stringify({ type: 'getDevices', region: '1' }));
+        } else {
+          setTimeout(() => {
+            handleSendOpen();
+          }, 1000);
+        }
+      }
+    };
+    handleSendOpen();
   }
 
   const stylePK = {
@@ -58,8 +86,8 @@ const ManagementKnobXT = () => {
       </Button>
       <Modal
         open={open}
-        disableEnforceFocus
-        onClose={handleCloseSet}
+        // disableEnforceFocus
+        // onClose={handleCloseSet}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description">
         <Box sx={stylePK}>
@@ -71,7 +99,7 @@ const ManagementKnobXT = () => {
               Отключить
             </Button>
             <Button sx={styleBatMenu} variant="contained" onClick={handleClose}>
-              Отмена    
+              Отмена
             </Button>
             {ButtonDo()}
           </Stack>

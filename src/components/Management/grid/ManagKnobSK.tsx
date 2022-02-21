@@ -5,13 +5,42 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
 
-const ManagementKnobSK = () => {
+const ManagementKnobSK = (props: { ws: WebSocket; }) => {
+
   const [value, setValue] = React.useState(21);
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+
+  const handleOpen = () => {
+    setOpen(true);
+    const handleSendOpen = () => {
+      if (props.ws !== null) {
+        if (props.ws.readyState === WebSocket.OPEN) {
+          props.ws.send(JSON.stringify({ type: 'stopDevices', region: '1' }));
+        } else {
+          setTimeout(() => {
+            handleSendOpen();
+          }, 1000);
+        }
+      }
+    };
+    handleSendOpen();
+  }
+
   const handleClose = () => {
     setOpen(false);
-    setValue(21)
+    setValue(0)
+    const handleSendOpen = () => {
+      if (props.ws !== null) {
+        if (props.ws.readyState === WebSocket.OPEN) {
+          props.ws.send(JSON.stringify({ type: 'getDevices', region: '1' }));
+        } else {
+          setTimeout(() => {
+            handleSendOpen();
+          }, 1000);
+        }
+      }
+    };
+    handleSendOpen();
   }
 
   const stylePK = {
@@ -55,12 +84,12 @@ const ManagementKnobSK = () => {
     <div>
       <Button size="small" sx={styleBatton} variant="contained" onClick={handleOpen}>
         СК
-        </Button>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+      </Button>
       <Modal
         open={open}
         aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description">      
-        <Box sx={stylePK}>                                              
+        aria-describedby="modal-modal-description">
+        <Box sx={stylePK}>
           <Stack direction="column">
             {ButtonKnob(0)}
             {ButtonKnob(1)}

@@ -12,7 +12,7 @@ import ManagementKnobXT from './ManagKnobXT';
 
 import { Tflight } from '../../../interfaceMNG.d';
 
-const ManagementLeftGrid = (props: { open: boolean; tflightt: Tflight[] }) => {
+const ManagementLeftGrid = (props: { open: boolean; ws: WebSocket; tflightt: Tflight[] }) => {
   const points = props.tflightt;
 
   //console.log('PoinsMGLeft:', props.open, points)
@@ -168,10 +168,10 @@ const ManagementLeftGrid = (props: { open: boolean; tflightt: Tflight[] }) => {
     return (
       <Grid item xs={12} sx={{ marginLeft: 0, marginTop: 1 }}>
         <Stack direction="row">
-          <ManagementKnobPK />
-          <ManagementKnobSK />
-          <ManagementKnobNK />
-          <ManagementKnobXT />
+          <ManagementKnobPK ws={props.ws} />
+          <ManagementKnobSK ws={props.ws} />
+          <ManagementKnobNK ws={props.ws} />
+          <ManagementKnobXT ws={props.ws} />
         </Stack>
       </Grid>
     );
