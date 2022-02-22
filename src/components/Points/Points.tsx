@@ -11,10 +11,10 @@ import PointsXt11 from './PointsXt11';
 import { XctrlInfo } from '../../interfaceGl.d';
 
 let tekValue = 0;
+let pointsEtalon: XctrlInfo[];
+let flagEtalon = true;
 
-const Points = (props: {
-  open: boolean; ws: WebSocket; xctrll: XctrlInfo[]
-}) => {
+const Points = (props: { open: boolean; ws: WebSocket; xctrll: XctrlInfo[] }) => {
   const stylePXt1 = {
     fontSize: 13.5,
     maxHeight: '20px',
@@ -24,8 +24,8 @@ const Points = (props: {
     marginRight: 0.5,
   };
 
-  const isOpen = props.open;
-  const points = props.xctrll;
+  let isOpen = props.open;
+  let points = props.xctrll;
   const [value, setValue] = React.useState(tekValue);
 
   React.useEffect(() => {
@@ -44,6 +44,40 @@ const Points = (props: {
     handleSend();
   }, [props.ws]);
 
+  if (isOpen && flagEtalon) {
+    pointsEtalon = points;
+    flagEtalon = false;
+    points = [];
+  }
+
+  if (isOpen && !flagEtalon) {
+    let pointsAdd = [];
+    let newRecord = true;
+    for (let i = 0; i < points.length; i++) {
+      newRecord = true;
+      for (let j = 0; j < pointsEtalon.length; j++) {
+        if (
+          points[i].subarea === pointsEtalon[j].subarea &&
+          points[i].region === pointsEtalon[j].region &&
+          points[i].area === pointsEtalon[j].area
+        ) {
+          console.log('Points совподение записей i=', i, 'j=', j);
+          newRecord = false;
+          pointsEtalon[j] = points[i];
+        }
+      }
+      if (newRecord) {
+        console.log('Points новая запись i=', i);
+        pointsAdd.push(points[i]);
+      }
+    }
+    if (pointsAdd.length > 0) {
+      for (let i = 0; i < pointsAdd.length; i++) {
+        pointsEtalon.push(pointsAdd[i]);
+      }
+    }
+  }
+
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
     tekValue = newValue;
@@ -53,8 +87,6 @@ const Points = (props: {
     let resSps: any = [];
     let labl: string = '';
 
-    //console.log('props.xctrll:', points)
-    
     if (points.length === 0) {
       resSps.push(
         <Box key={1} sx={stylePXt1}>
