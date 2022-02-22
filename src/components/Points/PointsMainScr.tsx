@@ -2,13 +2,13 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
-import PointsXtGrid1111 from './grid/PointsXtGrid1111';
-import PointsXtGrid1112 from './grid/PointsXtGrid1112';
-import PointsXtGrid1114 from './grid/PointsXtGrid1114';
+import PointsMainScrGrid1 from './grid/PointsMainScrGrid1';
+import PointsMainScrGrid2 from './grid/PointsMainScrGrid2';
+import PointsMainScrGrid3 from './grid/PointsMainScrGrid3';
 
 import { XctrlInfo } from '../../interfaceGl.d';
 
-const PointsXt111 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number }) => {
+const PointsMainScr = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number }) => {
   const xtProps = props.xtt;
   const points = props.xctrll[xtProps];
 
@@ -102,13 +102,13 @@ const PointsXt111 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number })
                 <Box sx={{ marginRight: -1.5 }}>
                   <Grid container>
                     <Grid item xs={4} sx={styleXt04}>
-                      <PointsXtGrid1111 open={props.open} xctrll={props.xctrll} xtt={xtProps} />
+                      <PointsMainScrGrid1 open={props.open} xctrll={props.xctrll} xtt={xtProps} />
                     </Grid>
                     <Grid item xs={4} sx={styleXt05}>
-                      <PointsXtGrid1112 open={props.open} xctrll={props.xctrll} xtt={xtProps} />
+                      <PointsMainScrGrid2 open={props.open} xctrll={props.xctrll} xtt={xtProps} />
                     </Grid>
                     <Grid item xs sx={styleXt04}>
-                      <PointsXtGrid1114 open={props.open} xctrll={props.xctrll} xtt={xtProps} />
+                      <PointsMainScrGrid3 open={props.open} xctrll={props.xctrll} xtt={xtProps} />
                     </Grid>
                   </Grid>
                 </Box>
@@ -121,4 +121,4 @@ const PointsXt111 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number })
   );
 };
 
-export default PointsXt111;
+export default PointsMainScr;

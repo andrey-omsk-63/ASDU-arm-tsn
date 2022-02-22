@@ -4,23 +4,22 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
-import PointsXt112Comp1 from './grid/PointsXt112Comp1';
+import PointsLevel2Baza from './grid/PointsLevel2Baza';
 import PointsXt112Comp2 from './grid/PointsXt112Comp2';
 import PointsXt112Comp3 from './grid/PointsXt112Comp3';
 
 import { XctrlInfo } from '../../interfaceGl.d';
 
-const PointsXt112 = (props: {
+const PointsMenuLevel2 = (props: {
   open: boolean;
   xctrll: XctrlInfo[];
   xtt: number;
   crossroad: number;
 }) => {
   const xtProps = props.xtt;
-  //const points = props.xctrll[xtProps];
   const [value, setValue] = React.useState('1');
 
-  const PointsXt112Menu = () => {
+  const PointsMenuLevel2Menu = () => {
     const styleXTG01 = {
       width: '70%',
       height: '84vh',
@@ -64,12 +63,12 @@ const PointsXt112 = (props: {
         <Grid item xs={12}>
           <Grid container item>
             <Grid item xs={0.4} sx={{ border: 0 }}>
-              <PointsXt112Menu />
+              <PointsMenuLevel2Menu />
             </Grid>
 
             <Grid item xs sx={{ border: 0 }}>
               <Grid item xs={12}>
-                <PointsXt112Comp1
+                <PointsLevel2Baza
                   open={props.open}
                   xctrll={props.xctrll}
                   xtt={xtProps}
@@ -99,4 +98,4 @@ const PointsXt112 = (props: {
   );
 };
 
-export default PointsXt112;
+export default PointsMenuLevel2;

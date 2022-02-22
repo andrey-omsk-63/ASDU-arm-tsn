@@ -47,7 +47,7 @@ const Points = (props: { open: boolean; ws: WebSocket; xctrll: XctrlInfo[] }) =>
   if (isOpen && flagEtalon) {
     pointsEtalon = points;
     flagEtalon = false;
-    //points = [];
+    points = [];
   }
 
   if (isOpen && !flagEtalon) {
@@ -61,7 +61,7 @@ const Points = (props: { open: boolean; ws: WebSocket; xctrll: XctrlInfo[] }) =>
           points[i].region === pointsEtalon[j].region &&
           points[i].area === pointsEtalon[j].area
         ) {
-          //console.log('Points совподение записей i=', i, 'j=', j);
+          console.log('Points совподение записей i=', i, 'j=', j);
           newRecord = false;
           pointsEtalon[j] = points[i];
         }
@@ -87,14 +87,14 @@ const Points = (props: { open: boolean; ws: WebSocket; xctrll: XctrlInfo[] }) =>
     let resSps: any = [];
     let labl: string = '';
 
-    if (pointsEtalon.length === 0) {
+    if (points.length === 0) {
       resSps.push(
         <Box key={1} sx={stylePXt1}>
           Нет данных по ХТ
         </Box>,
       );
     } else {
-      for (let i = 0; i < pointsEtalon.length; i++) {
+      for (let i = 0; i < points.length; i++) {
         labl = 'XT:' + (i + 1).toString() + ':1';
         resSps.push(<Tab key={i} sx={stylePXt1} label={labl} />);
       }
@@ -135,7 +135,7 @@ const Points = (props: { open: boolean; ws: WebSocket; xctrll: XctrlInfo[] }) =>
         </Tabs>
       </Box>
       <>
-        {pointsEtalon.length > 0 && (
+        {points.length > 0 && (
           <>
             <PointsMenuLevel1 open={isOpen} xctrll={points} xtt={value} />
           </>

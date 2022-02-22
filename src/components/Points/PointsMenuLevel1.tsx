@@ -6,12 +6,12 @@ import TabContext from '@mui/lab/TabContext';
 import TabPanel from '@mui/lab/TabPanel';
 import Modal from '@mui/material/Modal';
 
-import PointsXt111 from './PointsXt111';
-import PointsXt112 from './PointsXt112';
+import PointsMainScr from './PointsMainScr';
+import PointsMenuLevel2 from './PointsMenuLevel2';
 
 import { XctrlInfo } from '../../interfaceGl.d';
 
-const PointsXt11 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number }) => {
+const PointsMenuLevel1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number }) => {
   const isOpen = props.open;
   const xtProps = props.xtt;
   const points = props.xctrll[xtProps];
@@ -105,13 +105,13 @@ const PointsXt11 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number }) 
           </Stack>
         </Box>
         <TabPanel value="1">
-          <PointsXt111 open={isOpen} xctrll={props.xctrll} xtt={xtProps} />
+          <PointsMainScr open={isOpen} xctrll={props.xctrll} xtt={xtProps} />
         </TabPanel>
         <TabPanel value="2">
           <>
             {points.xctrls.length > 0 && (
               <>
-                <PointsXt112 open={isOpen} xctrll={props.xctrll} xtt={xtProps} crossroad={crossRoad} />
+                <PointsMenuLevel2 open={isOpen} xctrll={props.xctrll} xtt={xtProps} crossroad={crossRoad} />
               </>
             )}
           </>
@@ -121,4 +121,4 @@ const PointsXt11 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number }) 
   );
 };
 
-export default PointsXt11;
+export default PointsMenuLevel1;
