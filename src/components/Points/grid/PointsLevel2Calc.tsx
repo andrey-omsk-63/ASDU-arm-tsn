@@ -31,7 +31,7 @@ export interface Datasets {
   pointRadius: number;
 }
 
-const PointsXt112Comp3 = (props: {
+const PointsLevel2Calc = (props: {
   open: boolean;
   xctrll: XctrlInfo[];
   xtt: number;
@@ -141,7 +141,7 @@ const PointsXt112Comp3 = (props: {
     return <Line options={options} data={data} />;
   };
 
-  const PointsXt112Comp3Tab2Header = () => {
+  const PointsLevel2CalcTab2Header = () => {
     return (
       <Box sx={{ marginRight: 0.74, border: 0 }}>
         <Grid container item xs={12}>
@@ -178,7 +178,7 @@ const PointsXt112Comp3 = (props: {
 
   const namer = points.xctrls[0].name;
 
-  const PointsXt112Comp3Tab1Stroka = () => {
+  const PointsLevel2CalcTab1Stroka = () => {
     let resStr = [];
     let pusto = false;
     let kakchestvo = '';
@@ -220,15 +220,19 @@ const PointsXt112Comp3 = (props: {
         <Box sx={{ marginTop: -0.3, marginLeft: -0, marginRight: 0 }}>
           <Grid container item sx={{ margin: 0, height: '28vh' }}>
             <Grid item xs={12} sx={{ border: 1, borderRadius: 1, borderColor: 'primary.main' }}>
-              {points.results !== null && <div><PointsGraf00 /></div>}
+              {points.results !== null && (
+                <div>
+                  <PointsGraf00 />
+                </div>
+              )}
             </Grid>
           </Grid>
           <Grid container item sx={{ marginTop: 0.5, height: '56vh', border: 0 }}>
             <Grid item xs={24} sx={{ border: 1, borderRadius: 1, borderColor: 'primary.main' }}>
-              <PointsXt112Comp3Tab2Header />
+              <PointsLevel2CalcTab2Header />
               <Box sx={{ overflowX: 'auto', height: '56vh', border: 0 }}>
                 <Grid container item>
-                  {PointsXt112Comp3Tab1Stroka()}
+                  {PointsLevel2CalcTab1Stroka()}
                 </Grid>
               </Box>
             </Grid>
@@ -239,4 +243,4 @@ const PointsXt112Comp3 = (props: {
   );
 };
 
-export default PointsXt112Comp3;
+export default PointsLevel2Calc;

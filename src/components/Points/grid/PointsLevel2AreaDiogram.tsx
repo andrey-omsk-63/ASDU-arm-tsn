@@ -4,7 +4,11 @@ import Button from '@mui/material/Button';
 
 import { XctrlInfo } from '../../../interfaceGl.d';
 
-const PointsXt112Comp21 = (props: { xctrll: XctrlInfo[]; xtt: number; crossroad: number }) => {
+const PointsLevel2AreaDiogram = (props: {
+  xctrll: XctrlInfo[];
+  xtt: number;
+  crossroad: number;
+}) => {
   const xtProps = props.xtt;
   const points = props.xctrll[xtProps];
   const crRoad = props.crossroad;
@@ -175,4 +179,4 @@ const PointsXt112Comp21 = (props: { xctrll: XctrlInfo[]; xtt: number; crossroad:
   );
 };
 
-export default PointsXt112Comp21;
+export default PointsLevel2AreaDiogram;

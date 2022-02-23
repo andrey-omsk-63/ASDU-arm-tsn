@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 
-import ManagementRightGrid03 from './ManagRightGrid03';
+import ManagementRightGrid from './ManagRightGrid';
 import ManagementKnobPK from './ManagKnobPK';
 import ManagementKnobSK from './ManagKnobSK';
 import ManagementKnobNK from './ManagKnobNK';
@@ -23,7 +23,7 @@ const ManagementLeftGrid = (props: { open: boolean; ws: WebSocket; tflightt: Tfl
     borderColor: 'primary.main',
     margin: 0.5,
     //maxHeight: '99.2%',
-    //minHeight: '99.2%', 
+    //minHeight: '99.2%',
     height: '94vh',
   };
 
@@ -180,12 +180,12 @@ const ManagementLeftGrid = (props: { open: boolean; ws: WebSocket; tflightt: Tfl
   return (
     <Grid container>
       <Grid item xs={2.5} sx={styleMG01}>
-        <Box sx={{ border: 0, overflowX: 'auto',  }}>{props.open && <SpisMLG />}</Box>
+        <Box sx={{ border: 0, overflowX: 'auto' }}>{props.open && <SpisMLG />}</Box>
       </Grid>
       <Grid item xs sx={{ border: 0 }}>
         <Grid container>
           <FourKnops />
-          <ManagementRightGrid03
+          <ManagementRightGrid
             open={props.open}
             tflightt={points}
             mode={mode}

@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 
 import { Tflight } from '../../../interfaceMNG.d';
 
-const ManagementRightGrid03 = (props: {
+const ManagementRightGrid = (props: {
   open: boolean;
   tflightt: Tflight[];
   mode: number;
@@ -350,11 +350,11 @@ const ManagementRightGrid03 = (props: {
       <Grid item container sx={styleMRG04}>
         <Grid item xs={12}>
           <HeaderMRG03 />
-          <Box sx={{ border: 0, overflowX: 'auto', height: '81vh' }}>{props.open && <StrokaMRG03 />}</Box>
+          <Box sx={{ overflowX: 'auto', height: '81vh' }}>{props.open && <StrokaMRG03 />}</Box>
         </Grid>
       </Grid>
     </>
   );
 };
 
-export default ManagementRightGrid03;
+export default ManagementRightGrid;

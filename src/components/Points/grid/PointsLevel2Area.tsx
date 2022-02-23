@@ -2,11 +2,11 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 
-import PointsXt112Comp21 from './PointsXt112Comp21';
+import PointsLevel2AreaDiogram from './PointsLevel2AreaDiogram';
 
 import { XctrlInfo } from '../../../interfaceGl.d';
 
-const PointsXt112Comp2 = (props: {
+const PointsLevel2Area = (props: {
   open: boolean;
   xctrll: XctrlInfo[];
   xtt: number;
@@ -58,7 +58,7 @@ const PointsXt112Comp2 = (props: {
     borderColor: 'primary.main',
   };
 
-  const PointsXt112Comp2Tab1Header = () => {
+  const PointsLevel2AreaTab1Header = () => {
     return (
       <Grid container item xs={12}>
         <Grid xs={2} item sx={styleXTG02}>
@@ -77,7 +77,7 @@ const PointsXt112Comp2 = (props: {
     );
   };
 
-  const PointsXt112Comp2Tab1Stroka = () => {
+  const PointsLevel2AreaTab1Stroka = () => {
     let resStr = [];
 
     for (let i = 0; i < points.xctrls[props.crossroad].StrategyA.length; i++) {
@@ -109,15 +109,19 @@ const PointsXt112Comp2 = (props: {
           <Grid item xs={3} sx={{ height: '86.5vh', border: 0 }}>
             <Grid container>
               <Grid item xs={12} sx={styleXTG03}>
-                <PointsXt112Comp2Tab1Header />
-                {PointsXt112Comp2Tab1Stroka()}
+                <PointsLevel2AreaTab1Header />
+                {PointsLevel2AreaTab1Stroka()}
               </Grid>
             </Grid>
           </Grid>
 
           <Grid item xs sx={styleXTG04}>
             <Grid container>
-              <PointsXt112Comp21 xctrll={props.xctrll} xtt={xtProps} crossroad={props.crossroad} />
+              <PointsLevel2AreaDiogram
+                xctrll={props.xctrll}
+                xtt={xtProps}
+                crossroad={props.crossroad}
+              />
             </Grid>
           </Grid>
         </Stack>
@@ -126,4 +130,4 @@ const PointsXt112Comp2 = (props: {
   );
 };
 
-export default PointsXt112Comp2;
+export default PointsLevel2Area;

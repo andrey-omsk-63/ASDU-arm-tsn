@@ -5,8 +5,8 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
 import PointsLevel2Baza from './grid/PointsLevel2Baza';
-import PointsXt112Comp2 from './grid/PointsXt112Comp2';
-import PointsXt112Comp3 from './grid/PointsXt112Comp3';
+import PointsLevel2Area from './grid/PointsLevel2Area';
+import PointsLevel2Calc from './grid/PointsLevel2Calc';
 
 import { XctrlInfo } from '../../interfaceGl.d';
 
@@ -75,14 +75,14 @@ const PointsMenuLevel2 = (props: {
                   value={value}
                   crossroad={props.crossroad}
                 />
-                <PointsXt112Comp2
+                <PointsLevel2Area
                   open={props.open}
                   xctrll={props.xctrll}
                   xtt={xtProps}
                   value={value}
                   crossroad={props.crossroad}
                 />
-                <PointsXt112Comp3
+                <PointsLevel2Calc
                   open={props.open}
                   xctrll={props.xctrll}
                   xtt={xtProps}

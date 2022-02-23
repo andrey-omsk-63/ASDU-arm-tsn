@@ -66,12 +66,12 @@ const data: DataGl = {
 let canal: number[] = [];
 let oldAreaid = -1;
 
-const Statistic110 = (props: { open: boolean; statist: Statistic[]; areaid: number }) => {
+const StatisticXT = (props: { open: boolean; statist: Statistic[]; areaid: number }) => {
   const isOpen = props.open;
   const points = props.statist;
   const areaId = props.areaid;
   let colChanel = 0;
- 
+
   const [value, setValue] = React.useState('0');
 
   if (isOpen) {
@@ -440,4 +440,4 @@ const Statistic110 = (props: { open: boolean; statist: Statistic[]; areaid: numb
   );
 };
 
-export default Statistic110;
+export default StatisticXT;

@@ -5,7 +5,7 @@ import Tab from '@mui/material/Tab';
 
 //import axios from 'axios';
 
-import Statistic110 from './Statistic110';
+import StatisticXT from './StatisticXT';
 
 import { Statistic } from '../../interfaceStat.d';
 
@@ -74,19 +74,19 @@ const Statistics = (props: {
           points[i].area === pointsEtalon[j].area
         ) {
           console.log('Stat совподение записей i=', i, 'j=', j);
-          newRecord = false; 
+          newRecord = false;
           pointsEtalon[j] = points[i];
-        } 
+        }
       }
       if (newRecord) {
         console.log('Stat новая запись i=', i);
         pointsAdd.push(points[i]);
-      } 
+      }
     }
     //console.log('pointsAdd:', pointsAdd);
     if (pointsAdd.length > 0) {
       for (let i = 0; i < pointsAdd.length; i++) {
-        pointsEtalon.push(pointsAdd[i])
+        pointsEtalon.push(pointsAdd[i]);
       }
     }
   }
@@ -146,7 +146,7 @@ const Statistics = (props: {
           <>
             {pointsEtalon.length > 0 && (
               <>
-                <Statistic110 open={isOpen} statist={pointsEtalon} areaid={value} />
+                <StatisticXT open={isOpen} statist={pointsEtalon} areaid={value} />
               </>
             )}
           </>
