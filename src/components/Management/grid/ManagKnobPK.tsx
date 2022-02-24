@@ -11,18 +11,18 @@ const ManagementKnobPK = (props: {
   areaa: string;
   subArea: number;
 }) => {
-  console.log('props:', props.open, props.region, props.areaa, props.subArea);
+  //console.log('props:', props.open, props.region, props.areaa, props.subArea);
 
   const [value, setValue] = React.useState(21);
   const [open, setOpen] = React.useState(false);
-  let soob_dispatch = ' ';
+  let soob_dispatch = '.';
 
   const handleOpen = () => {
     setOpen(true);
     const handleSendOpen = () => {
       if (props.ws !== null) {
         if (props.ws.readyState === WebSocket.OPEN) {
-          props.ws.send(JSON.stringify({ type: 'stopDevices', region: '1' }));
+          props.ws.send(JSON.stringify({ type: 'stopDevices', region: props.region }));
         } else {
           setTimeout(() => {
             handleSendOpen();
@@ -39,7 +39,7 @@ const ManagementKnobPK = (props: {
     const handleSendOpen = () => {
       if (props.ws !== null) {
         if (props.ws.readyState === WebSocket.OPEN) {
-          props.ws.send(JSON.stringify({ type: 'getDevices', region: '1' }));
+          props.ws.send(JSON.stringify({ type: 'getDevices', region: props.region }));
         } else {
           setTimeout(() => {
             handleSendOpen();
@@ -117,7 +117,7 @@ const ManagementKnobPK = (props: {
       };
 
       handleSendOpen();
-      console.log('запрос отправлен');
+      //console.log('запрос отправлен');
       soob_dispatch = 'Отправлено';
     }
 

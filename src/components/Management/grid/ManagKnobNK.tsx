@@ -4,18 +4,23 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
-
-const ManagementKnobSK = (props: { ws: WebSocket; }) => {
-
+const ManagementKnobSK = (props: {
+  open: boolean;
+  ws: WebSocket;
+  region: string;
+  areaa: string;
+  subArea: number;
+}) => {
   const [value, setValue] = React.useState(21);
   const [open, setOpen] = React.useState(false);
+  let soob_dispatch = '.';
 
   const handleOpen = () => {
     setOpen(true);
     const handleSendOpen = () => {
       if (props.ws !== null) {
         if (props.ws.readyState === WebSocket.OPEN) {
-          props.ws.send(JSON.stringify({ type: 'stopDevices', region: '1' }));
+          props.ws.send(JSON.stringify({ type: 'stopDevices', region: props.region }));
         } else {
           setTimeout(() => {
             handleSendOpen();
@@ -24,15 +29,15 @@ const ManagementKnobSK = (props: { ws: WebSocket; }) => {
       }
     };
     handleSendOpen();
-  }
+  };
 
   const handleClose = () => {
     setOpen(false);
-    setValue(0)
+    setValue(0);
     const handleSendOpen = () => {
       if (props.ws !== null) {
         if (props.ws.readyState === WebSocket.OPEN) {
-          props.ws.send(JSON.stringify({ type: 'getDevices', region: '1' }));
+          props.ws.send(JSON.stringify({ type: 'getDevices', region: props.region }));
         } else {
           setTimeout(() => {
             handleSendOpen();
@@ -41,7 +46,7 @@ const ManagementKnobSK = (props: { ws: WebSocket; }) => {
       }
     };
     handleSendOpen();
-  }
+  };
 
   const stylePK = {
     position: 'absolute',
@@ -62,6 +67,13 @@ const ManagementKnobSK = (props: { ws: WebSocket; }) => {
     marginRight: 1,
   };
 
+  const styleSoob = {
+    fontSize: 10,
+    backgroundColor: '#F1F3F4',
+    color: 'blue',
+    textAlign: 'center',
+  };
+
   const styleBatMenu = {
     fontSize: 12.9,
     backgroundColor: '#F1F3F4',
@@ -69,16 +81,46 @@ const ManagementKnobSK = (props: { ws: WebSocket; }) => {
   };
 
   const ButtonKnob = (val: number) => {
+    let valumeKnob: string = 'Авт';
+    if (val !== 0) valumeKnob = val.toString();
+
     return (
       <Button sx={styleBatMenu} variant="contained" onClick={() => setValue(val)}>
-        {val}
+        {valumeKnob}
       </Button>
-    )
-  }
+    );
+  };
 
   const ButtonDo = () => {
-    //console.log('Value НК:', value)
-  }
+    if (value !== 21) {
+      const handleSendOpen = () => {
+        if (props.ws !== null) {
+          if (props.ws.readyState === WebSocket.OPEN) {
+            props.ws.send(
+              JSON.stringify({
+                type: 'dispatch',
+                cmd: 7,
+                param: value,
+                region: props.region,
+                area: props.areaa,
+                subarea: props.subArea,
+              }),
+            );
+          } else {
+            setTimeout(() => {
+              handleSendOpen();
+            }, 1000);
+          }
+        }
+      };
+
+      handleSendOpen();
+      //console.log('запрос отправлен');
+      soob_dispatch = 'Отправлено';
+    }
+
+    return <Box sx={styleSoob}>{soob_dispatch}</Box>;
+  };
 
   return (
     <div>
@@ -105,7 +147,7 @@ const ManagementKnobSK = (props: { ws: WebSocket; }) => {
             {ButtonKnob(11)}
             {ButtonKnob(12)}
             <Button sx={styleBatMenu} variant="contained" onClick={handleClose}>
-              Отмена
+              Выход
             </Button>
             {ButtonDo()}
           </Stack>

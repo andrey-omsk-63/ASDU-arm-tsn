@@ -62,7 +62,7 @@ const ManagementLeftGrid = (props: { open: boolean; ws: WebSocket; tflightt: Tfl
 
   const handleClickGl = () => {
     setMode(1);
-    setAreaa("0");
+    setAreaa('0');
     setSubArea(0);
   };
 
@@ -76,7 +76,6 @@ const ManagementLeftGrid = (props: { open: boolean; ws: WebSocket; tflightt: Tfl
     setMode(3);
     setAreaa(area);
     setSubArea(subarea);
-    
   };
 
   if (props.open) {
@@ -177,11 +176,33 @@ const ManagementLeftGrid = (props: { open: boolean; ws: WebSocket; tflightt: Tfl
       <Grid item xs={12} sx={{ marginLeft: 0, marginTop: 1 }}>
         <Stack direction="row">
           <ManagementKnobPK
-            open={props.open} ws={props.ws} region={reGion}
-            areaa={areaa} subArea={subArea} />
-          <ManagementKnobSK ws={props.ws} />
-          <ManagementKnobNK ws={props.ws} />
-          <ManagementKnobXT ws={props.ws} />
+            open={props.open}
+            ws={props.ws}
+            region={reGion}
+            areaa={areaa}
+            subArea={subArea}
+          />
+          <ManagementKnobSK
+            open={props.open}
+            ws={props.ws}
+            region={reGion}
+            areaa={areaa}
+            subArea={subArea}
+          />
+          <ManagementKnobNK
+            open={props.open}
+            ws={props.ws}
+            region={reGion}
+            areaa={areaa}
+            subArea={subArea}
+          />
+          <ManagementKnobXT
+            open={props.open}
+            ws={props.ws}
+            region={reGion}
+            areaa={areaa}
+            subArea={subArea}
+          />
         </Stack>
       </Grid>
     );
@@ -196,8 +217,10 @@ const ManagementLeftGrid = (props: { open: boolean; ws: WebSocket; tflightt: Tfl
         <Grid container>
           <FourKnops />
           <ManagementRightGrid
-            open={props.open} tflightt={points}
-            mode={mode} areaa={areaa}
+            open={props.open}
+            tflightt={points}
+            mode={mode}
+            areaa={areaa}
             subArea={subArea}
           />
         </Grid>
