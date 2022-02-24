@@ -117,7 +117,6 @@ const ManagementKnobPK = (props: {
       };
 
       handleSendOpen();
-      //console.log('запрос отправлен');
       soob_dispatch = 'Отправлено';
     }
 

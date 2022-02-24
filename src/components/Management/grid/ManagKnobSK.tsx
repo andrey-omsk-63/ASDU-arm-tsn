@@ -81,6 +81,17 @@ const ManagementKnobSK = (props: {
   };
 
   const ButtonKnob = (val: number) => {
+    let valumeKnob: string = 'Авт';
+    if (val !== 0) valumeKnob = val.toString();
+
+    return (
+      <Button sx={styleBatMenu} variant="contained" onClick={() => setValue(val)}>
+        {valumeKnob}
+      </Button>
+    );
+  };
+
+  const ButtonDo = () => {
     if (value !== 21) {
       const handleSendOpen = () => {
         if (props.ws !== null) {
@@ -104,15 +115,10 @@ const ManagementKnobSK = (props: {
       };
 
       handleSendOpen();
-      //console.log('запрос отправлен');
       soob_dispatch = 'Отправлено';
     }
 
     return <Box sx={styleSoob}>{soob_dispatch}</Box>;
-  };
-
-  const ButtonDo = () => {
-    //console.log('Value СК:', value)
   };
 
   return (

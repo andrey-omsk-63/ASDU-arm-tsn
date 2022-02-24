@@ -104,7 +104,6 @@ const ManagementKnobXT = (props: {
       };
 
       handleSendOpen();
-      //console.log('запрос отправлен');
       soob_dispatch = 'Отправлено';
     }
 
@@ -118,20 +117,18 @@ const ManagementKnobXT = (props: {
       </Button>
       <Modal
         open={open}
-        // disableEnforceFocus
-        // onClose={handleCloseSet}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description">
         <Box sx={stylePK}>
           <Stack direction="column">
-            <Button sx={styleBatMenu} variant="contained" onClick={() => setValue(1)}>
+            <Button sx={styleBatMenu} variant="contained" onClick={() => setValue(0)}>
               Включить
             </Button>
-            <Button sx={styleBatMenu} variant="contained" onClick={() => setValue(2)}>
+            <Button sx={styleBatMenu} variant="contained" onClick={() => setValue(1)}>
               Отключить
             </Button>
             <Button sx={styleBatMenu} variant="contained" onClick={handleClose}>
-              Отмена
+              Выход
             </Button>
             {ButtonDo()}
           </Stack>
