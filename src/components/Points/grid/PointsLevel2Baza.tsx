@@ -250,7 +250,7 @@ const PointsLevel2Baza = (props: {
 
           <Grid item xs sx={styleXTG04}>
             <Grid container>
-              <PointsXt112Comp11 xctrll={props.xctrll} xtt={xtProps} crossroad={props.crossroad} />
+              <PointsLevel2BazaDiogram xctrll={props.xctrll} xtt={xtProps} crossroad={props.crossroad} />
             </Grid>
           </Grid>
         </Stack>

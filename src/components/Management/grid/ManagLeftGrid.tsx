@@ -51,6 +51,8 @@ const ManagementLeftGrid = (props: { open: boolean; ws: WebSocket; tflightt: Tfl
   };
 
   const [mode, setMode] = React.useState(1);
+  //const [reGion, setReGion] = React.useState('1');
+  let reGion = '1';
   const [areaa, setAreaa] = React.useState('1');
   const [subArea, setSubArea] = React.useState(1);
 
@@ -60,20 +62,26 @@ const ManagementLeftGrid = (props: { open: boolean; ws: WebSocket; tflightt: Tfl
 
   const handleClickGl = () => {
     setMode(1);
+    setAreaa("0");
+    setSubArea(0);
   };
 
   const handleClock = (area: string) => {
-    setAreaa(area);
     setMode(2);
+    setAreaa(area);
+    setSubArea(0);
   };
 
   const handleClick = (area: string, subarea: number) => {
+    setMode(3);
     setAreaa(area);
     setSubArea(subarea);
-    setMode(3);
+    
   };
 
   if (props.open) {
+    //setReGion(points[0].region.num)
+    reGion = points[0].region.num;
     masRab[0] = points[0].area.num;
     mass[0] = {
       areaNum: points[0].area.num,
@@ -168,7 +176,9 @@ const ManagementLeftGrid = (props: { open: boolean; ws: WebSocket; tflightt: Tfl
     return (
       <Grid item xs={12} sx={{ marginLeft: 0, marginTop: 1 }}>
         <Stack direction="row">
-          <ManagementKnobPK ws={props.ws} />
+          <ManagementKnobPK
+            open={props.open} ws={props.ws} region={reGion}
+            areaa={areaa} subArea={subArea} />
           <ManagementKnobSK ws={props.ws} />
           <ManagementKnobNK ws={props.ws} />
           <ManagementKnobXT ws={props.ws} />
@@ -186,10 +196,8 @@ const ManagementLeftGrid = (props: { open: boolean; ws: WebSocket; tflightt: Tfl
         <Grid container>
           <FourKnops />
           <ManagementRightGrid
-            open={props.open}
-            tflightt={points}
-            mode={mode}
-            areaa={areaa}
+            open={props.open} tflightt={points}
+            mode={mode} areaa={areaa}
             subArea={subArea}
           />
         </Grid>
