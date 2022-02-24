@@ -11,11 +11,11 @@ const ManagementKnobPK = (props: {
   areaa: string;
   subArea: number;
 }) => {
-
-  console.log('props:', props.open, props.region, props.areaa, props.subArea)
+  console.log('props:', props.open, props.region, props.areaa, props.subArea);
 
   const [value, setValue] = React.useState(21);
   const [open, setOpen] = React.useState(false);
+  let soob_dispatch = '';
 
   const handleOpen = () => {
     setOpen(true);
@@ -31,7 +31,7 @@ const ManagementKnobPK = (props: {
       }
     };
     handleSendOpen();
-  }
+  };
 
   const handleClose = () => {
     setOpen(false);
@@ -48,7 +48,7 @@ const ManagementKnobPK = (props: {
       }
     };
     handleSendOpen();
-  }
+  };
 
   const stylePK = {
     position: 'absolute',
@@ -77,22 +77,30 @@ const ManagementKnobPK = (props: {
 
   const ButtonKnob = (val: number) => {
     let valumeKnob: string = 'Авт';
-    if (val !== 0) valumeKnob = val.toString()
+    if (val !== 0) valumeKnob = val.toString();
 
     return (
       <Button sx={styleBatMenu} variant="contained" onClick={() => setValue(val)}>
         {valumeKnob}
       </Button>
-    )
-  }
+    );
+  };
 
   const ButtonDo = () => {
     if (value !== 21) {
       const handleSendOpen = () => {
         if (props.ws !== null) {
           if (props.ws.readyState === WebSocket.OPEN) {
-            props.ws.send(JSON.stringify({ type: 'dispatch', cmd: 5, param: value, 
-            region: props.region, area: props.areaa, subarea: props.subArea }));
+            props.ws.send(
+              JSON.stringify({
+                type: 'dispatch',
+                cmd: 5,
+                param: value,
+                region: props.region,
+                area: props.areaa,
+                subarea: props.subArea,
+              }),
+            );
           } else {
             setTimeout(() => {
               handleSendOpen();
@@ -100,10 +108,14 @@ const ManagementKnobPK = (props: {
           }
         }
       };
+
       handleSendOpen();
-      console.log('запрос отправлен')
+      console.log('запрос отправлен');
+      soob_dispatch = 'Отправлено';
     }
-  }
+
+    return <Box>{soob_dispatch}</Box>;
+  };
 
   return (
     <div>
@@ -132,8 +144,8 @@ const ManagementKnobPK = (props: {
             <Button sx={styleBatMenu} variant="contained" onClick={handleClose}>
               Выход
             </Button>
+            {ButtonDo()}
           </Stack>
-          {ButtonDo()}
         </Box>
       </Modal>
     </div>
