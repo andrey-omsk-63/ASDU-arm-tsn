@@ -70,9 +70,10 @@ const ManagementKnobPK = (props: {
   };
 
   const styleSoob = {
-    fontSize: 8,
+    fontSize: 10,
     backgroundColor: '#F1F3F4',
     color: 'blue',
+    textAlign: 'center',
   };
 
   const styleBatMenu = {
