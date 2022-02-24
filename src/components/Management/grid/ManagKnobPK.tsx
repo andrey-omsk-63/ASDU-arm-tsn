@@ -15,7 +15,7 @@ const ManagementKnobPK = (props: {
 
   const [value, setValue] = React.useState(21);
   const [open, setOpen] = React.useState(false);
-  let soob_dispatch = '';
+  let soob_dispatch = ' ';
 
   const handleOpen = () => {
     setOpen(true);
@@ -120,7 +120,7 @@ const ManagementKnobPK = (props: {
       soob_dispatch = 'Отправлено';
     }
 
-    return <Box>{soob_dispatch}</Box>;
+    return <Box sx={styleSoob}>{soob_dispatch}</Box>;
   };
 
   return (
