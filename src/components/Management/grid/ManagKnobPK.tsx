@@ -69,6 +69,12 @@ const ManagementKnobPK = (props: {
     marginRight: 1,
   };
 
+  const styleSoob = {
+    fontSize: 8,
+    backgroundColor: '#F1F3F4',
+    color: 'blue',
+  };
+
   const styleBatMenu = {
     fontSize: 12.9,
     backgroundColor: '#F1F3F4',
