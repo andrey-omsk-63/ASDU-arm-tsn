@@ -235,11 +235,11 @@ const ManagementRightGrid = (props: {
       for (let i = 0; i < mass.length; i++) {
         let prosentSv = (100 * mass[i].sost) / mass[i].koldk;
         let prosentPch = (100 * mass[i].podch) / mass[i].koldk;
-        let soobBP = '';
-        if (mass[i].isPk) soobBP = '&nbsp;ПК';
+        let soobBP = 'Назначен';
+        if (mass[i].isPk) soobBP = soobBP + '&nbsp;ПК';
         if (mass[i].isCk) soobBP = soobBP + '&nbsp;CК';
         if (mass[i].isNk) soobBP = soobBP + '&nbsp;HК';
-        if (soobBP === '') soobBP = '&nbsp;BP';
+        if (soobBP === 'Назначен') soobBP = soobBP + ' BP';
         resStr.push(
           <Grid item key={Math.random()} container>
             <Grid item key={Math.random()} xs={0.3} sx={styleMRG02}>
@@ -253,7 +253,7 @@ const ManagementRightGrid = (props: {
               подчинены&nbsp;{prosentPch.toFixed(2)}%
             </Grid>
             <Grid item key={Math.random()} xs={2.5} sx={styleMRG02}>
-              Назначен{soobBP}
+              {soobBP}
             </Grid>
             <Grid item key={Math.random()} xs={3.7} sx={styleMRG01}>
               ХТ для данного района отсутствует
