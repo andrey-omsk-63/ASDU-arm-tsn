@@ -4,6 +4,8 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
+let otpravka = true;
+
 const ManagementKnobSK = (props: {
   open: boolean;
   ws: WebSocket;
@@ -21,6 +23,7 @@ const ManagementKnobSK = (props: {
       if (props.ws !== null) {
         if (props.ws.readyState === WebSocket.OPEN) {
           props.ws.send(JSON.stringify({ type: 'stopDevices', region: '1' }));
+          otpravka = true;
         } else {
           setTimeout(() => {
             handleSendOpen();
@@ -70,7 +73,7 @@ const ManagementKnobSK = (props: {
   const styleSoob = {
     fontSize: 10,
     backgroundColor: '#F1F3F4',
-    color: 'blue',
+    color: '#5B1080',
     textAlign: 'center',
   };
 
@@ -92,18 +95,20 @@ const ManagementKnobSK = (props: {
   };
 
   const ButtonDo = () => {
-    if (value !== 21) {
+    if (value !== 21 && otpravka) {
       const handleSendOpen = () => {
         if (props.ws !== null) {
           if (props.ws.readyState === WebSocket.OPEN) {
             props.ws.send(
               JSON.stringify({
                 type: 'dispatch',
-                cmd: 6,
-                param: value,
-                region: props.region,
-                area: props.areaa,
-                subarea: props.subArea,
+                data: {
+                  cmd: 6,
+                  param: value,
+                  region: props.region,
+                  area: props.areaa,
+                  subarea: props.subArea,
+                },
               }),
             );
           } else {
@@ -116,6 +121,7 @@ const ManagementKnobSK = (props: {
 
       handleSendOpen();
       soob_dispatch = 'Отправлено';
+      otpravka = false;
     }
 
     return <Box sx={styleSoob}>{soob_dispatch}</Box>;

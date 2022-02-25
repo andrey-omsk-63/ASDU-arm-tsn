@@ -386,6 +386,7 @@ const StatisticXT = (props: { open: boolean; statist: Statistic[]; areaid: numbe
   const CreateMatrix = () => {
     const step: number = points[areaId].Statistics[0].TLen;
     const typer = points[areaId].Statistics[0].Type;
+    const kolDatas = points[areaId].Statistics[0].Datas.length;
     let rows = 1440 / step;
     let time = -step;
     for (let i = 0; i < rows; i++) {
@@ -400,6 +401,17 @@ const StatisticXT = (props: { open: boolean; statist: Statistic[]; areaid: numbe
         Min: minutes,
         Datas: [],
       };
+      for (let j = 0; j < kolDatas; j++) {
+        matrix[i].Datas[j] = {
+          ch: j + 1,
+          st: 0,
+          in: 0,
+          sp: 0,
+          d: 0,
+          o: 0,
+          g: 0
+        }
+      }
     }
   };
 
@@ -409,7 +421,9 @@ const StatisticXT = (props: { open: boolean; statist: Statistic[]; areaid: numbe
     for (let i = 0; i < points[areaId].Statistics.length; i++) {
       let numInMatrix =
         (points[areaId].Statistics[i].Hour * 60 + points[areaId].Statistics[i].Min) / step;
-      matrix[numInMatrix].Datas = points[areaId].Statistics[i].Datas;
+      for (let j = 0; j < points[areaId].Statistics[i].Datas.length; j++) {
+        matrix[numInMatrix].Datas[j] = points[areaId].Statistics[i].Datas[j];
+      }
     }
   };
 

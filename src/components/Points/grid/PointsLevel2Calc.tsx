@@ -41,6 +41,9 @@ const PointsLevel2Calc = (props: {
   const xtProps = props.xtt;
   const points = props.xctrll[xtProps];
 
+  const namer = points.xctrls[props.crossroad].name;
+  //const namer = props.crossroad;
+
   const labels: string[] = [];
   let data: DataGl = {
     labels,
@@ -176,13 +179,14 @@ const PointsLevel2Calc = (props: {
     return timLiner;
   };
 
-  const namer = points.xctrls[0].name;
-
   const PointsLevel2CalcTab1Stroka = () => {
     let resStr = [];
     let pusto = false;
     let kakchestvo = '';
     if (points.results !== null) {
+
+      console.log('points.results[namer]', namer, points)
+      
       for (let i = 0; i < points.results[namer].length; i++) {
         if (!points.results[namer][i].Good) {
           pusto = true;

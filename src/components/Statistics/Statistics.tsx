@@ -73,7 +73,7 @@ const Statistics = (props: {
           points[i].region === pointsEtalon[j].region &&
           points[i].area === pointsEtalon[j].area
         ) {
-          console.log('Stat совподение записей i=', i, 'j=', j);
+          //console.log('Stat совподение записей i=', i, 'j=', j);
           newRecord = false;
           pointsEtalon[j] = points[i];
         }
@@ -119,7 +119,7 @@ const Statistics = (props: {
       );
     } else {
       for (let i = 0; i < pointsEtalon.length; i++) {
-        labl = 'XT:' + (i + 1).toString() + ':1';
+        labl = pointsEtalon[i].area.toString() + ':' + pointsEtalon[i].id.toString();
         resSps.push(<Tab key={i} sx={styleSt1} label={labl} />);
       }
     }
