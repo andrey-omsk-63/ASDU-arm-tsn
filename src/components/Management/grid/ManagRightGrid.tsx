@@ -76,6 +76,9 @@ const ManagementRightGrid = (props: {
       mass[j].podch++;
       podchGl++;
     }
+    if (points[i].StatusCommandDU.IsPK) mass[j].isPk = true;
+    if (points[i].StatusCommandDU.IsCK) mass[j].isCK = true;
+    if (points[i].StatusCommandDU.IsNK) mass[j].isNK = true;
   };
 
   switch (props.mode) {
@@ -87,6 +90,9 @@ const ManagementRightGrid = (props: {
           koldk: 1,
           sost: 0,
           podch: 0,
+          isPk: false,
+          isCk: false,
+          isNk: false,
         };
         CounterMode(0, 0);
         j = 0;
@@ -98,6 +104,9 @@ const ManagementRightGrid = (props: {
               koldk: 1,
               sost: 0,
               podch: 0,
+              isPk: false,
+              isCk: false,
+              isNk: false,
             };
           } else {
             mass[j].koldk++;
@@ -117,6 +126,9 @@ const ManagementRightGrid = (props: {
           koldk: 1,
           sost: 0,
           podch: 0,
+          isPk: false,
+          isCk: false,
+          isNk: false,
         };
         CounterMode(0, 0);
         j = 0;
@@ -129,6 +141,9 @@ const ManagementRightGrid = (props: {
               koldk: 1,
               sost: 0,
               podch: 0,
+              isPk: false,
+              isCk: false,
+              isNk: false,
             };
           } else {
             mass[j].koldk++;
@@ -220,6 +235,11 @@ const ManagementRightGrid = (props: {
       for (let i = 0; i < mass.length; i++) {
         let prosentSv = (100 * mass[i].sost) / mass[i].koldk;
         let prosentPch = (100 * mass[i].podch) / mass[i].koldk;
+        let soobBP = '';
+        if (mass[i].isPk) soobBP = '&nbsp;ПК';
+        if (mass[i].isCk) soobBP = soobBP + '&nbsp;CК';
+        if (mass[i].isNk) soobBP = soobBP + '&nbsp;HК';
+        if (soobBP === '') soobBP = '&nbsp;BP';
         resStr.push(
           <Grid item key={Math.random()} container>
             <Grid item key={Math.random()} xs={0.3} sx={styleMRG02}>
@@ -233,7 +253,7 @@ const ManagementRightGrid = (props: {
               подчинены&nbsp;{prosentPch.toFixed(2)}%
             </Grid>
             <Grid item key={Math.random()} xs={2.5} sx={styleMRG02}>
-              Назначен ВР
+              Назначен{soobBP}
             </Grid>
             <Grid item key={Math.random()} xs={3.7} sx={styleMRG01}>
               ХТ для данного района отсутствует
