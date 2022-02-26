@@ -236,9 +236,9 @@ const ManagementRightGrid = (props: {
         let prosentSv = (100 * mass[i].sost) / mass[i].koldk;
         let prosentPch = (100 * mass[i].podch) / mass[i].koldk;
         let soobBP = 'Назначен';
-        if (mass[i].isPk) soobBP = soobBP + '&nbsp;ПК';
-        if (mass[i].isCk) soobBP = soobBP + '&nbsp;CК';
-        if (mass[i].isNk) soobBP = soobBP + '&nbsp;HК';
+        if (mass[i].isPk) soobBP = soobBP + ' ПК';
+        if (mass[i].isCk) soobBP = soobBP + ' CК';
+        if (mass[i].isNk) soobBP = soobBP + ' HК';
         if (soobBP === 'Назначен') soobBP = soobBP + ' BP';
         resStr.push(
           <Grid item key={Math.random()} container>
@@ -267,6 +267,11 @@ const ManagementRightGrid = (props: {
     const StrokaSpsMode2 = () => {
       let resStr = [];
       for (let i = 0; i < mass.length; i++) {
+        let soobBP = 'Назначен';
+        if (mass[i].isPk) soobBP = soobBP + ' ПК';
+        if (mass[i].isCk) soobBP = soobBP + ' CК';
+        if (mass[i].isNk) soobBP = soobBP + ' HК';
+        if (soobBP === 'Назначен') soobBP = soobBP + ' BP';
         resStr.push(
           <Grid item key={Math.random()} container>
             <Grid item key={Math.random()} xs={0.3} sx={styleMRG02}>
@@ -280,7 +285,7 @@ const ManagementRightGrid = (props: {
               &nbsp;подчинены&nbsp;{mass[i].podch}
             </Grid>
             <Grid item key={Math.random()} xs={2.4} sx={styleMRG02}>
-              Назначен ВР
+              {soobBP}
             </Grid>
             <Grid item key={Math.random()} xs={3.7} sx={styleMRG01}>
               ХТ для данного района отсутствует
