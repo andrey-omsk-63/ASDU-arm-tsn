@@ -27,6 +27,8 @@ const ManagementKnobPK = (props: {
         if (props.ws.readyState === WebSocket.OPEN) {
           props.ws.send(JSON.stringify({ type: 'stopDevices', region: props.region }));
           otpravka = true;
+          soobDispatch = '';
+          nomDispatch = 'Авт';
         } else {
           setTimeout(() => {
             handleSendOpen();
@@ -135,6 +137,9 @@ const ManagementKnobPK = (props: {
         nomDispatch = 'ПК ' + value.toString();
       }
       otpravka = false;
+    } else {
+      soobDispatch = '';
+      nomDispatch = 'Авт';
     }
 
     return (
