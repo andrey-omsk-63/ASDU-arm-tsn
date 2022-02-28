@@ -4,8 +4,6 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
-let otpravka = true;
-
 const ManagementKnobPK = (props: {
   open: boolean;
   ws: WebSocket;
@@ -17,6 +15,7 @@ const ManagementKnobPK = (props: {
 
   const [value, setValue] = React.useState(21);
   const [open, setOpen] = React.useState(false);
+  let otpravka = true;
   let soobDispatch = '';
   let nomDispatch = 'Авт';
 
