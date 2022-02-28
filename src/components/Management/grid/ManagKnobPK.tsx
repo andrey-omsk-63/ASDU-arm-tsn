@@ -5,8 +5,6 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
 let otpravka = true;
-let soobDispatch = '';
-let nomDispatch = 'Авт';
 
 const ManagementKnobPK = (props: {
   open: boolean;
@@ -19,6 +17,8 @@ const ManagementKnobPK = (props: {
 
   const [value, setValue] = React.useState(21);
   const [open, setOpen] = React.useState(false);
+  let soobDispatch = '';
+  let nomDispatch = 'Авт';
 
   const handleOpen = () => {
     setOpen(true);
@@ -27,8 +27,8 @@ const ManagementKnobPK = (props: {
         if (props.ws.readyState === WebSocket.OPEN) {
           props.ws.send(JSON.stringify({ type: 'stopDevices', region: props.region }));
           otpravka = true;
-          soobDispatch = '';
-          nomDispatch = 'Авт';
+          // soobDispatch = '';
+          // nomDispatch = 'Авт';
         } else {
           setTimeout(() => {
             handleSendOpen();
@@ -46,8 +46,8 @@ const ManagementKnobPK = (props: {
       if (props.ws !== null) {
         if (props.ws.readyState === WebSocket.OPEN) {
           props.ws.send(JSON.stringify({ type: 'getDevices', region: props.region }));
-          soobDispatch = '';
-          nomDispatch = 'Авт';
+          // soobDispatch = '';
+          // nomDispatch = 'Авт';
         } else {
           setTimeout(() => {
             handleSendOpen();
