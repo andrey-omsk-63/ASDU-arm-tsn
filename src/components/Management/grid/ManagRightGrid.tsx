@@ -10,6 +10,7 @@ const ManagementRightGrid = (props: {
   mode: number;
   areaa: string;
   subArea: number;
+  masxt: any;
 }) => {
   const styleMgl = {
     padding: 1,

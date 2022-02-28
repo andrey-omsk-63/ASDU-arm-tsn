@@ -17,7 +17,8 @@ const ManagementKnobPK = (props: {
 
   const [value, setValue] = React.useState(21);
   const [open, setOpen] = React.useState(false);
-  let soob_dispatch = '.';
+  let soobDispatch = '';
+  let nomDispatch = 'Авт';
 
   const handleOpen = () => {
     setOpen(true);
@@ -58,7 +59,7 @@ const ManagementKnobPK = (props: {
     top: '46%',
     left: '29.3%',
     transform: 'translate(-50%, -50%)',
-    width: 64,
+    width: 69,
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -73,10 +74,15 @@ const ManagementKnobPK = (props: {
   };
 
   const styleSoob = {
-    fontSize: 10,
+    fontSize: 11,
     backgroundColor: '#F1F3F4',
     color: '#5B1080',
     textAlign: 'center',
+  };
+
+  const styleSoobPusto = {
+    backgroundColor: '#F1F3F4',
+    color: '#F1F3F4',
   };
 
   const styleBatMenu = {
@@ -122,11 +128,24 @@ const ManagementKnobPK = (props: {
       };
 
       handleSendOpen();
-      soob_dispatch = 'Отправлено';
+      soobDispatch = 'Отправлено';
+      if (value !== 0) {
+        nomDispatch = 'ПК ' + value.toString();
+      } 
       otpravka = false;
     }
 
-    return <Box sx={styleSoob}>{soob_dispatch}</Box>;
+    return (
+      <>{soobDispatch === 'Отправлено' && (
+        <>
+          <Box sx={styleSoobPusto}>Pusto</Box>
+          <Box sx={styleSoob}><b>{soobDispatch}</b></Box>
+          <Box sx={styleSoob}><b>{nomDispatch}</b></Box>
+          <Box sx={styleSoobPusto}>Pusto</Box>
+        </>
+      )}
+      </>
+    )
   };
 
   return (

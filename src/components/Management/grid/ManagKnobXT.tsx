@@ -128,10 +128,10 @@ const ManagementKnobXT = (props: {
         <Box sx={stylePK}>
           <Stack direction="column">
             <Button sx={styleBatMenu} variant="contained" onClick={() => setValue(0)}>
-              Включить
+              Отключить
             </Button>
             <Button sx={styleBatMenu} variant="contained" onClick={() => setValue(1)}>
-              Отключить
+              Включить
             </Button>
             <Button sx={styleBatMenu} variant="contained" onClick={handleClose}>
               Выход

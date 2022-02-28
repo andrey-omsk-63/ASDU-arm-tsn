@@ -50,7 +50,7 @@ const App = () => {
   const [isOpenDev, setIsOpenDev] = React.useState(false);
   const [pointsSt, setPointsSt] = React.useState<Array<Statistic>>([]);
   const [isOpenSt, setIsOpenSt] = React.useState(false);
-
+  
   const host =
     'wss://' + window.location.host + window.location.pathname + 'W' + window.location.search;
   // let WS: React.MutableRefObject<WebSocket> = {};
@@ -118,7 +118,7 @@ const App = () => {
             </Stack>
           </Box>
           <TabPanel value="1">
-            {WS !== null && (<><Management open={isOpenDev} ws={WS} points={pointsTfl} /></>)}
+            {WS !== null && (<><Management open={isOpenDev} ws={WS} points={pointsTfl} xctrll={pointsXctrl} /></>)}
           </TabPanel>
           <TabPanel value="2">
             {WS !== null && (<><Points open={isOpenInf} ws={WS} xctrll={pointsXctrl} /></>)}

@@ -11,19 +11,20 @@ import ManagementKnobNK from './ManagKnobNK';
 import ManagementKnobXT from './ManagKnobXT';
 
 import { Tflight } from '../../../interfaceMNG.d';
+import { XctrlInfo } from '../../../interfaceGl.d';
 
-const ManagementLeftGrid = (props: { open: boolean; ws: WebSocket; tflightt: Tflight[] }) => {
+const ManagementLeftGrid = (props: { open: boolean; ws: WebSocket; tflightt: Tflight[]; xctrll: XctrlInfo[]; }) => {
   const points = props.tflightt;
+  const pointsXT = props.xctrll;
+  let masXT: any = [];
 
-  //console.log('PoinsMGLeft:', props.open, points)
+  //console.log('pointsXT:', pointsXT)
 
   const styleMG01 = {
     border: 1,
     borderRadius: 1,
     borderColor: 'primary.main',
     margin: 0.5,
-    //maxHeight: '99.2%',
-    //minHeight: '99.2%',
     height: '94vh',
   };
 
@@ -51,10 +52,9 @@ const ManagementLeftGrid = (props: { open: boolean; ws: WebSocket; tflightt: Tfl
   };
 
   const [mode, setMode] = React.useState(1);
-  //const [reGion, setReGion] = React.useState('1');
   let reGion = '1';
-  const [areaa, setAreaa] = React.useState('1');
-  const [subArea, setSubArea] = React.useState(1);
+  const [areaa, setAreaa] = React.useState('0');
+  const [subArea, setSubArea] = React.useState(0);
 
   let mass: any = [];
   let masRab: any = [];
@@ -103,6 +103,13 @@ const ManagementLeftGrid = (props: { open: boolean; ws: WebSocket; tflightt: Tfl
     masAreaNum = masRab.filter((element: any, index: any) => {
       return masRab.indexOf(element) === index;
     });
+    // массив ХТ
+    for (let i = 0; i < pointsXT.length; i++) {
+      masXT[i] = {
+        areaXT: pointsXT[i].area,
+        subareaXT: pointsXT[i].subarea,
+      }
+    }
   }
 
   const SpisAreaMLG = (props: { nom: string }) => {
@@ -222,6 +229,7 @@ const ManagementLeftGrid = (props: { open: boolean; ws: WebSocket; tflightt: Tfl
             mode={mode}
             areaa={areaa}
             subArea={subArea}
+            masxt = {masXT}
           />
         </Grid>
       </Grid>

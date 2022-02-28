@@ -5,6 +5,7 @@ import Grid from '@mui/material/Grid';
 import ManagementLeftGrid from './grid/ManagLeftGrid';
 
 import { Tflight } from '../../interfaceMNG.d';
+import { XctrlInfo } from '../../interfaceGl.d';
 
 //import axios from 'axios';
 
@@ -13,9 +14,9 @@ let flagEtalon = true;
 
 const Management = (props: {
   open: boolean;
-  //ws: React.MutableRefObject<WebSocket>;
   ws: WebSocket;
   points: Tflight[];
+  xctrll: XctrlInfo[];
 }) => {
   //console.log('PoinsMG:', props.open, props.points);
 
@@ -81,9 +82,9 @@ const Management = (props: {
           points[i].subarea === pointsEtalon[j].subarea
         ) {
           //console.log('MNG совподение записей i=', i, 'j=', j);
-          newRecord = false; 
+          newRecord = false;
           pointsEtalon[j] = points[i];
-        } 
+        }
       }
       if (newRecord) {
         console.log('MNG новая запись i=', i);
@@ -106,7 +107,7 @@ const Management = (props: {
         {isOpen && (
           <>
             {/* <ManagementLeftGrid open={isOpen} tflightt={points} /> */}
-            <ManagementLeftGrid open={isOpen} ws={props.ws} tflightt={pointsEtalon} />
+            <ManagementLeftGrid open={isOpen} ws={props.ws} tflightt={pointsEtalon} xctrll={props.xctrll} />
           </>
         )}
       </Grid>

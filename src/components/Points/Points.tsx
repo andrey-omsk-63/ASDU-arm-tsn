@@ -95,7 +95,7 @@ const Points = (props: { open: boolean; ws: WebSocket; xctrll: XctrlInfo[] }) =>
       );
     } else {
       for (let i = 0; i < pointsEtalon.length; i++) {
-        labl = 'XT:' + (i + 1).toString() + ':1';
+        labl = 'XT:' + pointsEtalon[i].area.toString() + ':' + pointsEtalon[i].subarea.toString();
         resSps.push(<Tab key={i} sx={stylePXt1} label={labl} />);
       }
     }
