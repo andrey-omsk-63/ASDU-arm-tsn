@@ -86,7 +86,7 @@ const PointsLevel2Baza = (props: {
                 <div>
                   <b>Максимум обратного</b>
                 </div>
-                <p> 950:439</p>
+                {/* <p> 950:439</p> */}
               </Box>
             </Grid>
             <Grid item xs sx={{ marginTop: 0, border: 0 }}>
@@ -250,7 +250,11 @@ const PointsLevel2Baza = (props: {
 
           <Grid item xs sx={styleXTG04}>
             <Grid container>
-              <PointsLevel2BazaDiogram xctrll={props.xctrll} xtt={xtProps} crossroad={props.crossroad} />
+              <PointsLevel2BazaDiogram
+                xctrll={props.xctrll}
+                xtt={xtProps}
+                crossroad={props.crossroad}
+              />
             </Grid>
           </Grid>
         </Stack>

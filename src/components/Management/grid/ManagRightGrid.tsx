@@ -12,6 +12,8 @@ const ManagementRightGrid = (props: {
   subArea: number;
   masxt: any;
 }) => {
+  console.log('masxt:', props.masxt);
+
   const styleMgl = {
     padding: 1,
     margin: 1,
@@ -94,6 +96,7 @@ const ManagementRightGrid = (props: {
           isPk: false,
           isCk: false,
           isNk: false,
+          isXT: false,
         };
         CounterMode(0, 0);
         j = 0;
@@ -108,6 +111,7 @@ const ManagementRightGrid = (props: {
               isPk: false,
               isCk: false,
               isNk: false,
+              isXT: false,
             };
           } else {
             mass[j].koldk++;
@@ -130,6 +134,7 @@ const ManagementRightGrid = (props: {
           isPk: false,
           isCk: false,
           isNk: false,
+          isXT: false,
         };
         CounterMode(0, 0);
         j = 0;
@@ -145,6 +150,7 @@ const ManagementRightGrid = (props: {
               isPk: false,
               isCk: false,
               isNk: false,
+              isXT: false,
             };
           } else {
             mass[j].koldk++;

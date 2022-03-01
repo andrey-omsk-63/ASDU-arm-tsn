@@ -74,7 +74,7 @@ const ManagementKnobXT = (props: {
   };
 
   const styleSoob = {
-    fontSize: 10,
+    fontSize: 12,
     backgroundColor: '#F1F3F4',
     color: '#5B1080',
     textAlign: 'center',
