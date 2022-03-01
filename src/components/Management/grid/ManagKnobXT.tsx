@@ -5,6 +5,8 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
 let otpravka = true;
+let soobDispatch = '';
+let nomDispatch = 'Вкл';
 
 const ManagementKnobXT = (props: {
   open: boolean;
@@ -15,7 +17,6 @@ const ManagementKnobXT = (props: {
 }) => {
   const [value, setValue] = React.useState(21);
   const [open, setOpen] = React.useState(false);
-  let soob_dispatch = '.';
 
   const handleOpen = () => {
     setOpen(true);
@@ -36,11 +37,14 @@ const ManagementKnobXT = (props: {
 
   const handleClose = () => {
     setOpen(false);
-    //setValue(0)
+    setValue(21);
     const handleSendOpen = () => {
       if (props.ws !== null) {
         if (props.ws.readyState === WebSocket.OPEN) {
           props.ws.send(JSON.stringify({ type: 'getDevices', region: props.region }));
+          otpravka = false;
+          soobDispatch = '';
+          nomDispatch = 'Вкл';
         } else {
           setTimeout(() => {
             handleSendOpen();
@@ -76,6 +80,11 @@ const ManagementKnobXT = (props: {
     textAlign: 'center',
   };
 
+  const styleSoobPusto = {
+    backgroundColor: '#F1F3F4',
+    color: '#F1F3F4',
+  };
+
   const styleBatMenu = {
     fontSize: 12.9,
     backgroundColor: '#F1F3F4',
@@ -109,11 +118,30 @@ const ManagementKnobXT = (props: {
       };
 
       handleSendOpen();
-      soob_dispatch = 'Отправлено';
+      soobDispatch = 'Отправлено';
+      if (value === 0) nomDispatch = 'Откл';
       otpravka = false;
+    } else {
+      soobDispatch = '';
+      nomDispatch = 'Вкл';
     }
 
-    return <Box sx={styleSoob}>{soob_dispatch}</Box>;
+    return (
+      <>
+        {soobDispatch === 'Отправлено' && (
+          <>
+            <Box sx={styleSoobPusto}>Pusto</Box>
+            <Box sx={styleSoob}>
+              <b>{soobDispatch}</b>
+            </Box>
+            <Box sx={styleSoob}>
+              <b>{nomDispatch}</b>
+            </Box>
+            <Box sx={styleSoobPusto}>Pusto</Box>
+          </>
+        )}
+      </>
+    );
   };
 
   return (

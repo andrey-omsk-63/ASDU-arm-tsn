@@ -131,7 +131,7 @@ const ManagementKnobSK = (props: {
       handleSendOpen();
       soobDispatch = 'Отправлено';
       if (value !== 0) {
-        nomDispatch = 'ПК ' + value.toString();
+        nomDispatch = 'СК ' + value.toString();
       }
       otpravka = false;
     } else {
