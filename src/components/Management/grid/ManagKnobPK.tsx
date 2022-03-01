@@ -15,8 +15,6 @@ const ManagementKnobPK = (props: {
   areaa: string;
   subArea: number;
 }) => {
-  //console.log('props:', props.open, props.region, props.areaa, props.subArea);
-
   const [value, setValue] = React.useState(21);
   const [open, setOpen] = React.useState(false);
 
@@ -27,8 +25,6 @@ const ManagementKnobPK = (props: {
         if (props.ws.readyState === WebSocket.OPEN) {
           props.ws.send(JSON.stringify({ type: 'stopDevices', region: props.region }));
           otpravka = true;
-          // soobDispatch = '';
-          // nomDispatch = 'Авт';
         } else {
           setTimeout(() => {
             handleSendOpen();

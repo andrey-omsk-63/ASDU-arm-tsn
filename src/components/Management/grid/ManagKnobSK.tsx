@@ -5,6 +5,8 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
 let otpravka = true;
+let soobDispatch = '';
+let nomDispatch = 'Авт';
 
 const ManagementKnobSK = (props: {
   open: boolean;
@@ -15,7 +17,6 @@ const ManagementKnobSK = (props: {
 }) => {
   const [value, setValue] = React.useState(21);
   const [open, setOpen] = React.useState(false);
-  let soob_dispatch = '.';
 
   const handleOpen = () => {
     setOpen(true);
@@ -36,11 +37,14 @@ const ManagementKnobSK = (props: {
 
   const handleClose = () => {
     setOpen(false);
-    //setValue(0)
+    setValue(21);
     const handleSendOpen = () => {
       if (props.ws !== null) {
         if (props.ws.readyState === WebSocket.OPEN) {
           props.ws.send(JSON.stringify({ type: 'getDevices', region: '1' }));
+          otpravka = false;
+          soobDispatch = '';
+          nomDispatch = 'Авт';
         } else {
           setTimeout(() => {
             handleSendOpen();
@@ -75,6 +79,11 @@ const ManagementKnobSK = (props: {
     backgroundColor: '#F1F3F4',
     color: '#5B1080',
     textAlign: 'center',
+  };
+
+  const styleSoobPusto = {
+    backgroundColor: '#F1F3F4',
+    color: '#F1F3F4',
   };
 
   const styleBatMenu = {
@@ -120,11 +129,32 @@ const ManagementKnobSK = (props: {
       };
 
       handleSendOpen();
-      soob_dispatch = 'Отправлено';
+      soobDispatch = 'Отправлено';
+      if (value !== 0) {
+        nomDispatch = 'ПК ' + value.toString();
+      }
       otpravka = false;
+    } else {
+      soobDispatch = '';
+      nomDispatch = 'Авт';
     }
 
-    return <Box sx={styleSoob}>{soob_dispatch}</Box>;
+    return (
+      <>
+        {soobDispatch === 'Отправлено' && (
+          <>
+            <Box sx={styleSoobPusto}>Pusto</Box>
+            <Box sx={styleSoob}>
+              <b>{soobDispatch}</b>
+            </Box>
+            <Box sx={styleSoob}>
+              <b>{nomDispatch}</b>
+            </Box>
+            <Box sx={styleSoobPusto}>Pusto</Box>
+          </>
+        )}
+      </>
+    );
   };
 
   return (
