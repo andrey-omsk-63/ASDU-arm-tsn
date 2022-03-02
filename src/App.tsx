@@ -58,7 +58,7 @@ const App = () => {
     top: '22.8%',
     left: '47.7%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    width: 500,
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -66,7 +66,7 @@ const App = () => {
   };
 
   const styleBatMenu = {
-    fontSize: 15,
+    fontSize: 12,
     backgroundColor: '#F1F3F4',
     color: 'red',
     marginTop: 1,
@@ -78,17 +78,18 @@ const App = () => {
   };
 
   const EndSeans = () => {
-    let soob = 'В Арм-е Технолога системы работает пользователь ' + bsLogin;
+    let soob = 'В Арм-е Технолога системы работает пользователь ' + 'bsLogin';
     return (
       <>
         {bsLogin === '' && (
           <>
             <Box sx={styleMod}>
-              <Box sx={styleBatMenu}>{soob}</Box>
-
-              <Button sx={styleBatMenu} variant="contained" onClick={handleClose}>
-                Выход
-              </Button>
+              <Box sx={{ textAlign: 'center', fontSize: 14, color: 'red' }}>{soob}</Box>
+              <Box sx={{ textAlign: 'center' }}>
+                <Button sx={styleBatMenu} variant="contained" onClick={handleClose}>
+                  Выход
+                </Button>
+              </Box>
             </Box>
           </>
         )}
