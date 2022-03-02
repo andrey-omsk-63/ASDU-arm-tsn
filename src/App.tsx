@@ -58,7 +58,7 @@ const App = () => {
     top: '22.8%',
     left: '47.7%',
     transform: 'translate(-50%, -50%)',
-    width: 164,
+    width: 400,
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -68,8 +68,9 @@ const App = () => {
   const styleBatMenu = {
     fontSize: 15,
     backgroundColor: '#F1F3F4',
-    color: 'black',
+    color: 'red',
     marginTop: 1,
+    textAlign: 'center',
   };
 
   const handleClose = () => {
@@ -77,7 +78,7 @@ const App = () => {
   };
 
   const EndSeans = () => {
-    let soob = 'В Арм-е Технолога системы работает ' + bsLogin;
+    let soob = 'В Арм-е Технолога системы работает пользователь ' + bsLogin;
     return (
       <>
         {bsLogin === '' && (
