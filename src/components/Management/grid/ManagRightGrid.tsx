@@ -165,11 +165,13 @@ const ManagementRightGrid = (props: {
           console.log('mass[i].areaNum:', mass[i].areaNum, props.masxt[j].areaXT);
           console.log('mass[i].subareaNum:', mass[i].subareaNum, props.masxt[j].subareaXT);
           if (
-            mass[i].areaNum === props.masxt[j].areaXT &&
+            parseInt(mass[i].areaNum) === props.masxt[j].areaXT &&
             mass[i].subareaNum === props.masxt[j].subareaXT
           ) {
-            console.log('i:', i, 'j:', j);
+            console.log('!!!!', 'i:', i, 'j:', j);
             mass[i].isXT = true;
+          } else {
+            console.log('????', 'i:', i, 'j:', j);
           }
         }
       }
