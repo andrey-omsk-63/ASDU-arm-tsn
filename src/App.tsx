@@ -62,15 +62,15 @@ const App = () => {
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
-    p: 1,
+    p: 5,
   };
 
   const styleBatMenu = {
-    fontSize: 12,
+    fontSize: 14,
     backgroundColor: '#F1F3F4',
     color: 'red',
     marginTop: 1,
-    textAlign: 'center',
+    textTransform: 'unset !important',
   };
 
   const handleClose = () => {
@@ -78,13 +78,13 @@ const App = () => {
   };
 
   const EndSeans = () => {
-    let soob = 'В Арм-е Технолога системы работает пользователь ' + 'bsLogin';
+    let soob = 'В Арм-е Технолога системы работает пользователь ' + bsLogin;
     return (
       <>
         {bsLogin === '' && (
           <>
             <Box sx={styleMod}>
-              <Box sx={{ textAlign: 'center', fontSize: 14, color: 'red' }}>{soob}</Box>
+              <Box sx={{ textAlign: 'center', fontSize: 16, color: 'red' }}>{soob}</Box>
               <Box sx={{ textAlign: 'center' }}>
                 <Button sx={styleBatMenu} variant="contained" onClick={handleClose}>
                   Выход
@@ -104,11 +104,6 @@ const App = () => {
   const [pointsSt, setPointsSt] = React.useState<Array<Statistic>>([]);
   const [isOpenSt, setIsOpenSt] = React.useState(false);
   const [bsLogin, setBsLogin] = React.useState('');
-
-  // const EndSeans = () => {
-  //   console.log('data_busy4:', bsLogin);
-
-  // }
 
   const host =
     'wss://' + window.location.host + window.location.pathname + 'W' + window.location.search;
@@ -161,11 +156,11 @@ const App = () => {
 
   const [value, setValue] = React.useState('1');
 
-  if (bsLogin !== '') {
-    let soob = 'В Арм-е Технолога системы работает ' + bsLogin;
-    alert(soob);
-    //window.close();
-  }
+  // if (bsLogin !== '') {
+  //   let soob = 'В Арм-е Технолога системы работает ' + bsLogin;
+  //   alert(soob);
+  //   window.close();
+  // }
 
   return (
     <>
