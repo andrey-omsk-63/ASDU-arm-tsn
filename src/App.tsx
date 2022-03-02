@@ -66,24 +66,24 @@ const App = () => {
   };
 
   const styleBatMenu = {
-    fontSize: 12.9,
+    fontSize: 15,
     backgroundColor: '#F1F3F4',
     color: 'black',
     marginTop: 1,
   };
 
   const handleClose = () => {
-    //setOpenMod(false);
     window.close();
   };
 
   const EndSeans = () => {
+    let soob = 'В Арм-е Технолога системы работает ' + bsLogin;
     return (
       <>
         {bsLogin === '' && (
           <>
             <Box sx={styleMod}>
-              <h1>Работает&nbsp;{bsLogin}</h1>
+              <Box sx={styleBatMenu}>{soob}</Box>
 
               <Button sx={styleBatMenu} variant="contained" onClick={handleClose}>
                 Выход
