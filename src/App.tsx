@@ -62,7 +62,7 @@ const App = () => {
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
-    p: 5,
+    p: 4,
   };
 
   const styleBatMenu = {
@@ -81,7 +81,7 @@ const App = () => {
     let soob = 'В Арм-е Технолога системы работает пользователь ' + bsLogin;
     return (
       <>
-        {bsLogin === '' && (
+        {bsLogin !== '' && (
           <>
             <Box sx={styleMod}>
               <Box sx={{ textAlign: 'center', fontSize: 16, color: 'red' }}>{soob}</Box>
