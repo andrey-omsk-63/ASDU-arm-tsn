@@ -4,6 +4,7 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import TabContext from '@mui/lab/TabContext';
 import TabPanel from '@mui/lab/TabPanel';
+//import Modal from '@mui/material/Modal';
 
 //import axios from 'axios';
 //import Header from './components/Header/Header';
@@ -14,9 +15,17 @@ import Statistics from './components/Statistics/Statistics';
 import { Tflight } from './interfaceMNG.d';
 
 import { XctrlInfo } from './interfaceGl.d';
-//import { XctrlUpdate } from './interfaceGlNew.d';
 
 import { Statistic } from './interfaceStat.d';
+
+// export interface busy {
+//   type: string;
+//   data: Data;
+// }
+
+// export interface Data {
+//   login: string;
+// }
 
 let flagWS = true;
 let WS: any = null;
@@ -44,13 +53,43 @@ const App = () => {
     textTransform: 'unset !important',
   };
 
+  // const styleMod = {
+  //   position: 'absolute',
+  //   top: '22.8%',
+  //   left: '47.7%',
+  //   transform: 'translate(-50%, -50%)',
+  //   width: 164,
+  //   bgcolor: 'background.paper',
+  //   border: '2px solid #000',
+  //   boxShadow: 24,
+  //   p: 1,
+  // };
+
+  // const styleBatMenu = {
+  //   fontSize: 12.9,
+  //   backgroundColor: '#F1F3F4',
+  //   color: 'black',
+  //   marginTop: 1,
+  // };
+
   const [pointsXctrl, setPointsXctrl] = React.useState<Array<XctrlInfo>>([]);
   const [isOpenInf, setIsOpenInf] = React.useState(false);
   const [pointsTfl, setPointsTfl] = React.useState<Array<Tflight>>([]);
   const [isOpenDev, setIsOpenDev] = React.useState(false);
   const [pointsSt, setPointsSt] = React.useState<Array<Statistic>>([]);
   const [isOpenSt, setIsOpenSt] = React.useState(false);
+  const [bsLogin, setBsLogin] = React.useState('');
   
+  // const handleClose = () => {
+  //   setOpenMod(false);
+  //   window.close()
+  // }
+
+  // const EndSeans = () => {
+  //   console.log('data_busy4:', bsLogin);
+   
+  // }
+
   const host =
     'wss://' + window.location.host + window.location.pathname + 'W' + window.location.search;
   // let WS: React.MutableRefObject<WebSocket> = {};
@@ -91,6 +130,9 @@ const App = () => {
           setPointsSt(data.statistics ?? []);
           setIsOpenSt(true);
           break;
+        case 'busy':
+          setBsLogin(data.login);
+          break;
         default:
           console.log('data_default:', data);
       }
@@ -98,6 +140,13 @@ const App = () => {
   }, []);
 
   const [value, setValue] = React.useState('1');
+
+  if (bsLogin !== '') {
+    let soob = 'В Арм-е Технолога системы работает ' + bsLogin
+    alert(soob)
+    window.close()
+  }
+
 
   return (
     <>
@@ -133,6 +182,25 @@ const App = () => {
 };
 
 export default App;
+
+ // return (
+    //   <>
+        //  <Box sx={styleMod}> 
+        //    <Stack direction="column"> 
+        //   <h1>
+        //     Работает&nbsp;{bsLogin}
+        //   </h1>
+
+        //   <Button sx={styleBatMenu} variant="contained" onClick={handleClose}>
+        //     Выход
+        //   </Button>
+
+        //    </Stack> *
+        //  </Box> 
+    //   </>
+    // )
+
+
 
 // const WS = new WebSocket('wss://192.168.115.134:4443/user/MMM/charPointsW')
 // const WS = new WebSocket('wss://192.168.115.134:4443/user/Andrey_omsk/charPointsW');

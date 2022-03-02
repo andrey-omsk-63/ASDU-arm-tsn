@@ -12,7 +12,6 @@ const ManagementRightGrid = (props: {
   subArea: number;
   masxt: any;
 }) => {
-  console.log('masxt:', props.masxt);
 
   const styleMgl = {
     padding: 1,
@@ -158,6 +157,20 @@ const ManagementRightGrid = (props: {
           }
         }
       }
+      console.log('masxt:', props.masxt, 'mass:', mass);
+
+      for (let i = 0; i < mass.length; i++) {
+        console.log('i:', i, 'j:', j);
+        for (let j = 0; j < props.masxt.length; j++) {
+          console.log('j:', j);
+          if (mass[i].areaNum === props.masxt[j].areaXT &&
+            mass[i].subareaNum === props.masxt[j].subareaXT) {
+            console.log('i:', i, 'j:', j);
+            mass[i].isXT = true;
+          }
+        }
+      }
+      console.log('mass!!!:', mass);
       break;
 
     default:
@@ -275,10 +288,16 @@ const ManagementRightGrid = (props: {
       let resStr = [];
       for (let i = 0; i < mass.length; i++) {
         let soobBP = 'Назначен';
+        let soobXT = 'ХТ для данного района '
         if (mass[i].isPk) soobBP = soobBP + ' ПК';
         if (mass[i].isCk) soobBP = soobBP + ' CК';
         if (mass[i].isNk) soobBP = soobBP + ' HК';
         if (soobBP === 'Назначен') soobBP = soobBP + ' BP';
+        if (mass[i].isXT) {
+          soobXT = soobXT + 'назначен';
+        } else {
+          soobXT = soobXT + 'отсутствует'
+        }
         resStr.push(
           <Grid item key={Math.random()} container>
             <Grid item key={Math.random()} xs={0.3} sx={styleMRG02}>
@@ -295,7 +314,7 @@ const ManagementRightGrid = (props: {
               {soobBP}
             </Grid>
             <Grid item key={Math.random()} xs={3.7} sx={styleMRG01}>
-              ХТ для данного района отсутствует
+              {soobXT}
             </Grid>
           </Grid>,
         );
