@@ -53,24 +53,47 @@ const App = () => {
     textTransform: 'unset !important',
   };
 
-  // const styleMod = {
-  //   position: 'absolute',
-  //   top: '22.8%',
-  //   left: '47.7%',
-  //   transform: 'translate(-50%, -50%)',
-  //   width: 164,
-  //   bgcolor: 'background.paper',
-  //   border: '2px solid #000',
-  //   boxShadow: 24,
-  //   p: 1,
-  // };
+  const styleMod = {
+    position: 'absolute',
+    top: '22.8%',
+    left: '47.7%',
+    transform: 'translate(-50%, -50%)',
+    width: 164,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 1,
+  };
 
-  // const styleBatMenu = {
-  //   fontSize: 12.9,
-  //   backgroundColor: '#F1F3F4',
-  //   color: 'black',
-  //   marginTop: 1,
-  // };
+  const styleBatMenu = {
+    fontSize: 12.9,
+    backgroundColor: '#F1F3F4',
+    color: 'black',
+    marginTop: 1,
+  };
+
+  const handleClose = () => {
+    //setOpenMod(false);
+    window.close();
+  };
+
+  const EndSeans = () => {
+    return (
+      <>
+        {bsLogin === '' && (
+          <>
+            <Box sx={styleMod}>
+              <h1>Работает&nbsp;{bsLogin}</h1>
+
+              <Button sx={styleBatMenu} variant="contained" onClick={handleClose}>
+                Выход
+              </Button>
+            </Box>
+          </>
+        )}
+      </>
+    );
+  };
 
   const [pointsXctrl, setPointsXctrl] = React.useState<Array<XctrlInfo>>([]);
   const [isOpenInf, setIsOpenInf] = React.useState(false);
@@ -79,15 +102,10 @@ const App = () => {
   const [pointsSt, setPointsSt] = React.useState<Array<Statistic>>([]);
   const [isOpenSt, setIsOpenSt] = React.useState(false);
   const [bsLogin, setBsLogin] = React.useState('');
-  
-  // const handleClose = () => {
-  //   setOpenMod(false);
-  //   window.close()
-  // }
 
   // const EndSeans = () => {
   //   console.log('data_busy4:', bsLogin);
-   
+
   // }
 
   const host =
@@ -142,11 +160,10 @@ const App = () => {
   const [value, setValue] = React.useState('1');
 
   if (bsLogin !== '') {
-    let soob = 'В Арм-е Технолога системы работает ' + bsLogin
-    alert(soob)
-    window.close()
+    let soob = 'В Арм-е Технолога системы работает ' + bsLogin;
+    alert(soob);
+    //window.close();
   }
-
 
   return (
     <>
@@ -163,17 +180,30 @@ const App = () => {
               <Button sx={styleApp01} variant="contained" onClick={() => setValue('3')}>
                 <b>Статистика</b>
               </Button>
+              <EndSeans />
               {/* <Header /> */}
             </Stack>
           </Box>
           <TabPanel value="1">
-            {WS !== null && (<><Management open={isOpenDev} ws={WS} points={pointsTfl} xctrll={pointsXctrl} /></>)}
+            {WS !== null && (
+              <>
+                <Management open={isOpenDev} ws={WS} points={pointsTfl} xctrll={pointsXctrl} />
+              </>
+            )}
           </TabPanel>
           <TabPanel value="2">
-            {WS !== null && (<><Points open={isOpenInf} ws={WS} xctrll={pointsXctrl} /></>)}
+            {WS !== null && (
+              <>
+                <Points open={isOpenInf} ws={WS} xctrll={pointsXctrl} />
+              </>
+            )}
           </TabPanel>
           <TabPanel value="3">
-            {WS !== null && (<><Statistics open={isOpenSt} ws={WS} points={pointsSt} /></>)}
+            {WS !== null && (
+              <>
+                <Statistics open={isOpenSt} ws={WS} points={pointsSt} />
+              </>
+            )}
           </TabPanel>
         </TabContext>
       </Box>
@@ -182,25 +212,6 @@ const App = () => {
 };
 
 export default App;
-
- // return (
-    //   <>
-        //  <Box sx={styleMod}> 
-        //    <Stack direction="column"> 
-        //   <h1>
-        //     Работает&nbsp;{bsLogin}
-        //   </h1>
-
-        //   <Button sx={styleBatMenu} variant="contained" onClick={handleClose}>
-        //     Выход
-        //   </Button>
-
-        //    </Stack> *
-        //  </Box> 
-    //   </>
-    // )
-
-
 
 // const WS = new WebSocket('wss://192.168.115.134:4443/user/MMM/charPointsW')
 // const WS = new WebSocket('wss://192.168.115.134:4443/user/Andrey_omsk/charPointsW');
