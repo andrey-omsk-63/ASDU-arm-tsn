@@ -90,6 +90,7 @@ const ManagementKnobXT = (props: {
     backgroundColor: '#F1F3F4',
     color: 'black',
     marginTop: 1,
+    textTransform: 'unset !important',
   };
 
   const ButtonDo = () => {

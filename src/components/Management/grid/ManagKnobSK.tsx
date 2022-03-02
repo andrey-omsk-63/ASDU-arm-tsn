@@ -90,6 +90,7 @@ const ManagementKnobSK = (props: {
     fontSize: 12.9,
     backgroundColor: '#F1F3F4',
     color: 'black',
+    textTransform: 'unset !important',
   };
 
   const ButtonKnob = (val: number) => {
