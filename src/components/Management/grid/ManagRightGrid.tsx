@@ -12,7 +12,6 @@ const ManagementRightGrid = (props: {
   subArea: number;
   masxt: any;
 }) => {
-
   const styleMgl = {
     padding: 1,
     margin: 1,
@@ -160,11 +159,15 @@ const ManagementRightGrid = (props: {
       console.log('masxt:', props.masxt, 'mass:', mass);
 
       for (let i = 0; i < mass.length; i++) {
-        console.log('i:', i, 'j:', j);
+        console.log('i:', i);
         for (let j = 0; j < props.masxt.length; j++) {
           console.log('j:', j);
-          if (mass[i].areaNum === props.masxt[j].areaXT &&
-            mass[i].subareaNum === props.masxt[j].subareaXT) {
+          console.log('mass[i].areaNum:', mass[i].areaNum, props.masxt[j].areaXT);
+          console.log('mass[i].subareaNum:', mass[i].subareaNum, props.masxt[j].subareaXT);
+          if (
+            mass[i].areaNum === props.masxt[j].areaXT &&
+            mass[i].subareaNum === props.masxt[j].subareaXT
+          ) {
             console.log('i:', i, 'j:', j);
             mass[i].isXT = true;
           }
@@ -288,7 +291,7 @@ const ManagementRightGrid = (props: {
       let resStr = [];
       for (let i = 0; i < mass.length; i++) {
         let soobBP = 'Назначен';
-        let soobXT = 'ХТ для данного района '
+        let soobXT = 'ХТ для данного района ';
         if (mass[i].isPk) soobBP = soobBP + ' ПК';
         if (mass[i].isCk) soobBP = soobBP + ' CК';
         if (mass[i].isNk) soobBP = soobBP + ' HК';
@@ -296,7 +299,7 @@ const ManagementRightGrid = (props: {
         if (mass[i].isXT) {
           soobXT = soobXT + 'назначен';
         } else {
-          soobXT = soobXT + 'отсутствует'
+          soobXT = soobXT + 'отсутствует';
         }
         resStr.push(
           <Grid item key={Math.random()} container>
