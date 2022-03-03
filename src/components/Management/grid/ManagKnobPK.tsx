@@ -14,6 +14,7 @@ const ManagementKnobPK = (props: {
   region: string;
   areaa: string;
   subArea: number;
+  func: Function;
 }) => {
   const [value, setValue] = React.useState(21);
   const [open, setOpen] = React.useState(false);

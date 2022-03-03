@@ -18,15 +18,6 @@ import { XctrlInfo } from './interfaceGl.d';
 
 import { Statistic } from './interfaceStat.d';
 
-// export interface busy {
-//   type: string;
-//   data: Data;
-// }
-
-// export interface Data {
-//   login: string;
-// }
-
 let flagWS = true;
 let WS: any = null;
 
@@ -61,6 +52,8 @@ const App = () => {
     width: 500,
     bgcolor: 'background.paper',
     border: '2px solid #000',
+    borderColor: 'red',
+    borderRadius: 1,
     boxShadow: 24,
     p: 4,
   };
@@ -84,10 +77,11 @@ const App = () => {
         {bsLogin !== '' && (
           <>
             <Box sx={styleMod}>
-              <Box sx={{ textAlign: 'center', fontSize: 16, color: 'red' }}>{soob}</Box>
+              <Box sx={{ textAlign: 'center', fontSize: 16, color: 'red' }}><b>{soob}</b></Box>
+              <Box sx={{ color: 'background.paper', }}>Pusto</Box>
               <Box sx={{ textAlign: 'center' }}>
                 <Button sx={styleBatMenu} variant="contained" onClick={handleClose}>
-                  Выход
+                  <b>Выход</b>
                 </Button>
               </Box>
             </Box>
@@ -164,20 +158,26 @@ const App = () => {
 
   return (
     <>
+      <EndSeans />
       <Box sx={{ width: '98.5%', typography: 'body2' }}>
         <TabContext value={value}>
           <Box sx={{ marginLeft: 0.5, backgroundColor: '#F1F5FB' }}>
             <Stack direction="row">
-              <Button sx={styleApp01} variant="contained" onClick={() => setValue('1')}>
-                <b>Управление</b>
-              </Button>
-              <Button sx={styleApp02} variant="contained" onClick={() => setValue('2')}>
-                <b>Характерные точки</b>
-              </Button>
-              <Button sx={styleApp01} variant="contained" onClick={() => setValue('3')}>
-                <b>Статистика</b>
-              </Button>
-              <EndSeans />
+              {bsLogin === '' && (
+                <Button sx={styleApp01} variant="contained" onClick={() => setValue('1')}>
+                  <b>Управление</b>
+                </Button>
+              )}
+              {bsLogin === '' && (
+                <Button sx={styleApp02} variant="contained" onClick={() => setValue('2')}>
+                  <b>Характерные точки</b>
+                </Button>
+              )}
+              {bsLogin === '' && (
+                <Button sx={styleApp01} variant="contained" onClick={() => setValue('3')}>
+                  <b>Статистика</b>
+                </Button>
+              )}
               {/* <Header /> */}
             </Stack>
           </Box>

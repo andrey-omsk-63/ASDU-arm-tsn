@@ -55,7 +55,15 @@ const ManagementLeftGrid = (props: { open: boolean; ws: WebSocket; tflightt: Tfl
   let reGion = '1';
   const [areaa, setAreaa] = React.useState('0');
   const [subArea, setSubArea] = React.useState(0);
-
+  const [dataKnob, setDataKnob] = React.useState([{
+    data: {
+      cmd: 0,
+      param: 0,
+      area: 0,
+      subarea: 0,
+    },
+  }])
+    
   let mass: any = [];
   let masRab: any = [];
   let masAreaNum: any = [];
@@ -188,6 +196,7 @@ const ManagementLeftGrid = (props: { open: boolean; ws: WebSocket; tflightt: Tfl
             region={reGion}
             areaa={areaa}
             subArea={subArea}
+            func={setDataKnob}
           />
           <ManagementKnobSK
             open={props.open}

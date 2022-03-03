@@ -55,8 +55,6 @@ const ManagementRightGrid = (props: {
     borderColor: 'primary.main',
     marginTop: 0.5,
     marginBottom: 0.5,
-    //marginLeft: -0.7,
-    //height: '60vh',
   };
 
   let points = props.tflightt;
@@ -65,8 +63,6 @@ const ManagementRightGrid = (props: {
   let sostGl = 0;
   let podchGl = 0;
   let j = 0;
-
-  //console.log('PoinsMGRight:', props.open, points)
 
   const CounterMode = (i: number, j: number) => {
     if (points[i].scon) {
@@ -109,7 +105,7 @@ const ManagementRightGrid = (props: {
               isPk: false,
               isCk: false,
               isNk: false,
-              isXT: false,
+              isXT: true,
             };
           } else {
             mass[j].koldk++;
@@ -117,6 +113,29 @@ const ManagementRightGrid = (props: {
           }
         }
       }
+
+      let masArea: Tflight[];
+      let flagXtArea = true;
+      for (let k = 0; k < mass.length; k++) {
+        masArea = points.filter((points) => points.area.num === mass[k].areaNum);
+        flagXtArea = true;
+        for (let i = 0; i < masArea.length; i++) {
+          for (let j = 0; j < props.masxt.length; j++) {
+            if (
+              parseInt(masArea[i].area.num) === props.masxt[j].areaXT &&
+              masArea[i].subarea === props.masxt[j].subareaXT
+            ) {
+              mass[k].isXT = true;
+            } else {
+              mass[k].isXT = false;
+              flagXtArea = false;
+            }
+          }
+        }
+        mass[k].isXT = flagXtArea;
+      }
+
+      //console.log('mass_mod1_end', mass)
       break;
 
     case 2:
@@ -247,16 +266,23 @@ const ManagementRightGrid = (props: {
   };
 
   const StrokaMRG03 = () => {
+
     const StrokaSpsMode1 = () => {
       let resStr = [];
       for (let i = 0; i < mass.length; i++) {
         let prosentSv = (100 * mass[i].sost) / mass[i].koldk;
         let prosentPch = (100 * mass[i].podch) / mass[i].koldk;
         let soobBP = 'Назначен';
+        let soobXT = 'ХТ для данного района ';
         if (mass[i].isPk) soobBP = soobBP + ' ПК';
         if (mass[i].isCk) soobBP = soobBP + ' CК';
         if (mass[i].isNk) soobBP = soobBP + ' HК';
         if (soobBP === 'Назначен') soobBP = soobBP + ' BP';
+        if (mass[i].isXT) {
+          soobXT = soobXT + 'назначен';
+        } else {
+          soobXT = soobXT + 'отсутствует';
+        }
         resStr.push(
           <Grid item key={Math.random()} container>
             <Grid item key={Math.random()} xs={0.3} sx={styleMRG02}>
@@ -273,7 +299,7 @@ const ManagementRightGrid = (props: {
               {soobBP}
             </Grid>
             <Grid item key={Math.random()} xs={3.7} sx={styleMRG01}>
-              ХТ для данного района отсутствует
+              {soobXT}
             </Grid>
           </Grid>,
         );
@@ -285,7 +311,7 @@ const ManagementRightGrid = (props: {
       let resStr = [];
       for (let i = 0; i < mass.length; i++) {
         let soobBP = 'Назначен';
-        let soobXT = 'ХТ для данного района ';
+        let soobXT = 'ХТ для данного подрайона ';
         if (mass[i].isPk) soobBP = soobBP + ' ПК';
         if (mass[i].isCk) soobBP = soobBP + ' CК';
         if (mass[i].isNk) soobBP = soobBP + ' HК';
@@ -373,15 +399,28 @@ const ManagementRightGrid = (props: {
     let sumDk = points.length;
     let prosSv = '';
     let prosPch = '';
-    let proXT = 'ХТ для данного района отсутствует';
+    let proXT = 'ХТ для данного района ';
     if (props.mode !== 3) {
       prosSv = ((100 * sostGl) / sumDk).toFixed(2).toString() + '%';
       prosPch = ((100 * podchGl) / sumDk).toFixed(2).toString() + '%';
-      if (props.mode === 1) proXT = 'ХТ для данного региона отсутствует';
+      let proXtWell = 'назначен';
+      for (let k = 0; k < mass.length; k++) {
+        if (!mass[k].isXT) proXtWell = 'отсутствует';
+      }
+      if (props.mode === 1) proXT = 'ХТ для данного региона ';
+      proXT = proXT + proXtWell
     } else {
       prosSv = sostGl.toString();
       prosPch = podchGl.toString();
       proXT = 'ХТ для данного подрайона отсутствует';
+      for (let j = 0; j < props.masxt.length; j++) {
+        if (
+          parseInt(points[0].area.num) === props.masxt[j].areaXT &&
+          points[0].subarea === props.masxt[j].subareaXT
+        ) {
+          proXT = 'ХТ для данного подрайона назначен';
+        }
+      }
     }
 
     return (
