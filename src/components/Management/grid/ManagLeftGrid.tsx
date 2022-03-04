@@ -13,12 +13,12 @@ import ManagementKnobXT from './ManagKnobXT';
 import { Tflight } from '../../../interfaceMNG.d';
 import { XctrlInfo } from '../../../interfaceGl.d';
 
+let massKnob: any = [];
+
 const ManagementLeftGrid = (props: { open: boolean; ws: WebSocket; tflightt: Tflight[]; xctrll: XctrlInfo[]; }) => {
   const points = props.tflightt;
   const pointsXT = props.xctrll;
   let masXT: any = [];
-
-  //console.log('pointsXT:', pointsXT)
 
   const styleMG01 = {
     border: 1,
@@ -56,14 +56,16 @@ const ManagementLeftGrid = (props: { open: boolean; ws: WebSocket; tflightt: Tfl
   const [areaa, setAreaa] = React.useState('0');
   const [subArea, setSubArea] = React.useState(0);
   const [dataKnob, setDataKnob] = React.useState([{
-    data: {
-      cmd: 0,
-      param: 0,
-      area: 0,
-      subarea: 0,
-    },
-  }])
-    
+    cmd: 0,
+    param: 0,
+    region: 0,
+    area: 0,
+    subarea: 0,
+  },
+  ])
+
+  console.log('dataKnob:', dataKnob[0], dataKnob[0].cmd)
+
   let mass: any = [];
   let masRab: any = [];
   let masAreaNum: any = [];
@@ -87,7 +89,6 @@ const ManagementLeftGrid = (props: { open: boolean; ws: WebSocket; tflightt: Tfl
   };
 
   if (props.open) {
-    //setReGion(points[0].region.num)
     reGion = points[0].region.num;
     masRab[0] = points[0].area.num;
     mass[0] = {
@@ -186,6 +187,22 @@ const ManagementLeftGrid = (props: { open: boolean; ws: WebSocket; tflightt: Tfl
     );
   };
 
+  const CheckFourKnops = () => {
+    if (dataKnob[0].cmd !== 0) {
+      massKnob.push(dataKnob)
+      setDataKnob([{
+          cmd: 0,
+          param: 0,
+          region: 0,
+          area: 0,
+          subarea: 0,
+        },
+      ])
+      console.log('massKnob', massKnob)
+    }
+
+  }
+
   const FourKnops = () => {
     return (
       <Grid item xs={12} sx={{ marginLeft: 0, marginTop: 1 }}>
@@ -196,7 +213,7 @@ const ManagementLeftGrid = (props: { open: boolean; ws: WebSocket; tflightt: Tfl
             region={reGion}
             areaa={areaa}
             subArea={subArea}
-            func={setDataKnob}
+            setDataKn={setDataKnob}
           />
           <ManagementKnobSK
             open={props.open}
@@ -220,6 +237,7 @@ const ManagementLeftGrid = (props: { open: boolean; ws: WebSocket; tflightt: Tfl
             subArea={subArea}
           />
         </Stack>
+        {CheckFourKnops()}
       </Grid>
     );
   };
@@ -238,7 +256,7 @@ const ManagementLeftGrid = (props: { open: boolean; ws: WebSocket; tflightt: Tfl
             mode={mode}
             areaa={areaa}
             subArea={subArea}
-            masxt = {masXT}
+            masxt={masXT}
           />
         </Grid>
       </Grid>
