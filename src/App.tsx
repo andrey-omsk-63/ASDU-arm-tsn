@@ -74,7 +74,7 @@ const App = () => {
     let soob = 'В Арм-е Технолога системы работает пользователь ' + bsLogin;
     return (
       <>
-        {bsLogin !== '' && (
+        {bsLogin === '' && (
           <>
             <Box sx={styleMod}>
               <Box sx={{ textAlign: 'center', fontSize: 16, color: 'red' }}>
