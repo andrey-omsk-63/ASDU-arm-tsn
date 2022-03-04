@@ -53,7 +53,7 @@ const App = () => {
     bgcolor: 'background.paper',
     border: '2px solid #000',
     borderColor: 'red',
-    borderRadius: 1,
+    borderRadius: 2,
     boxShadow: 24,
     p: 4,
   };
@@ -74,7 +74,7 @@ const App = () => {
     let soob = 'В Арм-е Технолога системы работает пользователь ' + bsLogin;
     return (
       <>
-        {bsLogin === '' && (
+        {bsLogin !== '' && (
           <>
             <Box sx={styleMod}>
               <Box sx={{ textAlign: 'center', fontSize: 16, color: 'red' }}>
@@ -152,35 +152,23 @@ const App = () => {
 
   const [value, setValue] = React.useState('1');
 
-  // if (bsLogin !== '') {
-  //   let soob = 'В Арм-е Технолога системы работает ' + bsLogin;
-  //   alert(soob);
-  //   window.close();
-  // }
-
   return (
     <>
       <EndSeans />
       <Box sx={{ width: '98.5%', typography: 'body2' }}>
-        {bsLogin !== '' && (
+        {bsLogin === '' && (
           <TabContext value={value}>
             <Box sx={{ marginLeft: 0.5, backgroundColor: '#F1F5FB' }}>
               <Stack direction="row">
-                {/* {bsLogin === '' && ( */}
                 <Button sx={styleApp01} variant="contained" onClick={() => setValue('1')}>
                   <b>Управление</b>
                 </Button>
-                {/* )} */}
-                {/* {bsLogin === '' && ( */}
                 <Button sx={styleApp02} variant="contained" onClick={() => setValue('2')}>
                   <b>Характерные точки</b>
                 </Button>
-                {/* )}
-                {bsLogin === '' && ( */}
                 <Button sx={styleApp01} variant="contained" onClick={() => setValue('3')}>
                   <b>Статистика</b>
                 </Button>
-                {/* )} */}
                 {/* <Header /> */}
               </Stack>
             </Box>
@@ -214,74 +202,7 @@ const App = () => {
 
 export default App;
 
-// const WS = new WebSocket('wss://192.168.115.134:4443/user/MMM/charPointsW')
-// const WS = new WebSocket('wss://192.168.115.134:4443/user/Andrey_omsk/charPointsW');
-
 //const [points, setPoints] = React.useState<XctrlInfo>({} as XctrlInfo);
 
 // const [points, setPoints] = React.useState<Array<XctrlInfo>>([]);
 // const [isOpen, setIsOpen] = React.useState(false);
-
-//const ipAdress: string = 'http://localhost:3000/otladkaGlob.json';
-
-// React.useEffect(() => {
-//   axios.get(ipAdress).then(({ data }) => {
-//     setPoints(data.data.xctrlInfo);
-//     setIsOpen(true);
-//   });
-// }, [ipAdress]);
-
-//
-//
-// import React, { useState, useRef, useEffect, useCallback } from "react";
-
-// const AppWs = () => {
-//     const [isPaused, setIsPaused] = useState(false);
-//     const [data, setData] = useState(null);
-//     const [status, setStatus] = useState("");
-//     const ws = useRef(null);
-
-//     useEffect(() => {
-//         if (!isPaused) {
-//             ws.current = new WebSocket("wss://ws.kraken.com/"); // создаем ws соединение
-//             ws.current.onopen = () => setStatus("Соединение открыто");  // callback на ивент открытия соединения
-//             ws.current.onclose = () => setStatus("Соединение закрыто"); // callback на ивент закрытия соединения
-
-//             gettingData();
-//         }
-
-//         return () => ws.current.close(); // кода меняется isPaused - соединение закрывается
-//     }, [ws, isPaused]);
-
-//     const gettingData = useCallback(() => {
-//         if (!ws.current) return;
-
-//         ws.current.onmessage = e => {                //подписка на получение данных по вебсокету
-//             if (isPaused) return;
-//             const message = JSON.parse(e.data);
-//             setData(message);
-//         };
-//     }, [isPaused]);
-
-//     return (
-//         <>
-//             {!!data &&
-//                 <div>
-//                     <div>
-//                         <h2>{status}</h2>
-//                         <p>{`connection ID: ${data?.connectionID}`}</p>
-//                         <p>{`event: ${data?.event}`}</p>
-//                         <p>{`status: ${data?.status}`}</p>
-//                         <p>{`version: ${data?.version}`}</p>
-//                     </div>
-//                     <button onClick={() => {
-//                         ws.current.close();
-//                         setIsPaused(!isPaused)
-//                     }}>{!isPaused ? 'Остановить соединение' : 'Открыть соединение' }</button>
-//                 </div>
-//             }
-//         </>
-//     )
-// }
-
-// export default AppWs;

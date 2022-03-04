@@ -16,14 +16,15 @@ const ManagementKnobPK = (props: {
   subArea: number;
   setDataKn: Function;
 }) => {
-
-  let dataKnob = [{
-    cmd: 5,
-    param: 99,
-    region: props.region,
-    area: props.region,
-    subarea: props.subArea,
-  },]
+  let dataKnob = [
+    {
+      cmd: 5,
+      param: 99,
+      region: props.region,
+      area: props.areaa,
+      subarea: props.subArea,
+    },
+  ];
 
   const [value, setValue] = React.useState(21);
   const [open, setOpen] = React.useState(false);
@@ -137,7 +138,7 @@ const ManagementKnobPK = (props: {
             }, 1000);
           }
           dataKnob[0].param = value;
-          props.setDataKn(dataKnob)
+          props.setDataKn(dataKnob);
         }
       };
 
