@@ -208,7 +208,7 @@ const ManagementLeftGrid = (props: {
         )
           flagDubl = false;
       }
-      if (flagDubl) massKnob[dlMassKnob + 1] = dataKnob;
+      if (flagDubl) massKnob[dlMassKnob] = dataKnob;
 
       console.log('dataKnob', flagDubl, dataKnob);
       console.log('massKnob!!!', massKnob);
