@@ -199,14 +199,16 @@ const ManagementLeftGrid = (props: {
       let flagDubl = true;
       let dlMassKnob = massKnob.length;
       for (let i = 0; i < massKnob.length; i++) {
+        console.log('if', i, massKnob[i][0].param === dataKnob[0].param);
         if (
           massKnob[i][0].cmd === dataKnob[0].cmd &&
           massKnob[i][0].param === dataKnob[0].param &&
           massKnob[i][0].region === dataKnob[0].region &&
           massKnob[i][0].area === dataKnob[0].area &&
           massKnob[i][0].subarea === dataKnob[0].subarea
-        )
+        ) {
           flagDubl = false;
+        }
       }
       if (flagDubl) massKnob[dlMassKnob] = dataKnob;
 
