@@ -25,7 +25,15 @@ export interface Knob {
   subarea: number;
 }
 
-let massKnob: Knob[] = [];
+let massKnob: Knob[] = [
+  {
+    cmd: 5,
+    param: 99,
+    region: '',
+    area: '',
+    subarea: 0,
+  },
+];
 let massKnop: Knob[] = [];
 
 const ManagementLeftGrid = (props: {
@@ -231,9 +239,15 @@ const ManagementLeftGrid = (props: {
       //   }
       // }
       // if (flagDubl) {
-      console.log('Запись');
-      massKnob.push(dataKnob[0]);
-      massKnop[dlMassKnob] = massKnob[dlMassKnob];
+      //console.log('Запись');
+      massKnob[0].cmd = dataKnob[0].cmd;
+      massKnob[0].param = dataKnob[0].param;
+      massKnob[0].region = dataKnob[0].region;
+      massKnob[0].area = dataKnob[0].area;
+      massKnob[0].subarea = dataKnob[0].subarea;
+
+      massKnop.push(massKnob[0]);
+      //massKnop[dlMassKnob] = massKnob[dlMassKnob];
       //   flagDubl = false;
       // }
 
