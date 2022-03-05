@@ -199,7 +199,12 @@ const ManagementLeftGrid = (props: {
       let flagDubl = true;
       let dlMassKnob = massKnob.length;
       for (let i = 0; i < massKnob.length; i++) {
-        console.log('if', i, massKnob[i][0].param === dataKnob[0].param);
+        console.log(i, 'massKnob:', massKnob[i], 'dataKnob:', dataKnob);
+        console.log('cmd', i, massKnob[i][0].cmd === dataKnob[0].cmd);
+        console.log('param', i, massKnob[i][0].param === dataKnob[0].param);
+        console.log('region', i, massKnob[i][0].region === dataKnob[0].region);
+        console.log('area', i, massKnob[i][0].area === dataKnob[0].area);
+        console.log('subarea', i, massKnob[i][0].subarea === dataKnob[0].subarea);
         if (
           massKnob[i][0].cmd === dataKnob[0].cmd &&
           massKnob[i][0].param === dataKnob[0].param &&
@@ -208,6 +213,7 @@ const ManagementLeftGrid = (props: {
           massKnob[i][0].subarea === dataKnob[0].subarea
         ) {
           flagDubl = false;
+          console.log(i, 'Дубликат');
         }
       }
       if (flagDubl) massKnob[dlMassKnob] = dataKnob;
