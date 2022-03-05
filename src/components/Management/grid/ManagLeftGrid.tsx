@@ -210,30 +210,30 @@ const ManagementLeftGrid = (props: {
       // проверка дубликатов
       let flagDubl = true;
       let dlMassKnob = massKnob.length;
-      for (let i = 0; i < massKnob.length; i++) {
-        console.log(i, 'massKnob:', massKnob[i]);
-        console.log('dataKnob:', dataKnob);
-        // console.log('cmd', i, massKnob[i][0].cmd === dataKnob[0].cmd);
-        // console.log('param', i, massKnob[i][0].param === dataKnob[0].param);
-        // console.log('region', i, massKnob[i][0].region === dataKnob[0].region);
-        // console.log('area', i, massKnob[i][0].area === dataKnob[0].area);
-        // console.log('subarea', i, massKnob[i][0].subarea === dataKnob[0].subarea);
-        if (
-          massKnob[i].cmd === dataKnob[0].cmd &&
-          massKnob[i].param === dataKnob[0].param &&
-          massKnob[i].region === dataKnob[0].region &&
-          massKnob[i].area === dataKnob[0].area &&
-          massKnob[i].subarea === dataKnob[0].subarea
-        ) {
-          flagDubl = false;
-          console.log(i, 'Дубликат');
-        }
-      }
-      if (flagDubl) {
-        console.log('Запись');
-        massKnob.push(dataKnob[0]);
-        flagDubl = false;
-      }
+      // for (let i = 0; i < massKnob.length; i++) {
+      //   console.log(i, 'massKnob:', massKnob[i]);
+      //   console.log('dataKnob:', dataKnob);
+      //   console.log('cmd', i, massKnob[i][0].cmd === dataKnob[0].cmd);
+      //   console.log('param', i, massKnob[i][0].param === dataKnob[0].param);
+      //   console.log('region', i, massKnob[i][0].region === dataKnob[0].region);
+      //   console.log('area', i, massKnob[i][0].area === dataKnob[0].area);
+      //   console.log('subarea', i, massKnob[i][0].subarea === dataKnob[0].subarea);
+      //   if (
+      //     massKnob[i].cmd === dataKnob[0].cmd &&
+      //     massKnob[i].param === dataKnob[0].param &&
+      //     massKnob[i].region === dataKnob[0].region &&
+      //     massKnob[i].area === dataKnob[0].area &&
+      //     massKnob[i].subarea === dataKnob[0].subarea
+      //   ) {
+      //     flagDubl = false;
+      //     console.log(i, 'Дубликат');
+      //   }
+      // }
+      // if (flagDubl) {
+      console.log('Запись');
+      massKnob.push(dataKnob[0]);
+      //   flagDubl = false;
+      // }
 
       console.log('dataKnob', flagDubl, dataKnob);
       console.log('massKnob!!!', massKnob);
