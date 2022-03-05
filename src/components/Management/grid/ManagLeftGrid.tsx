@@ -64,8 +64,8 @@ const ManagementLeftGrid = (props: {
     {
       cmd: 0,
       param: 0,
-      region: 0,
-      area: 0,
+      region: '',
+      area: '',
       subarea: 0,
     },
   ]);
@@ -195,17 +195,44 @@ const ManagementLeftGrid = (props: {
 
   const CheckFourKnops = () => {
     if (dataKnob[0].cmd !== 0) {
-      massKnob.push(dataKnob);
+
+      // проверка дубликатов
+      let flagDubl = true;
+      for (let i = 0; i < massKnob.length; i++) {
+        // console.log('dataKnob[0]:', dataKnob[0]);
+        // console.log('massKnob[i]:', massKnob.length, massKnob[i]);
+        // console.log('massKnob[i].cmd:', massKnob[i][0].cmd === dataKnob[0].cmd);
+        // console.log('massKnob[i].param:', massKnob[i][0].param === dataKnob[0].param);
+        // console.log('massKnob[i].region:', massKnob[i].region === dataKnob[0].region);
+        // console.log('massKnob[i].area:', massKnob[i].area === dataKnob[0].area);
+        // console.log('massKnob[i].subarea:', massKnob[i].subarea === dataKnob[0].subarea);
+        if (massKnob[i][0].cmd === dataKnob[0].cmd &&
+          massKnob[i][0].param === dataKnob[0].param &&
+          massKnob[i][0].region === dataKnob[0].region &&
+          massKnob[i][0].area === dataKnob[0].area &&
+          massKnob[i][0].subarea === dataKnob[0].subarea
+        ) {
+          console.log('YES!!!')
+          flagDubl = false;
+        } else {
+          console.log('NO!!!')
+        }
+      }
+      if (flagDubl) massKnob.push(dataKnob);
+
+      //console.log('dataKnob', flagDubl, dataKnob);
+      //console.log('massKnob!!!', massKnob);
+
       setDataKnob([
         {
           cmd: 0,
           param: 0,
-          region: 0,
-          area: 0,
+          region: '',
+          area: '',
           subarea: 0,
         },
       ]);
-      console.log('massKnob', massKnob);
+
     }
   };
 

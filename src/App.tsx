@@ -156,45 +156,49 @@ const App = () => {
     <>
       <EndSeans />
       <Box sx={{ width: '98.5%', typography: 'body2' }}>
-        {bsLogin === '' && (
-          <TabContext value={value}>
-            <Box sx={{ marginLeft: 0.5, backgroundColor: '#F1F5FB' }}>
-              <Stack direction="row">
+        <TabContext value={value}>
+          <Box sx={{ marginLeft: 0.5, backgroundColor: '#F1F5FB' }}>
+            <Stack direction="row">
+              {bsLogin === '' && (
                 <Button sx={styleApp01} variant="contained" onClick={() => setValue('1')}>
                   <b>Управление</b>
                 </Button>
+              )}
+              {bsLogin === '' && (
                 <Button sx={styleApp02} variant="contained" onClick={() => setValue('2')}>
                   <b>Характерные точки</b>
                 </Button>
+              )}
+              {bsLogin === '' && (
                 <Button sx={styleApp01} variant="contained" onClick={() => setValue('3')}>
                   <b>Статистика</b>
                 </Button>
-                {/* <Header /> */}
-              </Stack>
-            </Box>
-            <TabPanel value="1">
-              {WS !== null && (
-                <>
-                  <Management open={isOpenDev} ws={WS} points={pointsTfl} xctrll={pointsXctrl} />
-                </>
               )}
-            </TabPanel>
-            <TabPanel value="2">
-              {WS !== null && (
-                <>
-                  <Points open={isOpenInf} ws={WS} xctrll={pointsXctrl} />
-                </>
-              )}
-            </TabPanel>
-            <TabPanel value="3">
-              {WS !== null && (
-                <>
-                  <Statistics open={isOpenSt} ws={WS} points={pointsSt} />
-                </>
-              )}
-            </TabPanel>
-          </TabContext>
-        )}
+              {/* <Header /> */}
+            </Stack>
+          </Box>
+          <TabPanel value="1">
+            {WS !== null && (
+              <>
+                <Management open={isOpenDev} ws={WS} points={pointsTfl} xctrll={pointsXctrl} />
+              </>
+            )}
+          </TabPanel>
+          <TabPanel value="2">
+            {WS !== null && (
+              <>
+                <Points open={isOpenInf} ws={WS} xctrll={pointsXctrl} />
+              </>
+            )}
+          </TabPanel>
+          <TabPanel value="3">
+            {WS !== null && (
+              <>
+                <Statistics open={isOpenSt} ws={WS} points={pointsSt} />
+              </>
+            )}
+          </TabPanel>
+        </TabContext>
       </Box>
     </>
   );

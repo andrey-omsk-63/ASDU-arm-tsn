@@ -7,6 +7,15 @@ import Button from '@mui/material/Button';
 let otpravka = true;
 let soobDispatch = '';
 let nomDispatch = 'Вкл';
+let dataKnob = [
+  {
+    cmd: 13,
+    param: 99,
+    region: '',
+    area: '',
+    subarea: 0,
+  },
+];
 
 const ManagementKnobXT = (props: {
   open: boolean;
@@ -16,16 +25,7 @@ const ManagementKnobXT = (props: {
   subArea: number;
   setDataKn: Function;
 }) => {
-  let dataKnob = [
-    {
-      cmd: 13,
-      param: 99,
-      region: props.region,
-      area: props.areaa,
-      subarea: props.subArea,
-    },
-  ];
-
+ 
   const [value, setValue] = React.useState(21);
   const [open, setOpen] = React.useState(false);
 
@@ -64,6 +64,7 @@ const ManagementKnobXT = (props: {
       }
     };
     handleSendOpen();
+    props.setDataKn(dataKnob);
   };
 
   const stylePK = {
@@ -127,7 +128,9 @@ const ManagementKnobXT = (props: {
             }, 1000);
           }
           dataKnob[0].param = value;
-          props.setDataKn(dataKnob);
+          dataKnob[0].region = props.region;
+          dataKnob[0].area = props.areaa;
+          dataKnob[0].subarea = props.subArea;
         }
       };
 
