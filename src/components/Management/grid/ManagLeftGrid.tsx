@@ -72,9 +72,17 @@ const ManagementLeftGrid = (props: {
   let reGion = '1';
   const [areaa, setAreaa] = React.useState('0');
   const [subArea, setSubArea] = React.useState(0);
-  const [dataKnob, setDataKnob] = React.useState<Array<Knob>>([]);
+  const [dataKnob, setDataKnob] = React.useState<Array<Knob>>([
+    {
+      cmd: 0,
+      param: 99,
+      region: '',
+      area: '',
+      subarea: 0,
+    },
+  ]);
 
-  //console.log('dataKnob:', dataKnob[0], dataKnob[0].cmd);
+  console.log('dataKnob:', dataKnob[0], dataKnob[0].cmd);
 
   let mass: any = [];
   let masRab: any = [];
