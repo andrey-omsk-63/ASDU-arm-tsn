@@ -13,7 +13,19 @@ import ManagementKnobXT from './ManagKnobXT';
 import { Tflight } from '../../../interfaceMNG.d';
 import { XctrlInfo } from '../../../interfaceGl.d';
 
-let massKnob: any = [];
+export interface DataKnob {
+  knop: Knob[];
+}
+
+export interface Knob {
+  cmd: number;
+  param: number;
+  region: string;
+  area: string;
+  subarea: number;
+}
+
+let massKnob: Knob[] = [];
 
 const ManagementLeftGrid = (props: {
   open: boolean;
@@ -60,15 +72,7 @@ const ManagementLeftGrid = (props: {
   let reGion = '1';
   const [areaa, setAreaa] = React.useState('0');
   const [subArea, setSubArea] = React.useState(0);
-  const [dataKnob, setDataKnob] = React.useState([
-    {
-      cmd: 0,
-      param: 99,
-      region: '',
-      area: '',
-      subarea: 0,
-    },
-  ]);
+  const [dataKnob, setDataKnob] = React.useState<Array<Knob>>([]);
 
   //console.log('dataKnob:', dataKnob[0], dataKnob[0].cmd);
 
@@ -207,11 +211,11 @@ const ManagementLeftGrid = (props: {
         // console.log('area', i, massKnob[i][0].area === dataKnob[0].area);
         // console.log('subarea', i, massKnob[i][0].subarea === dataKnob[0].subarea);
         if (
-          massKnob[i][0].cmd === dataKnob[0].cmd &&
-          massKnob[i][0].param === dataKnob[0].param &&
-          massKnob[i][0].region === dataKnob[0].region &&
-          massKnob[i][0].area === dataKnob[0].area &&
-          massKnob[i][0].subarea === dataKnob[0].subarea
+          massKnob[i].cmd === dataKnob[0].cmd &&
+          massKnob[i].param === dataKnob[0].param &&
+          massKnob[i].region === dataKnob[0].region &&
+          massKnob[i].area === dataKnob[0].area &&
+          massKnob[i].subarea === dataKnob[0].subarea
         ) {
           flagDubl = false;
           console.log(i, 'Дубликат');
@@ -219,7 +223,7 @@ const ManagementLeftGrid = (props: {
       }
       if (flagDubl) {
         console.log('Запись');
-        massKnob[dlMassKnob] = dataKnob;
+        massKnob.push(dataKnob[0]);
         flagDubl = false;
       }
 
