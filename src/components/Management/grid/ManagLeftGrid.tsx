@@ -25,15 +25,6 @@ export interface Knob {
   subarea: number;
 }
 
-let massKnob: any = [
-  {
-    cmd: 5,
-    param: 99,
-    region: '',
-    area: '',
-    subarea: 0,
-  },
-];
 let massKnop: any = [];
 
 const ManagementLeftGrid = (props: {
@@ -87,9 +78,19 @@ const ManagementLeftGrid = (props: {
       param: 99,
       region: '',
       area: '',
-      subarea: 0,
+      subarea: 88,
     },
   ]);
+
+  let massKnob: any = [
+    {
+      cmd: 0,
+      param: 99,
+      region: '',
+      area: '',
+      subarea: 99,
+    },
+  ];
 
   console.log('dataKnob:', dataKnob[0], dataKnob[0].cmd);
 
@@ -246,14 +247,7 @@ const ManagementLeftGrid = (props: {
       massKnob[0].area = dataKnob[0].area;
       massKnob[0].subarea = dataKnob[0].subarea;
 
-      massKnop.push(massKnob[0]);
-      //massKnop[dlMassKnob] = massKnob[dlMassKnob];
-      //   flagDubl = false;
-      // }
-
-      console.log('dataKnob', dataKnob, dlMassKnob);
-      console.log('massKnob!!!', massKnob);
-      console.log('massKnop', massKnop);
+      console.log('dataKnob', dataKnob);
 
       setDataKnob([
         {
@@ -261,9 +255,16 @@ const ManagementLeftGrid = (props: {
           param: 99,
           region: '',
           area: '',
-          subarea: 0,
+          subarea: 77,
         },
       ]);
+
+      massKnop.push(massKnob[0]);
+      //massKnop[dlMassKnob] = massKnob[dlMassKnob];
+      //   flagDubl = false;
+      // }
+
+      console.log('massKnop', massKnop);
     }
   };
 
@@ -308,8 +309,6 @@ const ManagementLeftGrid = (props: {
     );
   };
 
-  CheckFourKnops();
-
   return (
     <Grid container>
       <Grid item xs={2.5} sx={styleMG01}>
@@ -318,7 +317,7 @@ const ManagementLeftGrid = (props: {
       <Grid item xs sx={{ border: 0 }}>
         <Grid container>
           <FourKnops />
-
+          {CheckFourKnops()}
           <ManagementRightGrid
             open={props.open}
             tflightt={points}
