@@ -25,7 +25,7 @@ export interface Knob {
   subarea: number;
 }
 
-let massKnob: Knob[] = [
+let massKnob: any = [
   {
     cmd: 5,
     param: 99,
@@ -34,7 +34,7 @@ let massKnob: Knob[] = [
     subarea: 0,
   },
 ];
-let massKnop: Knob[] = [];
+let massKnop: any = [];
 
 const ManagementLeftGrid = (props: {
   open: boolean;
