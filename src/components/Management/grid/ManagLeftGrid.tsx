@@ -239,7 +239,7 @@ const ManagementLeftGrid = (props: {
       //   }
       // }
       // if (flagDubl) {
-      //console.log('Запись');
+      console.log('Запись');
       massKnob[0].cmd = dataKnob[0].cmd;
       massKnob[0].param = dataKnob[0].param;
       massKnob[0].region = dataKnob[0].region;
@@ -304,10 +304,11 @@ const ManagementLeftGrid = (props: {
             setDataKn={setDataKnob}
           />
         </Stack>
-        {CheckFourKnops()}
       </Grid>
     );
   };
+
+  CheckFourKnops();
 
   return (
     <Grid container>
@@ -317,6 +318,7 @@ const ManagementLeftGrid = (props: {
       <Grid item xs sx={{ border: 0 }}>
         <Grid container>
           <FourKnops />
+
           <ManagementRightGrid
             open={props.open}
             tflightt={points}
