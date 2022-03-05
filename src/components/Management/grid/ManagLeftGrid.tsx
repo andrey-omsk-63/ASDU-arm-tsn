@@ -197,6 +197,7 @@ const ManagementLeftGrid = (props: {
     if (dataKnob[0].cmd !== 0) {
       // проверка дубликатов
       let flagDubl = true;
+      let dlMassKnob = massKnob.length;
       for (let i = 0; i < massKnob.length; i++) {
         if (
           massKnob[i][0].cmd === dataKnob[0].cmd &&
@@ -207,9 +208,9 @@ const ManagementLeftGrid = (props: {
         )
           flagDubl = false;
       }
-      if (flagDubl) massKnob.push(dataKnob);
+      if (flagDubl) massKnob[dlMassKnob + 1] = dataKnob;
 
-      //console.log('dataKnob', flagDubl, dataKnob);
+      console.log('dataKnob', flagDubl, dataKnob);
       console.log('massKnob!!!', massKnob);
 
       setDataKnob([
