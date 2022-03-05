@@ -26,6 +26,7 @@ export interface Knob {
 }
 
 let massKnob: Knob[] = [];
+let massKnop: Knob[] = [];
 
 const ManagementLeftGrid = (props: {
   open: boolean;
@@ -232,11 +233,13 @@ const ManagementLeftGrid = (props: {
       // if (flagDubl) {
       console.log('Запись');
       massKnob.push(dataKnob[0]);
+      massKnop[dlMassKnob] = massKnob[dlMassKnob];
       //   flagDubl = false;
       // }
 
-      console.log('dataKnob', flagDubl, dataKnob);
+      console.log('dataKnob', dataKnob, dlMassKnob);
       console.log('massKnob!!!', massKnob);
+      console.log('massKnop', massKnop);
 
       setDataKnob([
         {
