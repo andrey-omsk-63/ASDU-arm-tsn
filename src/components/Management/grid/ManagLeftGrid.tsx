@@ -219,33 +219,36 @@ const ManagementLeftGrid = (props: {
     if (dataKnob[0].cmd !== 0) {
       // проверка дубликатов
       let flagDubl = true;
-      let dlMassKnob = massKnob.length;
-      // for (let i = 0; i < massKnob.length; i++) {
-      //   console.log(i, 'massKnob:', massKnob[i]);
-      //   console.log('dataKnob:', dataKnob);
-      //   console.log('cmd', i, massKnob[i][0].cmd === dataKnob[0].cmd);
-      //   console.log('param', i, massKnob[i][0].param === dataKnob[0].param);
-      //   console.log('region', i, massKnob[i][0].region === dataKnob[0].region);
-      //   console.log('area', i, massKnob[i][0].area === dataKnob[0].area);
-      //   console.log('subarea', i, massKnob[i][0].subarea === dataKnob[0].subarea);
-      //   if (
-      //     massKnob[i].cmd === dataKnob[0].cmd &&
-      //     massKnob[i].param === dataKnob[0].param &&
-      //     massKnob[i].region === dataKnob[0].region &&
-      //     massKnob[i].area === dataKnob[0].area &&
-      //     massKnob[i].subarea === dataKnob[0].subarea
-      //   ) {
-      //     flagDubl = false;
-      //     console.log(i, 'Дубликат');
-      //   }
-      // }
-      // if (flagDubl) {
-      console.log('Запись');
-      massKnob[0].cmd = dataKnob[0].cmd;
-      massKnob[0].param = dataKnob[0].param;
-      massKnob[0].region = dataKnob[0].region;
-      massKnob[0].area = dataKnob[0].area;
-      massKnob[0].subarea = dataKnob[0].subarea;
+      let dlMassKnop = massKnob.length;
+      for (let i = 0; i < massKnop.length; i++) {
+        // console.log(i, 'massKnob:', massKnob[i]);
+        // console.log('dataKnob:', dataKnob);
+        // console.log('cmd', i, massKnob[i][0].cmd === dataKnob[0].cmd);
+        // console.log('param', i, massKnob[i][0].param === dataKnob[0].param);
+        // console.log('region', i, massKnob[i][0].region === dataKnob[0].region);
+        // console.log('area', i, massKnob[i][0].area === dataKnob[0].area);
+        // console.log('subarea', i, massKnob[i][0].subarea === dataKnob[0].subarea);
+        if (
+          massKnop[i].cmd === dataKnob[0].cmd &&
+          massKnop[i].param === dataKnob[0].param &&
+          massKnop[i].region === dataKnob[0].region &&
+          massKnop[i].area === dataKnob[0].area &&
+          massKnop[i].subarea === dataKnob[0].subarea
+        ) {
+          flagDubl = false;
+          console.log(i, 'Дубликат');
+        }
+      }
+      if (flagDubl) {
+        console.log('Запись');
+        massKnob[0].cmd = dataKnob[0].cmd;
+        massKnob[0].param = dataKnob[0].param;
+        massKnob[0].region = dataKnob[0].region;
+        massKnob[0].area = dataKnob[0].area;
+        massKnob[0].subarea = dataKnob[0].subarea;
+
+        massKnop.push(massKnob[0]);
+      }
 
       console.log('dataKnob', dataKnob);
 
@@ -259,7 +262,6 @@ const ManagementLeftGrid = (props: {
         },
       ]);
 
-      massKnop.push(massKnob[0]);
       //massKnop[dlMassKnob] = massKnob[dlMassKnob];
       //   flagDubl = false;
       // }
