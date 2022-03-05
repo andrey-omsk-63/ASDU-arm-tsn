@@ -70,7 +70,7 @@ const ManagementLeftGrid = (props: {
     },
   ]);
 
-  console.log('dataKnob:', dataKnob[0], dataKnob[0].cmd);
+  //console.log('dataKnob:', dataKnob[0], dataKnob[0].cmd);
 
   let mass: any = [];
   let masRab: any = [];
@@ -195,33 +195,22 @@ const ManagementLeftGrid = (props: {
 
   const CheckFourKnops = () => {
     if (dataKnob[0].cmd !== 0) {
-
       // проверка дубликатов
       let flagDubl = true;
       for (let i = 0; i < massKnob.length; i++) {
-        // console.log('dataKnob[0]:', dataKnob[0]);
-        // console.log('massKnob[i]:', massKnob.length, massKnob[i]);
-        // console.log('massKnob[i].cmd:', massKnob[i][0].cmd === dataKnob[0].cmd);
-        // console.log('massKnob[i].param:', massKnob[i][0].param === dataKnob[0].param);
-        // console.log('massKnob[i].region:', massKnob[i].region === dataKnob[0].region);
-        // console.log('massKnob[i].area:', massKnob[i].area === dataKnob[0].area);
-        // console.log('massKnob[i].subarea:', massKnob[i].subarea === dataKnob[0].subarea);
-        if (massKnob[i][0].cmd === dataKnob[0].cmd &&
+        if (
+          massKnob[i][0].cmd === dataKnob[0].cmd &&
           massKnob[i][0].param === dataKnob[0].param &&
           massKnob[i][0].region === dataKnob[0].region &&
           massKnob[i][0].area === dataKnob[0].area &&
           massKnob[i][0].subarea === dataKnob[0].subarea
-        ) {
-          console.log('YES!!!')
+        )
           flagDubl = false;
-        } else {
-          console.log('NO!!!')
-        }
       }
       if (flagDubl) massKnob.push(dataKnob);
 
       //console.log('dataKnob', flagDubl, dataKnob);
-      //console.log('massKnob!!!', massKnob);
+      console.log('massKnob!!!', massKnob);
 
       setDataKnob([
         {
@@ -232,7 +221,6 @@ const ManagementLeftGrid = (props: {
           subarea: 0,
         },
       ]);
-
     }
   };
 
@@ -301,10 +289,3 @@ const ManagementLeftGrid = (props: {
 };
 
 export default ManagementLeftGrid;
-
-//console.log(points[0].ID);
-// let mass: Array<Tflight> = points.filter(tflight => tflight.ID == 8);
-// let mass: Array<Tflight> = [];
-// mass = points.filter(tflight => tflight.area.num === '2');
-// console.log('mass1:', mass);
-// mass = points.filter(tflight => tflight.area.num === '2' && tflight.subarea === 2);
