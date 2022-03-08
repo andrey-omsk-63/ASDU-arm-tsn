@@ -4,10 +4,22 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
+export interface DataKnob {
+  knop: Knob[];
+}
+
+export interface Knob {
+  cmd: number;
+  param: number;
+  region: string;
+  area: string;
+  subarea: number;
+}
+
 let otpravka = true;
 let soobDispatch = '';
 let nomDispatch = 'Вкл';
-let dataKnob = [
+let dataKnob: Knob[] = [
   {
     cmd: 13,
     param: 99,
@@ -25,7 +37,6 @@ const ManagementKnobXT = (props: {
   subArea: number;
   setDataKn: Function;
 }) => {
- 
   const [value, setValue] = React.useState(21);
   const [open, setOpen] = React.useState(false);
 
