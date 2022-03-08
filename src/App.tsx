@@ -46,10 +46,11 @@ const App = () => {
 
   const styleAppExit = {
     fontSize: 14,
-    textAlign: 'right',
+    marginLeft: 'auto',
+    marginRight: 0,
     maxHeight: '21px',
     minHeight: '21px',
-    width: '20%',
+    width: '12%',
     backgroundColor: '#F1F3F4',
     color: 'black',
     textTransform: 'unset !important',
