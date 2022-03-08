@@ -167,7 +167,7 @@ const App = () => {
   return (
     <>
       <EndSeans />
-      <Box sx={{ width: '98.5%', typography: 'body2' }}>
+      <Box sx={{ width: '99.5%', typography: 'body2' }}>
         <TabContext value={value}>
           <Box sx={{ marginLeft: 0.5, backgroundColor: '#F1F5FB' }}>
             <Stack direction="row">

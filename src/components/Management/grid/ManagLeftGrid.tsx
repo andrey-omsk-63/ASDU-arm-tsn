@@ -255,10 +255,6 @@ const ManagementLeftGrid = (props: {
         },
       ]);
 
-      //massKnop[dlMassKnob] = massKnob[dlMassKnob];
-      //   flagDubl = false;
-      // }
-
       console.log('massKnop', massKnop);
     }
   };
