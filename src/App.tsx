@@ -50,7 +50,7 @@ const App = () => {
     marginRight: 0,
     maxHeight: '21px',
     minHeight: '21px',
-    width: '12%',
+    width: '9%',
     backgroundColor: '#F1F3F4',
     color: 'black',
     textTransform: 'unset !important',
@@ -187,7 +187,7 @@ const App = () => {
                 </Button>
               )}
               {bsLogin === '' && (
-                <Button sx={styleAppExit} variant="contained" onClick={() => setValue('4')}>
+                <Button sx={styleAppExit} variant="contained" onClick={handleClose}>
                   <b>Выход</b>
                 </Button>
               )}

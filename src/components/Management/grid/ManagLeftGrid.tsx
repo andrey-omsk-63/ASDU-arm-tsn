@@ -92,7 +92,7 @@ const ManagementLeftGrid = (props: {
     },
   ];
 
-  console.log('dataKnob:', dataKnob[0], dataKnob[0].cmd);
+  //console.log('dataKnob:', dataKnob[0], dataKnob[0].cmd);
 
   let mass: any = [];
   let masRab: any = [];
@@ -221,13 +221,6 @@ const ManagementLeftGrid = (props: {
       let flagDubl = true;
       let dlMassKnop = massKnob.length;
       for (let i = 0; i < massKnop.length; i++) {
-        // console.log(i, 'massKnob:', massKnob[i]);
-        // console.log('dataKnob:', dataKnob);
-        // console.log('cmd', i, massKnob[i][0].cmd === dataKnob[0].cmd);
-        // console.log('param', i, massKnob[i][0].param === dataKnob[0].param);
-        // console.log('region', i, massKnob[i][0].region === dataKnob[0].region);
-        // console.log('area', i, massKnob[i][0].area === dataKnob[0].area);
-        // console.log('subarea', i, massKnob[i][0].subarea === dataKnob[0].subarea);
         if (
           massKnop[i].cmd === dataKnob[0].cmd &&
           massKnop[i].param === dataKnob[0].param &&
