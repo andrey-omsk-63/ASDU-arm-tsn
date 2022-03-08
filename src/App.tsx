@@ -44,6 +44,17 @@ const App = () => {
     textTransform: 'unset !important',
   };
 
+  const styleAppExit = {
+    fontSize: 14,
+    textAlign: 'right',
+    maxHeight: '21px',
+    minHeight: '21px',
+    width: '20%',
+    backgroundColor: '#F1F3F4',
+    color: 'black',
+    textTransform: 'unset !important',
+  };
+
   const styleMod = {
     position: 'absolute',
     top: '22.8%',
@@ -172,6 +183,11 @@ const App = () => {
               {bsLogin === '' && (
                 <Button sx={styleApp01} variant="contained" onClick={() => setValue('3')}>
                   <b>Статистика</b>
+                </Button>
+              )}
+              {bsLogin === '' && (
+                <Button sx={styleAppExit} variant="contained" onClick={() => setValue('4')}>
+                  <b>Выход</b>
                 </Button>
               )}
               {/* <Header /> */}
