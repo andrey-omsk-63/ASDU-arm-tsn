@@ -145,7 +145,7 @@ const App = () => {
           setIsOpenDev(true);
           break;
         case 'xctrlInfo':
-          console.log('data_xctrlInfo:', data);
+          //console.log('data_xctrlInfo:', data);
           setPointsXctrl(data.xctrlInfo ?? []);
           setIsOpenInf(true);
           break;
