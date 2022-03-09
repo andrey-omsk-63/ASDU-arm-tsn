@@ -44,17 +44,17 @@ const App = () => {
     textTransform: 'unset !important',
   };
 
-  const styleAppExit = {
-    fontSize: 14,
-    marginLeft: 'auto',
-    marginRight: 0,
-    maxHeight: '21px',
-    minHeight: '21px',
-    width: '9%',
-    backgroundColor: '#F1F3F4',
-    color: 'black',
-    textTransform: 'unset !important',
-  };
+  // const styleAppExit = {
+  //   fontSize: 14,
+  //   marginLeft: 'auto',
+  //   marginRight: 0,
+  //   maxHeight: '21px',
+  //   minHeight: '21px',
+  //   width: '9%',
+  //   backgroundColor: '#F1F3F4',
+  //   color: 'black',
+  //   textTransform: 'unset !important',
+  // };
 
   const styleMod = {
     position: 'absolute',
@@ -167,7 +167,7 @@ const App = () => {
   return (
     <>
       <EndSeans />
-      <Box sx={{ width: '99.5%', typography: 'body2' }}>
+      <Box sx={{ width: '98.8%', typography: 'body2' }}>
         <TabContext value={value}>
           <Box sx={{ marginLeft: 0.5, backgroundColor: '#F1F5FB' }}>
             <Stack direction="row">
@@ -186,11 +186,11 @@ const App = () => {
                   <b>Статистика</b>
                 </Button>
               )}
-              {bsLogin === '' && (
+              {/* {bsLogin === '' && (
                 <Button sx={styleAppExit} variant="contained" onClick={handleClose}>
                   <b>Выход</b>
                 </Button>
-              )}
+              )} */}
               {/* <Header /> */}
             </Stack>
           </Box>

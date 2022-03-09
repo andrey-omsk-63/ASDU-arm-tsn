@@ -4,6 +4,18 @@ import Box from '@mui/material/Box';
 
 import { Tflight } from '../../../interfaceMNG.d';
 
+export interface DataKnob {
+  knop: Knob[];
+}
+
+export interface Knob {
+  cmd: number;
+  param: number;
+  region: string;
+  area: string;
+  subarea: number;
+}
+
 const ManagementRightGrid = (props: {
   open: boolean;
   tflightt: Tflight[];
@@ -11,7 +23,11 @@ const ManagementRightGrid = (props: {
   areaa: string;
   subArea: number;
   masxt: any;
+  masknob: Knob[];
 }) => {
+
+  console.log('props.masxt', props.masxt)
+
   const styleMgl = {
     padding: 1,
     margin: 1,
@@ -63,6 +79,7 @@ const ManagementRightGrid = (props: {
   let sostGl = 0;
   let podchGl = 0;
   let j = 0;
+  let massKnob: Knob[] = [];
 
   const CounterMode = (i: number, j: number) => {
     if (points[i].scon) {
@@ -78,6 +95,18 @@ const ManagementRightGrid = (props: {
     if (points[i].StatusCommandDU.IsNK) mass[j].isNK = true;
   };
 
+  const MakeMassKnob = () => {
+    massKnob = [];
+    for (let i = 0; i < props.masknob.length; i++) {
+      if (props.areaa === props.masknob[i].area &&
+        props.subArea === props.masknob[i].subarea &&
+        props.masknob[i].param !== 13
+      ) {
+        massKnob.push(props.masknob[i]);
+      }
+    }
+  }
+
   switch (props.mode) {
     case 1:
       points = props.tflightt;
@@ -91,6 +120,7 @@ const ManagementRightGrid = (props: {
           isCk: false,
           isNk: false,
           isXT: false,
+          releaseXT: false,
         };
         CounterMode(0, 0);
         j = 0;
@@ -106,6 +136,7 @@ const ManagementRightGrid = (props: {
               isCk: false,
               isNk: false,
               isXT: true,
+              releaseXT: false,
             };
           } else {
             mass[j].koldk++;
@@ -134,8 +165,8 @@ const ManagementRightGrid = (props: {
         }
         mass[k].isXT = flagXtArea;
       }
-
-      //console.log('mass_mod1_end', mass)
+      MakeMassKnob()
+      //console.log('massKnob_mode1', massKnob)
       break;
 
     case 2:
@@ -152,6 +183,7 @@ const ManagementRightGrid = (props: {
           isCk: false,
           isNk: false,
           isXT: false,
+          releaseXT: false,
         };
         CounterMode(0, 0);
         j = 0;
@@ -168,6 +200,7 @@ const ManagementRightGrid = (props: {
               isCk: false,
               isNk: false,
               isXT: false,
+              releaseXT: false,
             };
           } else {
             mass[j].koldk++;
@@ -186,7 +219,8 @@ const ManagementRightGrid = (props: {
           }
         }
       }
-
+      MakeMassKnob()
+      //console.log('massKnob_mode2', massKnob)
       break;
 
     default:
@@ -198,6 +232,8 @@ const ManagementRightGrid = (props: {
         if (points[i].scon) sostGl++;
         if (points[i].techMode === 9) podchGl++;
       }
+      MakeMassKnob()
+    //console.log('massKnob_mode3', massKnob)
   }
 
   const HeaderMRG03 = () => {
@@ -403,7 +439,7 @@ const ManagementRightGrid = (props: {
     if (props.mode !== 3) {
       prosSv = ((100 * sostGl) / sumDk).toFixed(2).toString() + '%';
       prosPch = ((100 * podchGl) / sumDk).toFixed(2).toString() + '%';
-      let proXtWell = 'назначен';
+      let proXtWell = 'назначен/';
       for (let k = 0; k < mass.length; k++) {
         if (!mass[k].isXT) proXtWell = 'отсутствует';
       }
@@ -418,15 +454,37 @@ const ManagementRightGrid = (props: {
           parseInt(points[0].area.num) === props.masxt[j].areaXT &&
           points[0].subarea === props.masxt[j].subareaXT
         ) {
-          proXT = 'ХТ для данного подрайона назначен';
+          proXT = 'ХТ для данного подрайона назначен/';
+          if (props.masxt[j].releaseXT) {
+            proXT = proXT + 'включён'
+          } else {
+            proXT = proXT + 'выключен'
+          }
+        }
+      }
+    }
+    let soobBP = ' BP';
+    if (massKnob.length > 0) {
+      soobBP = '';
+      for (let i = 0; i < massKnob.length; i++) {
+        switch (massKnob[i].cmd) {
+          case 5:
+            soobBP = soobBP + ' ПК' + massKnob[i].param.toString()
+            break;
+          case 6:
+            soobBP = soobBP + ' CК' + massKnob[i].param.toString()
+            break;
+          case 7:
+            soobBP = soobBP + ' HК' + massKnob[i].param.toString()
+            break;
         }
       }
     }
 
     return (
       <Grid item xs={12} sx={styleMgl}>
-        Всего ДК&nbsp;{sumDk}&nbsp;на связи&nbsp;{prosSv}&nbsp; подчинены&nbsp;{prosPch}&nbsp;
-        <b>Назначен ВР</b>&nbsp;<em>{proXT}</em>
+        Всего ДК&nbsp;{sumDk}&nbsp;на связи&nbsp;{prosSv}&nbsp; подчинены&nbsp;{prosPch}&nbsp;&nbsp;
+        <b>Назначен{soobBP}</b>&nbsp;&nbsp;<em>{proXT}</em>
       </Grid>
     );
   };

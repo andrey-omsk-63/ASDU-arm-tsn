@@ -25,7 +25,7 @@ export interface Knob {
   subarea: number;
 }
 
-let massKnop: any = [];
+let massKnop: Knob[] = [];
 
 const ManagementLeftGrid = (props: {
   open: boolean;
@@ -82,7 +82,7 @@ const ManagementLeftGrid = (props: {
     },
   ]);
 
-  let massKnob: any = [
+  let massKnob: Knob[] = [
     {
       cmd: 0,
       param: 99,
@@ -140,11 +140,12 @@ const ManagementLeftGrid = (props: {
     masAreaNum = masRab.filter((element: any, index: any) => {
       return masRab.indexOf(element) === index;
     });
-    // массив ХТ
+    // создание массива ХТ
     for (let i = 0; i < pointsXT.length; i++) {
       masXT[i] = {
         areaXT: pointsXT[i].area,
         subareaXT: pointsXT[i].subarea,
+        releaseXT: pointsXT[i].release,
       };
     }
   }
@@ -219,21 +220,21 @@ const ManagementLeftGrid = (props: {
     if (dataKnob[0].cmd !== 0) {
       // проверка дубликатов
       let flagDubl = true;
-      let dlMassKnop = massKnob.length;
       for (let i = 0; i < massKnop.length; i++) {
         if (
           massKnop[i].cmd === dataKnob[0].cmd &&
-          massKnop[i].param === dataKnob[0].param &&
+          //massKnop[i].param === dataKnob[0].param &&
           massKnop[i].region === dataKnob[0].region &&
           massKnop[i].area === dataKnob[0].area &&
           massKnop[i].subarea === dataKnob[0].subarea
         ) {
           flagDubl = false;
-          console.log(i, 'Дубликат');
+          massKnop[i].param = dataKnob[0].param
+          //console.log(i, 'Дубликат');
         }
       }
       if (flagDubl) {
-        console.log('Запись');
+        //console.log('Запись');
         massKnob[0].cmd = dataKnob[0].cmd;
         massKnob[0].param = dataKnob[0].param;
         massKnob[0].region = dataKnob[0].region;
@@ -241,9 +242,9 @@ const ManagementLeftGrid = (props: {
         massKnob[0].subarea = dataKnob[0].subarea;
 
         massKnop.push(massKnob[0]);
+        // сортировка по cmd
+        massKnop.sort((prev, next) => prev.cmd - next.cmd);
       }
-
-      console.log('dataKnob', dataKnob);
 
       setDataKnob([
         {
@@ -316,6 +317,7 @@ const ManagementLeftGrid = (props: {
             areaa={areaa}
             subArea={subArea}
             masxt={masXT}
+            masknob={massKnop}
           />
         </Grid>
       </Grid>
