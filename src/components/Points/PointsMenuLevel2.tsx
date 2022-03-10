@@ -58,15 +58,15 @@ const PointsMenuLevel2 = (props: {
   };
 
   return (
-    <Box sx={{ border: 0, marginTop: -2, marginLeft: -3.5, marginRight: -3 }}>
-      <Grid container item sx={{ border: 0 }}>
+    <Box sx={{ marginTop: -2, marginLeft: -3.5, marginRight: -2 }}>
+      <Grid container item>
         <Grid item xs={12}>
           <Grid container item>
-            <Grid item xs={0.4} sx={{ border: 0 }}>
+            <Grid item xs={0.4}>
               <PointsMenuLevel2Menu />
             </Grid>
 
-            <Grid item xs sx={{ border: 0 }}>
+            <Grid item xs>
               <Grid item xs={12}>
                 <PointsLevel2Baza
                   open={props.open}

@@ -249,7 +249,7 @@ const StatisticXT = (props: { open: boolean; statist: Statistic[]; areaid: numbe
       const styleClear = {
         position: 'absolute',
         marginTop: '-2.8vh',
-        left: '0.4vh',
+        left: '0.8vh',
       };
 
       const styleBattonCl = {

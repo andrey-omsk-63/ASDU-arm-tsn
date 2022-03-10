@@ -35,8 +35,10 @@ const PointsMenuLevel1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: numb
     const handleOpen = () => setOpen(true);
 
     const handleClose = (numer: number) => {
-      setCrossRoad(numer)
-      setValueLavel2('2');
+      if (numer !== 777) {
+        setCrossRoad(numer)
+        setValueLavel2('2');
+      }
       setOpen(false);
     };
 
@@ -57,6 +59,7 @@ const PointsMenuLevel1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: numb
         width: (dlStrMenu + 8) * 10,
         bgcolor: 'background.paper',
         border: '2px solid #000',
+        borderRadius: 2,
         boxShadow: 24,
         p: 1,
       };
@@ -72,6 +75,13 @@ const PointsMenuLevel1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: numb
             </Button>,
           );
         }
+        resStr.push(
+          <Button key={0} sx={stylePXt1} variant="contained" onClick={() => handleClose(777)}>
+            <b>
+              Выход
+            </b>
+          </Button>,
+        );
         return resStr;
       };
 
@@ -92,12 +102,12 @@ const PointsMenuLevel1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: numb
       );
     }
   };
-  
+
   return (
-    <Box sx={{ border: 0 }}>
+    <Box>
       <TabContext value={valueLevel2}>
         <Box>
-          <Stack sx={{ marginLeft: 0.5, marginTop: 0.7, border: 0 }} direction="row">
+          <Stack sx={{ marginLeft: 0.5, marginTop: 0.7 }} direction="row">
             <Button sx={stylePXt1} variant="contained" onClick={() => setValueLavel2('1')}>
               <b>Основной:</b>
             </Button>

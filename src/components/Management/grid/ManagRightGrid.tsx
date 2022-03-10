@@ -26,8 +26,6 @@ const ManagementRightGrid = (props: {
   masknob: Knob[];
 }) => {
 
-  console.log('props.masxt', props.masxt)
-
   const styleMgl = {
     padding: 1,
     margin: 1,
@@ -93,6 +91,16 @@ const ManagementRightGrid = (props: {
     if (points[i].StatusCommandDU.IsPK) mass[j].isPk = true;
     if (points[i].StatusCommandDU.IsCK) mass[j].isCK = true;
     if (points[i].StatusCommandDU.IsNK) mass[j].isNK = true;
+    if (props.mode === 2) {
+      for (let k = 0; k < props.masxt.length; k++) {
+        if (
+          parseInt(points[i].area.num) === props.masxt[k].areaXT &&
+          points[i].subarea === props.masxt[k].subareaXT
+        ) {
+          mass[j].releaseXT = true;
+        }
+      }
+    }
   };
 
   const MakeMassKnob = () => {
@@ -166,7 +174,7 @@ const ManagementRightGrid = (props: {
         mass[k].isXT = flagXtArea;
       }
       MakeMassKnob()
-      //console.log('massKnob_mode1', massKnob)
+
       break;
 
     case 2:
@@ -220,7 +228,7 @@ const ManagementRightGrid = (props: {
         }
       }
       MakeMassKnob()
-      //console.log('massKnob_mode2', massKnob)
+
       break;
 
     default:
@@ -233,7 +241,6 @@ const ManagementRightGrid = (props: {
         if (points[i].techMode === 9) podchGl++;
       }
       MakeMassKnob()
-    //console.log('massKnob_mode3', massKnob)
   }
 
   const HeaderMRG03 = () => {
@@ -353,7 +360,12 @@ const ManagementRightGrid = (props: {
         if (mass[i].isNk) soobBP = soobBP + ' HК';
         if (soobBP === 'Назначен') soobBP = soobBP + ' BP';
         if (mass[i].isXT) {
-          soobXT = soobXT + 'назначен';
+          soobXT = soobXT + 'назначен/';
+          if (mass[i].releaseXT) {
+            soobXT = soobXT + 'включён'
+          } else {
+            soobXT = soobXT + 'выключен'
+          }
         } else {
           soobXT = soobXT + 'отсутствует';
         }
@@ -479,6 +491,11 @@ const ManagementRightGrid = (props: {
             break;
         }
       }
+      console.log('massKnob:', massKnob, soobBP)
+      if (soobBP === ' ПК0 CК0 HК0') {
+        soobBP = ' BP(ПК0+CК0+HК0)'
+      }
+      if (soobBP === '') soobBP = ' BP';
     }
 
     return (
