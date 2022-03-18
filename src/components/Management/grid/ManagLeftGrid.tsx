@@ -181,7 +181,7 @@ const ManagementLeftGrid = (props: {
       <>
         <Stack direction="column">
           <Grid container>
-            <Grid item xs={0.25} sx={styleMG03}></Grid>
+            {/* <Grid item xs={0.25} sx={styleMG03}></Grid> */}
             <Grid item xs sx={styleMG03}>
               <Button sx={styleButt01} variant="contained" onClick={() => handleClock(props.nom)}>
                 <b>
