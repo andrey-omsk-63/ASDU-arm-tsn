@@ -491,10 +491,8 @@ const ManagementRightGrid = (props: {
             break;
         }
       }
-      console.log('massKnob:', massKnob, soobBP)
-      if (soobBP === ' ПК0 CК0 HК0') {
-        soobBP = ' BP(ПК0+CК0+HК0)'
-      }
+      
+      if (soobBP === ' ПК0 CК0 HК0') soobBP = ' BP(ПК0+CК0+HК0)';
       if (soobBP === '') soobBP = ' BP';
     }
 
