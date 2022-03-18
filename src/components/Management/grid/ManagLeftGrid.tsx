@@ -181,12 +181,21 @@ const ManagementLeftGrid = (props: {
         <Grid container>
           <Grid item xs={0.5} sx={styleMG03}></Grid>
           <Grid item xs={11.5} sx={styleMG03}>
-            <Button sx={styleButt01} onClick={() => handleClock(props.nom)}>
+            <Button sx={styleButt01} variant="contained" onClick={() => handleClock(props.nom)}>
               <b>
                 Район:{masSpis[0].areaNum}&nbsp;{masSpis[0].areaName}
               </b>
             </Button>
           </Grid>
+
+          {/* <Grid container>
+            <Grid item xs>
+              <Button sx={styleButt01} variant="contained" onClick={() => setValue(val)}>
+                <b>{soob}</b>
+              </Button>
+            </Grid>
+          </Grid> */}
+
           {SpisSubAreaMLG()}
         </Grid>
       </>
@@ -204,14 +213,16 @@ const ManagementLeftGrid = (props: {
 
     return (
       <>
-        <Grid container>
-          <Grid item xs={6} sx={styleMG03}>
-            <Button sx={styleButt02} onClick={handleClickGl}>
-              <b>Регион&nbsp;&nbsp;{points[0].region.nameRegion}</b>
-            </Button>
+        <Stack direction="column">
+          <Grid container>
+            <Grid item xs={6} sx={styleMG03}>
+              <Button sx={styleButt02} onClick={handleClickGl}>
+                <b>Регион&nbsp;&nbsp;{points[0].region.nameRegion}</b>
+              </Button>
+            </Grid>
           </Grid>
-        </Grid>
-        {SpisAreaGlob()}
+          {SpisAreaGlob()}
+        </Stack>
       </>
     );
   };
@@ -229,7 +240,7 @@ const ManagementLeftGrid = (props: {
           massKnop[i].subarea === dataKnob[0].subarea
         ) {
           flagDubl = false;
-          massKnop[i].param = dataKnob[0].param
+          massKnop[i].param = dataKnob[0].param;
           //console.log(i, 'Дубликат');
         }
       }
