@@ -160,8 +160,8 @@ const ManagementLeftGrid = (props: {
       for (let i = 0; i < masSpis.length; i++) {
         resStr.push(
           <Grid container key={Math.random()}>
-            <Grid key={Math.random()} item xs={1} sx={styleMG03}></Grid>
-            <Grid key={Math.random()} item xs={11} sx={styleMG03}>
+            <Grid key={Math.random()} item xs={0.5} sx={styleMG03}></Grid>
+            <Grid key={Math.random()} item xs sx={styleMG03}>
               <Button
                 key={i}
                 sx={styleButt01}
@@ -181,8 +181,8 @@ const ManagementLeftGrid = (props: {
       <>
         <Stack direction="column">
           <Grid container>
-            <Grid item xs={0.5} sx={styleMG03}></Grid>
-            <Grid item xs={11.5} sx={styleMG03}>
+            <Grid item xs={0.25} sx={styleMG03}></Grid>
+            <Grid item xs sx={styleMG03}>
               <Button sx={styleButt01} variant="contained" onClick={() => handleClock(props.nom)}>
                 <b>
                   Район:{masSpis[0].areaNum}&nbsp;{masSpis[0].areaName}
