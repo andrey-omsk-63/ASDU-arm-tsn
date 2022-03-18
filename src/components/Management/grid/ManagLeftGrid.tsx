@@ -159,18 +159,21 @@ const ManagementLeftGrid = (props: {
 
       for (let i = 0; i < masSpis.length; i++) {
         resStr.push(
-          <Grid container key={Math.random()}>
-            <Grid key={Math.random()} item xs={1} sx={styleMG03}></Grid>
-            <Grid key={Math.random()} item xs={11} sx={styleMG03}>
-              <Button
-                key={i}
-                sx={styleButt01}
-                //variant="contained"
-                onClick={() => handleClick(props.nom, masSpis[i].subarea)}>
-                Подрайон:{masSpis[i].areaNum}:{masSpis[i].subarea}
-              </Button>
+          <Stack direction="column">
+            <Grid container key={Math.random()}>
+              <Grid key={Math.random()} item xs={1} sx={styleMG03}></Grid>
+              <Grid key={Math.random()} item xs={11} sx={styleMG03}>
+                <Button
+                  key={i}
+                  sx={styleButt01}
+                  variant="contained"
+                  //variant="contained"
+                  onClick={() => handleClick(props.nom, masSpis[i].subarea)}>
+                  Подрайон:{masSpis[i].areaNum}:{masSpis[i].subarea}
+                </Button>
+              </Grid>
             </Grid>
-          </Grid>,
+          </Stack>,
         );
       }
       return resStr;
@@ -178,26 +181,19 @@ const ManagementLeftGrid = (props: {
 
     return (
       <>
-        <Grid container>
-          <Grid item xs={0.5} sx={styleMG03}></Grid>
-          <Grid item xs={11.5} sx={styleMG03}>
-            <Button sx={styleButt01} variant="contained" onClick={() => handleClock(props.nom)}>
-              <b>
-                Район:{masSpis[0].areaNum}&nbsp;{masSpis[0].areaName}
-              </b>
-            </Button>
-          </Grid>
-
-          {/* <Grid container>
-            <Grid item xs>
-              <Button sx={styleButt01} variant="contained" onClick={() => setValue(val)}>
-                <b>{soob}</b>
+        <Stack direction="column">
+          <Grid container>
+            <Grid item xs={0.5} sx={styleMG03}></Grid>
+            <Grid item xs={11.5} sx={styleMG03}>
+              <Button sx={styleButt01} variant="contained" onClick={() => handleClock(props.nom)}>
+                <b>
+                  Район:{masSpis[0].areaNum}&nbsp;{masSpis[0].areaName}
+                </b>
               </Button>
             </Grid>
-          </Grid> */}
-
-          {SpisSubAreaMLG()}
-        </Grid>
+            {SpisSubAreaMLG()}
+          </Grid>
+        </Stack>
       </>
     );
   };
@@ -216,7 +212,7 @@ const ManagementLeftGrid = (props: {
         <Stack direction="column">
           <Grid container>
             <Grid item xs={6} sx={styleMG03}>
-              <Button sx={styleButt02} onClick={handleClickGl}>
+              <Button sx={styleButt02} variant="contained" onClick={handleClickGl}>
                 <b>Регион&nbsp;&nbsp;{points[0].region.nameRegion}</b>
               </Button>
             </Grid>
