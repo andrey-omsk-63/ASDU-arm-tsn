@@ -159,21 +159,19 @@ const ManagementLeftGrid = (props: {
 
       for (let i = 0; i < masSpis.length; i++) {
         resStr.push(
-          <Stack direction="column">
-            <Grid container key={Math.random()}>
-              <Grid key={Math.random()} item xs={1} sx={styleMG03}></Grid>
-              <Grid key={Math.random()} item xs={11} sx={styleMG03}>
-                <Button
-                  key={i}
-                  sx={styleButt01}
-                  variant="contained"
-                  //variant="contained"
-                  onClick={() => handleClick(props.nom, masSpis[i].subarea)}>
-                  Подрайон:{masSpis[i].areaNum}:{masSpis[i].subarea}
-                </Button>
-              </Grid>
+          <Grid container key={Math.random()}>
+            <Grid key={Math.random()} item xs={1} sx={styleMG03}></Grid>
+            <Grid key={Math.random()} item xs={11} sx={styleMG03}>
+              <Button
+                key={i}
+                sx={styleButt01}
+                variant="contained"
+                //variant="contained"
+                onClick={() => handleClick(props.nom, masSpis[i].subarea)}>
+                Подрайон:{masSpis[i].areaNum}:{masSpis[i].subarea}
+              </Button>
             </Grid>
-          </Stack>,
+          </Grid>,
         );
       }
       return resStr;
