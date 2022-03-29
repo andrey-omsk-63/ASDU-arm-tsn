@@ -63,7 +63,7 @@ const ManagementLeftGrid = (props: {
     fontSize: 14,
     maxHeight: '21px',
     minHeight: '21px',
-    width: '20%',
+    //width: '20%',
     backgroundColor: 'white',
     color: '#5B1080',
     textTransform: 'unset !important',
@@ -210,7 +210,7 @@ const ManagementLeftGrid = (props: {
         <Stack direction="column">
           <Grid container>
             {/* <Grid item xs={6} sx={styleMG03}> */}
-            <Grid item xs={6} sx={{ p: 0.3, border: 1 }}>
+            <Grid item xs sx={{ p: 0.3, border: 1 }}>
               <Button sx={styleButt02} onClick={handleClickGl}>
                 <b>Регион&nbsp;&nbsp;{points[0].region.nameRegion}</b>
               </Button>
