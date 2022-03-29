@@ -17,6 +17,7 @@ const Management = (props: {
   ws: WebSocket;
   points: Tflight[];
   xctrll: XctrlInfo[];
+  region: string;
 }) => {
   //console.log('PoinsMG:', props.open, props.points);
 
@@ -37,6 +38,7 @@ const Management = (props: {
   let isOpen = props.open;
   let points = props.points;
   let pointsAdd: Tflight[] = [];
+  let reGion = props.region;
 
   if (!isOpen) {
     pointsEtalon = [];
@@ -47,8 +49,8 @@ const Management = (props: {
     const handleSendOpen = () => {
       if (props.ws !== null) {
         if (props.ws.readyState === WebSocket.OPEN) {
-          props.ws.send(JSON.stringify({ type: 'stopStatistics', region: '1' }));
-          props.ws.send(JSON.stringify({ type: 'getDevices', region: '1' }));
+          props.ws.send(JSON.stringify({ type: 'stopStatistics', region: reGion }));
+          props.ws.send(JSON.stringify({ type: 'getDevices', region: reGion }));
         } else {
           setTimeout(() => {
             handleSendOpen();
@@ -58,7 +60,6 @@ const Management = (props: {
     };
     handleSendOpen();
   }, [props.ws]);
-
 
   if (isOpen && flagEtalon) {
     pointsEtalon = points;
@@ -72,7 +73,6 @@ const Management = (props: {
     for (let i = 0; i < points.length; i++) {
       newRecord = true;
       for (let j = 0; j < pointsEtalon.length; j++) {
-
         //console.log('points[i]',i,points[i])
         //console.log('pointsEtalon[j]',j,pointsEtalon[j])
         if (
@@ -94,7 +94,7 @@ const Management = (props: {
     //console.log('pointsAdd:', pointsAdd);
     if (pointsAdd.length > 0) {
       for (let i = 0; i < pointsAdd.length; i++) {
-        pointsEtalon.push(pointsAdd[i])
+        pointsEtalon.push(pointsAdd[i]);
       }
     }
   }
@@ -107,7 +107,12 @@ const Management = (props: {
         {isOpen && (
           <>
             {/* <ManagementLeftGrid open={isOpen} tflightt={points} /> */}
-            <ManagementLeftGrid open={isOpen} ws={props.ws} tflightt={pointsEtalon} xctrll={props.xctrll} />
+            <ManagementLeftGrid
+              open={isOpen}
+              ws={props.ws}
+              tflightt={pointsEtalon}
+              xctrll={props.xctrll}
+            />
           </>
         )}
       </Grid>

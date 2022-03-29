@@ -14,7 +14,9 @@ let tekValue = 0;
 let pointsEtalon: XctrlInfo[];
 let flagEtalon = true;
 
-const Points = (props: { open: boolean; ws: WebSocket; xctrll: XctrlInfo[] }) => {
+const Points = (props: { open: boolean; ws: WebSocket; xctrll: XctrlInfo[]; region: string }) => {
+  let reGion = props.region;
+
   const stylePXt1 = {
     fontSize: 13.5,
     maxHeight: '20px',
@@ -32,8 +34,8 @@ const Points = (props: { open: boolean; ws: WebSocket; xctrll: XctrlInfo[] }) =>
     const handleSend = () => {
       if (props.ws !== null) {
         if (props.ws.readyState === WebSocket.OPEN) {
-          props.ws.send(JSON.stringify({ type: 'stopDevices', region: '1' }));
-          props.ws.send(JSON.stringify({ type: 'stopStatistics', region: '1' }));
+          props.ws.send(JSON.stringify({ type: 'stopDevices', region: reGion }));
+          props.ws.send(JSON.stringify({ type: 'stopStatistics', region: reGion }));
         } else {
           setTimeout(() => {
             handleSend();

@@ -139,30 +139,14 @@ const App = () => {
   //const handleOpenModal = () => setOpen(true);
 
   const handleCloseModal = (numer: number) => {
-    // if (numer !== 777) {
     setCrossData(numer);
-    //setValueReg('1');
+
     regionGlob = numer;
-    // }
+
     setOpen(false);
   };
 
   const BeginSeans = () => {
-    // const ChoiceRegion = () => {
-    //   return (
-    //     <>
-    //       <Modal open={open}>
-    //         <Box sx={styleModal}>
-    //           <Stack direction="column">
-    //             <Box>Выбор региона:</Box>
-    //             <Box sx={{ overflowX: 'auto', height: '36vh' }}>{SpisRegion()}</Box>
-    //           </Stack>
-    //         </Box>
-    //       </Modal>
-    //     </>
-    //   );
-    // };
-
     const SpisRegion = () => {
       let resStr = [];
 
@@ -297,21 +281,27 @@ const App = () => {
           <TabPanel value="1">
             {WS !== null && regionGlob !== 0 && (
               <>
-                <Management open={isOpenDev} ws={WS} points={pointsTfl} xctrll={pointsXctrl} />
+                <Management
+                  open={isOpenDev}
+                  ws={WS}
+                  points={pointsTfl}
+                  xctrll={pointsXctrl}
+                  region={String(regionGlob)}
+                />
               </>
             )}
           </TabPanel>
           <TabPanel value="2">
-            {WS !== null && (
+            {WS !== null && regionGlob !== 0 && (
               <>
-                <Points open={isOpenInf} ws={WS} xctrll={pointsXctrl} />
+                <Points open={isOpenInf} ws={WS} xctrll={pointsXctrl} region={String(regionGlob)} />
               </>
             )}
           </TabPanel>
           <TabPanel value="3">
-            {WS !== null && (
+            {WS !== null && regionGlob !== 0 && (
               <>
-                <Statistics open={isOpenSt} ws={WS} points={pointsSt} />
+                <Statistics open={isOpenSt} ws={WS} points={pointsSt} region={String(regionGlob)} />
               </>
             )}
           </TabPanel>

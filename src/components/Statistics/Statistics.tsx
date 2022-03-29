@@ -15,23 +15,23 @@ let flagEtalon = true;
 
 const Statistics = (props: {
   open: boolean;
-  //ws: React.MutableRefObject<WebSocket>;
   ws: WebSocket;
-  //flag: boolean;
   points: Statistic[];
+  region: string;
 }) => {
   //console.log('PoinsSt:', props.open, props.points, props.ws);
 
   let isOpen = props.open;
   let points = props.points;
   //let points: Statistic[] = [];
+  let reGion = props.region;
 
   React.useEffect(() => {
     const handleSend = () => {
       if (props.ws !== null) {
         if (props.ws.readyState === WebSocket.OPEN) {
-          props.ws.send(JSON.stringify({ type: 'stopDevices', region: '1' }));
-          props.ws.send(JSON.stringify({ type: 'getStatistics', region: '1' }));
+          props.ws.send(JSON.stringify({ type: 'stopDevices', region: reGion }));
+          props.ws.send(JSON.stringify({ type: 'getStatistics', region: reGion }));
         } else {
           setTimeout(() => {
             handleSend();
