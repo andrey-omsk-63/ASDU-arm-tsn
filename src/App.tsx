@@ -4,7 +4,7 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import TabContext from '@mui/lab/TabContext';
 import TabPanel from '@mui/lab/TabPanel';
-//import Modal from '@mui/material/Modal';
+import Modal from '@mui/material/Modal';
 
 //import axios from 'axios';
 //import Header from './components/Header/Header';
@@ -20,6 +20,7 @@ import { Statistic } from './interfaceStat.d';
 
 let flagWS = true;
 let WS: any = null;
+let regionGlob: number = 0;
 
 const App = () => {
   const styleApp01 = {
@@ -105,6 +106,88 @@ const App = () => {
     );
   };
 
+  const [open, setOpen] = React.useState(false);
+  const [crossData, setCrossData] = React.useState(0);
+
+  const handleOpenModal = () => setOpen(true);
+
+  const handleCloseModal = (numer: number) => {
+    if (numer !== 777) {
+      setCrossData(numer);
+      setValue('1');
+      // extData =
+      //   points[numer].slice(11, 13) +
+      //   '.' +
+      //   points[numer].slice(8, 10) +
+      //   '.' +
+      //   points[numer].slice(3, 7);
+    }
+    setOpen(false);
+  };
+
+
+  const ChoiceRegion = () => {
+    return (
+      <>
+        <Button sx={styleApp01} variant="contained" onClick={handleOpenModal}>
+          <b>Выбор региона</b>
+        </Button>
+        <Modal open={open}>
+          <Box sx={styleModal}>
+            <Stack direction="column">
+              <Box sx={{ overflowX: 'auto', height: '82vh' }}>{SpisData()}</Box>
+            </Stack>
+          </Box>
+        </Modal>
+      </>
+    );
+  };
+
+  const BeginSeans = () => {
+    const styleJournal = {
+      marginTop: -3.5,
+      background: 'linear-gradient(50deg, #FFC0C0 55%, #0384CF 90%)',
+      backgroundRepeat: 'no-repeat',
+      backgroundAttachment: 'fixed',
+      marginLeft: -2.9,
+      marginRight: -3,
+      height: '85.6vh',
+    };
+    let massRegion: Array<number> = [];
+
+    if (isOpenInf && regionGlob === 0) {
+      for (let i = 0; i < pointsXctrl.length; i++) {
+        let flag = true;
+        for (let j = 0; j < massRegion.length; j++) {
+          if (pointsXctrl[i].region === massRegion[j]) flag = false;
+        }
+        if (flag) massRegion.push(pointsXctrl[i].region);
+      }
+    }
+
+    massRegion.sort()
+
+
+
+    return (
+
+      <Box sx={styleJournal}>
+        <TabContext value={value}>
+          <Box sx={{ marginLeft: 0, marginTop: 0.5 }}>
+            <Stack direction="row">
+              <ChoiceRegion />
+              <Box sx={styleApp02}>{extData}</Box>
+            </Stack>
+          </Box>
+          <TabPanel value="1">
+            {/* <JournalLogins logName={points[crossData]} /> */}
+          </TabPanel>
+        </TabContext>
+      </Box>
+
+    );
+  }
+
   const [pointsXctrl, setPointsXctrl] = React.useState<Array<XctrlInfo>>([]);
   const [isOpenInf, setIsOpenInf] = React.useState(false);
   const [pointsTfl, setPointsTfl] = React.useState<Array<Tflight>>([]);
@@ -137,15 +220,17 @@ const App = () => {
     };
 
     WS.onmessage = function (event: any) {
+
       let allData = JSON.parse(event.data);
       let data = allData.data;
+      //console.log('пришло:', data);
       switch (allData.type) {
         case 'getDevices':
           setPointsTfl(data.tflight ?? []);
           setIsOpenDev(true);
           break;
         case 'xctrlInfo':
-          //console.log('data_xctrlInfo:', data);
+          console.log('data_xctrlInfo:', data);
           setPointsXctrl(data.xctrlInfo ?? []);
           setIsOpenInf(true);
           break;
@@ -167,6 +252,7 @@ const App = () => {
   return (
     <>
       <EndSeans />
+      {regionGlob === 0 && isOpenInf && (<BeginSeans />)}
       <Box sx={{ width: '98.8%', typography: 'body2' }}>
         <TabContext value={value}>
           <Box sx={{ marginLeft: 0.5, backgroundColor: '#F1F5FB' }}>
@@ -195,7 +281,7 @@ const App = () => {
             </Stack>
           </Box>
           <TabPanel value="1">
-            {WS !== null && (
+            {WS !== null && regionGlob !== 0 && (
               <>
                 <Management open={isOpenDev} ws={WS} points={pointsTfl} xctrll={pointsXctrl} />
               </>
