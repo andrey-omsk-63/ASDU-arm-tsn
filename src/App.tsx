@@ -95,7 +95,7 @@ const App = () => {
     position: 'relative',
     bottom: '-48vh',
     marginLeft: '60vh',
-    transform: 'translate(-50%, -50%)',
+    //transform: 'translate(-50%, -50%)',
     width: 90,
     bgcolor: 'background.paper',
     border: '2px solid #000',

@@ -27,8 +27,11 @@ const Points = (props: { open: boolean; ws: WebSocket; xctrll: XctrlInfo[]; regi
   };
 
   let isOpen = props.open;
-  let points = props.xctrll;
+  let pointsGl = props.xctrll;
+  let points = pointsGl.filter((pointsGl) => pointsGl.region === Number(reGion));
   const [value, setValue] = React.useState(tekValue);
+
+  console.log('points:', points);
 
   React.useEffect(() => {
     const handleSend = () => {

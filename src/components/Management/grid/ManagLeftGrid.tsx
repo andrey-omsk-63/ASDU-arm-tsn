@@ -60,7 +60,7 @@ const ManagementLeftGrid = (props: {
   };
 
   const styleButt02 = {
-    fontSize: 15,
+    fontSize: 14,
     maxHeight: '21px',
     minHeight: '21px',
     backgroundColor: 'white',

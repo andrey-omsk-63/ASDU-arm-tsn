@@ -23,12 +23,12 @@ const PointsMenuLevel1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: numb
     backgroundColor: '#F1F3F4',
     color: 'black',
     marginRight: 1,
+    marginTop: 2,
     textTransform: 'unset !important',
   };
 
   const [valueLevel2, setValueLavel2] = React.useState('1');
   const [crossRoad, setCrossRoad] = React.useState(0);
-
 
   const MenuCrossRoad = () => {
     const [open, setOpen] = React.useState(false);
@@ -36,7 +36,7 @@ const PointsMenuLevel1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: numb
 
     const handleClose = (numer: number) => {
       if (numer !== 777) {
-        setCrossRoad(numer)
+        setCrossRoad(numer);
         setValueLavel2('2');
       }
       setOpen(false);
@@ -55,13 +55,13 @@ const PointsMenuLevel1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: numb
         position: 'relative',
         bottom: '-33vh',
         marginLeft: '60vh',
-        transform: 'translate(-50%, -50%)',
+        //transform: 'translate(-50%, -50%)',
         width: (dlStrMenu + 8) * 10,
         bgcolor: 'background.paper',
         border: '2px solid #000',
         borderRadius: 2,
         boxShadow: 24,
-        p: 1,
+        p: 3,
       };
 
       const SpisPerekr = () => {
@@ -77,9 +77,7 @@ const PointsMenuLevel1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: numb
         }
         resStr.push(
           <Button key={0} sx={stylePXt1} variant="contained" onClick={() => handleClose(777)}>
-            <b>
-              Выход
-            </b>
+            <b>Выход</b>
           </Button>,
         );
         return resStr;
@@ -90,10 +88,7 @@ const PointsMenuLevel1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: numb
           <Button sx={stylePXt1} variant="contained" onClick={handleOpen}>
             <b>XT:{xtProps + 1}:1 &nbsp; Перечень перекрёстков</b>
           </Button>
-          <Modal
-            open={open}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description">
+          <Modal open={open}>
             <Box sx={stylePK}>
               <Stack direction="column">{SpisPerekr()}</Stack>
             </Box>
@@ -121,7 +116,12 @@ const PointsMenuLevel1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: numb
           <>
             {points.xctrls.length > 0 && (
               <>
-                <PointsMenuLevel2 open={isOpen} xctrll={props.xctrll} xtt={xtProps} crossroad={crossRoad} />
+                <PointsMenuLevel2
+                  open={isOpen}
+                  xctrll={props.xctrll}
+                  xtt={xtProps}
+                  crossroad={crossRoad}
+                />
               </>
             )}
           </>
