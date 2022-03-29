@@ -130,7 +130,7 @@ const App = () => {
     );
   };
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   const [crossData, setCrossData] = React.useState(0);
   const [valueReg, setValueReg] = React.useState('1');
 
@@ -140,20 +140,21 @@ const App = () => {
     if (numer !== 777) {
       setCrossData(numer);
       setValueReg('1');
+      regionGlob = numer;
     }
     setOpen(false);
   };
 
   const BeginSeans = () => {
-    const styleJournal = {
-      marginTop: -3.5,
-      background: 'linear-gradient(50deg, #FFC0C0 55%, #0384CF 90%)',
-      backgroundRepeat: 'no-repeat',
-      backgroundAttachment: 'fixed',
-      marginLeft: -2.9,
-      marginRight: -3,
-      height: '85.6vh',
-    };
+    // const styleJournal = {
+    //   marginTop: -3.5,
+    //   background: 'linear-gradient(50deg, #FFC0C0 55%, #0384CF 90%)',
+    //   backgroundRepeat: 'no-repeat',
+    //   backgroundAttachment: 'fixed',
+    //   marginLeft: -2.9,
+    //   marginRight: -3,
+    //   height: '85.6vh',
+    // };
     let massRegion: Array<number> = [];
 
     const ChoiceRegion = () => {
@@ -162,7 +163,7 @@ const App = () => {
         bottom: '-48vh',
         marginLeft: '60vh',
         transform: 'translate(-50%, -50%)',
-        width: 150,
+        width: 69,
         bgcolor: 'background.paper',
         border: '2px solid #000',
         borderColor: 'primary.main',
@@ -173,13 +174,14 @@ const App = () => {
 
       return (
         <>
-          <Button sx={styleApp01} variant="contained" onClick={handleOpenModal}>
+          {/* <Button sx={styleApp01} variant="contained" onClick={handleOpenModal}>
             <b>Выбор региона</b>
-          </Button>
+          </Button> */}
           <Modal open={open}>
             <Box sx={styleModal}>
               <Stack direction="column">
-                <Box sx={{ overflowX: 'auto', height: '82vh' }}>{SpisRegion()}</Box>
+                <Box>Выбор региона</Box>
+                <Box sx={{ overflowX: 'auto', height: '33vh' }}>{SpisRegion()}</Box>
               </Stack>
             </Box>
           </Modal>
@@ -189,8 +191,8 @@ const App = () => {
 
     const SpisRegion = () => {
       let resStr = [];
-      let stroka = '';
-      let strDat = '';
+      // let stroka = '';
+      // let strDat = '';
 
       resStr.push(
         <Button key={777} sx={styleModalEnd} onClick={() => handleCloseModal(777)}>
@@ -277,7 +279,7 @@ const App = () => {
     WS.onmessage = function (event: any) {
       let allData = JSON.parse(event.data);
       let data = allData.data;
-      //console.log('пришло:', data);
+      console.log('пришло:', data);
       switch (allData.type) {
         case 'getDevices':
           setPointsTfl(data.tflight ?? []);
