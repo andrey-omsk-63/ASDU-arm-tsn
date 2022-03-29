@@ -79,6 +79,30 @@ const App = () => {
     textTransform: 'unset !important',
   };
 
+  const styleModalMenu = {
+    fontSize: 13.9,
+    maxHeight: '20px',
+    minHeight: '20px',
+    backgroundColor: '#F1F3F4',
+    color: 'black',
+    marginRight: 1,
+    marginBottom: 0.5,
+    textTransform: 'unset !important',
+  };
+
+  const styleModalEnd = {
+    position: 'absolute',
+    maxWidth: '3vh',
+    minWidth: '3vh',
+    maxHeight: '16px',
+    minHeight: '16px',
+    backgroundColor: 'fff',
+    color: 'black',
+    top: '0.5%',
+    left: '88%',
+    fontSize: 15,
+  };
+
   const handleClose = () => {
     window.close();
   };
@@ -108,39 +132,16 @@ const App = () => {
 
   const [open, setOpen] = React.useState(false);
   const [crossData, setCrossData] = React.useState(0);
+  const [valueReg, setValueReg] = React.useState('1');
 
   const handleOpenModal = () => setOpen(true);
 
   const handleCloseModal = (numer: number) => {
     if (numer !== 777) {
       setCrossData(numer);
-      setValue('1');
-      // extData =
-      //   points[numer].slice(11, 13) +
-      //   '.' +
-      //   points[numer].slice(8, 10) +
-      //   '.' +
-      //   points[numer].slice(3, 7);
+      setValueReg('1');
     }
     setOpen(false);
-  };
-
-
-  const ChoiceRegion = () => {
-    return (
-      <>
-        <Button sx={styleApp01} variant="contained" onClick={handleOpenModal}>
-          <b>Выбор региона</b>
-        </Button>
-        <Modal open={open}>
-          <Box sx={styleModal}>
-            <Stack direction="column">
-              <Box sx={{ overflowX: 'auto', height: '82vh' }}>{SpisData()}</Box>
-            </Stack>
-          </Box>
-        </Modal>
-      </>
-    );
   };
 
   const BeginSeans = () => {
@@ -155,6 +156,64 @@ const App = () => {
     };
     let massRegion: Array<number> = [];
 
+    const ChoiceRegion = () => {
+      const styleModal = {
+        position: 'relative',
+        bottom: '-48vh',
+        marginLeft: '60vh',
+        transform: 'translate(-50%, -50%)',
+        width: 150,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        borderColor: 'primary.main',
+        borderRadius: 2,
+        boxShadow: 24,
+        p: 3,
+      };
+
+      return (
+        <>
+          <Button sx={styleApp01} variant="contained" onClick={handleOpenModal}>
+            <b>Выбор региона</b>
+          </Button>
+          <Modal open={open}>
+            <Box sx={styleModal}>
+              <Stack direction="column">
+                <Box sx={{ overflowX: 'auto', height: '82vh' }}>{SpisRegion()}</Box>
+              </Stack>
+            </Box>
+          </Modal>
+        </>
+      );
+    };
+
+    const SpisRegion = () => {
+      let resStr = [];
+      let stroka = '';
+      let strDat = '';
+
+      resStr.push(
+        <Button key={777} sx={styleModalEnd} onClick={() => handleCloseModal(777)}>
+          <b>&#10006;</b>
+        </Button>,
+      );
+      if (isOpenInf) {
+        for (let i = 0; i < massRegion.length; i++) {
+          resStr.push(
+            <Button
+              key={i}
+              sx={styleModalMenu}
+              variant="contained"
+              onClick={() => handleCloseModal(massRegion[i])}>
+              <b>{massRegion[i]}</b>
+            </Button>,
+          );
+        }
+      }
+
+      return resStr;
+    };
+
     if (isOpenInf && regionGlob === 0) {
       for (let i = 0; i < pointsXctrl.length; i++) {
         let flag = true;
@@ -165,28 +224,24 @@ const App = () => {
       }
     }
 
-    massRegion.sort()
-
-
+    massRegion.sort();
 
     return (
-
-      <Box sx={styleJournal}>
-        <TabContext value={value}>
-          <Box sx={{ marginLeft: 0, marginTop: 0.5 }}>
-            <Stack direction="row">
-              <ChoiceRegion />
-              <Box sx={styleApp02}>{extData}</Box>
-            </Stack>
-          </Box>
-          <TabPanel value="1">
-            {/* <JournalLogins logName={points[crossData]} /> */}
-          </TabPanel>
-        </TabContext>
+      // <Box sx={styleJournal}>
+      //   <TabContext value={valueReg}>
+      <Box sx={{ marginLeft: 0, marginTop: 0.5 }}>
+        <Stack direction="row">
+          <ChoiceRegion />
+          {/* <Box sx={styleApp02}>{extData}</Box> */}
+        </Stack>
       </Box>
-
+      //<TabPanel value="1">{/* <JournalLogins logName={points[crossData]} /> */}</TabPanel>
+      //   </TabContext>
+      // </Box>
     );
-  }
+  };
+
+  console.log('crossData:', crossData);
 
   const [pointsXctrl, setPointsXctrl] = React.useState<Array<XctrlInfo>>([]);
   const [isOpenInf, setIsOpenInf] = React.useState(false);
@@ -220,7 +275,6 @@ const App = () => {
     };
 
     WS.onmessage = function (event: any) {
-
       let allData = JSON.parse(event.data);
       let data = allData.data;
       //console.log('пришло:', data);
@@ -252,32 +306,26 @@ const App = () => {
   return (
     <>
       <EndSeans />
-      {regionGlob === 0 && isOpenInf && (<BeginSeans />)}
+      {regionGlob === 0 && isOpenInf && <BeginSeans />}
       <Box sx={{ width: '98.8%', typography: 'body2' }}>
         <TabContext value={value}>
           <Box sx={{ marginLeft: 0.5, backgroundColor: '#F1F5FB' }}>
             <Stack direction="row">
               {bsLogin === '' && (
-                <Button sx={styleApp01} variant="contained" onClick={() => setValue('1')}>
+                <Button sx={styleApp01} onClick={() => setValue('1')}>
                   <b>Управление</b>
                 </Button>
               )}
               {bsLogin === '' && (
-                <Button sx={styleApp02} variant="contained" onClick={() => setValue('2')}>
+                <Button sx={styleApp02} onClick={() => setValue('2')}>
                   <b>Характерные точки</b>
                 </Button>
               )}
               {bsLogin === '' && (
-                <Button sx={styleApp01} variant="contained" onClick={() => setValue('3')}>
+                <Button sx={styleApp01} onClick={() => setValue('3')}>
                   <b>Статистика</b>
                 </Button>
               )}
-              {/* {bsLogin === '' && (
-                <Button sx={styleAppExit} variant="contained" onClick={handleClose}>
-                  <b>Выход</b>
-                </Button>
-              )} */}
-              {/* <Header /> */}
             </Stack>
           </Box>
           <TabPanel value="1">
@@ -313,3 +361,10 @@ export default App;
 
 // const [points, setPoints] = React.useState<Array<XctrlInfo>>([]);
 // const [isOpen, setIsOpen] = React.useState(false);
+
+// {bsLogin === '' && (
+//   <Button sx={styleAppExit} variant="contained" onClick={handleClose}>
+//     <b>Выход</b>
+//   </Button>
+// )}
+// <Header />
