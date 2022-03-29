@@ -95,7 +95,7 @@ const App = () => {
     position: 'relative',
     bottom: '-48vh',
     marginLeft: '60vh',
-    //transform: 'translate(-50%, -50%)',
+    transform: 'translate(-50%, -50%)',
     width: 90,
     bgcolor: 'background.paper',
     border: '2px solid #000',
@@ -133,14 +133,8 @@ const App = () => {
   };
 
   const [open, setOpen] = React.useState(true);
-  const [crossData, setCrossData] = React.useState(0);
-  //const [valueReg, setValueReg] = React.useState('1');
-
-  //const handleOpenModal = () => setOpen(true);
 
   const handleCloseModal = (numer: number) => {
-    setCrossData(numer);
-
     regionGlob = numer;
 
     setOpen(false);
@@ -189,8 +183,6 @@ const App = () => {
       </Box>
     );
   };
-
-  console.log('crossData:', crossData);
 
   const [pointsXctrl, setPointsXctrl] = React.useState<Array<XctrlInfo>>([]);
   const [isOpenInf, setIsOpenInf] = React.useState(false);
