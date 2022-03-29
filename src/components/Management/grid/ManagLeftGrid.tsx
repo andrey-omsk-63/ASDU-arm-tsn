@@ -165,7 +165,6 @@ const ManagementLeftGrid = (props: {
               <Button
                 key={i}
                 sx={styleButt01}
-                variant="contained"
                 //variant="contained"
                 onClick={() => handleClick(props.nom, masSpis[i].subarea)}>
                 Подрайон:{masSpis[i].areaNum}:{masSpis[i].subarea}
@@ -183,7 +182,7 @@ const ManagementLeftGrid = (props: {
           <Grid container>
             {/* <Grid item xs={0.25} sx={styleMG03}></Grid> */}
             <Grid item xs sx={styleMG03}>
-              <Button sx={styleButt01} variant="contained" onClick={() => handleClock(props.nom)}>
+              <Button sx={styleButt01} onClick={() => handleClock(props.nom)}>
                 <b>
                   Район:{masSpis[0].areaNum}&nbsp;{masSpis[0].areaName}
                 </b>
@@ -210,7 +209,7 @@ const ManagementLeftGrid = (props: {
         <Stack direction="column">
           <Grid container>
             <Grid item xs={6} sx={styleMG03}>
-              <Button sx={styleButt02} variant="contained" onClick={handleClickGl}>
+              <Button sx={styleButt02} onClick={handleClickGl}>
                 <b>Регион&nbsp;&nbsp;{points[0].region.nameRegion}</b>
               </Button>
             </Grid>
