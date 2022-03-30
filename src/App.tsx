@@ -129,23 +129,6 @@ const App = () => {
   };
 
   const BeginSeans = () => {
-    let dl = dlStrMenu * 6;
-    console.log('dl:', dl, dlStrMenu);
-    const styleModal = {
-      position: 'relative',
-      bottom: '-48vh',
-      marginLeft: '60vh',
-      transform: 'translate(-50%, -50%)',
-      width: 'dl',
-      //width: 220,
-      bgcolor: 'background.paper',
-      border: '2px solid #000',
-      borderColor: 'primary.main',
-      borderRadius: 2,
-      boxShadow: 24,
-      p: 3,
-    };
-
     const SpisRegion = () => {
       let resStr = [];
 
@@ -182,6 +165,23 @@ const App = () => {
         }
       }
       return resStr;
+    };
+
+    let dl = dlStrMenu * 2;
+    console.log('dl:', dl, dlStrMenu);
+    const styleModal = {
+      position: 'relative',
+      bottom: '-48vh',
+      marginLeft: '60vh',
+      transform: 'translate(-50%, -50%)',
+      width: 'dlStrMenu * 2',
+      //width: 220,
+      bgcolor: 'background.paper',
+      border: '2px solid #000',
+      borderColor: 'primary.main',
+      borderRadius: 2,
+      boxShadow: 24,
+      p: 3,
     };
 
     return (
