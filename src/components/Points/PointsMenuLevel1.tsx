@@ -64,6 +64,19 @@ const PointsMenuLevel1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: numb
         p: 3,
       };
 
+      const styleModalEnd = {
+        position: 'absolute',
+        maxWidth: '3vh',
+        minWidth: '3vh',
+        maxHeight: '16px',
+        minHeight: '16px',
+        backgroundColor: 'fff',
+        top: '0.5%',
+        left: '88%',
+        fontSize: 15,
+        color: 'black',
+      };
+
       const SpisPerekr = () => {
         let resStr = [];
         for (let i = 0; i < points.xctrls.length; i++) {
@@ -76,8 +89,11 @@ const PointsMenuLevel1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: numb
           );
         }
         resStr.push(
-          <Button key={0} sx={stylePXt1} variant="contained" onClick={() => handleClose(777)}>
-            <b>Выход</b>
+          // <Button key={0} sx={stylePXt1} variant="contained" onClick={() => handleClose(777)}>
+          //   <b>Выход</b>
+          // </Button>,
+          <Button key={777} sx={styleModalEnd} onClick={() => handleClose(777)}>
+            <b>&#10006;</b>
           </Button>,
         );
         return resStr;
