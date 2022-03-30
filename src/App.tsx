@@ -180,7 +180,7 @@ const App = () => {
       bottom: '-48vh',
       marginLeft: '60vh',
       transform: 'translate(-50%, -50%)',
-      width: dl,
+      width: 'dl',
       //width: 220,
       bgcolor: 'background.paper',
       border: '2px solid #000',
