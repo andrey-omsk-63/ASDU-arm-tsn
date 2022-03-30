@@ -146,7 +146,7 @@ const App = () => {
 
         for (let i = 0; i < massRegion.length; i++) {
           let strMenu = pointsReg[massRegion[i].toString() as keyof RegionInfo];
-          console.log('strMenu:', strMenu);
+
           massNameRegion.push(strMenu);
           if (strMenu?.length > dlStrMenu) dlStrMenu = strMenu.length;
         }
@@ -169,6 +169,12 @@ const App = () => {
       return resStr;
     };
 
+    for (let i = 0; i < massNameRegion.length; i++) {
+      let strMenu = massNameRegion[i];
+
+      if (strMenu.length > dlStrMenu) dlStrMenu = strMenu.length;
+    }
+
     let dl = dlStrMenu * 2;
     console.log('dl:', dl, dlStrMenu);
 
@@ -177,7 +183,7 @@ const App = () => {
       bottom: '-48vh',
       marginLeft: '60vh',
       transform: 'translate(-50%, -50%)',
-      width: dlStrMenu * 2,
+      width: '(dlStrMenu * 2) + 1',
       //width: 220,
       bgcolor: 'background.paper',
       border: '2px solid #000',
