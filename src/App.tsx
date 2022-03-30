@@ -23,7 +23,6 @@ let flagWS = true;
 let WS: any = null;
 let regionGlob: number = 0;
 let massRegion: Array<number> = [];
-let massNameRegion: Array<string> = [];
 
 const App = () => {
   const styleApp01 = {
@@ -130,81 +129,81 @@ const App = () => {
 
   const BeginSeans = () => {
     let dlStrMenu = 0;
+    let massNameRegion: Array<string> = [];
 
     const SpisRegion = () => {
       let resStr = [];
-
-      if (isOpenInf && regionGlob === 0) {
-        for (let i = 0; i < pointsXctrl.length; i++) {
-          let flag = true;
-          for (let j = 0; j < massRegion.length; j++) {
-            if (pointsXctrl[i].region === massRegion[j]) flag = false;
-          }
-          if (flag) massRegion.push(pointsXctrl[i].region);
-        }
-        massRegion.sort();
-
-        for (let i = 0; i < massRegion.length; i++) {
-          let strMenu = pointsReg[massRegion[i].toString() as keyof RegionInfo];
-
-          massNameRegion.push(strMenu);
-          if (strMenu?.length > dlStrMenu) dlStrMenu = strMenu.length;
-        }
-
-        console.log('massRegion:', dlStrMenu, massRegion, massNameRegion);
-
-        for (let i = 0; i < massRegion.length; i++) {
-          resStr.push(
-            <Button
-              key={i}
-              sx={styleModalMenu}
-              variant="contained"
-              onClick={() => handleCloseModal(massRegion[i])}>
-              {/* <b>{massRegion[i]}&nbsp;-&nbsp;{massNameRegion[i]}</b> */}
-              <b>{massNameRegion[i]}</b>
-            </Button>,
-          );
-        }
+      for (let i = 0; i < massRegion.length; i++) {
+        resStr.push(
+          <Button
+            key={i}
+            sx={styleModalMenu}
+            variant="contained"
+            onClick={() => handleCloseModal(massRegion[i])}>
+            {/* <b>{massRegion[i]}&nbsp;-&nbsp;{massNameRegion[i]}</b> */}
+            <b>{massNameRegion[i]}</b>
+          </Button>,
+        );
       }
       return resStr;
     };
 
-    for (let i = 0; i < massNameRegion.length; i++) {
-      let strMenu = massNameRegion[i];
+    if (isOpenInf && regionGlob === 0) {
+      for (let i = 0; i < pointsXctrl.length; i++) {
+        let flag = true;
+        for (let j = 0; j < massRegion.length; j++) {
+          if (pointsXctrl[i].region === massRegion[j]) flag = false;
+        }
+        if (flag) massRegion.push(pointsXctrl[i].region);
+      }
+      massRegion.sort();
+      massNameRegion = [];
+      for (let i = 0; i < massRegion.length; i++) {
+        let strMenu = pointsReg[massRegion[i].toString() as keyof RegionInfo];
 
-      if (strMenu.length > dlStrMenu) dlStrMenu = strMenu.length;
+        massNameRegion.push(strMenu);
+        if (strMenu?.length > dlStrMenu) dlStrMenu = strMenu.length;
+      }
+
+      console.log('massRegion:', dlStrMenu, massRegion, massNameRegion);
+
+      for (let i = 0; i < massNameRegion.length; i++) {
+        let strMenu = massNameRegion[i];
+
+        if (strMenu.length > dlStrMenu) dlStrMenu = strMenu.length;
+      }
+
+      let dl = dlStrMenu * 2;
+      console.log('dl:', dl, dlStrMenu);
+
+      const styleModal = {
+        position: 'relative',
+        bottom: '-48vh',
+        marginLeft: '60vh',
+        transform: 'translate(-50%, -50%)',
+        width: dlStrMenu * 2 + 1,
+        //width: 220,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        borderColor: 'primary.main',
+        borderRadius: 2,
+        boxShadow: 24,
+        p: 3,
+      };
+
+      return (
+        <Box sx={{ marginLeft: 0, marginTop: 0.5 }}>
+          <Modal open={open}>
+            <Box sx={styleModal}>
+              <Stack direction="column">
+                <Box sx={{ textAlign: 'center' }}>Выбор региона:</Box>
+                <Box sx={{ overflowX: 'auto', height: '36vh' }}>{SpisRegion()}</Box>
+              </Stack>
+            </Box>
+          </Modal>
+        </Box>
+      );
     }
-
-    let dl = dlStrMenu * 2;
-    console.log('dl:', dl, dlStrMenu);
-
-    const styleModal = {
-      position: 'relative',
-      bottom: '-48vh',
-      marginLeft: '60vh',
-      transform: 'translate(-50%, -50%)',
-      width: '(dlStrMenu * 2) + 1',
-      //width: 220,
-      bgcolor: 'background.paper',
-      border: '2px solid #000',
-      borderColor: 'primary.main',
-      borderRadius: 2,
-      boxShadow: 24,
-      p: 3,
-    };
-
-    return (
-      <Box sx={{ marginLeft: 0, marginTop: 0.5 }}>
-        <Modal open={open}>
-          <Box sx={styleModal}>
-            <Stack direction="column">
-              <Box sx={{ textAlign: 'center' }}>Выбор региона:</Box>
-              <Box sx={{ overflowX: 'auto', height: '36vh' }}>{SpisRegion()}</Box>
-            </Stack>
-          </Box>
-        </Modal>
-      </Box>
-    );
   };
 
   const [pointsXctrl, setPointsXctrl] = React.useState<Array<XctrlInfo>>([]);
