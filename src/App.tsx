@@ -178,7 +178,7 @@ const App = () => {
     const styleModal = {
       position: 'relative',
       bottom: '-48vh',
-      marginLeft: '120vh',
+      marginLeft: '60vh',
       transform: 'translate(-50%, -50%)',
       width: (dlStrMenu + 8) * 10,
       //width: 220,
@@ -196,8 +196,8 @@ const App = () => {
           <Box sx={styleModal}>
             <Stack direction="column">
               <Box sx={{ textAlign: 'center' }}>Выбор региона:</Box>
-              <Box sx={{ overflowX: 'auto', height: '36vh' }}>{SpisRegion()}</Box>
-              {/* {SpisRegion()} */}
+              {/* <Box sx={{ overflowX: 'auto', height: '36vh' }}>{SpisRegion()}</Box> */}
+              {SpisRegion()}
             </Stack>
           </Box>
         </Modal>
