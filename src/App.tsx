@@ -15,6 +15,7 @@ import Statistics from './components/Statistics/Statistics';
 import { Tflight } from './interfaceMNG.d';
 
 import { XctrlInfo } from './interfaceGl.d';
+import { RegionInfo } from './interfaceGl.d';
 
 import { Statistic } from './interfaceStat.d';
 
@@ -153,6 +154,7 @@ const App = () => {
           if (flag) massRegion.push(pointsXctrl[i].region);
         }
         massRegion.sort();
+        console.log('pointsReg:', pointsReg);
 
         for (let i = 0; i < massRegion.length; i++) {
           resStr.push(
@@ -185,6 +187,7 @@ const App = () => {
   };
 
   const [pointsXctrl, setPointsXctrl] = React.useState<Array<XctrlInfo>>([]);
+  const [pointsReg, setPointsReg] = React.useState<RegionInfo>({} as RegionInfo);
   const [isOpenInf, setIsOpenInf] = React.useState(false);
   const [pointsTfl, setPointsTfl] = React.useState<Array<Tflight>>([]);
   const [isOpenDev, setIsOpenDev] = React.useState(false);
@@ -227,6 +230,7 @@ const App = () => {
         case 'xctrlInfo':
           console.log('data_xctrlInfo:', data);
           setPointsXctrl(data.xctrlInfo ?? []);
+          if (regionGlob === 0) setPointsReg(data.regionInfo ?? []);
           setIsOpenInf(true);
           break;
         case 'getStatistics':
