@@ -26,25 +26,16 @@ export interface Зеленоград {
 }
 
 export interface RegionInfo {
-    "1": string;
-    "2": string;
-    "3": string;
-    "4": string;
-    "5": string;
-    "6": string;
-    "7": string;
-    "8": string;
-    "9": string;
-    Воронеж: string;
-    "Все регионы": string;
-    Зеленоград: string;
-    Иркутск: string;
-    "Иркутск дирекция": string;
-    Калмыкия: string;
-    Мосавтодор: string;
-    Тула: string;
-    Хабаровск: string;
-    "Южно-Сахалинск": string;
+    [index: string]: string
+    // "1": string;
+    // "2": string;
+    // "3": string;
+    // "4": string;
+    // "5": string;
+    // "6": string;
+    // "7": string;
+    // "8": string;
+    // "9": string;
 }
 
 export interface XctrlInfo {

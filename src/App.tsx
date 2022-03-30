@@ -23,6 +23,8 @@ let flagWS = true;
 let WS: any = null;
 let regionGlob: number = 0;
 let massRegion: Array<number> = [];
+let massNameRegion: Array<string> = [];
+
 
 const App = () => {
   const styleApp01 = {
@@ -72,7 +74,7 @@ const App = () => {
     boxShadow: 24,
     p: 4,
   };
-
+  
   const styleBatMenu = {
     fontSize: 14,
     backgroundColor: '#F1F3F4',
@@ -81,8 +83,10 @@ const App = () => {
     textTransform: 'unset !important',
   };
 
+  
+
   const styleModalMenu = {
-    fontSize: 13.9,
+    fontSize: 14,
     maxHeight: '20px',
     minHeight: '20px',
     backgroundColor: '#F1F3F4',
@@ -90,21 +94,9 @@ const App = () => {
     marginRight: 1,
     marginTop: 2,
     textTransform: 'unset !important',
+    
   };
 
-  const styleModal = {
-    position: 'relative',
-    bottom: '-48vh',
-    marginLeft: '60vh',
-    transform: 'translate(-50%, -50%)',
-    width: 90,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    borderColor: 'primary.main',
-    borderRadius: 2,
-    boxShadow: 24,
-    p: 3,
-  };
 
   const handleClose = () => {
     window.close();
@@ -134,15 +126,31 @@ const App = () => {
   };
 
   const [open, setOpen] = React.useState(true);
+  let dlStrMenu = 0;
 
   const handleCloseModal = (numer: number) => {
     regionGlob = numer;
-
     setOpen(false);
   };
 
   const BeginSeans = () => {
+    const styleModal = {
+      position: 'relative',
+      bottom: '-48vh',
+      marginLeft: '60vh',
+      //transform: 'translate(-50%, -50%)',
+      //width: (dlStrMenu + 8) * 10,
+      width: 220,
+      bgcolor: 'background.paper',
+      border: '2px solid #000',
+      borderColor: 'primary.main',
+      borderRadius: 2,
+      boxShadow: 24,
+      p: 3,
+    };
+
     const SpisRegion = () => {
+      
       let resStr = [];
 
       if (isOpenInf && regionGlob === 0) {
@@ -151,10 +159,18 @@ const App = () => {
           for (let j = 0; j < massRegion.length; j++) {
             if (pointsXctrl[i].region === massRegion[j]) flag = false;
           }
-          if (flag) massRegion.push(pointsXctrl[i].region);
+          if (flag) massRegion.push(pointsXctrl[i].region)
         }
         massRegion.sort();
-        console.log('pointsReg:', pointsReg);
+        dlStrMenu = 0;
+        for (let i = 0; i < massRegion.length; i++) {
+          let strMenu = pointsReg[massRegion[i].toString() as keyof RegionInfo]
+          console.log('strMenu:', strMenu)
+          massNameRegion.push(strMenu)
+          if (strMenu?.length > dlStrMenu) dlStrMenu = strMenu.length;
+        }
+
+        console.log('massRegion:',dlStrMenu, massRegion, massNameRegion);
 
         for (let i = 0; i < massRegion.length; i++) {
           resStr.push(
@@ -163,12 +179,11 @@ const App = () => {
               sx={styleModalMenu}
               variant="contained"
               onClick={() => handleCloseModal(massRegion[i])}>
-              <b>{massRegion[i]}</b>
+              <b>{massRegion[i]}&nbsp;-&nbsp;{massNameRegion[i]}</b>
             </Button>,
           );
         }
       }
-
       return resStr;
     };
 
@@ -177,7 +192,7 @@ const App = () => {
         <Modal open={open}>
           <Box sx={styleModal}>
             <Stack direction="column">
-              <Box>Выбор региона:</Box>
+              <Box sx={{ textAlign: 'center' }}>Выбор региона:</Box>
               <Box sx={{ overflowX: 'auto', height: '36vh' }}>{SpisRegion()}</Box>
             </Stack>
           </Box>
@@ -246,8 +261,11 @@ const App = () => {
     };
   }, []);
 
+  // let reg = '6';
+  // console.log('pointsReg:', pointsReg[reg as keyof RegionInfo]);
+
   const [value, setValue] = React.useState('1');
-  console.log('regionGlob:', regionGlob);
+
 
   return (
     <>
