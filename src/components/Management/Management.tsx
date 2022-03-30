@@ -59,7 +59,7 @@ const Management = (props: {
       }
     };
     handleSendOpen();
-  }, [props.ws]);
+  }, [props.ws, reGion]);
 
   if (isOpen && flagEtalon) {
     pointsEtalon = points;

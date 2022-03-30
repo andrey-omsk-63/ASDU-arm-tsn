@@ -47,7 +47,7 @@ const Points = (props: { open: boolean; ws: WebSocket; xctrll: XctrlInfo[]; regi
       }
     };
     handleSend();
-  }, [props.ws]);
+  }, [props.ws, reGion]);
 
   if (isOpen && flagEtalon) {
     pointsEtalon = points;

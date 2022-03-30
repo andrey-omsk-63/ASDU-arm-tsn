@@ -40,7 +40,7 @@ const Statistics = (props: {
       }
     };
     handleSend();
-  }, [props.ws]);
+  }, [props.ws, reGion]);
 
   //const [points, setPoints] = React.useState<Array<Statistic>>([]);
   //const [points, setPoints] = React.useState<Data>({} as Data);
