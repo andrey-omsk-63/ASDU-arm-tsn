@@ -130,12 +130,13 @@ const App = () => {
 
   const BeginSeans = () => {
     let dl = dlStrMenu * 6;
+    console.log('dl:', dl, dlStrMenu);
     const styleModal = {
       position: 'relative',
       bottom: '-48vh',
       marginLeft: '60vh',
-      //transform: 'translate(-50%, -50%)',
-      width: dl,
+      transform: 'translate(-50%, -50%)',
+      width: 'dl',
       //width: 220,
       bgcolor: 'background.paper',
       border: '2px solid #000',
