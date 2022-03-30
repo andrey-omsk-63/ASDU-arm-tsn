@@ -169,10 +169,10 @@ const App = () => {
 
     for (let i = 0; i < massNameRegion.length; i++) {
       let strMenu = massNameRegion[i];
-      if (strMenu.length > dlStrMenu) dlStrMenu = strMenu.length;
+      if (strMenu?.length > dlStrMenu) dlStrMenu = strMenu.length;
     }
 
-    let dl = dlStrMenu * 2;
+    let dl = 40;
     console.log('dl:', dl, dlStrMenu);
 
     const styleModal = {
@@ -180,7 +180,7 @@ const App = () => {
       bottom: '-48vh',
       marginLeft: '60vh',
       transform: 'translate(-50%, -50%)',
-      width: dlStrMenu * 2 + 1,
+      width: dl,
       //width: 220,
       bgcolor: 'background.paper',
       border: '2px solid #000',
