@@ -25,7 +25,6 @@ let regionGlob: number = 0;
 let massRegion: Array<number> = [];
 let massNameRegion: Array<string> = [];
 
-
 const App = () => {
   const styleApp01 = {
     fontSize: 14,
@@ -74,7 +73,7 @@ const App = () => {
     boxShadow: 24,
     p: 4,
   };
-  
+
   const styleBatMenu = {
     fontSize: 14,
     backgroundColor: '#F1F3F4',
@@ -82,8 +81,6 @@ const App = () => {
     marginTop: 1,
     textTransform: 'unset !important',
   };
-
-  
 
   const styleModalMenu = {
     fontSize: 14,
@@ -94,9 +91,7 @@ const App = () => {
     marginRight: 1,
     marginTop: 2,
     textTransform: 'unset !important',
-    
   };
-
 
   const handleClose = () => {
     window.close();
@@ -134,7 +129,7 @@ const App = () => {
   };
 
   const BeginSeans = () => {
-    let dl = (dlStrMenu + 8) * 10;
+    let dl = dlStrMenu * 6;
     const styleModal = {
       position: 'relative',
       bottom: '-48vh',
@@ -151,7 +146,6 @@ const App = () => {
     };
 
     const SpisRegion = () => {
-      
       let resStr = [];
 
       if (isOpenInf && regionGlob === 0) {
@@ -160,18 +154,18 @@ const App = () => {
           for (let j = 0; j < massRegion.length; j++) {
             if (pointsXctrl[i].region === massRegion[j]) flag = false;
           }
-          if (flag) massRegion.push(pointsXctrl[i].region)
+          if (flag) massRegion.push(pointsXctrl[i].region);
         }
         massRegion.sort();
         dlStrMenu = 0;
         for (let i = 0; i < massRegion.length; i++) {
-          let strMenu = pointsReg[massRegion[i].toString() as keyof RegionInfo]
-          console.log('strMenu:', strMenu)
-          massNameRegion.push(strMenu)
+          let strMenu = pointsReg[massRegion[i].toString() as keyof RegionInfo];
+          console.log('strMenu:', strMenu);
+          massNameRegion.push(strMenu);
           if (strMenu?.length > dlStrMenu) dlStrMenu = strMenu.length;
         }
 
-        console.log('massRegion:',dlStrMenu, massRegion, massNameRegion);
+        console.log('massRegion:', dlStrMenu, massRegion, massNameRegion);
 
         for (let i = 0; i < massRegion.length; i++) {
           resStr.push(
@@ -180,7 +174,8 @@ const App = () => {
               sx={styleModalMenu}
               variant="contained"
               onClick={() => handleCloseModal(massRegion[i])}>
-              <b>{massRegion[i]}&nbsp;-&nbsp;{massNameRegion[i]}</b>
+              {/* <b>{massRegion[i]}&nbsp;-&nbsp;{massNameRegion[i]}</b> */}
+              <b>{massNameRegion[i]}</b>
             </Button>,
           );
         }
@@ -266,7 +261,6 @@ const App = () => {
   // console.log('pointsReg:', pointsReg[reg as keyof RegionInfo]);
 
   const [value, setValue] = React.useState('1');
-
 
   return (
     <>
