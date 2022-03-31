@@ -15,8 +15,6 @@ let pointsEtalon: XctrlInfo[];
 let flagEtalon = true;
 
 const Points = (props: { open: boolean; ws: WebSocket; xctrll: XctrlInfo[]; region: string }) => {
-  let reGion = props.region;
-
   const stylePXt1 = {
     fontSize: 13.5,
     maxHeight: '20px',
@@ -26,12 +24,13 @@ const Points = (props: { open: boolean; ws: WebSocket; xctrll: XctrlInfo[]; regi
     marginRight: 0.5,
   };
 
+  let reGion = props.region;
   let isOpen = props.open;
   let pointsGl = props.xctrll;
   let points = pointsGl.filter((pointsGl) => pointsGl.region === Number(reGion));
   const [value, setValue] = React.useState(tekValue);
 
-  console.log('points:', points);
+  // console.log('points:', points);
 
   React.useEffect(() => {
     const handleSend = () => {

@@ -120,7 +120,6 @@ const App = () => {
   };
 
   const [open, setOpen] = React.useState(true);
-  //let dlStrMenu = 0;
 
   const handleCloseModal = (numer: number) => {
     regionGlob = numer;
@@ -165,15 +164,11 @@ const App = () => {
         if (strMenu?.length > dlStrMenu) dlStrMenu = strMenu.length;
       }
     }
-    console.log('massRegion:', dlStrMenu, massRegion, massNameRegion);
 
     for (let i = 0; i < massNameRegion.length; i++) {
       let strMenu = massNameRegion[i];
       if (strMenu?.length > dlStrMenu) dlStrMenu = strMenu.length;
     }
-
-    let dl = 40;
-    console.log('dl:', dl, dlStrMenu);
 
     const styleModal = {
       position: 'relative',
@@ -240,7 +235,7 @@ const App = () => {
     WS.onmessage = function (event: any) {
       let allData = JSON.parse(event.data);
       let data = allData.data;
-      console.log('пришло:', data);
+      //console.log('пришло:', data);
       switch (allData.type) {
         case 'getDevices':
           setPointsTfl(data.tflight ?? []);
