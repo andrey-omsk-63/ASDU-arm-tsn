@@ -72,7 +72,7 @@ const PointsMenuLevel1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: numb
         minHeight: '16px',
         backgroundColor: 'fff',
         top: '0.5%',
-        left: '95%',
+        left: '92%',
         fontSize: 15,
         color: 'black',
       };

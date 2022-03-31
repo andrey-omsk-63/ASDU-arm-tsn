@@ -24,6 +24,8 @@ const Management = (props: {
 
   let pointsGl = props.xctrll;
   let pointsXctrll = pointsGl.filter((pointsGl) => pointsGl.region === Number(reGion));
+  // console.log('pointsGl:', pointsGl)
+  // console.log('pointsXctrll:', pointsXctrll)
 
   if (!isOpen) {
     pointsEtalon = [];

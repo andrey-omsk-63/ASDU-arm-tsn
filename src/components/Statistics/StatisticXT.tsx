@@ -200,6 +200,7 @@ const StatisticXT = (props: { open: boolean; statist: Statistic[]; areaid: numbe
       maintainAspectRatio: false,
       plugins: {
         legend: {
+          display: true,
           position: 'top' as const,
         },
         title: {
