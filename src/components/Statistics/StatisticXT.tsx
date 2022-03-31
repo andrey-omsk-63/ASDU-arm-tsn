@@ -201,6 +201,7 @@ const StatisticXT = (props: { open: boolean; statist: Statistic[]; areaid: numbe
       plugins: {
         legend: {
           display: true,
+          //position: 'bottom' as const,
           position: 'top' as const,
         },
         title: {
