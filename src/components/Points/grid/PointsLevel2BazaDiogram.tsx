@@ -55,6 +55,8 @@ const PointsLevel2BazaDiogram = (props: { xctrll: XctrlInfo[]; xtt: number; cros
   const axisVertical = vertical * 1;
   const steepVertical = 84.4 / axisVertical;
 
+  console.log('dlMas:', dlMas)
+
   let matrix: string[][] = [[]];
 
   let scale: number = 5;
@@ -128,14 +130,25 @@ const PointsLevel2BazaDiogram = (props: { xctrll: XctrlInfo[]; xtt: number; cros
     let j = 0;
 
     const MakeMatrixColor = (num: number) => {
-      luchP = points.xctrls[crRoad].StrategyB[num].vleft;
-      luchO = points.xctrls[crRoad].StrategyB[num].vright;
+      // luchP = points.xctrls[crRoad].StrategyB[num].vleft;
+      // luchO = points.xctrls[crRoad].StrategyB[num].vright;
+      luchO = points.xctrls[crRoad].StrategyB[num].vleft;
+      luchP = points.xctrls[crRoad].StrategyB[num].vright;
       ratio =
         points.xctrls[crRoad].StrategyB[num].xright / points.xctrls[crRoad].StrategyB[num].xleft;
       coler = colorsGraf[num * 3];
       if (luchP !== 1 || luchO !== 1) {
-        if (i < j * luchO * ratio) coler = colorsGraf[num * 3 + 1];
-        if (i >= j * luchP * ratio) coler = colorsGraf[num * 3 + 2];
+        // if (i < j * luchO * ratio) coler = colorsGraf[num * 3 + 1];
+        // if (i >= j * luchP * ratio) coler = colorsGraf[num * 3 + 2];
+        if (i < j * luchO * ratio) {
+          coler = colorsGraf[num * 3 + 1];
+          // if (j === 1500) console.log('111:', i, j * luchO * ratio, luchP, luchO)
+        }
+        if (i >= j * luchP * ratio) {
+          coler = colorsGraf[num * 3 + 2];
+          // if (j === 1500) console.log('222:', i, j * luchP * ratio, luchP, luchO)
+        }
+
       }
     };
 

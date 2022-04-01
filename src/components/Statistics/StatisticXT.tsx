@@ -201,7 +201,7 @@ const StatisticXT = (props: { open: boolean; statist: Statistic[]; areaid: numbe
       plugins: {
         legend: {
           display: true,
-          //position: 'bottom' as const,
+          //position: 'chartArea' as const,
           position: 'top' as const,
         },
         title: {
@@ -215,7 +215,17 @@ const StatisticXT = (props: { open: boolean; statist: Statistic[]; areaid: numbe
   };
 
   const StatisticHeader = () => {
-    const styleSt03 = {
+    const styleHeader03 = {
+      //borderRight: 1,
+      borderBottom: 1,
+      borderColor: 'primary.main',
+      backgroundColor: '#C0C0C0',
+      fontSize: 11,
+      textAlign: 'center',
+      lineHeight: 2,
+    };
+
+    const styleHeader033 = {
       borderRight: 1,
       borderBottom: 1,
       borderColor: 'primary.main',
@@ -239,7 +249,7 @@ const StatisticXT = (props: { open: boolean; statist: Statistic[]; areaid: numbe
       };
 
       return (
-        <Grid key={Math.random()} item xs={props.xss} sx={styleSt03}>
+        <Grid key={Math.random()} item xs={props.xss} sx={styleHeader03}>
           <Button sx={styleBatton} variant="contained" onClick={() => setValue(props.num)}>
             <b>{props.num}</b>
           </Button>
@@ -302,12 +312,12 @@ const StatisticXT = (props: { open: boolean; statist: Statistic[]; areaid: numbe
     return (
       <Grid container item sx={{ height: 24 }}>
         <Grid container sx={{ marginRight: 0.7 }}>
-          <Grid item xs={0.5} sx={styleSt03}></Grid>
-          <Grid item xs={0.51 * colChanel} sx={styleSt03}>
+          <Grid item xs={0.5} sx={styleHeader03}></Grid>
+          <Grid item xs={0.51 * colChanel} sx={styleHeader03}>
             <MenuKnobBat />
             <KnobBatCl />
           </Grid>
-          <Grid item xs={3.3} sx={styleSt03}>
+          <Grid item xs={3.3} sx={styleHeader033}>
             <b>Качество</b>
           </Grid>
         </Grid>
@@ -390,7 +400,8 @@ const StatisticXT = (props: { open: boolean; statist: Statistic[]; areaid: numbe
     const typer = points[areaId].Statistics[0].Type;
     const kolDatas = points[areaId].Statistics[0].Datas.length;
     let rows = 1440 / step;
-    let time = -step;
+    // let time = -step;
+    let time = 0;
     for (let i = 0; i < rows; i++) {
       time = time + step;
       let hours = Math.trunc(time / 60);
@@ -421,10 +432,11 @@ const StatisticXT = (props: { open: boolean; statist: Statistic[]; areaid: numbe
     const step = points[areaId].Statistics[0].TLen;
     for (let i = 0; i < points[areaId].Statistics.length; i++) {
       let inHour = points[areaId].Statistics[i].Hour;
-      if (inHour >= 24) inHour = 0;
+      // if (inHour >= 24) inHour = 0;
+      if (inHour > 24) inHour = 0;
       let inTime = inHour * 60 + points[areaId].Statistics[i].Min
       if (inTime % step === 0) {
-        let numInMatrix = inTime / step;
+        let numInMatrix = (inTime / step) - 1;
         for (let j = 0; j < points[areaId].Statistics[i].Datas.length; j++) {
           matrix[numInMatrix].Datas[j] = points[areaId].Statistics[i].Datas[j];
         }

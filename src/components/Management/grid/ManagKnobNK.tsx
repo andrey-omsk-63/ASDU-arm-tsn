@@ -144,6 +144,19 @@ const ManagementKnobSK = (props: {
                 },
               }),
             );
+            //отключение ХТ
+            props.ws.send(
+              JSON.stringify({
+                type: 'dispatch',
+                data: {
+                  cmd: 13,
+                  param: 0,
+                  region: props.region,
+                  area: props.areaa,
+                  subarea: props.subArea,
+                },
+              }),
+            );
           } else {
             setTimeout(() => {
               handleSendOpen();
