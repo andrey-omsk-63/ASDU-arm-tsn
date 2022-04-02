@@ -52,7 +52,7 @@ const App = () => {
     marginRight: 1,
     maxHeight: '21px',
     minHeight: '21px',
-    width: '20%',
+    width: '12%',
     backgroundColor: '#F1F3F4',
     color: 'red',
     textTransform: 'unset !important',

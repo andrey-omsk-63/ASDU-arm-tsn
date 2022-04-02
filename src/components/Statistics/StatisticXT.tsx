@@ -422,8 +422,8 @@ const StatisticXT = (props: { open: boolean; statist: Statistic[]; areaid: numbe
           sp: 0,
           d: 0,
           o: 0,
-          g: 0
-        }
+          g: 0,
+        };
       }
     }
   };
@@ -433,10 +433,12 @@ const StatisticXT = (props: { open: boolean; statist: Statistic[]; areaid: numbe
     for (let i = 0; i < points[areaId].Statistics.length; i++) {
       let inHour = points[areaId].Statistics[i].Hour;
       // if (inHour >= 24) inHour = 0;
-      if (inHour > 24) inHour = 0;
-      let inTime = inHour * 60 + points[areaId].Statistics[i].Min
+      let inTime = inHour * 60 + points[areaId].Statistics[i].Min;
       if (inTime % step === 0) {
-        let numInMatrix = (inTime / step) - 1;
+        let numInMatrix = inTime / step - 1;
+        if (inHour === 0 && points[areaId].Statistics[i].Min === 0) {
+          numInMatrix = matrix.length - 1;
+        }
         for (let j = 0; j < points[areaId].Statistics[i].Datas.length; j++) {
           matrix[numInMatrix].Datas[j] = points[areaId].Statistics[i].Datas[j];
         }
