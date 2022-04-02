@@ -9,7 +9,7 @@ import { Statistic } from '../../interfaceStat.d';
 
 import { colorsGraf, styleSt02, styleSt03, styleSt04, styleSt05 } from './StatisticXTStyle';
 import { styleSt06, styleHeader03, styleHeader033 } from './StatisticXTStyle';
-import { styleBatton, styleClear, styleBattonCl } from './StatisticXTStyle';
+import { styleBatton, styleClear, styleBattonCl, options } from './StatisticXTStyle';
 
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement } from 'chart.js';
 import { LineElement, Title, Tooltip, Legend } from 'chart.js';
@@ -17,6 +17,7 @@ import { Line } from 'react-chartjs-2';
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 export interface GrafGlob {
+  id: number;
   dataGraf: DataGraf;
 }
 
@@ -66,21 +67,20 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
   let kakchestvo = ' ';
 
   const StatGraf01 = () => {
-    const options = {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          display: true,
-          //position: 'chartArea' as const,
-          position: 'top' as const,
-        },
-        title: {
-          display: false,
-          //text: 'Очковые змеи - это КОБРЫ а не глисты',
-        },
-      },
-    };
+    // const options = {
+    //   responsive: true,
+    //   maintainAspectRatio: false,
+    //   plugins: {
+    //     legend: {
+    //       display: true,
+    //       position: 'top' as const,
+    //     },
+    //     title: {
+    //       display: false,
+    //       //text: 'Очковые змеи - это КОБРЫ а не глисты',
+    //     },
+    //   },
+    // };
 
     return <Line options={options} data={data} />;
   };

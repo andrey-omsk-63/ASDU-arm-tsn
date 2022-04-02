@@ -119,3 +119,12 @@ export const styleBattonCl = {
   minHeight: '12px',
   textTransform: 'unset !important',
 };
+
+export const options = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: { display: true, position: 'top' as const },
+    title: { display: false },
+  },
+};
