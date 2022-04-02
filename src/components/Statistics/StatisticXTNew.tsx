@@ -16,30 +16,11 @@ import { LineElement, Title, Tooltip, Legend } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-// const colorsGraf = [
-//   'red',
-//   'orange',
-//   'black',
-//   'blue',
-//   'green',
-//   'Violet',
-//   'lime',
-//   'Silver',
-//   'teal',
-//   'YellowGreen',
-//   'purple',
-//   '',
-//   'Turquoise',
-//   'RosyBrown',
-//   'maroon',
-//   'Coral',
-//   'Aqua',
-//   'Tomato',
-//   'Pink',
-//   'Yellow',
-// ];
+export interface GrafGlob {
+  dataGraf: DataGraf;
+}
 
-export interface DataGl {
+export interface DataGraf {
   labels: string[];
   datasets: Datasets[];
 }
@@ -54,10 +35,7 @@ export interface Datasets {
 }
 
 const labels: string[] = [];
-const data: DataGl = {
-  labels,
-  datasets: [],
-};
+const data: DataGraf = { labels, datasets: [] };
 let canal: number[] = [];
 let oldAreaid = -1;
 
@@ -65,8 +43,8 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
   const isOpen = props.open;
   const points = props.statist;
   const areaId = props.areaid;
-  let colChanel = 0;
 
+  let colChanel = 0;
   const [value, setValue] = React.useState('0');
 
   if (isOpen) {
@@ -77,66 +55,35 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
       data.datasets = [];
       canal = [];
       //labels = [];
-      while (labels.length > 0) {
-        labels.pop();
-      }
+      while (labels.length > 0) labels.pop();
       oldAreaid = areaId;
     }
   }
-
-  // const styleSt02 = {
-  //   textIndent: 6,
-  //   borderRight: 1,
-  //   borderBottom: 1,
-  //   fontSize: 11,
-  //   lineHeight: 2,
-  //   borderColor: 'primary.main',
-  // };
-
-  // const styleSt03 = {
-  //   textIndent: 6,
-  //   borderRight: 1,
-  //   borderBottom: 1,
-  //   fontSize: 11,
-  //   lineHeight: 2,
-  //   backgroundColor: '#E6EEF5',
-  //   borderColor: 'primary.main',
-  //   textAlign: 'center',
-  // };
-  // const styleSt04 = {
-  //   textIndent: 6,
-  //   borderRight: 1,
-  //   borderBottom: 1,
-  //   fontSize: 11,
-  //   lineHeight: 2,
-  //   backgroundColor: '#FF80C0',
-  //   color: 'white',
-  //   textAlign: 'center',
-  // };
-  // const styleSt05 = {
-  //   borderRight: 1,
-  //   borderBottom: 1,
-  //   borderColor: 'primary.main',
-  //   fontSize: 11,
-  //   textAlign: 'center',
-  //   lineHeight: 2,
-  // };
-  // const styleSt06 = {
-  //   textIndent: 6,
-  //   border: 1,
-  //   borderTop: 0,
-  //   borderLeft: 0,
-  //   borderColor: 'primary.main',
-  //   fontSize: 11,
-  //   lineHeight: 2,
-  // };
-
-  //const [points, setPoints] = React.useState<Array<Statistic>>([]);
 
   let resStr: any = [];
   let resSps: any = [];
   let matrix: any = [];
   let kakchestvo = ' ';
+
+  const StatGraf01 = () => {
+    const options = {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: true,
+          //position: 'chartArea' as const,
+          position: 'top' as const,
+        },
+        title: {
+          display: false,
+          //text: 'Очковые змеи - это КОБРЫ а не глисты',
+        },
+      },
+    };
+
+    return <Line options={options} data={data} />;
+  };
 
   const StatGraf00 = () => {
     let datas = [];
@@ -190,60 +137,10 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
     );
   };
 
-  const StatGraf01 = () => {
-    const options = {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          display: true,
-          //position: 'chartArea' as const,
-          position: 'top' as const,
-        },
-        title: {
-          display: false,
-          //text: 'Очковые змеи - это КОБРЫ а не глисты',
-        },
-      },
-    };
-
-    return <Line options={options} data={data} />;
-  };
+  //=========================================================================
 
   const StatisticHeader = () => {
-    // const styleHeader03 = {
-    //   //borderRight: 1,
-    //   borderBottom: 1,
-    //   borderColor: 'primary.main',
-    //   backgroundColor: '#C0C0C0',
-    //   fontSize: 11,
-    //   textAlign: 'center',
-    //   lineHeight: 2,
-    // };
-
-    // const styleHeader033 = {
-    //   borderRight: 1,
-    //   borderBottom: 1,
-    //   borderColor: 'primary.main',
-    //   backgroundColor: '#C0C0C0',
-    //   fontSize: 11,
-    //   textAlign: 'center',
-    //   lineHeight: 2,
-    // };
-
     const KnobBat = (props: { num: string; xss: number }) => {
-      // const styleBatton = {
-      //   marginLeft: 0.4,
-      //   fontSize: 11,
-      //   backgroundColor: '#F1F3F4',
-      //   color: 'black',
-      //   maxWidth: '2.7vh',
-      //   maxHeight: '23px',
-      //   minWidth: '2.7vh',
-      //   minHeight: '23px',
-      //   textAlign: 'center',
-      // };
-
       return (
         <Grid key={Math.random()} item xs={props.xss} sx={styleHeader03}>
           <Button sx={styleBatton} variant="contained" onClick={() => setValue(props.num)}>
@@ -254,23 +151,6 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
     };
 
     const KnobBatCl = () => {
-      // const styleClear = {
-      //   position: 'absolute',
-      //   marginTop: '-2.8vh',
-      //   left: '0.8vh',
-      // };
-
-      // const styleBattonCl = {
-      //   fontSize: 10.1,
-      //   backgroundColor: '#F1F3F4',
-      //   color: 'red',
-      //   maxWidth: '5vh',
-      //   maxHeight: '12px',
-      //   minWidth: '5vh',
-      //   minHeight: '12px',
-      //   textTransform: 'unset !important',
-      // };
-
       return (
         <Box sx={styleClear}>
           <Button sx={styleBattonCl} variant="contained" onClick={() => setValue('17')}>
