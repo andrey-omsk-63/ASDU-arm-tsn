@@ -62,7 +62,7 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
       massId[0] = { id: areaId, labels, datasets: [] };
       oldAreaid = areaId;
     }
-    massId[1].push({ id: 7, labels, datasets: [] });
+    massId[3] = { id: 3, labels, datasets: [] };
 
     console.log('massId:', massId);
     console.log('massId!!!:', massId[1].datasets);
