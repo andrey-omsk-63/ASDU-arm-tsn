@@ -25,7 +25,6 @@ let regionGlob: number = 0;
 let massRegion: Array<number> = [];
 let massNameRegion: Array<string> = [];
 
-
 const App = () => {
   const styleApp01 = {
     fontSize: 14,
@@ -46,6 +45,16 @@ const App = () => {
     width: '20%',
     backgroundColor: '#F1F3F4',
     color: 'black',
+    textTransform: 'unset !important',
+  };
+  const styleApp99 = {
+    fontSize: 14,
+    marginRight: 1,
+    maxHeight: '21px',
+    minHeight: '21px',
+    width: '20%',
+    backgroundColor: '#F1F3F4',
+    color: 'red',
     textTransform: 'unset !important',
   };
 
@@ -159,8 +168,8 @@ const App = () => {
       massRegion.sort();
       regionGlob = massRegion[0];
 
-      console.log('massRegion:', massRegion)
-      console.log('pointsReg:', pointsReg)
+      console.log('massRegion:', massRegion);
+      console.log('pointsReg:', pointsReg);
 
       if (massNameRegion.length === 0) {
         for (let i = 0; i < massRegion.length; i++) {
@@ -186,7 +195,7 @@ const App = () => {
     };
 
     if (massRegion.length === 1) {
-      handleCloseModal(massRegion[0])
+      handleCloseModal(massRegion[0]);
     }
 
     return (
@@ -199,8 +208,8 @@ const App = () => {
           </Stack>
         </Box>
       </Modal>
-    )
-  }
+    );
+  };
 
   const [pointsXctrl, setPointsXctrl] = React.useState<Array<XctrlInfo>>([]);
   const [pointsReg, setPointsReg] = React.useState<RegionInfo>({} as RegionInfo);
@@ -288,6 +297,11 @@ const App = () => {
                   <b>Статистика</b>
                 </Button>
               )}
+              {bsLogin === '' && (
+                <Button sx={styleApp99} variant="contained" onClick={() => setValue('4')}>
+                  <b>Не нажимать!</b>
+                </Button>
+              )}
             </Stack>
           </Box>
           <TabPanel value="1">
@@ -311,6 +325,13 @@ const App = () => {
             )}
           </TabPanel>
           <TabPanel value="3">
+            {WS !== null && regionGlob !== 0 && (
+              <>
+                <Statistics open={isOpenSt} ws={WS} points={pointsSt} region={String(regionGlob)} />
+              </>
+            )}
+          </TabPanel>
+          <TabPanel value="4">
             {WS !== null && regionGlob !== 0 && (
               <>
                 <Statistics open={isOpenSt} ws={WS} points={pointsSt} region={String(regionGlob)} />
