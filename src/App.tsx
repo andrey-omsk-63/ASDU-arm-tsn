@@ -11,6 +11,7 @@ import Modal from '@mui/material/Modal';
 import Management from './components/Management/Management';
 import Points from './components/Points/Points';
 import Statistics from './components/Statistics/Statistics';
+import StatisticsNew from './components/Statistics/StatisticsNew';
 
 import { Tflight } from './interfaceMNG.d';
 
@@ -334,7 +335,12 @@ const App = () => {
           <TabPanel value="4">
             {WS !== null && regionGlob !== 0 && (
               <>
-                <Statistics open={isOpenSt} ws={WS} points={pointsSt} region={String(regionGlob)} />
+                <StatisticsNew
+                  open={isOpenSt}
+                  ws={WS}
+                  points={pointsSt}
+                  region={String(regionGlob)}
+                />
               </>
             )}
           </TabPanel>
