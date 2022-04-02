@@ -63,7 +63,7 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
       oldAreaid = areaId;
     }
     massId[3] = { id: 3, labels, datasets: [] };
-
+    massId[1] = { id: 7, labels, datasets: [] };
     console.log('massId:', massId);
     console.log('massId!!!:', massId[1].datasets);
 
