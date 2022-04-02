@@ -7,20 +7,13 @@ import Button from '@mui/material/Button';
 
 import { Statistic } from '../../interfaceStat.d';
 
-import { colorsGraf, styleSt02 } from './StatisticXTStyle';
+import { colorsGraf, styleSt02, styleSt03, styleSt04, styleSt05 } from './StatisticXTStyle';
+import { styleSt06, styleHeader03, styleHeader033 } from './StatisticXTStyle';
+import { styleBatton, styleClear, styleBattonCl } from './StatisticXTStyle';
 
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement } from 'chart.js';
+import { LineElement, Title, Tooltip, Legend } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 // const colorsGraf = [
@@ -100,43 +93,43 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
   //   borderColor: 'primary.main',
   // };
 
-  const styleSt03 = {
-    textIndent: 6,
-    borderRight: 1,
-    borderBottom: 1,
-    fontSize: 11,
-    lineHeight: 2,
-    backgroundColor: '#E6EEF5',
-    borderColor: 'primary.main',
-    textAlign: 'center',
-  };
-  const styleSt04 = {
-    textIndent: 6,
-    borderRight: 1,
-    borderBottom: 1,
-    fontSize: 11,
-    lineHeight: 2,
-    backgroundColor: '#FF80C0',
-    color: 'white',
-    textAlign: 'center',
-  };
-  const styleSt05 = {
-    borderRight: 1,
-    borderBottom: 1,
-    borderColor: 'primary.main',
-    fontSize: 11,
-    textAlign: 'center',
-    lineHeight: 2,
-  };
-  const styleSt06 = {
-    textIndent: 6,
-    border: 1,
-    borderTop: 0,
-    borderLeft: 0,
-    borderColor: 'primary.main',
-    fontSize: 11,
-    lineHeight: 2,
-  };
+  // const styleSt03 = {
+  //   textIndent: 6,
+  //   borderRight: 1,
+  //   borderBottom: 1,
+  //   fontSize: 11,
+  //   lineHeight: 2,
+  //   backgroundColor: '#E6EEF5',
+  //   borderColor: 'primary.main',
+  //   textAlign: 'center',
+  // };
+  // const styleSt04 = {
+  //   textIndent: 6,
+  //   borderRight: 1,
+  //   borderBottom: 1,
+  //   fontSize: 11,
+  //   lineHeight: 2,
+  //   backgroundColor: '#FF80C0',
+  //   color: 'white',
+  //   textAlign: 'center',
+  // };
+  // const styleSt05 = {
+  //   borderRight: 1,
+  //   borderBottom: 1,
+  //   borderColor: 'primary.main',
+  //   fontSize: 11,
+  //   textAlign: 'center',
+  //   lineHeight: 2,
+  // };
+  // const styleSt06 = {
+  //   textIndent: 6,
+  //   border: 1,
+  //   borderTop: 0,
+  //   borderLeft: 0,
+  //   borderColor: 'primary.main',
+  //   fontSize: 11,
+  //   lineHeight: 2,
+  // };
 
   //const [points, setPoints] = React.useState<Array<Statistic>>([]);
 
@@ -218,38 +211,38 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
   };
 
   const StatisticHeader = () => {
-    const styleHeader03 = {
-      //borderRight: 1,
-      borderBottom: 1,
-      borderColor: 'primary.main',
-      backgroundColor: '#C0C0C0',
-      fontSize: 11,
-      textAlign: 'center',
-      lineHeight: 2,
-    };
+    // const styleHeader03 = {
+    //   //borderRight: 1,
+    //   borderBottom: 1,
+    //   borderColor: 'primary.main',
+    //   backgroundColor: '#C0C0C0',
+    //   fontSize: 11,
+    //   textAlign: 'center',
+    //   lineHeight: 2,
+    // };
 
-    const styleHeader033 = {
-      borderRight: 1,
-      borderBottom: 1,
-      borderColor: 'primary.main',
-      backgroundColor: '#C0C0C0',
-      fontSize: 11,
-      textAlign: 'center',
-      lineHeight: 2,
-    };
+    // const styleHeader033 = {
+    //   borderRight: 1,
+    //   borderBottom: 1,
+    //   borderColor: 'primary.main',
+    //   backgroundColor: '#C0C0C0',
+    //   fontSize: 11,
+    //   textAlign: 'center',
+    //   lineHeight: 2,
+    // };
 
     const KnobBat = (props: { num: string; xss: number }) => {
-      const styleBatton = {
-        marginLeft: 0.4,
-        fontSize: 11,
-        backgroundColor: '#F1F3F4',
-        color: 'black',
-        maxWidth: '2.7vh',
-        maxHeight: '23px',
-        minWidth: '2.7vh',
-        minHeight: '23px',
-        textAlign: 'center',
-      };
+      // const styleBatton = {
+      //   marginLeft: 0.4,
+      //   fontSize: 11,
+      //   backgroundColor: '#F1F3F4',
+      //   color: 'black',
+      //   maxWidth: '2.7vh',
+      //   maxHeight: '23px',
+      //   minWidth: '2.7vh',
+      //   minHeight: '23px',
+      //   textAlign: 'center',
+      // };
 
       return (
         <Grid key={Math.random()} item xs={props.xss} sx={styleHeader03}>
@@ -261,22 +254,22 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
     };
 
     const KnobBatCl = () => {
-      const styleClear = {
-        position: 'absolute',
-        marginTop: '-2.8vh',
-        left: '0.8vh',
-      };
+      // const styleClear = {
+      //   position: 'absolute',
+      //   marginTop: '-2.8vh',
+      //   left: '0.8vh',
+      // };
 
-      const styleBattonCl = {
-        fontSize: 10.1,
-        backgroundColor: '#F1F3F4',
-        color: 'red',
-        maxWidth: '5vh',
-        maxHeight: '12px',
-        minWidth: '5vh',
-        minHeight: '12px',
-        textTransform: 'unset !important',
-      };
+      // const styleBattonCl = {
+      //   fontSize: 10.1,
+      //   backgroundColor: '#F1F3F4',
+      //   color: 'red',
+      //   maxWidth: '5vh',
+      //   maxHeight: '12px',
+      //   minWidth: '5vh',
+      //   minHeight: '12px',
+      //   textTransform: 'unset !important',
+      // };
 
       return (
         <Box sx={styleClear}>
