@@ -17,11 +17,12 @@ import { Line } from 'react-chartjs-2';
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 export interface GrafGlob {
-  id: number;
-  dataGraf: DataGraf;
+  //id: number;
+  dataGraf: DataGraf[];
 }
 
 export interface DataGraf {
+  id: number;
   labels: string[];
   datasets: Datasets[];
 }
@@ -35,10 +36,13 @@ export interface Datasets {
   pointRadius: number;
 }
 
-const labels: string[] = [];
-const data: DataGraf = { labels, datasets: [] };
-let canal: number[] = [];
+// let massId: <GrafGlob>({} as GrafGlob)
+let massId: any = [];
+
 let oldAreaid = -1;
+const labels: string[] = [];
+const data: DataGraf = { id: 0, labels, datasets: [] };
+let canal: number[] = [];
 
 const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: number }) => {
   const isOpen = props.open;
@@ -48,7 +52,19 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
   let colChanel = 0;
   const [value, setValue] = React.useState('0');
 
+  let resStr: any = [];
+  let resSps: any = [];
+  let matrix: any = [];
+  let kakchestvo = ' ';
+
   if (isOpen) {
+    if (oldAreaid < 0) {
+      massId[0] = { id: areaId, labels, datasets: [] };
+      oldAreaid = areaId;
+    }
+
+    console.log('massId:', massId);
+
     colChanel = points[areaId].Statistics[areaId].Datas.length;
     if (oldAreaid !== areaId) {
       // очистка графиков
@@ -61,29 +77,10 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
     }
   }
 
-  let resStr: any = [];
-  let resSps: any = [];
-  let matrix: any = [];
-  let kakchestvo = ' ';
+  // const StatGraf01 = () => {
 
-  const StatGraf01 = () => {
-    // const options = {
-    //   responsive: true,
-    //   maintainAspectRatio: false,
-    //   plugins: {
-    //     legend: {
-    //       display: true,
-    //       position: 'top' as const,
-    //     },
-    //     title: {
-    //       display: false,
-    //       //text: 'Очковые змеи - это КОБРЫ а не глисты',
-    //     },
-    //   },
-    // };
-
-    return <Line options={options} data={data} />;
-  };
+  //   return <Line options={options} data={data} />;
+  // };
 
   const StatGraf00 = () => {
     let datas = [];
@@ -132,7 +129,7 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
 
     return (
       <Grid item xs sx={{ height: '28vh' }}>
-        <StatGraf01 />
+        <Line options={options} data={data} />
       </Grid>
     );
   };
