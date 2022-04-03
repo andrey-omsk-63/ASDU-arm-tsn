@@ -41,7 +41,7 @@ export interface Datasets {
 let oldAreaid = -1;
 const labels: string[] = [];
 //const masLabels = { id: 0, labels: [''] };
-let massId: any = { id: 0, labels: [''], datasets: [] };
+const massId: any = { id: 0, labels: [''], datasets: [] };
 //const data: DataGraf = { id: 0, labels, datasets: [] };
 let canal: number[] = [];
 
