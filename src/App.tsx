@@ -6,7 +6,6 @@ import TabContext from '@mui/lab/TabContext';
 import TabPanel from '@mui/lab/TabPanel';
 import Modal from '@mui/material/Modal';
 
-//import axios from 'axios';
 //import Header from './components/Header/Header';
 import Management from './components/Management/Management';
 import Points from './components/Points/Points';
@@ -14,10 +13,8 @@ import Statistics from './components/Statistics/Statistics';
 import StatisticsNew from './components/Statistics/StatisticsNew';
 
 import { Tflight } from './interfaceMNG.d';
-
 import { XctrlInfo } from './interfaceGl.d';
 import { RegionInfo } from './interfaceGl.d';
-
 import { Statistic } from './interfaceStat.d';
 
 let flagWS = true;
@@ -53,7 +50,7 @@ const App = () => {
     marginRight: 1,
     maxHeight: '21px',
     minHeight: '21px',
-    width: '12%',
+    width: '20%',
     backgroundColor: '#F1F3F4',
     color: 'red',
     textTransform: 'unset !important',

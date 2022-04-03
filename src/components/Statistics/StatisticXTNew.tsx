@@ -80,11 +80,6 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
     }
   }
 
-  // const StatGraf01 = () => {
-
-  //   return <Line options={options} data={data} />;
-  // };
-
   const StatGraf00 = () => {
     let datas = [];
     let datasetsMask: Datasets = {
@@ -125,11 +120,12 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
         datasetsMask.data = datas;
         datasetsMask.borderColor = colorsGraf[val];
         datasetsMask.backgroundColor = colorsGraf[val];
+
         massId[0].datasets.push(datasetsMask);
         canal.push(val);
       }
     }
-    console.log('massId[1].datasets:', massId[areaId].datasets);
+    console.log('massId[areaId].datasets:', massId[areaId].datasets);
 
     return (
       <Grid item xs sx={{ height: '28vh' }}>
