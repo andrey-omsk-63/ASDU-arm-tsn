@@ -37,10 +37,11 @@ export interface Datasets {
 }
 
 // let massId: <GrafGlob>({} as GrafGlob)
-let massId: any = [];
 
 let oldAreaid = -1;
 const labels: string[] = [];
+//const masLabels = { id: 0, labels: [''] };
+let massId: any = { id: 0, labels: [''], datasets: [] };
 //const data: DataGraf = { id: 0, labels, datasets: [] };
 let canal: number[] = [];
 
@@ -59,13 +60,13 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
 
   if (isOpen) {
     if (oldAreaid < 0) {
-      massId[0] = { id: areaId, labels, datasets: [] };
+      // massId[0] = { id: areaId, labels, datasets: [] };
+      massId.push({ id: areaId, labels, datasets: [] });
       oldAreaid = areaId;
     }
-    massId[3] = { id: 3, labels, datasets: [] };
-    massId[1] = { id: 7, labels, datasets: [] };
+    massId.push({ id: 3, labels, datasets: [] });
+    massId.push({ id: 7, labels, datasets: [] });
     console.log('massId:', massId);
-    console.log('massId!!!:', massId[1].datasets);
 
     colChanel = points[areaId].Statistics[areaId].Datas.length;
     if (oldAreaid !== areaId) {
@@ -128,10 +129,11 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
         canal.push(val);
       }
     }
+    console.log('massId[1].datasets:', massId[areaId].datasets);
 
     return (
       <Grid item xs sx={{ height: '28vh' }}>
-        <Line options={options} data={massId[0]} />
+        <Line options={options} data={massId[areaId]} />
       </Grid>
     );
   };
