@@ -41,7 +41,7 @@ let massId: any = [];
 
 let oldAreaid = -1;
 const labels: string[] = [];
-const data: DataGraf = { id: 0, labels, datasets: [] };
+//const data: DataGraf = { id: 0, labels, datasets: [] };
 let canal: number[] = [];
 
 const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: number }) => {
@@ -71,7 +71,7 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
     if (oldAreaid !== areaId) {
       // очистка графиков
       setValue('0');
-      data.datasets = [];
+      massId[0].datasets = [];
       canal = [];
       //labels = [];
       while (labels.length > 0) labels.pop();
@@ -112,7 +112,7 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
       }
       if (val === 16) {
         // очистка графиков
-        data.datasets = [];
+        massId[0].datasets = [];
         canal = [];
       } else {
         for (let i = 0; i < matrix.length; i++) {
@@ -124,14 +124,14 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
         datasetsMask.data = datas;
         datasetsMask.borderColor = colorsGraf[val];
         datasetsMask.backgroundColor = colorsGraf[val];
-        data.datasets.push(datasetsMask);
+        massId[0].datasets.push(datasetsMask);
         canal.push(val);
       }
     }
 
     return (
       <Grid item xs sx={{ height: '28vh' }}>
-        <Line options={options} data={data} />
+        <Line options={options} data={massId[0]} />
       </Grid>
     );
   };
