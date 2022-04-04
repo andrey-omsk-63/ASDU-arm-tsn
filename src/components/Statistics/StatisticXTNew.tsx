@@ -62,7 +62,7 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
   if (isOpen) {
     if (oldAreaid < 0) {
       // massId[0] = { id: areaId, labels, datasets: [] };
-      massId.push({ id: areaId, canall: [], labels, datasets: [] });
+      massId.push({ id: areaId, canall: [], lbl: [], labels, datasets: [] });
       oldAreaid = areaId;
       canal = [];
       // while (labels.length > 0) labels.pop(); // labels = [];
@@ -78,7 +78,7 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
         }
       }
       if (nomInMas < 0) {
-        massId.push({ id: areaId, canall: [], labels, datasets: [] });
+        massId.push({ id: areaId, canall: [], lbl: [], labels, datasets: [] });
         numIdInMas = massId.length - 1;
         while (labels.length > 0) labels.pop(); // labels = [];
         canal = [];
@@ -87,7 +87,12 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
         numIdInMas = nomInMas;
         canal = [];
         canal = massId[numIdInMas].canall;
-        // while (labels.length > 0) labels.pop(); // labels = [];
+        while (labels.length > 0) labels.pop(); // labels = [];
+        for (let i = 0; i < massId[numIdInMas].lb.length; i++) {
+          //labels = massId[numIdInMas].lbl
+          labels.push(massId[numIdInMas].lbl[i]);
+        }
+
         setValue('0');
       }
       oldAreaid = areaId;
@@ -96,7 +101,6 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
     console.log('canal0:', canal);
     console.log('111massId:', numIdInMas, massId);
 
-    colChanel = points[areaId].Statistics[0].Datas.length;
     // if (oldAreaid !== areaId) {
     //   // очистка графиков
     //   setValue('0');
@@ -135,6 +139,7 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
           }
           labels.push(int);
         }
+        massId[numIdInMas].lbl = labels;
       }
       if (val === 16) {
         // очистка графиков
@@ -143,7 +148,7 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
       } else {
         for (let i = 0; i < matrix.length; i++) {
           let int = 0;
-          console.log('1!!!', i, val, matrix[i].Datas);
+          //console.log('1!!!', i, val, matrix[i].Datas);
           if (matrix[i].Datas.length !== 0) int = matrix[i].Datas[val].in;
           datas.push(int);
         }
@@ -170,6 +175,8 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
   };
 
   //=========================================================================
+
+  colChanel = points[areaId].Statistics[0].Datas.length;
 
   const StatisticHeader = () => {
     const KnobBat = (props: { num: string; xss: number }) => {
