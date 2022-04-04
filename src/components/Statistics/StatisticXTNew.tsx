@@ -90,8 +90,9 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
         while (labels.length > 0) labels.pop(); // labels = [];
 
         console.log('333massId[numIdInMas:', massId[numIdInMas]);
+        console.log('333', massId[numIdInMas].lbl.length);
 
-        for (let i = 0; i < massId[numIdInMas].lb.length; i++) {
+        for (let i = 0; i < massId[numIdInMas].lbl.length; i++) {
           //labels = massId[numIdInMas].lbl
           labels.push(massId[numIdInMas].lbl[i]);
         }
