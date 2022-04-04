@@ -38,12 +38,14 @@ export interface Datasets {
 
 // let massId: <GrafGlob>({} as GrafGlob)
 
-let oldAreaid = -1;
+
 const labels: string[] = [];
 //const masLabels = { id: 0, labels: [''] };
 let massId: any = [];
 //const data: DataGraf = { id: 0, labels, datasets: [] };
 let canal: number[] = [];
+let oldAreaid = -1;
+let numIdInMas = 0;
 
 const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: number }) => {
   const isOpen = props.open;
@@ -57,27 +59,49 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
   let resSps: any = [];
   let matrix: any = [];
   let kakchestvo = ' ';
+  
 
   if (isOpen) {
+    
     if (oldAreaid < 0) {
       // massId[0] = { id: areaId, labels, datasets: [] };
-      massId.push({ id: areaId, labels, datasets: [] });
+      massId.push({ id: areaId, canall: [], labels, datasets: [] });
       oldAreaid = areaId;
-    }
-    massId.push({ id: 3, labels, datasets: [] });
-    massId.push({ id: 7, labels, datasets: [] });
-    console.log('massId:', massId);
-
-    colChanel = points[areaId].Statistics[areaId].Datas.length;
-    if (oldAreaid !== areaId) {
-      // очистка графиков
-      setValue('0');
-      massId[0].datasets = [];
       canal = [];
-      //labels = [];
-      while (labels.length > 0) labels.pop();
+      setValue('0');
+    }
+    if (oldAreaid !== areaId) {
+      let nomInMas = -1;
+      
+      for (let i = 0; i < massId.length; i++) {
+        if (massId[i].id === areaId) { nomInMas = i; break; }
+      }
+      if (nomInMas < 0) {
+        massId.push({ id: areaId, canall: [], labels, datasets: [] });
+        numIdInMas = massId.length - 1;
+        canal = [];
+        setValue('0');
+      } else {
+        numIdInMas = nomInMas;
+        canal = massId[numIdInMas].canall;
+        setValue('0');
+      }
       oldAreaid = areaId;
     }
+
+    console.log('canal0:', canal, );
+    console.log('111massId:', numIdInMas, massId);
+
+    colChanel = points[areaId].Statistics[0].Datas.length;
+    // if (oldAreaid !== areaId) {
+    //   // очистка графиков
+    //   setValue('0');
+    //   massId[numIdInMas].datasets = [];
+    //   canal = [];
+    //   //labels = [];
+    //   while (labels.length > 0) labels.pop();
+    //   oldAreaid = areaId;
+    // }
   }
 
   const StatGraf00 = () => {
@@ -92,6 +116,8 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
     };
 
     const val = Number(value) - 1;
+
+    console.log('canal33:', canal, );
 
     if (isOpen && val >= 0 && !canal.includes(val)) {
       if (isOpen && value !== '0' && labels.length === 0) {
@@ -108,11 +134,12 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
       }
       if (val === 16) {
         // очистка графиков
-        massId[0].datasets = [];
+        massId[numIdInMas].datasets = [];
         canal = [];
       } else {
         for (let i = 0; i < matrix.length; i++) {
           let int = 0;
+          console.log('1!!!', i, val, matrix[i].Datas)
           if (matrix[i].Datas.length !== 0) int = matrix[i].Datas[val].in;
           datas.push(int);
         }
@@ -121,15 +148,20 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
         datasetsMask.borderColor = colorsGraf[val];
         datasetsMask.backgroundColor = colorsGraf[val];
 
-        massId[0].datasets.push(datasetsMask);
+        massId[numIdInMas].datasets.push(datasetsMask);
         canal.push(val);
+        massId[numIdInMas].canall = canal;
       }
     }
-    console.log('massId[areaId].datasets:', massId[areaId].datasets);
+
+    console.log('canal2:', canal);
+    console.log('222massId[numIdInMas]:', massId[numIdInMas]);
+    console.log('massId[numIdInMas].datasets:',numIdInMas, massId[numIdInMas].datasets);
+
 
     return (
       <Grid item xs sx={{ height: '28vh' }}>
-        <Line options={options} data={massId[areaId]} />
+        <Line options={options} data={massId[numIdInMas]} />
       </Grid>
     );
   };
@@ -217,7 +249,8 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
         </Grid>,
       );
 
-      if (matrix[numMas].Datas.length === 0) {
+       // if (matrix[numMas].Datas.length === 0) {
+        if (!matrix[numMas].Avail) {  
         //нет данных
         for (let i = 0; i < colChanel; i++) {
           resStr.push(<Grid key={i} item xs={0.51} sx={styleSt02}></Grid>);
@@ -285,6 +318,7 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
         TLen: step,
         Hour: hours,
         Min: minutes,
+        Avail: false,
         Datas: [],
       };
       for (let j = 0; j < kolDatas; j++) {
@@ -315,6 +349,7 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
         for (let j = 0; j < points[areaId].Statistics[i].Datas.length; j++) {
           matrix[numInMatrix].Datas[j] = points[areaId].Statistics[i].Datas[j];
         }
+        matrix[numInMatrix].Avail = true;
       }
     }
   };

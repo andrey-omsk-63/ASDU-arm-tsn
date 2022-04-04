@@ -75,7 +75,10 @@ const StatisticXT = (props: { open: boolean; statist: Statistic[]; areaid: numbe
   const [value, setValue] = React.useState('0');
 
   if (isOpen) {
-    colChanel = points[areaId].Statistics[areaId].Datas.length;
+    console.log('points[areaId]:', points[areaId])
+    console.log('points[areaId].Statistics[areaId]:', points[areaId].Statistics[areaId])
+
+    colChanel = points[areaId].Statistics[0].Datas.length;
     if (oldAreaid !== areaId) {
       // очистка графиков
       setValue('0');
@@ -344,7 +347,10 @@ const StatisticXT = (props: { open: boolean; statist: Statistic[]; areaid: numbe
         </Grid>,
       );
 
-      if (matrix[numMas].Datas.length === 0) {
+      //console.log('matrix[numMas].Datas:', matrix[numMas].Datas)
+
+      // if (matrix[numMas].Datas.length === 0) {
+      if (!matrix[numMas].Avail) {  
         //нет данных
         for (let i = 0; i < colChanel; i++) {
           resStr.push(<Grid key={i} item xs={0.51} sx={styleSt02}></Grid>);
@@ -412,6 +418,7 @@ const StatisticXT = (props: { open: boolean; statist: Statistic[]; areaid: numbe
         TLen: step,
         Hour: hours,
         Min: minutes,
+        Avail: false,
         Datas: [],
       };
       for (let j = 0; j < kolDatas; j++) {
@@ -442,6 +449,7 @@ const StatisticXT = (props: { open: boolean; statist: Statistic[]; areaid: numbe
         for (let j = 0; j < points[areaId].Statistics[i].Datas.length; j++) {
           matrix[numInMatrix].Datas[j] = points[areaId].Statistics[i].Datas[j];
         }
+        matrix[numInMatrix].Avail = true;
       }
     }
   };
