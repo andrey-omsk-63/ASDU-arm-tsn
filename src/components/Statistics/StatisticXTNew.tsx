@@ -68,6 +68,7 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
       massId.push({ id: areaId, canall: [], labels, datasets: [] });
       oldAreaid = areaId;
       canal = [];
+      while (labels.length > 0) labels.pop(); // labels = [];
       setValue('0');
     }
     if (oldAreaid !== areaId) {
@@ -79,11 +80,13 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
       if (nomInMas < 0) {
         massId.push({ id: areaId, canall: [], labels, datasets: [] });
         numIdInMas = massId.length - 1;
+        while (labels.length > 0) labels.pop(); // labels = [];
         canal = [];
         setValue('0');
       } else {
         numIdInMas = nomInMas;
         canal = massId[numIdInMas].canall;
+        while (labels.length > 0) labels.pop(); // labels = [];
         setValue('0');
       }
       oldAreaid = areaId;
