@@ -85,9 +85,10 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
         setValue('0');
       } else {
         numIdInMas = nomInMas;
+        canal = [];
         canal = massId[numIdInMas].canall;
         // while (labels.length > 0) labels.pop(); // labels = [];
-        // setValue('0');
+        setValue('0');
       }
       oldAreaid = areaId;
     }
@@ -142,7 +143,7 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
       } else {
         for (let i = 0; i < matrix.length; i++) {
           let int = 0;
-          //console.log('1!!!', i, val, matrix[i].Datas)
+          console.log('1!!!', i, val, matrix[i].Datas);
           if (matrix[i].Datas.length !== 0) int = matrix[i].Datas[val].in;
           datas.push(int);
         }
