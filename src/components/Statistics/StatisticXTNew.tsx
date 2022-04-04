@@ -142,7 +142,10 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
           }
           labels.push(int);
         }
-        massId[numIdInMas].lbl = labels;
+        //massId[numIdInMas].lbl = labels;
+        for (let i = 0; i < labels.length; i++) {
+          massId[numIdInMas].lbl.push(labels[i]);
+        }
       }
       if (val === 16) {
         // очистка графиков
