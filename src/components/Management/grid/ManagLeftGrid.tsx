@@ -212,7 +212,6 @@ const ManagementLeftGrid = (props: {
             {/* <Grid item xs={6} sx={styleMG03}> */}
             <Grid item xs sx={{ p: 0.1, border: 0 }}>
               <Button sx={styleButt02} onClick={handleClickGl}>
-                {/* <b>Регион&nbsp;&nbsp;{points[0].region.nameRegion}</b> */}
                 <b>{points[0].region.nameRegion}</b>
               </Button>
             </Grid>
@@ -262,8 +261,6 @@ const ManagementLeftGrid = (props: {
           subarea: 77,
         },
       ]);
-
-      console.log('massKnop', massKnop);
     }
   };
 

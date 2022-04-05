@@ -295,11 +295,11 @@ const App = () => {
                   <b>Статистика</b>
                 </Button>
               )}
-              {bsLogin === '' && (
+              {/* {bsLogin === '' && (
                 <Button sx={styleApp99} variant="contained" onClick={() => setValue('4')}>
                   <b>Не нажимать!</b>
                 </Button>
-              )}
+              )} */}
             </Stack>
           </Box>
           <TabPanel value="1">
@@ -325,11 +325,17 @@ const App = () => {
           <TabPanel value="3">
             {WS !== null && regionGlob !== 0 && (
               <>
-                <Statistics open={isOpenSt} ws={WS} points={pointsSt} region={String(regionGlob)} />
+                {/* <Statistics open={isOpenSt} ws={WS} points={pointsSt} region={String(regionGlob)} /> */}
+                <StatisticsNew
+                  open={isOpenSt}
+                  ws={WS}
+                  points={pointsSt}
+                  region={String(regionGlob)}
+                />
               </>
             )}
           </TabPanel>
-          <TabPanel value="4">
+          {/* <TabPanel value="4">
             {WS !== null && regionGlob !== 0 && (
               <>
                 <StatisticsNew
@@ -340,7 +346,7 @@ const App = () => {
                 />
               </>
             )}
-          </TabPanel>
+          </TabPanel> */}
         </TabContext>
       </Box>
     </>
