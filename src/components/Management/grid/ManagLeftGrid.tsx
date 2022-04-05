@@ -93,8 +93,6 @@ const ManagementLeftGrid = (props: {
     },
   ];
 
-  //console.log('dataKnob:', dataKnob[0], dataKnob[0].cmd);
-
   let mass: any = [];
   let masRab: any = [];
   let masAreaNum: any = [];
@@ -307,6 +305,9 @@ const ManagementLeftGrid = (props: {
       </Grid>
     );
   };
+
+  console.log('dataKnob:', dataKnob[0], dataKnob[0].cmd);
+  console.log('massKnop:', massKnop);
 
   return (
     <Grid container>
