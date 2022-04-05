@@ -143,7 +143,7 @@ const ManagementLeftGrid = (props: {
 
     console.log('mass:', mass);
     //console.log('masRab:', masRab);
-    console.log('masAreaNum:', masAreaNum);
+    //console.log('masAreaNum:', masAreaNum);
 
     // создание массива ХТ
     for (let i = 0; i < pointsXT.length; i++) {
@@ -255,10 +255,17 @@ const ManagementLeftGrid = (props: {
         massKnop.push(massKnob[0]);
         // сюда нужно записать проверку куста
         if (dataKnob[0].area === '0' && dataKnob[0].subarea === 0) {
-          console.log('прописать все районыи подрайоны');
+          console.log('прописать все районы и подрайоны', dataKnob[0].cmd, '-', dataKnob[0].param);
         } else {
           if (dataKnob[0].subarea === 0) {
-            console.log('прописать подрайоны района ', dataKnob[0].area);
+            console.log(
+              'прописать подрайоны района ',
+              dataKnob[0].area,
+              '.',
+              dataKnob[0].cmd,
+              '-',
+              dataKnob[0].param,
+            );
           }
         }
 
