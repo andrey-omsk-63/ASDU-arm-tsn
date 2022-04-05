@@ -26,6 +26,7 @@ export interface Knob {
 }
 
 let massKnop: Knob[] = [];
+//let instal = true;
 
 const ManagementLeftGrid = (props: {
   open: boolean;
@@ -141,7 +142,7 @@ const ManagementLeftGrid = (props: {
     });
 
     console.log('mass:', mass);
-    console.log('masRab:', masRab);
+    //console.log('masRab:', masRab);
     console.log('masAreaNum:', masAreaNum);
 
     // создание массива ХТ
@@ -240,7 +241,7 @@ const ManagementLeftGrid = (props: {
           flagDubl = false;
           massKnop[i].param = dataKnob[0].param;
           //console.log(i, 'Дубликат');
-          break;
+          //break;
         }
       }
       if (flagDubl) {
@@ -253,6 +254,13 @@ const ManagementLeftGrid = (props: {
 
         massKnop.push(massKnob[0]);
         // сюда нужно записать проверку куста
+        if (dataKnob[0].area === '0' && dataKnob[0].subarea === 0) {
+          console.log('прописать все районыи подрайоны');
+        } else {
+          if (dataKnob[0].subarea === 0) {
+            console.log('прописать подрайоны района ', dataKnob[0].area);
+          }
+        }
 
         // сортировка по cmd
         massKnop.sort((prev, next) => prev.cmd - next.cmd);
