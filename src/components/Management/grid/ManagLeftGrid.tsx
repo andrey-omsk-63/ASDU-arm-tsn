@@ -139,6 +139,11 @@ const ManagementLeftGrid = (props: {
     masAreaNum = masRab.filter((element: any, index: any) => {
       return masRab.indexOf(element) === index;
     });
+
+    console.log('mass:', mass);
+    console.log('masRab:', masRab);
+    console.log('masAreaNum:', masAreaNum);
+
     // создание массива ХТ
     for (let i = 0; i < pointsXT.length; i++) {
       masXT[i] = {
@@ -262,6 +267,9 @@ const ManagementLeftGrid = (props: {
           subarea: 77,
         },
       ]);
+
+      console.log('dataKnob:', dataKnob[0], dataKnob[0].cmd);
+      console.log('massKnop:', massKnop);
     }
   };
 
@@ -305,9 +313,6 @@ const ManagementLeftGrid = (props: {
       </Grid>
     );
   };
-
-  console.log('dataKnob:', dataKnob[0], dataKnob[0].cmd);
-  console.log('massKnop:', massKnop);
 
   return (
     <Grid container>
