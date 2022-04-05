@@ -9,13 +9,15 @@ import Modal from '@mui/material/Modal';
 //import Header from './components/Header/Header';
 import Management from './components/Management/Management';
 import Points from './components/Points/Points';
-import Statistics from './components/Statistics/Statistics';
+//import Statistics from './components/Statistics/Statistics';
 import StatisticsNew from './components/Statistics/StatisticsNew';
 
 import { Tflight } from './interfaceMNG.d';
 import { XctrlInfo } from './interfaceGl.d';
 import { RegionInfo } from './interfaceGl.d';
 import { Statistic } from './interfaceStat.d';
+
+import { styleApp01, styleApp02, styleMod, styleBatMenu, styleModalMenu } from './AppStyle';
 
 let flagWS = true;
 let WS: any = null;
@@ -24,83 +26,6 @@ let massRegion: Array<number> = [];
 let massNameRegion: Array<string> = [];
 
 const App = () => {
-  const styleApp01 = {
-    fontSize: 14,
-    marginRight: 1,
-    width: '12%',
-    maxHeight: '21px',
-    minHeight: '21px',
-    backgroundColor: '#F1F3F4',
-    color: 'black',
-    textTransform: 'unset !important',
-  };
-
-  const styleApp02 = {
-    fontSize: 14,
-    marginRight: 1,
-    maxHeight: '21px',
-    minHeight: '21px',
-    width: '20%',
-    backgroundColor: '#F1F3F4',
-    color: 'black',
-    textTransform: 'unset !important',
-  };
-  const styleApp99 = {
-    fontSize: 14,
-    marginRight: 1,
-    maxHeight: '21px',
-    minHeight: '21px',
-    width: '20%',
-    backgroundColor: '#F1F3F4',
-    color: 'red',
-    textTransform: 'unset !important',
-  };
-
-  // const styleAppExit = {
-  //   fontSize: 14,
-  //   marginLeft: 'auto',
-  //   marginRight: 0,
-  //   maxHeight: '21px',
-  //   minHeight: '21px',
-  //   width: '9%',
-  //   backgroundColor: '#F1F3F4',
-  //   color: 'black',
-  //   textTransform: 'unset !important',
-  // };
-
-  const styleMod = {
-    position: 'absolute',
-    top: '22.8%',
-    left: '47.7%',
-    transform: 'translate(-50%, -50%)',
-    width: 500,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    borderColor: 'red',
-    borderRadius: 2,
-    boxShadow: 24,
-    p: 4,
-  };
-
-  const styleBatMenu = {
-    fontSize: 14,
-    backgroundColor: '#F1F3F4',
-    color: 'red',
-    marginTop: 1,
-    textTransform: 'unset !important',
-  };
-
-  const styleModalMenu = {
-    fontSize: 14,
-    maxHeight: '20px',
-    minHeight: '20px',
-    backgroundColor: '#F1F3F4',
-    color: 'black',
-    marginRight: 1,
-    marginTop: 2,
-    textTransform: 'unset !important',
-  };
-
   const handleClose = () => {
     window.close();
   };
@@ -147,7 +72,6 @@ const App = () => {
             sx={styleModalMenu}
             variant="contained"
             onClick={() => handleCloseModal(massRegion[i])}>
-            {/* <b>{massRegion[i]}&nbsp;-&nbsp;{massNameRegion[i]}</b> */}
             <b>{massNameRegion[i]}</b>
           </Button>,
         );
@@ -165,10 +89,6 @@ const App = () => {
       }
       massRegion.sort();
       regionGlob = massRegion[0];
-
-      console.log('massRegion:', massRegion);
-      console.log('pointsReg:', pointsReg);
-
       if (massNameRegion.length === 0) {
         for (let i = 0; i < massRegion.length; i++) {
           let strMenu = pointsReg[massRegion[i].toString() as keyof RegionInfo];
@@ -295,58 +215,23 @@ const App = () => {
                   <b>Статистика</b>
                 </Button>
               )}
-              {/* {bsLogin === '' && (
-                <Button sx={styleApp99} variant="contained" onClick={() => setValue('4')}>
-                  <b>Не нажимать!</b>
-                </Button>
-              )} */}
             </Stack>
           </Box>
           <TabPanel value="1">
             {WS !== null && regionGlob !== 0 && (
-              <>
-                <Management
-                  open={isOpenDev}
-                  ws={WS}
-                  points={pointsTfl}
-                  xctrll={pointsXctrl}
-                  region={String(regionGlob)}
-                />
-              </>
+              <Management open={isOpenDev} ws={WS} points={pointsTfl} xctrll={pointsXctrl} region={String(regionGlob)} />
             )}
           </TabPanel>
           <TabPanel value="2">
             {WS !== null && regionGlob !== 0 && (
-              <>
-                <Points open={isOpenInf} ws={WS} xctrll={pointsXctrl} region={String(regionGlob)} />
-              </>
+              <Points open={isOpenInf} ws={WS} xctrll={pointsXctrl} region={String(regionGlob)} />
             )}
           </TabPanel>
           <TabPanel value="3">
             {WS !== null && regionGlob !== 0 && (
-              <>
-                {/* <Statistics open={isOpenSt} ws={WS} points={pointsSt} region={String(regionGlob)} /> */}
-                <StatisticsNew
-                  open={isOpenSt}
-                  ws={WS}
-                  points={pointsSt}
-                  region={String(regionGlob)}
-                />
-              </>
+              <StatisticsNew open={isOpenSt} ws={WS} points={pointsSt} region={String(regionGlob)} />
             )}
           </TabPanel>
-          {/* <TabPanel value="4">
-            {WS !== null && regionGlob !== 0 && (
-              <>
-                <StatisticsNew
-                  open={isOpenSt}
-                  ws={WS}
-                  points={pointsSt}
-                  region={String(regionGlob)}
-                />
-              </>
-            )}
-          </TabPanel> */}
         </TabContext>
       </Box>
     </>
@@ -360,9 +245,3 @@ export default App;
 // const [points, setPoints] = React.useState<Array<XctrlInfo>>([]);
 // const [isOpen, setIsOpen] = React.useState(false);
 
-// {bsLogin === '' && (
-//   <Button sx={styleAppExit} variant="contained" onClick={handleClose}>
-//     <b>Выход</b>
-//   </Button>
-// )}
-// <Header />

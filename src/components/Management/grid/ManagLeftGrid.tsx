@@ -83,7 +83,7 @@ const ManagementLeftGrid = (props: {
     },
   ]);
 
-  let massKnob: Knob[] = [
+  const massKnob: Knob[] = [
     {
       cmd: 0,
       param: 99,
@@ -237,6 +237,7 @@ const ManagementLeftGrid = (props: {
           flagDubl = false;
           massKnop[i].param = dataKnob[0].param;
           //console.log(i, 'Дубликат');
+          break;
         }
       }
       if (flagDubl) {
@@ -248,6 +249,8 @@ const ManagementLeftGrid = (props: {
         massKnob[0].subarea = dataKnob[0].subarea;
 
         massKnop.push(massKnob[0]);
+        // сюда нужно записать проверку куста
+
         // сортировка по cmd
         massKnop.sort((prev, next) => prev.cmd - next.cmd);
       }
@@ -308,7 +311,7 @@ const ManagementLeftGrid = (props: {
   return (
     <Grid container>
       <Grid item xs={2.5} sx={styleMG01}>
-        <Box sx={{ border: 0, overflowX: 'auto' }}>{props.open && <SpisMLG />}</Box>
+        <Box sx={{ overflowX: 'auto' }}>{props.open && <SpisMLG />}</Box>
       </Grid>
       <Grid item xs sx={{ border: 0 }}>
         <Grid container>
