@@ -253,25 +253,26 @@ const ManagementLeftGrid = (props: {
         massKnob[0].subarea = dataKnob[0].subarea;
 
         massKnop.push(massKnob[0]);
-        // сюда нужно записать проверку куста
-        if (dataKnob[0].area === '0' && dataKnob[0].subarea === 0) {
-          console.log('прописать все районы и подрайоны', dataKnob[0].cmd, '-', dataKnob[0].param);
-        } else {
-          if (dataKnob[0].subarea === 0) {
-            console.log(
-              'прописать подрайоны района ',
-              dataKnob[0].area,
-              '.',
-              dataKnob[0].cmd,
-              '-',
-              dataKnob[0].param,
-            );
-          }
-        }
-
-        // сортировка по cmd
-        massKnop.sort((prev, next) => prev.cmd - next.cmd);
       }
+
+      // сюда нужно записать проверку куста
+      if (dataKnob[0].area === '0' && dataKnob[0].subarea === 0) {
+        console.log('прописать все районы и подрайоны', dataKnob[0].cmd, '-', dataKnob[0].param);
+      } else {
+        if (dataKnob[0].subarea === 0) {
+          console.log(
+            'прописать подрайоны района ',
+            dataKnob[0].area,
+            ' ',
+            dataKnob[0].cmd,
+            '-',
+            dataKnob[0].param,
+          );
+        }
+      }
+
+      // сортировка по cmd
+      massKnop.sort((prev, next) => prev.cmd - next.cmd);
 
       setDataKnob([
         {
