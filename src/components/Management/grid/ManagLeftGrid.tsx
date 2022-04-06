@@ -226,6 +226,73 @@ const ManagementLeftGrid = (props: {
     );
   };
 
+  const RecordInAria = () => {
+    massKnopTemp = [];
+    let masArea: any = [];
+    let masAreaRab: any = [];
+    for (let i = 0; i < mass.length; i++) {
+      let dataKnobTemp: Knob[] = [
+        {
+          cmd: dataKnob[0].cmd,
+          param: dataKnob[0].param,
+          region: dataKnob[0].region,
+          area: mass[i].areaNum,
+          subarea: mass[i].subarea,
+        },
+      ];
+      massKnopTemp[i] = dataKnobTemp[0];
+      masAreaRab.push(mass[i].areaNum);
+    }
+    //убираем дубликаты
+    masArea = masAreaRab.filter((element: any, index: any) => {
+      return masAreaRab.indexOf(element) === index;
+    });
+    for (let i = 0; i < masArea.length; i++) {
+      let dataKnobTemp: Knob[] = [
+        {
+          cmd: dataKnob[0].cmd,
+          param: dataKnob[0].param,
+          region: dataKnob[0].region,
+          area: masArea[i],
+          subarea: 0,
+        },
+      ];
+      massKnopTemp.push(dataKnobTemp[0]);
+    }
+    console.log('massKnopTempGl:', massKnopTemp);
+
+    massKnop = massKnop.concat(massKnopTemp); // ОбЪединение массивов
+    console.log('massKnopBig:', massKnop);
+
+    for (let i = 0; i < massKnop.length; i++) {
+      // изменение param по всему кусту
+      if (massKnop[i].cmd === dataKnob[0].cmd && massKnop[i].region === dataKnob[0].region) {
+        massKnop[i].param = dataKnob[0].param;
+      }
+    }
+    let massTemp = [];
+    //удаление дубликатов
+    for (let i = 0; i < massKnop.length; i++) {
+      let dubl = false;
+      if (i < massKnop.length - 1) {
+        for (let j = i + 1; j < massKnop.length; j++) {
+          if (
+            massKnop[i].cmd === massKnop[j].cmd &&
+            massKnop[i].param === massKnop[j].param &&
+            massKnop[i].region === massKnop[j].region &&
+            massKnop[i].area === massKnop[j].area &&
+            massKnop[i].subarea === massKnop[j].subarea
+          ) {
+            dubl = true;
+          }
+        }
+      }
+      if (!dubl) massTemp.push(massKnop[i]);
+    }
+    massKnop = massTemp;
+    console.log('massKnopDubl:', massKnop);
+  };
+
   const CheckFourKnops = () => {
     if (dataKnob[0].cmd !== 0) {
       // проверка дубликатов
@@ -241,7 +308,6 @@ const ManagementLeftGrid = (props: {
           flagDubl = false;
           massKnop[i].param = dataKnob[0].param;
           //console.log(i, 'Дубликат');
-          //break;
         }
       }
       if (flagDubl) {
@@ -254,83 +320,76 @@ const ManagementLeftGrid = (props: {
 
         massKnop.push(massKnob[0]);
       }
-      console.log('mass:', mass);
+      //console.log('mass:', mass);
       if (dataKnob[0].area === '0' && dataKnob[0].subarea === 0) {
-        massKnopTemp = [];
-        let masArea: any = [];
-        let masAreaRab: any = [];
-        for (let i = 0; i < mass.length; i++) {
-          let dataKnobTemp: Knob[] = [
-            {
-              cmd: dataKnob[0].cmd,
-              param: dataKnob[0].param,
-              region: dataKnob[0].region,
-              area: mass[i].areaNum,
-              subarea: mass[i].subarea,
-            },
-          ];
-          massKnopTemp[i] = dataKnobTemp[0];
-          masAreaRab.push(mass[i].areaNum);
-        }
+        RecordInAria();
+        // massKnopTemp = [];
+        // let masArea: any = [];
+        // let masAreaRab: any = [];
+        // for (let i = 0; i < mass.length; i++) {
+        //   let dataKnobTemp: Knob[] = [
+        //     {
+        //       cmd: dataKnob[0].cmd,
+        //       param: dataKnob[0].param,
+        //       region: dataKnob[0].region,
+        //       area: mass[i].areaNum,
+        //       subarea: mass[i].subarea,
+        //     },
+        //   ];
+        //   massKnopTemp[i] = dataKnobTemp[0];
+        //   masAreaRab.push(mass[i].areaNum);
+        // }
 
-        //убираем дубликаты
-        masArea = masAreaRab.filter((element: any, index: any) => {
-          return masAreaRab.indexOf(element) === index;
-        });
+        // //убираем дубликаты
+        // masArea = masAreaRab.filter((element: any, index: any) => {
+        //   return masAreaRab.indexOf(element) === index;
+        // });
 
-        for (let i = 0; i < masArea.length; i++) {
-          let dataKnobTemp: Knob[] = [
-            {
-              cmd: dataKnob[0].cmd,
-              param: dataKnob[0].param,
-              region: dataKnob[0].region,
-              area: masArea[i],
-              subarea: 0,
-            },
-          ];
-          massKnopTemp.push(dataKnobTemp[0]);
-        }
+        // for (let i = 0; i < masArea.length; i++) {
+        //   let dataKnobTemp: Knob[] = [
+        //     {
+        //       cmd: dataKnob[0].cmd,
+        //       param: dataKnob[0].param,
+        //       region: dataKnob[0].region,
+        //       area: masArea[i],
+        //       subarea: 0,
+        //     },
+        //   ];
+        //   massKnopTemp.push(dataKnobTemp[0]);
+        // }
 
-        console.log('masArea:', masArea);
-        console.log('massKnopTempGl:', massKnopTemp);
+        // console.log('masArea:', masArea);
+        // console.log('massKnopTempGl:', massKnopTemp);
 
-        massKnop = massKnop.concat(massKnopTemp); // ОбЪединение массивов
-        console.log('massKnop:', massKnop);
+        // massKnop = massKnop.concat(massKnopTemp); // ОбЪединение массивов
+        // console.log('massKnop:', massKnop);
 
-        for (let i = 0; i < massKnop.length; i++) {
-          // изменение param по всему кусту
-          if (massKnop[i].cmd === dataKnob[0].cmd && massKnop[i].region === dataKnob[0].region) {
-            massKnop[i].param = dataKnob[0].param;
-          }
-        }
-
-        let massTemp = [];
-        for (let i = 0; i < massKnop.length; i++) {
-          let dubl = false;
-          if (i < massKnop.length - 1) {
-            for (let j = i + 1; j < massKnop.length; j++) {
-              if (
-                massKnop[i].cmd === massKnop[j].cmd &&
-                massKnop[i].param === massKnop[j].param &&
-                massKnop[i].region === massKnop[j].region &&
-                massKnop[i].area === massKnop[j].area &&
-                massKnop[i].subarea === massKnop[j].subarea
-              ) {
-                //console.log('дубликат i = ', i, j);
-                dubl = true;
-              }
-            }
-          }
-
-          if (!dubl) {
-            massTemp.push(massKnop[i]);
-            console.log('massTemp111:', i, massTemp);
-          }
-        }
-
-        console.log('massTemp:', massTemp);
-        massKnop = massTemp;
-        console.log('massKnopDubl:', massKnop);
+        // for (let i = 0; i < massKnop.length; i++) {
+        //   // изменение param по всему кусту
+        //   if (massKnop[i].cmd === dataKnob[0].cmd && massKnop[i].region === dataKnob[0].region) {
+        //     massKnop[i].param = dataKnob[0].param;
+        //   }
+        // }
+        // let massTemp = [];
+        // for (let i = 0; i < massKnop.length; i++) { //удаление дубликатов
+        //   let dubl = false;
+        //   if (i < massKnop.length - 1) {
+        //     for (let j = i + 1; j < massKnop.length; j++) {
+        //       if (
+        //         massKnop[i].cmd === massKnop[j].cmd &&
+        //         massKnop[i].param === massKnop[j].param &&
+        //         massKnop[i].region === massKnop[j].region &&
+        //         massKnop[i].area === massKnop[j].area &&
+        //         massKnop[i].subarea === massKnop[j].subarea
+        //       ) {
+        //         dubl = true;
+        //       }
+        //     }
+        //   }
+        //   if (!dubl) massTemp.push(massKnop[i]);
+        // }
+        // massKnop = massTemp;
+        // console.log('massKnopDubl:', massKnop);
       } else {
         if (dataKnob[0].subarea === 0) {
           console.log(
@@ -346,16 +405,6 @@ const ManagementLeftGrid = (props: {
 
       // сортировка по cmd
       massKnop.sort((prev, next) => prev.cmd - next.cmd);
-
-      // setDataKnob([
-      //   {
-      //     cmd: 0,
-      //     param: 99,
-      //     region: '',
-      //     area: '',
-      //     subarea: 77,
-      //   },
-      // ]);
 
       //console.log('dataKnob:', dataKnob[0], dataKnob[0].cmd);
       console.log('massKnopGl:', massKnop);
