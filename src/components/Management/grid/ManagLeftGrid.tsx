@@ -84,16 +84,6 @@ const ManagementLeftGrid = (props: {
     },
   ]);
 
-  // const [dataKnobTemp, setDataKnobTemp] = React.useState<Array<Knob>>([
-  //   {
-  //     cmd: 0,
-  //     param: 99,
-  //     region: '',
-  //     area: '',
-  //     subarea: 69,
-  //   },
-  // ]);
-
   const massKnob: Knob[] = [
     {
       cmd: 0,
@@ -268,6 +258,7 @@ const ManagementLeftGrid = (props: {
       if (dataKnob[0].area === '0' && dataKnob[0].subarea === 0) {
         massKnopTemp = [];
         let masArea: any = [];
+        let masAreaRab: any = [];
         for (let i = 0; i < mass.length; i++) {
           let dataKnobTemp: Knob[] = [
             {
@@ -279,8 +270,13 @@ const ManagementLeftGrid = (props: {
             },
           ];
           massKnopTemp[i] = dataKnobTemp[0];
-          masArea.push(mass[i].areaNum);
+          masAreaRab.push(mass[i].areaNum);
         }
+
+        //убираем дубликаты
+        masArea = masAreaRab.filter((element: any, index: any) => {
+          return masAreaRab.indexOf(element) === index;
+        });
 
         console.log('masArea:', masArea);
         console.log('massKnopTempGl:', massKnopTemp);
