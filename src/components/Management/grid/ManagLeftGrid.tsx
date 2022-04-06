@@ -278,6 +278,19 @@ const ManagementLeftGrid = (props: {
           return masAreaRab.indexOf(element) === index;
         });
 
+        for (let i = 0; i < masArea.length; i++) {
+          let dataKnobTemp: Knob[] = [
+            {
+              cmd: dataKnob[0].cmd,
+              param: dataKnob[0].param,
+              region: dataKnob[0].region,
+              area: masArea[i],
+              subarea: 0,
+            },
+          ];
+          massKnopTemp.push(dataKnobTemp[0]);
+        }
+
         console.log('masArea:', masArea);
         console.log('massKnopTempGl:', massKnopTemp);
 
