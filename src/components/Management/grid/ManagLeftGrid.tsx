@@ -307,21 +307,24 @@ const ManagementLeftGrid = (props: {
         let massTemp = [];
         for (let i = 0; i < massKnop.length; i++) {
           let dubl = false;
-          for (let j = i + 1; j < massKnop.length - i; j++) {
-            if (
-              massKnop[i].cmd === massKnop[j].cmd &&
-              massKnop[i].param === massKnop[j].param &&
-              massKnop[i].region === massKnop[j].region &&
-              massKnop[i].area === massKnop[j].area &&
-              massKnop[i].subarea === massKnop[j].subarea
-            ) {
-              console.log('дубликат i = ', i);
-              dubl = true;
+          if (i < massKnop.length - 1) {
+            for (let j = i + 1; j < massKnop.length; j++) {
+              if (
+                massKnop[i].cmd === massKnop[j].cmd &&
+                massKnop[i].param === massKnop[j].param &&
+                massKnop[i].region === massKnop[j].region &&
+                massKnop[i].area === massKnop[j].area &&
+                massKnop[i].subarea === massKnop[j].subarea
+              ) {
+                console.log('дубликат i = ', i, j);
+                dubl = true;
+              }
             }
           }
+
           if (!dubl) {
             massTemp.push(massKnop[i]);
-            //console.log('massTemp111:', i, massTemp);
+            console.log('massTemp111:', i, massTemp);
           }
         }
 
