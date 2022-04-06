@@ -321,10 +321,13 @@ const ManagementLeftGrid = (props: {
           }
           if (!dubl) {
             massTemp.push(massKnop[i]);
-            console.log('massTemp111:', i, massTemp);
+            //console.log('massTemp111:', i, massTemp);
           }
         }
+
         console.log('massTemp:', massTemp);
+        massKnop = massTemp;
+        console.log('massKnopDubl:', massKnop);
       } else {
         if (dataKnob[0].subarea === 0) {
           console.log(
