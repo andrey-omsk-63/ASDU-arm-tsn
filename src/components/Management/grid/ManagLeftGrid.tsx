@@ -26,7 +26,7 @@ export interface Knob {
 }
 
 let massKnop: Knob[] = [];
-//let instal = true;
+let massKnopTemp: Knob[] = [];
 
 const ManagementLeftGrid = (props: {
   open: boolean;
@@ -83,6 +83,16 @@ const ManagementLeftGrid = (props: {
       subarea: 88,
     },
   ]);
+
+  // const [dataKnobTemp, setDataKnobTemp] = React.useState<Array<Knob>>([
+  //   {
+  //     cmd: 0,
+  //     param: 99,
+  //     region: '',
+  //     area: '',
+  //     subarea: 69,
+  //   },
+  // ]);
 
   const massKnob: Knob[] = [
     {
@@ -141,7 +151,7 @@ const ManagementLeftGrid = (props: {
       return masRab.indexOf(element) === index;
     });
 
-    console.log('mass:', mass);
+    //console.log('mass:', mass);
     //console.log('masRab:', masRab);
     //console.log('masAreaNum:', masAreaNum);
 
@@ -255,9 +265,52 @@ const ManagementLeftGrid = (props: {
         massKnop.push(massKnob[0]);
       }
 
-      // сюда нужно записать проверку куста
       if (dataKnob[0].area === '0' && dataKnob[0].subarea === 0) {
-        console.log('прописать все районы и подрайоны', dataKnob[0].cmd, '-', dataKnob[0].param);
+        massKnopTemp = []
+        for (let i = 0; i < mass.length; i++) {
+          let dataKnobTemp: Knob[] = [
+            {
+              cmd: dataKnob[0].cmd,
+              param: dataKnob[0].param,
+              region: dataKnob[0].region,
+              area: mass[i].areaNum,
+              subarea: mass[i].subarea,
+            },
+          ];
+          massKnopTemp[i] = dataKnobTemp[0];
+        }
+
+        console.log('massKnopTempGl:', massKnopTemp);
+        massKnop = massKnop.concat(massKnopTemp)  // ОбЪединение массивов
+        for (let i = 0; i < massKnop.length; i++) {  // изменение param по всему кусту
+          if (
+            massKnop[i].cmd === dataKnob[0].cmd &&
+            massKnop[i].region === dataKnob[0].region
+          ) {
+            massKnop[i].param = dataKnob[0].param;
+          }
+        }
+
+        let massTemp = []
+        for (let i = 0; i < massKnop.length; i++) {
+          for (let j = 0; j < massKnop.length; j++) {
+            
+          }
+
+          if (
+            massKnop[i].cmd === massKnopTemp[0].cmd &&
+            massKnop[i].param === massKnopTemp[0].param &&
+            massKnop[i].region === massKnopTemp[0].region &&
+            massKnop[i].area === massKnopTemp[0].area &&
+            massKnop[i].subarea === massKnopTemp[0].subarea
+          ) {
+
+          }
+
+        }
+        
+        console.log('massKnop1111:', massKnop);
+
       } else {
         if (dataKnob[0].subarea === 0) {
           console.log(
