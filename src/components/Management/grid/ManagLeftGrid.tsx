@@ -316,7 +316,7 @@ const ManagementLeftGrid = (props: {
                 massKnop[i].area === massKnop[j].area &&
                 massKnop[i].subarea === massKnop[j].subarea
               ) {
-                console.log('дубликат i = ', i, j);
+                //console.log('дубликат i = ', i, j);
                 dubl = true;
               }
             }
@@ -347,18 +347,18 @@ const ManagementLeftGrid = (props: {
       // сортировка по cmd
       massKnop.sort((prev, next) => prev.cmd - next.cmd);
 
-      setDataKnob([
-        {
-          cmd: 0,
-          param: 99,
-          region: '',
-          area: '',
-          subarea: 77,
-        },
-      ]);
+      // setDataKnob([
+      //   {
+      //     cmd: 0,
+      //     param: 99,
+      //     region: '',
+      //     area: '',
+      //     subarea: 77,
+      //   },
+      // ]);
 
       //console.log('dataKnob:', dataKnob[0], dataKnob[0].cmd);
-      //console.log('massKnop:', massKnop);
+      console.log('massKnopGl:', massKnop);
     }
   };
 
