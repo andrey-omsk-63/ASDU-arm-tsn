@@ -267,6 +267,7 @@ const ManagementLeftGrid = (props: {
       console.log('mass:', mass);
       if (dataKnob[0].area === '0' && dataKnob[0].subarea === 0) {
         massKnopTemp = [];
+        let masArea: any = [];
         for (let i = 0; i < mass.length; i++) {
           let dataKnobTemp: Knob[] = [
             {
@@ -278,9 +279,12 @@ const ManagementLeftGrid = (props: {
             },
           ];
           massKnopTemp[i] = dataKnobTemp[0];
+          masArea.push(mass[i].areaNum);
         }
 
+        console.log('masArea:', masArea);
         console.log('massKnopTempGl:', massKnopTemp);
+
         massKnop = massKnop.concat(massKnopTemp); // ОбЪединение массивов
         for (let i = 0; i < massKnop.length; i++) {
           // изменение param по всему кусту
