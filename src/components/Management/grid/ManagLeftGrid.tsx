@@ -295,6 +295,8 @@ const ManagementLeftGrid = (props: {
         console.log('massKnopTempGl:', massKnopTemp);
 
         massKnop = massKnop.concat(massKnopTemp); // ОбЪединение массивов
+        console.log('massKnop:', massKnop);
+
         for (let i = 0; i < massKnop.length; i++) {
           // изменение param по всему кусту
           if (massKnop[i].cmd === dataKnob[0].cmd && massKnop[i].region === dataKnob[0].region) {
@@ -319,18 +321,9 @@ const ManagementLeftGrid = (props: {
           }
           if (!dubl) {
             massTemp.push(massKnop[i]);
+            console.log('massTemp111:', i, massTemp);
           }
-
-          // if (
-          //   massKnop[i].cmd === massKnopTemp[0].cmd &&
-          //   massKnop[i].param === massKnopTemp[0].param &&
-          //   massKnop[i].region === massKnopTemp[0].region &&
-          //   massKnop[i].area === massKnopTemp[0].area &&
-          //   massKnop[i].subarea === massKnopTemp[0].subarea
-          // ) {
-          // }
         }
-
         console.log('massTemp:', massTemp);
       } else {
         if (dataKnob[0].subarea === 0) {
@@ -358,8 +351,8 @@ const ManagementLeftGrid = (props: {
         },
       ]);
 
-      console.log('dataKnob:', dataKnob[0], dataKnob[0].cmd);
-      console.log('massKnop:', massKnop);
+      //console.log('dataKnob:', dataKnob[0], dataKnob[0].cmd);
+      //console.log('massKnop:', massKnop);
     }
   };
 
