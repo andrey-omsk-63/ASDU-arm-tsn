@@ -264,9 +264,9 @@ const ManagementLeftGrid = (props: {
 
         massKnop.push(massKnob[0]);
       }
-
+      console.log('mass:', mass);
       if (dataKnob[0].area === '0' && dataKnob[0].subarea === 0) {
-        massKnopTemp = []
+        massKnopTemp = [];
         for (let i = 0; i < mass.length; i++) {
           let dataKnobTemp: Knob[] = [
             {
@@ -281,36 +281,44 @@ const ManagementLeftGrid = (props: {
         }
 
         console.log('massKnopTempGl:', massKnopTemp);
-        massKnop = massKnop.concat(massKnopTemp)  // ОбЪединение массивов
-        for (let i = 0; i < massKnop.length; i++) {  // изменение param по всему кусту
-          if (
-            massKnop[i].cmd === dataKnob[0].cmd &&
-            massKnop[i].region === dataKnob[0].region
-          ) {
+        massKnop = massKnop.concat(massKnopTemp); // ОбЪединение массивов
+        for (let i = 0; i < massKnop.length; i++) {
+          // изменение param по всему кусту
+          if (massKnop[i].cmd === dataKnob[0].cmd && massKnop[i].region === dataKnob[0].region) {
             massKnop[i].param = dataKnob[0].param;
           }
         }
 
-        let massTemp = []
+        let massTemp = [];
         for (let i = 0; i < massKnop.length; i++) {
-          for (let j = 0; j < massKnop.length; j++) {
-            
+          let dubl = false;
+          for (let j = i + 1; j < massKnop.length - i; j++) {
+            if (
+              massKnop[i].cmd === massKnop[j].cmd &&
+              massKnop[i].param === massKnop[j].param &&
+              massKnop[i].region === massKnop[j].region &&
+              massKnop[i].area === massKnop[j].area &&
+              massKnop[i].subarea === massKnop[j].subarea
+            ) {
+              console.log('дубликат i = ', i);
+              dubl = true;
+            }
+          }
+          if (!dubl) {
+            massTemp.push(massKnop[i]);
           }
 
-          if (
-            massKnop[i].cmd === massKnopTemp[0].cmd &&
-            massKnop[i].param === massKnopTemp[0].param &&
-            massKnop[i].region === massKnopTemp[0].region &&
-            massKnop[i].area === massKnopTemp[0].area &&
-            massKnop[i].subarea === massKnopTemp[0].subarea
-          ) {
-
-          }
-
+          // if (
+          //   massKnop[i].cmd === massKnopTemp[0].cmd &&
+          //   massKnop[i].param === massKnopTemp[0].param &&
+          //   massKnop[i].region === massKnopTemp[0].region &&
+          //   massKnop[i].area === massKnopTemp[0].area &&
+          //   massKnop[i].subarea === massKnopTemp[0].subarea
+          // ) {
+          // }
         }
-        
-        console.log('massKnop1111:', massKnop);
 
+        console.log('massTemp:', massTemp);
       } else {
         if (dataKnob[0].subarea === 0) {
           console.log(
