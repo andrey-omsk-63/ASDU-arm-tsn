@@ -64,7 +64,6 @@ const ManagementLeftGrid = (props: {
     fontSize: 15,
     maxHeight: '21px',
     minHeight: '21px',
-    //width: '20%',
     backgroundColor: 'white',
     color: '#5B1080',
     textTransform: 'unset !important',
@@ -222,6 +221,28 @@ const ManagementLeftGrid = (props: {
     );
   };
 
+  const DelateDublRecords = () => {
+    let massTemp = [];
+    for (let i = 0; i < massKnop.length; i++) {
+      let dubl = false;
+      if (i < massKnop.length - 1) {
+        for (let j = i + 1; j < massKnop.length; j++) {
+          if (
+            massKnop[i].cmd === massKnop[j].cmd &&
+            massKnop[i].param === massKnop[j].param &&
+            massKnop[i].region === massKnop[j].region &&
+            massKnop[i].area === massKnop[j].area &&
+            massKnop[i].subarea === massKnop[j].subarea
+          ) {
+            dubl = true;
+          }
+        }
+      }
+      if (!dubl && massKnop[i].param !== 99) massTemp.push(massKnop[i]);
+    }
+    massKnop = massTemp;
+  }
+
   const RecordInAria = () => {
     massKnopTemp = [];
     let masArea: any = [];
@@ -243,7 +264,7 @@ const ManagementLeftGrid = (props: {
     masArea = masAreaRab.filter((element: any, index: any) => {
       return masAreaRab.indexOf(element) === index;
     });
-    for (let i = 0; i < masArea.length; i++) {
+    for (let i = 0; i < masArea.length; i++) { //добавление записей по районам
       let dataKnobTemp: Knob[] = [
         {
           cmd: dataKnob[0].cmd,
@@ -256,35 +277,47 @@ const ManagementLeftGrid = (props: {
       massKnopTemp.push(dataKnobTemp[0]);
     }
     massKnop = massKnop.concat(massKnopTemp); // ОбЪединение массивов
-
     for (let i = 0; i < massKnop.length; i++) {
-      // изменение param по всему кусту
+      // изменение param по всему кусту региона
       if (massKnop[i].cmd === dataKnob[0].cmd && massKnop[i].region === dataKnob[0].region) {
         massKnop[i].param = dataKnob[0].param;
       }
     }
+    DelateDublRecords() //удаление дубликатов
+  };
 
-    //удаление дубликатов
-    let massTemp = [];
-    for (let i = 0; i < massKnop.length; i++) {
-      let dubl = false;
-      if (i < massKnop.length - 1) {
-        for (let j = i + 1; j < massKnop.length; j++) {
-          if (
-            massKnop[i].cmd === massKnop[j].cmd &&
-            massKnop[i].param === massKnop[j].param &&
-            massKnop[i].region === massKnop[j].region &&
-            massKnop[i].area === massKnop[j].area &&
-            massKnop[i].subarea === massKnop[j].subarea
-          ) {
-            dubl = true;
-          }
+  const RecordInSubaria = () => {
+    if (dataKnob[0].subarea === 0) {
+      massKnopTemp = [];
+      for (let i = 0; i < mass.length; i++) {
+        if (mass[i].areaNum === dataKnob[0].area) {
+          let dataKnobTemp: Knob[] = [
+            {
+              cmd: dataKnob[0].cmd,
+              param: dataKnob[0].param,
+              region: dataKnob[0].region,
+              area: mass[i].areaNum,
+              subarea: mass[i].subarea,
+            },
+          ];
+          massKnopTemp.push(dataKnobTemp[0]);
+          console.log('massKnopTempTr:', massKnopTemp)
         }
       }
-      if (!dubl) massTemp.push(massKnop[i]);
+      massKnop = massKnop.concat(massKnopTemp); // ОбЪединение массивов
+      for (let i = 0; i < massKnop.length; i++) {
+        // изменение param по всему кусту района
+        if (
+          massKnop[i].cmd === dataKnob[0].cmd &&
+          massKnop[i].region === dataKnob[0].region &&
+          massKnop[i].area === dataKnob[0].area
+        ) {
+          massKnop[i].param = dataKnob[0].param;
+        }
+      }
+      DelateDublRecords()   //удаление дубликатов
     }
-    massKnop = massTemp;
-  };
+  }
 
   const CheckFourKnops = () => {
     if (dataKnob[0].cmd !== 0) {
@@ -298,35 +331,22 @@ const ManagementLeftGrid = (props: {
           massKnop[i].area === dataKnob[0].area &&
           massKnop[i].subarea === dataKnob[0].subarea
         ) {
-          flagDubl = false;
+          flagDubl = false;         //console.log(i, 'Дубликат')
           massKnop[i].param = dataKnob[0].param;
-          //console.log(i, 'Дубликат');
         }
       }
-      if (flagDubl) {
-        //console.log('Запись');
+      if (flagDubl) { //console.log('Запись');
         massKnob[0].cmd = dataKnob[0].cmd;
         massKnob[0].param = dataKnob[0].param;
         massKnob[0].region = dataKnob[0].region;
         massKnob[0].area = dataKnob[0].area;
         massKnob[0].subarea = dataKnob[0].subarea;
-
         massKnop.push(massKnob[0]);
       }
       if (dataKnob[0].area === '0' && dataKnob[0].subarea === 0) {
         RecordInAria();
       } else {
-        //RecordInSubaria();
-        if (dataKnob[0].subarea === 0) {
-          console.log(
-            'прописать подрайоны района ',
-            dataKnob[0].area,
-            ' ',
-            dataKnob[0].cmd,
-            '-',
-            dataKnob[0].param,
-          );
-        }
+        RecordInSubaria();
       }
       // сортировка по cmd
       massKnop.sort((prev, next) => prev.cmd - next.cmd);
