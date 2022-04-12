@@ -78,7 +78,6 @@ export const styleSt06 = {
 };
 
 export const styleHeader03 = {
-  //border: 1,
   borderBottom: 1,
   borderColor: 'primary.main',
   backgroundColor: '#C0C0C0',

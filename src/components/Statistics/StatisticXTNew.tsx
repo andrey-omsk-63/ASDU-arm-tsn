@@ -170,32 +170,19 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
   colChanel = points[areaId].Statistics[0].Datas.length;
 
   const StatisticHeader = () => {
-    const KnobBat = (props: { num: string; xss: number }) => {
+    const KnobBat = (props: { num: string }) => {
       return (
-        // <Grid container key={Math.random()} justifyContent="center" alignItems="center">
-        // <Grid container key={Math.random()} direction="row" alignItems="center">
         <Grid
-          //item
           container
           key={Math.random()}
-          //xs={props.xss}
-          direction="row"
+          //direction="row"
           justifyContent="center"
-          alignItems="center"
-          //sx={styleHeader03}
-          sx={{ border: 1 }}>
-          {/* <Grid
-            container
-            sx={{ border: 1 }}
-            direction="row"
-            justifyContent="center"
-            alignItems="center"> */}
+          //alignItems="center"
+          sx={styleHeader03}>
           <Button sx={styleBatton} variant="contained" onClick={() => setValue(props.num)}>
             <b>{props.num}</b>
           </Button>
-          {/* </Grid> */}
         </Grid>
-        // </Grid>
       );
     };
 
@@ -215,8 +202,8 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
         let xss = 12 / leng;
         for (let i = 1; i <= leng; i++) {
           resStr.push(
-            <Grid item key={i} xs={xss} sx={{ border: 1 }}>
-              <KnobBat num={i.toString()} xss={xss} key={Math.random()} />
+            <Grid item key={i} xs={xss}>
+              <KnobBat num={i.toString()} key={Math.random()} />
             </Grid>,
           );
         }
