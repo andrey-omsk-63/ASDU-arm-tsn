@@ -190,9 +190,9 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
             direction="row"
             justifyContent="center"
             alignItems="center"> */}
-          <Button sx={styleBatton} variant="contained" onClick={() => setValue(props.num)}>
+          {/* <Button sx={styleBatton} variant="contained" onClick={() => setValue(props.num)}>
             <b>{props.num}</b>
-          </Button>
+          </Button> */}
           {/* </Grid> */}
         </Grid>
         // </Grid>
@@ -215,7 +215,7 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
         let xss = 12 / leng;
         for (let i = 1; i <= leng; i++) {
           resStr.push(
-            <Grid item key={i} xs={xss}>
+            <Grid item key={i} xs={xss} sx={{ border: 1 }}>
               <KnobBat num={i.toString()} xss={xss} key={Math.random()} />
             </Grid>,
           );
