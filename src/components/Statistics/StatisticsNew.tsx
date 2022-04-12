@@ -144,11 +144,7 @@ const StatisticsNew = (props: {
             </Tabs>
           </Box>
           <>
-            {pointsEtalon.length > 0 && (
-              <>
-                <StatisticXTNew open={isOpen} statist={pointsEtalon} areaid={value} />
-              </>
-            )}
+            {pointsEtalon.length > 0 && (<StatisticXTNew open={isOpen} statist={pointsEtalon} areaid={value} />)}
           </>
         </>
       )}

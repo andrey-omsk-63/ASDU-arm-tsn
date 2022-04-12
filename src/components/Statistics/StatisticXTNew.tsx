@@ -167,10 +167,13 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
   const StatisticHeader = () => {
     const KnobBat = (props: { num: string; xss: number }) => {
       return (
-        <Grid key={Math.random()} item xs={props.xss} sx={styleHeader03}>
-          <Button sx={styleBatton} variant="contained" onClick={() => setValue(props.num)}>
-            <b>{props.num}</b>
-          </Button>
+        // <Grid container key={Math.random()} justifyContent="center" alignItems="center">
+        <Grid container key={Math.random()} direction="row" alignItems="center">
+          <Grid key={Math.random()} item xs={props.xss} sx={styleHeader03}>
+            <Button sx={styleBatton} variant="contained" onClick={() => setValue(props.num)}>
+              <b>{props.num}</b>
+            </Button>
+          </Grid>
         </Grid>
       );
     };
