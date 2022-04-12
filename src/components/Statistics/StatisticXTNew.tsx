@@ -184,8 +184,9 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
             container
             sx={{ border: 1 }}
             //direction="row"
-            //justifyContent="center"
-            alignItems="center">
+            justifyContent="flex-end"
+            //alignItems="center"
+          >
             <Button sx={styleBatton} variant="contained" onClick={() => setValue(props.num)}>
               <b>{props.num}</b>
             </Button>
