@@ -175,19 +175,16 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
         // <Grid container key={Math.random()} justifyContent="center" alignItems="center">
         // <Grid container key={Math.random()} direction="row" alignItems="center">
         <Grid
-          //item
-          container
+          item
+          //container
           key={Math.random()}
           xs={props.xss}
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
           sx={styleHeader03}>
-          <Box>
+          <Grid container direction="row" justifyContent="center" alignItems="center">
             <Button sx={styleBatton} variant="contained" onClick={() => setValue(props.num)}>
               <b>{props.num}</b>
             </Button>
-          </Box>
+          </Grid>
         </Grid>
         // </Grid>
       );
