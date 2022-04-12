@@ -175,10 +175,10 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
         // <Grid container key={Math.random()} justifyContent="center" alignItems="center">
         // <Grid container key={Math.random()} direction="row" alignItems="center">
         <Grid
-          item
-          //container
+          //item
+          container
           key={Math.random()}
-          xs={props.xss}
+          //xs={props.xss}
           direction="row"
           justifyContent="center"
           alignItems="center"
@@ -190,9 +190,9 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
             direction="row"
             justifyContent="center"
             alignItems="center"> */}
-          {/* <Button sx={styleBatton} variant="contained" onClick={() => setValue(props.num)}>
+          <Button sx={styleBatton} variant="contained" onClick={() => setValue(props.num)}>
             <b>{props.num}</b>
-          </Button> */}
+          </Button>
           {/* </Grid> */}
         </Grid>
         // </Grid>
