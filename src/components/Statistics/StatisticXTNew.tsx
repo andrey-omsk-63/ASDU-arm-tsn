@@ -179,7 +179,9 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
           //container
           key={Math.random()}
           xs={props.xss}
+          direction="row"
           justifyContent="center"
+          alignItems="center"
           //sx={styleHeader03}
           sx={{ border: 1 }}>
           {/* <Grid
