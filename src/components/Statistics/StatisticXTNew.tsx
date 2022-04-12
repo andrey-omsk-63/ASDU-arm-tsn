@@ -60,16 +60,21 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
   let kakchestvo = ' ';
 
   if (isOpen) {
-    if (oldAreaid < 0) {   //начало работы (первый вход)
+    if (oldAreaid < 0) {
+      //начало работы (первый вход)
       massId.push({ id: areaId, canall: [], lbl: [], labels, datasets: [] });
       oldAreaid = areaId;
       canal = [];
     }
-    if (oldAreaid !== areaId) {  //сменился ID
+    if (oldAreaid !== areaId) {
+      //сменился ID
       let nomInMas = -1;
 
       for (let i = 0; i < massId.length; i++) {
-        if (massId[i].id === areaId) { nomInMas = i; break; }
+        if (massId[i].id === areaId) {
+          nomInMas = i;
+          break;
+        }
       }
       if (nomInMas < 0) {
         massId.push({ id: areaId, canall: [], lbl: [], labels, datasets: [] });
@@ -168,13 +173,19 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
     const KnobBat = (props: { num: string; xss: number }) => {
       return (
         // <Grid container key={Math.random()} justifyContent="center" alignItems="center">
-        <Grid container key={Math.random()} direction="row" alignItems="center">
-          <Grid key={Math.random()} item xs={props.xss} sx={styleHeader03}>
-            <Button sx={styleBatton} variant="contained" onClick={() => setValue(props.num)}>
-              <b>{props.num}</b>
-            </Button>
-          </Grid>
+        // <Grid container key={Math.random()} direction="row" alignItems="center">
+        <Grid
+          item
+          key={Math.random()}
+          xs={props.xss}
+          justifyContent="center"
+          alignItems="center"
+          sx={styleHeader03}>
+          <Button sx={styleBatton} variant="contained" onClick={() => setValue(props.num)}>
+            <b>{props.num}</b>
+          </Button>
         </Grid>
+        // </Grid>
       );
     };
 
@@ -281,9 +292,13 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
             kakchestvo += ', ';
           }
           resStr.push(
-            <Grid key={Math.random()} item xs={0.51} sx={matrix[numMas].Datas[i].st === 0 ? styleSt03 : styleSt04}>
+            <Grid
+              key={Math.random()}
+              item
+              xs={0.51}
+              sx={matrix[numMas].Datas[i].st === 0 ? styleSt03 : styleSt04}>
               {matrix[numMas].Datas[i].in}
-            </Grid>
+            </Grid>,
           );
         }
         //формирование конца строки
@@ -315,7 +330,7 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
     const step: number = points[areaId].Statistics[0].TLen;
     const typer = points[areaId].Statistics[0].Type;
     // const kolDatas = points[areaId].Statistics[0].Datas.length;
-    const kolDatas = colChanel
+    const kolDatas = colChanel;
     //colChanel = points[areaId].Statistics[0].Datas.length;
     let rows = 1440 / step;
     // let time = -step;
