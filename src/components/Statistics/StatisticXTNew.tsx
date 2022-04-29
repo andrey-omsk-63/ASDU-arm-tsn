@@ -257,7 +257,7 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
       } else {
         for (let i = 0; i < colChanel; i++) {
           if (matrix[numMas].Datas[i].st !== 0) {
-            kakchestvo += i;
+            kakchestvo += i + 1;
             kakchestvo += ', ';
           }
           resStr.push(
