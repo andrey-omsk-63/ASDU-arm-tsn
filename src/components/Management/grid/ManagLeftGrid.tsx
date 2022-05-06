@@ -208,7 +208,6 @@ const ManagementLeftGrid = (props: {
       <>
         <Stack direction="column">
           <Grid container>
-            {/* <Grid item xs={6} sx={styleMG03}> */}
             <Grid item xs sx={{ p: 0.1, border: 0 }}>
               <Button sx={styleButt02} onClick={handleClickGl}>
                 <b>{points[0].region.nameRegion}</b>
@@ -350,7 +349,7 @@ const ManagementLeftGrid = (props: {
       }
       // сортировка по cmd
       massKnop.sort((prev, next) => prev.cmd - next.cmd);
-      console.log('massKnopGl:', massKnop);
+      //console.log('massKnopGl:', massKnop);
     }
   };
 
