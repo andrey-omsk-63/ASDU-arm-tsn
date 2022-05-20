@@ -167,11 +167,12 @@ const App = () => {
       //console.log('пришло:', data);
       switch (allData.type) {
         case 'getDevices':
+          console.log('data_getDevices:', data);
           setPointsTfl(data.tflight ?? []);
           setIsOpenDev(true);
           break;
         case 'xctrlInfo':
-          //console.log('data_xctrlInfo:', data);
+          console.log('data_xctrlInfo:', data);
           setPointsXctrl(data.xctrlInfo ?? []);
           if (regionGlob === 0) setPointsReg(data.regionInfo ?? []);
           setIsOpenInf(true);

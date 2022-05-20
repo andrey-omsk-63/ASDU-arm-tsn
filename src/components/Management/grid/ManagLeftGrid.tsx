@@ -124,8 +124,13 @@ const ManagementLeftGrid = (props: {
       subarea: points[0].subarea,
     };
     let j = 0;
+    console.log('points01:', points)
+    
     for (let i = 1; i < points.length; i++) {
-      if (mass[j].area !== points[i].area && mass[j].subarea !== points[i].subarea) {
+      console.log('mass[j].areaNum:', j,mass[j].areaNum)
+      console.log('points[i].area.num:', i,points[i].area.num)
+      if (mass[j].areaNum !== points[i].area.num && mass[j].subarea !== points[i].subarea) {
+        
         j++;
         masRab[j] = points[i].area.num;
         mass[j] = {
@@ -135,6 +140,9 @@ const ManagementLeftGrid = (props: {
         };
       }
     }
+    console.log('masRab:', masRab)
+    console.log('mass:', mass)
+
     //убираем дубликаты
     masAreaNum = masRab.filter((element: any, index: any) => {
       return masRab.indexOf(element) === index;
@@ -149,6 +157,8 @@ const ManagementLeftGrid = (props: {
       };
     }
   }
+
+  console.log('masAreaNum1:', masAreaNum)
 
   const SpisAreaMLG = (props: { nom: string }) => {
     let masSpis: any = [];
