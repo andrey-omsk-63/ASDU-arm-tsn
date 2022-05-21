@@ -246,7 +246,7 @@ const ManagementRightGrid = (props: {
   const HeaderMRG03 = () => {
     const StrokaGridHeader = (xss: number, write: string) => {
       return (
-        <Grid item key={Math.random()} xs={xss} sx={styleMRG03}>
+        <Grid item xs={xss} sx={styleMRG03}>
           <b>{write}</b>
         </Grid>
       );
@@ -327,21 +327,21 @@ const ManagementRightGrid = (props: {
           soobXT = soobXT + 'отсутствует';
         }
         resStr.push(
-          <Grid item key={Math.random()} container>
-            <Grid item key={Math.random()} xs={0.3} sx={styleMRG02}>
+          <Grid item key={i} container>
+            <Grid item xs={0.3} sx={styleMRG02}>
               {i + 1}
             </Grid>
-            <Grid item key={Math.random()} xs={0.7} sx={styleMRG02Center}>
+            <Grid item xs={0.7} sx={styleMRG02Center}>
               {mass[i].areaNum}
             </Grid>
-            <Grid item key={Math.random()} xs={4.8} sx={styleMRG02}>
+            <Grid item xs={4.8} sx={styleMRG02}>
               Всего ДК&nbsp;{mass[i].koldk}&nbsp;на связи&nbsp;{prosentSv.toFixed(2)}%
               подчинены&nbsp;{prosentPch.toFixed(2)}%
             </Grid>
-            <Grid item key={Math.random()} xs={2.5} sx={styleMRG02}>
+            <Grid item xs={2.5} sx={styleMRG02}>
               {soobBP}
             </Grid>
-            <Grid item key={Math.random()} xs={3.7} sx={styleMRG01}>
+            <Grid item xs={3.7} sx={styleMRG01}>
               {soobXT}
             </Grid>
           </Grid>,
@@ -370,21 +370,21 @@ const ManagementRightGrid = (props: {
           soobXT = soobXT + 'отсутствует';
         }
         resStr.push(
-          <Grid item key={Math.random()} container>
-            <Grid item key={Math.random()} xs={0.3} sx={styleMRG02}>
+          <Grid item key={i} container>
+            <Grid item xs={0.3} sx={styleMRG02}>
               {i + 1}
             </Grid>
-            <Grid item key={Math.random()} xs={1.1} sx={styleMRG02Center}>
+            <Grid item xs={1.1} sx={styleMRG02Center}>
               {mass[i].areaNum}:{mass[i].subareaNum}
             </Grid>
-            <Grid item key={Math.random()} xs={4.5} sx={styleMRG02}>
+            <Grid item xs={4.5} sx={styleMRG02}>
               Всего ДК&nbsp;{mass[i].koldk}&nbsp;на связи&nbsp;{mass[i].sost}
               &nbsp;подчинены&nbsp;{mass[i].podch}
             </Grid>
-            <Grid item key={Math.random()} xs={2.4} sx={styleMRG02}>
+            <Grid item xs={2.4} sx={styleMRG02}>
               {soobBP}
             </Grid>
-            <Grid item key={Math.random()} xs={3.7} sx={styleMRG01}>
+            <Grid item xs={3.7} sx={styleMRG01}>
               {soobXT}
             </Grid>
           </Grid>,
@@ -397,35 +397,35 @@ const ManagementRightGrid = (props: {
       let resStr = [];
       for (let i = 0; i < points.length; i++) {
         resStr.push(
-          <Grid item key={Math.random()} container>
-            <Grid item key={Math.random()} xs={0.3} sx={styleMRG02Center}>
+          <Grid item key={i} container>
+            <Grid item xs={0.3} sx={styleMRG02Center}>
               {i + 1}
             </Grid>
-            <Grid item key={Math.random()} xs={1.1} sx={styleMRG02Center}>
+            <Grid item xs={1.1} sx={styleMRG02Center}>
               {points[i].area.num}:{points[i].subarea}
             </Grid>
-            <Grid item key={Math.random()} xs={0.4} sx={styleMRG02Center}>
+            <Grid item xs={0.4} sx={styleMRG02Center}>
               {points[i].ID}
             </Grid>
-            <Grid item key={Math.random()} xs={4} sx={styleMRG02}>
+            <Grid item xs={4} sx={styleMRG02}>
               {points[i].description}
             </Grid>
-            <Grid item key={Math.random()} xs={1.5} sx={styleMRG02Center}>
+            <Grid item xs={1.5} sx={styleMRG02Center}>
               {points[i].idevice}
             </Grid>
-            <Grid item key={Math.random()} xs={2} sx={styleMRG02}>
+            <Grid item xs={2} sx={styleMRG02}>
               {points[i].tlsost.description}
             </Grid>
-            <Grid item key={Math.random()} xs={0.5} sx={styleMRG02Center}>
+            <Grid item xs={0.5} sx={styleMRG02Center}>
               {points[i].pk}
             </Grid>
-            <Grid item key={Math.random()} xs={0.5} sx={styleMRG02Center}>
+            <Grid itemProp='' xs={0.5} sx={styleMRG02Center}>
               {points[i].ck}
             </Grid>
-            <Grid item key={Math.random()} xs={0.5} sx={styleMRG02Center}>
+            <Grid item xs={0.5} sx={styleMRG02Center}>
               {points[i].nk}
             </Grid>
-            <Grid item key={Math.random()} xs={1.2} sx={styleMRG01}>
+            <Grid item xs={1.2} sx={styleMRG01}>
               {points[i].techModeString}
             </Grid>
           </Grid>,

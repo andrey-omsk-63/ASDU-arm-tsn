@@ -125,14 +125,9 @@ const ManagementLeftGrid = (props: {
     };
     let j = 0;
 
-    console.log('points01:', points);
-    console.log('mass:', mass);
-
     for (let i = 1; i < points.length; i++) {
-      console.log('mass[j].areaNum:', j, mass[j].areaNum);
-      console.log('points[i].area.num:', i, points[i].area.num);
-
-      if (mass[j].areaNum !== points[i].area.num && mass[j].subarea !== points[i].subarea) {
+ 
+      if (mass[j].areaNum !== points[i].area.num || mass[j].subarea !== points[i].subarea) {
         j++;
         masRab[j] = points[i].area.num;
         mass[j] = {
@@ -142,9 +137,6 @@ const ManagementLeftGrid = (props: {
         };
       }
     }
-
-    console.log('masRab:', masRab);
-    console.log('mass:', mass);
 
     //убираем дубликаты
     masAreaNum = masRab.filter((element: any, index: any) => {
@@ -161,8 +153,6 @@ const ManagementLeftGrid = (props: {
     }
   }
 
-  console.log('masAreaNum1:', masAreaNum);
-
   const SpisAreaMLG = (props: { nom: string }) => {
     let masSpis: any = [];
     masSpis = mass.filter((mass: { areaNum: string }) => mass.areaNum === props.nom);
@@ -172,11 +162,10 @@ const ManagementLeftGrid = (props: {
 
       for (let i = 0; i < masSpis.length; i++) {
         resStr.push(
-          <Grid container key={Math.random()}>
-            <Grid key={Math.random()} item xs={0.5} sx={styleMG03}></Grid>
-            <Grid key={Math.random()} item xs sx={styleMG03}>
+          <Grid container key={i}>
+            <Grid item xs={0.5} sx={styleMG03}></Grid>
+            <Grid item xs sx={styleMG03}>
               <Button
-                key={i}
                 sx={styleButt01}
                 //variant="contained"
                 onClick={() => handleClick(props.nom, masSpis[i].subarea)}>
