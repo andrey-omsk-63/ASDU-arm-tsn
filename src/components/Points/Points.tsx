@@ -29,9 +29,7 @@ const Points = (props: { open: boolean; ws: WebSocket; xctrll: XctrlInfo[]; regi
   let pointsGl = props.xctrll;
   let points = pointsGl.filter((pointsGl) => pointsGl.region === Number(reGion));
   const [value, setValue] = React.useState(tekValue);
-
-  // console.log('points:', points);
-
+ 
   React.useEffect(() => {
     const handleSend = () => {
       if (props.ws !== null) {
@@ -51,7 +49,6 @@ const Points = (props: { open: boolean; ws: WebSocket; xctrll: XctrlInfo[]; regi
   if (isOpen && flagEtalon) {
     pointsEtalon = points;
     flagEtalon = false;
-    //points = [];
   }
 
   if (isOpen && !flagEtalon) {
@@ -106,18 +103,6 @@ const Points = (props: { open: boolean; ws: WebSocket; xctrll: XctrlInfo[]; regi
     return resSps;
   };
 
-  // const [points, setPoints] = React.useState<Array<XctrlInfo>>([]);
-  // const [isOpen, setIsOpen] = React.useState(false);
-  // const ipAdress: string = 'http://localhost:3000/otladkaGlob.json';
-  // React.useEffect(() => {
-  //   axios.get(ipAdress).then(({ data }) => {
-  //     //console.log('ggg', data.data.xctrlInfo);
-  //     setPoints(data.data.xctrlInfo);
-  //     setIsOpen(true);
-  //   });
-  // }, [ipAdress]);
-  //console.log('pppp', points, isOpen);
-
   return (
     <Box sx={{ border: 0, marginTop: -2.8, marginLeft: -3, marginRight: -5.5 }}>
       <Box
@@ -141,7 +126,7 @@ const Points = (props: { open: boolean; ws: WebSocket; xctrll: XctrlInfo[]; regi
       <>
         {pointsEtalon.length > 0 && (
           <>
-            <PointsMenuLevel1 open={isOpen} xctrll={points} xtt={value} />
+            <PointsMenuLevel1 open={isOpen} xctrll={points} xtt={points[tekValue].area-1} />
           </>
         )}
       </>

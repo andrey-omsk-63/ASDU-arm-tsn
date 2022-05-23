@@ -143,7 +143,7 @@ const ManagementRightGrid = (props: {
               isPk: false,
               isCk: false,
               isNk: false,
-              isXT: true,
+              isXT: false,
               releaseXT: false,
             };
           } else {
@@ -155,23 +155,47 @@ const ManagementRightGrid = (props: {
 
       let masArea: Tflight[];
       let flagXtArea = true;
+      //console.log('MASXT:', props.masxt)
+      //console.log('MASS:', mass)
       for (let k = 0; k < mass.length; k++) {
         masArea = points.filter((points) => points.area.num === mass[k].areaNum);
         flagXtArea = true;
+        let flEstXt = false;
+        //console.log('masArea:', masArea)
         for (let i = 0; i < masArea.length; i++) {
           for (let j = 0; j < props.masxt.length; j++) {
-            if (
-              parseInt(masArea[i].area.num) === props.masxt[j].areaXT &&
-              masArea[i].subarea === props.masxt[j].subareaXT
-            ) {
-              mass[k].isXT = true;
-            } else {
-              mass[k].isXT = false;
-              flagXtArea = false;
+            // console.log('parseInt(masArea[i].area.num:', parseInt(masArea[i].area.num))
+            // console.log('props.masxt[j].areaXT:', props.masxt[j].areaXT)
+            // console.log('masArea[i].subarea:', masArea[i].subarea)
+            // console.log('props.masxt[j].subareaXT:', props.masxt[j].subareaXT)
+            if (parseInt(masArea[i].area.num) === props.masxt[j].areaXT) {
+              flEstXt = true;
+              if (masArea[i].subarea === props.masxt[j].subareaXT) {
+                mass[k].isXT = true;
+                //console.log('совпал:', k, i, j)
+              }
+              else {
+                mass[k].isXT = false;
+                flagXtArea = false;
+                //console.log('не совпал:', k, i, j)
+              }
             }
+            // if (
+            //   parseInt(masArea[i].area.num) === props.masxt[j].areaXT &&
+            //   masArea[i].subarea === props.masxt[j].subareaXT
+            // ) {
+            //   mass[k].isXT = true;
+            //   console.log('совпал:', k, i, j)
+            // } 
+            // else {
+            //   mass[k].isXT = false;
+            //   flagXtArea = false;
+            //   console.log('не совпал:', k, i, j)
+            // }
           }
         }
-        mass[k].isXT = flagXtArea;
+        if (flEstXt) mass[k].isXT = flagXtArea;
+        //console.log('mass[k].isXT:', mass[k].isXT)
       }
       MakeMassKnob()
 
@@ -311,6 +335,7 @@ const ManagementRightGrid = (props: {
   const StrokaMRG03 = () => {
 
     const StrokaSpsMode1 = () => {
+      //console.log('massMode1:', mass)
       let resStr = [];
       for (let i = 0; i < mass.length; i++) {
         let prosentSv = (100 * mass[i].sost) / mass[i].koldk;
@@ -326,6 +351,9 @@ const ManagementRightGrid = (props: {
         } else {
           soobXT = soobXT + 'отсутствует';
         }
+
+        //console.log('i=', i, soobXT)
+
         resStr.push(
           <Grid item key={i} container>
             <Grid item xs={0.3} sx={styleMRG02}>
@@ -352,6 +380,7 @@ const ManagementRightGrid = (props: {
 
     const StrokaSpsMode2 = () => {
       let resStr = [];
+      console.log('massMode2:', mass)
       for (let i = 0; i < mass.length; i++) {
         let soobBP = 'Назначен';
         let soobXT = 'ХТ для данного подрайона ';
@@ -444,6 +473,7 @@ const ManagementRightGrid = (props: {
   };
 
   const StrokaInfo = () => {
+    //console.log('props.masxt:', props.masxt)
     let sumDk = points.length;
     let prosSv = '';
     let prosPch = '';
@@ -451,7 +481,7 @@ const ManagementRightGrid = (props: {
     if (props.mode !== 3) {
       prosSv = ((100 * sostGl) / sumDk).toFixed(2).toString() + '%';
       prosPch = ((100 * podchGl) / sumDk).toFixed(2).toString() + '%';
-      let proXtWell = 'назначен/';
+      let proXtWell = 'назначен';
       for (let k = 0; k < mass.length; k++) {
         if (!mass[k].isXT) proXtWell = 'отсутствует';
       }
@@ -491,7 +521,7 @@ const ManagementRightGrid = (props: {
             break;
         }
       }
-      
+
       if (soobBP === ' ПК0 CК0 HК0') soobBP = ' BP(ПК0+CК0+HК0)';
       if (soobBP === '') soobBP = ' BP';
     }

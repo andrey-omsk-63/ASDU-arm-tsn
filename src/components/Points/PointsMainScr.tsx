@@ -73,7 +73,6 @@ const PointsMainScr = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number 
   }
 
   return (
-    // <Box sx={{ border: 1, marginTop: -3, marginLeft: -3, marginRight: 3 }}>
     <Box sx={{ border: 0, marginTop: -3, marginLeft: -3, marginRight: -3 }}>
       <Grid container item sx={{ margin: 0, border: 0 }}>
         <Grid item xs>

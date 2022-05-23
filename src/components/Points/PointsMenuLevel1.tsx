@@ -10,11 +10,15 @@ import PointsMainScr from './PointsMainScr';
 import PointsMenuLevel2 from './PointsMenuLevel2';
 
 import { XctrlInfo } from '../../interfaceGl.d';
+import { PinDropSharp } from '@mui/icons-material';
 
 const PointsMenuLevel1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number }) => {
   const isOpen = props.open;
   const xtProps = props.xtt;
   const points = props.xctrll[xtProps];
+
+  console.log('props.xtt:', props.xtt)
+  console.log('props.xctrll:', props.xctrll)
 
   const stylePXt1 = {
     fontSize: 13.9,
@@ -71,10 +75,13 @@ const PointsMenuLevel1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: numb
         maxHeight: '16px',
         minHeight: '16px',
         backgroundColor: 'fff',
-        top: '0.5%',
-        left: '92%',
+        // top: '0.5%',
+        // left: '92%',
         fontSize: 15,
         color: 'black',
+        top: '0%',
+        left: 'auto',
+        right: '-1.2%',
       };
 
       const SpisPerekr = () => {
@@ -89,9 +96,6 @@ const PointsMenuLevel1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: numb
           );
         }
         resStr.push(
-          // <Button key={0} sx={stylePXt1} variant="contained" onClick={() => handleClose(777)}>
-          //   <b>Выход</b>
-          // </Button>,
           <Button key={777} sx={styleModalEnd} onClick={() => handleClose(777)}>
             <b>&#10006;</b>
           </Button>,
