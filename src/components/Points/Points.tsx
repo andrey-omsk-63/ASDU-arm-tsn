@@ -62,7 +62,6 @@ const Points = (props: { open: boolean; ws: WebSocket; xctrll: XctrlInfo[]; regi
           points[i].region === pointsEtalon[j].region &&
           points[i].area === pointsEtalon[j].area
         ) {
-          //console.log('Points совподение записей i=', i, 'j=', j);
           newRecord = false;
           pointsEtalon[j] = points[i];
         }
@@ -126,7 +125,7 @@ const Points = (props: { open: boolean; ws: WebSocket; xctrll: XctrlInfo[]; regi
       <>
         {pointsEtalon.length > 0 && (
           <>
-            <PointsMenuLevel1 open={isOpen} xctrll={points} xtt={points[tekValue].area-1} />
+            <PointsMenuLevel1 open={isOpen} xctrll={points} xtt={tekValue} />
           </>
         )}
       </>

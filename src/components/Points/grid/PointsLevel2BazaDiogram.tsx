@@ -55,8 +55,6 @@ const PointsLevel2BazaDiogram = (props: { xctrll: XctrlInfo[]; xtt: number; cros
   const axisVertical = vertical * 1;
   const steepVertical = 84.4 / axisVertical;
 
-  console.log('dlMas:', dlMas)
-
   let matrix: string[][] = [[]];
 
   let scale: number = 5;

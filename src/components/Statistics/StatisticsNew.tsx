@@ -23,7 +23,6 @@ const StatisticsNew = (props: {
 
   let isOpen = props.open;
   let points = props.points;
-  //let points: Statistic[] = [];
   let reGion = props.region;
 
   React.useEffect(() => {
@@ -41,20 +40,6 @@ const StatisticsNew = (props: {
     };
     handleSend();
   }, [props.ws, reGion]);
-
-  //const [points, setPoints] = React.useState<Array<Statistic>>([]);
-  //const [points, setPoints] = React.useState<Data>({} as Data);
-  // const [isOpen, setIsOpen] = React.useState(false);
-  // const ipAdress: string = 'http://localhost:3000/statistics.json';
-
-  // React.useEffect(() => {
-  //   axios.get(ipAdress).then(({ data }) => {
-  //     setPoints(data.data.statistics);
-  //     setIsOpen(true);
-  //   });
-  // }, [ipAdress]);
-
-  //if (isOpen) console.log('!!!', points);
 
   if (isOpen && flagEtalon) {
     pointsEtalon = points;

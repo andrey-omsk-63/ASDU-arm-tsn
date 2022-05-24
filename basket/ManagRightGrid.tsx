@@ -84,19 +84,9 @@ const ManagementRightGrid = (props: {
       mass[j].sost++;
       sostGl++;
     }
-    switch (points[i].techMode) {
-      case 2:
-        if (!points[i].StatusCommandDU.IsCK &&    // назначен ВР
-          !points[i].StatusCommandDU.IsPK &&
-          !points[i].StatusCommandDU.IsNK
-        ) {
-          mass[j].podch++;
-          podchGl++;
-        }
-        break;
-      case 9:
-        mass[j].podch++;
-        podchGl++;
+    if (points[i].techMode === 9) {
+      mass[j].podch++;
+      podchGl++;
     }
     if (points[i].StatusCommandDU.IsPK) mass[j].isPk = true;
     if (points[i].StatusCommandDU.IsCK) mass[j].isCK = true;
@@ -125,7 +115,6 @@ const ManagementRightGrid = (props: {
     }
   }
 
-  //=================================================================================
   switch (props.mode) {
     case 1:
       points = props.tflightt;
@@ -157,36 +146,56 @@ const ManagementRightGrid = (props: {
               isXT: false,
               releaseXT: false,
             };
-            CounterMode(i, j);
           } else {
             mass[j].koldk++;
-            //CounterMode(i, j);
+            CounterMode(i, j);
           }
         }
-
       }
 
       let masArea: Tflight[];
       let flagXtArea = true;
+      //console.log('MASXT:', props.masxt)
+      //console.log('MASS:', mass)
       for (let k = 0; k < mass.length; k++) {
         masArea = points.filter((points) => points.area.num === mass[k].areaNum);
         flagXtArea = true;
         let flEstXt = false;
+        //console.log('masArea:', masArea)
         for (let i = 0; i < masArea.length; i++) {
           for (let j = 0; j < props.masxt.length; j++) {
+            // console.log('parseInt(masArea[i].area.num:', parseInt(masArea[i].area.num))
+            // console.log('props.masxt[j].areaXT:', props.masxt[j].areaXT)
+            // console.log('masArea[i].subarea:', masArea[i].subarea)
+            // console.log('props.masxt[j].subareaXT:', props.masxt[j].subareaXT)
             if (parseInt(masArea[i].area.num) === props.masxt[j].areaXT) {
               flEstXt = true;
               if (masArea[i].subarea === props.masxt[j].subareaXT) {
                 mass[k].isXT = true;
+                //console.log('совпал:', k, i, j)
               }
               else {
                 mass[k].isXT = false;
                 flagXtArea = false;
+                //console.log('не совпал:', k, i, j)
               }
             }
+            // if (
+            //   parseInt(masArea[i].area.num) === props.masxt[j].areaXT &&
+            //   masArea[i].subarea === props.masxt[j].subareaXT
+            // ) {
+            //   mass[k].isXT = true;
+            //   console.log('совпал:', k, i, j)
+            // } 
+            // else {
+            //   mass[k].isXT = false;
+            //   flagXtArea = false;
+            //   console.log('не совпал:', k, i, j)
+            // }
           }
         }
         if (flEstXt) mass[k].isXT = flagXtArea;
+        //console.log('mass[k].isXT:', mass[k].isXT)
       }
       MakeMassKnob()
 
@@ -225,10 +234,9 @@ const ManagementRightGrid = (props: {
               isXT: false,
               releaseXT: false,
             };
-            CounterMode(i, j);
           } else {
             mass[j].koldk++;
-            //CounterMode(i, j);
+            CounterMode(i, j);
           }
         }
       }
@@ -254,23 +262,10 @@ const ManagementRightGrid = (props: {
       points = masSpis;
       for (let i = 0; i < points.length; i++) {
         if (points[i].scon) sostGl++;
-        switch (points[i].techMode) {
-          case 2:
-            if (!points[i].StatusCommandDU.IsCK &&    // назначен ВР
-              !points[i].StatusCommandDU.IsPK &&
-              !points[i].StatusCommandDU.IsNK
-            ) {
-              podchGl++;
-            }
-            break;
-          case 9:
-            podchGl++;
-        }
-        //if (points[i].techMode === 9) podchGl++;
+        if (points[i].techMode === 9) podchGl++;
       }
       MakeMassKnob()
   }
-  //=================================================================================
 
   const HeaderMRG03 = () => {
     const StrokaGridHeader = (xss: number, write: string) => {
@@ -340,8 +335,8 @@ const ManagementRightGrid = (props: {
   const StrokaMRG03 = () => {
 
     const StrokaSpsMode1 = () => {
+      //console.log('massMode1:', mass)
       let resStr = [];
-      
       for (let i = 0; i < mass.length; i++) {
         let prosentSv = (100 * mass[i].sost) / mass[i].koldk;
         let prosentPch = (100 * mass[i].podch) / mass[i].koldk;
@@ -356,6 +351,9 @@ const ManagementRightGrid = (props: {
         } else {
           soobXT = soobXT + 'отсутствует';
         }
+
+        //console.log('i=', i, soobXT)
+
         resStr.push(
           <Grid item key={i} container>
             <Grid item xs={0.3} sx={styleMRG02}>
@@ -382,6 +380,7 @@ const ManagementRightGrid = (props: {
 
     const StrokaSpsMode2 = () => {
       let resStr = [];
+      console.log('massMode2:', mass)
       for (let i = 0; i < mass.length; i++) {
         let soobBP = 'Назначен';
         let soobXT = 'ХТ для данного подрайона ';

@@ -24,7 +24,8 @@ const Management = (props: {
 
   let pointsGl = props.xctrll;
   let pointsXctrll = pointsGl.filter((pointsGl) => pointsGl.region === Number(reGion));
-  // console.log('pointsGl:', pointsGl)
+
+  console.log('Points:', points)
   // console.log('pointsXctrll:', pointsXctrll)
 
   if (!isOpen) {
@@ -66,7 +67,6 @@ const Management = (props: {
           points[i].area.num === pointsEtalon[j].area.num &&
           points[i].subarea === pointsEtalon[j].subarea
         ) {
-          //console.log('MNG совподение записей i=', i, 'j=', j);
           newRecord = false;
           pointsEtalon[j] = points[i];
         }

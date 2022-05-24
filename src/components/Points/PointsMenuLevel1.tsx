@@ -9,8 +9,7 @@ import Modal from '@mui/material/Modal';
 import PointsMainScr from './PointsMainScr';
 import PointsMenuLevel2 from './PointsMenuLevel2';
 
-import { XctrlInfo } from '../../interfaceGl.d';
-import { PinDropSharp } from '@mui/icons-material';
+import { XctrlInfo } from '../../interfaceGl.d';//import { PinDropSharp } from '@mui/icons-material';
 
 const PointsMenuLevel1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number }) => {
   const isOpen = props.open;
@@ -47,6 +46,8 @@ const PointsMenuLevel1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: numb
     };
 
     let dlStrMenu = 0;
+
+    console.log('Points.Xctrls', points.xctrls)
 
     if (isOpen && points.xctrls.length !== 0) {
       for (let i = 0; i < points.xctrls.length; i++) {
@@ -90,7 +91,7 @@ const PointsMenuLevel1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: numb
           resStr.push(
             <Button key={i} sx={stylePXt1} variant="contained" onClick={() => handleClose(i)}>
               <b>
-                XT:{xtProps + 1}:1:&nbsp;&nbsp;{points.xctrls[i].name}
+                XT:{points.area}:1:&nbsp;&nbsp;{points.xctrls[i].name}
               </b>
             </Button>,
           );
@@ -106,7 +107,7 @@ const PointsMenuLevel1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: numb
       return (
         <div>
           <Button sx={stylePXt1} variant="contained" onClick={handleOpen}>
-            <b>XT:{xtProps + 1}:1 &nbsp; Перечень перекрёстков</b>
+            <b>XT:{points.area}:1 &nbsp; Перечень перекрёстков</b>
           </Button>
           <Modal open={open}>
             <Box sx={stylePK}>

@@ -69,19 +69,21 @@ const PointsMainScrGrid1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: nu
     if (points.results !== null) {
       if (Object.keys(points.results).length > 0) {
         for (let i = 0; i < points.results.result.length; i++) {
+          let kakchectvo = '';
+          if (!points.results.result[i].Good) kakchectvo = 'н/д';
           resStr.push(
-            <Grid key={Math.random()} container xs={12} item>
-              <Grid key={Math.random()} xs={2} item sx={styleXTG03}>
+            <Grid key={i} container xs={12} item>
+              <Grid xs={2} item sx={styleXTG03}>
                 {TimeStr(points.results.result[i].Time)}
               </Grid>
-              <Grid key={Math.random()} xs={3} item sx={styleXTG03}>
+              <Grid xs={3} item sx={styleXTG03}>
                 {points.results.result[i].Value[0]}
               </Grid>
-              <Grid key={Math.random()} xs={3} item sx={styleXTG03}>
+              <Grid xs={3} item sx={styleXTG03}>
                 {points.results.result[i].Value[1]}
               </Grid>
-              <Grid key={Math.random()} xs={4} item sx={styleXTG03}>
-                н/д
+              <Grid xs={4} item sx={styleXTG03}>
+                {kakchectvo}
               </Grid>
             </Grid>,
           );

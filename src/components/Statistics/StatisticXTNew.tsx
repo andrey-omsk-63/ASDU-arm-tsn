@@ -51,6 +51,8 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
   const points = props.statist;
   const areaId = props.areaid;
 
+  console.log('Stat_points:', points)
+
   let colChanel = 0;
   const [value, setValue] = React.useState('0');
 
@@ -130,12 +132,21 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
         massId[numIdInMas].datasets = [];
         canal = [];
       } else {
-        for (let i = 0; i < matrix.length; i++) {
-          let int = 0;
-          //console.log('1!!!', i, val, matrix[i].Datas);
+        let int = 0;
+        if (matrix[matrix.length - 1].Datas.length !== 0) int = matrix[matrix.length - 1].Datas[val].in;
+        datas.push(int);
+
+        for (let i = 0; i < matrix.length - 1; i++) {
+          int = 0;
           if (matrix[i].Datas.length !== 0) int = matrix[i].Datas[val].in;
           datas.push(int);
         }
+        // for (let i = 0; i < matrix.length; i++) {
+        //   let int = 0;
+        //   //console.log('1!!!', i, val, matrix[i].Datas);
+        //   if (matrix[i].Datas.length !== 0) int = matrix[i].Datas[val].in;
+        //   datas.push(int);
+        // }
         datasetsMask.label += value;
         datasetsMask.data = datas;
         datasetsMask.borderColor = colorsGraf[val];
