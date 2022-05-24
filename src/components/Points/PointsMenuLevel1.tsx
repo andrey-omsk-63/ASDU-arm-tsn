@@ -9,15 +9,15 @@ import Modal from '@mui/material/Modal';
 import PointsMainScr from './PointsMainScr';
 import PointsMenuLevel2 from './PointsMenuLevel2';
 
-import { XctrlInfo } from '../../interfaceGl.d';//import { PinDropSharp } from '@mui/icons-material';
+import { XctrlInfo } from '../../interfaceGl.d'; //import { PinDropSharp } from '@mui/icons-material';
 
 const PointsMenuLevel1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number }) => {
   const isOpen = props.open;
   const xtProps = props.xtt;
   const points = props.xctrll[xtProps];
 
-  console.log('props.xtt:', props.xtt)
-  console.log('props.xctrll:', props.xctrll)
+  console.log('props.xtt:', props.xtt);
+  console.log('props.xctrll:', props.xctrll);
 
   const stylePXt1 = {
     fontSize: 13.9,
@@ -47,7 +47,7 @@ const PointsMenuLevel1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: numb
 
     let dlStrMenu = 0;
 
-    console.log('Points.Xctrls', points.xctrls)
+    console.log('Points.Xctrls', points.xctrls);
 
     if (isOpen && points.xctrls.length !== 0) {
       for (let i = 0; i < points.xctrls.length; i++) {
@@ -64,6 +64,7 @@ const PointsMenuLevel1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: numb
         width: (dlStrMenu + 8) * 10,
         bgcolor: 'background.paper',
         border: '2px solid #000',
+        borderColor: 'primary.main',
         borderRadius: 2,
         boxShadow: 24,
         p: 3,
@@ -76,8 +77,6 @@ const PointsMenuLevel1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: numb
         maxHeight: '16px',
         minHeight: '16px',
         backgroundColor: 'fff',
-        // top: '0.5%',
-        // left: '92%',
         fontSize: 15,
         color: 'black',
         top: '0%',
