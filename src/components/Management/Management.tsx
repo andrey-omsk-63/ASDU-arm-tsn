@@ -7,7 +7,8 @@ import ManagementLeftGrid from './grid/ManagLeftGrid';
 import { Tflight } from '../../interfaceMNG.d';
 import { XctrlInfo } from '../../interfaceGl.d';
 
-let pointsEtalon: Tflight[];
+let pointsEtalon: Tflight[] = [];
+let pointsXctrlEtalon: XctrlInfo[] = [];
 let flagEtalon = true;
 
 const Management = (props: {
@@ -25,13 +26,10 @@ const Management = (props: {
   let pointsGl = props.xctrll;
   let pointsXctrll = pointsGl.filter((pointsGl) => pointsGl.region === Number(reGion));
 
-  console.log('Points:', points)
-  // console.log('pointsXctrll:', pointsXctrll)
+  // console.log('ManagementPoints:', points)
+  // console.log('ManagementPointsXctrll:', pointsXctrll)
 
-  if (!isOpen) {
-    pointsEtalon = [];
-    flagEtalon = true;
-  }
+  if (isOpen) pointsXctrlEtalon = pointsXctrll; // замена проверки обновления Xctrl - проверка теперь в App
 
   React.useEffect(() => {
     const handleSendOpen = () => {
@@ -53,8 +51,9 @@ const Management = (props: {
     pointsEtalon = points;
     flagEtalon = false;
     points = [];
+    pointsXctrlEtalon = pointsXctrll;
   }
-
+  // разноска обновлений Tflight
   if (isOpen && !flagEtalon) {
     pointsAdd = [];
     let newRecord = true;
@@ -81,6 +80,31 @@ const Management = (props: {
         pointsEtalon.push(pointsAdd[i]);
       }
     }
+    // разноска обновлений Xctrl
+    // let pointsAddd = [];
+    // newRecord = true;
+    // for (let i = 0; i < pointsXctrll.length; i++) {
+    //   newRecord = true;
+    //   for (let j = 0; j < pointsXctrlEtalon.length; j++) {
+    //     if (
+    //       pointsXctrll[i].subarea === pointsXctrlEtalon[j].subarea &&
+    //       pointsXctrll[i].region === pointsXctrlEtalon[j].region &&
+    //       pointsXctrll[i].area === pointsXctrlEtalon[j].area
+    //     ) {
+    //       newRecord = false;
+    //       pointsXctrlEtalon[j] = pointsXctrll[i];
+    //     }
+    //   }
+    //   if (newRecord) {
+    //     console.log('MNG новая запись i=', i);
+    //     pointsAddd.push(pointsXctrll[i]);
+    //   }
+    // }
+    // if (pointsAdd.length > 0) {
+    //   for (let i = 0; i < pointsAdd.length; i++) {
+    //     pointsXctrlEtalon.push(pointsAddd[i]);
+    //   }
+    // }
   }
 
   return (
@@ -92,7 +116,7 @@ const Management = (props: {
               open={isOpen}
               ws={props.ws}
               tflightt={pointsEtalon}
-              xctrll={pointsXctrll}
+              xctrll={pointsXctrlEtalon}
             />
           </>
         )}

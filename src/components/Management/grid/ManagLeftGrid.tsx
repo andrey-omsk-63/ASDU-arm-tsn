@@ -149,6 +149,7 @@ const ManagementLeftGrid = (props: {
         areaXT: pointsXT[i].area,
         subareaXT: pointsXT[i].subarea,
         releaseXT: pointsXT[i].release,
+        pknowXT: pointsXT[i].pknow,
       };
     }
   }

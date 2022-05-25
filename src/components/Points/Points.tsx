@@ -12,7 +12,7 @@ import { XctrlInfo } from '../../interfaceGl.d';
 
 let tekValue = 0;
 let pointsEtalon: XctrlInfo[];
-let flagEtalon = true;
+//let flagEtalon = true;
 
 const Points = (props: { open: boolean; ws: WebSocket; xctrll: XctrlInfo[]; region: string }) => {
   const stylePXt1 = {
@@ -28,8 +28,11 @@ const Points = (props: { open: boolean; ws: WebSocket; xctrll: XctrlInfo[]; regi
   let isOpen = props.open;
   let pointsGl = props.xctrll;
   let points = pointsGl.filter((pointsGl) => pointsGl.region === Number(reGion));
+
+  pointsEtalon = points;     // замена проверки обновления Xctrl - проверка теперь в App
+
   const [value, setValue] = React.useState(tekValue);
- 
+
   React.useEffect(() => {
     const handleSend = () => {
       if (props.ws !== null) {
@@ -45,38 +48,37 @@ const Points = (props: { open: boolean; ws: WebSocket; xctrll: XctrlInfo[]; regi
     };
     handleSend();
   }, [props.ws, reGion]);
+  
+  if (isOpen) pointsEtalon = points;   // замена проверки обновления - проверка теперь в App
 
-  if (isOpen && flagEtalon) {
-    pointsEtalon = points;
-    flagEtalon = false;
-  }
-
-  if (isOpen && !flagEtalon) {
-    let pointsAdd = [];
-    let newRecord = true;
-    for (let i = 0; i < points.length; i++) {
-      newRecord = true;
-      for (let j = 0; j < pointsEtalon.length; j++) {
-        if (
-          points[i].subarea === pointsEtalon[j].subarea &&
-          points[i].region === pointsEtalon[j].region &&
-          points[i].area === pointsEtalon[j].area
-        ) {
-          newRecord = false;
-          pointsEtalon[j] = points[i];
-        }
-      }
-      if (newRecord) {
-        console.log('Points новая запись i=', i);
-        pointsAdd.push(points[i]);
-      }
-    }
-    if (pointsAdd.length > 0) {
-      for (let i = 0; i < pointsAdd.length; i++) {
-        pointsEtalon.push(pointsAdd[i]);
-      }
-    }
-  }
+  // разноска обновлений
+  // if (isOpen && !flagEtalon) {
+  //   let pointsAdd = [];
+  //   let newRecord = true;
+  //   for (let i = 0; i < points.length; i++) {
+  //     newRecord = true;
+  //     for (let j = 0; j < pointsEtalon.length; j++) {
+  //       if (
+  //         points[i].subarea === pointsEtalon[j].subarea &&
+  //         points[i].region === pointsEtalon[j].region &&
+  //         points[i].area === pointsEtalon[j].area
+  //       ) {
+  //         newRecord = false;
+  //         pointsEtalon[j] = points[i];
+  //         //console.log('Points обновилась запись i=', i);
+  //       }
+  //     }
+  //     if (newRecord) {
+  //       console.log('Points новая запись i=', i);
+  //       pointsAdd.push(points[i]);
+  //     }
+  //   }
+  //   if (pointsAdd.length > 0) {
+  //     for (let i = 0; i < pointsAdd.length; i++) {
+  //       pointsEtalon.push(pointsAdd[i]);
+  //     }
+  //   }
+  // }
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -125,7 +127,7 @@ const Points = (props: { open: boolean; ws: WebSocket; xctrll: XctrlInfo[]; regi
       <>
         {pointsEtalon.length > 0 && (
           <>
-            <PointsMenuLevel1 open={isOpen} xctrll={points} xtt={tekValue} />
+            <PointsMenuLevel1 open={isOpen} xctrll={pointsEtalon} xtt={tekValue} />
           </>
         )}
       </>

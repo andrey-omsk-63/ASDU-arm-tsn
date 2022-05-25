@@ -12,8 +12,6 @@ const PointsMainScr = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number 
   const xtProps = props.xtt;
   const points = props.xctrll[xtProps];
 
-  console.log('Props.Xctrll:', props.xctrll)
-
   const styleXt02 = {
     border: 1,
     borderRadius: 1,
@@ -77,9 +75,9 @@ const PointsMainScr = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number 
   let rachet = 'Расчёт не возможен';
   if (points.pkcalc > 0) rachet = 'Расчёт выполнен';
 
-  let uprBP = 'Управление по ВР';
+  
+let uprBP = 'Управление по ВР';
   if(points.pknow > 0) uprBP = 'Выбран план №'+ points.pknow.toString()
-
   return (
     <Box sx={{ border: 0, marginTop: -3, marginLeft: -3, marginRight: -3 }}>
       <Grid container item sx={{ margin: 0, border: 0 }}>

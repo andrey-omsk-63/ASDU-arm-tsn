@@ -263,10 +263,20 @@ const ManagementRightGrid = (props: {
               podchGl++;
             }
             break;
+          case 5:
+            for (let j = 0; j < props.masxt.length; j++) {
+              if (
+                parseInt(points[0].area.num) === props.masxt[j].areaXT &&
+                points[0].subarea === props.masxt[j].subareaXT
+              ) {
+                if (props.masxt[j].pknowXT > 0) podchGl++;
+              }
+            }
+            break;
           case 9:
             podchGl++;
+
         }
-        //if (points[i].techMode === 9) podchGl++;
       }
       MakeMassKnob()
   }
@@ -341,7 +351,7 @@ const ManagementRightGrid = (props: {
 
     const StrokaSpsMode1 = () => {
       let resStr = [];
-      
+
       for (let i = 0; i < mass.length; i++) {
         let prosentSv = (100 * mass[i].sost) / mass[i].koldk;
         let prosentPch = (100 * mass[i].podch) / mass[i].koldk;
@@ -474,11 +484,11 @@ const ManagementRightGrid = (props: {
   };
 
   const StrokaInfo = () => {
-    //console.log('props.masxt:', props.masxt)
     let sumDk = points.length;
     let prosSv = '';
     let prosPch = '';
     let proXT = 'ХТ для данного района ';
+    let soobBP = 'Назначен BP';
     if (props.mode !== 3) {
       prosSv = ((100 * sostGl) / sumDk).toFixed(2).toString() + '%';
       prosPch = ((100 * podchGl) / sumDk).toFixed(2).toString() + '%';
@@ -503,34 +513,37 @@ const ManagementRightGrid = (props: {
           } else {
             proXT = proXT + 'выключен'
           }
+          if (props.masxt[j].pknowXT > 0) soobBP = ' Выбран план №' + props.masxt[j].pknowXT.toString();
         }
       }
     }
-    let soobBP = ' BP';
-    if (massKnob.length > 0) {
-      soobBP = '';
-      for (let i = 0; i < massKnob.length; i++) {
-        switch (massKnob[i].cmd) {
-          case 5:
-            soobBP = soobBP + ' ПК' + massKnob[i].param.toString()
-            break;
-          case 6:
-            soobBP = soobBP + ' CК' + massKnob[i].param.toString()
-            break;
-          case 7:
-            soobBP = soobBP + ' HК' + massKnob[i].param.toString()
-            break;
-        }
-      }
 
-      if (soobBP === ' ПК0 CК0 HК0') soobBP = ' BP(ПК0+CК0+HК0)';
-      if (soobBP === '') soobBP = ' BP';
+    if (soobBP === '') {
+      soobBP = 'Назначен BP';
+      if (massKnob.length > 0) {
+        soobBP = '';
+        for (let i = 0; i < massKnob.length; i++) {
+          switch (massKnob[i].cmd) {
+            case 5:
+              soobBP = soobBP + ' ПК' + massKnob[i].param.toString()
+              break;
+            case 6:
+              soobBP = soobBP + ' CК' + massKnob[i].param.toString()
+              break;
+            case 7:
+              soobBP = soobBP + ' HК' + massKnob[i].param.toString()
+              break;
+          }
+        }
+        if (soobBP === ' ПК0 CК0 HК0') soobBP = 'Назначен BP(ПК0+CК0+HК0)';
+        if (soobBP === '') soobBP = 'Назначен BP';
+      }
     }
 
     return (
       <Grid item xs={12} sx={styleMgl}>
         Всего ДК&nbsp;{sumDk}&nbsp;на связи&nbsp;{prosSv}&nbsp; подчинены&nbsp;{prosPch}&nbsp;&nbsp;
-        <b>Назначен{soobBP}</b>&nbsp;&nbsp;<em>{proXT}</em>
+        <b>{soobBP}</b>&nbsp;&nbsp;<em>{proXT}</em>
       </Grid>
     );
   };

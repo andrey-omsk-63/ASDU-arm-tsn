@@ -25,6 +25,9 @@ let regionGlob: number = 0;
 let massRegion: Array<number> = [];
 let massNameRegion: Array<string> = [];
 
+let pointsEtalonXctrl: XctrlInfo[];
+let flagEtalonInf = true;
+
 const App = () => {
   const handleClose = () => {
     window.close();
@@ -129,6 +132,41 @@ const App = () => {
     );
   };
 
+  const UpdateXctrl = () => {
+    if (isOpenInf && flagEtalonInf) {
+      pointsEtalonXctrl = pointsXctrl;
+      flagEtalonInf = false;
+    }
+    // разноска обновлений Xctrl
+    if (isOpenInf && !flagEtalonInf) {
+      let pointsAdd = [];
+      let newRecord = true;
+      for (let i = 0; i < pointsXctrl.length; i++) {
+        newRecord = true;
+        for (let j = 0; j < pointsEtalonXctrl.length; j++) {
+          if (
+            pointsXctrl[i].subarea === pointsEtalonXctrl[j].subarea &&
+            pointsXctrl[i].region === pointsEtalonXctrl[j].region &&
+            pointsXctrl[i].area === pointsEtalonXctrl[j].area
+          ) {
+            newRecord = false;
+            pointsEtalonXctrl[j] = pointsXctrl[i];
+            //console.log('Points обновилась запись i=', i);
+          }
+        }
+        if (newRecord) {
+          console.log('Points новая запись i=', i);
+          pointsAdd.push(pointsXctrl[i]);
+        }
+      }
+      if (pointsAdd.length > 0) {
+        for (let i = 0; i < pointsAdd.length; i++) {
+          pointsEtalonXctrl.push(pointsAdd[i]);
+        }
+      }
+    }
+  }
+
   const [pointsXctrl, setPointsXctrl] = React.useState<Array<XctrlInfo>>([]);
   const [pointsReg, setPointsReg] = React.useState<RegionInfo>({} as RegionInfo);
   const [isOpenInf, setIsOpenInf] = React.useState(false);
@@ -193,6 +231,8 @@ const App = () => {
 
   const [value, setValue] = React.useState('1');
 
+  UpdateXctrl()   // разноска обновлений Xctrl
+
   return (
     <>
       <EndSeans />
@@ -225,7 +265,7 @@ const App = () => {
           </TabPanel>
           <TabPanel value="2">
             {WS !== null && regionGlob !== 0 && (
-              <Points open={isOpenInf} ws={WS} xctrll={pointsXctrl} region={String(regionGlob)} />
+              <Points open={isOpenInf} ws={WS} xctrll={pointsEtalonXctrl} region={String(regionGlob)} />
             )}
           </TabPanel>
           <TabPanel value="3">

@@ -55,17 +55,17 @@ const PointsMainScrGrid3 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: nu
 
     for (let i = 0; i < points.prioryty.length; i++) {
       resStr.push(
-        <Grid key={Math.random()} container item xs={12}>
-          <Grid key={Math.random()} xs={1.5} item sx={styleXTG03}>
+        <Grid key={i} container item xs={12}>
+          <Grid xs={1.5} item sx={styleXTG03}>
             {i + 1}
           </Grid>
-          <Grid key={Math.random()} xs={3.5} item sx={styleXTG03}>
+          <Grid xs={3.5} item sx={styleXTG03}>
             {points.prioryty[i][0]}
           </Grid>
-          <Grid key={Math.random()} xs={3.5} item sx={styleXTG03}>
+          <Grid xs={3.5} item sx={styleXTG03}>
             {points.prioryty[i][1]}
           </Grid>
-          <Grid key={Math.random()} xs={3.5} item sx={styleXTG03}>
+          <Grid xs={3.5} item sx={styleXTG03}>
             {points.prioryty[i][2]}
           </Grid>
         </Grid>,

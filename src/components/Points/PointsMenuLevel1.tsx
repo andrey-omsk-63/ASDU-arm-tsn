@@ -16,8 +16,9 @@ const PointsMenuLevel1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: numb
   const xtProps = props.xtt;
   const points = props.xctrll[xtProps];
 
-  console.log('props.xtt:', props.xtt);
-  console.log('props.xctrll:', props.xctrll);
+  // console.log('props.xtt:', props.xtt);
+  // console.log('props.xctrll:', props.xctrll);
+  // console.log('!!!points:', points);
 
   const stylePXt1 = {
     fontSize: 13.9,
@@ -46,9 +47,7 @@ const PointsMenuLevel1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: numb
     };
 
     let dlStrMenu = 0;
-
-    console.log('Points.Xctrls', points.xctrls);
-
+    
     if (isOpen && points.xctrls.length !== 0) {
       for (let i = 0; i < points.xctrls.length; i++) {
         if (points.xctrls[i].name.length > dlStrMenu) {
