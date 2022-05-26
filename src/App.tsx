@@ -133,10 +133,6 @@ const App = () => {
   };
 
   const UpdateXctrl = () => {
-    if (isOpenInf && flagEtalonInf) {
-      pointsEtalonXctrl = pointsXctrl;
-      flagEtalonInf = false;
-    }
     // разноска обновлений Xctrl
     if (isOpenInf && !flagEtalonInf) {
       let pointsAdd = [];
@@ -164,6 +160,10 @@ const App = () => {
           pointsEtalonXctrl.push(pointsAdd[i]);
         }
       }
+    }
+    if (isOpenInf && flagEtalonInf) {   // получен первый WS 
+      pointsEtalonXctrl = pointsXctrl;
+      flagEtalonInf = false;
     }
   }
 

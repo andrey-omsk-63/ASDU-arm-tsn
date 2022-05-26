@@ -6,8 +6,6 @@ import Tab from '@mui/material/Tab';
 
 import PointsMenuLevel1 from './PointsMenuLevel1';
 
-//import axios from 'axios';
-
 import { XctrlInfo } from '../../interfaceGl.d';
 
 let tekValue = 0;
