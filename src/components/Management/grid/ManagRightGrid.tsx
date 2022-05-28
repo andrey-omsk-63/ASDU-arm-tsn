@@ -4,6 +4,9 @@ import Box from '@mui/material/Box';
 
 import { Tflight } from '../../../interfaceMNG.d';
 
+import { styleMgl, styleMRG01, styleMRG02 } from './ManagRightGridStyle';
+import { styleMRG02Center, styleMRG03, styleMRG04 } from './ManagRightGridStyle';
+
 export interface DataKnob {
   knop: Knob[];
 }
@@ -25,52 +28,6 @@ const ManagementRightGrid = (props: {
   masxt: any;
   masknob: Knob[];
 }) => {
-
-  const styleMgl = {
-    padding: 1,
-    margin: 1,
-    marginLeft: -0.5,
-    marginTop: 0.5,
-    marginBottom: 0,
-  };
-
-  const styleMRG01 = {
-    borderBottom: 1,
-    borderColor: 'primary.main',
-    padding: 0.4,
-  };
-
-  const styleMRG02 = {
-    borderRight: 1,
-    borderBottom: 1,
-    borderColor: 'primary.main',
-    padding: 0.4,
-  };
-
-  const styleMRG02Center = {
-    borderRight: 1,
-    borderBottom: 1,
-    borderColor: 'primary.main',
-    padding: 0.4,
-    textAlign: 'center',
-  };
-
-  const styleMRG03 = {
-    borderBottom: 1,
-    borderColor: 'primary.main',
-    padding: 0.4,
-    textAlign: 'center',
-    backgroundColor: '#C0C0C0',
-  };
-
-  const styleMRG04 = {
-    border: 1,
-    borderRadius: 1,
-    borderColor: 'primary.main',
-    marginTop: 0.5,
-    marginBottom: 0.5,
-  };
-
   let points = props.tflightt;
   let masSpis = [];
   let mass: any = [];
@@ -81,7 +38,6 @@ const ManagementRightGrid = (props: {
   const massClinch = [16, 17, 18, 38, 39];
 
   const CounterMode = (i: number, j: number) => {
-    // if (points[i].scon) {
     if (!massClinch.includes(points[i].tlsost.num)) {   // на связи
       mass[j].sost++;
       sostGl++;
@@ -112,11 +68,7 @@ const ManagementRightGrid = (props: {
           mass[j].podch++;
           podchGl++;
       }
-      if (points[i].StatusCommandDU.IsPK) {
-        console.log('!Points:',i,points)
-        console.log('!points[i]:',i,points[i])
-        mass[j].isPk = true;
-      }
+      if (points[i].StatusCommandDU.IsPK) mass[j].isPk = true;
       if (points[i].StatusCommandDU.isCk) mass[j].isCk = true;
       if (points[i].StatusCommandDU.IsNK) mass[j].isNK = true;
       if (props.mode === 2) {
@@ -142,173 +94,8 @@ const ManagementRightGrid = (props: {
         massKnob.push(props.masknob[i]);
       }
     }
-    console.log("massKnob:",massKnob)
   }
-
-  //=================================================================================
-  switch (props.mode) {
-    case 1:
-      points = props.tflightt;
-
-      if (props.open) {
-        mass[0] = {
-          areaNum: points[0].area.num,
-          koldk: 1,
-          sost: 0,
-          podch: 0,
-          isPk: false,
-          isCk: false,
-          isNk: false,
-          isXT: false,
-          releaseXT: false,
-        };
-        CounterMode(0, 0);
-        j = 0;
-        for (let i = 1; i < points.length; i++) {
-          if (mass[j].areaNum !== points[i].area.num) {
-            j++;
-            mass[j] = {
-              areaNum: points[i].area.num,
-              koldk: 1,
-              sost: 0,
-              podch: 0,
-              isPk: false,
-              isCk: false,
-              isNk: false,
-              isXT: false,
-              releaseXT: false,
-            };
-            CounterMode(i, j);
-          } else {
-            mass[j].koldk++;
-            CounterMode(i, j);
-          }
-        }
-
-      }
-
-      let masArea: Tflight[];
-      let flagXtArea = true;
-      for (let k = 0; k < mass.length; k++) {
-        masArea = points.filter((points) => points.area.num === mass[k].areaNum);
-        flagXtArea = true;
-        let flEstXt = false;
-        for (let i = 0; i < masArea.length; i++) {
-          for (let j = 0; j < props.masxt.length; j++) {
-            if (parseInt(masArea[i].area.num) === props.masxt[j].areaXT) {
-              flEstXt = true;
-              if (masArea[i].subarea === props.masxt[j].subareaXT) {
-                mass[k].isXT = true;
-              }
-              else {
-                mass[k].isXT = false;
-                flagXtArea = false;
-              }
-            }
-          }
-        }
-        if (flEstXt) mass[k].isXT = flagXtArea;
-      }
-      MakeMassKnob()
-
-      break;
-
-    case 2:
-      masSpis = points.filter((points) => points.area.num === props.areaa);
-      points = masSpis;
-
-      if (props.open) {
-        mass[0] = {
-          areaNum: points[0].area.num,
-          subareaNum: points[0].subarea,
-          koldk: 1,
-          sost: 0,
-          podch: 0,
-          isPk: false,
-          isCk: false,
-          isNk: false,
-          isXT: false,
-          releaseXT: false,
-        };
-        CounterMode(0, 0);
-        j = 0;
-        for (let i = 1; i < points.length; i++) {
-          if (mass[j].subareaNum !== points[i].subarea) {
-            j++;
-            mass[j] = {
-              areaNum: points[i].area.num,
-              subareaNum: points[i].subarea,
-              koldk: 1,
-              sost: 0,
-              podch: 0,
-              isPk: false,
-              isCk: false,
-              isNk: false,
-              isXT: false,
-              releaseXT: false,
-            };
-            CounterMode(i, j);
-          } else {
-            mass[j].koldk++;
-            CounterMode(i, j);
-          }
-        }
-      }
-
-      for (let i = 0; i < mass.length; i++) {
-        for (let j = 0; j < props.masxt.length; j++) {
-          if (
-            parseInt(mass[i].areaNum) === props.masxt[j].areaXT &&
-            mass[i].subareaNum === props.masxt[j].subareaXT
-          ) {
-            mass[i].isXT = true;
-          }
-        }
-      }
-      MakeMassKnob()
-
-      break;
-
-    default:
-      masSpis = points.filter(
-        (points) => points.area.num === props.areaa && points.subarea === props.subArea,
-      );
-      points = masSpis;
-
-      console.log('points_mod3:', points)
-
-      for (let i = 0; i < points.length; i++) {
-        //if (points[i].scon) sostGl++;
-        if (!massClinch.includes(points[i].tlsost.num)) {  // на связи
-          sostGl++;
-          switch (points[i].techMode) {
-            case 2:                                  // назначен ВР
-              if (!points[i].StatusCommandDU.isCk &&
-                !points[i].StatusCommandDU.IsPK &&
-                !points[i].StatusCommandDU.IsNK
-              ) {
-                podchGl++;
-              }
-              break;
-            case 5:
-              for (let j = 0; j < props.masxt.length; j++) {
-                if (
-                  parseInt(points[0].area.num) === props.masxt[j].areaXT &&
-                  points[0].subarea === props.masxt[j].subareaXT
-                ) {
-                  if (props.masxt[j].pknowXT > 0) podchGl++;
-                }
-              }
-              break;
-            case 9:
-              podchGl++;
-          }
-        }
-      }
-      MakeMassKnob()
-  }
-  //=================================================================================
-
+  
   const HeaderMRG03 = () => {
     const StrokaGridHeader = (xss: number, write: string) => {
       return (
@@ -321,7 +108,7 @@ const ManagementRightGrid = (props: {
     const StrokaHeaderMode1 = () => {
       let resStr = [];
       resStr.push(
-        <Grid item key={Math.random()} container>
+        <Grid item container>
           {StrokaGridHeader(0.3, '№')}
           {StrokaGridHeader(0.7, 'Район')}
           {StrokaGridHeader(4.8, 'Устройствa')}
@@ -335,7 +122,7 @@ const ManagementRightGrid = (props: {
     const StrokaHeaderMode2 = () => {
       let resStr = [];
       resStr.push(
-        <Grid item key={Math.random()} container>
+        <Grid item container>
           {StrokaGridHeader(0.3, '№')}
           {StrokaGridHeader(1.1, 'Подрайон')}
           {StrokaGridHeader(4.5, 'Устройствa')}
@@ -349,7 +136,7 @@ const ManagementRightGrid = (props: {
     const StrokaHeaderMode3 = () => {
       let resStr = [];
       resStr.push(
-        <Grid item key={Math.random()} container>
+        <Grid item container>
           {StrokaGridHeader(0.3, '№')}
           {StrokaGridHeader(1.1, 'Подрайон')}
           {StrokaGridHeader(0.4, 'ДК')}
@@ -375,10 +162,16 @@ const ManagementRightGrid = (props: {
   };
 
   const StrokaMRG03 = () => {
+    const StrokaGridInfo = (xss: number, stylXX: any, write: string) => {
+      return (
+        <Grid item xs={xss} sx={stylXX}>
+          {write}
+        </Grid>
+      );
+    };
 
     const StrokaSpsMode1 = () => {
       let resStr = [];
-
       for (let i = 0; i < mass.length; i++) {
         let prosentSv = (100 * mass[i].sost) / mass[i].koldk;
         let prosentPch = (100 * mass[i].podch) / mass[i].koldk;
@@ -395,22 +188,15 @@ const ManagementRightGrid = (props: {
         }
         resStr.push(
           <Grid item key={i} container>
-            <Grid item xs={0.3} sx={styleMRG02}>
-              {i + 1}
-            </Grid>
-            <Grid item xs={0.7} sx={styleMRG02Center}>
-              {mass[i].areaNum}
-            </Grid>
+            {StrokaGridInfo(0.3, styleMRG02Center, String(i + 1))}
+            {StrokaGridInfo(0.7, styleMRG02Center, String(mass[i].areaNum))}
             <Grid item xs={4.8} sx={styleMRG02}>
-              Всего ДК&nbsp;{mass[i].koldk}&nbsp;на связи&nbsp;{prosentSv.toFixed(2)}%
-              подчинены&nbsp;{prosentPch.toFixed(2)}%
+              Всего ДК&nbsp;<b>{mass[i].koldk}</b>&nbsp;
+              на связи&nbsp;<b>{prosentSv.toFixed(2)}%</b>&nbsp;
+              подчинены&nbsp;<b>{prosentPch.toFixed(2)}%</b>
             </Grid>
-            <Grid item xs={2.5} sx={styleMRG02}>
-              {soobBP}
-            </Grid>
-            <Grid item xs={3.7} sx={styleMRG01}>
-              {soobXT}
-            </Grid>
+            {StrokaGridInfo(2.5, styleMRG02, soobBP)}
+            {StrokaGridInfo(3.7, styleMRG01, soobXT)}
           </Grid>,
         );
       }
@@ -419,9 +205,6 @@ const ManagementRightGrid = (props: {
 
     const StrokaSpsMode2 = () => {
       let resStr = [];
-
-      console.log('!!!mass:', mass)
-      
       for (let i = 0; i < mass.length; i++) {
         let soobBP = 'Назначен';
         let soobXT = 'ХТ для данного подрайона ';
@@ -441,22 +224,15 @@ const ManagementRightGrid = (props: {
         }
         resStr.push(
           <Grid item key={i} container>
-            <Grid item xs={0.3} sx={styleMRG02}>
-              {i + 1}
-            </Grid>
-            <Grid item xs={1.1} sx={styleMRG02Center}>
-              {mass[i].areaNum}:{mass[i].subareaNum}
-            </Grid>
+            {StrokaGridInfo(0.3, styleMRG02Center, String(i + 1))}
+            {StrokaGridInfo(1.1, styleMRG02Center, (String(mass[i].areaNum) + ':' + String(mass[i].subareaNum)))}
             <Grid item xs={4.5} sx={styleMRG02}>
-              Всего ДК&nbsp;{mass[i].koldk}&nbsp;на связи&nbsp;{mass[i].sost}
-              &nbsp;подчинены&nbsp;{mass[i].podch}
+              Всего ДК&nbsp;<b>{mass[i].koldk}</b>&nbsp;
+              на связи&nbsp;<b>{mass[i].sost}</b>&nbsp;
+              подчинены&nbsp;<b>{mass[i].podch}</b>
             </Grid>
-            <Grid item xs={2.4} sx={styleMRG02}>
-              {soobBP}
-            </Grid>
-            <Grid item xs={3.7} sx={styleMRG01}>
-              {soobXT}
-            </Grid>
+            {StrokaGridInfo(2.4, styleMRG02, soobBP)}
+            {StrokaGridInfo(3.7, styleMRG01, soobXT)}
           </Grid>,
         );
       }
@@ -468,36 +244,16 @@ const ManagementRightGrid = (props: {
       for (let i = 0; i < points.length; i++) {
         resStr.push(
           <Grid item key={i} container>
-            <Grid item xs={0.3} sx={styleMRG02Center}>
-              {i + 1}
-            </Grid>
-            <Grid item xs={1.1} sx={styleMRG02Center}>
-              {points[i].area.num}:{points[i].subarea}
-            </Grid>
-            <Grid item xs={0.4} sx={styleMRG02Center}>
-              {points[i].ID}
-            </Grid>
-            <Grid item xs={4} sx={styleMRG02}>
-              {points[i].description}
-            </Grid>
-            <Grid item xs={1.5} sx={styleMRG02Center}>
-              {points[i].idevice}
-            </Grid>
-            <Grid item xs={2} sx={styleMRG02}>
-              {points[i].tlsost.description}
-            </Grid>
-            <Grid item xs={0.5} sx={styleMRG02Center}>
-              {points[i].pk}
-            </Grid>
-            <Grid itemProp='' xs={0.5} sx={styleMRG02Center}>
-              {points[i].ck}
-            </Grid>
-            <Grid item xs={0.5} sx={styleMRG02Center}>
-              {points[i].nk}
-            </Grid>
-            <Grid item xs={1.2} sx={styleMRG01}>
-              {points[i].techModeString}
-            </Grid>
+            {StrokaGridInfo(0.3, styleMRG02Center, String(i + 1))}
+            {StrokaGridInfo(1.1, styleMRG02Center, (String(points[i].area.num) + ':' + String(points[i].subarea)))}
+            {StrokaGridInfo(0.4, styleMRG02Center, String(points[i].ID))}
+            {StrokaGridInfo(4, styleMRG02, String(points[i].description))}
+            {StrokaGridInfo(1.5, styleMRG02Center, String(points[i].idevice))}
+            {StrokaGridInfo(2, styleMRG02, String(points[i].tlsost.description))}
+            {StrokaGridInfo(0.5, styleMRG02Center, String(points[i].pk))}
+            {StrokaGridInfo(0.5, styleMRG02Center, String(points[i].ck))}
+            {StrokaGridInfo(0.5, styleMRG02Center, String(points[i].nk))}
+            {StrokaGridInfo(1.2, styleMRG01, points[i].techModeString)}
           </Grid>,
         );
       }
@@ -547,12 +303,8 @@ const ManagementRightGrid = (props: {
         }
       }
     }
-
     if (soobBP === '') {
       soobBP = 'Назначен BP';
-
-      console.log("!!!massKnob:",massKnob)
-
       if (massKnob.length > 0) {
         soobBP = '';
         for (let i = 0; i < massKnob.length; i++) {
@@ -565,7 +317,6 @@ const ManagementRightGrid = (props: {
               break;
             case 7:
               soobBP = soobBP + ' HК' + massKnob[i].param.toString()
-              break;
           }
         }
         if (soobBP === ' ПК0 CК0 HК0') {
@@ -574,10 +325,9 @@ const ManagementRightGrid = (props: {
           if (soobBP === '') {
             soobBP = 'Назначен BP';
           } else {
-            soobBP = 'Назначен'+ soobBP;
+            soobBP = 'Назначен' + soobBP;
           }
         }
-        
       }
     }
 
@@ -588,6 +338,159 @@ const ManagementRightGrid = (props: {
       </Grid>
     );
   };
+
+  //=Тело компонента ===============================================================
+  switch (props.mode) {
+    case 1:
+      points = props.tflightt;
+      if (props.open) {
+        mass[0] = {
+          areaNum: points[0].area.num,
+          koldk: 1,
+          sost: 0,
+          podch: 0,
+          isPk: false,
+          isCk: false,
+          isNk: false,
+          isXT: false,
+          releaseXT: false,
+        };
+        CounterMode(0, 0);
+        j = 0;
+        for (let i = 1; i < points.length; i++) {
+          if (mass[j].areaNum !== points[i].area.num) {
+            j++;
+            mass[j] = {
+              areaNum: points[i].area.num,
+              koldk: 1,
+              sost: 0,
+              podch: 0,
+              isPk: false,
+              isCk: false,
+              isNk: false,
+              isXT: false,
+              releaseXT: false,
+            };
+            CounterMode(i, j);
+          } else {
+            mass[j].koldk++;
+            CounterMode(i, j);
+          }
+        }
+      }
+      let masArea: Tflight[];
+      let flagXtArea = true;
+      for (let k = 0; k < mass.length; k++) {
+        masArea = points.filter((points) => points.area.num === mass[k].areaNum);
+        flagXtArea = true;
+        let flEstXt = false;
+        for (let i = 0; i < masArea.length; i++) {
+          for (let j = 0; j < props.masxt.length; j++) {
+            if (parseInt(masArea[i].area.num) === props.masxt[j].areaXT) {
+              flEstXt = true;
+              if (masArea[i].subarea === props.masxt[j].subareaXT) {
+                mass[k].isXT = true;
+              }
+              else {
+                mass[k].isXT = false;
+                flagXtArea = false;
+              }
+            }
+          }
+        }
+        if (flEstXt) mass[k].isXT = flagXtArea;
+      }
+      MakeMassKnob()
+      break;
+
+    case 2:
+      masSpis = points.filter((points) => points.area.num === props.areaa);
+      points = masSpis;
+
+      if (props.open) {
+        mass[0] = {
+          areaNum: points[0].area.num,
+          subareaNum: points[0].subarea,
+          koldk: 1,
+          sost: 0,
+          podch: 0,
+          isPk: false,
+          isCk: false,
+          isNk: false,
+          isXT: false,
+          releaseXT: false,
+        };
+        CounterMode(0, 0);
+        j = 0;
+        for (let i = 1; i < points.length; i++) {
+          if (mass[j].subareaNum !== points[i].subarea) {
+            j++;
+            mass[j] = {
+              areaNum: points[i].area.num,
+              subareaNum: points[i].subarea,
+              koldk: 1,
+              sost: 0,
+              podch: 0,
+              isPk: false,
+              isCk: false,
+              isNk: false,
+              isXT: false,
+              releaseXT: false,
+            };
+            CounterMode(i, j);
+          } else {
+            mass[j].koldk++;
+            CounterMode(i, j);
+          }
+        }
+      }
+      for (let i = 0; i < mass.length; i++) {
+        for (let j = 0; j < props.masxt.length; j++) {
+          if (
+            parseInt(mass[i].areaNum) === props.masxt[j].areaXT &&
+            mass[i].subareaNum === props.masxt[j].subareaXT
+          ) {
+            mass[i].isXT = true;
+          }
+        }
+      }
+      MakeMassKnob()
+      break;
+
+    default:
+      masSpis = points.filter(
+        (points) => points.area.num === props.areaa && points.subarea === props.subArea,
+      );
+      points = masSpis;
+      for (let i = 0; i < points.length; i++) {
+        if (!massClinch.includes(points[i].tlsost.num)) {  // на связи
+          sostGl++;
+          switch (points[i].techMode) {
+            case 2:                                  // назначен ВР
+              if (!points[i].StatusCommandDU.isCk &&
+                !points[i].StatusCommandDU.IsPK &&
+                !points[i].StatusCommandDU.IsNK
+              ) {
+                podchGl++;
+              }
+              break;
+            case 5:
+              for (let j = 0; j < props.masxt.length; j++) {
+                if (
+                  parseInt(points[0].area.num) === props.masxt[j].areaXT &&
+                  points[0].subarea === props.masxt[j].subareaXT
+                ) {
+                  if (props.masxt[j].pknowXT > 0) podchGl++;
+                }
+              }
+              break;
+            case 9:
+              podchGl++;
+          }
+        }
+      }
+      MakeMassKnob()
+  }
 
   return (
     <>
