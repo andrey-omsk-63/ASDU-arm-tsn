@@ -304,7 +304,7 @@ const ManagementLeftGrid = (props: {
             },
           ];
           massKnopTemp.push(dataKnobTemp[0]);
-          console.log('massKnopTempTr:', massKnopTemp);
+          //console.log('massKnopTempTr:', massKnopTemp);
         }
       }
       massKnop = massKnop.concat(massKnopTemp); // ОбЪединение массивов
