@@ -35,24 +35,39 @@ const ManagementRightGrid = (props: {
   let podchGl = 0;
   let j = 0;
   let massKnob: Knob[] = [];
+  let massknob: Knob[] = [];
   const massClinch = [16, 17, 18, 38, 39];
+
+  console.log('props.masknob:', props.masknob)
+  console.log('points:', points)
+
+  const SearchInMassKnob = (cmd: number) => {
+    for (let i = 0; i < massknob.length; i++) {
+      if (massknob[i].cmd === cmd) return massknob[i].param;
+    }
+    return -1;
+  }
 
   const CounterMode = (i: number, j: number) => {
     if (!massClinch.includes(points[i].tlsost.num)) {   // на связи
       mass[j].sost++;
       sostGl++;
+      let podchGlOld = podchGl;
       switch (points[i].techMode) {
         case 2:
           if (!points[i].StatusCommandDU.isCK &&    // назначен ВР
             !points[i].StatusCommandDU.IsPK &&
             !points[i].StatusCommandDU.IsNK
           ) {
-            mass[j].podch++;
-            podchGl++;
+            console.log('111:', SearchInMassKnob(5), SearchInMassKnob(6), SearchInMassKnob(7))
+            if (SearchInMassKnob(5) <= 0 && SearchInMassKnob(6) <= 0 && // не было ручного упр-я
+              SearchInMassKnob(7) <= 0) {
+              mass[j].podch++;
+              podchGl++;
+            }
           }
           break;
         case 5:
-          let podchGlOld = podchGl;
           for (let k = 0; k < props.masxt.length; k++) {
             if (
               parseInt(points[i].area.num) === props.masxt[k].areaXT &&
@@ -64,15 +79,39 @@ const ManagementRightGrid = (props: {
               }
             }
           }
-          if (podchGl === podchGlOld) {
-            if (points[i].StatusCommandDU.IsPK) {
-              console.log('!!!')
-            }
-          }
           break;
         case 9:
           mass[j].podch++;
           podchGl++;
+      }
+
+      if (podchGl === podchGlOld) {        // подчинён вручную?
+
+        console.log('massknob:', massknob)
+        console.log('SearchInMassKnob:',SearchInMassKnob(5), SearchInMassKnob(6),SearchInMassKnob(7))
+
+        if (points[i].StatusCommandDU.IsPK) {
+          if (points[i].pk === SearchInMassKnob(5)) {
+            podchGl++;
+            mass[j].podch++;
+          }
+        } else {
+          if (points[i].StatusCommandDU.IsCK && SearchInMassKnob(5) <= 0) {
+            if (points[i].ck === SearchInMassKnob(6)) {
+              console.log('???ck', i)
+              podchGl++;
+              mass[j].podch++;
+            }
+          } else {
+            console.log('SearchInMassKnob3:', SearchInMassKnob(6),SearchInMassKnob(7))
+            if (points[i].StatusCommandDU.IsNK && SearchInMassKnob(6) <= 0) {
+              if (points[i].nk === SearchInMassKnob(7)) {
+                podchGl++;
+                mass[j].podch++;
+              }
+            }
+          }
+        }
       }
 
       if (points[i].StatusCommandDU.IsPK) mass[j].isPK = true;
@@ -97,7 +136,9 @@ const ManagementRightGrid = (props: {
 
   const MakeMassKnob = () => {
     massKnob = [];
+    massknob = [];
     for (let i = 0; i < props.masknob.length; i++) {
+      if (props.masknob[i].param > 0) massknob.push(props.masknob[i]);
       if (props.areaa === props.masknob[i].area &&
         props.subArea === props.masknob[i].subarea &&
         props.masknob[i].param !== 13
@@ -195,6 +236,20 @@ const ManagementRightGrid = (props: {
         if (mass[i].isPK) soobBP = soobBP + ' ПК';
         if (mass[i].isCK) soobBP = soobBP + ' CК';
         if (mass[i].isNk) soobBP = soobBP + ' HК';
+        if (soobBP === 'Назначен') {
+          for (let i = 0; i < massKnob.length; i++) {
+            switch (massKnob[i].cmd) {
+              case 5:
+                soobBP = soobBP + ' ПК';
+                break;
+              case 6:
+                soobBP = soobBP + ' CК';
+                break;
+              case 7:
+                soobBP = soobBP + ' HК';
+            }
+          }
+        }
         if (soobBP === 'Назначен') soobBP = soobBP + ' BP';
         if (mass[i].isXT) {
           soobXT = soobXT + 'назначен';
@@ -231,7 +286,23 @@ const ManagementRightGrid = (props: {
         if (mass[i].isPK) soobBP = soobBP + ' ПК';
         if (mass[i].isCK) soobBP = soobBP + ' CК';
         if (mass[i].isNK) soobBP = soobBP + ' HК';
+        if (soobBP === 'Назначен') {
+          for (let i = 0; i < massKnob.length; i++) {
+            switch (massKnob[i].cmd) {
+              case 5:
+                soobBP = soobBP + ' ПК';
+                break;
+              case 6:
+                soobBP = soobBP + ' CК';
+                break;
+              case 7:
+                soobBP = soobBP + ' HК';
+            }
+          }
+        }
         if (soobBP === 'Назначен') soobBP = soobBP + ' BP';
+        
+
         if (mass[i].isXT) {
           soobXT = soobXT + 'назначен/';
           if (mass[i].releaseXT) {
@@ -483,13 +554,18 @@ const ManagementRightGrid = (props: {
       for (let i = 0; i < points.length; i++) {
         if (!massClinch.includes(points[i].tlsost.num)) {  // на связи
           sostGl++;
+          let podchGlOld = podchGl;
           switch (points[i].techMode) {
             case 2:                                  // назначен ВР
               if (!points[i].StatusCommandDU.isCK &&
                 !points[i].StatusCommandDU.IsPK &&
                 !points[i].StatusCommandDU.IsNK
               ) {
-                podchGl++;
+                console.log('222:', SearchInMassKnob(5), SearchInMassKnob(6), SearchInMassKnob(7))
+                if (SearchInMassKnob(5) <= 0 && SearchInMassKnob(6) <= 0 && // не было ручного упр-я
+                  SearchInMassKnob(7) <= 0) {
+                  podchGl++;
+                }
               }
               break;
             case 5:
@@ -504,6 +580,27 @@ const ManagementRightGrid = (props: {
               break;
             case 9:
               podchGl++;
+          }
+          if (podchGl === podchGlOld) {        // подчинён вручную?
+            if (points[i].StatusCommandDU.IsPK) {
+              if (points[i].pk === SearchInMassKnob(5)) {
+                podchGl++;
+              }
+            } else {
+              if (points[i].StatusCommandDU.IsCK && SearchInMassKnob(7) <= 0) {
+                console.log('!!3!!ck', i)
+                if (points[i].ck === SearchInMassKnob(6)) {
+                  console.log('!!3ck', i)
+                  podchGl++;
+                }
+              } else {
+                if (points[i].StatusCommandDU.IsNK && SearchInMassKnob(6) <= 0) {
+                  if (points[i].nk === SearchInMassKnob(7)) {
+                    podchGl++;
+                  }
+                }
+              }
+            }
           }
         }
       }
