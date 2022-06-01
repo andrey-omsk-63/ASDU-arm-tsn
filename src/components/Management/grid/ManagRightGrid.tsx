@@ -295,9 +295,39 @@ const ManagementRightGrid = (props: {
       for (let i = 0; i < mass.length; i++) {
         let soobBP = 'Назначен';
         let soobXT = 'ХТ для данного подрайона ';
-        if (mass[i].isPK) soobBP = soobBP + ' ПК';
-        if (mass[i].isCK) soobBP = soobBP + ' CК';
-        if (mass[i].isNK) soobBP = soobBP + ' HК';
+        //if (mass[i].isPK) soobBP = soobBP + ' ПК';
+        if (mass[i].isPK) {
+          soobBP = soobBP + ' ПК';
+        } else {
+          for (let i = 0; i < massKnob.length; i++) {
+            if (massKnob[i].cmd = 5) {
+              soobBP = soobBP + ' пк'; 
+              break;
+            } 
+          }
+        }
+        if (mass[i].isCK) {
+          soobBP = soobBP + ' CК';
+        } else {
+          for (let i = 0; i < massKnob.length; i++) {
+            if (massKnob[i].cmd = 6) {
+              soobBP = soobBP + ' ск'; 
+              break;
+            } 
+          }
+        }
+        //if (mass[i].isNK) soobBP = soobBP + ' HК';
+        if (mass[i].isNK) {
+          soobBP = soobBP + ' HК';
+        } else {
+          for (let i = 0; i < massKnob.length; i++) {
+            if (massKnob[i].cmd = 7) {
+              soobBP = soobBP + ' нк'; 
+              break;
+            } 
+          }
+        }
+        console.log('2222massKnob:',massKnob)
         if (soobBP === 'Назначен') {
           for (let i = 0; i < massKnob.length; i++) {
             switch (massKnob[i].cmd) {
@@ -450,6 +480,7 @@ const ManagementRightGrid = (props: {
   for (let i = 0; i < props.masknob.length; i++) {
     if (props.masknob[i].param > 0) massknob.push(props.masknob[i]);
   }
+  MakeMassKnob();
 
   console.log('!massknob:', massknob);
 
@@ -512,7 +543,7 @@ const ManagementRightGrid = (props: {
         }
         if (flEstXt) mass[k].isXT = flagXtArea;
       }
-      MakeMassKnob();
+      //MakeMassKnob();
       break;
 
     case 2:
@@ -568,7 +599,7 @@ const ManagementRightGrid = (props: {
           }
         }
       }
-      MakeMassKnob();
+      //MakeMassKnob();
       break;
 
     default:
@@ -635,7 +666,7 @@ const ManagementRightGrid = (props: {
           }
         }
       }
-      MakeMassKnob();
+    //MakeMassKnob();
   }
 
   return (
