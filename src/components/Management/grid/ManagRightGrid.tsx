@@ -246,9 +246,39 @@ const ManagementRightGrid = (props: {
         let prosentPch = (100 * mass[i].podch) / mass[i].koldk;
         let soobBP = 'Назначен';
         let soobXT = 'ХТ для данного района ';
-        if (mass[i].isPK) soobBP = soobBP + ' ПК';
-        if (mass[i].isCK) soobBP = soobBP + ' CК';
-        if (mass[i].isNk) soobBP = soobBP + ' HК';
+        //if (mass[i].isPK) soobBP = soobBP + ' ПК';
+        if (mass[i].isPK) {
+          soobBP = soobBP + ' ПК';
+        } else {
+          for (let i = 0; i < massKnob.length; i++) {
+            if (massKnob[i].cmd === 5) {
+              soobBP = soobBP + ' пк'; 
+              break;
+            } 
+          }
+        }
+        //if (mass[i].isCK) soobBP = soobBP + ' CК';
+        if (mass[i].isCK) {
+          soobBP = soobBP + ' CК';
+        } else {
+          for (let i = 0; i < massKnob.length; i++) {
+            if (massKnob[i].cmd === 6) {
+              soobBP = soobBP + ' ск'; 
+              break;
+            } 
+          }
+        }
+        //if (mass[i].isNk) soobBP = soobBP + ' HК';
+        if (mass[i].isNK) {
+          soobBP = soobBP + ' HК';
+        } else {
+          for (let i = 0; i < massKnob.length; i++) {
+            if (massKnob[i].cmd === 7) {
+              soobBP = soobBP + ' нк'; 
+              break;
+            } 
+          }
+        }
         if (soobBP === 'Назначен') {
           for (let i = 0; i < massKnob.length; i++) {
             switch (massKnob[i].cmd) {
@@ -287,11 +317,6 @@ const ManagementRightGrid = (props: {
 
     const StrokaSpsMode2 = () => {
       let resStr = [];
-
-      console.log('mass_mode2:', mass);
-      console.log('massKnob_mode2:', massKnob);
-      console.log('points:', points);
-
       for (let i = 0; i < mass.length; i++) {
         let soobBP = 'Назначен';
         let soobXT = 'ХТ для данного подрайона ';
@@ -300,7 +325,7 @@ const ManagementRightGrid = (props: {
           soobBP = soobBP + ' ПК';
         } else {
           for (let i = 0; i < massKnob.length; i++) {
-            if (massKnob[i].cmd = 5) {
+            if (massKnob[i].cmd === 5) {
               soobBP = soobBP + ' пк'; 
               break;
             } 
@@ -310,7 +335,7 @@ const ManagementRightGrid = (props: {
           soobBP = soobBP + ' CК';
         } else {
           for (let i = 0; i < massKnob.length; i++) {
-            if (massKnob[i].cmd = 6) {
+            if (massKnob[i].cmd === 6) {
               soobBP = soobBP + ' ск'; 
               break;
             } 
@@ -321,13 +346,12 @@ const ManagementRightGrid = (props: {
           soobBP = soobBP + ' HК';
         } else {
           for (let i = 0; i < massKnob.length; i++) {
-            if (massKnob[i].cmd = 7) {
+            if (massKnob[i].cmd === 7) {
               soobBP = soobBP + ' нк'; 
               break;
             } 
           }
         }
-        console.log('2222massKnob:',massKnob)
         if (soobBP === 'Назначен') {
           for (let i = 0; i < massKnob.length; i++) {
             switch (massKnob[i].cmd) {
@@ -343,7 +367,6 @@ const ManagementRightGrid = (props: {
           }
         }
         if (soobBP === 'Назначен') soobBP = soobBP + ' BP';
-
         if (mass[i].isXT) {
           soobXT = soobXT + 'назначен/';
           if (mass[i].releaseXT) {
@@ -482,7 +505,7 @@ const ManagementRightGrid = (props: {
   }
   MakeMassKnob();
 
-  console.log('!massknob:', massknob);
+  console.log('Right_massknob:', massknob);
 
   switch (props.mode) {
     case 1:
@@ -543,7 +566,6 @@ const ManagementRightGrid = (props: {
         }
         if (flEstXt) mass[k].isXT = flagXtArea;
       }
-      //MakeMassKnob();
       break;
 
     case 2:
@@ -599,7 +621,6 @@ const ManagementRightGrid = (props: {
           }
         }
       }
-      //MakeMassKnob();
       break;
 
     default:
@@ -666,7 +687,6 @@ const ManagementRightGrid = (props: {
           }
         }
       }
-    //MakeMassKnob();
   }
 
   return (

@@ -92,17 +92,7 @@ const ManagementLeftGrid = (props: {
       subarea: 99,
     },
   ];
-
-  // let dataKnobTemp: Knob[] = [
-  //   {
-  //     cmd: 0,
-  //     param: 99,
-  //     region: '',
-  //     area: '',
-  //     subarea: 99,
-  //   },
-  // ];
-
+  
   let mass: any = [];
   let masRab: any = [];
   let masAreaNum: any = [];
@@ -257,7 +247,6 @@ const ManagementLeftGrid = (props: {
 
   const RecordInAria = () => {
     massKnopTemp = [];
-    //let massKnopTempKost: any = [];
     let masArea: any = [];
     let masAreaRab: any = [];
 
@@ -265,23 +254,21 @@ const ManagementLeftGrid = (props: {
     console.log('LEFTmassKnop:', massKnop)
 
     for (let i = 0; i < mass.length; i++) {
-      // let dataKnobTemp: Knob[] = [
-      //   {
-      //     cmd: dataKnob[0].cmd,
-      //     param: dataKnob[0].param,
-      //     region: dataKnob[0].region,
-      //     area: mass[i].areaNum,
-      //     subarea: mass[i].subarea,
-      //   },
-      // ];
-      let dataKnobTemp: Knob[] = []
-      //massKnopTemp = [];
-      dataKnobTemp[0].cmd = dataKnob[0].cmd  // костыль
+      let dataKnobTemp: Knob[] = [
+        {
+          cmd: dataKnob[0].cmd,
+          param: dataKnob[0].param,
+          region: dataKnob[0].region,
+          area: mass[i].areaNum,
+          subarea: mass[i].subarea,
+        },
+      ];
+      // костыль
+      dataKnobTemp[0].cmd = dataKnob[0].cmd
       dataKnobTemp[0].param = dataKnob[0].param;
       dataKnobTemp[0].region = dataKnob[0].region;
       dataKnobTemp[0].area = mass[i].areaNum;
       dataKnobTemp[0].subarea = mass[i].subarea;
-
       //massKnopTemp[i] = dataKnobTemp[0];
       massKnopTemp.push(dataKnobTemp[0]);
       masAreaRab.push(mass[i].areaNum);
@@ -291,50 +278,27 @@ const ManagementLeftGrid = (props: {
       return masAreaRab.indexOf(element) === index;
     });
 
-    console.log('LEFTmasArea:',masArea)
-    //console.log('LEFTdataKnob:',dataKnob)
-    let cmdd = dataKnob[0].cmd;
-    //console.log('LEFTdataKnob:',cmdd,dataKnob)
-
     for (let i = 0; i < masArea.length; i++) {
       //добавление записей по районам
-
-      // let dataKnobTemp: Knob[] = [
-      //   {
-      //     //cmd: dataKnob[0].cmd,
-      //     cmd: cmdd,
-      //     param: dataKnob[0].param,
-      //     region: dataKnob[0].region,
-      //     area: masArea[i],
-      //     subarea: 0,
-      //   },
-      // ];
-      let dataKnobTemp: Knob[] = []
-      //massKnopTemp = [];
-      dataKnobTemp[0].cmd = dataKnob[0].cmd  
+      let dataKnobTemp: Knob[] = [
+        {
+          cmd: dataKnob[0].cmd,
+          param: dataKnob[0].param,
+          region: dataKnob[0].region,
+          area: masArea[i],
+          subarea: 0,
+        },
+      ];
+      // костыль
+      dataKnobTemp[0].cmd = dataKnob[0].cmd
       dataKnobTemp[0].param = dataKnob[0].param;
       dataKnobTemp[0].region = dataKnob[0].region;
       dataKnobTemp[0].area = masArea[i];
       dataKnobTemp[0].subarea = 0;
 
-      console.log('LEFTdataKnobTemp:', i, dataKnob[0].area, masArea[i],dataKnobTemp)
-
       massKnopTemp.push(dataKnobTemp[0]);
-      //massKnopTempKost.push(dataKnobTemp[0]);
     }
-
-    console.log('LEFTmassKnopTempAria:',massKnopTemp)
-
-    //massKnopTempKost[0].cmd = cmdd   // костыль
-
-    //console.log('!LEFTmassKnopTempKost:',massKnopTempKost)
-
-    console.log('LEFTmassKnopAria:',massKnop)
-    //console.log('LEFTmassKnopTemp:',massKnopTemp)
-
     massKnop = massKnop.concat(massKnopTemp); // ОбЪединение массивов
-
-    //console.log('LEFTmassKnopUN:',massKnop)
 
     for (let i = 0; i < massKnop.length; i++) {
       // изменение param по всему кусту региона
@@ -342,10 +306,6 @@ const ManagementLeftGrid = (props: {
         massKnop[i].param = dataKnob[0].param;
       }
     }
-
-    //console.log('LEFTdataKnobEnd:',dataKnob)
-    console.log('LEFTmassKnopEnd:', massKnop)
-
     DelateDublRecords(); //удаление дубликатов
   };
 
@@ -354,18 +314,17 @@ const ManagementLeftGrid = (props: {
       massKnopTemp = [];
       for (let i = 0; i < mass.length; i++) {
         if (mass[i].areaNum === dataKnob[0].area) {
-          // let dataKnobTemp: Knob[] = [
-          //   {
-          //     cmd: dataKnob[0].cmd,
-          //     param: dataKnob[0].param,
-          //     region: dataKnob[0].region,
-          //     area: mass[i].areaNum,
-          //     subarea: mass[i].areaNum,
-          //   },
-          // ];
-          let dataKnobTemp: Knob[] = []
-          //massKnopTemp = [];
-          dataKnobTemp[0].cmd = dataKnob[0].cmd 
+          let dataKnobTemp: Knob[] = [
+            {
+              cmd: dataKnob[0].cmd,
+              param: dataKnob[0].param,
+              region: dataKnob[0].region,
+              area: mass[i].areaNum,
+              subarea: mass[i].areaNum,
+            },
+          ];
+          // костыль
+          dataKnobTemp[0].cmd = dataKnob[0].cmd
           dataKnobTemp[0].param = dataKnob[0].param;
           dataKnobTemp[0].region = dataKnob[0].region;
           dataKnobTemp[0].area = mass[i].areaNum;
@@ -374,9 +333,6 @@ const ManagementLeftGrid = (props: {
           //console.log('massKnopTempTr:', massKnopTemp);
         }
       }
-
-      console.log('LEFTmassKnopTempSub:',massKnopTemp)
-
       massKnop = massKnop.concat(massKnopTemp); // ОбЪединение массивов
       for (let i = 0; i < massKnop.length; i++) {
         // изменение param по всему кусту района
@@ -471,7 +427,7 @@ const ManagementLeftGrid = (props: {
     );
   };
 
-  console.log('LEFTmasknobOut:',massKnop)
+  console.log('LEFTmasknobOut:', massKnop)
 
   return (
     <Grid container>
