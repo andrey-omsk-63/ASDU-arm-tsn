@@ -250,9 +250,6 @@ const ManagementLeftGrid = (props: {
     let masArea: any = [];
     let masAreaRab: any = [];
 
-    console.log('LEFTdataKnob:', dataKnob)
-    console.log('LEFTmassKnop:', massKnop)
-
     for (let i = 0; i < mass.length; i++) {
       let dataKnobTemp: Knob[] = [
         {
@@ -330,8 +327,7 @@ const ManagementLeftGrid = (props: {
           dataKnobTemp[0].area = mass[i].areaNum;
           dataKnobTemp[0].subarea = mass[i].areaNum;
           massKnopTemp.push(dataKnobTemp[0]);
-          //console.log('massKnopTempTr:', massKnopTemp);
-        }
+         }
       }
       massKnop = massKnop.concat(massKnopTemp); // ОбЪединение массивов
       for (let i = 0; i < massKnop.length; i++) {
@@ -379,10 +375,10 @@ const ManagementLeftGrid = (props: {
       } else {
         RecordInSubaria();
       }
-      console.log('LEFTmassKnopGl:', massKnop);
+      //console.log('LEFTmassKnopGl:', massKnop);
       // сортировка по cmd
       massKnop.sort((prev, next) => prev.cmd - next.cmd);
-      console.log('LEFTmassKnopGlSort:', massKnop);
+      //console.log('LEFTmassKnopGlSort:', massKnop);
     }
   };
 
@@ -427,7 +423,7 @@ const ManagementLeftGrid = (props: {
     );
   };
 
-  console.log('LEFTmasknobOut:', massKnop)
+  //console.log('LEFTmasknobOut:', massKnop)
 
   return (
     <Grid container>
