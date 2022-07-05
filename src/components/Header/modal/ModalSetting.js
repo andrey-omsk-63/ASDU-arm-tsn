@@ -42,7 +42,7 @@ const ModalSetting = () => {
     console.log('1111', event)
     if (reason !== 'backdropClick') setOpenSet(false);
   };
-  
+
   const styleSet = {
     position: 'absolute',
     top: '48%',
