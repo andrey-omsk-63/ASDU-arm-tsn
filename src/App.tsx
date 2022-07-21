@@ -1,23 +1,29 @@
-import React from 'react';
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import TabContext from '@mui/lab/TabContext';
-import TabPanel from '@mui/lab/TabPanel';
-import Modal from '@mui/material/Modal';
+import React from "react";
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import TabContext from "@mui/lab/TabContext";
+import TabPanel from "@mui/lab/TabPanel";
+import Modal from "@mui/material/Modal";
 
 //import Header from './components/Header/Header';
-import Management from './components/Management/Management';
-import Points from './components/Points/Points';
+import Management from "./components/Management/Management";
+import Points from "./components/Points/Points";
 //import Statistics from './components/Statistics/Statistics';
-import StatisticsNew from './components/Statistics/StatisticsNew';
+import StatisticsNew from "./components/Statistics/StatisticsNew";
 
-import { Tflight } from './interfaceMNG.d';
-import { XctrlInfo } from './interfaceGl.d';
-import { RegionInfo } from './interfaceGl.d';
-import { Statistic } from './interfaceStat.d';
+import { Tflight } from "./interfaceMNG.d";
+import { XctrlInfo } from "./interfaceGl.d";
+import { RegionInfo } from "./interfaceGl.d";
+import { Statistic } from "./interfaceStat.d";
 
-import { styleApp01, styleApp02, styleMod, styleBatMenu, styleModalMenu } from './AppStyle';
+import {
+  styleApp01,
+  styleApp02,
+  styleMod,
+  styleBatMenu,
+  styleModalMenu,
+} from "./AppStyle";
 
 let flagWS = true;
 let WS: any = null;
@@ -34,18 +40,22 @@ const App = () => {
   };
 
   const EndSeans = () => {
-    let soob = 'В Арм-е Технолога системы работает пользователь ' + bsLogin;
+    let soob = "В Арм-е Технолога системы работает пользователь " + bsLogin;
     return (
       <>
-        {bsLogin !== '' && (
+        {bsLogin !== "" && (
           <>
             <Box sx={styleMod}>
-              <Box sx={{ textAlign: 'center', fontSize: 16, color: 'red' }}>
+              <Box sx={{ textAlign: "center", fontSize: 16, color: "red" }}>
                 <b>{soob}</b>
               </Box>
-              <Box sx={{ color: 'background.paper' }}>Pusto</Box>
-              <Box sx={{ textAlign: 'center' }}>
-                <Button sx={styleBatMenu} variant="contained" onClick={handleClose}>
+              <Box sx={{ color: "background.paper" }}>Pusto</Box>
+              <Box sx={{ textAlign: "center" }}>
+                <Button
+                  sx={styleBatMenu}
+                  variant="contained"
+                  onClick={handleClose}
+                >
                   <b>Выход</b>
                 </Button>
               </Box>
@@ -74,46 +84,77 @@ const App = () => {
             key={i}
             sx={styleModalMenu}
             variant="contained"
-            onClick={() => handleCloseModal(massRegion[i])}>
+            onClick={() => handleCloseModal(massRegion[i])}
+          >
             <b>{massNameRegion[i]}</b>
-          </Button>,
+          </Button>
         );
       }
       return resStr;
     };
 
+    // let dat: any = [];
+
+    // for (let i = 0; i < massKey.length; i++) {
+    //   let maskCurrencies = {
+    //     value: "",
+    //     label: "",
+    //   };
+    //   maskCurrencies.value = massKey[i];
+    //   maskCurrencies.label = massDat[i];
+    //   currencies.push(maskCurrencies);
+    // }
+
     if (isOpenInf && regionGlob === 0) {
-      for (let i = 0; i < pointsXctrl.length; i++) {
-        let flag = true;
-        for (let j = 0; j < massRegion.length; j++) {
-          if (pointsXctrl[i].region === massRegion[j]) flag = false;
+      //let massDat = [];
+      for (let key in pointsReg) {
+        if (!isNaN(Number(key))) {
+          // ключ - символьное число
+          massRegion.push(Number(key));
+          massNameRegion.push(pointsReg[key]);
+          if (pointsReg[key].length > dlStrMenu)
+            dlStrMenu = pointsReg[key].length;
         }
-        if (flag) massRegion.push(pointsXctrl[i].region);
       }
-      massRegion.sort();
       regionGlob = massRegion[0];
-      if (massNameRegion.length === 0) {
-        for (let i = 0; i < massRegion.length; i++) {
-          let strMenu = pointsReg[massRegion[i].toString() as keyof RegionInfo];
-          massNameRegion.push(strMenu);
-          if (strMenu?.length > dlStrMenu) dlStrMenu = strMenu.length;
-        }
-      }
+      // console.log("massRegion:", typeof massRegion[0], massRegion);
+      // console.log("massNameRegion:", dlStrMenu, massNameRegion);
+      // console.log("pointsReg:", pointsReg);
+
+      // for (let i = 0; i < pointsXctrl.length; i++) {
+      //   let flag = true;
+      //   for (let j = 0; j < massRegion.length; j++) {
+      //     if (pointsXctrl[i].region === massRegion[j]) flag = false;
+      //   }
+      //   if (flag) massRegion.push(pointsXctrl[i].region);
+      // }
+      //massRegion.sort();
+      // if (massNameRegion.length === 0) {
+      //   for (let i = 0; i < massRegion.length; i++) {
+      //     let strMenu = pointsReg[massRegion[i].toString() as keyof RegionInfo];
+      //     massNameRegion.push(strMenu);
+      //     if (strMenu?.length > dlStrMenu) dlStrMenu = strMenu.length;
+      //   }
+      // }
     }
 
     const styleModal = {
-      position: 'relative',
-      bottom: '-48vh',
-      marginLeft: '60vh',
-      transform: 'translate(-50%, -50%)',
+      position: "relative",
+      bottom: "-48vh",
+      marginLeft: "60vh",
+      transform: "translate(-50%, -50%)",
       width: (dlStrMenu + 8) * 10,
-      bgcolor: 'background.paper',
-      border: '2px solid #000',
-      borderColor: 'primary.main',
+      bgcolor: "background.paper",
+      border: "2px solid #000",
+      borderColor: "primary.main",
       borderRadius: 2,
       boxShadow: 24,
       p: 3,
     };
+
+    // if (massRegion.length === 0) {
+    //   handleCloseModal(-1);
+    // }
 
     if (massRegion.length === 1) {
       handleCloseModal(massRegion[0]);
@@ -123,7 +164,7 @@ const App = () => {
       <Modal open={open}>
         <Box sx={styleModal}>
           <Stack direction="column">
-            <Box sx={{ textAlign: 'center' }}>Выбор региона:</Box>
+            <Box sx={{ textAlign: "center" }}>Выбор региона:</Box>
             {/* <Box sx={{ overflowX: 'auto', height: '36vh' }}>{SpisRegion()}</Box> */}
             {SpisRegion()}
           </Stack>
@@ -151,7 +192,7 @@ const App = () => {
           }
         }
         if (newRecord) {
-          console.log('Points новая запись i=', i);
+          console.log("Points новая запись i=", i);
           pointsAdd.push(pointsXctrl[i]);
         }
       }
@@ -161,23 +202,30 @@ const App = () => {
         }
       }
     }
-    if (isOpenInf && flagEtalonInf) {   // получен первый WS 
+    if (isOpenInf && flagEtalonInf) {
+      // получен первый WS
       pointsEtalonXctrl = pointsXctrl;
       flagEtalonInf = false;
     }
-  }
+  };
 
   const [pointsXctrl, setPointsXctrl] = React.useState<Array<XctrlInfo>>([]);
-  const [pointsReg, setPointsReg] = React.useState<RegionInfo>({} as RegionInfo);
+  const [pointsReg, setPointsReg] = React.useState<RegionInfo>(
+    {} as RegionInfo
+  );
   const [isOpenInf, setIsOpenInf] = React.useState(false);
   const [pointsTfl, setPointsTfl] = React.useState<Array<Tflight>>([]);
   const [isOpenDev, setIsOpenDev] = React.useState(false);
   const [pointsSt, setPointsSt] = React.useState<Array<Statistic>>([]);
   const [isOpenSt, setIsOpenSt] = React.useState(false);
-  const [bsLogin, setBsLogin] = React.useState('');
+  const [bsLogin, setBsLogin] = React.useState("");
 
   const host =
-    'wss://' + window.location.host + window.location.pathname + 'W' + window.location.search;
+    "wss://" +
+    window.location.host +
+    window.location.pathname +
+    "W" +
+    window.location.search;
   // let WS: React.MutableRefObject<WebSocket> = {};
   //const WS: any = React.useRef(new WebSocket('wss://ws.kraken.com/'));
   //const WS = React.useRef(new WebSocket('wss://ws.kraken.com/'));
@@ -188,15 +236,15 @@ const App = () => {
 
   React.useEffect(() => {
     WS.onopen = function (event: any) {
-      console.log('WS.current.onopen:', event);
+      console.log("WS.current.onopen:", event);
     };
 
     WS.onclose = function (event: any) {
-      console.log('WS.current.onclose:', event);
+      console.log("WS.current.onclose:", event);
     };
 
     WS.onerror = function (event: any) {
-      console.log('WS.current.onerror:', event);
+      console.log("WS.current.onerror:", event);
     };
 
     WS.onmessage = function (event: any) {
@@ -204,55 +252,69 @@ const App = () => {
       let data = allData.data;
       //console.log('пришло:', data);
       switch (allData.type) {
-        case 'getDevices':
-          console.log('data_getDevices:', data);
+        case "getDevices":
+          console.log("data_getDevices:", data);
           setPointsTfl(data.tflight ?? []);
           setIsOpenDev(true);
           break;
-        case 'xctrlInfo':
-          console.log('data_xctrlInfo:', data);
+        case "xctrlInfo":
+          console.log("data_xctrlInfo:", data);
           setPointsXctrl(data.xctrlInfo ?? []);
           if (regionGlob === 0) setPointsReg(data.regionInfo ?? []);
+          //setPointsInfo(data.regionInfo ?? []);
+          //if (regionGlob === 0) setPointsReg(data.regionInfo ?? []);
           setIsOpenInf(true);
           break;
-        case 'getStatistics':
-          console.log('data_statistics:', data);
+        case "getStatistics":
+          console.log("data_statistics:", data);
           setPointsSt(data.statistics ?? []);
           setIsOpenSt(true);
           break;
-        case 'busy':
+        case "busy":
           setBsLogin(data.login);
           break;
         default:
-          console.log('data_default:', data);
+          console.log("data_default:", data);
       }
     };
   }, []);
 
-  const [value, setValue] = React.useState('1');
+  const [value, setValue] = React.useState("1");
 
-  UpdateXctrl()   // разноска обновлений Xctrl
+  UpdateXctrl(); // разноска обновлений Xctrl
 
   return (
     <>
       <EndSeans />
       {regionGlob === 0 && isOpenInf && <BeginSeans />}
-      <Box sx={{ width: '98.8%', typography: 'body2' }}>
+      <Box sx={{ width: "98.8%", typography: "body2" }}>
         <TabContext value={value}>
-          <Box sx={{ marginLeft: 0.5, backgroundColor: '#F1F5FB' }}>
+          <Box sx={{ marginLeft: 0.5, backgroundColor: "#F1F5FB" }}>
             <Stack direction="row">
-              {bsLogin === '' && (
-                <Button sx={styleApp01} variant="contained" onClick={() => setValue('1')}>
+              {bsLogin === "" && (
+                <Button
+                  sx={styleApp01}
+                  variant="contained"
+                  onClick={() => setValue("1")}
+                >
                   <b>Управление</b>
                 </Button>
               )}
-              {bsLogin === '' && (
-                <Button sx={styleApp02} variant="contained" onClick={() => setValue('2')}>
+              {bsLogin === "" && (
+                <Button
+                  sx={styleApp02}
+                  variant="contained"
+                  onClick={() => setValue("2")}
+                >
                   <b>Характерные точки</b>
                 </Button>
               )}
-              {bsLogin === '' && (
-                <Button sx={styleApp01} variant="contained" onClick={() => setValue('3')}>
+              {bsLogin === "" && (
+                <Button
+                  sx={styleApp01}
+                  variant="contained"
+                  onClick={() => setValue("3")}
+                >
                   <b>Статистика</b>
                 </Button>
               )}
@@ -260,17 +322,33 @@ const App = () => {
           </Box>
           <TabPanel value="1">
             {WS !== null && regionGlob !== 0 && (
-              <Management open={isOpenDev} ws={WS} points={pointsTfl} xctrll={pointsXctrl} region={String(regionGlob)} />
+              <Management
+                open={isOpenDev}
+                ws={WS}
+                points={pointsTfl}
+                xctrll={pointsXctrl}
+                region={String(regionGlob)}
+              />
             )}
           </TabPanel>
           <TabPanel value="2">
             {WS !== null && regionGlob !== 0 && (
-              <Points open={isOpenInf} ws={WS} xctrll={pointsEtalonXctrl} region={String(regionGlob)} />
+              <Points
+                open={isOpenInf}
+                ws={WS}
+                xctrll={pointsEtalonXctrl}
+                region={String(regionGlob)}
+              />
             )}
           </TabPanel>
           <TabPanel value="3">
             {WS !== null && regionGlob !== 0 && (
-              <StatisticsNew open={isOpenSt} ws={WS} points={pointsSt} region={String(regionGlob)} />
+              <StatisticsNew
+                open={isOpenSt}
+                ws={WS}
+                points={pointsSt}
+                region={String(regionGlob)}
+              />
             )}
           </TabPanel>
         </TabContext>
@@ -282,7 +360,5 @@ const App = () => {
 export default App;
 
 //const [points, setPoints] = React.useState<XctrlInfo>({} as XctrlInfo);
-
 // const [points, setPoints] = React.useState<Array<XctrlInfo>>([]);
 // const [isOpen, setIsOpen] = React.useState(false);
-
