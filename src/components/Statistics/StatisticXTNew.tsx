@@ -1,20 +1,46 @@
-import * as React from 'react';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import * as React from "react";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 
-import { Statistic } from '../../interfaceStat.d';
+import { Statistic } from "../../interfaceStat.d";
 
-import { colorsGraf, styleSt02, styleSt03, styleSt04, styleSt05 } from './StatisticXTStyle';
-import { styleSt06, styleHeader03, styleHeader033 } from './StatisticXTStyle';
-import { styleBatton, styleClear, styleBattonCl, options } from './StatisticXTStyle';
+import {
+  colorsGraf,
+  styleSt02,
+  styleSt03,
+  styleSt04,
+  styleSt05,
+} from "./StatisticXTStyle";
+import { styleSt06, styleHeader03, styleHeader033 } from "./StatisticXTStyle";
+import {
+  styleBatton,
+  styleClear,
+  styleBattonCl,
+  options,
+} from "./StatisticXTStyle";
 
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement } from 'chart.js';
-import { LineElement, Title, Tooltip, Legend } from 'chart.js';
-import { Line } from 'react-chartjs-2';
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+} from "chart.js";
+import { LineElement, Title, Tooltip, Legend } from "chart.js";
+import { Line } from "react-chartjs-2";
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 export interface GrafGlob {
   //id: number;
@@ -46,20 +72,24 @@ let canal: number[] = [];
 let oldAreaid = -1;
 let numIdInMas = 0;
 
-const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: number }) => {
+const StatisticXTNew = (props: {
+  open: boolean;
+  statist: Statistic[];
+  areaid: number;
+}) => {
   const isOpen = props.open;
   const points = props.statist;
   const areaId = props.areaid;
 
-  console.log('Stat_points:', points)
+  console.log("Stat_points:", points);
 
   let colChanel = 0;
-  const [value, setValue] = React.useState('0');
+  const [value, setValue] = React.useState("0");
 
   let resStr: any = [];
   let resSps: any = [];
   let matrix: any = [];
-  let kakchestvo = ' ';
+  let kakchestvo = " ";
 
   if (isOpen) {
     if (oldAreaid < 0) {
@@ -93,32 +123,32 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
         }
       }
       oldAreaid = areaId;
-      setValue('0');
+      setValue("0");
     }
   }
 
   const StatGraf00 = () => {
     let datas = [];
     let datasetsMask: Datasets = {
-      label: 'Канал ',
+      label: "Канал ",
       data: [],
       borderWidth: 1,
-      borderColor: '',
-      backgroundColor: '',
+      borderColor: "",
+      backgroundColor: "",
       pointRadius: 1,
     };
 
     const val = Number(value) - 1;
 
     if (isOpen && val >= 0 && !canal.includes(val)) {
-      if (isOpen && value !== '0' && labels.length === 0) {
+      if (isOpen && value !== "0" && labels.length === 0) {
         const colMin = 60 / matrix[0].TLen;
         for (let i = 0; i < matrix.length; i++) {
-          let int = '';
+          let int = "";
           if (i % colMin === 0) {
-            if (i / colMin < 10) int += '0';
+            if (i / colMin < 10) int += "0";
             int += String(i / colMin);
-            int += ':00';
+            int += ":00";
           }
           labels.push(int);
         }
@@ -133,7 +163,8 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
         canal = [];
       } else {
         let int = 0;
-        if (matrix[matrix.length - 1].Datas.length !== 0) int = matrix[matrix.length - 1].Datas[val].in;
+        if (matrix[matrix.length - 1].Datas.length !== 0)
+          int = matrix[matrix.length - 1].Datas[val].in;
         datas.push(int);
 
         for (let i = 0; i < matrix.length - 1; i++) {
@@ -159,7 +190,7 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
     }
 
     return (
-      <Grid item xs sx={{ height: '28vh' }}>
+      <Grid item xs sx={{ height: "28vh" }}>
         <Line options={options} data={massId[numIdInMas]} />
       </Grid>
     );
@@ -183,7 +214,11 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
     const KnobBatCl = () => {
       return (
         <Box sx={styleClear}>
-          <Button sx={styleBattonCl} variant="contained" onClick={() => setValue('17')}>
+          <Button
+            sx={styleBattonCl}
+            variant="contained"
+            onClick={() => setValue("17")}
+          >
             <b>Чистка</b>
           </Button>
         </Box>
@@ -198,12 +233,21 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
           resStr.push(
             <Grid item key={i} xs={xss}>
               {/* <KnobBat num={i.toString()} key={Math.random()} /> */}
-              <Grid container key={Math.random()} justifyContent="center" sx={styleHeader03}>
-                <Button sx={styleBatton} variant="contained" onClick={() => setValue(i.toString())}>
+              <Grid
+                container
+                key={Math.random()}
+                justifyContent="center"
+                sx={styleHeader03}
+              >
+                <Button
+                  sx={styleBatton}
+                  variant="contained"
+                  onClick={() => setValue(i.toString())}
+                >
                   <b>{i.toString()}</b>
                 </Button>
               </Grid>
-            </Grid>,
+            </Grid>
           );
         }
         return resStr;
@@ -238,21 +282,21 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
 
   const StatStroka = (numMas: number) => {
     if (isOpen) {
-      kakchestvo = ' ';
+      kakchestvo = " ";
       resStr = [];
 
       //формирование времение в формате 00:00
-      let timLiner = '';
-      if (matrix[numMas].Hour < 10) timLiner = '0';
+      let timLiner = "";
+      if (matrix[numMas].Hour < 10) timLiner = "0";
       timLiner += matrix[numMas].Hour;
-      timLiner += ':';
-      if (matrix[numMas].Min < 10) timLiner += '0';
+      timLiner += ":";
+      if (matrix[numMas].Min < 10) timLiner += "0";
       timLiner += matrix[numMas].Min;
       //формирование начала строки
       resStr.push(
         <Grid key={Math.random()} item xs={0.5} sx={styleSt05}>
           {timLiner}
-        </Grid>,
+        </Grid>
       );
       if (!matrix[numMas].Avail) {
         //нет данных
@@ -263,29 +307,30 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
         resStr.push(
           <Grid key={Math.random()} item xs={3.3} sx={styleSt06}>
             нет данных
-          </Grid>,
+          </Grid>
         );
       } else {
         for (let i = 0; i < colChanel; i++) {
           if (matrix[numMas].Datas[i].st !== 0) {
             kakchestvo += i + 1;
-            kakchestvo += ', ';
+            kakchestvo += ", ";
           }
           resStr.push(
             <Grid
               key={Math.random()}
               item
               xs={0.51}
-              sx={matrix[numMas].Datas[i].st === 0 ? styleSt03 : styleSt04}>
+              sx={matrix[numMas].Datas[i].st === 0 ? styleSt03 : styleSt04}
+            >
               {matrix[numMas].Datas[i].in}
-            </Grid>,
+            </Grid>
           );
         }
         //формирование конца строки
         resStr.push(
           <Grid key={Math.random()} item xs={3.3} sx={styleSt06}>
             {kakchestvo.slice(0, -2)}
-          </Grid>,
+          </Grid>
         );
       }
     }
@@ -299,7 +344,7 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
         resSps.push(
           <Grid key={i} item container sx={{ height: 27 }}>
             {StatStroka(i)}
-          </Grid>,
+          </Grid>
         );
       }
     }
@@ -355,27 +400,72 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
         matrix[numInMatrix].Avail = true;
       }
     }
+    //Output()
+  };
+  //============ Динама =====================================================
+  const [openLoader, setOpenLoader] = React.useState(true);
+  const handleClose = () => {
+    setOpenLoader(false);
   };
 
+  const styleBackdrop = {
+    color: "#fff",
+    zIndex: (theme: any) => theme.zIndex.drawer + 1,
+  };
+
+  const Output = () => {
+    React.useEffect(() => {
+      setTimeout(() => {
+        setOpenLoader(false);
+      }, 100);
+    }, []);
+  };
+
+  const Loader = () => {
+    return (
+      <Backdrop sx={styleBackdrop} open={openLoader} onClick={handleClose}>
+        <CircularProgress color="inherit" size={548} />
+      </Backdrop>
+    );
+  };
+  //=========================================================================
   if (isOpen) {
+    // setOpenLoader(true);
     CreateMatrix();
     CompletMatrix();
     StatSpis();
+    Output()
   }
+
+  console.log('OpenLoader - ',openLoader) 
 
   return (
     <Box sx={{ marginTop: 0.8, marginLeft: -2.5, marginRight: -4 }}>
-      <Grid container item sx={{ height: '28vh' }}>
-        <Grid item xs={12} sx={{ border: 1, borderRadius: 1, borderColor: 'primary.main' }}>
+      <Grid container item sx={{ height: "28vh" }}>
+        <Grid
+          item
+          xs={12}
+          sx={{ border: 1, borderRadius: 1, borderColor: "primary.main" }}
+        >
           <StatGraf00 />
         </Grid>
       </Grid>
-      <Grid container item sx={{ marginTop: 0.5, height: '56vh' }}>
-        <Grid item xs={24} sx={{ border: 1, borderRadius: 1, borderColor: 'primary.main' }}>
+      <Grid container item sx={{ marginTop: 0.5, height: "56vh" }}>
+        <Grid
+          item
+          xs={24}
+          sx={{ border: 1, borderRadius: 1, borderColor: "primary.main" }}
+        >
           <StatisticHeader />
-          <Box sx={{ overflowX: 'auto', height: '59vh' }}>
+          <Box sx={{ overflowX: "auto", height: "59vh" }}>
             <Grid container item>
-              {resSps}
+              {openLoader ? (
+                <Loader />
+              ) : (
+                <Grid container item>
+                  {resSps}
+                </Grid>
+              )}
             </Grid>
           </Box>
         </Grid>
