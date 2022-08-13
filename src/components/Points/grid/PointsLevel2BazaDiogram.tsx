@@ -1,48 +1,55 @@
-import * as React from 'react';
-import Grid from '@mui/material/Grid';
-import Button from '@mui/material/Button';
+import * as React from "react";
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
 
-import { XctrlInfo } from '../../../interfaceGl.d';
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 
-const PointsLevel2BazaDiogram = (props: { xctrll: XctrlInfo[]; xtt: number; crossroad: number }) => {
+import { XctrlInfo } from "../../../interfaceGl.d";
+
+const PointsLevel2BazaDiogram = (props: {
+  xctrll: XctrlInfo[];
+  xtt: number;
+  crossroad: number;
+}) => {
   const xtProps = props.xtt;
   const points = props.xctrll[xtProps];
   const crRoad = props.crossroad;
 
   const colorsGraf = [
-    'orange',
-    'Turquoise',
-    'YellowGreen',
+    "orange",
+    "Turquoise",
+    "YellowGreen",
 
-    'Yellow',
-    'Pink',
-    'Aqua',
+    "Yellow",
+    "Pink",
+    "Aqua",
 
-    'Lime',
-    'Tomato',
-    'teal',
+    "Lime",
+    "Tomato",
+    "teal",
 
-    'purple',
-    'RosyBrown',
-    'Coral',
+    "purple",
+    "RosyBrown",
+    "Coral",
 
-    'Olive',
-    'Magenta',
-    'DarkGray',
+    "Olive",
+    "Magenta",
+    "DarkGray",
 
-    'RoyalBlue',
-    'SpringGreen',
-    'Violet',
+    "RoyalBlue",
+    "SpringGreen",
+    "Violet",
   ];
 
   const styleXTG02 = {
     fontSize: 12.5,
-    maxHeight: '15px',
-    minHeight: '15px',
-    backgroundColor: '#F1F3F4',
-    color: 'black',
+    maxHeight: "15px",
+    minHeight: "15px",
+    backgroundColor: "#F1F3F4",
+    color: "black",
     marginRight: 1,
-    textTransform: 'unset !important',
+    textTransform: "unset !important",
   };
 
   const [value, setValue] = React.useState(0);
@@ -58,8 +65,8 @@ const PointsLevel2BazaDiogram = (props: { xctrll: XctrlInfo[]; xtt: number; cros
   let matrix: string[][] = [[]];
 
   let scale: number = 5;
-  let coler = 'red';
-  let colerOld = '';
+  let coler = "red";
+  let colerOld = "";
   let masStr = [];
   let masCol = [];
   let colBl = 0;
@@ -70,11 +77,101 @@ const PointsLevel2BazaDiogram = (props: { xctrll: XctrlInfo[]; xtt: number; cros
 
     if (value > 1) scale = 2;
 
-    MakeMatrix();
+    const MakeMatrix = () => {
+      let ratio = 0;
+      let luchP = 1;
+      let luchO = 1;
+      let coler = "red";
+      let i = 0;
+      let j = 0;
+
+      const MakeMatrixColor = (num: number) => {
+        // luchP = points.xctrls[crRoad].StrategyB[num].vleft;
+        // luchO = points.xctrls[crRoad].StrategyB[num].vright;
+        luchO = points.xctrls[crRoad].StrategyB[num].vleft;
+        luchP = points.xctrls[crRoad].StrategyB[num].vright;
+        ratio =
+          points.xctrls[crRoad].StrategyB[num].xright /
+          points.xctrls[crRoad].StrategyB[num].xleft;
+        coler = colorsGraf[num * 3];
+        if (luchP !== 1 || luchO !== 1) {
+          // if (i < j * luchO * ratio) coler = colorsGraf[num * 3 + 1];
+          // if (i >= j * luchP * ratio) coler = colorsGraf[num * 3 + 2];
+          if (i < j * luchO * ratio) {
+            coler = colorsGraf[num * 3 + 1];
+            // if (j === 1500) console.log('111:', i, j * luchO * ratio, luchP, luchO)
+          }
+          if (i >= j * luchP * ratio) {
+            coler = colorsGraf[num * 3 + 2];
+            // if (j === 1500) console.log('222:', i, j * luchP * ratio, luchP, luchO)
+          }
+        }
+      };
+
+      for (j = 0; j < vertical; j += scale) {
+        matrix[j] = [];
+
+        for (i = 0; i < horizon; i += scale) {
+          if (
+            dlMas >= 1 &&
+            points.xctrls[crRoad].StrategyB[0].xright >= i &&
+            points.xctrls[crRoad].StrategyB[0].xleft >= j
+          ) {
+            MakeMatrixColor(0);
+          } else {
+            if (
+              dlMas >= 2 &&
+              points.xctrls[crRoad].StrategyB[1].xright >= i &&
+              points.xctrls[crRoad].StrategyB[1].xleft >= j
+            ) {
+              MakeMatrixColor(1);
+            } else {
+              if (
+                dlMas >= 3 &&
+                points.xctrls[crRoad].StrategyB[2].xright >= i &&
+                points.xctrls[crRoad].StrategyB[2].xleft >= j
+              ) {
+                MakeMatrixColor(2);
+              } else {
+                if (
+                  dlMas >= 4 &&
+                  points.xctrls[crRoad].StrategyB[3].xright >= i &&
+                  points.xctrls[crRoad].StrategyB[3].xleft >= j
+                ) {
+                  MakeMatrixColor(3);
+                } else {
+                  if (
+                    dlMas >= 5 &&
+                    points.xctrls[crRoad].StrategyB[4].xright >= i &&
+                    points.xctrls[crRoad].StrategyB[4].xleft >= j
+                  ) {
+                    MakeMatrixColor(4);
+                  } else {
+                    if (
+                      dlMas >= 6 &&
+                      points.xctrls[crRoad].StrategyB[5].xright >= i &&
+                      points.xctrls[crRoad].StrategyB[5].xleft >= j
+                    ) {
+                      MakeMatrixColor(5);
+                    }
+                  }
+                }
+              }
+            }
+          }
+          matrix[j].push(coler);
+        }
+      }
+      matrix = matrix.filter(function (el) {
+        //избавляемся от пустых значений
+        return el != null;
+      });
+      matrix.reverse(); //переворачиваем матрицу
+    };
 
     const PointsXt112Comp1Tab4Str = (j: number) => {
       resStr = [];
-      coler = 'red';
+      coler = "red";
       colerOld = matrix[j / scale][0 / scale];
       masStr = [];
       masCol = [];
@@ -102,114 +199,71 @@ const PointsLevel2BazaDiogram = (props: { xctrll: XctrlInfo[]; xtt: number; cros
             item
             sx={{
               backgroundColor: masCol[i],
-              height: String(steepVertical * scale) + 'vh',
-            }}></Grid>,
+              height: String(steepVertical * scale) + "vh",
+            }}
+          ></Grid>
         );
       }
       return resStr;
     };
 
+    //setOpenLoader(true);
+    MakeMatrix();
     for (let j = 0; j < vertical; j += scale) {
       resSps.push(
         <Grid key={j} item container sx={{ border: 0 }}>
           {PointsXt112Comp1Tab4Str(j)}
-        </Grid>,
+        </Grid>
       );
+      //resSps.push(<>{setValue(0)}</>);
     }
+    //Output();
+    console.log("2openLoader", openLoader, value);
+    //setValue(0)
+
     return resSps;
+    //<>{resSps}</>
+    // <>
+    //   {openLoader && <Dinama />}
+    //   {!openLoader && <>{resSps}</>}
+    // </>
+    //);
   };
 
-  const MakeMatrix = () => {
-    let ratio = 0;
-    let luchP = 1;
-    let luchO = 1;
-    let coler = 'red';
-    let i = 0;
-    let j = 0;
-
-    const MakeMatrixColor = (num: number) => {
-      // luchP = points.xctrls[crRoad].StrategyB[num].vleft;
-      // luchO = points.xctrls[crRoad].StrategyB[num].vright;
-      luchO = points.xctrls[crRoad].StrategyB[num].vleft;
-      luchP = points.xctrls[crRoad].StrategyB[num].vright;
-      ratio =
-        points.xctrls[crRoad].StrategyB[num].xright / points.xctrls[crRoad].StrategyB[num].xleft;
-      coler = colorsGraf[num * 3];
-      if (luchP !== 1 || luchO !== 1) {
-        // if (i < j * luchO * ratio) coler = colorsGraf[num * 3 + 1];
-        // if (i >= j * luchP * ratio) coler = colorsGraf[num * 3 + 2];
-        if (i < j * luchO * ratio) {
-          coler = colorsGraf[num * 3 + 1];
-          // if (j === 1500) console.log('111:', i, j * luchO * ratio, luchP, luchO)
-        }
-        if (i >= j * luchP * ratio) {
-          coler = colorsGraf[num * 3 + 2];
-          // if (j === 1500) console.log('222:', i, j * luchP * ratio, luchP, luchO)
-        }
-
-      }
-    };
-
-    for (j = 0; j < vertical; j += scale) {
-      matrix[j] = [];
-
-      for (i = 0; i < horizon; i += scale) {
-        if (
-          dlMas >= 1 &&
-          points.xctrls[crRoad].StrategyB[0].xright >= i &&
-          points.xctrls[crRoad].StrategyB[0].xleft >= j
-        ) {
-          MakeMatrixColor(0);
-        } else {
-          if (
-            dlMas >= 2 &&
-            points.xctrls[crRoad].StrategyB[1].xright >= i &&
-            points.xctrls[crRoad].StrategyB[1].xleft >= j
-          ) {
-            MakeMatrixColor(1);
-          } else {
-            if (
-              dlMas >= 3 &&
-              points.xctrls[crRoad].StrategyB[2].xright >= i &&
-              points.xctrls[crRoad].StrategyB[2].xleft >= j
-            ) {
-              MakeMatrixColor(2);
-            } else {
-              if (
-                dlMas >= 4 &&
-                points.xctrls[crRoad].StrategyB[3].xright >= i &&
-                points.xctrls[crRoad].StrategyB[3].xleft >= j
-              ) {
-                MakeMatrixColor(3);
-              } else {
-                if (
-                  dlMas >= 5 &&
-                  points.xctrls[crRoad].StrategyB[4].xright >= i &&
-                  points.xctrls[crRoad].StrategyB[4].xleft >= j
-                ) {
-                  MakeMatrixColor(4);
-                } else {
-                  if (
-                    dlMas >= 6 &&
-                    points.xctrls[crRoad].StrategyB[5].xright >= i &&
-                    points.xctrls[crRoad].StrategyB[5].xleft >= j
-                  ) {
-                    MakeMatrixColor(5);
-                  }
-                }
-              }
-            }
-          }
-        }
-        matrix[j].push(coler);
-      }
-    }
-    matrix = matrix.filter(function (el) {
-      //избавляемся от пустых значений
-      return el != null;
-    });
-    matrix.reverse(); //переворачиваем матрицу
+  //============ Dinama =====================================================
+  const [openLoader, setOpenLoader] = React.useState(false);
+  const handleClose = () => {
+    setOpenLoader(false);
   };
+
+  const styleBackdrop = {
+    color: "#fff",
+    zIndex: (theme: any) => theme.zIndex.drawer + 1,
+  };
+
+  const Output = () => {
+    React.useEffect(() => {
+      setTimeout(() => {
+        setOpenLoader(false);
+      }, 1000);
+    }, []);
+  };
+
+  const Dinama = () => {
+    return (
+      <Backdrop sx={styleBackdrop} open={openLoader} onClick={handleClose}>
+        <CircularProgress color="inherit" size={548} />
+      </Backdrop>
+    );
+  };
+  //=========================================================================
+
+  // const SetValue = (mode: number) => {
+  //   setValue(mode);
+  //   //setOpenLoader(true);
+  // };
+
+  console.log("1openLoader", openLoader, value);
 
   return (
     <Grid item container xs={12}>
@@ -220,7 +274,19 @@ const PointsLevel2BazaDiogram = (props: { xctrll: XctrlInfo[]; xtt: number; cros
         <b>Диаграмма в высоком качестве</b>
       </Button>
 
-      <>{value > 0 && <>{PointsXt112Comp1Tab4()}</>}</>
+      <>
+        {value > 0 && (
+          <>
+            {openLoader && <Dinama />}
+            {!openLoader && (
+              <>
+                {PointsXt112Comp1Tab4()}
+                {/* {setValue(0)} */}
+              </>
+            )}
+          </>
+        )}
+      </>
     </Grid>
   );
 };

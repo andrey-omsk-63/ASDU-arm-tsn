@@ -9,27 +9,13 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 import { Statistic } from "../../interfaceStat.d";
 
-import {
-  colorsGraf,
-  styleSt02,
-  styleSt03,
-  styleSt04,
-  styleSt05,
-} from "./StatisticXTStyle";
+import { colorsGraf, styleSt02, styleSt03, options } from "./StatisticXTStyle";
+import { styleSt04, styleSt05, styleStatMain } from "./StatisticXTStyle";
 import { styleSt06, styleHeader03, styleHeader033 } from "./StatisticXTStyle";
-import {
-  styleBatton,
-  styleClear,
-  styleBattonCl,
-  options,
-} from "./StatisticXTStyle";
+import { styleBatton, styleClear, styleBattonCl } from "./StatisticXTStyle";
 
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-} from "chart.js";
+import { Chart as ChartJS, CategoryScale } from "chart.js";
+import { LinearScale, PointElement } from "chart.js";
 import { LineElement, Title, Tooltip, Legend } from "chart.js";
 import { Line } from "react-chartjs-2";
 ChartJS.register(
@@ -141,6 +127,7 @@ const StatisticXTNew = (props: {
     const val = Number(value) - 1;
 
     if (isOpen && val >= 0 && !canal.includes(val)) {
+      setOpenLoader(true);
       if (isOpen && value !== "0" && labels.length === 0) {
         const colMin = 60 / matrix[0].TLen;
         for (let i = 0; i < matrix.length; i++) {
@@ -187,6 +174,7 @@ const StatisticXTNew = (props: {
         canal.push(val);
         massId[numIdInMas].canall = canal;
       }
+      Output();
     }
 
     return (
@@ -201,16 +189,6 @@ const StatisticXTNew = (props: {
   colChanel = points[areaId].Statistics[0].Datas.length;
 
   const StatisticHeader = () => {
-    // const KnobBat = (props: { num: string }) => {
-    //   return (
-    //     <Grid container key={Math.random()} justifyContent="center" sx={styleHeader03}>
-    //       <Button sx={styleBatton} variant="contained" onClick={() => setValue(props.num)}>
-    //         <b>{props.num}</b>
-    //       </Button>
-    //     </Grid>
-    //   );
-    // };
-
     const KnobBatCl = () => {
       return (
         <Box sx={styleClear}>
@@ -400,9 +378,8 @@ const StatisticXTNew = (props: {
         matrix[numInMatrix].Avail = true;
       }
     }
-    //Output()
   };
-  //============ Динама =====================================================
+  //============ Dinama =====================================================
   const [openLoader, setOpenLoader] = React.useState(true);
   const handleClose = () => {
     setOpenLoader(false);
@@ -421,7 +398,7 @@ const StatisticXTNew = (props: {
     }, []);
   };
 
-  const Loader = () => {
+  const Dinama = () => {
     return (
       <Backdrop sx={styleBackdrop} open={openLoader} onClick={handleClose}>
         <CircularProgress color="inherit" size={548} />
@@ -434,34 +411,24 @@ const StatisticXTNew = (props: {
     CreateMatrix();
     CompletMatrix();
     StatSpis();
-    Output()
+    Output();
   }
-
-  console.log('OpenLoader - ',openLoader) 
 
   return (
     <Box sx={{ marginTop: 0.8, marginLeft: -2.5, marginRight: -4 }}>
       <Grid container item sx={{ height: "28vh" }}>
-        <Grid
-          item
-          xs={12}
-          sx={{ border: 1, borderRadius: 1, borderColor: "primary.main" }}
-        >
-          <StatGraf00 />
+        <Grid item xs={12} sx={styleStatMain}>
+          {openLoader && <Dinama />}
+          {!openLoader && <StatGraf00 />}
         </Grid>
       </Grid>
       <Grid container item sx={{ marginTop: 0.5, height: "56vh" }}>
-        <Grid
-          item
-          xs={24}
-          sx={{ border: 1, borderRadius: 1, borderColor: "primary.main" }}
-        >
+        <Grid item xs={24} sx={styleStatMain}>
           <StatisticHeader />
           <Box sx={{ overflowX: "auto", height: "59vh" }}>
             <Grid container item>
-              {openLoader ? (
-                <Loader />
-              ) : (
+              {openLoader && <Dinama />}
+              {!openLoader && (
                 <Grid container item>
                   {resSps}
                 </Grid>
