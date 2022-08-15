@@ -127,7 +127,7 @@ const StatisticXTNew = (props: {
     const val = Number(value) - 1;
 
     if (isOpen && val >= 0 && !canal.includes(val)) {
-      setOpenLoader(true);
+      if (val !== 16) setOpenLoader(true);
       if (isOpen && value !== "0" && labels.length === 0) {
         const colMin = 60 / matrix[0].TLen;
         for (let i = 0; i < matrix.length; i++) {
@@ -173,8 +173,8 @@ const StatisticXTNew = (props: {
         massId[numIdInMas].datasets.push(datasetsMask);
         canal.push(val);
         massId[numIdInMas].canall = canal;
-      }
-      Output();
+       }
+       if (val !== 16) Output();
     }
 
     return (

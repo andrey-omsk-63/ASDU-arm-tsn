@@ -64,6 +64,7 @@ const PointsLevel2Baza = (props: {
 
   const styleXTG04 = {
     //height: '84.4vh',
+    height: '86.5vh',
     border: 1,
     marginLeft: 0.5,
     borderRadius: 1,

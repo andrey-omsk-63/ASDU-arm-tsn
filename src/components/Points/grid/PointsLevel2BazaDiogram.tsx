@@ -57,10 +57,11 @@ const PointsLevel2BazaDiogram = (props: {
   let dlMas = points.xctrls[crRoad].StrategyB.length;
   const horizon = points.xctrls[crRoad].StrategyB[dlMas - 1].xright;
   const vertical = points.xctrls[crRoad].StrategyB[dlMas - 1].xleft;
-  const axisHorizon = horizon * 1;
+  const axisHorizon = horizon;
   const steepHorizon = 12 / axisHorizon;
-  const axisVertical = vertical * 1;
-  const steepVertical = 84.4 / axisVertical;
+  const axisVertical = vertical;
+  //const steepVertical = 84.4 / axisVertical;
+  const steepVertical = 85.4 / axisVertical;
 
   let matrix: string[][] = [[]];
 
@@ -86,8 +87,6 @@ const PointsLevel2BazaDiogram = (props: {
       let j = 0;
 
       const MakeMatrixColor = (num: number) => {
-        // luchP = points.xctrls[crRoad].StrategyB[num].vleft;
-        // luchO = points.xctrls[crRoad].StrategyB[num].vright;
         luchO = points.xctrls[crRoad].StrategyB[num].vleft;
         luchP = points.xctrls[crRoad].StrategyB[num].vright;
         ratio =
@@ -95,16 +94,8 @@ const PointsLevel2BazaDiogram = (props: {
           points.xctrls[crRoad].StrategyB[num].xleft;
         coler = colorsGraf[num * 3];
         if (luchP !== 1 || luchO !== 1) {
-          // if (i < j * luchO * ratio) coler = colorsGraf[num * 3 + 1];
-          // if (i >= j * luchP * ratio) coler = colorsGraf[num * 3 + 2];
-          if (i < j * luchO * ratio) {
-            coler = colorsGraf[num * 3 + 1];
-            // if (j === 1500) console.log('111:', i, j * luchO * ratio, luchP, luchO)
-          }
-          if (i >= j * luchP * ratio) {
-            coler = colorsGraf[num * 3 + 2];
-            // if (j === 1500) console.log('222:', i, j * luchP * ratio, luchP, luchO)
-          }
+          if (i < j * luchO * ratio) coler = colorsGraf[num * 3 + 1];
+          if (i >= j * luchP * ratio) coler = colorsGraf[num * 3 + 2];
         }
       };
 
@@ -163,8 +154,7 @@ const PointsLevel2BazaDiogram = (props: {
         }
       }
       matrix = matrix.filter(function (el) {
-        //избавляемся от пустых значений
-        return el != null;
+        return el != null; //избавляемся от пустых значений
       });
       matrix.reverse(); //переворачиваем матрицу
     };
@@ -207,7 +197,6 @@ const PointsLevel2BazaDiogram = (props: {
       return resStr;
     };
 
-    //setOpenLoader(true);
     MakeMatrix();
     for (let j = 0; j < vertical; j += scale) {
       resSps.push(
@@ -215,21 +204,10 @@ const PointsLevel2BazaDiogram = (props: {
           {PointsXt112Comp1Tab4Str(j)}
         </Grid>
       );
-      //resSps.push(<>{setValue(0)}</>);
     }
-    //Output();
-    console.log("2openLoader", openLoader, value);
-    //setValue(0)
 
     return resSps;
-    //<>{resSps}</>
-    // <>
-    //   {openLoader && <Dinama />}
-    //   {!openLoader && <>{resSps}</>}
-    // </>
-    //);
   };
-
   //============ Dinama =====================================================
   const [openLoader, setOpenLoader] = React.useState(false);
   const handleClose = () => {
@@ -242,11 +220,11 @@ const PointsLevel2BazaDiogram = (props: {
   };
 
   const Output = () => {
-    React.useEffect(() => {
-      setTimeout(() => {
-        setOpenLoader(false);
-      }, 1000);
-    }, []);
+    //React.useEffect(() => {
+    setTimeout(() => {
+      setOpenLoader(false);
+    }, 100);
+    //}, []);
   };
 
   const Dinama = () => {
@@ -258,19 +236,19 @@ const PointsLevel2BazaDiogram = (props: {
   };
   //=========================================================================
 
-  // const SetValue = (mode: number) => {
-  //   setValue(mode);
-  //   //setOpenLoader(true);
-  // };
-
-  console.log("1openLoader", openLoader, value);
+  const SetValue = (mode: number) => {
+    setValue(mode);
+    setOpenLoader(true);
+  };
+  
+  if (openLoader) Output();
 
   return (
     <Grid item container xs={12}>
-      <Button sx={styleXTG02} variant="contained" onClick={() => setValue(1)}>
+      <Button sx={styleXTG02} variant="contained" onClick={() => SetValue(1)}>
         <b>Построить диаграмму быстро</b>
       </Button>
-      <Button sx={styleXTG02} variant="contained" onClick={() => setValue(2)}>
+      <Button sx={styleXTG02} variant="contained" onClick={() => SetValue(2)}>
         <b>Диаграмма в высоком качестве</b>
       </Button>
 
@@ -278,12 +256,7 @@ const PointsLevel2BazaDiogram = (props: {
         {value > 0 && (
           <>
             {openLoader && <Dinama />}
-            {!openLoader && (
-              <>
-                {PointsXt112Comp1Tab4()}
-                {/* {setValue(0)} */}
-              </>
-            )}
+            {!openLoader && <>{PointsXt112Comp1Tab4()}</>}
           </>
         )}
       </>
@@ -292,3 +265,4 @@ const PointsLevel2BazaDiogram = (props: {
 };
 
 export default PointsLevel2BazaDiogram;
+

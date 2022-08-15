@@ -1,8 +1,11 @@
-import * as React from 'react';
-import Grid from '@mui/material/Grid';
-import Button from '@mui/material/Button';
+import * as React from "react";
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
 
-import { XctrlInfo } from '../../../interfaceGl.d';
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
+
+import { XctrlInfo } from "../../../interfaceGl.d";
 
 const PointsLevel2AreaDiogram = (props: {
   xctrll: XctrlInfo[];
@@ -14,39 +17,39 @@ const PointsLevel2AreaDiogram = (props: {
   const crRoad = props.crossroad;
 
   const colorsGraf = [
-    'orange',
-    'Turquoise',
-    'YellowGreen',
+    "orange",
+    "Turquoise",
+    "YellowGreen",
 
-    'Yellow',
-    'Pink',
-    'Aqua',
+    "Yellow",
+    "Pink",
+    "Aqua",
 
-    'Lime',
-    'Tomato',
-    'teal',
+    "Lime",
+    "Tomato",
+    "teal",
 
-    'purple',
-    'RosyBrown',
-    'Coral',
+    "purple",
+    "RosyBrown",
+    "Coral",
 
-    'Olive',
-    'Magenta',
-    'DarkGray',
+    "Olive",
+    "Magenta",
+    "DarkGray",
 
-    'RoyalBlue',
-    'SpringGreen',
-    'Violet',
+    "RoyalBlue",
+    "SpringGreen",
+    "Violet",
   ];
 
   const styleXTG02 = {
     fontSize: 12.5,
-    maxHeight: '15px',
-    minHeight: '15px',
-    backgroundColor: '#F1F3F4',
-    color: 'black',
+    maxHeight: "15px",
+    minHeight: "15px",
+    backgroundColor: "#F1F3F4",
+    color: "black",
     marginRight: 1,
-    textTransform: 'unset !important',
+    textTransform: "unset !important",
   };
 
   const [value, setValue] = React.useState(0);
@@ -61,9 +64,9 @@ const PointsLevel2AreaDiogram = (props: {
   let matrix: string[][] = [[]];
   let scale = 5;
 
-  let coler = 'red';
+  let coler = "red";
   //let colerOld = [];
-  let colerOld = '';
+  let colerOld = "";
   let masStr = [];
   let masCol = [];
   let colBl = 0;
@@ -78,7 +81,7 @@ const PointsLevel2AreaDiogram = (props: {
 
     const PointsXt112Comp1Tab4StrOptim = (j: number) => {
       resStr = [];
-      coler = 'red';
+      coler = "red";
       colerOld = matrix[j / scale][0 / scale];
       masStr = [];
       masCol = [];
@@ -106,8 +109,9 @@ const PointsLevel2AreaDiogram = (props: {
             item
             sx={{
               backgroundColor: masCol[i],
-              height: String(steepVertical * scale) + 'vh',
-            }}></Grid>,
+              height: String(steepVertical * scale) + "vh",
+            }}
+          ></Grid>
         );
       }
       return resStr;
@@ -117,14 +121,14 @@ const PointsLevel2AreaDiogram = (props: {
       resSps.push(
         <Grid key={j} item container>
           {PointsXt112Comp1Tab4StrOptim(j)}
-        </Grid>,
+        </Grid>
       );
     }
     return resSps;
   };
 
   const MakeMatrix = () => {
-    let coler = 'white';
+    let coler = "white";
 
     let coorPointX = 0;
     let coorPointY = 0;
@@ -133,7 +137,7 @@ const PointsLevel2AreaDiogram = (props: {
       matrix[j] = [];
 
       for (let i = 0; i < horizon; i += scale) {
-        coler = 'LightCyan';
+        coler = "LightCyan";
         let mass = [];
         let flag = true;
 
@@ -141,7 +145,7 @@ const PointsLevel2AreaDiogram = (props: {
           coorPointY = points.xctrls[crRoad].StrategyA[ij].xleft;
           coorPointX = points.xctrls[crRoad].StrategyA[ij].xright;
           if (coorPointY === j && coorPointX === i) {
-            coler = 'black';
+            coler = "black";
             flag = false;
           }
           let kvx = (i - coorPointX) ** 2;
@@ -159,22 +163,62 @@ const PointsLevel2AreaDiogram = (props: {
     }
 
     matrix = matrix.filter(function (el) {
-      //избавляемся от пустых значений
-      return el != null;
+      return el != null; //избавляемся от пустых значений
     });
     matrix.reverse(); //переворачиваем матрицу
   };
+  //============ Dinama =====================================================
+  const [openLoader, setOpenLoader] = React.useState(false);
+  const handleClose = () => {
+    setOpenLoader(false);
+  };
+
+  const styleBackdrop = {
+    color: "#fff",
+    zIndex: (theme: any) => theme.zIndex.drawer + 1,
+  };
+
+  const Output = () => {
+    //React.useEffect(() => {
+    setTimeout(() => {
+      setOpenLoader(false);
+    }, 100);
+    //}, []);
+  };
+
+  const Dinama = () => {
+    return (
+      <Backdrop sx={styleBackdrop} open={openLoader} onClick={handleClose}>
+        <CircularProgress color="inherit" size={548} />
+      </Backdrop>
+    );
+  };
+  //=========================================================================
+
+  const SetValue = (mode: number) => {
+    setValue(mode);
+    setOpenLoader(true);
+  };
+
+  if (openLoader) Output();
 
   return (
     <Grid item container xs={12}>
-      <Button sx={styleXTG02} variant="contained" onClick={() => setValue(1)}>
+      <Button sx={styleXTG02} variant="contained" onClick={() => SetValue(1)}>
         <b>Построить диаграмму быстро</b>
       </Button>
-      <Button sx={styleXTG02} variant="contained" onClick={() => setValue(2)}>
+      <Button sx={styleXTG02} variant="contained" onClick={() => SetValue(2)}>
         <b>Диаграмма в высоком качестве</b>
       </Button>
-
-      <>{value > 0 && <>{PointsXt112Comp1Tab4()}</>}</>
+      {/* <>{value > 0 && <>{PointsXt112Comp1Tab4()}</>}</> */}
+      <>
+        {value > 0 && (
+          <>
+            {openLoader && <Dinama />}
+            {!openLoader && <>{PointsXt112Comp1Tab4()}</>}
+          </>
+        )}
+      </>
     </Grid>
   );
 };
