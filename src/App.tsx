@@ -1,27 +1,27 @@
-import React from "react";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
-import TabContext from "@mui/lab/TabContext";
-import TabPanel from "@mui/lab/TabPanel";
-import Modal from "@mui/material/Modal";
-import TextField from "@mui/material/TextField";
+import React from 'react';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import TabContext from '@mui/lab/TabContext';
+import TabPanel from '@mui/lab/TabPanel';
+import Modal from '@mui/material/Modal';
+import TextField from '@mui/material/TextField';
 
 //import Header from './components/Header/Header';
-import Management from "./components/Management/Management";
-import Points from "./components/Points/Points";
-import StatisticsNew from "./components/Statistics/StatisticsNew";
-import StatisticsArchive from "./components/Statistics/StatisticsArchive";
+import Management from './components/Management/Management';
+import Points from './components/Points/Points';
+import StatisticsNew from './components/Statistics/StatisticsNew';
+import StatisticsArchive from './components/Statistics/StatisticsArchive';
 
-import { Tflight } from "./interfaceMNG.d";
-import { XctrlInfo } from "./interfaceGl.d";
-import { RegionInfo } from "./interfaceGl.d";
-import { Statistic } from "./interfaceStat.d";
+import { Tflight } from './interfaceMNG.d';
+import { XctrlInfo } from './interfaceGl.d';
+import { RegionInfo } from './interfaceGl.d';
+import { Statistic } from './interfaceStat.d';
 
-import { styleApp01, styleApp02, styleMod } from "./AppStyle";
-import { styleBatMenu, styleModalMenu } from "./AppStyle";
-import { styleImpServis, styleInp } from "./AppStyle";
+import { styleApp01, styleApp02, styleMod } from './AppStyle';
+import { styleBatMenu, styleModalMenu } from './AppStyle';
+import { styleImpServis, styleInp } from './AppStyle';
 
 let flagWS = true;
 let WS: any = null;
@@ -32,8 +32,7 @@ let massNameRegion: Array<string> = [];
 let pointsEtalonXctrl: XctrlInfo[];
 let flagEtalonInf = true;
 
-let formSett = "";
-let oldSett = "";
+let formSett = '';
 
 const App = () => {
   const handleClose = () => {
@@ -41,22 +40,18 @@ const App = () => {
   };
 
   const EndSeans = () => {
-    let soob = "В Арм-е Технолога системы работает пользователь " + bsLogin;
+    let soob = 'В Арм-е Технолога системы работает пользователь ' + bsLogin;
     return (
       <>
-        {bsLogin !== "" && (
+        {bsLogin !== '' && (
           <>
             <Box sx={styleMod}>
-              <Box sx={{ textAlign: "center", fontSize: 16, color: "red" }}>
+              <Box sx={{ textAlign: 'center', fontSize: 16, color: 'red' }}>
                 <b>{soob}</b>
               </Box>
-              <Box sx={{ color: "background.paper" }}>Pusto</Box>
-              <Box sx={{ textAlign: "center" }}>
-                <Button
-                  sx={styleBatMenu}
-                  variant="contained"
-                  onClick={handleClose}
-                >
+              <Box sx={{ color: 'background.paper' }}>Pusto</Box>
+              <Box sx={{ textAlign: 'center' }}>
+                <Button sx={styleBatMenu} variant="contained" onClick={handleClose}>
                   <b>Выход</b>
                 </Button>
               </Box>
@@ -85,42 +80,40 @@ const App = () => {
             key={i}
             sx={styleModalMenu}
             variant="contained"
-            onClick={() => handleCloseModal(massRegion[i])}
-          >
+            onClick={() => handleCloseModal(massRegion[i])}>
             <b>{massNameRegion[i]}</b>
-          </Button>
+          </Button>,
         );
       }
       return resStr;
     };
-    
+
     if (isOpenInf && regionGlob === 0) {
       for (let key in pointsReg) {
         if (!isNaN(Number(key))) {
           // ключ - символьное число
           massRegion.push(Number(key));
           massNameRegion.push(pointsReg[key]);
-          if (pointsReg[key].length > dlStrMenu)
-            dlStrMenu = pointsReg[key].length;
+          if (pointsReg[key].length > dlStrMenu) dlStrMenu = pointsReg[key].length;
         }
       }
       regionGlob = massRegion[0];
     }
 
     const styleModal = {
-      position: "relative",
-      bottom: "-48vh",
-      marginLeft: "60vh",
-      transform: "translate(-50%, -50%)",
+      position: 'relative',
+      bottom: '-48vh',
+      marginLeft: '60vh',
+      transform: 'translate(-50%, -50%)',
       width: (dlStrMenu + 8) * 10,
-      bgcolor: "background.paper",
-      border: "2px solid #000",
-      borderColor: "primary.main",
+      bgcolor: 'background.paper',
+      border: '2px solid #000',
+      borderColor: 'primary.main',
       borderRadius: 2,
       boxShadow: 24,
       p: 3,
     };
-  
+
     if (massRegion.length === 1) {
       handleCloseModal(massRegion[0]);
     }
@@ -129,7 +122,7 @@ const App = () => {
       <Modal open={open}>
         <Box sx={styleModal}>
           <Stack direction="column">
-            <Box sx={{ textAlign: "center" }}>Выбор региона:</Box>
+            <Box sx={{ textAlign: 'center' }}>Выбор региона:</Box>
             {/* <Box sx={{ overflowX: 'auto', height: '36vh' }}>{SpisRegion()}</Box> */}
             {SpisRegion()}
           </Stack>
@@ -157,7 +150,7 @@ const App = () => {
           }
         }
         if (newRecord) {
-          console.log("Points новая запись i=", i);
+          console.log('Points новая запись i=', i);
           pointsAdd.push(pointsXctrl[i]);
         }
       }
@@ -175,22 +168,18 @@ const App = () => {
   };
 
   const [pointsXctrl, setPointsXctrl] = React.useState<Array<XctrlInfo>>([]);
-  const [pointsReg, setPointsReg] = React.useState<RegionInfo>(
-    {} as RegionInfo
-  );
+  const [pointsReg, setPointsReg] = React.useState<RegionInfo>({} as RegionInfo);
   const [isOpenInf, setIsOpenInf] = React.useState(false);
   const [pointsTfl, setPointsTfl] = React.useState<Array<Tflight>>([]);
   const [isOpenDev, setIsOpenDev] = React.useState(false);
   const [pointsSt, setPointsSt] = React.useState<Array<Statistic>>([]);
+  const [pointsOldSt, setPointsOldSt] = React.useState<Array<Statistic>>([]);
   const [isOpenSt, setIsOpenSt] = React.useState(false);
-  const [bsLogin, setBsLogin] = React.useState("");
+  const [isOpenOldSt, setIsOpenOldSt] = React.useState(false);
+  const [bsLogin, setBsLogin] = React.useState('');
 
   const host =
-    "wss://" +
-    window.location.host +
-    window.location.pathname +
-    "W" +
-    window.location.search;
+    'wss://' + window.location.host + window.location.pathname + 'W' + window.location.search;
   // let WS: React.MutableRefObject<WebSocket> = {};
   //const WS: any = React.useRef(new WebSocket('wss://ws.kraken.com/'));
   //const WS = React.useRef(new WebSocket('wss://ws.kraken.com/'));
@@ -201,15 +190,15 @@ const App = () => {
 
   React.useEffect(() => {
     WS.onopen = function (event: any) {
-      console.log("WS.current.onopen:", event);
+      console.log('WS.current.onopen:', event);
     };
 
     WS.onclose = function (event: any) {
-      console.log("WS.current.onclose:", event);
+      console.log('WS.current.onclose:', event);
     };
 
     WS.onerror = function (event: any) {
-      console.log("WS.current.onerror:", event);
+      console.log('WS.current.onerror:', event);
     };
 
     WS.onmessage = function (event: any) {
@@ -217,77 +206,57 @@ const App = () => {
       let data = allData.data;
       //console.log('пришло:', data);
       switch (allData.type) {
-        case "getDevices":
-          console.log("data_getDevices:", data);
+        case 'getDevices':
+          console.log('data_getDevices:', data);
           setPointsTfl(data.tflight ?? []);
           setIsOpenDev(true);
           break;
-        case "xctrlInfo":
-          console.log("data_xctrlInfo:", data);
+        case 'xctrlInfo':
+          console.log('data_xctrlInfo:', data);
           setPointsXctrl(data.xctrlInfo ?? []);
           if (regionGlob === 0) setPointsReg(data.regionInfo ?? []);
           setIsOpenInf(true);
           break;
-        case "getStatistics":
-          console.log("data_statistics:", data);
+        case 'getStatistics':
+          console.log('data_statistics:', data);
           setPointsSt(data.statistics ?? []);
           setIsOpenSt(true);
           break;
-        case "busy":
+        case 'getOldStatistics':
+          console.log('data_OldStatistics:', data);
+          setPointsOldSt(data.statistics ?? []);
+          setIsOpenOldSt(true);
+          break;
+        case 'busy':
           setBsLogin(data.login);
           break;
         default:
-          console.log("data_default:", data);
+          console.log('data_default:', data);
       }
     };
   }, []);
 
-  const [value, setValue] = React.useState("1");
+  const [value, setValue] = React.useState('1');
 
   UpdateXctrl(); // разноска обновлений Xctrl
 
-  
-
   const InputNewDate = () => {
-    // const styleImpServis = {
-    //   border: "2px solid #000",
-    //   borderColor: "primary.main",
-    //   borderRadius: 1,
-    //   fontSize: 14,
-    //   marginLeft: "auto",
-    //   maxHeight: "24px",
-    //   minHeight: "24px",
-    //   maxWidth: "110px",
-    //   minWidth: "110px",
-    // };
-
-    // const styleInp = {
-    //   backgroundColor: "#FFFBE5",
-    //   maxHeight: "21px",
-    //   minHeight: "21px",
-    //   maxWidth: "75px",
-    //   minWidth: "75px",
-    // };
-
     const InputDate = () => {
       const handleChange = (event: any) => {
-        console.log("values.someDate", sDate, event.target.value);
+        console.log('values.someDate', sDate, event.target.value);
         formSett = event.target.value;
-        console.log("formSett", new Date(formSett).toISOString());
-        setValue("4");
+        console.log('formSett', new Date(formSett).toISOString());
+        setValue('4');
       };
 
       let tekData = new Date();
       let SMes = tekData.getMonth() + 1;
-
-      let sDate = tekData.getFullYear() + "-";
-      if (SMes < 10) sDate = sDate + "0";
-      sDate = sDate + SMes + "-" + tekData.getDate();
-
-      console.log("!!!!", tekData, tekData.toISOString());
+      let sDate = tekData.getFullYear() + '-';
+      if (SMes < 10) sDate = sDate + '0';
+      sDate = sDate + SMes + '-' + tekData.getDate();
 
       return (
-        <Box component="form" sx={{ "& > :not(style)": { width: "110px" } }}>
+        <Box component="form" sx={{ '& > :not(style)': { width: '110px' } }}>
           <TextField
             size="small"
             type="date"
@@ -315,38 +284,26 @@ const App = () => {
     <>
       <EndSeans />
       {regionGlob === 0 && isOpenInf && <BeginSeans />}
-      <Box sx={{ width: "98.8%", typography: "body2" }}>
+      <Box sx={{ width: '98.8%', typography: 'body2' }}>
         <TabContext value={value}>
-          <Box sx={{ marginLeft: 0.5, backgroundColor: "#F1F5FB" }}>
+          <Box sx={{ marginLeft: 0.5, backgroundColor: '#F1F5FB' }}>
             <Stack direction="row">
-              {bsLogin === "" && (
-                <Button
-                  sx={styleApp01}
-                  variant="contained"
-                  onClick={() => setValue("1")}
-                >
+              {bsLogin === '' && (
+                <Button sx={styleApp01} variant="contained" onClick={() => setValue('1')}>
                   <b>Управление</b>
                 </Button>
               )}
-              {bsLogin === "" && (
-                <Button
-                  sx={styleApp02}
-                  variant="contained"
-                  onClick={() => setValue("2")}
-                >
+              {bsLogin === '' && (
+                <Button sx={styleApp02} variant="contained" onClick={() => setValue('2')}>
                   <b>Характерные точки</b>
                 </Button>
               )}
-              {bsLogin === "" && (
-                <Button
-                  sx={styleApp01}
-                  variant="contained"
-                  onClick={() => setValue("3")}
-                >
+              {bsLogin === '' && (
+                <Button sx={styleApp01} variant="contained" onClick={() => setValue('3')}>
                   <b>Статистика</b>
                 </Button>
               )}
-              {bsLogin === "" && Number(value) > 2 && <InputNewDate />}
+              {bsLogin === '' && Number(value) > 2 && <InputNewDate />}
             </Stack>
           </Box>
           <TabPanel value="1">
@@ -381,14 +338,15 @@ const App = () => {
             )}
           </TabPanel>
           <TabPanel value="4">
-            {WS !== null && regionGlob !== 0 && <h1>
+            {WS !== null && regionGlob !== 0 && (
               <StatisticsArchive
-                open={isOpenSt}
+                open={isOpenOldSt}
                 ws={WS}
-                points={pointsSt}
+                points={pointsOldSt}
                 region={String(regionGlob)}
                 date={formSett}
-              /></h1>}
+              />
+            )}
           </TabPanel>
         </TabContext>
       </Box>
