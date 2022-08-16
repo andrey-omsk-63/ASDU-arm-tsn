@@ -1,29 +1,27 @@
 import React from "react";
 import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import TabContext from "@mui/lab/TabContext";
 import TabPanel from "@mui/lab/TabPanel";
 import Modal from "@mui/material/Modal";
+import TextField from "@mui/material/TextField";
 
 //import Header from './components/Header/Header';
 import Management from "./components/Management/Management";
 import Points from "./components/Points/Points";
-//import Statistics from './components/Statistics/Statistics';
 import StatisticsNew from "./components/Statistics/StatisticsNew";
+import StatisticsArchive from "./components/Statistics/StatisticsArchive";
 
 import { Tflight } from "./interfaceMNG.d";
 import { XctrlInfo } from "./interfaceGl.d";
 import { RegionInfo } from "./interfaceGl.d";
 import { Statistic } from "./interfaceStat.d";
 
-import {
-  styleApp01,
-  styleApp02,
-  styleMod,
-  styleBatMenu,
-  styleModalMenu,
-} from "./AppStyle";
+import { styleApp01, styleApp02, styleMod } from "./AppStyle";
+import { styleBatMenu, styleModalMenu } from "./AppStyle";
+import { styleImpServis, styleInp } from "./AppStyle";
 
 let flagWS = true;
 let WS: any = null;
@@ -33,6 +31,9 @@ let massNameRegion: Array<string> = [];
 
 let pointsEtalonXctrl: XctrlInfo[];
 let flagEtalonInf = true;
+
+let formSett = "";
+let oldSett = "";
 
 const App = () => {
   const handleClose = () => {
@@ -92,21 +93,8 @@ const App = () => {
       }
       return resStr;
     };
-
-    // let dat: any = [];
-
-    // for (let i = 0; i < massKey.length; i++) {
-    //   let maskCurrencies = {
-    //     value: "",
-    //     label: "",
-    //   };
-    //   maskCurrencies.value = massKey[i];
-    //   maskCurrencies.label = massDat[i];
-    //   currencies.push(maskCurrencies);
-    // }
-
+    
     if (isOpenInf && regionGlob === 0) {
-      //let massDat = [];
       for (let key in pointsReg) {
         if (!isNaN(Number(key))) {
           // ключ - символьное число
@@ -117,25 +105,6 @@ const App = () => {
         }
       }
       regionGlob = massRegion[0];
-      // console.log("massRegion:", typeof massRegion[0], massRegion);
-      // console.log("massNameRegion:", dlStrMenu, massNameRegion);
-      // console.log("pointsReg:", pointsReg);
-
-      // for (let i = 0; i < pointsXctrl.length; i++) {
-      //   let flag = true;
-      //   for (let j = 0; j < massRegion.length; j++) {
-      //     if (pointsXctrl[i].region === massRegion[j]) flag = false;
-      //   }
-      //   if (flag) massRegion.push(pointsXctrl[i].region);
-      // }
-      //massRegion.sort();
-      // if (massNameRegion.length === 0) {
-      //   for (let i = 0; i < massRegion.length; i++) {
-      //     let strMenu = pointsReg[massRegion[i].toString() as keyof RegionInfo];
-      //     massNameRegion.push(strMenu);
-      //     if (strMenu?.length > dlStrMenu) dlStrMenu = strMenu.length;
-      //   }
-      // }
     }
 
     const styleModal = {
@@ -151,11 +120,7 @@ const App = () => {
       boxShadow: 24,
       p: 3,
     };
-
-    // if (massRegion.length === 0) {
-    //   handleCloseModal(-1);
-    // }
-
+  
     if (massRegion.length === 1) {
       handleCloseModal(massRegion[0]);
     }
@@ -261,8 +226,6 @@ const App = () => {
           console.log("data_xctrlInfo:", data);
           setPointsXctrl(data.xctrlInfo ?? []);
           if (regionGlob === 0) setPointsReg(data.regionInfo ?? []);
-          //setPointsInfo(data.regionInfo ?? []);
-          //if (regionGlob === 0) setPointsReg(data.regionInfo ?? []);
           setIsOpenInf(true);
           break;
         case "getStatistics":
@@ -282,6 +245,71 @@ const App = () => {
   const [value, setValue] = React.useState("1");
 
   UpdateXctrl(); // разноска обновлений Xctrl
+
+  
+
+  const InputNewDate = () => {
+    // const styleImpServis = {
+    //   border: "2px solid #000",
+    //   borderColor: "primary.main",
+    //   borderRadius: 1,
+    //   fontSize: 14,
+    //   marginLeft: "auto",
+    //   maxHeight: "24px",
+    //   minHeight: "24px",
+    //   maxWidth: "110px",
+    //   minWidth: "110px",
+    // };
+
+    // const styleInp = {
+    //   backgroundColor: "#FFFBE5",
+    //   maxHeight: "21px",
+    //   minHeight: "21px",
+    //   maxWidth: "75px",
+    //   minWidth: "75px",
+    // };
+
+    const InputDate = () => {
+      const handleChange = (event: any) => {
+        console.log("values.someDate", sDate, event.target.value);
+        formSett = event.target.value;
+        console.log("formSett", new Date(formSett).toISOString());
+        setValue("4");
+      };
+
+      let tekData = new Date();
+      let SMes = tekData.getMonth() + 1;
+
+      let sDate = tekData.getFullYear() + "-";
+      if (SMes < 10) sDate = sDate + "0";
+      sDate = sDate + SMes + "-" + tekData.getDate();
+
+      console.log("!!!!", tekData, tekData.toISOString());
+
+      return (
+        <Box component="form" sx={{ "& > :not(style)": { width: "110px" } }}>
+          <TextField
+            size="small"
+            type="date"
+            defaultValue={sDate}
+            inputProps={{ style: { fontSize: 14 } }}
+            onChange={handleChange}
+            variant="standard"
+          />
+        </Box>
+      );
+    };
+
+    return (
+      <Box sx={styleImpServis}>
+        <Grid item container>
+          <Grid item xs sx={styleInp}>
+            <InputDate />
+          </Grid>
+        </Grid>
+      </Box>
+    );
+  };
 
   return (
     <>
@@ -318,6 +346,7 @@ const App = () => {
                   <b>Статистика</b>
                 </Button>
               )}
+              {bsLogin === "" && Number(value) > 2 && <InputNewDate />}
             </Stack>
           </Box>
           <TabPanel value="1">
@@ -350,6 +379,16 @@ const App = () => {
                 region={String(regionGlob)}
               />
             )}
+          </TabPanel>
+          <TabPanel value="4">
+            {WS !== null && regionGlob !== 0 && <h1>
+              <StatisticsArchive
+                open={isOpenSt}
+                ws={WS}
+                points={pointsSt}
+                region={String(regionGlob)}
+                date={formSett}
+              /></h1>}
           </TabPanel>
         </TabContext>
       </Box>

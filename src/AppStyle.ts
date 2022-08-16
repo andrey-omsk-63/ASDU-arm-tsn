@@ -64,19 +64,23 @@ export const styleModalMenu = {
   marginTop: 2,
   textTransform: 'unset !important',
 };
+//=========================================================================
+export const styleImpServis = {
+  border: "2px solid #000",
+  borderColor: "primary.main",
+  borderRadius: 1,
+  fontSize: 14,
+  marginLeft: "auto",
+  maxHeight: "24px",
+  minHeight: "24px",
+  maxWidth: "110px",
+  minWidth: "110px",
+};
 
-// export const styleModal = {
-//   position: 'relative',
-//   bottom: '-48vh',
-//   marginLeft: '60vh',
-//   transform: 'translate(-50%, -50%)',
-//   width: (dlStrMenu + 8) * 10,
-//   bgcolor: 'background.paper',
-//   border: '2px solid #000',
-//   borderColor: 'primary.main',
-//   borderRadius: 2,
-//   boxShadow: 24,
-//   p: 3,
-// };
-
-
+export const styleInp = {
+  backgroundColor: "#FFFBE5",
+  maxHeight: "21px",
+  minHeight: "21px",
+  maxWidth: "75px",
+  minWidth: "75px",
+};

@@ -13,13 +13,14 @@ let tekValue = 0;
 let pointsEtalon: Statistic[];
 let flagEtalon = true;
 
-const StatisticsNew = (props: {
+const StatisticsArchive = (props: {
   open: boolean;
   ws: WebSocket;
   points: Statistic[];
   region: string;
+  date: string;
 }) => {
-  //console.log('PoinsSt:', props.open, props.points, props.ws);
+  console.log('PoinsSt:', props.open, props.points, props.ws, props.date);
 
   let isOpen = props.open;
   let points = props.points;
@@ -30,7 +31,11 @@ const StatisticsNew = (props: {
       if (props.ws !== null) {
         if (props.ws.readyState === WebSocket.OPEN) {
           props.ws.send(JSON.stringify({ type: 'stopDevices', region: reGion }));
-          props.ws.send(JSON.stringify({ type: 'getStatistics', region: reGion }));
+          props.ws.send(JSON.stringify({ type: 'stopStatistics', region: reGion }));
+          props.ws.send(JSON.stringify({ type: 'getOldStatistics', 
+          region: reGion,
+          date: new Date(props.date).toISOString()
+         }));
         } else {
           setTimeout(() => {
             handleSend();
@@ -136,4 +141,4 @@ const StatisticsNew = (props: {
   );
 };
 
-export default StatisticsNew;
+export default StatisticsArchive;
