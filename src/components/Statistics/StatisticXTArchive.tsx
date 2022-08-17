@@ -57,17 +57,19 @@ let massId: any = [];
 let canal: number[] = [];
 let oldAreaid = -1;
 let numIdInMas = 0;
+let oldDate = "";
 
-const StatisticXTNew = (props: {
+const StatisticXTArchive = (props: {
   open: boolean;
   statist: Statistic[];
   areaid: number;
+  date: string;
 }) => {
   const isOpen = props.open;
   const points = props.statist;
   const areaId = props.areaid;
 
-  console.log("Stat_points_New:", points);
+  console.log("Stat_points_Archive:", isOpen, props.date,oldDate, points);
 
   let colChanel = 0;
   const [value, setValue] = React.useState("0");
@@ -76,6 +78,15 @@ const StatisticXTNew = (props: {
   let resSps: any = [];
   let matrix: any = [];
   let kakchestvo = " ";
+
+  if (oldDate !== props.date) {
+    while (labels.length > 0) labels.pop(); // labels = [];
+    massId = [];
+    canal = [];
+    oldAreaid = -1;
+    numIdInMas = 0;
+    oldDate = props.date;
+  }
 
   if (isOpen) {
     if (oldAreaid < 0) {
@@ -167,8 +178,8 @@ const StatisticXTNew = (props: {
         massId[numIdInMas].datasets.push(datasetsMask);
         canal.push(val);
         massId[numIdInMas].canall = canal;
-       }
-       if (val !== 16) Output();
+      }
+      if (val !== 16) Output();
     }
 
     return (
@@ -435,4 +446,4 @@ const StatisticXTNew = (props: {
   );
 };
 
-export default StatisticXTNew;
+export default StatisticXTArchive;

@@ -1,17 +1,17 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 
 //import axios from 'axios';
 
-import StatisticXTNew from './StatisticXTNew';
+import StatisticXTArchive from "./StatisticXTArchive";
 
-import { Statistic } from '../../interfaceStat.d';
+import { Statistic } from "../../interfaceStat.d";
 
 let tekValue = 0;
 let pointsEtalon: Statistic[];
-let flagEtalon = true;
+//let flagEtalon = true;
 
 const StatisticsArchive = (props: {
   open: boolean;
@@ -20,22 +20,30 @@ const StatisticsArchive = (props: {
   region: string;
   date: string;
 }) => {
-  console.log('PoinsSt:', props.open, props.points, props.ws, props.date);
+  console.log("!!!PoinsSt:", props.open, props.points, props.date);
 
   let isOpen = props.open;
   let points = props.points;
   let reGion = props.region;
+  pointsEtalon = points;
 
   React.useEffect(() => {
     const handleSend = () => {
       if (props.ws !== null) {
         if (props.ws.readyState === WebSocket.OPEN) {
-          props.ws.send(JSON.stringify({ type: 'stopDevices', region: reGion }));
-          props.ws.send(JSON.stringify({ type: 'stopStatistics', region: reGion }));
-          props.ws.send(JSON.stringify({ type: 'getOldStatistics', 
-          region: reGion,
-          date: new Date(props.date).toISOString()
-         }));
+          props.ws.send(
+            JSON.stringify({ type: "stopDevices", region: reGion })
+          );
+          props.ws.send(
+            JSON.stringify({ type: "stopStatistics", region: reGion })
+          );
+          props.ws.send(
+            JSON.stringify({
+              type: "getOldStatistics",
+              region: reGion,
+              date: new Date(props.date).toISOString(),
+            })
+          );
         } else {
           setTimeout(() => {
             handleSend();
@@ -44,49 +52,49 @@ const StatisticsArchive = (props: {
       }
     };
     handleSend();
-  }, [props.ws, reGion]);
+  }, [props.ws, reGion, isOpen, props.date]);
 
-  if (isOpen && flagEtalon) {
-    pointsEtalon = points;
-    flagEtalon = false;
-    points = [];
-  }
+  // if (isOpen && flagEtalon) {
+  //   pointsEtalon = points;
+  //   flagEtalon = false;
+  //   points = [];
+  // }
 
-  if (isOpen && !flagEtalon) {
-    let pointsAdd = [];
-    let newRecord = true;
-    for (let i = 0; i < points.length; i++) {
-      newRecord = true;
-      for (let j = 0; j < pointsEtalon.length; j++) {
-        if (
-          points[i].id === pointsEtalon[j].id &&
-          points[i].region === pointsEtalon[j].region &&
-          points[i].area === pointsEtalon[j].area
-        ) {
-          //console.log('Stat совподение записей i=', i, 'j=', j);
-          newRecord = false;
-          pointsEtalon[j] = points[i];
-        }
-      }
-      if (newRecord) {
-        console.log('Stat новая запись i=', i);
-        pointsAdd.push(points[i]);
-      }
-    }
-    //console.log('pointsAdd:', pointsAdd);
-    if (pointsAdd.length > 0) {
-      for (let i = 0; i < pointsAdd.length; i++) {
-        pointsEtalon.push(pointsAdd[i]);
-      }
-    }
-  }
+  // if (isOpen && !flagEtalon) {
+  //   let pointsAdd = [];
+  //   let newRecord = true;
+  //   for (let i = 0; i < points.length; i++) {
+  //     newRecord = true;
+  //     for (let j = 0; j < pointsEtalon.length; j++) {
+  //       if (
+  //         points[i].id === pointsEtalon[j].id &&
+  //         points[i].region === pointsEtalon[j].region &&
+  //         points[i].area === pointsEtalon[j].area
+  //       ) {
+  //         //console.log('Stat совподение записей i=', i, 'j=', j);
+  //         newRecord = false;
+  //         pointsEtalon[j] = points[i];
+  //       }
+  //     }
+  //     if (newRecord) {
+  //       console.log("Stat новая запись i=", i);
+  //       pointsAdd.push(points[i]);
+  //     }
+  //   }
+  //   //console.log('pointsAdd:', pointsAdd);
+  //   if (pointsAdd.length > 0) {
+  //     for (let i = 0; i < pointsAdd.length; i++) {
+  //       pointsEtalon.push(pointsAdd[i]);
+  //     }
+  //   }
+  // }
 
   const styleSt1 = {
     fontSize: 13.5,
-    maxHeight: '20px',
-    minHeight: '20px',
-    backgroundColor: '#F1F3F4',
-    color: 'black',
+    maxHeight: "20px",
+    minHeight: "20px",
+    backgroundColor: "#F1F3F4",
+    color: "black",
     marginRight: 0.5,
   };
 
@@ -99,21 +107,21 @@ const StatisticsArchive = (props: {
 
   const SpisXT = () => {
     let resSps: any = [];
-    let labl: string = '';
+    let labl: string = "";
 
     if (pointsEtalon.length === 0) {
       resSps.push(
         <Box key={1} sx={styleSt1}>
           Нет данных по ХТ
-        </Box>,
+        </Box>
       );
     } else {
       for (let i = 0; i < pointsEtalon.length; i++) {
-        labl = pointsEtalon[i].area.toString() + ':' + pointsEtalon[i].id.toString();
+        labl =
+          pointsEtalon[i].area.toString() + ":" + pointsEtalon[i].id.toString();
         resSps.push(<Tab key={i} sx={styleSt1} label={labl} />);
       }
     }
-
     return resSps;
   };
 
@@ -121,19 +129,35 @@ const StatisticsArchive = (props: {
     <>
       {isOpen && (
         <>
-          <Box sx={{ maxWidth: 850, fontSize: 12, marginTop: -2, marginLeft: -3, marginRight: -7 }}>
+          <Box
+            sx={{
+              maxWidth: 850,
+              fontSize: 12,
+              marginTop: -2,
+              marginLeft: -3,
+              marginRight: -7,
+            }}
+          >
             <Tabs
-              sx={{ maxHeight: '20px', minHeight: '20px' }}
+              sx={{ maxHeight: "20px", minHeight: "20px" }}
               value={value}
               onChange={handleChange}
               variant="scrollable"
               scrollButtons={true}
-              allowScrollButtonsMobile>
+              allowScrollButtonsMobile
+            >
               {SpisXT()}
             </Tabs>
           </Box>
           <>
-            {pointsEtalon.length > 0 && (<StatisticXTNew open={isOpen} statist={pointsEtalon} areaid={value} />)}
+            {pointsEtalon.length > 0 && (
+              <StatisticXTArchive
+                open={isOpen}
+                statist={points}
+                areaid={value}
+                date={props.date}
+              />
+            )}
           </>
         </>
       )}
