@@ -11,7 +11,7 @@ import { Statistic } from "../../interfaceStat.d";
 
 let tekValue = 0;
 let pointsEtalon: Statistic[];
-//let flagEtalon = true;
+let oldDate = "";
 
 const StatisticsArchive = (props: {
   open: boolean;
@@ -20,11 +20,13 @@ const StatisticsArchive = (props: {
   region: string;
   date: string;
 }) => {
-  console.log("!!!PoinsSt:", props.open, props.points, props.date);
+  console.log("!!!PoinsStArchive:", props.open, props.date, oldDate);
 
   let isOpen = props.open;
   let points = props.points;
   let reGion = props.region;
+  let tekDate = oldDate;
+  if (oldDate !== props.date) tekDate = props.date;
   pointsEtalon = points;
 
   React.useEffect(() => {
@@ -52,7 +54,8 @@ const StatisticsArchive = (props: {
       }
     };
     handleSend();
-  }, [props.ws, reGion, isOpen, props.date]);
+    //oldDate =  props.date
+  }, [reGion, props.date]);
 
   // if (isOpen && flagEtalon) {
   //   pointsEtalon = points;
@@ -112,7 +115,7 @@ const StatisticsArchive = (props: {
     if (pointsEtalon.length === 0) {
       resSps.push(
         <Box key={1} sx={styleSt1}>
-          Нет данных по ХТ
+          Нет данных по статистике
         </Box>
       );
     } else {

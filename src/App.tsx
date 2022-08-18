@@ -8,6 +8,11 @@ import TabPanel from "@mui/lab/TabPanel";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { ru } from "date-fns/locale";
+
 //import Header from './components/Header/Header';
 import Management from "./components/Management/Management";
 import Points from "./components/Points/Points";
@@ -21,7 +26,7 @@ import { Statistic } from "./interfaceStat.d";
 
 import { styleApp01, styleApp02, styleMod } from "./AppStyle";
 import { styleBatMenu, styleModalMenu } from "./AppStyle";
-import { styleImpServis, styleInp } from "./AppStyle";
+import { styleImpServis, styleInp, styleDatePicker } from "./AppStyle";
 
 let flagWS = true;
 let WS: any = null;
@@ -42,6 +47,7 @@ const MakeDate = (tekData: Date) => {
 
 let formSett = MakeDate(new Date());
 let formSettToday = MakeDate(new Date());
+let formSettOld = MakeDate(new Date());
 
 const App = () => {
   const handleClose = () => {
@@ -237,12 +243,13 @@ const App = () => {
           setIsOpenInf(true);
           break;
         case "getStatistics":
-          console.log("data_statistics:", data);
+          console.log("data_NewStatistics:", data);
           setPointsSt(data.statistics ?? []);
           setIsOpenSt(true);
           break;
         case "getOldStatistics":
           console.log("data_OldStatistics:", data);
+          formSettOld = formSett;
           setPointsOldSt(data.statistics ?? []);
           setIsOpenOldSt(true);
           break;
@@ -261,6 +268,9 @@ const App = () => {
 
   const InputNewDate = () => {
     const InputDate = () => {
+      const [valueDate, setValueDate] = React.useState<Date | null>(
+        new Date(formSett)
+      );
       // const handleChange = (event: any) => {
       //   console.log("Нажато:",event.key )
       //   if (event.key === "Enter") {
@@ -277,34 +287,49 @@ const App = () => {
       //   }
       // };
 
-      const handleKey = (event: any) => {
-        console.log("HandleKey:", event.key,event.keyCode, event.target.value);
-        formSett = event.target.value;
-        if (event.key === "Enter") {
-         
-          console.log("FormSett:", formSett, formSettToday);
-          if (formSett === formSettToday) {
-            setValue("3");
-          } else {
-            setValue("4");
-            setIsOpenOldSt(false);
-            setPointsOldSt([]);
-          }
+      // const handleKey = (event: any) => {
+      //   console.log("HandleKey:", event.key, event.keyCode, event.target.value);
+      //   formSett = event.target.value;
+      //   if (event.key === "Enter") {
+      //     console.log("FormSett:", formSett, formSettToday);
+      //     if (formSett === formSettToday) {
+      //       setValue("3");
+      //     } else {
+      //       setValue("4");
+      //       setIsOpenOldSt(false);
+      //       setPointsOldSt([]);
+      //     }
+      //   }
+      // };
+
+      const handleChange = (event: any) => {
+        setValueDate(event);
+        formSettOld = formSett
+        formSett = MakeDate(event);
+        console.log("!!!FormSett:", formSett, formSettOld, formSettToday);
+        if (formSett === formSettToday) {
+          setValue("3");
+        } else {
+          setValue("4");
+          setIsOpenOldSt(false);
+          setPointsOldSt([]);
         }
       };
 
       return (
-        <Box component="form" sx={{ "& > :not(style)": { width: "110px" } }}>
-          <TextField
-            size="small"
-            type="date"
-            defaultValue={formSett}
-            inputProps={{ style: { fontSize: 14 } }}
-            //onKeyDown={handleKey}
-            onKeyPress={handleKey}
-            //onChange={handleChange}
-            variant="standard"
-          />
+        <Box sx={styleDatePicker}>
+          <LocalizationProvider locale={ru} dateAdapter={AdapterDateFns}>
+            <DatePicker
+              views={["day"]}
+              value={valueDate}
+              inputFormat="dd-MM-yyyy"
+              InputProps={{ style: { fontSize: 14 } }}
+              onChange={handleChange}
+              renderInput={(params) => (
+                <TextField {...params} helperText={null} />
+              )}
+            />
+          </LocalizationProvider>
         </Box>
       );
     };
@@ -321,10 +346,11 @@ const App = () => {
   };
 
   const EntryStatistics = () => {
-    formSett = formSettToday;
+    //formSett = formSettToday;
     setValue("3");
   };
 
+  console.log("FormSett:", formSett, formSettOld, formSettToday);
   return (
     <>
       <EndSeans />
@@ -385,17 +411,32 @@ const App = () => {
             )}
           </TabPanel>
           <TabPanel value="3">
-            {WS !== null && regionGlob !== 0 && (
-              <StatisticsNew
-                open={isOpenSt}
-                ws={WS}
-                points={pointsSt}
-                region={String(regionGlob)}
-              />
-            )}
+            {WS !== null &&
+              regionGlob !== 0 &&
+              formSettOld === formSettToday && (
+                <StatisticsNew
+                  open={isOpenSt}
+                  ws={WS}
+                  points={pointsSt}
+                  region={String(regionGlob)}
+                  date={formSett}
+                />
+              )}
+            {WS !== null &&
+              regionGlob !== 0 &&
+              formSettOld !== formSettToday && (
+                <StatisticsArchive
+                  open={true}
+                  ws={WS}
+                  points={pointsOldSt}
+                  region={String(regionGlob)}
+                  date={formSett}
+                />
+              )}
           </TabPanel>
           <TabPanel value="4">
             {WS !== null && regionGlob !== 0 && (
+              // formSettOld !== formSettToday && (
               <StatisticsArchive
                 open={isOpenOldSt}
                 ws={WS}
@@ -404,6 +445,17 @@ const App = () => {
                 date={formSett}
               />
             )}
+            {/* {WS !== null &&
+              regionGlob !== 0 &&
+              formSettOld === formSettToday && (
+                <StatisticsNew
+                  open={isOpenSt}
+                  ws={WS}
+                  points={pointsSt}
+                  region={String(regionGlob)}
+                  date={formSett}
+                />
+              )} */}
           </TabPanel>
         </TabContext>
       </Box>

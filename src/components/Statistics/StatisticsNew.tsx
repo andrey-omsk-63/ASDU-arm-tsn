@@ -18,8 +18,9 @@ const StatisticsNew = (props: {
   ws: WebSocket;
   points: Statistic[];
   region: string;
+  date: string;
 }) => {
-  //console.log('PoinsSt:', props.open, props.points, props.ws);
+  console.log('1111PoinsStNew:', props.open, props.date, props.points);
 
   let isOpen = props.open;
   let points = props.points;
@@ -103,7 +104,7 @@ const StatisticsNew = (props: {
     if (pointsEtalon.length === 0) {
       resSps.push(
         <Box key={1} sx={styleSt1}>
-          Нет данных по ХТ
+          Нет данных по статистике
         </Box>
       );
     } else {

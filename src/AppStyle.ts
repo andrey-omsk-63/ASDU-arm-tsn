@@ -66,15 +66,15 @@ export const styleModalMenu = {
 };
 //=========================================================================
 export const styleImpServis = {
-  border: "2px solid #000",
-  borderColor: "primary.main",
-  borderRadius: 1,
+  // border: "2px solid #000",
+  // borderColor: "primary.main",
+  // borderRadius: 2,
   fontSize: 14,
   marginLeft: "auto",
-  maxHeight: "24px",
-  minHeight: "24px",
-  maxWidth: "110px",
-  minWidth: "110px",
+  maxHeight: "21px",
+  minHeight: "21px",
+  maxWidth: "120px",
+  minWidth: "120px",
 };
 
 export const styleInp = {
@@ -83,4 +83,15 @@ export const styleInp = {
   minHeight: "21px",
   maxWidth: "75px",
   minWidth: "75px",
+};
+
+export const styleDatePicker = {
+  "& > :not(style)": {
+    width: "120px",
+    height: "21px",
+    display: "flex",
+    flexWrap: "nowrap",
+    flexDirection: "row",
+    flex: "1 1 0px",
+  },
 };

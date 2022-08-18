@@ -58,6 +58,7 @@ let canal: number[] = [];
 let oldAreaid = -1;
 let numIdInMas = 0;
 let oldDate = "";
+let ch = 0;
 
 const StatisticXTArchive = (props: {
   open: boolean;
@@ -69,7 +70,7 @@ const StatisticXTArchive = (props: {
   const points = props.statist;
   const areaId = props.areaid;
 
-  console.log("Stat_points_Archive:", isOpen, props.date,oldDate, points);
+  console.log("Stat_points_Archive:", isOpen, props.date, oldDate);
 
   let colChanel = 0;
   const [value, setValue] = React.useState("0");
@@ -86,9 +87,14 @@ const StatisticXTArchive = (props: {
     oldAreaid = -1;
     numIdInMas = 0;
     oldDate = props.date;
+    console.log("OОООООчистка", oldDate);
+  } else {
+    console.log("OОООООтбой");
   }
 
   if (isOpen) {
+    ch++;
+    console.log("OOOOOOoldAreaid:", ch, oldAreaid, areaId);
     if (oldAreaid < 0) {
       //начало работы (первый вход)
       massId.push({ id: areaId, canall: [], lbl: [], labels, datasets: [] });

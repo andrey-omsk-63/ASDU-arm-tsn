@@ -37,6 +37,7 @@ const Points = (props: { open: boolean; ws: WebSocket; xctrll: XctrlInfo[]; regi
         if (props.ws.readyState === WebSocket.OPEN) {
           props.ws.send(JSON.stringify({ type: 'stopDevices', region: reGion }));
           props.ws.send(JSON.stringify({ type: 'stopStatistics', region: reGion }));
+          props.ws.send(JSON.stringify({ type: 'stopOldStatistics', region: reGion }));
         } else {
           setTimeout(() => {
             handleSend();
