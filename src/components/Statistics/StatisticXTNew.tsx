@@ -66,9 +66,7 @@ const StatisticXTNew = (props: {
   const isOpen = props.open;
   const points = props.statist;
   const areaId = props.areaid;
-
-  console.log("Stat_points_New:", points);
-
+  
   let colChanel = 0;
   const [value, setValue] = React.useState("0");
 

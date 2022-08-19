@@ -20,7 +20,7 @@ const StatisticsArchive = (props: {
   region: string;
   date: string;
 }) => {
-  console.log("!!!PoinsStArchive:", props.open, props.date, oldDate);
+  //console.log("!!!PoinsStArchive:", props.open, props.date, oldDate, props.points);
 
   let isOpen = props.open;
   let points = props.points;
@@ -31,7 +31,7 @@ const StatisticsArchive = (props: {
 
   React.useEffect(() => {
     const handleSend = () => {
-      if (props.ws !== null) {
+      if (props.ws !== null && oldDate !== props.date) {
         if (props.ws.readyState === WebSocket.OPEN) {
           props.ws.send(
             JSON.stringify({ type: "stopDevices", region: reGion })
@@ -54,44 +54,10 @@ const StatisticsArchive = (props: {
       }
     };
     handleSend();
-    //oldDate =  props.date
+    oldDate = props.date;
+    //console.log("ОТРАБОТАЛ useEFFECT АХИВ");
   }, [reGion, props.date]);
-
-  // if (isOpen && flagEtalon) {
-  //   pointsEtalon = points;
-  //   flagEtalon = false;
-  //   points = [];
-  // }
-
-  // if (isOpen && !flagEtalon) {
-  //   let pointsAdd = [];
-  //   let newRecord = true;
-  //   for (let i = 0; i < points.length; i++) {
-  //     newRecord = true;
-  //     for (let j = 0; j < pointsEtalon.length; j++) {
-  //       if (
-  //         points[i].id === pointsEtalon[j].id &&
-  //         points[i].region === pointsEtalon[j].region &&
-  //         points[i].area === pointsEtalon[j].area
-  //       ) {
-  //         //console.log('Stat совподение записей i=', i, 'j=', j);
-  //         newRecord = false;
-  //         pointsEtalon[j] = points[i];
-  //       }
-  //     }
-  //     if (newRecord) {
-  //       console.log("Stat новая запись i=", i);
-  //       pointsAdd.push(points[i]);
-  //     }
-  //   }
-  //   //console.log('pointsAdd:', pointsAdd);
-  //   if (pointsAdd.length > 0) {
-  //     for (let i = 0; i < pointsAdd.length; i++) {
-  //       pointsEtalon.push(pointsAdd[i]);
-  //     }
-  //   }
-  // }
-
+  
   const styleSt1 = {
     fontSize: 13.5,
     maxHeight: "20px",

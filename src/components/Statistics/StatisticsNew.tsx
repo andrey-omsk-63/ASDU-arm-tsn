@@ -20,7 +20,7 @@ const StatisticsNew = (props: {
   region: string;
   date: string;
 }) => {
-  console.log('1111PoinsStNew:', props.open, props.date, props.points);
+  //console.log('1111PoinsStNew:', props.open, props.date, props.points);
 
   let isOpen = props.open;
   let points = props.points;
@@ -44,6 +44,7 @@ const StatisticsNew = (props: {
       }
     };
     handleSend();
+    //console.log("ОТРАБОТАЛ useEFFECT ОСНОВНОЙ");
   }, [props.ws, reGion]);
 
   if (isOpen && flagEtalon) {

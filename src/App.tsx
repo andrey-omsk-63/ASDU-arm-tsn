@@ -24,7 +24,7 @@ import { XctrlInfo } from "./interfaceGl.d";
 import { RegionInfo } from "./interfaceGl.d";
 import { Statistic } from "./interfaceStat.d";
 
-import { styleApp01, styleApp02, styleMod } from "./AppStyle";
+import { styleApp02, styleMod } from "./AppStyle";
 import { styleBatMenu, styleModalMenu } from "./AppStyle";
 import { styleImpServis, styleInp, styleDatePicker } from "./AppStyle";
 
@@ -198,6 +198,9 @@ const App = () => {
   const [isOpenSt, setIsOpenSt] = React.useState(false);
   const [isOpenOldSt, setIsOpenOldSt] = React.useState(false);
   const [bsLogin, setBsLogin] = React.useState("");
+  const [valueDate, setValueDate] = React.useState<Date | null>(
+    new Date(formSett)
+  );
 
   const host =
     "wss://" +
@@ -248,8 +251,8 @@ const App = () => {
           setIsOpenSt(true);
           break;
         case "getOldStatistics":
-          console.log("data_OldStatistics:", data);
           formSettOld = formSett;
+          console.log("DATA_OLDSTATistics:", formSettOld, data);
           setPointsOldSt(data.statistics ?? []);
           setIsOpenOldSt(true);
           break;
@@ -268,52 +271,22 @@ const App = () => {
 
   const InputNewDate = () => {
     const InputDate = () => {
-      const [valueDate, setValueDate] = React.useState<Date | null>(
-        new Date(formSett)
-      );
-      // const handleChange = (event: any) => {
-      //   console.log("Нажато:",event.key )
-      //   if (event.key === "Enter") {
-      //     formSett = event.target.value;
-
-      //     console.log("FormSett", formSett, formSettToday);
-      //     if (formSett === formSettToday) {
-      //       setValue("3");
-      //     } else {
-      //       setValue("4");
-      //       setIsOpenOldSt(false);
-      //       setPointsOldSt([]);
-      //     }
-      //   }
-      // };
-
-      // const handleKey = (event: any) => {
-      //   console.log("HandleKey:", event.key, event.keyCode, event.target.value);
-      //   formSett = event.target.value;
-      //   if (event.key === "Enter") {
-      //     console.log("FormSett:", formSett, formSettToday);
-      //     if (formSett === formSettToday) {
-      //       setValue("3");
-      //     } else {
-      //       setValue("4");
-      //       setIsOpenOldSt(false);
-      //       setPointsOldSt([]);
-      //     }
-      //   }
-      // };
-
       const handleChange = (event: any) => {
-        setValueDate(event);
-        formSettOld = formSett
         formSett = MakeDate(event);
-        console.log("!!!FormSett:", formSett, formSettOld, formSettToday);
+        //console.log("ВВЕДЕНО:", formSett, formSettOld, formSettToday);
         if (formSett === formSettToday) {
           setValue("3");
+          //console.log("ПЕРЕХОД В СТАТИСТИКУ");
         } else {
+          //console.log("ПЕРЕХОД В АРХИВ");
+          if (formSett !== formSettOld) {
+            //console.log("ПЕРЕХОД В НОВЫЙ АРХИВ");
+            setIsOpenOldSt(false);
+            setPointsOldSt([]);
+          }
           setValue("4");
-          setIsOpenOldSt(false);
-          setPointsOldSt([]);
         }
+        setValueDate(event);
       };
 
       return (
@@ -345,12 +318,20 @@ const App = () => {
     );
   };
 
-  const EntryStatistics = () => {
-    //formSett = formSettToday;
-    setValue("3");
+  const ButtonMenu = (mode: string, soob: string) => {
+    return (
+      <Button
+        sx={styleApp02}
+        variant="contained"
+        onClick={() => setValue(mode)}
+      >
+        <b>{soob}</b>
+      </Button>
+    );
   };
 
-  console.log("FormSett:", formSett, formSettOld, formSettToday);
+  //console.log("!!!", formSett, formSettOld, formSettToday);
+
   return (
     <>
       <EndSeans />
@@ -359,33 +340,9 @@ const App = () => {
         <TabContext value={value}>
           <Box sx={{ marginLeft: 0.5, backgroundColor: "#F1F5FB" }}>
             <Stack direction="row">
-              {bsLogin === "" && (
-                <Button
-                  sx={styleApp01}
-                  variant="contained"
-                  onClick={() => setValue("1")}
-                >
-                  <b>Управление</b>
-                </Button>
-              )}
-              {bsLogin === "" && (
-                <Button
-                  sx={styleApp02}
-                  variant="contained"
-                  onClick={() => setValue("2")}
-                >
-                  <b>Характерные точки</b>
-                </Button>
-              )}
-              {bsLogin === "" && (
-                <Button
-                  sx={styleApp01}
-                  variant="contained"
-                  onClick={() => EntryStatistics()}
-                >
-                  <b>Статистика</b>
-                </Button>
-              )}
+              {bsLogin === "" && <>{ButtonMenu("1", "Управление")}</>}
+              {bsLogin === "" && <>{ButtonMenu("2", "Характерные точки")}</>}
+              {bsLogin === "" && <>{ButtonMenu("3", "Статистика")}</>}
               {bsLogin === "" && Number(value) > 2 && <InputNewDate />}
             </Stack>
           </Box>
@@ -413,7 +370,8 @@ const App = () => {
           <TabPanel value="3">
             {WS !== null &&
               regionGlob !== 0 &&
-              formSettOld === formSettToday && (
+              // formSettOld === formSettToday && (
+              formSett === formSettToday && (
                 <StatisticsNew
                   open={isOpenSt}
                   ws={WS}
@@ -422,21 +380,18 @@ const App = () => {
                   date={formSett}
                 />
               )}
-            {WS !== null &&
-              regionGlob !== 0 &&
-              formSettOld !== formSettToday && (
-                <StatisticsArchive
-                  open={true}
-                  ws={WS}
-                  points={pointsOldSt}
-                  region={String(regionGlob)}
-                  date={formSett}
-                />
-              )}
+            {WS !== null && regionGlob !== 0 && formSett !== formSettToday && (
+              <StatisticsArchive
+                open={true}
+                ws={WS}
+                points={pointsOldSt}
+                region={String(regionGlob)}
+                date={formSett}
+              />
+            )}
           </TabPanel>
           <TabPanel value="4">
             {WS !== null && regionGlob !== 0 && (
-              // formSettOld !== formSettToday && (
               <StatisticsArchive
                 open={isOpenOldSt}
                 ws={WS}
@@ -445,17 +400,6 @@ const App = () => {
                 date={formSett}
               />
             )}
-            {/* {WS !== null &&
-              regionGlob !== 0 &&
-              formSettOld === formSettToday && (
-                <StatisticsNew
-                  open={isOpenSt}
-                  ws={WS}
-                  points={pointsSt}
-                  region={String(regionGlob)}
-                  date={formSett}
-                />
-              )} */}
           </TabPanel>
         </TabContext>
       </Box>
