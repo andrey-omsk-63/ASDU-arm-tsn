@@ -307,14 +307,54 @@ const App = () => {
       );
     };
 
+    const styleMinut01 = {
+      border: 1,
+      fontSize: 14,
+      marginLeft: "auto",
+      marginRight: 1,
+      maxHeight: "21px",
+      minHeight: "21px",
+      maxWidth: "210px",
+      minWidth: "210px",
+    };
+
+    const styleMinut02 = {
+      fontSize: 11.5,
+      border: 1,
+      maxHeight: "21px",
+      minHeight: "21px",
+      maxWidth: "70px",
+      minWidth: "70px",
+      backgroundColor: "#F1F3F4",
+      color: "black",
+      textTransform: "unset !important",
+    };
+
     return (
-      <Box sx={styleImpServis}>
-        <Grid item container>
-          <Grid item xs sx={styleInp}>
-            <InputDate />
+      <>
+        <Box sx={styleMinut01}>
+          <Grid item container>
+            <Grid item xs={4}>
+              <Button variant="contained" sx={styleMinut02}>
+                25 мин
+              </Button>
+            </Grid>
+            <Grid item xs={4} sx={styleMinut02}>
+              10 мин
+            </Grid>
+            <Grid item xs={4} sx={styleMinut02}>
+              15 мин
+            </Grid>
           </Grid>
-        </Grid>
-      </Box>
+        </Box>
+        <Box sx={styleImpServis}>
+          <Grid item container>
+            <Grid item xs sx={styleInp}>
+              <InputDate />
+            </Grid>
+          </Grid>
+        </Box>
+      </>
     );
   };
 
