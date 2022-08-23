@@ -7,6 +7,7 @@ import TabContext from "@mui/lab/TabContext";
 import TabPanel from "@mui/lab/TabPanel";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
+import MenuItem from "@mui/material/MenuItem";
 
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -24,8 +25,8 @@ import { XctrlInfo } from "./interfaceGl.d";
 import { RegionInfo } from "./interfaceGl.d";
 import { Statistic } from "./interfaceStat.d";
 
-import { styleApp02, styleMod } from "./AppStyle";
-import { styleBatMenu, styleModalMenu } from "./AppStyle";
+import { styleApp02, styleMod, styleBoxFormInt } from "./AppStyle";
+import { styleBatMenu, styleModalMenu, styleInt01 } from "./AppStyle";
 import { styleImpServis, styleInp, styleDatePicker } from "./AppStyle";
 
 let flagWS = true;
@@ -48,8 +49,28 @@ const MakeDate = (tekData: Date) => {
 let formSett = MakeDate(new Date());
 let formSettToday = MakeDate(new Date());
 let formSettOld = MakeDate(new Date());
+let interval = 0;
+let tekIdNow = 0;
 
 const App = () => {
+  const [pointsXctrl, setPointsXctrl] = React.useState<Array<XctrlInfo>>([]);
+  const [pointsReg, setPointsReg] = React.useState<RegionInfo>(
+    {} as RegionInfo
+  );
+  const [isOpenInf, setIsOpenInf] = React.useState(false);
+  const [pointsTfl, setPointsTfl] = React.useState<Array<Tflight>>([]);
+  const [isOpenDev, setIsOpenDev] = React.useState(false);
+  const [pointsSt, setPointsSt] = React.useState<Array<Statistic>>([]);
+  const [pointsOldSt, setPointsOldSt] = React.useState<Array<Statistic>>([]);
+  const [isOpenSt, setIsOpenSt] = React.useState(false);
+  const [isOpenOldSt, setIsOpenOldSt] = React.useState(false);
+  const [bsLogin, setBsLogin] = React.useState("");
+  const [valueDate, setValueDate] = React.useState<Date | null>(
+    new Date(formSett)
+  );
+  const [value, setValue] = React.useState("1");
+  const [trigger, setTrigger] = React.useState(true);
+
   const handleClose = () => {
     window.close();
   };
@@ -186,21 +207,10 @@ const App = () => {
     }
   };
 
-  const [pointsXctrl, setPointsXctrl] = React.useState<Array<XctrlInfo>>([]);
-  const [pointsReg, setPointsReg] = React.useState<RegionInfo>(
-    {} as RegionInfo
-  );
-  const [isOpenInf, setIsOpenInf] = React.useState(false);
-  const [pointsTfl, setPointsTfl] = React.useState<Array<Tflight>>([]);
-  const [isOpenDev, setIsOpenDev] = React.useState(false);
-  const [pointsSt, setPointsSt] = React.useState<Array<Statistic>>([]);
-  const [pointsOldSt, setPointsOldSt] = React.useState<Array<Statistic>>([]);
-  const [isOpenSt, setIsOpenSt] = React.useState(false);
-  const [isOpenOldSt, setIsOpenOldSt] = React.useState(false);
-  const [bsLogin, setBsLogin] = React.useState("");
-  const [valueDate, setValueDate] = React.useState<Date | null>(
-    new Date(formSett)
-  );
+  const SetStatisticsInterval = (statPoints: any) => {
+    console.log("SSSSStatPoints:", statPoints);
+    if (!interval) interval = statPoints[0].Statistics[0].TLen;
+  };
 
   const host =
     "wss://" +
@@ -208,9 +218,7 @@ const App = () => {
     window.location.pathname +
     "W" +
     window.location.search;
-  // let WS: React.MutableRefObject<WebSocket> = {};
-  //const WS: any = React.useRef(new WebSocket('wss://ws.kraken.com/'));
-  //const WS = React.useRef(new WebSocket('wss://ws.kraken.com/'));
+
   if (flagWS) {
     WS = new WebSocket(host);
     flagWS = false;
@@ -247,6 +255,7 @@ const App = () => {
           break;
         case "getStatistics":
           console.log("data_NewStatistics:", data);
+          SetStatisticsInterval(data.statistics);
           setPointsSt(data.statistics ?? []);
           setIsOpenSt(true);
           break;
@@ -265,13 +274,17 @@ const App = () => {
     };
   }, []);
 
-  const [value, setValue] = React.useState("1");
-
   UpdateXctrl(); // разноска обновлений Xctrl
+
+  const SetId = (newId: number, intervalId: number) => {
+    tekIdNow = newId;
+    interval = intervalId;
+    console.log("!!!!!!tekIdNow:", tekIdNow, interval);
+  };
 
   const InputNewDate = () => {
     const InputDate = () => {
-      const handleChange = (event: any) => {
+      const handleChangeDP = (event: any) => {
         formSett = MakeDate(event);
         //console.log("ВВЕДЕНО:", formSett, formSettOld, formSettToday);
         if (formSett === formSettToday) {
@@ -297,7 +310,7 @@ const App = () => {
               value={valueDate}
               inputFormat="dd-MM-yyyy"
               InputProps={{ style: { fontSize: 14 } }}
-              onChange={handleChange}
+              onChange={handleChangeDP}
               renderInput={(params) => (
                 <TextField {...params} helperText={null} />
               )}
@@ -307,46 +320,77 @@ const App = () => {
       );
     };
 
-    const styleMinut01 = {
-      border: 1,
-      fontSize: 14,
-      marginLeft: "auto",
-      marginRight: 1,
-      maxHeight: "21px",
-      minHeight: "21px",
-      maxWidth: "210px",
-      minWidth: "210px",
-    };
+    let dat = ["5", "10", "15", "30", "60"];
+    let massKey = [];
+    let massDat: any = [];
+    const currencies: any = [];
+    for (let key in dat) {
+      massKey.push(key);
+      massDat.push(dat[key]);
+    }
+    for (let i = 0; i < massKey.length; i++) {
+      let maskCurrencies = {
+        value: "",
+        label: "",
+      };
+      maskCurrencies.value = massKey[i];
+      maskCurrencies.label = massDat[i];
+      currencies.push(maskCurrencies);
+    }
+    // const [currency, setCurrency] = React.useState(massKey[0]);
+    const [currency, setCurrency] = React.useState(interval.toString());
 
-    const styleMinut02 = {
-      fontSize: 11.5,
-      border: 1,
-      maxHeight: "21px",
-      minHeight: "21px",
-      maxWidth: "70px",
-      minWidth: "70px",
-      backgroundColor: "#F1F3F4",
-      color: "black",
-      textTransform: "unset !important",
+    const InputInterval = () => {
+      const handleChangeInt = (event: any) => {
+        setCurrency(event.target.value);
+        interval = Number(massDat[Number(event.target.value)]);
+        console.log("setCurrency:", interval, event.target.value, currency);
+        setTrigger(!trigger);
+      };
+
+      const handleKey = (event: any) => {
+        if (event.key === "Enter") event.preventDefault();
+      };
+
+      return (
+        <Box component="form" sx={styleBoxFormInt}>
+          <TextField
+            select
+            size="small"
+            onKeyPress={handleKey} //отключение Enter
+            value={currency}
+            onChange={handleChangeInt}
+            InputProps={{ style: { fontSize: 14 } }}
+            variant="standard"
+            color="secondary"
+          >
+            {currencies.map((option: any) => (
+              <MenuItem
+                key={option.value}
+                value={option.value}
+                sx={{ fontSize: 14 }}
+              >
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+        </Box>
+      );
     };
 
     return (
       <>
-        <Box sx={styleMinut01}>
-          <Grid item container>
-            <Grid item xs={4}>
-              <Button variant="contained" sx={styleMinut02}>
-                25 мин
-              </Button>
-            </Grid>
-            <Grid item xs={4} sx={styleMinut02}>
-              10 мин
-            </Grid>
-            <Grid item xs={4} sx={styleMinut02}>
-              15 мин
-            </Grid>
+        <Grid item container sx={{ border: 0, width: "150px" }}>
+          <Grid item xs={7} sx={{ border: 0, textAlign: "right" }}>
+            Интервал:
           </Grid>
-        </Box>
+          <Grid item xs={5}>
+            <Box sx={styleInt01}>
+              <InputInterval />
+            </Box>
+          </Grid>
+        </Grid>
+
         <Box sx={styleImpServis}>
           <Grid item container>
             <Grid item xs sx={styleInp}>
@@ -369,8 +413,6 @@ const App = () => {
       </Button>
     );
   };
-
-  //console.log("!!!", formSett, formSettOld, formSettToday);
 
   return (
     <>
@@ -418,6 +460,8 @@ const App = () => {
                   points={pointsSt}
                   region={String(regionGlob)}
                   date={formSett}
+                  interval={interval}
+                  func={SetId}
                 />
               )}
             {WS !== null && regionGlob !== 0 && formSett !== formSettToday && (
@@ -427,6 +471,7 @@ const App = () => {
                 points={pointsOldSt}
                 region={String(regionGlob)}
                 date={formSett}
+                interval={interval}
               />
             )}
           </TabPanel>
@@ -438,6 +483,7 @@ const App = () => {
                 points={pointsOldSt}
                 region={String(regionGlob)}
                 date={formSett}
+                interval={interval}
               />
             )}
           </TabPanel>
@@ -452,3 +498,33 @@ export default App;
 //const [points, setPointsonKeyDown] = React.useState<XctrlInfo>({} as XctrlInfo);
 // const [points, setPoints] = React.useState<Array<XctrlInfo>>([]);
 // const [isOpen, setIsOpen] = React.useState(false);
+{
+  /* <Grid item container>
+  <Grid item xs={4}>
+    <Button variant="contained" sx={styleInt02} onClick={() => setInterval(5)}>
+      5мин
+    </Button>
+  </Grid>
+  <Grid item xs={4}>
+    <Button variant="contained" sx={styleInt02}>
+      10мин
+    </Button>
+  </Grid>
+  <Grid item xs={4}>
+    <Button variant="contained" sx={styleInt02}>
+      15мин
+    </Button>
+  </Grid>
+</Grid>; */
+}
+// const styleInt02 = {
+//   fontSize: 12,
+//   border: 1,
+//   maxHeight: "21px",
+//   minHeight: "21px",
+//   maxWidth: "70px",
+//   minWidth: "70px",
+//   backgroundColor: "#F1F3F4",
+//   color: "black",
+//   textTransform: "unset !important",
+// };

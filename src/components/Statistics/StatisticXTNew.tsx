@@ -127,6 +127,7 @@ const StatisticXTNew = (props: {
     if (isOpen && val >= 0 && !canal.includes(val)) {
       if (val !== 16) setOpenLoader(true);
       if (isOpen && value !== "0" && labels.length === 0) {
+        //==========================================================
         const colMin = 60 / matrix[0].TLen;
         for (let i = 0; i < matrix.length; i++) {
           let int = "";

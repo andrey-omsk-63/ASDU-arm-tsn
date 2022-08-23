@@ -64,11 +64,8 @@ export const styleModalMenu = {
   marginTop: 2,
   textTransform: "unset !important",
 };
-//=========================================================================
+//====== DatePicker =======================================================
 export const styleImpServis = {
-  // border: "2px solid #000",
-  // borderColor: "primary.main",
-  // borderRadius: 2,
   fontSize: 14,
   marginLeft: "auto",
   maxHeight: "21px",
@@ -95,3 +92,28 @@ export const styleDatePicker = {
     flex: "1 1 0px",
   },
 };
+//====== Interval =========================================================
+export const styleInt01 = {
+  fontSize: 14,
+  marginLeft: "auto",
+  marginRight: 1,
+  maxHeight: "21px",
+  minHeight: "21px",
+  maxWidth: "50px",
+  minWidth: "50px",
+  backgroundColor: "#FFFBE5",
+};
+
+export const styleBoxFormInt = {
+  "& > :not(style)": {
+    marginTop: "-2px",
+    marginLeft: "-0px",
+    width: "55px",
+  },
+};
+
+
+
+
+
+

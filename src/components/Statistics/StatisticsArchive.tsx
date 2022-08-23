@@ -19,14 +19,15 @@ const StatisticsArchive = (props: {
   points: Statistic[];
   region: string;
   date: string;
+  interval: number;
 }) => {
   //console.log("!!!PoinsStArchive:", props.open, props.date, oldDate, props.points);
 
   let isOpen = props.open;
   let points = props.points;
   let reGion = props.region;
-  let tekDate = oldDate;
-  if (oldDate !== props.date) tekDate = props.date;
+  //let tekDate = oldDate;
+  //if (oldDate !== props.date) tekDate = props.date;
   pointsEtalon = points;
 
   React.useEffect(() => {
@@ -56,8 +57,8 @@ const StatisticsArchive = (props: {
     handleSend();
     oldDate = props.date;
     //console.log("ОТРАБОТАЛ useEFFECT АХИВ");
-  }, [reGion, props.date]);
-  
+  }, [reGion, props.date, props.ws]);
+
   const styleSt1 = {
     fontSize: 13.5,
     maxHeight: "20px",

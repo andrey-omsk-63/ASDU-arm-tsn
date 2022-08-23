@@ -12,6 +12,7 @@ import { Statistic } from "../../interfaceStat.d";
 let tekValue = 0;
 let pointsEtalon: Statistic[];
 let flagEtalon = true;
+let massInterval: any = [];
 
 const StatisticsNew = (props: {
   open: boolean;
@@ -19,8 +20,10 @@ const StatisticsNew = (props: {
   points: Statistic[];
   region: string;
   date: string;
+  interval: number;
+  func: any;
 }) => {
-  //console.log('1111PoinsStNew:', props.open, props.date, props.points);
+  console.log('1111PoinsStNew:', props.interval);
 
   let isOpen = props.open;
   let points = props.points;
@@ -50,8 +53,17 @@ const StatisticsNew = (props: {
   if (isOpen && flagEtalon) {
     pointsEtalon = points;
     flagEtalon = false;
+    for (let i = 0; i < points.length; i++) {
+      massInterval.push(points[i].Statistics[0].TLen);
+    }
+    console.log("massInterval", massInterval, points);
     points = [];
+  } else {
+    if (massInterval.length) massInterval[tekValue] = props.interval;
+    console.log("PROPS.massInterval", massInterval);
   }
+
+  
 
   if (isOpen && !flagEtalon) {
     let pointsAdd = [];
@@ -96,6 +108,8 @@ const StatisticsNew = (props: {
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
     tekValue = newValue;
+    props.func(tekValue, massInterval[tekValue]);
+    console.log('ПЕРЕДАЛ:',tekValue, massInterval[tekValue])
   };
 
   const SpisXT = () => {
