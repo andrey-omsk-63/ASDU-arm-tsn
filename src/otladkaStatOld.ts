@@ -1,12 +1,12 @@
 export const dataStatOld = {
-  type: "getOldStatistics",
+  type: 'getOldStatistics',
   data: {
     statistics: [
       {
         region: 1,
         area: 1,
         id: 1,
-        date: "2022-04-20T23:55:00.463359355+06:00",
+        date: '2022-04-20T23:55:00.463359355+06:00',
         Statistics: [
           {
             Period: 1,
@@ -7189,7 +7189,7 @@ export const dataStatOld = {
         region: 1,
         area: 1,
         id: 6,
-        date: "2022-04-20T23:55:00.46937087+06:00",
+        date: '2022-04-20T23:55:00.46937087+06:00',
         Statistics: [
           {
             Period: 1,
@@ -13224,7 +13224,7 @@ export const dataStatOld = {
         region: 1,
         area: 1,
         id: 8,
-        date: "2022-04-20T23:55:00.792615645+06:00",
+        date: '2022-04-20T23:55:00.792615645+06:00',
         Statistics: [
           {
             Period: 1,
@@ -16963,7 +16963,7 @@ export const dataStatOld = {
         region: 1,
         area: 1,
         id: 11,
-        date: "2022-04-20T14:45:02.328919+06:00",
+        date: '2022-04-20T14:45:02.328919+06:00',
         Statistics: [
           {
             Period: 177,

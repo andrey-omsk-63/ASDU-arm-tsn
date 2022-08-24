@@ -1,17 +1,17 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 
 //import axios from 'axios';
 
-import StatisticXTArchive from "./StatisticXTArchive";
+import StatisticXTArchive from './StatisticXTArchive';
 
-import { Statistic } from "../../interfaceStat.d";
+import { Statistic } from '../../interfaceStat.d';
 
 let tekValue = 0;
 let pointsEtalon: Statistic[];
-let oldDate = "";
+let oldDate = '';
 
 const StatisticsArchive = (props: {
   open: boolean;
@@ -34,18 +34,14 @@ const StatisticsArchive = (props: {
     const handleSend = () => {
       if (props.ws !== null && oldDate !== props.date) {
         if (props.ws.readyState === WebSocket.OPEN) {
-          props.ws.send(
-            JSON.stringify({ type: "stopDevices", region: reGion })
-          );
-          props.ws.send(
-            JSON.stringify({ type: "stopStatistics", region: reGion })
-          );
+          props.ws.send(JSON.stringify({ type: 'stopDevices', region: reGion }));
+          props.ws.send(JSON.stringify({ type: 'stopStatistics', region: reGion }));
           props.ws.send(
             JSON.stringify({
-              type: "getOldStatistics",
+              type: 'getOldStatistics',
               region: reGion,
               date: new Date(props.date).toISOString(),
-            })
+            }),
           );
         } else {
           setTimeout(() => {
@@ -61,10 +57,10 @@ const StatisticsArchive = (props: {
 
   const styleSt1 = {
     fontSize: 13.5,
-    maxHeight: "20px",
-    minHeight: "20px",
-    backgroundColor: "#F1F3F4",
-    color: "black",
+    maxHeight: '20px',
+    minHeight: '20px',
+    backgroundColor: '#F1F3F4',
+    color: 'black',
     marginRight: 0.5,
   };
 
@@ -77,18 +73,17 @@ const StatisticsArchive = (props: {
 
   const SpisXT = () => {
     let resSps: any = [];
-    let labl: string = "";
+    let labl: string = '';
 
     if (pointsEtalon.length === 0) {
       resSps.push(
         <Box key={1} sx={styleSt1}>
           Нет данных по статистике
-        </Box>
+        </Box>,
       );
     } else {
       for (let i = 0; i < pointsEtalon.length; i++) {
-        labl =
-          pointsEtalon[i].area.toString() + ":" + pointsEtalon[i].id.toString();
+        labl = pointsEtalon[i].area.toString() + ':' + pointsEtalon[i].id.toString();
         resSps.push(<Tab key={i} sx={styleSt1} label={labl} />);
       }
     }
@@ -102,31 +97,25 @@ const StatisticsArchive = (props: {
           <Box
             sx={{
               maxWidth: 850,
+              minWidth: 850,
               fontSize: 12,
               marginTop: -2,
               marginLeft: -3,
               marginRight: -7,
-            }}
-          >
+            }}>
             <Tabs
-              sx={{ maxHeight: "20px", minHeight: "20px" }}
+              sx={{ maxHeight: '20px', minHeight: '20px' }}
               value={value}
               onChange={handleChange}
               variant="scrollable"
               scrollButtons={true}
-              allowScrollButtonsMobile
-            >
+              allowScrollButtonsMobile>
               {SpisXT()}
             </Tabs>
           </Box>
           <>
             {pointsEtalon.length > 0 && (
-              <StatisticXTArchive
-                open={isOpen}
-                statist={points}
-                areaid={value}
-                date={props.date}
-              />
+              <StatisticXTArchive open={isOpen} statist={points} areaid={value} date={props.date} />
             )}
           </>
         </>
