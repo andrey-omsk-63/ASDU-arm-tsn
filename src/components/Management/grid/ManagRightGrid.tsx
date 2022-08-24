@@ -1,11 +1,15 @@
-import * as React from 'react';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import * as React from "react";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 
-import { Tflight } from '../../../interfaceMNG.d';
+import { Tflight } from "../../../interfaceMNG.d";
 
-import { styleMgl, styleMRG01, styleMRG02 } from './ManagRightGridStyle';
-import { styleMRG02Center, styleMRG03, styleMRG04 } from './ManagRightGridStyle';
+import { styleMgl, styleMRG01, styleMRG02 } from "./ManagRightGridStyle";
+import {
+  styleMRG02Center,
+  styleMRG03,
+  styleMRG04,
+} from "./ManagRightGridStyle";
 
 export interface DataKnob {
   knop: Knob[];
@@ -137,13 +141,13 @@ const ManagementRightGrid = (props: {
     const StrokaHeaderMode1 = () => {
       let resStr = [];
       resStr.push(
-        <Grid item container>
-          {StrokaGridHeader(0.3, '№')}
-          {StrokaGridHeader(0.7, 'Район')}
-          {StrokaGridHeader(4.8, 'Устройствa')}
-          {StrokaGridHeader(2.5, 'Текущее состояние')}
-          {StrokaGridHeader(3.7, 'Состояние ХТ')}
-        </Grid>,
+        <Grid item key={Math.random()} container>
+          {StrokaGridHeader(0.3, "№")}
+          {StrokaGridHeader(0.7, "Район")}
+          {StrokaGridHeader(4.8, "Устройствa")}
+          {StrokaGridHeader(2.5, "Текущее состояние")}
+          {StrokaGridHeader(3.7, "Состояние ХТ")}
+        </Grid>
       );
       return resStr;
     };
@@ -152,12 +156,12 @@ const ManagementRightGrid = (props: {
       let resStr = [];
       resStr.push(
         <Grid item container>
-          {StrokaGridHeader(0.3, '№')}
-          {StrokaGridHeader(1.1, 'Подрайон')}
-          {StrokaGridHeader(4.5, 'Устройствa')}
-          {StrokaGridHeader(2.4, 'Текущее состояние')}
-          {StrokaGridHeader(3.7, 'Состояние ХТ')}
-        </Grid>,
+          {StrokaGridHeader(0.3, "№")}
+          {StrokaGridHeader(1.1, "Подрайон")}
+          {StrokaGridHeader(4.5, "Устройствa")}
+          {StrokaGridHeader(2.4, "Текущее состояние")}
+          {StrokaGridHeader(3.7, "Состояние ХТ")}
+        </Grid>
       );
       return resStr;
     };
@@ -166,17 +170,17 @@ const ManagementRightGrid = (props: {
       let resStr = [];
       resStr.push(
         <Grid item container>
-          {StrokaGridHeader(0.3, '№')}
-          {StrokaGridHeader(1.1, 'Подрайон')}
-          {StrokaGridHeader(0.4, 'ДК')}
-          {StrokaGridHeader(4.0, 'Наименование')}
-          {StrokaGridHeader(1.5, 'Устройствo')}
-          {StrokaGridHeader(2.0, 'Состояние')}
-          {StrokaGridHeader(0.5, 'ПК')}
-          {StrokaGridHeader(0.5, 'СК')}
-          {StrokaGridHeader(0.5, 'НК')}
-          {StrokaGridHeader(1.2, 'Статус')}
-        </Grid>,
+          {StrokaGridHeader(0.3, "№")}
+          {StrokaGridHeader(1.1, "Подрайон")}
+          {StrokaGridHeader(0.4, "ДК")}
+          {StrokaGridHeader(4.0, "Наименование")}
+          {StrokaGridHeader(1.5, "Устройствo")}
+          {StrokaGridHeader(2.0, "Состояние")}
+          {StrokaGridHeader(0.5, "ПК")}
+          {StrokaGridHeader(0.5, "СК")}
+          {StrokaGridHeader(0.5, "НК")}
+          {StrokaGridHeader(1.2, "Статус")}
+        </Grid>
       );
       return resStr;
     };
@@ -204,60 +208,60 @@ const ManagementRightGrid = (props: {
       for (let i = 0; i < mass.length; i++) {
         let prosentSv = (100 * mass[i].sost) / mass[i].koldk;
         let prosentPch = (100 * mass[i].podch) / mass[i].koldk;
-        let soobBP = 'Назначен';
-        let soobXT = 'ХТ для данного района ';
+        let soobBP = "Назначен";
+        let soobXT = "ХТ для данного района ";
         //if (mass[i].isPK) soobBP = soobBP + ' ПК';
         if (mass[i].isPK) {
-          soobBP = soobBP + ' ПК';
+          soobBP = soobBP + " ПК";
         } else {
           for (let i = 0; i < massKnob.length; i++) {
             if (massKnob[i].cmd === 5) {
-              soobBP = soobBP + ' пк';
+              soobBP = soobBP + " пк";
               break;
             }
           }
         }
         //if (mass[i].isCK) soobBP = soobBP + ' CК';
         if (mass[i].isCK) {
-          soobBP = soobBP + ' CК';
+          soobBP = soobBP + " CК";
         } else {
           for (let i = 0; i < massKnob.length; i++) {
             if (massKnob[i].cmd === 6) {
-              soobBP = soobBP + ' ск';
+              soobBP = soobBP + " ск";
               break;
             }
           }
         }
         //if (mass[i].isNk) soobBP = soobBP + ' HК';
         if (mass[i].isNK) {
-          soobBP = soobBP + ' HК';
+          soobBP = soobBP + " HК";
         } else {
           for (let i = 0; i < massKnob.length; i++) {
             if (massKnob[i].cmd === 7) {
-              soobBP = soobBP + ' нк';
+              soobBP = soobBP + " нк";
               break;
             }
           }
         }
-        if (soobBP === 'Назначен') {
+        if (soobBP === "Назначен") {
           for (let i = 0; i < massKnob.length; i++) {
             switch (massKnob[i].cmd) {
               case 5:
-                soobBP = soobBP + ' ПК';
+                soobBP = soobBP + " ПК";
                 break;
               case 6:
-                soobBP = soobBP + ' CК';
+                soobBP = soobBP + " CК";
                 break;
               case 7:
-                soobBP = soobBP + ' HК';
+                soobBP = soobBP + " HК";
             }
           }
         }
-        if (soobBP === 'Назначен') soobBP = soobBP + ' BP';
+        if (soobBP === "Назначен") soobBP = soobBP + " BP";
         if (mass[i].isXT) {
-          soobXT = soobXT + 'назначен';
+          soobXT = soobXT + "назначен";
         } else {
-          soobXT = soobXT + 'отсутствует';
+          soobXT = soobXT + "отсутствует";
         }
         resStr.push(
           <Grid item key={i} container>
@@ -265,11 +269,12 @@ const ManagementRightGrid = (props: {
             {StrokaGridInfo(0.7, styleMRG02Center, String(mass[i].areaNum))}
             <Grid item xs={4.8} sx={styleMRG02}>
               Всего ДК&nbsp;<b>{mass[i].koldk}</b>&nbsp; на связи&nbsp;
-              <b>{prosentSv.toFixed(2)}%</b>&nbsp; подчинены&nbsp;<b>{prosentPch.toFixed(2)}%</b>
+              <b>{prosentSv.toFixed(2)}%</b>&nbsp; подчинены&nbsp;
+              <b>{prosentPch.toFixed(2)}%</b>
             </Grid>
             {StrokaGridInfo(2.5, styleMRG02, soobBP)}
             {StrokaGridInfo(3.7, styleMRG01, soobXT)}
-          </Grid>,
+          </Grid>
         );
       }
       return resStr;
@@ -278,64 +283,64 @@ const ManagementRightGrid = (props: {
     const StrokaSpsMode2 = () => {
       let resStr = [];
       for (let i = 0; i < mass.length; i++) {
-        let soobBP = 'Назначен';
-        let soobXT = 'ХТ для данного подрайона ';
+        let soobBP = "Назначен";
+        let soobXT = "ХТ для данного подрайона ";
         //if (mass[i].isPK) soobBP = soobBP + ' ПК';
         if (mass[i].isPK) {
-          soobBP = soobBP + ' ПК';
+          soobBP = soobBP + " ПК";
         } else {
           for (let i = 0; i < massKnob.length; i++) {
             if (massKnob[i].cmd === 5) {
-              soobBP = soobBP + ' пк';
+              soobBP = soobBP + " пк";
               break;
             }
           }
         }
         if (mass[i].isCK) {
-          soobBP = soobBP + ' CК';
+          soobBP = soobBP + " CК";
         } else {
           for (let i = 0; i < massKnob.length; i++) {
             if (massKnob[i].cmd === 6) {
-              soobBP = soobBP + ' ск';
+              soobBP = soobBP + " ск";
               break;
             }
           }
         }
         //if (mass[i].isNK) soobBP = soobBP + ' HК';
         if (mass[i].isNK) {
-          soobBP = soobBP + ' HК';
+          soobBP = soobBP + " HК";
         } else {
           for (let i = 0; i < massKnob.length; i++) {
             if (massKnob[i].cmd === 7) {
-              soobBP = soobBP + ' нк';
+              soobBP = soobBP + " нк";
               break;
             }
           }
         }
-        if (soobBP === 'Назначен') {
+        if (soobBP === "Назначен") {
           for (let i = 0; i < massKnob.length; i++) {
             switch (massKnob[i].cmd) {
               case 5:
-                soobBP = soobBP + ' ПК';
+                soobBP = soobBP + " ПК";
                 break;
               case 6:
-                soobBP = soobBP + ' CК';
+                soobBP = soobBP + " CК";
                 break;
               case 7:
-                soobBP = soobBP + ' HК';
+                soobBP = soobBP + " HК";
             }
           }
         }
-        if (soobBP === 'Назначен') soobBP = soobBP + ' BP';
+        if (soobBP === "Назначен") soobBP = soobBP + " BP";
         if (mass[i].isXT) {
-          soobXT = soobXT + 'назначен/';
+          soobXT = soobXT + "назначен/";
           if (mass[i].releaseXT) {
-            soobXT = soobXT + 'включён';
+            soobXT = soobXT + "включён";
           } else {
-            soobXT = soobXT + 'выключен';
+            soobXT = soobXT + "выключен";
           }
         } else {
-          soobXT = soobXT + 'отсутствует';
+          soobXT = soobXT + "отсутствует";
         }
         resStr.push(
           <Grid item key={i} container>
@@ -343,15 +348,15 @@ const ManagementRightGrid = (props: {
             {StrokaGridInfo(
               1.1,
               styleMRG02Center,
-              String(mass[i].areaNum) + ':' + String(mass[i].subareaNum),
+              String(mass[i].areaNum) + ":" + String(mass[i].subareaNum)
             )}
             <Grid item xs={4.5} sx={styleMRG02}>
-              Всего ДК&nbsp;<b>{mass[i].koldk}</b>&nbsp; на связи&nbsp;<b>{mass[i].sost}</b>&nbsp;
-              подчинены&nbsp;<b>{mass[i].podch}</b>
+              Всего ДК&nbsp;<b>{mass[i].koldk}</b>&nbsp; на связи&nbsp;
+              <b>{mass[i].sost}</b>&nbsp; подчинены&nbsp;<b>{mass[i].podch}</b>
             </Grid>
             {StrokaGridInfo(2.4, styleMRG02, soobBP)}
             {StrokaGridInfo(3.7, styleMRG01, soobXT)}
-          </Grid>,
+          </Grid>
         );
       }
       return resStr;
@@ -366,17 +371,21 @@ const ManagementRightGrid = (props: {
             {StrokaGridInfo(
               1.1,
               styleMRG02Center,
-              String(points[i].area.num) + ':' + String(points[i].subarea),
+              String(points[i].area.num) + ":" + String(points[i].subarea)
             )}
             {StrokaGridInfo(0.4, styleMRG02Center, String(points[i].ID))}
             {StrokaGridInfo(4, styleMRG02, String(points[i].description))}
             {StrokaGridInfo(1.5, styleMRG02Center, String(points[i].idevice))}
-            {StrokaGridInfo(2, styleMRG02, String(points[i].tlsost.description))}
+            {StrokaGridInfo(
+              2,
+              styleMRG02,
+              String(points[i].tlsost.description)
+            )}
             {StrokaGridInfo(0.5, styleMRG02Center, String(points[i].pk))}
             {StrokaGridInfo(0.5, styleMRG02Center, String(points[i].ck))}
             {StrokaGridInfo(0.5, styleMRG02Center, String(points[i].nk))}
             {StrokaGridInfo(1.2, styleMRG01, points[i].techModeString)}
-          </Grid>,
+          </Grid>
         );
       }
       return resStr;
@@ -393,66 +402,67 @@ const ManagementRightGrid = (props: {
 
   const StrokaInfo = () => {
     let sumDk = points.length;
-    let prosSv = '';
-    let prosPch = '';
-    let proXT = 'ХТ для данного района ';
-    let soobBP = '';
+    let prosSv = "";
+    let prosPch = "";
+    let proXT = "ХТ для данного района ";
+    let soobBP = "";
     if (props.mode !== 3) {
-      prosSv = ((100 * sostGl) / sumDk).toFixed(2).toString() + '%';
-      prosPch = ((100 * podchGl) / sumDk).toFixed(2).toString() + '%';
-      let proXtWell = 'назначен';
+      prosSv = ((100 * sostGl) / sumDk).toFixed(2).toString() + "%";
+      prosPch = ((100 * podchGl) / sumDk).toFixed(2).toString() + "%";
+      let proXtWell = "назначен";
       for (let k = 0; k < mass.length; k++) {
-        if (!mass[k].isXT) proXtWell = 'отсутствует';
+        if (!mass[k].isXT) proXtWell = "отсутствует";
       }
-      if (props.mode === 1) proXT = 'ХТ для данного региона ';
+      if (props.mode === 1) proXT = "ХТ для данного региона ";
       proXT = proXT + proXtWell;
     } else {
       prosSv = sostGl.toString();
       prosPch = podchGl.toString();
-      proXT = 'ХТ для данного подрайона отсутствует';
+      proXT = "ХТ для данного подрайона отсутствует";
       for (let j = 0; j < props.masxt.length; j++) {
         if (
           parseInt(points[0].area.num) === props.masxt[j].areaXT &&
           points[0].subarea === props.masxt[j].subareaXT
         ) {
-          proXT = 'ХТ для данного подрайона назначен/';
+          proXT = "ХТ для данного подрайона назначен/";
           if (props.masxt[j].releaseXT) {
-            proXT = proXT + 'включён';
+            proXT = proXT + "включён";
           } else {
-            proXT = proXT + 'выключен';
+            proXT = proXT + "выключен";
           }
           if (props.masxt[j].pknowXT > 0)
-            soobBP = ' Выбран план №' + props.masxt[j].pknowXT.toString();
+            soobBP = " Выбран план №" + props.masxt[j].pknowXT.toString();
         }
       }
     }
-    if (soobBP === '') {
-      soobBP = 'Назначен BP';
+    if (soobBP === "") {
+      soobBP = "Назначен BP";
       if (massKnob.length > 0) {
-        soobBP = '';
+        soobBP = "";
         for (let i = 0; i < massKnob.length; i++) {
           switch (massKnob[i].cmd) {
             case 5:
-              soobBP = soobBP + ' ПК' + massKnob[i].param.toString();
+              soobBP = soobBP + " ПК" + massKnob[i].param.toString();
               break;
             case 6:
-              soobBP = soobBP + ' CК' + massKnob[i].param.toString();
+              soobBP = soobBP + " CК" + massKnob[i].param.toString();
               break;
             case 7:
-              soobBP = soobBP + ' HК' + massKnob[i].param.toString();
+              soobBP = soobBP + " HК" + massKnob[i].param.toString();
           }
         }
-        if (soobBP === '') {
-          soobBP = 'Назначен BP';
+        if (soobBP === "") {
+          soobBP = "Назначен BP";
         } else {
-          soobBP = 'Назначен' + soobBP;
+          soobBP = "Назначен" + soobBP;
         }
       }
     }
 
     return (
       <Grid item xs={12} sx={styleMgl}>
-        Всего ДК&nbsp;{sumDk}&nbsp;на связи&nbsp;{prosSv}&nbsp; подчинены&nbsp;{prosPch}&nbsp;&nbsp;
+        Всего ДК&nbsp;{sumDk}&nbsp;на связи&nbsp;{prosSv}&nbsp; подчинены&nbsp;
+        {prosPch}&nbsp;&nbsp;
         <b>{soobBP}</b>&nbsp;&nbsp;<em>{proXT}</em>
       </Grid>
     );
@@ -462,7 +472,7 @@ const ManagementRightGrid = (props: {
   massknob = [];
   massKnob = [];
   for (let i = 0; i < props.masknob.length; i++) {
-    if (props.masknob[i].param > 0) massknob.push(props.masknob[i]); 
+    if (props.masknob[i].param > 0) massknob.push(props.masknob[i]);
     if (
       props.areaa === props.masknob[i].area &&
       props.subArea === props.masknob[i].subarea &&
@@ -513,7 +523,9 @@ const ManagementRightGrid = (props: {
       let masArea: Tflight[];
       let flagXtArea = true;
       for (let k = 0; k < mass.length; k++) {
-        masArea = points.filter((points) => points.area.num === mass[k].areaNum);
+        masArea = points.filter(
+          (points) => points.area.num === mass[k].areaNum
+        );
         flagXtArea = true;
         let flEstXt = false;
         for (let i = 0; i < masArea.length; i++) {
@@ -588,7 +600,8 @@ const ManagementRightGrid = (props: {
 
     default:
       masSpis = points.filter(
-        (points) => points.area.num === props.areaa && points.subarea === props.subArea,
+        (points) =>
+          points.area.num === props.areaa && points.subarea === props.subArea
       );
       points = masSpis;
       for (let i = 0; i < points.length; i++) {
@@ -637,7 +650,10 @@ const ManagementRightGrid = (props: {
                   podchGl++;
                 }
               } else {
-                if (points[i].StatusCommandDU.IsNK && SearchInMassKnob(6) <= 0) {
+                if (
+                  points[i].StatusCommandDU.IsNK &&
+                  SearchInMassKnob(6) <= 0
+                ) {
                   if (points[i].nk === SearchInMassKnob(7)) {
                     podchGl++;
                   }
@@ -655,7 +671,9 @@ const ManagementRightGrid = (props: {
       <Grid item container sx={styleMRG04}>
         <Grid item xs={12}>
           <HeaderMRG03 />
-          <Box sx={{ overflowX: 'auto', height: '81vh' }}>{props.open && <StrokaMRG03 />}</Box>
+          <Box sx={{ overflowX: "auto", height: "81vh" }}>
+            {props.open && <StrokaMRG03 />}
+          </Box>
         </Grid>
       </Grid>
     </>

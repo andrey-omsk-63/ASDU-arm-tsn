@@ -25,6 +25,9 @@ const Points = (props: { open: boolean; ws: WebSocket; xctrll: XctrlInfo[]; regi
   let reGion = props.region;
   let isOpen = props.open;
   let pointsGl = props.xctrll;
+
+console.log('POINS:',reGion,pointsGl)
+
   let points = pointsGl.filter((pointsGl) => pointsGl.region === Number(reGion));
 
   pointsEtalon = points;     // замена проверки обновления Xctrl - проверка теперь в App
