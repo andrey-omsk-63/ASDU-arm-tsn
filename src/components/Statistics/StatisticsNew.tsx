@@ -1,18 +1,19 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 
 //import axios from 'axios';
 
-import StatisticXTNew from './StatisticXTNew';
+import StatisticXTNew from "./StatisticXTNew";
 
-import { Statistic } from '../../interfaceStat.d';
+import { Statistic } from "../../interfaceStat.d";
 
 let tekValue = 0;
 let pointsEtalon: Statistic[];
 let flagEtalon = true;
 let massInterval: any = [];
+let massIntervalEt: any = [];
 
 const StatisticsNew = (props: {
   open: boolean;
@@ -23,7 +24,7 @@ const StatisticsNew = (props: {
   interval: number;
   func: any;
 }) => {
-  console.log('1111PoinsStNew:', props.interval);
+  console.log("1111PoinsStNew:", props.interval);
 
   let isOpen = props.open;
   let points = props.points;
@@ -33,8 +34,12 @@ const StatisticsNew = (props: {
     const handleSend = () => {
       if (props.ws !== null) {
         if (props.ws.readyState === WebSocket.OPEN) {
-          props.ws.send(JSON.stringify({ type: 'stopDevices', region: reGion }));
-          props.ws.send(JSON.stringify({ type: 'getStatistics', region: reGion }));
+          props.ws.send(
+            JSON.stringify({ type: "stopDevices", region: reGion })
+          );
+          props.ws.send(
+            JSON.stringify({ type: "getStatistics", region: reGion })
+          );
         } else {
           setTimeout(() => {
             handleSend();
@@ -51,16 +56,18 @@ const StatisticsNew = (props: {
     flagEtalon = false;
     for (let i = 0; i < points.length; i++) {
       massInterval.push(points[i].Statistics[0].TLen);
+      massIntervalEt.push(points[i].Statistics[0].TLen);
     }
-    console.log('massInterval', massInterval, points);
+    console.log("massInterval", massInterval, points);
     points = [];
   } else {
     if (massInterval.length) massInterval[tekValue] = props.interval;
-    console.log('PROPS.massInterval', massInterval);
+    console.log("PROPS.massInterval", massInterval);
   }
 
   if (isOpen && !flagEtalon) {
     let pointsAdd = [];
+    let pointsAddInterval = [];
     let newRecord = true;
     for (let i = 0; i < points.length; i++) {
       newRecord = true;
@@ -76,25 +83,37 @@ const StatisticsNew = (props: {
         }
       }
       if (newRecord) {
-        console.log('Stat новая запись i=', i);
+        console.log("Stat новая запись i=", i);
         pointsAdd.push(points[i]);
+        pointsAddInterval.push(points[i].Statistics[0].TLen);
       }
     }
     //console.log('pointsAdd:', pointsAdd);
     if (pointsAdd.length > 0) {
       for (let i = 0; i < pointsAdd.length; i++) {
         pointsEtalon.push(pointsAdd[i]);
+        massInterval.push(pointsAddInterval[i]);
+        massIntervalEt.push(pointsAddInterval[i]);
       }
     }
   }
 
   const styleSt1 = {
     fontSize: 13.5,
-    maxHeight: '20px',
-    minHeight: '20px',
-    backgroundColor: '#F1F3F4',
-    color: 'black',
+    maxHeight: "20px",
+    minHeight: "20px",
+    backgroundColor: "#F1F3F4",
+    color: "black",
     marginRight: 0.5,
+  };
+
+  const styleSt2 = {
+    maxWidth: 850,
+    minWidth: 850,
+    fontSize: 12,
+    marginTop: -2,
+    marginLeft: -3,
+    marginRight: -7,
   };
 
   const [value, setValue] = React.useState(tekValue);
@@ -103,26 +122,26 @@ const StatisticsNew = (props: {
     setValue(newValue);
     tekValue = newValue;
     props.func(tekValue, massInterval[tekValue]);
-    console.log('ПЕРЕДАЛ:', tekValue, massInterval[tekValue]);
+    console.log("ПЕРЕДАЛ:", tekValue, massInterval[tekValue]);
   };
 
   const SpisXT = () => {
     let resSps: any = [];
-    let labl: string = '';
+    let labl: string = "";
 
     if (pointsEtalon.length === 0) {
       resSps.push(
         <Box key={1} sx={styleSt1}>
           Нет данных по статистике
-        </Box>,
+        </Box>
       );
     } else {
       for (let i = 0; i < pointsEtalon.length; i++) {
-        labl = pointsEtalon[i].area.toString() + ':' + pointsEtalon[i].id.toString();
+        labl =
+          pointsEtalon[i].area.toString() + ":" + pointsEtalon[i].id.toString();
         resSps.push(<Tab key={i} sx={styleSt1} label={labl} />);
       }
     }
-
     return resSps;
   };
 
@@ -130,28 +149,26 @@ const StatisticsNew = (props: {
     <>
       {isOpen && (
         <>
-          <Box
-            sx={{
-              maxWidth: 850,
-              minWidth: 850,
-              fontSize: 12,
-              marginTop: -2,
-              marginLeft: -3,
-              marginRight: -7,
-            }}>
+          <Box sx={styleSt2}>
             <Tabs
-              sx={{ maxHeight: '20px', minHeight: '20px' }}
+              sx={{ maxHeight: "20px", minHeight: "20px" }}
               value={value}
               onChange={handleChange}
               variant="scrollable"
               scrollButtons={true}
-              allowScrollButtonsMobile>
+              allowScrollButtonsMobile
+            >
               {SpisXT()}
             </Tabs>
           </Box>
           <>
             {pointsEtalon.length > 0 && (
-              <StatisticXTNew open={isOpen} statist={pointsEtalon} areaid={value} />
+              <StatisticXTNew
+                open={isOpen}
+                statist={pointsEtalon}
+                areaid={value}
+                interval={massInterval[tekValue]}
+              />
             )}
           </>
         </>

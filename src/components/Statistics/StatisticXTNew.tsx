@@ -1,24 +1,32 @@
-import * as React from 'react';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
+import * as React from "react";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 
-import { Statistic } from '../../interfaceStat.d';
+import { Statistic } from "../../interfaceStat.d";
 
-import { colorsGraf, styleSt02, styleSt03, options } from './StatisticXTStyle';
-import { styleSt04, styleSt05, styleStatMain } from './StatisticXTStyle';
-import { styleSt06, styleHeader03, styleHeader033 } from './StatisticXTStyle';
-import { styleBatton, styleClear, styleBattonCl } from './StatisticXTStyle';
+import { colorsGraf, styleSt02, styleSt03, options } from "./StatisticXTStyle";
+import { styleSt04, styleSt05, styleStatMain } from "./StatisticXTStyle";
+import { styleSt06, styleHeader03, styleHeader033 } from "./StatisticXTStyle";
+import { styleBatton, styleClear, styleBattonCl } from "./StatisticXTStyle";
 
-import { Chart as ChartJS, CategoryScale } from 'chart.js';
-import { LinearScale, PointElement } from 'chart.js';
-import { LineElement, Title, Tooltip, Legend } from 'chart.js';
-import { Line } from 'react-chartjs-2';
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+import { Chart as ChartJS, CategoryScale } from "chart.js";
+import { LinearScale, PointElement } from "chart.js";
+import { LineElement, Title, Tooltip, Legend } from "chart.js";
+import { Line } from "react-chartjs-2";
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 export interface GrafGlob {
   //id: number;
@@ -49,19 +57,52 @@ let massId: any = [];
 let canal: number[] = [];
 let oldAreaid = -1;
 let numIdInMas = 0;
+let oldInterval = -1;
+//let stepInterval = 1;
+let matrix: any = [];
+let oldPoints: Statistic[] = [];
+let needCreate = true;
 
-const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: number }) => {
+const StatisticXTNew = (props: {
+  open: boolean;
+  statist: Statistic[];
+  areaid: number;
+  interval: number;
+}) => {
   const isOpen = props.open;
   const points = props.statist;
   const areaId = props.areaid;
+  const interval = props.interval;
+  console.log("interval:", interval, isOpen, areaId);
+
+  console.log(
+    "??????:",
+    oldInterval === interval,
+    oldAreaid === areaId,
+    oldPoints === points
+  );
+  if (
+    oldInterval === interval &&
+    oldAreaid === areaId &&
+    oldPoints === points
+  ) {
+    needCreate = false;
+
+    console.log("1Отработал needCreate", needCreate);
+  } else {
+    needCreate = true;
+    oldPoints = points;
+    console.log("2Отработал needCreate", needCreate);
+  }
+  console.log("needCreate:", needCreate);
 
   let colChanel = 0;
-  const [value, setValue] = React.useState('0');
+  const [value, setValue] = React.useState("0");
 
   let resStr: any = [];
   let resSps: any = [];
-  let matrix: any = [];
-  let kakchestvo = ' ';
+  //let matrix: any = [];
+  let kakchestvo = " ";
 
   if (isOpen) {
     if (oldAreaid < 0) {
@@ -69,6 +110,7 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
       massId.push({ id: areaId, canall: [], lbl: [], labels, datasets: [] });
       oldAreaid = areaId;
       canal = [];
+      console.log("1Отработал oldAreaid", oldAreaid);
     }
     if (oldAreaid !== areaId) {
       //сменился ID
@@ -95,18 +137,19 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
         }
       }
       oldAreaid = areaId;
-      setValue('0');
+      console.log("2Отработал oldAreaid", oldAreaid);
+      setValue("0");
     }
   }
 
   const StatGraf00 = () => {
     let datas = [];
     let datasetsMask: Datasets = {
-      label: 'Канал ',
+      label: "Канал ",
       data: [],
       borderWidth: 1,
-      borderColor: '',
-      backgroundColor: '',
+      borderColor: "",
+      backgroundColor: "",
       pointRadius: 1,
     };
 
@@ -114,15 +157,15 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
 
     if (isOpen && val >= 0 && !canal.includes(val)) {
       //if (val !== 16) setOpenLoader(true);
-      if (isOpen && value !== '0' && labels.length === 0) {
+      if (isOpen && value !== "0" && labels.length === 0) {
         //==========================================================
         const colMin = 60 / matrix[0].TLen;
         for (let i = 0; i < matrix.length; i++) {
-          let int = '';
+          let int = "";
           if (i % colMin === 0) {
-            if (i / colMin < 10) int += '0';
+            if (i / colMin < 10) int += "0";
             int += String(i / colMin);
-            int += ':00';
+            int += ":00";
           }
           labels.push(int);
         }
@@ -159,7 +202,7 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
     }
 
     return (
-      <Grid item xs sx={{ height: '28vh' }}>
+      <Grid item xs sx={{ height: "28vh" }}>
         <Line options={options} data={massId[numIdInMas]} />
       </Grid>
     );
@@ -173,7 +216,11 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
     const KnobBatCl = () => {
       return (
         <Box sx={styleClear}>
-          <Button sx={styleBattonCl} variant="contained" onClick={() => setValue('17')}>
+          <Button
+            sx={styleBattonCl}
+            variant="contained"
+            onClick={() => setValue("17")}
+          >
             <b>Чистка</b>
           </Button>
         </Box>
@@ -188,12 +235,21 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
           resStr.push(
             <Grid item key={i} xs={xss}>
               {/* <KnobBat num={i.toString()} key={Math.random()} /> */}
-              <Grid container key={Math.random()} justifyContent="center" sx={styleHeader03}>
-                <Button sx={styleBatton} variant="contained" onClick={() => setValue(i.toString())}>
+              <Grid
+                container
+                key={Math.random()}
+                justifyContent="center"
+                sx={styleHeader03}
+              >
+                <Button
+                  sx={styleBatton}
+                  variant="contained"
+                  onClick={() => setValue(i.toString())}
+                >
                   <b>{i.toString()}</b>
                 </Button>
               </Grid>
-            </Grid>,
+            </Grid>
           );
         }
         return resStr;
@@ -228,21 +284,21 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
 
   const StatStroka = (numMas: number) => {
     if (isOpen) {
-      kakchestvo = ' ';
+      kakchestvo = " ";
       resStr = [];
 
       //формирование времение в формате 00:00
-      let timLiner = '';
-      if (matrix[numMas].Hour < 10) timLiner = '0';
+      let timLiner = "";
+      if (matrix[numMas].Hour < 10) timLiner = "0";
       timLiner += matrix[numMas].Hour;
-      timLiner += ':';
-      if (matrix[numMas].Min < 10) timLiner += '0';
+      timLiner += ":";
+      if (matrix[numMas].Min < 10) timLiner += "0";
       timLiner += matrix[numMas].Min;
       //формирование начала строки
       resStr.push(
         <Grid key={Math.random()} item xs={0.5} sx={styleSt05}>
           {timLiner}
-        </Grid>,
+        </Grid>
       );
       if (!matrix[numMas].Avail) {
         //нет данных
@@ -253,29 +309,30 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
         resStr.push(
           <Grid key={Math.random()} item xs={3.3} sx={styleSt06}>
             нет данных
-          </Grid>,
+          </Grid>
         );
       } else {
         for (let i = 0; i < colChanel; i++) {
           if (matrix[numMas].Datas[i].st !== 0) {
             kakchestvo += i + 1;
-            kakchestvo += ', ';
+            kakchestvo += ", ";
           }
           resStr.push(
             <Grid
               key={Math.random()}
               item
               xs={0.51}
-              sx={matrix[numMas].Datas[i].st === 0 ? styleSt03 : styleSt04}>
+              sx={matrix[numMas].Datas[i].st === 0 ? styleSt03 : styleSt04}
+            >
               {matrix[numMas].Datas[i].in}
-            </Grid>,
+            </Grid>
           );
         }
         //формирование конца строки
         resStr.push(
           <Grid key={Math.random()} item xs={3.3} sx={styleSt06}>
             {kakchestvo.slice(0, -2)}
-          </Grid>,
+          </Grid>
         );
       }
     }
@@ -289,7 +346,7 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
         resSps.push(
           <Grid key={i} item container sx={{ height: 27 }}>
             {StatStroka(i)}
-          </Grid>,
+          </Grid>
         );
       }
     }
@@ -302,6 +359,7 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
     const kolDatas = colChanel;
     let rows = 1440 / step;
     let time = 0;
+    matrix = [];
     for (let i = 0; i < rows; i++) {
       time = time + step;
       let hours = Math.trunc(time / 60);
@@ -345,6 +403,27 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
         matrix[numInMatrix].Avail = true;
       }
     }
+    //if (oldInterval !== interval) {
+    let stepInterval = interval / step;
+    if (stepInterval > 1) {
+      let pointsMatrix: any = [];
+      for (let i = 0; i < matrix.length; i = i + stepInterval) {
+        let sumRec = matrix[i];
+        for (let j = 0; j < matrix[i].Datas.length; j++) {
+          for (let k = 1; k < stepInterval; k++) {
+            sumRec.Datas[j].in = sumRec.Datas[j].in + matrix[i + k].Datas[j].in;
+            sumRec.Min = matrix[i + k].Min;
+            sumRec.Hour = matrix[i + k].Hour;
+          }
+        }
+        sumRec.TLen = interval;
+        pointsMatrix.push(sumRec);
+      }
+      matrix = pointsMatrix;
+    }
+    oldInterval = interval;
+    console.log("Отработал CompletMatrix interval", oldInterval);
+    //}
   };
   //============ Dinama =====================================================
   const [openLoader, setOpenLoader] = React.useState(true);
@@ -353,7 +432,7 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
   };
 
   const styleBackdrop = {
-    color: '#fff',
+    color: "#fff",
     zIndex: (theme: any) => theme.zIndex.drawer + 1,
   };
 
@@ -373,27 +452,37 @@ const StatisticXTNew = (props: { open: boolean; statist: Statistic[]; areaid: nu
     );
   };
   //=========================================================================
+  // if (isOpen && needCreate) {
   if (isOpen) {
     // setOpenLoader(true);
+    //const [trigger, setTrigger] = React.useState(true);
+    // React.useEffect(() => {
+    console.log("Запуск CreateMatrix");
+
     CreateMatrix();
     CompletMatrix();
     StatSpis();
     Output();
+    //oldPoints = points;
+    // }, [isOpen, points, areaId, interval]);
   }
+
+  //setTrigger(!trigger);
+  Output();
 
   return (
     <Box sx={{ marginTop: 0.8, marginLeft: -2.5, marginRight: -4 }}>
-      <Grid container item sx={{ height: '28vh' }}>
+      <Grid container item sx={{ height: "28vh" }}>
         <Grid item xs={12} sx={styleStatMain}>
           {/* {openLoader && <Dinama />}
           {!openLoader && <StatGraf00 />} */}
           <StatGraf00 />
         </Grid>
       </Grid>
-      <Grid container item sx={{ marginTop: 0.5, height: '56vh' }}>
+      <Grid container item sx={{ marginTop: 0.5, height: "56vh" }}>
         <Grid item xs={24} sx={styleStatMain}>
           <StatisticHeader />
-          <Box sx={{ overflowX: 'auto', height: '59vh' }}>
+          <Box sx={{ overflowX: "auto", height: "59vh" }}>
             <Grid container item>
               {openLoader && <Dinama />}
               {!openLoader && (

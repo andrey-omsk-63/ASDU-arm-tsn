@@ -21,7 +21,7 @@ const StatisticsArchive = (props: {
   date: string;
   interval: number;
 }) => {
-  //console.log("!!!PoinsStArchive:", props.open, props.date, oldDate, props.points);
+  console.log("!!!PoinsStArchive:", props.open, props.date, oldDate, props.points);
 
   let isOpen = props.open;
   let points = props.points;
