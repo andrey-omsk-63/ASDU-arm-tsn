@@ -48,20 +48,16 @@ export interface Datasets {
   pointRadius: number;
 }
 
-// let massId: <GrafGlob>({} as GrafGlob)
-
 const labels: string[] = [];
 //const masLabels = { id: 0, labels: [''] };
-let massId: any = [];
+const massId: any = [];
 //const data: DataGraf = { id: 0, labels, datasets: [] };
 let canal: number[] = [];
 let oldAreaid = -1;
 let numIdInMas = 0;
-let oldInterval = -1;
-//let stepInterval = 1;
-let matrix: any = [];
-let oldPoints: Statistic[] = [];
-let needCreate = true;
+let intervalGraf = [
+  -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+];
 
 const StatisticXTNew = (props: {
   open: boolean;
@@ -75,34 +71,21 @@ const StatisticXTNew = (props: {
   const interval = props.interval;
   console.log("interval:", interval, isOpen, areaId);
 
-  console.log(
-    "??????:",
-    oldInterval === interval,
-    oldAreaid === areaId,
-    oldPoints === points
-  );
-  if (
-    oldInterval === interval &&
-    oldAreaid === areaId &&
-    oldPoints === points
-  ) {
-    needCreate = false;
-
-    console.log("1Отработал needCreate", needCreate);
-  } else {
-    needCreate = true;
-    oldPoints = points;
-    console.log("2Отработал needCreate", needCreate);
-  }
-  console.log("needCreate:", needCreate);
-
   let colChanel = 0;
   const [value, setValue] = React.useState("0");
 
   let resStr: any = [];
   let resSps: any = [];
-  //let matrix: any = [];
+  let matrix: any = [];
   let kakchestvo = " ";
+
+  const ZeroMassIdCanal = () => {
+    massId[numIdInMas].datasets = [];
+    massId[numIdInMas].lbl = [];
+    massId[numIdInMas].canall = [];
+    canal = [];
+    while (labels.length > 0) labels.pop(); // labels = [];
+  };
 
   if (isOpen) {
     if (oldAreaid < 0) {
@@ -115,7 +98,7 @@ const StatisticXTNew = (props: {
     if (oldAreaid !== areaId) {
       //сменился ID
       let nomInMas = -1;
-
+      console.log("333333", intervalGraf, interval);
       for (let i = 0; i < massId.length; i++) {
         if (massId[i].id === areaId) {
           nomInMas = i;
@@ -128,12 +111,21 @@ const StatisticXTNew = (props: {
         while (labels.length > 0) labels.pop(); // labels = [];
         canal = [];
       } else {
+        let oldNumIdInMas = numIdInMas;
         numIdInMas = nomInMas;
+
         canal = [];
         canal = massId[numIdInMas].canall;
         while (labels.length > 0) labels.pop(); // labels = [];
         for (let i = 0; i < massId[numIdInMas].lbl.length; i++) {
           labels.push(massId[numIdInMas].lbl[i]);
+        }
+
+        console.log("numIdInMas", numIdInMas, oldNumIdInMas, intervalGraf);
+        if (intervalGraf[numIdInMas] !== intervalGraf[oldNumIdInMas]) {
+          console.log("55555", intervalGraf, interval);
+          ZeroMassIdCanal();
+          intervalGraf[numIdInMas] = interval;
         }
       }
       oldAreaid = areaId;
@@ -155,11 +147,19 @@ const StatisticXTNew = (props: {
 
     const val = Number(value) - 1;
 
+    if (isOpen && intervalGraf[numIdInMas] !== interval) {
+      console.log("!!!!!!", intervalGraf, interval);
+      ZeroMassIdCanal();
+
+      intervalGraf[numIdInMas] = interval;
+    }
+    console.log("999999", val, canal, labels.length);
     if (isOpen && val >= 0 && !canal.includes(val)) {
       //if (val !== 16) setOpenLoader(true);
       if (isOpen && value !== "0" && labels.length === 0) {
         //==========================================================
-        const colMin = 60 / matrix[0].TLen;
+        const colMin = 60 / intervalGraf[numIdInMas];
+
         for (let i = 0; i < matrix.length; i++) {
           let int = "";
           if (i % colMin === 0) {
@@ -169,15 +169,12 @@ const StatisticXTNew = (props: {
           }
           labels.push(int);
         }
-        //massId[numIdInMas].lbl = labels;
         for (let i = 0; i < labels.length; i++) {
           massId[numIdInMas].lbl.push(labels[i]);
         }
       }
       if (val === 16) {
-        // очистка графиков
-        massId[numIdInMas].datasets = [];
-        canal = [];
+        ZeroMassIdCanal(); // очистка графиков
       } else {
         let int = 0;
         if (matrix[matrix.length - 1].Datas.length !== 0)
@@ -364,7 +361,7 @@ const StatisticXTNew = (props: {
       time = time + step;
       let hours = Math.trunc(time / 60);
       let minutes = time % 60;
-      matrix[i] = {
+      let maskMmatrix = {
         Period: 0,
         Type: typer,
         TLen: step,
@@ -373,8 +370,11 @@ const StatisticXTNew = (props: {
         Avail: false,
         Datas: [],
       };
+      maskMmatrix.Hour = hours;
+      maskMmatrix.Min = minutes;
+      let datas: any = [];
       for (let j = 0; j < kolDatas; j++) {
-        matrix[i].Datas[j] = {
+        let maskMatrixDatas = {
           ch: j + 1,
           st: 0,
           in: 0,
@@ -383,12 +383,17 @@ const StatisticXTNew = (props: {
           o: 0,
           g: 0,
         };
+        maskMatrixDatas.ch = j + 1;
+        datas.push(maskMatrixDatas);
       }
+      maskMmatrix.Datas = datas;
+      matrix.push(maskMmatrix);
     }
   };
 
   const CompletMatrix = () => {
     const step = points[areaId].Statistics[0].TLen;
+
     for (let i = 0; i < points[areaId].Statistics.length; i++) {
       let inHour = points[areaId].Statistics[i].Hour;
       let inTime = inHour * 60 + points[areaId].Statistics[i].Min;
@@ -398,7 +403,9 @@ const StatisticXTNew = (props: {
           numInMatrix = matrix.length - 1;
         }
         for (let j = 0; j < points[areaId].Statistics[i].Datas.length; j++) {
-          matrix[numInMatrix].Datas[j] = points[areaId].Statistics[i].Datas[j];
+          matrix[numInMatrix].Datas[j] = {
+            ...points[areaId].Statistics[i].Datas[j],
+          };
         }
         matrix[numInMatrix].Avail = true;
       }
@@ -421,9 +428,7 @@ const StatisticXTNew = (props: {
       }
       matrix = pointsMatrix;
     }
-    oldInterval = interval;
-    console.log("Отработал CompletMatrix interval", oldInterval);
-    //}
+    //oldInterval = interval;
   };
   //============ Dinama =====================================================
   const [openLoader, setOpenLoader] = React.useState(true);
@@ -452,22 +457,13 @@ const StatisticXTNew = (props: {
     );
   };
   //=========================================================================
-  // if (isOpen && needCreate) {
   if (isOpen) {
-    // setOpenLoader(true);
-    //const [trigger, setTrigger] = React.useState(true);
-    // React.useEffect(() => {
-    console.log("Запуск CreateMatrix");
-
     CreateMatrix();
     CompletMatrix();
     StatSpis();
     Output();
-    //oldPoints = points;
-    // }, [isOpen, points, areaId, interval]);
   }
 
-  //setTrigger(!trigger);
   Output();
 
   return (

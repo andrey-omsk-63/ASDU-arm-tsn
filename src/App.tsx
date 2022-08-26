@@ -67,6 +67,7 @@ const App = () => {
   const [pointsTfl, setPointsTfl] = React.useState<Array<Tflight>>([]);
   const [isOpenDev, setIsOpenDev] = React.useState(false);
   const [pointsSt, setPointsSt] = React.useState<Array<Statistic>>([]);
+  const [pointsStRab, setPointsStRab] = React.useState<Array<Statistic>>([]);
   const [pointsOldSt, setPointsOldSt] = React.useState<Array<Statistic>>([]);
   const [isOpenSt, setIsOpenSt] = React.useState(false);
   const [isOpenOldSt, setIsOpenOldSt] = React.useState(false);
@@ -287,7 +288,7 @@ const App = () => {
   const SetId = (newId: number, intervalId: number) => {
     tekIdNow = newId;
     interval = intervalId;
-    console.log("Пришло:", tekIdNow, interval);
+    console.log("Пришло_SetId:", tekIdNow, interval);
     setTrigger(!trigger);
   };
 
