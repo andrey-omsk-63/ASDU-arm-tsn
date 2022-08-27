@@ -49,9 +49,7 @@ export interface Datasets {
 }
 
 const labels: string[] = [];
-//const masLabels = { id: 0, labels: [''] };
 const massId: any = [];
-//const data: DataGraf = { id: 0, labels, datasets: [] };
 let canal: number[] = [];
 let oldAreaid = -1;
 let numIdInMas = 0;
@@ -69,7 +67,7 @@ const StatisticXTNew = (props: {
   const points = props.statist;
   const areaId = props.areaid;
   const interval = props.interval;
-  console.log("interval:", interval, isOpen, areaId);
+  //console.log("interval:", interval, isOpen, areaId);
 
   let colChanel = 0;
   const [value, setValue] = React.useState("0");
@@ -79,57 +77,46 @@ const StatisticXTNew = (props: {
   let matrix: any = [];
   let kakchestvo = " ";
 
-  const ZeroMassIdCanal = () => {
-    massId[numIdInMas].datasets = [];
-    massId[numIdInMas].lbl = [];
-    massId[numIdInMas].canall = [];
+  const ZeroLabelsCanal = () => {
     canal = [];
     while (labels.length > 0) labels.pop(); // labels = [];
   };
 
+  const ZeroMassIdCanal = () => {
+    massId[numIdInMas].datasets = [];
+    massId[numIdInMas].lbl = [];
+    massId[numIdInMas].canall = [];
+    ZeroLabelsCanal();
+  };
+
   if (isOpen) {
+    //начало работы (первый вход)
     if (oldAreaid < 0) {
-      //начало работы (первый вход)
       massId.push({ id: areaId, canall: [], lbl: [], labels, datasets: [] });
       oldAreaid = areaId;
       canal = [];
-      console.log("1Отработал oldAreaid", oldAreaid);
     }
+    //сменился ID
     if (oldAreaid !== areaId) {
-      //сменился ID
       let nomInMas = -1;
-      console.log("333333", intervalGraf, interval);
       for (let i = 0; i < massId.length; i++) {
         if (massId[i].id === areaId) {
           nomInMas = i;
           break;
         }
       }
+      ZeroLabelsCanal();
       if (nomInMas < 0) {
         massId.push({ id: areaId, canall: [], lbl: [], labels, datasets: [] });
         numIdInMas = massId.length - 1;
-        while (labels.length > 0) labels.pop(); // labels = [];
-        canal = [];
       } else {
-        let oldNumIdInMas = numIdInMas;
         numIdInMas = nomInMas;
-
-        canal = [];
         canal = massId[numIdInMas].canall;
-        while (labels.length > 0) labels.pop(); // labels = [];
         for (let i = 0; i < massId[numIdInMas].lbl.length; i++) {
           labels.push(massId[numIdInMas].lbl[i]);
         }
-
-        console.log("numIdInMas", numIdInMas, oldNumIdInMas, intervalGraf);
-        if (intervalGraf[numIdInMas] !== intervalGraf[oldNumIdInMas]) {
-          console.log("55555", intervalGraf, interval);
-          ZeroMassIdCanal();
-          intervalGraf[numIdInMas] = interval;
-        }
       }
       oldAreaid = areaId;
-      console.log("2Отработал oldAreaid", oldAreaid);
       setValue("0");
     }
   }
@@ -148,18 +135,14 @@ const StatisticXTNew = (props: {
     const val = Number(value) - 1;
 
     if (isOpen && intervalGraf[numIdInMas] !== interval) {
-      console.log("!!!!!!", intervalGraf, interval);
       ZeroMassIdCanal();
-
       intervalGraf[numIdInMas] = interval;
     }
-    console.log("999999", val, canal, labels.length);
+
     if (isOpen && val >= 0 && !canal.includes(val)) {
       //if (val !== 16) setOpenLoader(true);
       if (isOpen && value !== "0" && labels.length === 0) {
-        //==========================================================
         const colMin = 60 / intervalGraf[numIdInMas];
-
         for (let i = 0; i < matrix.length; i++) {
           let int = "";
           if (i % colMin === 0) {

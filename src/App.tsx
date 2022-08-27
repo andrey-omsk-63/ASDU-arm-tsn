@@ -27,6 +27,7 @@ import { XctrlInfo } from "./interfaceGl.d";
 import { RegionInfo } from "./interfaceGl.d";
 import { Statistic } from "./interfaceStat.d";
 
+//import { styleModal } from "./AppStyle";
 import { styleModalMenu, styleInt01, styleApp02 } from "./AppStyle";
 import { styleImpServis, styleInp, styleDatePicker } from "./AppStyle";
 import { MakeInterval } from "./AppServiceFunctions";
@@ -58,6 +59,8 @@ let formSettOld = MakeDate(new Date());
 let interval = 0;
 let tekIdNow = 0;
 
+export let dlStrMenu = 0;
+
 const App = () => {
   const [pointsXctrl, setPointsXctrl] = React.useState<Array<XctrlInfo>>([]);
   const [pointsReg, setPointsReg] = React.useState<RegionInfo>(
@@ -67,7 +70,6 @@ const App = () => {
   const [pointsTfl, setPointsTfl] = React.useState<Array<Tflight>>([]);
   const [isOpenDev, setIsOpenDev] = React.useState(false);
   const [pointsSt, setPointsSt] = React.useState<Array<Statistic>>([]);
-  const [pointsStRab, setPointsStRab] = React.useState<Array<Statistic>>([]);
   const [pointsOldSt, setPointsOldSt] = React.useState<Array<Statistic>>([]);
   const [isOpenSt, setIsOpenSt] = React.useState(false);
   const [isOpenOldSt, setIsOpenOldSt] = React.useState(false);
@@ -86,7 +88,39 @@ const App = () => {
   };
 
   const BeginSeans = () => {
-    let dlStrMenu = 0;
+    dlStrMenu = 0;
+
+    const styleModal = {
+      position: "relative",
+      bottom: "-48vh",
+      marginLeft: "60vh",
+      transform: "translate(-50%, -50%)",
+      width: dlStrMenu,
+      bgcolor: "background.paper",
+      border: "2px solid #000",
+      borderColor: "primary.main",
+      borderRadius: 2,
+      boxShadow: 24,
+      p: 3,
+    };
+
+    if (isOpenInf && regionGlob === 0) {
+      for (let key in pointsReg) {
+        if (!isNaN(Number(key))) {
+          // ключ - символьное число
+          massRegion.push(Number(key));
+          massNameRegion.push(pointsReg[key]);
+          if (pointsReg[key].length > dlStrMenu)
+            dlStrMenu = pointsReg[key].length;
+        }
+      }
+      regionGlob = massRegion[0];
+      dlStrMenu = (dlStrMenu + 8) * 10
+    }
+
+    if (massRegion.length === 1) {
+      handleCloseModal(massRegion[0]);
+    }
 
     const SpisRegion = () => {
       let resStr = [];
@@ -104,37 +138,6 @@ const App = () => {
       }
       return resStr;
     };
-
-    if (isOpenInf && regionGlob === 0) {
-      for (let key in pointsReg) {
-        if (!isNaN(Number(key))) {
-          // ключ - символьное число
-          massRegion.push(Number(key));
-          massNameRegion.push(pointsReg[key]);
-          if (pointsReg[key].length > dlStrMenu)
-            dlStrMenu = pointsReg[key].length;
-        }
-      }
-      regionGlob = massRegion[0];
-    }
-
-    const styleModal = {
-      position: "relative",
-      bottom: "-48vh",
-      marginLeft: "60vh",
-      transform: "translate(-50%, -50%)",
-      width: (dlStrMenu + 8) * 10,
-      bgcolor: "background.paper",
-      border: "2px solid #000",
-      borderColor: "primary.main",
-      borderRadius: 2,
-      boxShadow: 24,
-      p: 3,
-    };
-
-    if (massRegion.length === 1) {
-      handleCloseModal(massRegion[0]);
-    }
 
     return (
       <Modal open={open}>
@@ -285,11 +288,18 @@ const App = () => {
     flagOpenDebug = false;
   }
 
-  const SetId = (newId: number, intervalId: number) => {
+  const SetIdNow = (newId: number, intervalId: number) => {
     tekIdNow = newId;
     interval = intervalId;
     console.log("Пришло_SetId:", tekIdNow, interval);
     setTrigger(!trigger);
+  };
+
+  const SetIdOld = (newId: number, intervalId: number) => {
+    // tekIdNow = newId;
+    // interval = intervalId;
+    // console.log("Пришло_SetId:", tekIdNow, interval);
+    // setTrigger(!trigger);
   };
 
   const InputNewDate = () => {
@@ -450,7 +460,7 @@ const App = () => {
                   region={String(regionGlob)}
                   date={formSett}
                   interval={interval}
-                  func={SetId}
+                  func={SetIdNow}
                 />
               )}
             {WS !== null && regionGlob !== 0 && formSett !== formSettToday && (
@@ -461,6 +471,7 @@ const App = () => {
                 region={String(regionGlob)}
                 date={formSett}
                 interval={interval}
+                func={SetIdOld}
               />
             )}
           </TabPanel>
@@ -473,6 +484,7 @@ const App = () => {
                 region={String(regionGlob)}
                 date={formSett}
                 interval={interval}
+                func={SetIdOld}
               />
             )}
           </TabPanel>

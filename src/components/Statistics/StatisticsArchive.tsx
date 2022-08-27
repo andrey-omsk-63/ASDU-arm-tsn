@@ -1,17 +1,21 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 
 //import axios from 'axios';
 
-import StatisticXTArchive from './StatisticXTArchive';
+import StatisticXTArchive from "./StatisticXTArchive";
 
-import { Statistic } from '../../interfaceStat.d';
+import { Statistic } from "../../interfaceStat.d";
 
 let tekValue = 0;
 let pointsEtalon: Statistic[];
-let oldDate = '';
+let flagEtalon = true;
+let massInterval: any = [];
+let massIntervalEt: any = [];
+
+let oldDate = "";
 
 const StatisticsArchive = (props: {
   open: boolean;
@@ -20,8 +24,15 @@ const StatisticsArchive = (props: {
   region: string;
   date: string;
   interval: number;
+  func: any;
 }) => {
-  console.log("!!!PoinsStArchive:", props.open, props.date, oldDate, props.points);
+  console.log(
+    "!!!PoinsStArchive:",
+    props.open,
+    props.date,
+    oldDate,
+    props.points
+  );
 
   let isOpen = props.open;
   let points = props.points;
@@ -34,14 +45,18 @@ const StatisticsArchive = (props: {
     const handleSend = () => {
       if (props.ws !== null && oldDate !== props.date) {
         if (props.ws.readyState === WebSocket.OPEN) {
-          props.ws.send(JSON.stringify({ type: 'stopDevices', region: reGion }));
-          props.ws.send(JSON.stringify({ type: 'stopStatistics', region: reGion }));
+          props.ws.send(
+            JSON.stringify({ type: "stopDevices", region: reGion })
+          );
+          props.ws.send(
+            JSON.stringify({ type: "stopStatistics", region: reGion })
+          );
           props.ws.send(
             JSON.stringify({
-              type: 'getOldStatistics',
+              type: "getOldStatistics",
               region: reGion,
               date: new Date(props.date).toISOString(),
-            }),
+            })
           );
         } else {
           setTimeout(() => {
@@ -57,11 +72,20 @@ const StatisticsArchive = (props: {
 
   const styleSt1 = {
     fontSize: 13.5,
-    maxHeight: '20px',
-    minHeight: '20px',
-    backgroundColor: '#F1F3F4',
-    color: 'black',
+    maxHeight: "20px",
+    minHeight: "20px",
+    backgroundColor: "#F1F3F4",
+    color: "black",
     marginRight: 0.5,
+  };
+
+  const styleSt2 = {
+    maxWidth: 850,
+    minWidth: 850,
+    fontSize: 12,
+    marginTop: -2,
+    marginLeft: -3,
+    marginRight: -7,
   };
 
   const [value, setValue] = React.useState(tekValue);
@@ -69,21 +93,24 @@ const StatisticsArchive = (props: {
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
     tekValue = newValue;
+    props.func(tekValue, massInterval[tekValue]);
+    console.log("Old_ПЕРЕДАЛ:", tekValue, massInterval[tekValue]);
   };
 
   const SpisXT = () => {
     let resSps: any = [];
-    let labl: string = '';
+    let labl: string = "";
 
     if (pointsEtalon.length === 0) {
       resSps.push(
         <Box key={1} sx={styleSt1}>
           Нет данных по статистике
-        </Box>,
+        </Box>
       );
     } else {
       for (let i = 0; i < pointsEtalon.length; i++) {
-        labl = pointsEtalon[i].area.toString() + ':' + pointsEtalon[i].id.toString();
+        labl =
+          pointsEtalon[i].area.toString() + ":" + pointsEtalon[i].id.toString();
         resSps.push(<Tab key={i} sx={styleSt1} label={labl} />);
       }
     }
@@ -94,28 +121,27 @@ const StatisticsArchive = (props: {
     <>
       {isOpen && (
         <>
-          <Box
-            sx={{
-              maxWidth: 850,
-              minWidth: 850,
-              fontSize: 12,
-              marginTop: -2,
-              marginLeft: -3,
-              marginRight: -7,
-            }}>
+          <Box sx={styleSt2}>
             <Tabs
-              sx={{ maxHeight: '20px', minHeight: '20px' }}
+              sx={{ maxHeight: "20px", minHeight: "20px" }}
               value={value}
               onChange={handleChange}
               variant="scrollable"
               scrollButtons={true}
-              allowScrollButtonsMobile>
+              allowScrollButtonsMobile
+            >
               {SpisXT()}
             </Tabs>
           </Box>
           <>
             {pointsEtalon.length > 0 && (
-              <StatisticXTArchive open={isOpen} statist={points} areaid={value} date={props.date} />
+              <StatisticXTArchive
+                open={isOpen}
+                statist={points}
+                areaid={value}
+                date={props.date}
+                interval={massInterval[tekValue]}
+              />
             )}
           </>
         </>

@@ -43,6 +43,7 @@ export const styleSt03 = {
   fontSize: 11,
   lineHeight: 2,
   backgroundColor: "#E6EEF5",
+  //backgroundColor: "#E7F9EB",
   borderColor: "primary.main",
   textAlign: "center",
 };
