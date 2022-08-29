@@ -9,7 +9,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 import { Statistic } from "../../interfaceStat.d";
 
-import { colorsGraf, styleSt02, styleSt03, options } from "./StatisticXTStyle";
+import { colorsGraf, styleSt02, options } from "./StatisticXTStyle";
 import { styleSt04, styleSt05, styleStatMain } from "./StatisticXTStyle";
 import { styleSt06, styleHeader03, styleHeader033 } from "./StatisticXTStyle";
 import { styleBatton, styleClear, styleBattonCl } from "./StatisticXTStyle";
@@ -56,6 +56,7 @@ let numIdInMas = 0;
 let intervalGraf = [
   -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
 ];
+let colorStat = "#E6EEF5"; // голубой
 
 const StatisticXTNew = (props: {
   open: boolean;
@@ -189,6 +190,16 @@ const StatisticXTNew = (props: {
   };
 
   //=========================================================================
+  const styleSt03 = {
+    textIndent: 6,
+    borderRight: 1,
+    borderBottom: 1,
+    fontSize: 11,
+    lineHeight: 2,
+    backgroundColor: colorStat,
+    borderColor: "primary.main",
+    textAlign: "center",
+  };
 
   colChanel = points[areaId].Statistics[0].Datas.length;
 
@@ -376,6 +387,9 @@ const StatisticXTNew = (props: {
 
   const CompletMatrix = () => {
     const step = points[areaId].Statistics[0].TLen;
+    const typeStat = points[areaId].Statistics[0].Type;
+    colorStat = "#E6EEF5"; // голубой
+    if (typeStat > 1) colorStat = "#D8F5DF"; //зелёный
 
     for (let i = 0; i < points[areaId].Statistics.length; i++) {
       let inHour = points[areaId].Statistics[i].Hour;
@@ -393,7 +407,6 @@ const StatisticXTNew = (props: {
         matrix[numInMatrix].Avail = true;
       }
     }
-    //if (oldInterval !== interval) {
     let stepInterval = interval / step;
     if (stepInterval > 1) {
       let pointsMatrix: any = [];
@@ -405,13 +418,14 @@ const StatisticXTNew = (props: {
             sumRec.Min = matrix[i + k].Min;
             sumRec.Hour = matrix[i + k].Hour;
           }
+          if (typeStat > 1)
+            sumRec.Datas[j].in = sumRec.Datas[j].in / stepInterval;
         }
         sumRec.TLen = interval;
         pointsMatrix.push(sumRec);
       }
       matrix = pointsMatrix;
     }
-    //oldInterval = interval;
   };
   //============ Dinama =====================================================
   const [openLoader, setOpenLoader] = React.useState(true);
@@ -444,7 +458,7 @@ const StatisticXTNew = (props: {
     CreateMatrix();
     CompletMatrix();
     StatSpis();
-    Output();
+    //Output();
   }
 
   Output();

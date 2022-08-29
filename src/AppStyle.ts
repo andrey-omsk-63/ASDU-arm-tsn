@@ -1,4 +1,4 @@
-import { dlStrMenu } from "./App";
+//import { dlStrMenu } from "./App";
 
 // export const styleModal = {
 //   position: "relative",

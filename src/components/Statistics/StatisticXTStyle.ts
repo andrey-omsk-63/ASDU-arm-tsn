@@ -42,8 +42,8 @@ export const styleSt03 = {
   borderBottom: 1,
   fontSize: 11,
   lineHeight: 2,
-  backgroundColor: "#E6EEF5",
-  //backgroundColor: "#E7F9EB",
+  backgroundColor: "#E6EEF5", // голубой
+  //backgroundColor: "#E7F9EB", //зелёный
   borderColor: "primary.main",
   textAlign: "center",
 };

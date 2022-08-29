@@ -9,7 +9,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 import { Statistic } from "../../interfaceStat.d";
 
-import { colorsGraf, styleSt02, styleSt03, options } from "./StatisticXTStyle";
+import { colorsGraf, styleSt02, options } from "./StatisticXTStyle";
 import { styleSt04, styleSt05, styleStatMain } from "./StatisticXTStyle";
 import { styleSt06, styleHeader03, styleHeader033 } from "./StatisticXTStyle";
 import { styleBatton, styleClear, styleBattonCl } from "./StatisticXTStyle";
@@ -56,6 +56,7 @@ let numIdInMas = 0;
 let intervalGraf = [
   -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
 ];
+let colorStat = "#E6EEF5"; // голубой
 let oldDate = "";
 
 const StatisticXTArchive = (props: {
@@ -69,7 +70,6 @@ const StatisticXTArchive = (props: {
   const points = props.statist;
   const areaId = props.areaid;
   const interval = props.interval;
-
   //console.log("Stat_points_Archive:", isOpen, props.date, oldDate);
 
   let colChanel = 0;
@@ -202,6 +202,16 @@ const StatisticXTArchive = (props: {
   };
 
   //=========================================================================
+  const styleSt03 = {
+    textIndent: 6,
+    borderRight: 1,
+    borderBottom: 1,
+    fontSize: 11,
+    lineHeight: 2,
+    backgroundColor: colorStat,
+    borderColor: "primary.main",
+    textAlign: "center",
+  };
 
   colChanel = points[areaId].Statistics[0].Datas.length;
 
@@ -381,6 +391,9 @@ const StatisticXTArchive = (props: {
 
   const CompletMatrix = () => {
     const step = points[areaId].Statistics[0].TLen;
+    const typeStat = points[areaId].Statistics[0].Type;
+    colorStat = "#E6EEF5"; // голубой
+    if (typeStat > 1) colorStat = "#D8F5DF"; //зелёный
     for (let i = 0; i < points[areaId].Statistics.length; i++) {
       let inHour = points[areaId].Statistics[i].Hour;
       let inTime = inHour * 60 + points[areaId].Statistics[i].Min;
@@ -390,11 +403,33 @@ const StatisticXTArchive = (props: {
           numInMatrix = matrix.length - 1;
         }
         for (let j = 0; j < points[areaId].Statistics[i].Datas.length; j++) {
-          matrix[numInMatrix].Datas[j] = points[areaId].Statistics[i].Datas[j];
+          matrix[numInMatrix].Datas[j] = {
+            ...points[areaId].Statistics[i].Datas[j],
+          };
         }
         matrix[numInMatrix].Avail = true;
       }
     }
+    let stepInterval = interval / step;
+    if (stepInterval > 1) {
+      let pointsMatrix: any = [];
+      for (let i = 0; i < matrix.length; i = i + stepInterval) {
+        let sumRec = matrix[i];
+        for (let j = 0; j < matrix[i].Datas.length; j++) {
+          for (let k = 1; k < stepInterval; k++) {
+            sumRec.Datas[j].in = sumRec.Datas[j].in + matrix[i + k].Datas[j].in;
+            sumRec.Min = matrix[i + k].Min;
+            sumRec.Hour = matrix[i + k].Hour;
+          }
+          if (typeStat > 1)
+            sumRec.Datas[j].in = sumRec.Datas[j].in / stepInterval;
+        }
+        sumRec.TLen = interval;
+        pointsMatrix.push(sumRec);
+      }
+      matrix = pointsMatrix;
+    }
+    //}
   };
   //============ Dinama =====================================================
   const [openLoader, setOpenLoader] = React.useState(true);
@@ -424,12 +459,13 @@ const StatisticXTArchive = (props: {
   };
   //=========================================================================
   if (isOpen) {
-    // setOpenLoader(true);
     CreateMatrix();
     CompletMatrix();
     StatSpis();
-    Output();
+    //Output();
   }
+
+  Output();
 
   return (
     <Box sx={{ marginTop: 0.8, marginLeft: -2.5, marginRight: -4 }}>
