@@ -68,10 +68,8 @@ const StatisticsArchive = (props: {
     };
     handleSend();
     oldDate = props.date;
-    //console.log("ОТРАБОТАЛ useEFFECT АХИВ");
   }, [reGion, props.date, props.ws]);
 
-  console.log('1StatisticsArchive_пересчёт',isOpen ,flagEtalon,massInterval)
   if (isOpen && flagEtalon) {
     console.log('2StatisticsArchive_пересчёт')
     pointsEtalon = points;
@@ -92,8 +90,6 @@ const StatisticsArchive = (props: {
   
   }
   console.log("PROPS.OLDmassInterval", massInterval);
-  
-
 
   const styleSt1 = {
     fontSize: 13.5,
