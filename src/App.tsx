@@ -55,7 +55,7 @@ const MakeDate = (tekData: Date) => {
 let formSett = MakeDate(new Date());
 let formSettToday = MakeDate(new Date());
 let formSettOld = MakeDate(new Date());
-let interval = 0;
+let interval = 5;
 let tekIdNow = 0;
 let tekIdOld = 0;
 
@@ -192,7 +192,8 @@ const App = () => {
   };
 
   const SetStatisticsIntervalNow = (points: any) => {
-    if (!massIntervalNow.length) {
+     if (!massIntervalNow.length) {
+      console.log('Points_SetStatisticsIntervalNow',points)
       for (let i = 0; i < points.length; i++) {
         massIntervalNow.push(points[i].Statistics[0].TLen);
         massIntervalNowStart.push(points[i].Statistics[0].TLen);
@@ -202,7 +203,7 @@ const App = () => {
   };
 
   const SetStatisticsIntervalOld = (points: any) => {
-    console.log('!!!!!!!!!!!!!!!',points) 
+    console.log("!!!!!!!!!!!!!!!", points);
     if (!nullOldStatistics) {
       massIntervalOld = [];
       for (let i = 0; i < points.length; i++) {
@@ -213,8 +214,13 @@ const App = () => {
       tekIdOld = 0;
       formSettOld = formSett;
     }
-    
-    console.log('&&&&&&&&&&&&',massIntervalOld,massIntervalOldStart)
+
+    console.log(
+      "&&&&&&&&&&&&",
+      interval,
+      massIntervalOld,
+      massIntervalOldStart
+    );
   };
 
   const host =
@@ -263,7 +269,6 @@ const App = () => {
           console.log("data_NewStatistics:", data);
           setPointsSt(data.statistics ?? []);
           SetStatisticsIntervalNow(data.statistics ?? []);
-
           setIsOpenSt(true);
           break;
         case "getOldStatistics":
@@ -318,7 +323,7 @@ const App = () => {
 
   const SetIdOld = (newId: number, intervalId: number) => {
     tekIdOld = newId;
-    interval = intervalId;
+    if (!intervalId) interval = intervalId;
     setTrigger(!trigger);
   };
 
@@ -333,8 +338,14 @@ const App = () => {
             setValue("3");
             console.log("ПЕРЕХОД В СТАТИСТИКУ");
           } else {
-            console.log("ПЕРЕХОД В АРХИВ", tekIdOld, massIntervalOld);
             interval = massIntervalOld[tekIdOld];
+            nullOldStatistics = false;
+            console.log("ПЕРЕХОД В АРХИВ", interval, tekIdOld, massIntervalOld);
+
+            if (!massIntervalOld.length) {
+              massIntervalOld = ["1", "5", "10", "15", "30", "60"];
+              interval = 5
+            }
 
             if (formSett !== formSettOld) {
               console.log("ПЕРЕХОД В НОВЫЙ АРХИВ", debug);
@@ -395,6 +406,8 @@ const App = () => {
       maskCurrencies.label = massDat[i];
       currencies.push(maskCurrencies);
     }
+
+    console.log("777777:", dat, massKey, massDat, interval);
 
     const [currency, setCurrency] = React.useState(
       massKey[massDat.indexOf(interval.toString())]
