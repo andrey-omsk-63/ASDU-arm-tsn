@@ -52,17 +52,20 @@ const MakeDate = (tekData: Date) => {
   return sDate;
 };
 
-let formSett = MakeDate(new Date());
-let formSettToday = MakeDate(new Date());
-let formSettOld = MakeDate(new Date());
+let date = new Date();
+//date.setDate(date.getDate() + 1);  // для отладки
+let formSett = MakeDate(date);
+let formSettToday = MakeDate(date);
+let formSettOld = MakeDate(date);
+
 let interval = 5;
 let tekIdNow = 0;
 let tekIdOld = 0;
 
-let massIntervalNow: any = ["1", "5", "10", "15", "30", "60"];
-let massIntervalOld: any = ["1", "5", "10", "15", "30", "60"];
-let massIntervalNowStart: any = ["1", "5", "10", "15", "30", "60"];
-let massIntervalOldStart: any = ["1", "5", "10", "15", "30", "60"];
+let massIntervalNow: any = [];
+let massIntervalOld: any = [1, 5, 10, 15, 30, 60];
+let massIntervalNowStart: any = [];
+let massIntervalOldStart: any = [1, 5, 10, 15, 30, 60];
 let nullOldStatistics = false;
 let nullNewStatistics = false;
 
@@ -171,7 +174,6 @@ const App = () => {
           ) {
             newRecord = false;
             pointsEtalonXctrl[j] = pointsXctrl[i];
-            //console.log('Points обновилась запись i=', i);
           }
         }
         if (newRecord) {
@@ -192,20 +194,17 @@ const App = () => {
   };
 
   const SetStatisticsIntervalNow = (points: any) => {
-     if (!massIntervalNow.length) {
-      console.log('Points_SetStatisticsIntervalNow',points)
-      for (let i = 0; i < points.length; i++) {
-        massIntervalNow.push(points[i].Statistics[0].TLen);
-        massIntervalNowStart.push(points[i].Statistics[0].TLen);
-        if (!i) interval = massIntervalNow[0];
-      }
+    for (let i = 0; i < points.length; i++) {
+      massIntervalNow.push(points[i].Statistics[0].TLen);
+      massIntervalNowStart.push(points[i].Statistics[0].TLen);
+      if (!i) interval = massIntervalNow[0];
     }
   };
 
   const SetStatisticsIntervalOld = (points: any) => {
-    console.log("!!!!!!!!!!!!!!!", points);
     if (!nullOldStatistics) {
       massIntervalOld = [];
+      massIntervalOldStart = [];
       for (let i = 0; i < points.length; i++) {
         massIntervalOld.push(points[i].Statistics[0].TLen);
         massIntervalOldStart.push(points[i].Statistics[0].TLen);
@@ -214,13 +213,6 @@ const App = () => {
       tekIdOld = 0;
       formSettOld = formSett;
     }
-
-    console.log(
-      "&&&&&&&&&&&&",
-      interval,
-      massIntervalOld,
-      massIntervalOldStart
-    );
   };
 
   const host =
@@ -269,6 +261,7 @@ const App = () => {
           console.log("data_NewStatistics:", data);
           setPointsSt(data.statistics ?? []);
           SetStatisticsIntervalNow(data.statistics ?? []);
+          nullNewStatistics = false;
           setIsOpenSt(true);
           break;
         case "getOldStatistics":
@@ -291,19 +284,22 @@ const App = () => {
   if (debug && flagOpenDebug) {
     console.log("РЕЖИМ ОТЛАДКИ!!!");
     regionGlob = 1;
+    // axios.get("http://localhost:3000/otladkaPoints.json").then(({ data }) => {
+    axios.get("http://localhost:3000/xctrlsReal.json").then(({ data }) => {
+      setPointsTfl(data.data.tflight);
+      setIsOpenDev(true);
+    });
     const ipAdress: string = "http://localhost:3000/otladkaMNG.json";
     axios.get(ipAdress).then(({ data }) => {
       console.log("data:", data.data.xctrlInfo);
       setPointsXctrl(data.data.xctrlInfo);
       setIsOpenInf(true);
     });
-    axios.get("http://localhost:3000/otladkaPoints.json").then(({ data }) => {
-      setPointsTfl(data.data.tflight);
-      setIsOpenDev(true);
-    });
     axios.get("http://localhost:3000/otladkaStatNow.json").then(({ data }) => {
       SetStatisticsIntervalNow(data.data.statistics);
       setPointsSt(data.data.statistics);
+      // SetStatisticsIntervalNow([]);   // костыль для отладки
+      // setPointsSt([]);
       setIsOpenSt(true);
     });
     axios.get("http://localhost:3000/otladkaStatOld.json").then(({ data }) => {
@@ -318,12 +314,16 @@ const App = () => {
   const SetIdNow = (newId: number, intervalId: number) => {
     tekIdNow = newId;
     interval = intervalId;
+    if (tekIdNow < 0) {
+      nullNewStatistics = true;
+      tekIdNow = 0;
+    }
     setTrigger(!trigger);
   };
 
   const SetIdOld = (newId: number, intervalId: number) => {
     tekIdOld = newId;
-    if (!intervalId) interval = intervalId;
+    if (intervalId) interval = intervalId;
     setTrigger(!trigger);
   };
 
@@ -332,21 +332,18 @@ const App = () => {
       const handleChangeDP = (event: any) => {
         if (event <= new Date()) {
           formSett = MakeDate(event);
-          console.log("ВВЕДЕНО:", formSett, formSettOld, formSettToday);
           if (formSett === formSettToday) {
             interval = massIntervalNow[tekIdNow];
-            setValue("3");
+            SetValue("3");
             console.log("ПЕРЕХОД В СТАТИСТИКУ");
           } else {
             interval = massIntervalOld[tekIdOld];
             nullOldStatistics = false;
             console.log("ПЕРЕХОД В АРХИВ", interval, tekIdOld, massIntervalOld);
-
             if (!massIntervalOld.length) {
-              massIntervalOld = ["1", "5", "10", "15", "30", "60"];
-              interval = 5
+              massIntervalOld = [1, 5, 10, 15, 30, 60];
+              interval = 5;
             }
-
             if (formSett !== formSettOld) {
               console.log("ПЕРЕХОД В НОВЫЙ АРХИВ", debug);
               if (!debug) {
@@ -356,7 +353,7 @@ const App = () => {
                 SetStatisticsIntervalOld(pointsOldSt);
               }
             }
-            setValue("4");
+            SetValue("4");
           }
           setValueDate(event);
           setTrigger(!trigger);
@@ -407,8 +404,6 @@ const App = () => {
       currencies.push(maskCurrencies);
     }
 
-    console.log("777777:", dat, massKey, massDat, interval);
-
     const [currency, setCurrency] = React.useState(
       massKey[massDat.indexOf(interval.toString())]
     );
@@ -456,12 +451,21 @@ const App = () => {
     );
   };
 
+  const SetValue = (mode: string) => {
+    if (mode === "3") {
+      formSett = formSettToday;
+      interval = massIntervalNow[tekIdNow];
+      setValueDate(new Date(formSett));
+    }
+    setValue(mode);
+  };
+
   const ButtonMenu = (mode: string, soob: string) => {
     return (
       <Button
         sx={styleApp02}
         variant="contained"
-        onClick={() => setValue(mode)}
+        onClick={() => SetValue(mode)}
       >
         <b>{soob}</b>
       </Button>
@@ -481,9 +485,7 @@ const App = () => {
               {!bsLogin && <>{ButtonMenu("1", "Управление")}</>}
               {!bsLogin && <>{ButtonMenu("2", "Характерные точки")}</>}
               {!bsLogin && <>{ButtonMenu("3", "Статистика")}</>}
-              {!bsLogin && value === "3" && isOpenSt && pointsSt.length && (
-                <InputNewDate />
-              )}
+              {!bsLogin && value === "3" && isOpenSt && <InputNewDate />}
               {!bsLogin &&
                 value === "4" &&
                 isOpenOldSt &&
@@ -512,17 +514,20 @@ const App = () => {
             )}
           </TabPanel>
           <TabPanel value="3">
-            {WS !== null && regionGlob !== 0 && formSett === formSettToday && (
-              <StatisticsNew
-                open={isOpenSt}
-                ws={WS}
-                points={pointsSt}
-                region={String(regionGlob)}
-                date={formSett}
-                interval={interval}
-                func={SetIdNow}
-              />
-            )}
+            {WS !== null &&
+              regionGlob !== 0 &&
+              formSett === formSettToday &&
+              !nullNewStatistics && (
+                <StatisticsNew
+                  open={isOpenSt}
+                  ws={WS}
+                  points={pointsSt}
+                  region={String(regionGlob)}
+                  date={formSett}
+                  interval={interval}
+                  func={SetIdNow}
+                />
+              )}
             {WS !== null &&
               regionGlob !== 0 &&
               !nullOldStatistics &&

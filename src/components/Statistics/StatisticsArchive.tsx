@@ -13,7 +13,6 @@ let tekValue = 0;
 let pointsEtalon: Statistic[];
 let flagEtalon = true;
 let massInterval: any = [];
-//let massIntervalEt: any = [];
 
 let oldDate = "";
 
@@ -26,21 +25,10 @@ const StatisticsArchive = (props: {
   interval: number;
   func: any;
 }) => {
-  console.log(
-    "!!!PoinsStArchive:",
-    props.open,
-    props.date,
-    oldDate,
-    props.points,
-    props.interval
-  );
-
   let isOpen = props.open;
   let points = props.points;
   let reGion = props.region;
-  //let tekDate = oldDate;
   if (oldDate !== props.date) flagEtalon = true;
- 
 
   React.useEffect(() => {
     const handleSend = () => {
@@ -71,25 +59,17 @@ const StatisticsArchive = (props: {
   }, [reGion, props.date, props.ws]);
 
   if (isOpen && flagEtalon) {
-    console.log('2StatisticsArchive_пересчёт')
     pointsEtalon = points;
     flagEtalon = false;
     massInterval = [];
     for (let i = 0; i < points.length; i++) {
       massInterval.push(points[i].Statistics[0].TLen);
-      //massIntervalEt.push(points[i].Statistics[0].TLen);
     }
-    console.log("OLDmassInterval", massInterval, points);
     points = [];
     tekValue = 0;
-  }
-   else {
-    console.log('3StatisticsArchive_пересчёт',isOpen ,flagEtalon,massInterval)
+  } else {
     if (massInterval.length) massInterval[tekValue] = props.interval;
-    console.log('1StatisticsArchive_пересчёт',isOpen ,flagEtalon,massInterval)
-  
   }
-  console.log("PROPS.OLDmassInterval", massInterval);
 
   const styleSt1 = {
     fontSize: 13.5,
@@ -115,7 +95,7 @@ const StatisticsArchive = (props: {
     setValue(newValue);
     tekValue = newValue;
     props.func(tekValue, massInterval[tekValue]);
-    console.log("Old_ПЕРЕДАЛ:", tekValue, massInterval[tekValue]);
+    //console.log("Old_ПЕРЕДАЛ:", tekValue, massInterval[tekValue]);
   };
 
   const SpisXT = () => {

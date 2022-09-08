@@ -24,8 +24,6 @@ const StatisticsNew = (props: {
   interval: number;
   func: any;
 }) => {
-  console.log("1111PoinsStNew:", props.interval);
-
   let isOpen = props.open;
   let points = props.points;
   let reGion = props.region;
@@ -58,11 +56,15 @@ const StatisticsNew = (props: {
       massInterval.push(points[i].Statistics[0].TLen);
       massIntervalEt.push(points[i].Statistics[0].TLen);
     }
+    if (!massInterval.length) {
+      massInterval.push(5);
+      massIntervalEt.push(5);
+    }
     console.log("massInterval", massInterval, points);
     points = [];
   } else {
     if (massInterval.length) massInterval[tekValue] = props.interval;
-    console.log("PROPS.massInterval", massInterval);
+    //console.log("PROPS.massInterval", massInterval);
   }
 
   if (isOpen && !flagEtalon) {
@@ -108,8 +110,7 @@ const StatisticsNew = (props: {
   };
 
   const styleSt2 = {
-    maxWidth: 850,
-    minWidth: 850,
+    width: 850,
     fontSize: 12,
     marginTop: -2,
     marginLeft: -3,
@@ -122,7 +123,12 @@ const StatisticsNew = (props: {
     setValue(newValue);
     tekValue = newValue;
     props.func(tekValue, massInterval[tekValue]);
-    console.log("ПЕРЕДАЛ:", tekValue, massInterval[tekValue]);
+  };
+
+  const handleChangeNull = () => {
+    console.log("ПЕРЕДАЛ:", 0, massInterval[0]);
+    props.func(-1, massInterval[0]);
+    return <Box sx={styleSt1}>Нет данных по статистике</Box>;
   };
 
   const SpisXT = () => {
@@ -147,7 +153,8 @@ const StatisticsNew = (props: {
 
   return (
     <>
-      {isOpen && (
+      {isOpen && !pointsEtalon.length && <>{handleChangeNull()} </>}
+      {isOpen && pointsEtalon.length && (
         <>
           <Box sx={styleSt2}>
             <Tabs
