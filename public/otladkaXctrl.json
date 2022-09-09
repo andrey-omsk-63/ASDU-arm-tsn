@@ -1,0 +1,101 @@
+{
+  "type": "xctrlInfo",
+  "data": {
+    "areaInfo": {
+      "Мосавтодор": {
+        "1": "Первая половина",
+        "2": "Вторая половина",
+        "3": "Третий кусок"
+      }
+    },
+    "regionInfo": { "1": "Мосавтодор", "Все регионы": "*", "Мосавтодор": "1" },
+    "xctrlInfo": [
+      {
+        "region": 1,
+        "area": 1,
+        "subarea": 1,
+        "switch": false,
+        "release": true,
+        "use": true,
+        "yellow": { "make": true, "start": 0, "stop": 120 },
+        "step": 15,
+        "ltime": 0,
+        "pkcalc": 0,
+        "pknow": 0,
+        "pklast": 0,
+        "status": null,
+        "xctrls": [
+          {
+            "name": "Без имени_09.09.2022_09-28-28",
+            "left": 300,
+            "right": 300,
+            "status": [],
+            "StrategyA": [
+              { "xleft": 100, "xright": 100, "pk": 1, "desc": "" },
+              { "xleft": 200, "xright": 200, "pk": 2, "desc": "" },
+              { "xleft": 300, "xright": 300, "pk": 3, "desc": "" }
+            ],
+            "StrategyB": [
+              {
+                "xleft": 100,
+                "xright": 100,
+                "vleft": 1.2,
+                "vright": 1.4,
+                "pkl": 1,
+                "pks": 2,
+                "pkr": 3,
+                "desc": ""
+              },
+              {
+                "xleft": 200,
+                "xright": 200,
+                "vleft": 0.7,
+                "vright": 1.1,
+                "pkl": 4,
+                "pks": 5,
+                "pkr": 6,
+                "desc": ""
+              },
+              {
+                "xleft": 300,
+                "xright": 300,
+                "vleft": 0.65,
+                "vright": 1.3,
+                "pkl": 7,
+                "pks": 8,
+                "pkr": 9,
+                "desc": ""
+              }
+            ],
+            "Calculates": [
+              { "region": 1, "area": 1, "id": 11, "chanL": [2], "chanR": [3] }
+            ]
+          }
+        ],
+        "ext": [
+          [1, 2],
+          [2, 3],
+          [3, 1],
+          [4, 5],
+          [5, 6],
+          [6, 7],
+          [7, 4],
+          [8, 9],
+          [9, 8],
+          [0, 0],
+          [0, 0],
+          [0, 0]
+        ],
+        "prioryty": [
+          [0, 0, 0],
+          [2, 1, 3],
+          [5, 4, 6],
+          [8, 7, 9]
+        ],
+        "time": 0,
+        "results": null,
+        "devices": null
+      }
+    ]
+  }
+}

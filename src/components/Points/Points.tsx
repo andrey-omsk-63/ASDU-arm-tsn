@@ -1,24 +1,29 @@
-import * as React from 'react';
+import * as React from "react";
 
-import Box from '@mui/material/Box';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+import Box from "@mui/material/Box";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 
-import PointsMenuLevel1 from './PointsMenuLevel1';
+import PointsMenuLevel1 from "./PointsMenuLevel1";
 
-import { XctrlInfo } from '../../interfaceGl.d';
+import { XctrlInfo } from "../../interfaceGl.d";
 
 let tekValue = 0;
 let pointsEtalon: XctrlInfo[];
 //let flagEtalon = true;
 
-const Points = (props: { open: boolean; ws: WebSocket; xctrll: XctrlInfo[]; region: string }) => {
+const Points = (props: {
+  open: boolean;
+  ws: WebSocket;
+  xctrll: XctrlInfo[];
+  region: string;
+}) => {
   const stylePXt1 = {
     fontSize: 13.5,
-    maxHeight: '20px',
-    minHeight: '20px',
-    backgroundColor: '#F1F3F4',
-    color: 'black',
+    maxHeight: "20px",
+    minHeight: "20px",
+    backgroundColor: "#F1F3F4",
+    color: "black",
     marginRight: 0.5,
   };
 
@@ -26,11 +31,14 @@ const Points = (props: { open: boolean; ws: WebSocket; xctrll: XctrlInfo[]; regi
   let isOpen = props.open;
   let pointsGl = props.xctrll;
 
-console.log('POINS:',reGion,pointsGl)
+  console.log("POINS:", reGion, pointsGl);
 
-  let points = pointsGl.filter((pointsGl) => pointsGl.region === Number(reGion));
+  let points = pointsGl.filter(
+    (pointsGl) => pointsGl.region === Number(reGion)
+  );
+  //let points = pointsGl;  // для отладки
 
-  pointsEtalon = points;     // замена проверки обновления Xctrl - проверка теперь в App
+  pointsEtalon = points; // замена проверки обновления Xctrl - проверка теперь в App
 
   const [value, setValue] = React.useState(tekValue);
 
@@ -38,9 +46,15 @@ console.log('POINS:',reGion,pointsGl)
     const handleSend = () => {
       if (props.ws !== null) {
         if (props.ws.readyState === WebSocket.OPEN) {
-          props.ws.send(JSON.stringify({ type: 'stopDevices', region: reGion }));
-          props.ws.send(JSON.stringify({ type: 'stopStatistics', region: reGion }));
-          props.ws.send(JSON.stringify({ type: 'stopOldStatistics', region: reGion }));
+          props.ws.send(
+            JSON.stringify({ type: "stopDevices", region: reGion })
+          );
+          props.ws.send(
+            JSON.stringify({ type: "stopStatistics", region: reGion })
+          );
+          props.ws.send(
+            JSON.stringify({ type: "stopOldStatistics", region: reGion })
+          );
         } else {
           setTimeout(() => {
             handleSend();
@@ -50,8 +64,8 @@ console.log('POINS:',reGion,pointsGl)
     };
     handleSend();
   }, [props.ws, reGion]);
-  
-  if (isOpen) pointsEtalon = points;   // замена проверки обновления - проверка теперь в App
+
+  if (isOpen) pointsEtalon = points; // замена проверки обновления - проверка теперь в App
 
   // разноска обновлений
   // if (isOpen && !flagEtalon) {
@@ -89,17 +103,21 @@ console.log('POINS:',reGion,pointsGl)
 
   const SpisXT = () => {
     let resSps: any = [];
-    let labl: string = '';
+    let labl: string = "";
 
     if (pointsEtalon.length === 0) {
       resSps.push(
         <Box key={1} sx={stylePXt1}>
           Нет данных по ХТ
-        </Box>,
+        </Box>
       );
     } else {
       for (let i = 0; i < pointsEtalon.length; i++) {
-        labl = 'XT:' + pointsEtalon[i].area.toString() + ':' + pointsEtalon[i].subarea.toString();
+        labl =
+          "XT:" +
+          pointsEtalon[i].area.toString() +
+          ":" +
+          pointsEtalon[i].subarea.toString();
         resSps.push(<Tab key={i} sx={stylePXt1} label={labl} />);
       }
     }
@@ -110,26 +128,32 @@ console.log('POINS:',reGion,pointsGl)
     <Box sx={{ border: 0, marginTop: -2.8, marginLeft: -3, marginRight: -5.5 }}>
       <Box
         sx={{
-          maxWidth: '100%',
+          maxWidth: "100%",
           fontSize: 12,
           marginTop: 0.5,
           marginLeft: -4.6,
           marginRight: -7,
-        }}>
+        }}
+      >
         <Tabs
-          sx={{ maxHeight: '20px', minHeight: '20px' }}
+          sx={{ maxHeight: "20px", minHeight: "20px" }}
           value={value}
           onChange={handleChange}
           variant="scrollable"
           scrollButtons={true}
-          allowScrollButtonsMobile>
+          allowScrollButtonsMobile
+        >
           {SpisXT()}
         </Tabs>
       </Box>
       <>
         {pointsEtalon.length > 0 && (
           <>
-            <PointsMenuLevel1 open={isOpen} xctrll={pointsEtalon} xtt={tekValue} />
+            <PointsMenuLevel1
+              open={isOpen}
+              xctrll={pointsEtalon}
+              xtt={tekValue}
+            />
           </>
         )}
       </>

@@ -284,12 +284,12 @@ const App = () => {
   if (debug && flagOpenDebug) {
     console.log("РЕЖИМ ОТЛАДКИ!!!");
     regionGlob = 1;
-    // axios.get("http://localhost:3000/otladkaPoints.json").then(({ data }) => {
-    axios.get("http://localhost:3000/xctrlsReal.json").then(({ data }) => {
+    axios.get("http://localhost:3000/otladkaPoints.json").then(({ data }) => {
       setPointsTfl(data.data.tflight);
       setIsOpenDev(true);
     });
-    const ipAdress: string = "http://localhost:3000/otladkaMNG.json";
+    const ipAdress: string = "http://localhost:3000/otladkaXctrl.json";
+    //const ipAdress: string = "http://localhost:3000/otladkaGlob.json";
     axios.get(ipAdress).then(({ data }) => {
       console.log("data:", data.data.xctrlInfo);
       setPointsXctrl(data.data.xctrlInfo);
