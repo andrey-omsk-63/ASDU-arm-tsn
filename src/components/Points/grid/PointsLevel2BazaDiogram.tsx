@@ -60,8 +60,8 @@ const PointsLevel2BazaDiogram = (props: {
   const axisHorizon = horizon;
   const steepHorizon = 12 / axisHorizon;
   const axisVertical = vertical;
-  //const steepVertical = 84.4 / axisVertical;
-  const steepVertical = 85.4 / axisVertical;
+  const steepVertical = 84.8 / axisVertical;
+  //const steepVertical = 85.4 / axisVertical;
 
   let matrix: string[][] = [[]];
 
@@ -240,29 +240,25 @@ const PointsLevel2BazaDiogram = (props: {
     setValue(mode);
     setOpenLoader(true);
   };
-  
+
   if (openLoader) Output();
 
   return (
-    <Grid item container xs={12}>
+    <Grid container>
       <Button sx={styleXTG02} variant="contained" onClick={() => SetValue(1)}>
         <b>Построить диаграмму быстро</b>
       </Button>
       <Button sx={styleXTG02} variant="contained" onClick={() => SetValue(2)}>
         <b>Диаграмма в высоком качестве</b>
       </Button>
-
-      <>
-        {value > 0 && (
-          <>
-            {openLoader && <Dinama />}
-            {!openLoader && <>{PointsXt112Comp1Tab4()}</>}
-          </>
-        )}
-      </>
+      {value > 0 && (
+        <>
+          {openLoader && <Dinama />}
+          {!openLoader && <>{PointsXt112Comp1Tab4()}</>}
+        </>
+      )}
     </Grid>
   );
 };
 
 export default PointsLevel2BazaDiogram;
-
