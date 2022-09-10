@@ -1,23 +1,25 @@
-import * as React from "react";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
-import Modal from "@mui/material/Modal";
-import Typography from "@mui/material/Typography";
+import * as React from 'react';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Modal from '@mui/material/Modal';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
 
-import PointsLevel2BazaDiogram from "./PointsLevel2BazaDiogram";
+import PointsLevel2BazaDiogram from './PointsLevel2BazaDiogram';
 
-import { styleXTG00, styleXTG01, styleXTG011 } from "./PointsLevel2BazaStyle";
-import { styleXTG021, styleXTG02, styleXTG03 } from "./PointsLevel2BazaStyle";
-import { styleXTG04, styleXTG05, styleBut01 } from "./PointsLevel2BazaStyle";
-import { styleBut02, styleModalEnd, styleBut03 } from "./PointsLevel2BazaStyle";
-import { styleSetInf } from "./PointsLevel2BazaStyle";
+import { styleXTG00, styleXTG01, styleXTG011 } from './PointsLevel2BazaStyle';
+import { styleXTG021, styleXTG02, styleXTG03 } from './PointsLevel2BazaStyle';
+import { styleXTG04, styleXTG05, styleBut01 } from './PointsLevel2BazaStyle';
+import { styleBut02, styleModalEnd, styleBut03 } from './PointsLevel2BazaStyle';
+import { styleSetInf } from './PointsLevel2BazaStyle';
 
-import { XctrlInfo } from "../../../interfaceGl.d";
+import { XctrlInfo } from '../../../interfaceGl.d';
 
 let nomStr = 0;
 let flagSave = false;
+//let formName = '';
 
 const PointsLevel2Baza = (props: {
   open: boolean;
@@ -29,51 +31,78 @@ const PointsLevel2Baza = (props: {
   const xtProps = props.xtt;
   const points = props.xctrll[xtProps];
   const crossRoad = props.crossroad;
+  //formName = points.xctrls[props.crossroad].name;
 
   const [openSetName, setOpenSetName] = React.useState(false);
   const [openSetStr, setOpenSetStr] = React.useState(false);
+  const [formName, setFormName] = React.useState(points.xctrls[props.crossroad].name);
 
   const styleInpKnop = {
-    color: "black",
+    color: 'black',
     marginTop: 1,
-    maxHeight: "21px",
-    minHeight: "21px",
-    backgroundColor: "#F1F3F4",
-    textAlign: "center",
-    textTransform: "unset !important",
+    maxHeight: '21px',
+    minHeight: '21px',
+    backgroundColor: '#F1F3F4',
+    textAlign: 'center',
+    textTransform: 'unset !important',
   };
 
   const SetName = () => {
+    const [valuen, setValuen] = React.useState(formName);
+
+    const handleKey = (event: any) => {
+      if (event.key === 'Enter') event.preventDefault();
+    };
+
+    const handleChange = (event: any) => {
+      let form = event.target.value.trimStart(); // удаление пробелов в начале строки
+      setValuen(form);
+    };
+
     const handleClose = () => {
+      setFormName(valuen);
+      setOpenSetName(false);
+      console.log('formName', formName);
+    };
+
+    const handleCloseClinch = () => {
       setOpenSetName(false);
     };
 
     return (
       <Modal open={openSetName} onClose={handleClose} hideBackdrop>
         <Box sx={styleSetInf}>
-          <Button sx={styleModalEnd} onClick={handleClose}>
+          <Button sx={styleModalEnd} onClick={handleCloseClinch}>
             <b>&#10006;</b>
           </Button>
 
-          {/* <Box sx={styleSet}> */}
-          <Box
-            component="form"
-            sx={{ "& > :not(style)": { m: 1, width: "40ch" } }}
-            noValidate
-            autoComplete="off"
-          >
-            <Typography sx={{ textAlign: "center" }}>
+          <Box sx={{ textAlign: 'center' }}>
+            <Box
+              component="form"
+              // sx={{ '& > :not(style)': {  width: '25ch' } }}
+              sx={{ '& > :not(style)': { m: 1, width: '25ch', bgcolor: '#FFFBE5' } }}
+              //noValidate
+              //autoComplete="off"
+            >
+              {/* <Typography sx={{ textAlign: "center" }}>
               <b>{points.xctrls[props.crossroad].name}</b>
-            </Typography>
-            {/* <InpForm /> */}
+            </Typography> */}
+              <TextField
+                size="small"
+                onKeyPress={handleKey} //отключение Enter
+                inputProps={{ style: { fontSize: 14 } }}
+                value={valuen}
+                onChange={handleChange}
+                variant="standard"
+              />
+            </Box>
           </Box>
-          <Box sx={{ textAlign: "center" }}>
+          <Box sx={{ textAlign: 'center' }}>
             <Button sx={styleInpKnop} variant="contained" onClick={handleClose}>
               <b>Сохранить</b>
             </Button>
           </Box>
         </Box>
-        {/* </Box> */}
       </Modal>
     );
   };
@@ -90,7 +119,7 @@ const PointsLevel2Baza = (props: {
             <b>&#10006;</b>
           </Button>
 
-          <Typography sx={{ textAlign: "center" }}>
+          <Typography sx={{ textAlign: 'center' }}>
             <b>
               Прямой {points.xctrls[crossRoad].StrategyB[props.nom].xleft}
               <br />
@@ -103,12 +132,11 @@ const PointsLevel2Baza = (props: {
               КСО {points.xctrls[crossRoad].StrategyB[props.nom].pkr}
               <br />
               Луч П {points.xctrls[crossRoad].StrategyB[props.nom].vleft} <br />
-              Луч О {points.xctrls[crossRoad].StrategyB[props.nom].vright}{" "}
-              <br />
+              Луч О {points.xctrls[crossRoad].StrategyB[props.nom].vright} <br />
               Описание {points.xctrls[crossRoad].StrategyB[props.nom].desc}
             </b>
           </Typography>
-          <Box sx={{ textAlign: "center" }}>
+          <Box sx={{ textAlign: 'center' }}>
             <Button sx={styleInpKnop} variant="contained" onClick={handleClose}>
               <b>Сохранить</b>
             </Button>
@@ -131,7 +159,7 @@ const PointsLevel2Baza = (props: {
 
   const PointsLevel2BazaTab1 = () => {
     return (
-      <Grid container sx={{ height: "14.5vh" }}>
+      <Grid container sx={{ height: '14.5vh' }}>
         <Grid item xs={12} sx={{ border: 0 }}>
           <Grid container item>
             <Grid item xs={3.9}>
@@ -143,12 +171,9 @@ const PointsLevel2Baza = (props: {
             </Grid>
             <Grid item xs>
               <Box sx={{ marginTop: -0.3, fontSize: 11, border: 0 }}>
-                <Button
-                  sx={styleBut01}
-                  variant="contained"
-                  onClick={() => SetOpenSetName()}
-                >
-                  <b>{points.xctrls[props.crossroad].name}</b>
+                <Button sx={styleBut01} variant="contained" onClick={() => SetOpenSetName()}>
+                  {/* <b>{points.xctrls[props.crossroad].name}</b> */}
+                  <b>{formName}</b>
                 </Button>
                 <br /> <br />
                 {points.xctrls[props.crossroad].left} <br /> <br />
@@ -180,15 +205,15 @@ const PointsLevel2Baza = (props: {
   const PointsLevel2BazaTab2Header = () => {
     return (
       <Grid container>
-        {ConclHeader(1.3, "№", styleXTG02)}
-        {ConclHeader(1.8, "Прямой", styleXTG02)}
-        {ConclHeader(1.8, "Обратный", styleXTG02)}
-        {ConclHeader(1, "КСП", styleXTG02)}
-        {ConclHeader(1, "КСС", styleXTG02)}
-        {ConclHeader(1, "КСО", styleXTG02)}
-        {ConclHeader(1, "Луч П", styleXTG02)}
-        {ConclHeader(1, "Луч О", styleXTG02)}
-        {ConclHeader(2.1, "Описание", styleXTG021)}
+        {ConclHeader(1.3, '№', styleXTG02)}
+        {ConclHeader(1.8, 'Прямой', styleXTG02)}
+        {ConclHeader(1.8, 'Обратный', styleXTG02)}
+        {ConclHeader(1, 'КСП', styleXTG02)}
+        {ConclHeader(1, 'КСС', styleXTG02)}
+        {ConclHeader(1, 'КСО', styleXTG02)}
+        {ConclHeader(1, 'Луч П', styleXTG02)}
+        {ConclHeader(1, 'Луч О', styleXTG02)}
+        {ConclHeader(2.1, 'Описание', styleXTG021)}
       </Grid>
     );
   };
@@ -197,11 +222,11 @@ const PointsLevel2Baza = (props: {
     return (
       <Grid container>
         <Grid xs={0.5} item sx={styleXTG02}></Grid>
-        {ConclHeader(1.75, "Регион", styleXTG02)}
-        {ConclHeader(1.75, "Район", styleXTG02)}
-        {ConclHeader(2, "Перекрёсток", styleXTG02)}
-        {ConclHeader(3, "Номера каналов прямого", styleXTG02)}
-        {ConclHeader(3, "Номера каналов обратного", styleXTG021)}
+        {ConclHeader(1.75, 'Регион', styleXTG02)}
+        {ConclHeader(1.75, 'Район', styleXTG02)}
+        {ConclHeader(2, 'Перекрёсток', styleXTG02)}
+        {ConclHeader(3, 'Номера каналов прямого', styleXTG02)}
+        {ConclHeader(3, 'Номера каналов обратного', styleXTG021)}
       </Grid>
     );
   };
@@ -214,11 +239,7 @@ const PointsLevel2Baza = (props: {
       resStr.push(
         <Grid key={i} container item xs={12}>
           <Grid xs={1.3} item sx={styleXTG011}>
-            <Button
-              sx={styleBut02}
-              variant="contained"
-              onClick={() => SetOpenSetStr(i)}
-            >
+            <Button sx={styleBut02} variant="contained" onClick={() => SetOpenSetStr(i)}>
               {i}
             </Button>
           </Grid>
@@ -230,7 +251,7 @@ const PointsLevel2Baza = (props: {
           {ConclStr(1, elem.vleft, styleXTG01)}
           {ConclStr(1, elem.vright, styleXTG01)}
           {ConclStr(2.1, elem.desc, styleXTG00)}
-        </Grid>
+        </Grid>,
       );
     }
     return resStr;
@@ -253,7 +274,7 @@ const PointsLevel2Baza = (props: {
             {ConclStr(3, elem.chanL[0], styleXTG01)}
             {ConclStr(3, elem.chanR[0], styleXTG00)}
           </Grid>
-        </Grid>
+        </Grid>,
       );
     }
     return resStr;
@@ -261,7 +282,7 @@ const PointsLevel2Baza = (props: {
 
   return (
     <>
-      {props.value === "1" && (
+      {props.value === '1' && (
         <>
           {flagSave && (
             <Grid container item>
@@ -274,7 +295,7 @@ const PointsLevel2Baza = (props: {
             </Grid>
           )}
           <Stack direction="row">
-            <Grid item xs={4} sx={{ height: "86.5vh", border: 0 }}>
+            <Grid item xs={4} sx={{ height: '86.5vh', border: 0 }}>
               <PointsLevel2BazaTab1 />
               <Grid container>
                 <Grid item xs={12} sx={styleXTG03}>
