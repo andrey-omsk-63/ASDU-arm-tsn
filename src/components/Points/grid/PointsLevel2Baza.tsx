@@ -28,11 +28,12 @@ const PointsLevel2Baza = (props: {
   crossroad: number;
 }) => {
   const xtProps = props.xtt;
-  const points = props.xctrll[xtProps];
+  const pointsEt = props.xctrll[xtProps];
   const crossRoad = props.crossroad;
 
   const [openSetName, setOpenSetName] = React.useState(false);
   const [openSetStr, setOpenSetStr] = React.useState(false);
+  const [points, setPoints] = React.useState(pointsEt);
   const [formName, setFormName] = React.useState(points.xctrls[props.crossroad].name);
 
   const handleKey = (event: any) => {
@@ -48,8 +49,12 @@ const PointsLevel2Baza = (props: {
     };
 
     const handleClose = () => {
+      let pointRab = points;
+      pointRab.xctrls[props.crossroad].name = valuen;
+      setPoints(pointRab);
       setFormName(valuen);
       setOpenSetName(false);
+      flagSave = true;
       console.log('formName', formName);
     };
 
@@ -58,7 +63,7 @@ const PointsLevel2Baza = (props: {
     };
 
     return (
-      <Modal open={openSetName} onClose={handleClose} hideBackdrop>
+      <Modal open={openSetName} onClose={handleCloseClinch} hideBackdrop>
         <Box sx={styleSetInf}>
           <Button sx={styleModalEnd} onClick={handleCloseClinch}>
             <b>&#10006;</b>
@@ -88,25 +93,89 @@ const PointsLevel2Baza = (props: {
 
   const SetStr = (props: { nom: number }) => {
     let elem = points.xctrls[crossRoad].StrategyB[props.nom];
+    const [valuen1, setValuen1] = React.useState(elem.xleft);
     const [valuen2, setValuen2] = React.useState(elem.xright);
+    const [valuen3, setValuen3] = React.useState(elem.pkl);
+    const [valuen4, setValuen4] = React.useState(elem.pks);
+    const [valuen5, setValuen5] = React.useState(elem.pkr);
+    const [valuen6, setValuen6] = React.useState(elem.vleft);
+    const [valuen7, setValuen7] = React.useState(elem.vright);
+    const [valuen8, setValuen8] = React.useState(elem.desc);
 
     const handleClose = () => {
       setOpenSetStr(false);
     };
 
+    const handleCloseStr = () => {
+      let pointRab = points;
+      pointRab.xctrls[crossRoad].StrategyB[props.nom].xleft = valuen1;
+      pointRab.xctrls[crossRoad].StrategyB[props.nom].xright = valuen2;
+      pointRab.xctrls[crossRoad].StrategyB[props.nom].pkl = valuen3;
+      pointRab.xctrls[crossRoad].StrategyB[props.nom].pks = valuen4;
+      pointRab.xctrls[crossRoad].StrategyB[props.nom].pkr = valuen5;
+      pointRab.xctrls[crossRoad].StrategyB[props.nom].vleft = valuen6;
+      pointRab.xctrls[crossRoad].StrategyB[props.nom].vright = valuen7;
+      pointRab.xctrls[crossRoad].StrategyB[props.nom].desc = valuen8;
+      setPoints(pointRab);
+      flagSave = true;
+      setOpenSetStr(false);
+    };
+
+    const handleChange1 = (event: any) => {
+      let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
+      console.log('form1', form, typeof form);
+      if (form) setValuen1(form);
+    };
+
     const handleChange2 = (event: any) => {
+      let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
+      console.log('form2', form);
+      if (form) setValuen2(form);
+    };
+
+    const handleChange3 = (event: any) => {
+      let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
+      console.log('form3', form);
+      if (form) setValuen3(form);
+    };
+
+    const handleChange4 = (event: any) => {
+      let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
+      console.log('form4', form);
+      if (form) setValuen4(form);
+    };
+
+    const handleChange5 = (event: any) => {
+      let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
+      console.log('form5', form);
+      if (form) setValuen5(form);
+    };
+
+    const handleChange6 = (event: any) => {
+      let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
+      console.log('form6', form);
+      if (form) setValuen6(form);
+    };
+
+    const handleChange7 = (event: any) => {
+      let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
+      console.log('form7', form);
+      if (form) setValuen7(form);
+    };
+
+    const handleChange8 = (event: any) => {
       let form = event.target.value.trimStart(); // удаление пробелов в начале строки
-      console.log('form', form);
-      setValuen2(event.target.value);
+      console.log('form8', form);
+      if (form) setValuen8(form);
     };
 
     const Inputer = (name: string, argum: any, handleChange: any) => {
       return (
         <Grid container>
-          <Grid item xs={4.5} sx={{ border: 0 }}>
+          <Grid item xs={4.5}>
             {name}
           </Grid>
-          <Grid item xs sx={{ border: 0 }}>
+          <Grid item xs>
             <Box sx={{ '& > :not(style)': { width: '12ch', bgcolor: '#FFFBE5' } }}>
               <TextField
                 size="small"
@@ -131,19 +200,16 @@ const PointsLevel2Baza = (props: {
           <Typography sx={{ textAlign: 'center' }}>
             Номер записи <b> {props.nom} </b>
           </Typography>
-          <Typography>Прямой {elem.xleft}</Typography>
+          {Inputer('Прямой', valuen1, handleChange1)}
           {Inputer('Обратный', valuen2, handleChange2)}
-
-          <Typography>
-            КСП {elem.pkl} <br />
-            КСС {elem.pks} <br />
-            КСО {elem.pkr} <br />
-            Луч П {elem.vleft} <br />
-            Луч О {elem.vright} <br />
-            Описание {elem.desc}
-          </Typography>
+          {Inputer('КСП', valuen3, handleChange3)}
+          {Inputer('КСС', valuen4, handleChange4)}
+          {Inputer('КСО', valuen5, handleChange5)}
+          {Inputer('Луч П', valuen6, handleChange6)}
+          {Inputer('Луч О', valuen7, handleChange7)}
+          {Inputer('Описание', valuen8, handleChange8)}
           <Box sx={{ textAlign: 'center' }}>
-            <Button sx={styleInpKnop} variant="contained" onClick={handleClose}>
+            <Button sx={styleInpKnop} variant="contained" onClick={handleCloseStr}>
               <b>Сохранить</b>
             </Button>
           </Box>
@@ -154,13 +220,11 @@ const PointsLevel2Baza = (props: {
 
   const SetOpenSetName = () => {
     setOpenSetName(true);
-    flagSave = true;
   };
 
   const SetOpenSetStr = (nom: number) => {
     nomStr = nom;
     setOpenSetStr(true);
-    flagSave = true;
   };
 
   const PointsLevel2BazaTab1 = () => {
