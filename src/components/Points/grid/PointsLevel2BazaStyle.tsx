@@ -70,8 +70,8 @@ export const styleBut01 = {
   //marginTop: -0.1,
   maxHeight: '21px',
   minHeight: '21px',
-  maxWidth: '193px',
-  minWidth: '193px',
+  maxWidth: '205px',
+  minWidth: '205px',
   backgroundColor: '#FFFBE5',
   color: 'black',
   textTransform: 'unset !important',
@@ -112,15 +112,26 @@ export const styleModalEnd = {
 };
 
 export const styleSetInf = {
+  fontSize: 17,
   position: 'absolute',
   marginTop: '15vh',
   marginLeft: '64vh',
   // width: 340,
-  width: 240,
+  width: 270,
   bgcolor: 'background.paper',
   border: '3px solid #000',
   borderColor: 'primary.main',
   borderRadius: 2,
   boxShadow: 24,
   p: 1.5,
+};
+
+export const styleInpKnop = {
+  color: 'black',
+  marginTop: 1,
+  maxHeight: '21px',
+  minHeight: '21px',
+  backgroundColor: '#F1F3F4',
+  textAlign: 'center',
+  textTransform: 'unset !important',
 };

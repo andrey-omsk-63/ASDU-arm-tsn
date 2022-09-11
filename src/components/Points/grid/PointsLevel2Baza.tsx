@@ -13,13 +13,12 @@ import { styleXTG00, styleXTG01, styleXTG011 } from './PointsLevel2BazaStyle';
 import { styleXTG021, styleXTG02, styleXTG03 } from './PointsLevel2BazaStyle';
 import { styleXTG04, styleXTG05, styleBut01 } from './PointsLevel2BazaStyle';
 import { styleBut02, styleModalEnd, styleBut03 } from './PointsLevel2BazaStyle';
-import { styleSetInf } from './PointsLevel2BazaStyle';
+import { styleSetInf, styleInpKnop } from './PointsLevel2BazaStyle';
 
 import { XctrlInfo } from '../../../interfaceGl.d';
 
 let nomStr = 0;
 let flagSave = false;
-//let formName = '';
 
 const PointsLevel2Baza = (props: {
   open: boolean;
@@ -31,28 +30,17 @@ const PointsLevel2Baza = (props: {
   const xtProps = props.xtt;
   const points = props.xctrll[xtProps];
   const crossRoad = props.crossroad;
-  //formName = points.xctrls[props.crossroad].name;
 
   const [openSetName, setOpenSetName] = React.useState(false);
   const [openSetStr, setOpenSetStr] = React.useState(false);
   const [formName, setFormName] = React.useState(points.xctrls[props.crossroad].name);
 
-  const styleInpKnop = {
-    color: 'black',
-    marginTop: 1,
-    maxHeight: '21px',
-    minHeight: '21px',
-    backgroundColor: '#F1F3F4',
-    textAlign: 'center',
-    textTransform: 'unset !important',
+  const handleKey = (event: any) => {
+    if (event.key === 'Enter') event.preventDefault();
   };
 
   const SetName = () => {
     const [valuen, setValuen] = React.useState(formName);
-
-    const handleKey = (event: any) => {
-      if (event.key === 'Enter') event.preventDefault();
-    };
 
     const handleChange = (event: any) => {
       let form = event.target.value.trimStart(); // удаление пробелов в начале строки
@@ -77,16 +65,7 @@ const PointsLevel2Baza = (props: {
           </Button>
 
           <Box sx={{ textAlign: 'center' }}>
-            <Box
-              component="form"
-              // sx={{ '& > :not(style)': {  width: '25ch' } }}
-              sx={{ '& > :not(style)': { m: 1, width: '25ch', bgcolor: '#FFFBE5' } }}
-              //noValidate
-              //autoComplete="off"
-            >
-              {/* <Typography sx={{ textAlign: "center" }}>
-              <b>{points.xctrls[props.crossroad].name}</b>
-            </Typography> */}
+            <Box sx={{ '& > :not(style)': { m: 1, width: '27ch', bgcolor: '#FFFBE5' } }}>
               <TextField
                 size="small"
                 onKeyPress={handleKey} //отключение Enter
@@ -108,8 +87,39 @@ const PointsLevel2Baza = (props: {
   };
 
   const SetStr = (props: { nom: number }) => {
+    let elem = points.xctrls[crossRoad].StrategyB[props.nom];
+    const [valuen2, setValuen2] = React.useState(elem.xright);
+
     const handleClose = () => {
       setOpenSetStr(false);
+    };
+
+    const handleChange2 = (event: any) => {
+      let form = event.target.value.trimStart(); // удаление пробелов в начале строки
+      console.log('form', form);
+      setValuen2(event.target.value);
+    };
+
+    const Inputer = (name: string, argum: any, handleChange: any) => {
+      return (
+        <Grid container>
+          <Grid item xs={4.5} sx={{ border: 0 }}>
+            {name}
+          </Grid>
+          <Grid item xs sx={{ border: 0 }}>
+            <Box sx={{ '& > :not(style)': { width: '12ch', bgcolor: '#FFFBE5' } }}>
+              <TextField
+                size="small"
+                onKeyPress={handleKey} //отключение Enter
+                inputProps={{ style: { fontSize: 15 } }}
+                value={argum}
+                onChange={handleChange}
+                variant="standard"
+              />
+            </Box>
+          </Grid>
+        </Grid>
+      );
     };
 
     return (
@@ -118,23 +128,19 @@ const PointsLevel2Baza = (props: {
           <Button sx={styleModalEnd} onClick={handleClose}>
             <b>&#10006;</b>
           </Button>
-
           <Typography sx={{ textAlign: 'center' }}>
-            <b>
-              Прямой {points.xctrls[crossRoad].StrategyB[props.nom].xleft}
-              <br />
-              Обратный {points.xctrls[crossRoad].StrategyB[props.nom].xright}
-              <br />
-              КСП {points.xctrls[crossRoad].StrategyB[props.nom].pkl}
-              <br />
-              КСС {points.xctrls[crossRoad].StrategyB[props.nom].pks}
-              <br />
-              КСО {points.xctrls[crossRoad].StrategyB[props.nom].pkr}
-              <br />
-              Луч П {points.xctrls[crossRoad].StrategyB[props.nom].vleft} <br />
-              Луч О {points.xctrls[crossRoad].StrategyB[props.nom].vright} <br />
-              Описание {points.xctrls[crossRoad].StrategyB[props.nom].desc}
-            </b>
+            Номер записи <b> {props.nom} </b>
+          </Typography>
+          <Typography>Прямой {elem.xleft}</Typography>
+          {Inputer('Обратный', valuen2, handleChange2)}
+
+          <Typography>
+            КСП {elem.pkl} <br />
+            КСС {elem.pks} <br />
+            КСО {elem.pkr} <br />
+            Луч П {elem.vleft} <br />
+            Луч О {elem.vright} <br />
+            Описание {elem.desc}
           </Typography>
           <Box sx={{ textAlign: 'center' }}>
             <Button sx={styleInpKnop} variant="contained" onClick={handleClose}>
@@ -158,11 +164,13 @@ const PointsLevel2Baza = (props: {
   };
 
   const PointsLevel2BazaTab1 = () => {
+    let name = formName.slice(0, 29);
+
     return (
       <Grid container sx={{ height: '14.5vh' }}>
         <Grid item xs={12} sx={{ border: 0 }}>
           <Grid container item>
-            <Grid item xs={3.9}>
+            <Grid item xs={3.5}>
               <Box sx={{ fontSize: 10.5, marginTop: 0.5 }}>
                 <b>Наименование ХТ</b> <br /> <br />
                 <b>Максимум прямого</b> <br /> <br />
@@ -172,8 +180,7 @@ const PointsLevel2Baza = (props: {
             <Grid item xs>
               <Box sx={{ marginTop: -0.3, fontSize: 11, border: 0 }}>
                 <Button sx={styleBut01} variant="contained" onClick={() => SetOpenSetName()}>
-                  {/* <b>{points.xctrls[props.crossroad].name}</b> */}
-                  <b>{formName}</b>
+                  <b>{name}</b>
                 </Button>
                 <br /> <br />
                 {points.xctrls[props.crossroad].left} <br /> <br />
