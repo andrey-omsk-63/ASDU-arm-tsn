@@ -45,7 +45,7 @@ export const styleXTG02 = {
 export const styleXTG03 = {
   marginTop: 0.5,
   border: 1,
-  height: '35.5vh',
+  height: '35vh',
   borderRadius: 1,
   borderColor: 'primary.main',
 };
@@ -68,8 +68,8 @@ export const styleXTG05 = {
 export const styleBut01 = {
   fontSize: 10,
   //marginTop: -0.1,
-  maxHeight: '21px',
-  minHeight: '21px',
+  maxHeight: '18px',
+  minHeight: '18px',
   maxWidth: '205px',
   minWidth: '205px',
   backgroundColor: '#FFFBE5',
@@ -114,8 +114,10 @@ export const styleModalEnd = {
 export const styleSetInf = {
   fontSize: 17,
   position: 'absolute',
+  left: "36%",
+  //top: "50%",
   marginTop: '15vh',
-  marginLeft: '64vh',
+  // marginLeft: '64vh',
   // width: 340,
   width: 270,
   bgcolor: 'background.paper',

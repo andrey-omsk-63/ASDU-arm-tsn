@@ -11,7 +11,7 @@ import PointsMenuLevel2 from './PointsMenuLevel2';
 
 import { XctrlInfo } from '../../interfaceGl.d'; //import { PinDropSharp } from '@mui/icons-material';
 
-const PointsMenuLevel1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number }) => {
+const PointsMenuLevel1 = (props: { open: boolean; ws: WebSocket; xctrll: XctrlInfo[]; xtt: number }) => {
   const isOpen = props.open;
   const xtProps = props.xtt;
   const points = props.xctrll[xtProps];
@@ -56,10 +56,13 @@ const PointsMenuLevel1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: numb
       }
 
       const stylePK = {
-        position: 'relative',
-        bottom: '-33vh',
-        marginLeft: '60vh',
-        //transform: 'translate(-50%, -50%)',
+        // position: 'relative',
+        // bottom: '-33vh',
+        // marginLeft: '60vh',
+        position: "absolute",
+        left: "50%",
+        top: "50%",
+        transform: 'translate(-50%, -50%)',
         width: (dlStrMenu + 8) * 10,
         bgcolor: 'background.paper',
         border: '2px solid #000',
@@ -107,7 +110,7 @@ const PointsMenuLevel1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: numb
           <Button sx={stylePXt1} variant="contained" onClick={handleOpen}>
             <b>XT:{points.area}:1 &nbsp; Перечень перекрёстков</b>
           </Button>
-          <Modal open={open}>
+          <Modal open={open} hideBackdrop>
             <Box sx={stylePK}>
               <Stack direction="column">{SpisPerekr()}</Stack>
             </Box>
@@ -137,6 +140,7 @@ const PointsMenuLevel1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: numb
               <>
                 <PointsMenuLevel2
                   open={isOpen}
+                  ws={props.ws}
                   xctrll={props.xctrll}
                   xtt={xtProps}
                   crossroad={crossRoad}

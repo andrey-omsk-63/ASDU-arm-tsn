@@ -98,20 +98,6 @@ const App = () => {
   const BeginSeans = () => {
     let dlStrMenu = 0;
 
-    const styleModal = {
-      position: "relative",
-      bottom: "-48vh",
-      marginLeft: "60vh",
-      transform: "translate(-50%, -50%)",
-      width: dlStrMenu,
-      bgcolor: "background.paper",
-      border: "2px solid #000",
-      borderColor: "primary.main",
-      borderRadius: 2,
-      boxShadow: 24,
-      p: 3,
-    };
-
     if (isOpenInf && regionGlob === 0) {
       for (let key in pointsReg) {
         if (!isNaN(Number(key))) {
@@ -145,6 +131,23 @@ const App = () => {
         );
       }
       return resStr;
+    };
+
+    const styleModal = {
+      // position: "relative",
+      // bottom: "-48vh",
+      // marginLeft: "60vh",
+      position: "absolute",
+      left: "50%",
+      top: "50%",
+      transform: "translate(-50%, -50%)",
+      width: dlStrMenu,
+      bgcolor: "background.paper",
+      border: "2px solid #000",
+      borderColor: "primary.main",
+      borderRadius: 4,
+      boxShadow: 24,
+      p: 3,
     };
 
     return (
@@ -282,7 +285,7 @@ const App = () => {
   }, []);
 
   if (debug && flagOpenDebug) {
-    console.log("РЕЖИМ ОТЛАДКИ!!!");
+    console.log("РЕЖИМ ОТЛАДКИ!!! ");
     regionGlob = 1;
     axios.get("http://localhost:3000/otladkaPoints.json").then(({ data }) => {
       setPointsTfl(data.data.tflight);
@@ -293,6 +296,7 @@ const App = () => {
     axios.get(ipAdress).then(({ data }) => {
       console.log("data:", data.data.xctrlInfo);
       setPointsXctrl(data.data.xctrlInfo);
+      if (regionGlob === 0) setPointsReg(data.data.regionInfo ?? []);
       setIsOpenInf(true);
     });
     axios.get("http://localhost:3000/otladkaStatNow.json").then(({ data }) => {

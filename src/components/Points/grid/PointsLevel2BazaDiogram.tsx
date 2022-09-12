@@ -76,7 +76,7 @@ const PointsLevel2BazaDiogram = (props: {
     let resStr = [];
     let resSps = [];
 
-    if (value > 1) scale = 2;
+    if (value > 1) scale = 1;
 
     const MakeMatrix = () => {
       let ratio = 0;

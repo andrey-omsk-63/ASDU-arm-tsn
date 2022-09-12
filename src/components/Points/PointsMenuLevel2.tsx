@@ -12,6 +12,7 @@ import { XctrlInfo } from '../../interfaceGl.d';
 
 const PointsMenuLevel2 = (props: {
   open: boolean;
+  ws: WebSocket;
   xctrll: XctrlInfo[];
   xtt: number;
   crossroad: number;
@@ -70,6 +71,7 @@ const PointsMenuLevel2 = (props: {
               <Grid item xs={12}>
                 <PointsLevel2Baza
                   open={props.open}
+                  ws={props.ws}
                   xctrll={props.xctrll}
                   xtt={xtProps}
                   value={value}

@@ -151,6 +151,7 @@ const Points = (props: {
           <>
             <PointsMenuLevel1
               open={isOpen}
+              ws={props.ws}
               xctrll={pointsEtalon}
               xtt={tekValue}
             />
