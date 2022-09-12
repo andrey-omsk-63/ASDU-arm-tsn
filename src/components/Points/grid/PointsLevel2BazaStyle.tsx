@@ -114,7 +114,7 @@ export const styleModalEnd = {
 export const styleSetInf = {
   fontSize: 17,
   position: 'absolute',
-  left: "36%",
+  left: '36%',
   //top: "50%",
   marginTop: '15vh',
   // marginLeft: '64vh',
@@ -126,6 +126,11 @@ export const styleSetInf = {
   borderRadius: 2,
   boxShadow: 24,
   p: 1.5,
+};
+
+export const styleInpName = {
+  textAlign: 'center',
+  '& > :not(style)': { m: 1, width: '27ch', bgcolor: '#FFFBE5' },
 };
 
 export const styleInpKnop = {

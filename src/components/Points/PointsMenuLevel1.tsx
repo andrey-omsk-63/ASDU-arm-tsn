@@ -9,9 +9,16 @@ import Modal from '@mui/material/Modal';
 import PointsMainScr from './PointsMainScr';
 import PointsMenuLevel2 from './PointsMenuLevel2';
 
-import { XctrlInfo } from '../../interfaceGl.d'; //import { PinDropSharp } from '@mui/icons-material';
+import { XctrlInfo } from '../../interfaceGl.d';
 
-const PointsMenuLevel1 = (props: { open: boolean; ws: WebSocket; xctrll: XctrlInfo[]; xtt: number }) => {
+let xtPropsOld = -1;
+
+const PointsMenuLevel1 = (props: {
+  open: boolean;
+  ws: WebSocket;
+  xctrll: XctrlInfo[];
+  xtt: number;
+}) => {
   const isOpen = props.open;
   const xtProps = props.xtt;
   const points = props.xctrll[xtProps];
@@ -34,6 +41,11 @@ const PointsMenuLevel1 = (props: { open: boolean; ws: WebSocket; xctrll: XctrlIn
   const [valueLevel2, setValueLavel2] = React.useState('1');
   const [crossRoad, setCrossRoad] = React.useState(0);
 
+  if (xtPropsOld !== xtProps) {
+    xtPropsOld = xtProps;
+    setCrossRoad(0);
+  }
+
   const MenuCrossRoad = () => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -47,7 +59,7 @@ const PointsMenuLevel1 = (props: { open: boolean; ws: WebSocket; xctrll: XctrlIn
     };
 
     let dlStrMenu = 0;
-    
+
     if (isOpen && points.xctrls.length !== 0) {
       for (let i = 0; i < points.xctrls.length; i++) {
         if (points.xctrls[i].name.length > dlStrMenu) {
@@ -59,9 +71,9 @@ const PointsMenuLevel1 = (props: { open: boolean; ws: WebSocket; xctrll: XctrlIn
         // position: 'relative',
         // bottom: '-33vh',
         // marginLeft: '60vh',
-        position: "absolute",
-        left: "50%",
-        top: "50%",
+        position: 'absolute',
+        left: '50%',
+        top: '50%',
         transform: 'translate(-50%, -50%)',
         width: (dlStrMenu + 8) * 10,
         bgcolor: 'background.paper',
