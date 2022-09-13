@@ -1,11 +1,11 @@
-import * as React from "react";
-import Grid from "@mui/material/Grid";
+import * as React from 'react';
+import Grid from '@mui/material/Grid';
 //import Button from "@mui/material/Button";
 
-import Backdrop from "@mui/material/Backdrop";
-import CircularProgress from "@mui/material/CircularProgress";
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
-import { XctrlInfo } from "../../../interfaceGl.d";
+import { XctrlInfo } from '../../../interfaceGl.d';
 
 let xtPropsOld = -1;
 let crossRoadOld = -1;
@@ -21,42 +21,31 @@ const PointsLevel2BazaDiogram = (props: {
   const crRoad = props.crossroad;
 
   const colorsGraf = [
-    "orange",
-    "Turquoise",
-    "YellowGreen",
+    'orange',
+    'Turquoise',
+    'YellowGreen',
 
-    "Yellow",
-    "Pink",
-    "Aqua",
+    'Yellow',
+    'Pink',
+    'Aqua',
 
-    "Lime",
-    "Tomato",
-    "teal",
+    'Lime',
+    'Tomato',
+    'teal',
 
-    "purple",
-    "RosyBrown",
-    "Coral",
+    'purple',
+    'RosyBrown',
+    'Coral',
 
-    "Olive",
-    "Magenta",
-    "DarkGray",
+    'Olive',
+    'Magenta',
+    'DarkGray',
 
-    "RoyalBlue",
-    "SpringGreen",
-    "Violet",
+    'RoyalBlue',
+    'SpringGreen',
+    'Violet',
   ];
 
-  // const styleXTG02 = {
-  //   fontSize: 12.5,
-  //   maxHeight: "15px",
-  //   minHeight: "15px",
-  //   backgroundColor: "#F1F3F4",
-  //   color: "black",
-  //   marginRight: 1,
-  //   textTransform: "unset !important",
-  // };
-
-  //const [value, setValue] = React.useState(0);
   const [openLoader, setOpenLoader] = React.useState(true);
 
   let dlMas = points.xctrls[crRoad].StrategyB.length;
@@ -70,19 +59,14 @@ const PointsLevel2BazaDiogram = (props: {
 
   let matrix: string[][] = [[]];
 
-  //let scale: number = 5;
   let scale: number = 1;
-  let coler = "red";
-  let colerOld = "";
+  let coler = 'red';
+  let colerOld = '';
   let masStr = [];
   let masCol = [];
   let colBl = 0;
 
-  if (
-    xtPropsOld !== xtProps ||
-    crossRoadOld !== crRoad ||
-    pointsOld !== points
-  ) {
+  if (xtPropsOld !== xtProps || crossRoadOld !== crRoad || pointsOld !== points) {
     xtPropsOld = xtProps;
     crossRoadOld = crRoad;
     pointsOld = points;
@@ -93,13 +77,11 @@ const PointsLevel2BazaDiogram = (props: {
     let resStr = [];
     let resSps = [];
 
-    //if (value > 1) scale = 1;
-
     const MakeMatrix = () => {
       let ratio = 0;
       let luchP = 1;
       let luchO = 1;
-      let coler = "red";
+      let coler = 'red';
       let i = 0;
       let j = 0;
 
@@ -107,8 +89,7 @@ const PointsLevel2BazaDiogram = (props: {
         luchO = points.xctrls[crRoad].StrategyB[num].vleft;
         luchP = points.xctrls[crRoad].StrategyB[num].vright;
         ratio =
-          points.xctrls[crRoad].StrategyB[num].xright /
-          points.xctrls[crRoad].StrategyB[num].xleft;
+          points.xctrls[crRoad].StrategyB[num].xright / points.xctrls[crRoad].StrategyB[num].xleft;
         coler = colorsGraf[num * 3];
         if (luchP !== 1 || luchO !== 1) {
           if (i < j * luchO * ratio) coler = colorsGraf[num * 3 + 1];
@@ -178,7 +159,7 @@ const PointsLevel2BazaDiogram = (props: {
 
     const PointsXt112Comp1Tab4Str = (j: number) => {
       resStr = [];
-      coler = "red";
+      coler = 'red';
       colerOld = matrix[j / scale][0 / scale];
       masStr = [];
       masCol = [];
@@ -206,9 +187,8 @@ const PointsLevel2BazaDiogram = (props: {
             item
             sx={{
               backgroundColor: masCol[i],
-              height: String(steepVertical * scale) + "vh",
-            }}
-          ></Grid>
+              height: String(steepVertical * scale) + 'vh',
+            }}></Grid>,
         );
       }
       return resStr;
@@ -219,7 +199,7 @@ const PointsLevel2BazaDiogram = (props: {
       resSps.push(
         <Grid key={j} item container sx={{ border: 0 }}>
           {PointsXt112Comp1Tab4Str(j)}
-        </Grid>
+        </Grid>,
       );
     }
 
@@ -231,7 +211,7 @@ const PointsLevel2BazaDiogram = (props: {
   };
 
   const styleBackdrop = {
-    color: "#fff",
+    color: '#fff',
     zIndex: (theme: any) => theme.zIndex.drawer + 1,
   };
 
@@ -250,27 +230,12 @@ const PointsLevel2BazaDiogram = (props: {
   };
   //=========================================================================
 
-  // const SetValue = (mode: number) => {
-  //   //setValue(mode);
-  //   setOpenLoader(true);
-  // };
-
   if (openLoader) Output();
 
   return (
     <Grid container>
-      {/* <Button sx={styleXTG02} variant="contained" onClick={() => SetValue(1)}>
-        <b>Построить диаграмму быстро</b>
-      </Button>
-      <Button sx={styleXTG02} variant="contained" onClick={() => SetValue(2)}>
-        <b>Диаграмма в высоком качестве</b>
-      </Button>
-      {value > 0 && (
-        <> */}
       {openLoader && <Dinama />}
       {!openLoader && <>{PointsXt112Comp1Tab4()}</>}
-      {/* </>
-      )} */}
     </Grid>
   );
 };

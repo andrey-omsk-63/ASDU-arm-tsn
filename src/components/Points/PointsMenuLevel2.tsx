@@ -81,10 +81,12 @@ const PointsMenuLevel2 = (props: {
                 />
                 <PointsLevel2Area
                   open={props.open}
+                  ws={props.ws}
                   xctrll={props.xctrll}
                   xtt={xtProps}
                   value={value}
                   crossroad={props.crossroad}
+                  setPoint={props.setPoint}
                 />
                 <PointsLevel2Calc
                   open={props.open}
