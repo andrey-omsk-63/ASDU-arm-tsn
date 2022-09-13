@@ -17,6 +17,7 @@ const Points = (props: {
   ws: WebSocket;
   xctrll: XctrlInfo[];
   region: string;
+  setPoint: any;
 }) => {
   const stylePXt1 = {
     fontSize: 13.5,
@@ -154,6 +155,7 @@ const Points = (props: {
               ws={props.ws}
               xctrll={pointsEtalon}
               xtt={tekValue}
+              setPoint={props.setPoint}
             />
           </>
         )}

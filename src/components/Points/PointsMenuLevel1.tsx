@@ -18,6 +18,7 @@ const PointsMenuLevel1 = (props: {
   ws: WebSocket;
   xctrll: XctrlInfo[];
   xtt: number;
+  setPoint: any;
 }) => {
   const isOpen = props.open;
   const xtProps = props.xtt;
@@ -156,6 +157,7 @@ const PointsMenuLevel1 = (props: {
                   xctrll={props.xctrll}
                   xtt={xtProps}
                   crossroad={crossRoad}
+                  setPoint={props.setPoint}
                 />
               </>
             )}

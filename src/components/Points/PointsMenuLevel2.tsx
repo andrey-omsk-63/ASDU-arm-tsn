@@ -16,6 +16,7 @@ const PointsMenuLevel2 = (props: {
   xctrll: XctrlInfo[];
   xtt: number;
   crossroad: number;
+  setPoint: any;
 }) => {
   const xtProps = props.xtt;
   const [value, setValue] = React.useState('1');
@@ -76,6 +77,7 @@ const PointsMenuLevel2 = (props: {
                   xtt={xtProps}
                   value={value}
                   crossroad={props.crossroad}
+                  setPoint={props.setPoint}
                 />
                 <PointsLevel2Area
                   open={props.open}

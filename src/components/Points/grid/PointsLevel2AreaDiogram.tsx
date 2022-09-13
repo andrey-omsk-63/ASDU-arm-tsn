@@ -1,11 +1,15 @@
 import * as React from "react";
 import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
+//import Button from "@mui/material/Button";
 
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 
 import { XctrlInfo } from "../../../interfaceGl.d";
+
+let xtPropsOld = -1;
+let crossRoadOld = -1;
+let pointsOld: any = [];
 
 const PointsLevel2AreaDiogram = (props: {
   xctrll: XctrlInfo[];
@@ -15,6 +19,8 @@ const PointsLevel2AreaDiogram = (props: {
   const xtProps = props.xtt;
   const points = props.xctrll[xtProps];
   const crRoad = props.crossroad;
+
+  console.log("Пришло Graf", props.xctrll);
 
   const colorsGraf = [
     "orange",
@@ -42,17 +48,18 @@ const PointsLevel2AreaDiogram = (props: {
     "Violet",
   ];
 
-  const styleXTG02 = {
-    fontSize: 12.5,
-    maxHeight: "15px",
-    minHeight: "15px",
-    backgroundColor: "#F1F3F4",
-    color: "black",
-    marginRight: 1,
-    textTransform: "unset !important",
-  };
+  // const styleXTG02 = {
+  //   fontSize: 12.5,
+  //   maxHeight: "15px",
+  //   minHeight: "15px",
+  //   backgroundColor: "#F1F3F4",
+  //   color: "black",
+  //   marginRight: 1,
+  //   textTransform: "unset !important",
+  // };
 
-  const [value, setValue] = React.useState(0);
+  //const [value, setValue] = React.useState(0);
+  const [openLoader, setOpenLoader] = React.useState(true);
 
   let dlMas = points.xctrls[crRoad].StrategyA.length;
   const horizon = points.xctrls[crRoad].right;
@@ -60,9 +67,11 @@ const PointsLevel2AreaDiogram = (props: {
   const axisHorizon = horizon * 1;
   const steepHorizon = 12 / axisHorizon;
   const axisVertical = vertical * 1;
-  const steepVertical = 84.4 / axisVertical;
+  // const steepVertical = 84.4 / axisVertical;
+  const steepVertical = 86.4 / axisVertical;
   let matrix: string[][] = [[]];
-  let scale = 5;
+  //let scale = 5;
+  let scale = 2;
 
   let coler = "red";
   //let colerOld = [];
@@ -71,11 +80,22 @@ const PointsLevel2AreaDiogram = (props: {
   let masCol = [];
   let colBl = 0;
 
+  if (
+    xtPropsOld !== xtProps ||
+    crossRoadOld !== crRoad ||
+    pointsOld !== points
+  ) {
+    xtPropsOld = xtProps;
+    crossRoadOld = crRoad;
+    pointsOld = points;
+    setOpenLoader(true);
+  }
+
   const PointsXt112Comp1Tab4 = () => {
     let resStr = [];
     let resSps = [];
 
-    if (value > 1) scale = 2;
+    //if (value > 1) scale = 2;
 
     MakeMatrix();
 
@@ -168,7 +188,6 @@ const PointsLevel2AreaDiogram = (props: {
     matrix.reverse(); //переворачиваем матрицу
   };
   //============ Dinama =====================================================
-  const [openLoader, setOpenLoader] = React.useState(false);
   const handleClose = () => {
     setOpenLoader(false);
   };
@@ -195,30 +214,29 @@ const PointsLevel2AreaDiogram = (props: {
   };
   //=========================================================================
 
-  const SetValue = (mode: number) => {
-    setValue(mode);
-    setOpenLoader(true);
-  };
+  // const SetValue = (mode: number) => {
+  //   //setValue(mode);
+  //   setOpenLoader(true);
+  // };
 
   if (openLoader) Output();
 
   return (
     <Grid item container xs={12}>
-      <Button sx={styleXTG02} variant="contained" onClick={() => SetValue(1)}>
+      {/* <Button sx={styleXTG02} variant="contained" onClick={() => SetValue(1)}>
         <b>Построить диаграмму быстро</b>
       </Button>
       <Button sx={styleXTG02} variant="contained" onClick={() => SetValue(2)}>
         <b>Диаграмма в высоком качестве</b>
       </Button>
-      {/* <>{value > 0 && <>{PointsXt112Comp1Tab4()}</>}</> */}
       <>
         {value > 0 && (
-          <>
+          <> */}
             {openLoader && <Dinama />}
             {!openLoader && <>{PointsXt112Comp1Tab4()}</>}
-          </>
+          {/* </>
         )}
-      </>
+      </> */}
     </Grid>
   );
 };

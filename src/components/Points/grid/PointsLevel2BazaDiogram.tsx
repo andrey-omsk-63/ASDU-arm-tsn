@@ -1,11 +1,15 @@
 import * as React from "react";
 import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
+//import Button from "@mui/material/Button";
 
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 
 import { XctrlInfo } from "../../../interfaceGl.d";
+
+let xtPropsOld = -1;
+let crossRoadOld = -1;
+let pointsOld: any = [];
 
 const PointsLevel2BazaDiogram = (props: {
   xctrll: XctrlInfo[];
@@ -42,17 +46,18 @@ const PointsLevel2BazaDiogram = (props: {
     "Violet",
   ];
 
-  const styleXTG02 = {
-    fontSize: 12.5,
-    maxHeight: "15px",
-    minHeight: "15px",
-    backgroundColor: "#F1F3F4",
-    color: "black",
-    marginRight: 1,
-    textTransform: "unset !important",
-  };
+  // const styleXTG02 = {
+  //   fontSize: 12.5,
+  //   maxHeight: "15px",
+  //   minHeight: "15px",
+  //   backgroundColor: "#F1F3F4",
+  //   color: "black",
+  //   marginRight: 1,
+  //   textTransform: "unset !important",
+  // };
 
-  const [value, setValue] = React.useState(0);
+  //const [value, setValue] = React.useState(0);
+  const [openLoader, setOpenLoader] = React.useState(true);
 
   let dlMas = points.xctrls[crRoad].StrategyB.length;
   const horizon = points.xctrls[crRoad].StrategyB[dlMas - 1].xright;
@@ -60,23 +65,35 @@ const PointsLevel2BazaDiogram = (props: {
   const axisHorizon = horizon;
   const steepHorizon = 12 / axisHorizon;
   const axisVertical = vertical;
-  const steepVertical = 84.8 / axisVertical;
-  //const steepVertical = 85.4 / axisVertical;
+  //const steepVertical = 84.8 / axisVertical;
+  const steepVertical = 86.4 / axisVertical;
 
   let matrix: string[][] = [[]];
 
-  let scale: number = 5;
+  //let scale: number = 5;
+  let scale: number = 1;
   let coler = "red";
   let colerOld = "";
   let masStr = [];
   let masCol = [];
   let colBl = 0;
 
+  if (
+    xtPropsOld !== xtProps ||
+    crossRoadOld !== crRoad ||
+    pointsOld !== points
+  ) {
+    xtPropsOld = xtProps;
+    crossRoadOld = crRoad;
+    pointsOld = points;
+    setOpenLoader(true);
+  }
+
   const PointsXt112Comp1Tab4 = () => {
     let resStr = [];
     let resSps = [];
 
-    if (value > 1) scale = 1;
+    //if (value > 1) scale = 1;
 
     const MakeMatrix = () => {
       let ratio = 0;
@@ -209,7 +226,6 @@ const PointsLevel2BazaDiogram = (props: {
     return resSps;
   };
   //============ Dinama =====================================================
-  const [openLoader, setOpenLoader] = React.useState(false);
   const handleClose = () => {
     setOpenLoader(false);
   };
@@ -220,11 +236,9 @@ const PointsLevel2BazaDiogram = (props: {
   };
 
   const Output = () => {
-    //React.useEffect(() => {
     setTimeout(() => {
       setOpenLoader(false);
     }, 100);
-    //}, []);
   };
 
   const Dinama = () => {
@@ -236,27 +250,27 @@ const PointsLevel2BazaDiogram = (props: {
   };
   //=========================================================================
 
-  const SetValue = (mode: number) => {
-    setValue(mode);
-    setOpenLoader(true);
-  };
+  // const SetValue = (mode: number) => {
+  //   //setValue(mode);
+  //   setOpenLoader(true);
+  // };
 
   if (openLoader) Output();
 
   return (
     <Grid container>
-      <Button sx={styleXTG02} variant="contained" onClick={() => SetValue(1)}>
+      {/* <Button sx={styleXTG02} variant="contained" onClick={() => SetValue(1)}>
         <b>Построить диаграмму быстро</b>
       </Button>
       <Button sx={styleXTG02} variant="contained" onClick={() => SetValue(2)}>
         <b>Диаграмма в высоком качестве</b>
       </Button>
       {value > 0 && (
-        <>
-          {openLoader && <Dinama />}
-          {!openLoader && <>{PointsXt112Comp1Tab4()}</>}
-        </>
-      )}
+        <> */}
+      {openLoader && <Dinama />}
+      {!openLoader && <>{PointsXt112Comp1Tab4()}</>}
+      {/* </>
+      )} */}
     </Grid>
   );
 };

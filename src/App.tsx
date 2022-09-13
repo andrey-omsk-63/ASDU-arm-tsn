@@ -134,9 +134,6 @@ const App = () => {
     };
 
     const styleModal = {
-      // position: "relative",
-      // bottom: "-48vh",
-      // marginLeft: "60vh",
       position: "absolute",
       left: "50%",
       top: "50%",
@@ -476,6 +473,26 @@ const App = () => {
     );
   };
 
+  const SetPointsXctrl = (points: any) => {
+    //console.log("Пришёл points", points.xctrls, pointsXctrl);
+    //console.log("Пришёл", points, pointsXctrl[1]);
+    let masRab: Array<XctrlInfo> = [];
+    for (let i = 0; i < pointsXctrl.length; i++) {
+      if (
+        pointsXctrl[i].region === points.region &&
+        pointsXctrl[i].area === points.area &&
+        pointsXctrl[i].subarea === points.subarea
+      ) {
+        masRab.push(points);
+        //console.log("Обновление", i);
+      } else {
+        masRab.push(pointsXctrl[i]);
+      }
+    }
+    //console.log("masRab", masRab[1]);
+    setPointsXctrl(masRab);
+  };
+
   UpdateXctrl(); // разноска обновлений Xctrl
 
   return (
@@ -514,6 +531,7 @@ const App = () => {
                 ws={WS}
                 xctrll={pointsEtalonXctrl}
                 region={String(regionGlob)}
+                setPoint={SetPointsXctrl}
               />
             )}
           </TabPanel>
