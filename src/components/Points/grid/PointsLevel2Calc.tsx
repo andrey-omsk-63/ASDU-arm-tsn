@@ -35,7 +35,7 @@ const PointsLevel2Calc = (props: {
   open: boolean;
   xctrll: XctrlInfo[];
   xtt: number;
-  value: string;
+  //value: string;
   crossroad: number;
 }) => {
   const xtProps = props.xtt;
@@ -184,9 +184,8 @@ const PointsLevel2Calc = (props: {
     let pusto = false;
     let kakchestvo = '';
     if (points.results !== null) {
+      console.log('points.results[namer]', namer, points);
 
-      console.log('points.results[namer]', namer, points)
-      
       for (let i = 0; i < points.results[namer].length; i++) {
         if (!points.results[namer][i].Good) {
           pusto = true;
@@ -220,29 +219,29 @@ const PointsLevel2Calc = (props: {
 
   return (
     <>
-      {props.value === '3' && (
-        <Box sx={{ marginTop: -0.3, marginLeft: -0, marginRight: 0 }}>
-          <Grid container item sx={{ margin: 0, height: '28vh' }}>
-            <Grid item xs={12} sx={{ border: 1, borderRadius: 1, borderColor: 'primary.main' }}>
-              {points.results !== null && (
-                <div>
-                  <PointsGraf00 />
-                </div>
-              )}
-            </Grid>
+      {/* {props.value === '3' && ( */}
+      <Box sx={{ marginTop: -0.3, marginLeft: -0, marginRight: 0 }}>
+        <Grid container item sx={{ margin: 0, height: '28vh' }}>
+          <Grid item xs={12} sx={{ border: 1, borderRadius: 1, borderColor: 'primary.main' }}>
+            {points.results !== null && (
+              <div>
+                <PointsGraf00 />
+              </div>
+            )}
           </Grid>
-          <Grid container item sx={{ marginTop: 0.5, height: '56vh', border: 0 }}>
-            <Grid item xs={24} sx={{ border: 1, borderRadius: 1, borderColor: 'primary.main' }}>
-              <PointsLevel2CalcTab2Header />
-              <Box sx={{ overflowX: 'auto', height: '56vh', border: 0 }}>
-                <Grid container item>
-                  {PointsLevel2CalcTab1Stroka()}
-                </Grid>
-              </Box>
-            </Grid>
+        </Grid>
+        <Grid container item sx={{ marginTop: 0.5, height: '56vh' }}>
+          <Grid item xs={24} sx={{ border: 1, borderRadius: 1, borderColor: 'primary.main' }}>
+            <PointsLevel2CalcTab2Header />
+            <Box sx={{ overflowX: 'auto', height: '56vh' }}>
+              <Grid container item>
+                {PointsLevel2CalcTab1Stroka()}
+              </Grid>
+            </Box>
           </Grid>
-        </Box>
-      )}
+        </Grid>
+      </Box>
+      {/* )} */}
     </>
   );
 };

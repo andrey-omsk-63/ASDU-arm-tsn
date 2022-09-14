@@ -17,8 +17,25 @@ const PointsMainScrGrid2 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: nu
     backgroundColor: '#C0C0C0',
   };
 
+  const styleXTG021 = {
+    //borderRight: 1,
+    borderBottom: 1,
+    borderColor: 'primary.main',
+    padding: 1,
+    textAlign: 'center',
+    backgroundColor: '#C0C0C0',
+  };
+
   const styleXTG03 = {
     borderRight: 1,
+    borderBottom: 1,
+    borderColor: 'primary.main',
+    padding: 1,
+    textAlign: 'center',
+  };
+
+  const styleXTG033 = {
+    //borderRight: 1,
     borderBottom: 1,
     borderColor: 'primary.main',
     padding: 1,
@@ -40,7 +57,7 @@ const PointsMainScrGrid2 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: nu
         <Grid item xs={5.25} sx={styleXTG02}>
           <b>КС на ДК</b>
         </Grid>
-        <Grid item xs={5.25} sx={styleXTG02}>
+        <Grid item xs={5.25} sx={styleXTG021}>
           <b>ПК</b>
         </Grid>
       </Grid>
@@ -59,7 +76,7 @@ const PointsMainScrGrid2 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: nu
           <Grid xs={5.25} item sx={styleXTG03}>
             {points.ext[i][0]}
           </Grid>
-          <Grid xs={5.25} item sx={styleXTG03}>
+          <Grid xs={5.25} item sx={styleXTG033}>
             {points.ext[i][1]}
           </Grid>
         </Grid>,

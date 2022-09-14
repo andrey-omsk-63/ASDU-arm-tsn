@@ -70,31 +70,37 @@ const PointsMenuLevel2 = (props: {
 
             <Grid item xs>
               <Grid item xs={12}>
-                <PointsLevel2Baza
-                  open={props.open}
-                  ws={props.ws}
-                  xctrll={props.xctrll}
-                  xtt={xtProps}
-                  value={value}
-                  crossroad={props.crossroad}
-                  setPoint={props.setPoint}
-                />
-                <PointsLevel2Area
-                  open={props.open}
-                  ws={props.ws}
-                  xctrll={props.xctrll}
-                  xtt={xtProps}
-                  value={value}
-                  crossroad={props.crossroad}
-                  setPoint={props.setPoint}
-                />
-                <PointsLevel2Calc
-                  open={props.open}
-                  xctrll={props.xctrll}
-                  xtt={xtProps}
-                  value={value}
-                  crossroad={props.crossroad}
-                />
+                {value === '1' && (
+                  <PointsLevel2Baza
+                    open={props.open}
+                    ws={props.ws}
+                    xctrll={props.xctrll}
+                    xtt={xtProps}
+                    //value={value}
+                    crossroad={props.crossroad}
+                    setPoint={props.setPoint}
+                  />
+                )}
+                {value === '2' && (
+                  <PointsLevel2Area
+                    open={props.open}
+                    ws={props.ws}
+                    xctrll={props.xctrll}
+                    xtt={xtProps}
+                    //value={value}
+                    crossroad={props.crossroad}
+                    setPoint={props.setPoint}
+                  />
+                )}
+                {value === '3' && (
+                  <PointsLevel2Calc
+                    open={props.open}
+                    xctrll={props.xctrll}
+                    xtt={xtProps}
+                    //value={value}
+                    crossroad={props.crossroad}
+                  />
+                )}
               </Grid>
             </Grid>
           </Grid>

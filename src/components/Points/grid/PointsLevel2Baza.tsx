@@ -1,26 +1,26 @@
-import * as React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { maskpointCreate } from "./../../../redux/actions";
+import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { maskpointCreate } from './../../../redux/actions';
 
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
-import Modal from "@mui/material/Modal";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Modal from '@mui/material/Modal';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
 
-import PointsLevel2BazaDiogram from "./PointsLevel2BazaDiogram";
+import PointsLevel2BazaDiogram from './PointsLevel2BazaDiogram';
 
-import { styleXTG00, styleXTG01, styleXTG011 } from "./PointsLevel2BazaStyle";
-import { styleXTG021, styleXTG02, styleXTG03 } from "./PointsLevel2BazaStyle";
-import { styleXTG04, styleXTG05, styleBut01 } from "./PointsLevel2BazaStyle";
-import { styleBut02, styleModalEnd, styleBut03 } from "./PointsLevel2BazaStyle";
-import { styleSetInf, styleSetInff } from "./PointsLevel2BazaStyle";
-import { styleInpName, styleInpKnop } from "./PointsLevel2BazaStyle";
-import { styleInpArg } from "./PointsLevel2BazaStyle";
+import { styleXTG00, styleXTG01, styleXTG011 } from './PointsLevel2BazaStyle';
+import { styleXTG021, styleXTG02, styleXTG03 } from './PointsLevel2BazaStyle';
+import { styleXTG04, styleXTG05, styleBut01 } from './PointsLevel2BazaStyle';
+import { styleBut02, styleModalEnd, styleBut03 } from './PointsLevel2BazaStyle';
+import { styleSetInf, styleSetInff } from './PointsLevel2BazaStyle';
+import { styleInpName, styleInpKnop } from './PointsLevel2BazaStyle';
+import { styleInpArg } from './PointsLevel2BazaStyle';
 
-import { XctrlInfo } from "../../../interfaceGl.d";
+import { XctrlInfo } from '../../../interfaceGl.d';
 
 let nomStr = 0;
 let flagSave = false;
@@ -31,7 +31,7 @@ let xtPropsOld = -1;
 let crossRoadOld = -1;
 
 let pointsTemp: any = null;
-let formTemp = "";
+let formTemp = '';
 let leftTemp = 0;
 let rightTemp = 0;
 let pointRab: any = null;
@@ -42,7 +42,7 @@ const PointsLevel2Baza = (props: {
   ws: WebSocket;
   xctrll: XctrlInfo[];
   xtt: number;
-  value: string;
+  //value: string;
   crossroad: number;
   setPoint: any;
 }) => {
@@ -51,8 +51,7 @@ const PointsLevel2Baza = (props: {
     const { maskpointReducer } = state;
     return maskpointReducer.maskpoint;
   });
-  console.log("maskpoint_Baza:", maskpoint);
-  //flagEdit = maskpoint.redaxPoint;
+  //console.log('maskpoint_Baza:', maskpoint);
   const dispatch = useDispatch();
   //===========================================================
   const xtProps = props.xtt;
@@ -63,16 +62,10 @@ const PointsLevel2Baza = (props: {
   const [openSetName, setOpenSetName] = React.useState(false);
   const [openSetStr, setOpenSetStr] = React.useState(false);
   const [points, setPoints] = React.useState(pointsEt);
-  const [formName, setFormName] = React.useState(
-    pointsEt.xctrls[crossRoad].name
-  );
+  const [formName, setFormName] = React.useState(pointsEt.xctrls[crossRoad].name);
   const [maxLeft, setMaxLeft] = React.useState(pointsEt.xctrls[crossRoad].left);
-  const [maxRight, setMaxRight] = React.useState(
-    pointsEt.xctrls[crossRoad].right
-  );
+  const [maxRight, setMaxRight] = React.useState(pointsEt.xctrls[crossRoad].right);
   const [trigger, setTrigger] = React.useState(false);
-
-  console.log("444Baza", flagEdit, maskpoint.redaxPoint);
 
   if (xtPropsOld !== xtProps || crossRoadOld !== crossRoad) {
     pointGraf = props.xctrll;
@@ -80,6 +73,7 @@ const PointsLevel2Baza = (props: {
     crossRoadOld = crossRoad;
     nomStr = 0;
     flagSave = false;
+    maskpoint.savePoint = false;
     flagEdit = true;
     maskpoint.redaxPoint = true;
     flagExit = false;
@@ -90,17 +84,14 @@ const PointsLevel2Baza = (props: {
     setPoints(pointsEt);
     maskpoint.pointForRedax = pointsEt;
     dispatch(maskpointCreate(maskpoint));
-    console.log("222maskpoint_Baza:", maskpoint);
   } else {
     if (!maskpoint.redaxPoint && flagEdit) {
-      console.log("111Baza Flags:", flagEdit, maskpoint.redaxPoint);
       pointsEt = maskpoint.pointForRedax; // Start
       pointsTemp = pointsEt;
       flagExit = true;
       flagEdit = false;
     } else {
       if (maskpoint.redaxPoint && !flagEdit) {
-        console.log("222Baza Flags:", flagEdit, maskpoint.redaxPoint);
         setPoints(pointsTemp); // Stop
         flagExit = false;
         flagEdit = true;
@@ -110,7 +101,7 @@ const PointsLevel2Baza = (props: {
   }
 
   const handleKey = (event: any) => {
-    if (event.key === "Enter") event.preventDefault();
+    if (event.key === 'Enter') event.preventDefault();
   };
 
   const Inputer = (name: string, argum: any, hChange: any, styleX: any) => {
@@ -162,12 +153,13 @@ const PointsLevel2Baza = (props: {
       pointRab.xctrls[props.crossroad].right = valuen3;
       setPoints(pointRab);
       maskpoint.pointForRedax = pointRab;
-      dispatch(maskpointCreate(maskpoint));
       setFormName(valuen1);
       setMaxLeft(valuen2);
       setMaxRight(valuen3);
       setOpenSetName(false);
       flagSave = true;
+      maskpoint.savePoint = true;
+      dispatch(maskpointCreate(maskpoint));
     };
 
     const handleCloseClinch = () => {
@@ -180,11 +172,11 @@ const PointsLevel2Baza = (props: {
           <Button sx={styleModalEnd} onClick={handleCloseClinch}>
             <b>&#10006;</b>
           </Button>
-          {Inputer("Наименование ХТ", valuen1, handleChange1, styleInpName)}
-          {Inputer("Максимум прямого", valuen2, handleChange2, styleInpArg)}
-          {Inputer("Максимум обратного", valuen3, handleChange3, styleInpArg)}
+          {Inputer('Наименование ХТ', valuen1, handleChange1, styleInpName)}
+          {Inputer('Максимум прямого', valuen2, handleChange2, styleInpArg)}
+          {Inputer('Максимум обратного', valuen3, handleChange3, styleInpArg)}
           <br />
-          <Box sx={{ textAlign: "center" }}>
+          <Box sx={{ textAlign: 'center' }}>
             <Button sx={styleInpKnop} variant="contained" onClick={handleClose}>
               <b>Сохранить</b>
             </Button>
@@ -221,7 +213,6 @@ const PointsLevel2Baza = (props: {
       pointRab.xctrls[crossRoad].StrategyB[props.nom].desc = valuen8;
       setPoints(pointRab);
       maskpoint.pointForRedax = pointRab;
-      dispatch(maskpointCreate(maskpoint));
       pointGraf = [];
       for (let i = 0; i < xctrLl.length; i++) {
         if (
@@ -235,6 +226,8 @@ const PointsLevel2Baza = (props: {
         }
       }
       flagSave = true;
+      maskpoint.savePoint = true;
+      dispatch(maskpointCreate(maskpoint));
       setOpenSetStr(false);
       setTrigger(!trigger);
     };
@@ -285,25 +278,21 @@ const PointsLevel2Baza = (props: {
           <Button sx={styleModalEnd} onClick={handleClose}>
             <b>&#10006;</b>
           </Button>
-          <Typography sx={{ textAlign: "center" }}>
+          <Typography sx={{ textAlign: 'center' }}>
             Номер записи <b> {props.nom} </b>
-          </Typography>{" "}
+          </Typography>{' '}
           <br />
-          {Inputer("Прямой", valuen1, handleChange1, styleInpArg)}
-          {Inputer("Обратный", valuen2, handleChange2, styleInpArg)}
-          {Inputer("КСП", valuen3, handleChange3, styleInpArg)}
-          {Inputer("КСС", valuen4, handleChange4, styleInpArg)}
-          {Inputer("КСО", valuen5, handleChange5, styleInpArg)}
-          {Inputer("Луч П", valuen6, handleChange6, styleInpArg)}
-          {Inputer("Луч О", valuen7, handleChange7, styleInpArg)}
-          {Inputer("Описание", valuen8, handleChange8, styleInpArg)}
+          {Inputer('Прямой', valuen1, handleChange1, styleInpArg)}
+          {Inputer('Обратный', valuen2, handleChange2, styleInpArg)}
+          {Inputer('КСП', valuen3, handleChange3, styleInpArg)}
+          {Inputer('КСС', valuen4, handleChange4, styleInpArg)}
+          {Inputer('КСО', valuen5, handleChange5, styleInpArg)}
+          {Inputer('Луч П', valuen6, handleChange6, styleInpArg)}
+          {Inputer('Луч О', valuen7, handleChange7, styleInpArg)}
+          {Inputer('Описание', valuen8, handleChange8, styleInpArg)}
           <br />
-          <Box sx={{ textAlign: "center" }}>
-            <Button
-              sx={styleInpKnop}
-              variant="contained"
-              onClick={handleCloseStr}
-            >
+          <Box sx={{ textAlign: 'center' }}>
+            <Button sx={styleInpKnop} variant="contained" onClick={handleCloseStr}>
               <b>Сохранить</b>
             </Button>
           </Box>
@@ -325,7 +314,7 @@ const PointsLevel2Baza = (props: {
     let name = formName.slice(0, 29);
 
     return (
-      <Grid container sx={{ height: "15.5vh" }}>
+      <Grid container sx={{ height: '15.5vh' }}>
         <Grid item xs={12} sx={{ border: 0 }}>
           <Grid container item>
             <Grid item xs={3.5}>
@@ -338,11 +327,7 @@ const PointsLevel2Baza = (props: {
             <Grid item xs>
               <Box sx={{ marginTop: 0.2, fontSize: 11, border: 0 }}>
                 {!flagEdit && (
-                  <Button
-                    sx={styleBut01}
-                    variant="contained"
-                    onClick={() => SetOpenSetName()}
-                  >
+                  <Button sx={styleBut01} variant="contained" onClick={() => SetOpenSetName()}>
                     <b>{name}</b>
                   </Button>
                 )}
@@ -378,15 +363,15 @@ const PointsLevel2Baza = (props: {
   const PointsLevel2BazaTab2Header = () => {
     return (
       <Grid container>
-        {ConclHeader(1.3, "№", styleXTG02)}
-        {ConclHeader(1.8, "Прямой", styleXTG02)}
-        {ConclHeader(1.8, "Обратный", styleXTG02)}
-        {ConclHeader(1, "КСП", styleXTG02)}
-        {ConclHeader(1, "КСС", styleXTG02)}
-        {ConclHeader(1, "КСО", styleXTG02)}
-        {ConclHeader(1, "Луч П", styleXTG02)}
-        {ConclHeader(1, "Луч О", styleXTG02)}
-        {ConclHeader(2.1, "Описание", styleXTG021)}
+        {ConclHeader(1.3, '№', styleXTG02)}
+        {ConclHeader(1.8, 'Прямой', styleXTG02)}
+        {ConclHeader(1.8, 'Обратный', styleXTG02)}
+        {ConclHeader(1, 'КСП', styleXTG02)}
+        {ConclHeader(1, 'КСС', styleXTG02)}
+        {ConclHeader(1, 'КСО', styleXTG02)}
+        {ConclHeader(1, 'Луч П', styleXTG02)}
+        {ConclHeader(1, 'Луч О', styleXTG02)}
+        {ConclHeader(2.1, 'Описание', styleXTG021)}
       </Grid>
     );
   };
@@ -395,11 +380,11 @@ const PointsLevel2Baza = (props: {
     return (
       <Grid container>
         <Grid xs={0.5} item sx={styleXTG02}></Grid>
-        {ConclHeader(1.75, "Регион", styleXTG02)}
-        {ConclHeader(1.75, "Район", styleXTG02)}
-        {ConclHeader(2, "Перекрёсток", styleXTG02)}
-        {ConclHeader(3, "Номера каналов прямого", styleXTG02)}
-        {ConclHeader(3, "Номера каналов обратного", styleXTG021)}
+        {ConclHeader(1.75, 'Регион', styleXTG02)}
+        {ConclHeader(1.75, 'Район', styleXTG02)}
+        {ConclHeader(2, 'Перекрёсток', styleXTG02)}
+        {ConclHeader(3, 'Номера каналов прямого', styleXTG02)}
+        {ConclHeader(3, 'Номера каналов обратного', styleXTG021)}
       </Grid>
     );
   };
@@ -415,11 +400,7 @@ const PointsLevel2Baza = (props: {
         <Grid key={i} container item xs={12}>
           <Grid xs={1.3} item sx={styleXTG011}>
             {!flagEdit && (
-              <Button
-                sx={styleBut02}
-                variant="contained"
-                onClick={() => SetOpenSetStr(i)}
-              >
+              <Button sx={styleBut02} variant="contained" onClick={() => SetOpenSetStr(i)}>
                 {i}
               </Button>
             )}
@@ -433,7 +414,7 @@ const PointsLevel2Baza = (props: {
           {ConclStr(1, elem.vleft, styleXTG01)}
           {ConclStr(1, elem.vright, styleXTG01)}
           {ConclStr(2.1, elem.desc, styleXTG00)}
-        </Grid>
+        </Grid>,
       );
     }
     return resStr;
@@ -457,7 +438,7 @@ const PointsLevel2Baza = (props: {
             {ConclStr(3, elem.chanL[0], styleXTG01)}
             {ConclStr(3, elem.chanR[0], styleXTG00)}
           </Grid>
-        </Grid>
+        </Grid>,
       );
     }
     return resStr;
@@ -487,22 +468,23 @@ const PointsLevel2Baza = (props: {
     flagExit = false;
     flagEdit = true;
     maskpoint.redaxPoint = true;
-    dispatch(maskpointCreate(maskpoint));
     flagSave = false;
+    maskpoint.savePoint = false;
+    dispatch(maskpointCreate(maskpoint));
     setTrigger(!trigger);
   };
 
   const SaveEdit = () => {
-    console.log("!!!", maskpoint.pointForRedax === points);
+    console.log('!!!', maskpoint.pointForRedax === points);
 
     const handleSend = () => {
       if (props.ws !== null) {
         if (props.ws.readyState === WebSocket.OPEN) {
           props.ws.send(
             JSON.stringify({
-              type: "changeXctrl",
+              type: 'changeXctrl',
               data: maskpoint.pointForRedax,
-            })
+            }),
           );
         } else {
           setTimeout(() => {
@@ -516,93 +498,76 @@ const PointsLevel2Baza = (props: {
     flagExit = false;
     flagEdit = true;
     maskpoint.redaxPoint = true;
-    dispatch(maskpointCreate(maskpoint));
     flagSave = false;
-    pointsTemp = maskpoint.pointForRedax;
+    maskpoint.savePoint = false;
+    dispatch(maskpointCreate(maskpoint));
+    pointsTemp = JSON.parse(JSON.stringify(maskpoint.pointForRedax));
     pointsEt = maskpoint.pointForRedax;
     setTrigger(!trigger);
   };
 
-  console.log("333Baza", flagEdit, maskpoint.redaxPoint);
-
   return (
     <>
-      {props.value === "1" && (
-        <>
-          {flagSave && (
-            <Grid container item>
-              <Grid item xs={6}></Grid>
-              <Grid item xs={3} sx={styleXTG05}>
-                <Button
-                  sx={styleBut03}
-                  variant="contained"
-                  onClick={() => SaveEdit()}
-                >
-                  <b>Сохранить изменения</b>
-                </Button>
-              </Grid>
-            </Grid>
-          )}
-
-          {(maskpoint.redaxPoint || flagEdit) && (
-            <Grid container item>
-              <Grid item xs={9}></Grid>
-              <Grid item xs={3} sx={styleXTG05}>
-                <Button
-                  sx={styleBut03}
-                  variant="contained"
-                  onClick={() => StartEdit()}
-                >
-                  <b>Редактирование</b>
-                </Button>
-              </Grid>
-            </Grid>
-          )}
-
-          {flagExit && (
-            <Grid container item>
-              <Grid item xs={9}></Grid>
-              <Grid item xs={3} sx={styleXTG05}>
-                <Button
-                  sx={styleBut03}
-                  variant="contained"
-                  onClick={() => StopEdit()}
-                >
-                  <b>Выйти без cохранения</b>
-                </Button>
-              </Grid>
-            </Grid>
-          )}
-
-          <Stack direction="row">
-            <Grid item xs={4} sx={{ height: "86.5vh", border: 0 }}>
-              <PointsLevel2BazaTab1 />
-              <Grid container>
-                <Grid item xs={12} sx={styleXTG03}>
-                  <PointsLevel2BazaTab2Header />
-                  {PointsLevel2BazaTab2Stroka()}
-                </Grid>
-              </Grid>
-              <Grid container>
-                <Grid item xs={12} sx={styleXTG03}>
-                  <PointsLevel2BazaTab3Header />
-                  {PointsLevel2BazaTab3Stroka()}
-                </Grid>
-              </Grid>
-            </Grid>
-
-            <Grid item xs sx={styleXTG04}>
-              <PointsLevel2BazaDiogram
-                xctrll={pointGraf}
-                xtt={xtProps}
-                crossroad={props.crossroad}
-              />
-            </Grid>
-          </Stack>
-          {openSetName && <SetName />}
-          {openSetStr && <SetStr nom={nomStr} />}
-        </>
+      {/* {props.value === '1' && (
+        <> */}
+      {(maskpoint.savePoint || flagSave) && (
+        <Grid container item>
+          <Grid item xs={6}></Grid>
+          <Grid item xs={3} sx={styleXTG05}>
+            <Button sx={styleBut03} variant="contained" onClick={() => SaveEdit()}>
+              <b>Сохранить изменения</b>
+            </Button>
+          </Grid>
+        </Grid>
       )}
+
+      {(maskpoint.redaxPoint || flagEdit) && (
+        <Grid container item>
+          <Grid item xs={9}></Grid>
+          <Grid item xs={3} sx={styleXTG05}>
+            <Button sx={styleBut03} variant="contained" onClick={() => StartEdit()}>
+              <b>Редактирование</b>
+            </Button>
+          </Grid>
+        </Grid>
+      )}
+
+      {flagExit && (
+        <Grid container item>
+          <Grid item xs={9}></Grid>
+          <Grid item xs={3} sx={styleXTG05}>
+            <Button sx={styleBut03} variant="contained" onClick={() => StopEdit()}>
+              <b>Выйти без cохранения</b>
+            </Button>
+          </Grid>
+        </Grid>
+      )}
+
+      <Stack direction="row">
+        <Grid item xs={4} sx={{ height: '86.5vh', border: 0 }}>
+          <PointsLevel2BazaTab1 />
+          <Grid container>
+            <Grid item xs={12} sx={styleXTG03}>
+              <PointsLevel2BazaTab2Header />
+              {PointsLevel2BazaTab2Stroka()}
+            </Grid>
+          </Grid>
+          <Grid container>
+            <Grid item xs={12} sx={styleXTG03}>
+              <PointsLevel2BazaTab3Header />
+              {PointsLevel2BazaTab3Stroka()}
+            </Grid>
+          </Grid>
+        </Grid>
+
+        <Grid item xs sx={styleXTG04}>
+          <PointsLevel2BazaDiogram xctrll={pointGraf} xtt={xtProps} crossroad={props.crossroad} />
+        </Grid>
+      </Stack>
+      {openSetName && <SetName />}
+      {openSetStr && <SetStr nom={nomStr} />}
+      {/* </>
+      )} */}
     </>
   );
 };
