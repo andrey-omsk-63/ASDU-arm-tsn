@@ -1,4 +1,7 @@
 import * as React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { maskpointCreate } from "./../../../redux/actions";
+
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
@@ -43,6 +46,15 @@ const PointsLevel2Baza = (props: {
   crossroad: number;
   setPoint: any;
 }) => {
+  //== Piece of Redux =======================================
+  let maskpoint = useSelector((state: any) => {
+    const { maskpointReducer } = state;
+    return maskpointReducer.maskpoint;
+  });
+  console.log("maskpoint_Baza:", maskpoint);
+  //flagEdit = maskpoint.redaxPoint;
+  const dispatch = useDispatch();
+  //===========================================================
   const xtProps = props.xtt;
   let pointsEt = props.xctrll[xtProps];
   const crossRoad = props.crossroad;
@@ -60,6 +72,8 @@ const PointsLevel2Baza = (props: {
   );
   const [trigger, setTrigger] = React.useState(false);
 
+  console.log("444Baza", flagEdit, maskpoint.redaxPoint);
+
   if (xtPropsOld !== xtProps || crossRoadOld !== crossRoad) {
     pointGraf = props.xctrll;
     xtPropsOld = xtProps;
@@ -67,12 +81,32 @@ const PointsLevel2Baza = (props: {
     nomStr = 0;
     flagSave = false;
     flagEdit = true;
+    maskpoint.redaxPoint = true;
     flagExit = false;
     pointsTemp = pointsEt;
     setFormName(pointsEt.xctrls[crossRoad].name);
     setMaxLeft(pointsEt.xctrls[crossRoad].left);
     setMaxRight(pointsEt.xctrls[crossRoad].right);
     setPoints(pointsEt);
+    maskpoint.pointForRedax = pointsEt;
+    dispatch(maskpointCreate(maskpoint));
+    console.log("222maskpoint_Baza:", maskpoint);
+  } else {
+    if (!maskpoint.redaxPoint && flagEdit) {
+      console.log("111Baza Flags:", flagEdit, maskpoint.redaxPoint);
+      pointsEt = maskpoint.pointForRedax; // Start
+      pointsTemp = pointsEt;
+      flagExit = true;
+      flagEdit = false;
+    } else {
+      if (maskpoint.redaxPoint && !flagEdit) {
+        console.log("222Baza Flags:", flagEdit, maskpoint.redaxPoint);
+        setPoints(pointsTemp); // Stop
+        flagExit = false;
+        flagEdit = true;
+        flagSave = false;
+      }
+    }
   }
 
   const handleKey = (event: any) => {
@@ -122,11 +156,13 @@ const PointsLevel2Baza = (props: {
     };
 
     const handleClose = () => {
-      let pointRab = JSON.parse(JSON.stringify(points));
+      let pointRab = JSON.parse(JSON.stringify(maskpoint.pointForRedax));
       pointRab.xctrls[props.crossroad].name = valuen1;
       pointRab.xctrls[props.crossroad].left = valuen2;
       pointRab.xctrls[props.crossroad].right = valuen3;
       setPoints(pointRab);
+      maskpoint.pointForRedax = pointRab;
+      dispatch(maskpointCreate(maskpoint));
       setFormName(valuen1);
       setMaxLeft(valuen2);
       setMaxRight(valuen3);
@@ -147,6 +183,7 @@ const PointsLevel2Baza = (props: {
           {Inputer("Наименование ХТ", valuen1, handleChange1, styleInpName)}
           {Inputer("Максимум прямого", valuen2, handleChange2, styleInpArg)}
           {Inputer("Максимум обратного", valuen3, handleChange3, styleInpArg)}
+          <br />
           <Box sx={{ textAlign: "center" }}>
             <Button sx={styleInpKnop} variant="contained" onClick={handleClose}>
               <b>Сохранить</b>
@@ -158,7 +195,7 @@ const PointsLevel2Baza = (props: {
   };
 
   const SetStr = (props: { nom: number }) => {
-    let elem = points.xctrls[crossRoad].StrategyB[props.nom];
+    let elem = maskpoint.pointForRedax.xctrls[crossRoad].StrategyB[props.nom];
     const [valuen1, setValuen1] = React.useState(elem.xleft);
     const [valuen2, setValuen2] = React.useState(elem.xright);
     const [valuen3, setValuen3] = React.useState(elem.pkl);
@@ -173,7 +210,7 @@ const PointsLevel2Baza = (props: {
     };
 
     const handleCloseStr = () => {
-      pointRab = JSON.parse(JSON.stringify(points));
+      pointRab = JSON.parse(JSON.stringify(maskpoint.pointForRedax));
       pointRab.xctrls[crossRoad].StrategyB[props.nom].xleft = valuen1;
       pointRab.xctrls[crossRoad].StrategyB[props.nom].xright = valuen2;
       pointRab.xctrls[crossRoad].StrategyB[props.nom].pkl = valuen3;
@@ -183,6 +220,8 @@ const PointsLevel2Baza = (props: {
       pointRab.xctrls[crossRoad].StrategyB[props.nom].vright = valuen7;
       pointRab.xctrls[crossRoad].StrategyB[props.nom].desc = valuen8;
       setPoints(pointRab);
+      maskpoint.pointForRedax = pointRab;
+      dispatch(maskpointCreate(maskpoint));
       pointGraf = [];
       for (let i = 0; i < xctrLl.length; i++) {
         if (
@@ -248,7 +287,8 @@ const PointsLevel2Baza = (props: {
           </Button>
           <Typography sx={{ textAlign: "center" }}>
             Номер записи <b> {props.nom} </b>
-          </Typography>
+          </Typography>{" "}
+          <br />
           {Inputer("Прямой", valuen1, handleChange1, styleInpArg)}
           {Inputer("Обратный", valuen2, handleChange2, styleInpArg)}
           {Inputer("КСП", valuen3, handleChange3, styleInpArg)}
@@ -257,6 +297,7 @@ const PointsLevel2Baza = (props: {
           {Inputer("Луч П", valuen6, handleChange6, styleInpArg)}
           {Inputer("Луч О", valuen7, handleChange7, styleInpArg)}
           {Inputer("Описание", valuen8, handleChange8, styleInpArg)}
+          <br />
           <Box sx={{ textAlign: "center" }}>
             <Button
               sx={styleInpKnop}
@@ -307,8 +348,9 @@ const PointsLevel2Baza = (props: {
                 )}
                 {flagEdit && <b>{name}</b>}
                 <br /> <br />
-                {points.xctrls[props.crossroad].left} <br /> <br />
-                {points.xctrls[props.crossroad].right}
+                {maskpoint.pointForRedax.xctrls[props.crossroad].left} <br />
+                <br />
+                {maskpoint.pointForRedax.xctrls[props.crossroad].right}
               </Box>
             </Grid>
           </Grid>
@@ -365,8 +407,10 @@ const PointsLevel2Baza = (props: {
   const PointsLevel2BazaTab2Stroka = () => {
     let resStr = [];
 
-    for (let i = 0; i < points.xctrls[crossRoad].StrategyB.length; i++) {
-      let elem = points.xctrls[crossRoad].StrategyB[i];
+    let elemm = maskpoint.pointForRedax.xctrls[crossRoad].StrategyB;
+
+    for (let i = 0; i < elemm.length; i++) {
+      let elem = elemm[i];
       resStr.push(
         <Grid key={i} container item xs={12}>
           <Grid xs={1.3} item sx={styleXTG011}>
@@ -397,9 +441,10 @@ const PointsLevel2Baza = (props: {
 
   const PointsLevel2BazaTab3Stroka = () => {
     let resStr = [];
+    let elemm = maskpoint.pointForRedax.xctrls[props.crossroad].Calculates;
 
-    for (let i = 0; i < points.xctrls[props.crossroad].Calculates.length; i++) {
-      let elem = points.xctrls[props.crossroad].Calculates[i];
+    for (let i = 0; i < elemm.length; i++) {
+      let elem = elemm[i];
       resStr.push(
         <Grid key={i} container item xs={12}>
           <Grid container item xs={12}>
@@ -426,6 +471,8 @@ const PointsLevel2Baza = (props: {
     pointsTemp = pointsEt;
     flagExit = true;
     flagEdit = false;
+    maskpoint.redaxPoint = false;
+    dispatch(maskpointCreate(maskpoint));
     setTrigger(!trigger);
   };
 
@@ -434,18 +481,29 @@ const PointsLevel2Baza = (props: {
     setMaxLeft(leftTemp);
     setMaxRight(rightTemp);
     setPoints(pointsTemp);
+    //maskpoint.pointForRedax = pointsTemp;
+    maskpoint.pointForRedax = props.xctrll[xtProps];
     pointGraf = props.xctrll;
     flagExit = false;
     flagEdit = true;
+    maskpoint.redaxPoint = true;
+    dispatch(maskpointCreate(maskpoint));
     flagSave = false;
     setTrigger(!trigger);
   };
 
   const SaveEdit = () => {
+    console.log("!!!", maskpoint.pointForRedax === points);
+
     const handleSend = () => {
       if (props.ws !== null) {
         if (props.ws.readyState === WebSocket.OPEN) {
-          props.ws.send(JSON.stringify({ type: "changeXctrl", data: points }));
+          props.ws.send(
+            JSON.stringify({
+              type: "changeXctrl",
+              data: maskpoint.pointForRedax,
+            })
+          );
         } else {
           setTimeout(() => {
             handleSend();
@@ -454,15 +512,19 @@ const PointsLevel2Baza = (props: {
       }
     };
     handleSend(); // прокидываем изменения на сервер
-    props.setPoint(points); // прокидываем изменения в App
+    props.setPoint(maskpoint.pointForRedax); // прокидываем изменения в App
     flagExit = false;
     flagEdit = true;
+    maskpoint.redaxPoint = true;
+    dispatch(maskpointCreate(maskpoint));
     flagSave = false;
-    pointsTemp = points;
-    pointsEt = points;
+    pointsTemp = maskpoint.pointForRedax;
+    pointsEt = maskpoint.pointForRedax;
     setTrigger(!trigger);
   };
-  
+
+  console.log("333Baza", flagEdit, maskpoint.redaxPoint);
+
   return (
     <>
       {props.value === "1" && (
@@ -482,7 +544,7 @@ const PointsLevel2Baza = (props: {
             </Grid>
           )}
 
-          {flagEdit && (
+          {(maskpoint.redaxPoint || flagEdit) && (
             <Grid container item>
               <Grid item xs={9}></Grid>
               <Grid item xs={3} sx={styleXTG05}>

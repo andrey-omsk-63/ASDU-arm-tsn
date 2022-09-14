@@ -1,4 +1,7 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { maskpointCreate } from "./redux/actions";
+
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
@@ -31,6 +34,16 @@ import { styleModalMenu, styleInt01, styleApp02 } from "./AppStyle";
 import { styleImpServis, styleInp, styleDatePicker } from "./AppStyle";
 import { MakeInterval } from "./AppServiceFunctions";
 
+export interface Pointer {
+  redaxPoint: boolean;
+  pointForRedax: any;
+}
+
+export let maskPoint: Pointer = {
+  redaxPoint: true,
+  pointForRedax: [],
+};
+
 let flagOpenWS = true;
 let WS: any = null;
 
@@ -53,7 +66,6 @@ const MakeDate = (tekData: Date) => {
 };
 
 let date = new Date();
-//date.setDate(date.getDate() + 1);  // для отладки
 let formSett = MakeDate(date);
 let formSettToday = MakeDate(date);
 let formSettOld = MakeDate(date);
@@ -70,6 +82,14 @@ let nullOldStatistics = false;
 let nullNewStatistics = false;
 
 const App = () => {
+  //== Piece of Redux ======================================
+  let maskpoint = useSelector((state: any) => {
+    const { maskpointReducer } = state;
+    return maskpointReducer.maskpoint;
+  });
+  console.log("maskpoint_App:", maskpoint);
+  const dispatch = useDispatch();
+  //========================================================
   const [pointsXctrl, setPointsXctrl] = React.useState<Array<XctrlInfo>>([]);
   const [pointsReg, setPointsReg] = React.useState<RegionInfo>(
     {} as RegionInfo
@@ -294,6 +314,11 @@ const App = () => {
       console.log("data:", data.data.xctrlInfo);
       setPointsXctrl(data.data.xctrlInfo);
       if (regionGlob === 0) setPointsReg(data.data.regionInfo ?? []);
+
+      console.log("@@@:", data.data.xctrlInfo);
+      maskPoint.pointForRedax = data.data.xctrlInfo[0];
+      dispatch(maskpointCreate(maskpoint));
+
       setIsOpenInf(true);
     });
     axios.get("http://localhost:3000/otladkaStatNow.json").then(({ data }) => {

@@ -1,21 +1,24 @@
-import * as React from 'react';
-import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
-import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
+import * as React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { maskpointCreate } from "./../../../redux/actions";
 
-import PointsLevel2AreaDiogram from './PointsLevel2AreaDiogram';
+import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Modal from "@mui/material/Modal";
+import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
 
-import { styleSetInf, styleModalEnd } from './PointsLevel2BazaStyle';
-import { styleInpArg, styleInpKnop } from './PointsLevel2BazaStyle';
-import { styleXTG05, styleBut02, styleBut03 } from './PointsLevel2BazaStyle';
-import { styleXTG00, styleXTG01, styleXTG021 } from './PointsLevel2BazaStyle';
-import { styleXTG02, styleXTG035, styleXTG045 } from './PointsLevel2BazaStyle';
+import PointsLevel2AreaDiogram from "./PointsLevel2AreaDiogram";
 
-import { XctrlInfo } from '../../../interfaceGl.d';
+import { styleSetInf, styleModalEnd } from "./PointsLevel2BazaStyle";
+import { styleInpArg, styleInpKnop } from "./PointsLevel2BazaStyle";
+import { styleXTG05, styleBut02, styleBut03 } from "./PointsLevel2BazaStyle";
+import { styleXTG00, styleXTG01, styleXTG021 } from "./PointsLevel2BazaStyle";
+import { styleXTG02, styleXTG035, styleXTG045 } from "./PointsLevel2BazaStyle";
+
+import { XctrlInfo } from "../../../interfaceGl.d";
 
 let nomStr = 0;
 let flagSave = false;
@@ -38,6 +41,15 @@ const PointsLevel2Area = (props: {
   crossroad: number;
   setPoint: any;
 }) => {
+  //== Piece of Redux =======================================
+  let maskpoint = useSelector((state: any) => {
+    const { maskpointReducer } = state;
+    return maskpointReducer.maskpoint;
+  });
+  console.log("maskpoint_Area:", flagEdit, maskpoint);
+  //flagEdit = maskpoint.redaxPoint;
+  const dispatch = useDispatch();
+  //===========================================================
   const xtProps = props.xtt;
   let pointsEt = props.xctrll[xtProps];
   const crossRoad = props.crossroad;
@@ -47,21 +59,6 @@ const PointsLevel2Area = (props: {
   const [points, setPoints] = React.useState(pointsEt);
   const [trigger, setTrigger] = React.useState(false);
 
-  // const styleXTG03 = {
-  //   border: 1,
-  //   height: '86.5vh',
-  //   borderRadius: 1,
-  //   borderColor: 'primary.main',
-  // };
-
-  // const styleXTG04 = {
-  //   //height: '84.4vh',
-  //   border: 1,
-  //   marginLeft: 0.5,
-  //   borderRadius: 1,
-  //   borderColor: 'primary.main',
-  // };
-
   if (xtPropsOld !== xtProps || crossRoadOld !== crossRoad) {
     pointGraf = props.xctrll;
     xtPropsOld = xtProps;
@@ -69,13 +66,32 @@ const PointsLevel2Area = (props: {
     nomStr = 0;
     flagSave = false;
     flagEdit = true;
+    maskpoint.redaxPoint = true;
     flagExit = false;
-    pointsTemp = pointsEt;
+    pointsTemp = JSON.parse(JSON.stringify(pointsEt));
     setPoints(pointsEt);
+    maskpoint.pointForRedax = pointsEt;
+    dispatch(maskpointCreate(maskpoint));
+  } else {
+    if (!maskpoint.redaxPoint && flagEdit) {
+      console.log("111Area Flags:", flagEdit, maskpoint.redaxPoint);
+      pointsEt = maskpoint.pointForRedax; // Start
+      pointsTemp = JSON.parse(JSON.stringify(pointsEt));
+      flagExit = true;
+      flagEdit = false;
+    } else {
+      if (maskpoint.redaxPoint && !flagEdit) {
+        console.log("222Area Flags:", flagEdit, maskpoint.redaxPoint);
+        setPoints(pointsTemp); // Stop
+        flagExit = false;
+        flagEdit = true;
+        flagSave = false;
+      }
+    }
   }
 
   const handleKey = (event: any) => {
-    if (event.key === 'Enter') event.preventDefault();
+    if (event.key === "Enter") event.preventDefault();
   };
 
   const Inputer = (name: string, argum: any, hChange: any, styleX: any) => {
@@ -102,7 +118,7 @@ const PointsLevel2Area = (props: {
   //let elem = points.xctrls[crossRoad].StrategyA[props.nom]
 
   const SetStr = (props: { nom: number }) => {
-    let elem = points.xctrls[crossRoad].StrategyA[props.nom];
+    let elem = maskpoint.pointForRedax.xctrls[crossRoad].StrategyA[props.nom];
     const [valuen1, setValuen1] = React.useState(elem.xleft);
     const [valuen2, setValuen2] = React.useState(elem.xright);
     const [valuen3, setValuen3] = React.useState(elem.desc);
@@ -112,11 +128,13 @@ const PointsLevel2Area = (props: {
     };
 
     const handleCloseStr = () => {
-      pointRab = JSON.parse(JSON.stringify(points));
+      pointRab = JSON.parse(JSON.stringify(maskpoint.pointForRedax));
       pointRab.xctrls[crossRoad].StrategyA[props.nom].xleft = valuen1;
       pointRab.xctrls[crossRoad].StrategyA[props.nom].xright = valuen2;
       pointRab.xctrls[crossRoad].StrategyA[props.nom].desc = valuen3;
       setPoints(pointRab);
+      maskpoint.pointForRedax = pointRab;
+      dispatch(maskpointCreate(maskpoint));
       pointGraf = [];
       for (let i = 0; i < xctrLl.length; i++) {
         if (
@@ -155,14 +173,21 @@ const PointsLevel2Area = (props: {
           <Button sx={styleModalEnd} onClick={handleClose}>
             <b>&#10006;</b>
           </Button>
-          <Typography sx={{ textAlign: 'center' }}>
-            КС <b> {elem.pk} </b>
-          </Typography>
-          {Inputer('Прямой', valuen1, handleChange1, styleInpArg)}
-          {Inputer('Обратный', valuen2, handleChange2, styleInpArg)}
-          {Inputer('Описание', valuen3, handleChange3, styleInpArg)}
-          <Box sx={{ textAlign: 'center' }}>
-            <Button sx={styleInpKnop} variant="contained" onClick={handleCloseStr}>
+          <Typography sx={{ textAlign: "center" }}>
+            КС <b> &nbsp;{elem.pk} </b>
+          </Typography>{" "}
+          <br />
+          {Inputer("Прямой", valuen1, handleChange1, styleInpArg)}
+          {Inputer("Обратный", valuen2, handleChange2, styleInpArg)}
+          {Inputer("Описание", valuen3, handleChange3, styleInpArg)}
+          <Box sx={{ textAlign: "center" }}>
+            {" "}
+            <br />
+            <Button
+              sx={styleInpKnop}
+              variant="contained"
+              onClick={handleCloseStr}
+            >
               <b>Сохранить</b>
             </Button>
           </Box>
@@ -197,31 +222,35 @@ const PointsLevel2Area = (props: {
 
   const PointsLevel2AreaTab1Stroka = () => {
     let resStr = [];
+    let elemm = maskpoint.pointForRedax.xctrls[props.crossroad].StrategyA;
 
-    for (let i = 0; i < points.xctrls[props.crossroad].StrategyA.length; i++) {
-      let elem = points.xctrls[props.crossroad].StrategyA[i].pk;
+    for (let i = 0; i < elemm.length; i++) {
+      let elem = elemm[i].pk;
       resStr.push(
         <Grid key={i} container>
           <Grid xs={2} item sx={styleXTG01}>
             {/* {points.xctrls[props.crossroad].StrategyA[i].pk} */}
             {!flagEdit && (
-              <Button sx={styleBut02} variant="contained" onClick={() => SetOpenSetStr(i)}>
+              <Button
+                sx={styleBut02}
+                variant="contained"
+                onClick={() => SetOpenSetStr(i)}
+              >
                 {elem}
               </Button>
             )}
             {flagEdit && <Box sx={{ p: 0.3 }}>{elem}</Box>}
           </Grid>
           <Grid xs={3} item sx={styleXTG01}>
-            {points.xctrls[props.crossroad].StrategyA[i].xleft}
+            {elemm[i].xleft}
           </Grid>
           <Grid xs={3.5} item sx={styleXTG01}>
-            {points.xctrls[props.crossroad].StrategyA[i].xright}
+            {elemm[i].xright}
           </Grid>
-
           <Grid xs={3.5} item sx={styleXTG00}>
-            {points.xctrls[props.crossroad].StrategyA[i].desc}
+            {elemm[i].desc}
           </Grid>
-        </Grid>,
+        </Grid>
       );
     }
     return resStr;
@@ -229,26 +258,43 @@ const PointsLevel2Area = (props: {
 
   const StartEdit = () => {
     pointsEt = points;
-    pointsTemp = pointsEt;
+    pointsTemp = JSON.parse(JSON.stringify(pointsEt));
+
+    console.log("222не сохр:", pointsTemp);
+
     flagExit = true;
     flagEdit = false;
+    maskpoint.redaxPoint = false;
+    dispatch(maskpointCreate(maskpoint));
     setTrigger(!trigger);
   };
 
   const StopEdit = () => {
+    console.log("111не сохр:", pointsTemp,props.xctrll[xtProps]);
+
     setPoints(pointsTemp);
+    //maskpoint.pointForRedax = pointsTemp;
+    maskpoint.pointForRedax = props.xctrll[xtProps];
     pointGraf = props.xctrll;
     flagExit = false;
     flagEdit = true;
+    maskpoint.redaxPoint = true;
+    dispatch(maskpointCreate(maskpoint));
     flagSave = false;
     setTrigger(!trigger);
   };
 
   const SaveEdit = () => {
+    console.log("&&&", maskpoint.pointForRedax === points);
     const handleSend = () => {
       if (props.ws !== null) {
         if (props.ws.readyState === WebSocket.OPEN) {
-          props.ws.send(JSON.stringify({ type: 'changeXctrl', data: points }));
+          props.ws.send(
+            JSON.stringify({
+              type: "changeXctrl",
+              data: maskpoint.pointForRedax,
+            })
+          );
         } else {
           setTimeout(() => {
             handleSend();
@@ -257,35 +303,45 @@ const PointsLevel2Area = (props: {
       }
     };
     handleSend(); // прокидываем изменения на сервер
-    props.setPoint(points); // прокидываем изменения в App
+    props.setPoint(maskpoint.pointForRedax); // прокидываем изменения в App
     flagExit = false;
     flagEdit = true;
+    maskpoint.redaxPoint = true;
+    dispatch(maskpointCreate(maskpoint));
     flagSave = false;
-    pointsTemp = points;
-    pointsEt = points;
+    pointsTemp = JSON.parse(JSON.stringify(maskpoint.pointForRedax));
+    pointsEt = maskpoint.pointForRedax;
     setTrigger(!trigger);
   };
 
   return (
     <>
-      {props.value === '2' && (
+      {props.value === "2" && (
         <>
           {flagSave && (
             <Grid container>
               <Grid item xs={6}></Grid>
               <Grid item xs={3} sx={styleXTG05}>
-                <Button sx={styleBut03} variant="contained" onClick={() => SaveEdit()}>
+                <Button
+                  sx={styleBut03}
+                  variant="contained"
+                  onClick={() => SaveEdit()}
+                >
                   <b>Сохранить изменения</b>
                 </Button>
               </Grid>
             </Grid>
           )}
 
-          {flagEdit && (
+          {(maskpoint.redaxPoint || flagEdit) && (
             <Grid container>
               <Grid item xs={9}></Grid>
               <Grid item xs={3} sx={styleXTG05}>
-                <Button sx={styleBut03} variant="contained" onClick={() => StartEdit()}>
+                <Button
+                  sx={styleBut03}
+                  variant="contained"
+                  onClick={() => StartEdit()}
+                >
                   <b>Редактирование</b>
                 </Button>
               </Grid>
@@ -296,7 +352,11 @@ const PointsLevel2Area = (props: {
             <Grid container>
               <Grid item xs={9}></Grid>
               <Grid item xs={3} sx={styleXTG05}>
-                <Button sx={styleBut03} variant="contained" onClick={() => StopEdit()}>
+                <Button
+                  sx={styleBut03}
+                  variant="contained"
+                  onClick={() => StopEdit()}
+                >
                   <b>Выйти без cохранения</b>
                 </Button>
               </Grid>
@@ -304,7 +364,7 @@ const PointsLevel2Area = (props: {
           )}
 
           <Stack direction="row">
-            <Grid item xs={3} sx={{ height: '86.5vh', border: 0 }}>
+            <Grid item xs={3} sx={{ height: "86.5vh", border: 0 }}>
               <Grid container>
                 <Grid item xs={12} sx={styleXTG035}>
                   <PointsLevel2AreaTab1Header />

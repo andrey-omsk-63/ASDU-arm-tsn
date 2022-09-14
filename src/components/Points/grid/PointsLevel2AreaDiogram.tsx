@@ -20,7 +20,7 @@ const PointsLevel2AreaDiogram = (props: {
   const points = props.xctrll[xtProps];
   const crRoad = props.crossroad;
 
-  console.log('Пришло Graf', props.xctrll);
+  //console.log('Пришло Graf', props.xctrll);
 
   const colorsGraf = [
     'orange',
