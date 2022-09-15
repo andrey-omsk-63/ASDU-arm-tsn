@@ -397,17 +397,19 @@ const StatisticXTArchive = (props: {
     for (let i = 0; i < points[areaId].Statistics.length; i++) {
       let inHour = points[areaId].Statistics[i].Hour;
       let inTime = inHour * 60 + points[areaId].Statistics[i].Min;
-      if (inTime % step === 0) {
-        let numInMatrix = inTime / step - 1;
-        if (inHour === 0 && points[areaId].Statistics[i].Min === 0) {
-          numInMatrix = matrix.length - 1;
+      if (inHour < 24) {
+        if (inTime % step === 0) {
+          let numInMatrix = inTime / step - 1;
+          if (inHour === 0 && points[areaId].Statistics[i].Min === 0) {
+            numInMatrix = matrix.length - 1;
+          }
+          for (let j = 0; j < points[areaId].Statistics[i].Datas.length; j++) {
+            matrix[numInMatrix].Datas[j] = {
+              ...points[areaId].Statistics[i].Datas[j],
+            };
+          }
+          matrix[numInMatrix].Avail = true;
         }
-        for (let j = 0; j < points[areaId].Statistics[i].Datas.length; j++) {
-          matrix[numInMatrix].Datas[j] = {
-            ...points[areaId].Statistics[i].Datas[j],
-          };
-        }
-        matrix[numInMatrix].Avail = true;
       }
     }
     let stepInterval = interval / step;

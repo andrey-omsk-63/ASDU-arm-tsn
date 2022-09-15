@@ -108,9 +108,11 @@ const StatisticXTNew = (props: {
       }
       ZeroLabelsCanal();
       if (nomInMas < 0) {
+        console.log("111");
         massId.push({ id: areaId, canall: [], lbl: [], labels, datasets: [] });
         numIdInMas = massId.length - 1;
       } else {
+        console.log("222");
         numIdInMas = nomInMas;
         canal = massId[numIdInMas].canall;
         for (let i = 0; i < massId[numIdInMas].lbl.length; i++) {
@@ -140,9 +142,11 @@ const StatisticXTNew = (props: {
       intervalGraf[numIdInMas] = interval;
     }
 
+    console.log("canal", canal, val, value);
+
     if (isOpen && val >= 0 && !canal.includes(val)) {
-      //if (val !== 16) setOpenLoader(true);
-      if (isOpen && value !== "0" && labels.length === 0) {
+      if (value !== "0" && labels.length === 0 && val !== 16) {
+        console.log("333", val);
         const colMin = 60 / intervalGraf[numIdInMas];
         for (let i = 0; i < matrix.length; i++) {
           let int = "";
@@ -176,10 +180,37 @@ const StatisticXTNew = (props: {
         datasetsMask.backgroundColor = colorsGraf[val];
 
         massId[numIdInMas].datasets.push(datasetsMask);
+
+        console.log("MassId", numIdInMas, massId);
+
         canal.push(val);
         massId[numIdInMas].canall = canal;
       }
-      if (val !== 16) Output();
+      // if (val !== 16) Output();
+    } else {
+      console.log("0@@@@@@", numIdInMas, massId);
+      console.log("1@@@@@@", massId[numIdInMas].datasets);
+      console.log("2@@@@@@", massId[numIdInMas].lbl);
+      console.log("3@@@@@@", massId[numIdInMas].canall);
+      let faktNum = massId[numIdInMas].canall.indexOf(val);
+      console.log("4@@@@@@", val, faktNum);
+      console.log(
+        "5@@@@@@",
+        massId[numIdInMas].canall.filter((n: any) => {
+          return n !== val;
+        })
+      );
+      console.log(
+        "6@@@@@@",
+        massId[numIdInMas].datasets.filter((n: any) => {
+          return n !== faktNum;
+        })
+      );
+      let mass = [];
+      for (let i = 0; i < massId[numIdInMas].datasets.length; i++) {
+        if (i != faktNum) mass.push(massId[numIdInMas].datasets[i]);
+      }
+      console.log("7@@@@@@", mass);
     }
 
     return (
@@ -281,10 +312,10 @@ const StatisticXTNew = (props: {
       //формирование времение в формате 00:00
       let timLiner = "";
       if (matrix[numMas].Hour < 10) timLiner = "0";
-      timLiner += matrix[numMas].Hour;
+      timLiner += String(matrix[numMas].Hour);
       timLiner += ":";
       if (matrix[numMas].Min < 10) timLiner += "0";
-      timLiner += matrix[numMas].Min;
+      timLiner += String(matrix[numMas].Min);
       //формирование начала строки
       resStr.push(
         <Grid key={Math.random()} item xs={0.5} sx={styleSt05}>
@@ -394,17 +425,19 @@ const StatisticXTNew = (props: {
     for (let i = 0; i < points[areaId].Statistics.length; i++) {
       let inHour = points[areaId].Statistics[i].Hour;
       let inTime = inHour * 60 + points[areaId].Statistics[i].Min;
-      if (inTime % step === 0) {
-        let numInMatrix = inTime / step - 1;
-        if (inHour === 0 && points[areaId].Statistics[i].Min === 0) {
-          numInMatrix = matrix.length - 1;
+      if (inHour < 24) {
+        if (inTime % step === 0) {
+          let numInMatrix = inTime / step - 1;
+          if (inHour === 0 && points[areaId].Statistics[i].Min === 0) {
+            numInMatrix = matrix.length - 1;
+          }
+          for (let j = 0; j < points[areaId].Statistics[i].Datas.length; j++) {
+            matrix[numInMatrix].Datas[j] = {
+              ...points[areaId].Statistics[i].Datas[j],
+            };
+          }
+          matrix[numInMatrix].Avail = true;
         }
-        for (let j = 0; j < points[areaId].Statistics[i].Datas.length; j++) {
-          matrix[numInMatrix].Datas[j] = {
-            ...points[areaId].Statistics[i].Datas[j],
-          };
-        }
-        matrix[numInMatrix].Avail = true;
       }
     }
     let stepInterval = interval / step;

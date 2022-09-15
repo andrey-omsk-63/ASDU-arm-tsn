@@ -1,4 +1,6 @@
 import * as React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { maskpointCreate } from "./../../redux/actions";
 
 import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
@@ -10,7 +12,7 @@ import { XctrlInfo } from "../../interfaceGl.d";
 
 let tekValue = 0;
 let pointsEtalon: XctrlInfo[];
-//let flagEtalon = true;
+let numerOld = -1;
 
 const Points = (props: {
   open: boolean;
@@ -19,6 +21,14 @@ const Points = (props: {
   region: string;
   setPoint: any;
 }) => {
+  //== Piece of Redux =======================================
+  let maskpoint = useSelector((state: any) => {
+    const { maskpointReducer } = state;
+    return maskpointReducer.maskpoint;
+  });
+  //console.log("maskpoint_Points:", maskpoint);
+  const dispatch = useDispatch();
+  //===========================================================
   const stylePXt1 = {
     fontSize: 13.5,
     maxHeight: "20px",
@@ -100,6 +110,11 @@ const Points = (props: {
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
     tekValue = newValue;
+    if (numerOld !== tekValue) {
+      maskpoint.newXt = true;
+      dispatch(maskpointCreate(maskpoint));
+      numerOld = tekValue;
+    }
   };
 
   const SpisXT = () => {
