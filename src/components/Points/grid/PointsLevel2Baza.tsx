@@ -346,10 +346,12 @@ const PointsLevel2Baza = (props: {
                   </Button>
                 )}
                 {flagEdit && <b>{name}</b>}
-                <br /> <br />
-                {maskpoint.pointForRedax.xctrls[props.crossroad].left} <br />
-                <br />
-                {maskpoint.pointForRedax.xctrls[props.crossroad].right}
+                <b>
+                  <br /> <br />
+                  {maskpoint.pointForRedax.xctrls[props.crossroad].left}
+                  <br /> <br />
+                  {maskpoint.pointForRedax.xctrls[props.crossroad].right}
+                </b>
               </Box>
             </Grid>
           </Grid>

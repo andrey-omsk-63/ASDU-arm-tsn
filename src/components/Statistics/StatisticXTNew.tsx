@@ -191,7 +191,6 @@ const StatisticXTNew = (props: {
       </Grid>
     );
   };
-
   //=========================================================================
   const styleSt03 = {
     textIndent: 6,
