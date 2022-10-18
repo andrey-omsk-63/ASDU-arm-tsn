@@ -1,17 +1,17 @@
-import * as React from 'react';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
+import * as React from "react";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
 
-import ManagementRightGrid from './ManagRightGrid';
-import ManagementKnobPK from './ManagKnobPK';
-import ManagementKnobSK from './ManagKnobSK';
-import ManagementKnobNK from './ManagKnobNK';
-import ManagementKnobXT from './ManagKnobXT';
+import ManagementRightGrid from "./ManagRightGrid";
+import ManagementKnobPK from "./ManagKnobPK";
+import ManagementKnobSK from "./ManagKnobSK";
+import ManagementKnobNK from "./ManagKnobNK";
+import ManagementKnobXT from "./ManagKnobXT";
 
-import { Tflight } from '../../../interfaceMNG.d';
-import { XctrlInfo } from '../../../interfaceGl.d';
+import { Tflight } from "../../../interfaceMNG.d";
+import { XctrlInfo } from "../../../interfaceGl.d";
 
 export interface DataKnob {
   knop: Knob[];
@@ -41,9 +41,9 @@ const ManagementLeftGrid = (props: {
   const styleMG01 = {
     border: 1,
     borderRadius: 1,
-    borderColor: 'primary.main',
+    borderColor: "primary.main",
     margin: 0.5,
-    height: '94vh',
+    height: "94vh",
   };
 
   const styleMG03 = {
@@ -53,32 +53,34 @@ const ManagementLeftGrid = (props: {
 
   const styleButt01 = {
     fontSize: 12,
-    maxHeight: '21px',
-    minHeight: '21px',
-    backgroundColor: 'white',
-    color: 'black',
-    textTransform: 'unset !important',
+    maxHeight: "21px",
+    minHeight: "21px",
+    // backgroundColor: 'white',
+    backgroundColor: "#E8EAED",
+    color: "black",
+    textTransform: "unset !important",
   };
 
   const styleButt02 = {
     fontSize: 15,
-    maxHeight: '21px',
-    minHeight: '21px',
-    backgroundColor: 'white',
-    color: '#5B1080',
-    textTransform: 'unset !important',
+    maxHeight: "21px",
+    minHeight: "21px",
+    // backgroundColor: 'white',
+    backgroundColor: "#E8EAED",
+    color: "#5B1080",
+    textTransform: "unset !important",
   };
 
   const [mode, setMode] = React.useState(1);
-  let reGion = '1';
-  const [areaa, setAreaa] = React.useState('0');
+  let reGion = "1";
+  const [areaa, setAreaa] = React.useState("0");
   const [subArea, setSubArea] = React.useState(0);
   const [dataKnob, setDataKnob] = React.useState<Array<Knob>>([
     {
       cmd: 0,
       param: 99,
-      region: '',
-      area: '',
+      region: "",
+      area: "",
       subarea: 88,
     },
   ]);
@@ -87,19 +89,19 @@ const ManagementLeftGrid = (props: {
     {
       cmd: 0,
       param: 99,
-      region: '',
-      area: '',
+      region: "",
+      area: "",
       subarea: 99,
     },
   ];
-  
+
   let mass: any = [];
   let masRab: any = [];
   let masAreaNum: any = [];
 
   const handleClickGl = () => {
     setMode(1);
-    setAreaa('0');
+    setAreaa("0");
     setSubArea(0);
   };
 
@@ -126,8 +128,10 @@ const ManagementLeftGrid = (props: {
     let j = 0;
 
     for (let i = 1; i < points.length; i++) {
-
-      if (mass[j].areaNum !== points[i].area.num || mass[j].subarea !== points[i].subarea) {
+      if (
+        mass[j].areaNum !== points[i].area.num ||
+        mass[j].subarea !== points[i].subarea
+      ) {
         j++;
         masRab[j] = points[i].area.num;
         mass[j] = {
@@ -156,7 +160,9 @@ const ManagementLeftGrid = (props: {
 
   const SpisAreaMLG = (props: { nom: string }) => {
     let masSpis: any = [];
-    masSpis = mass.filter((mass: { areaNum: string }) => mass.areaNum === props.nom);
+    masSpis = mass.filter(
+      (mass: { areaNum: string }) => mass.areaNum === props.nom
+    );
 
     const SpisSubAreaMLG = () => {
       let resStr = [];
@@ -169,11 +175,12 @@ const ManagementLeftGrid = (props: {
               <Button
                 sx={styleButt01}
                 //variant="contained"
-                onClick={() => handleClick(props.nom, masSpis[i].subarea)}>
+                onClick={() => handleClick(props.nom, masSpis[i].subarea)}
+              >
                 Подрайон:{masSpis[i].areaNum}:{masSpis[i].subarea}
               </Button>
             </Grid>
-          </Grid>,
+          </Grid>
         );
       }
       return resStr;
@@ -261,7 +268,7 @@ const ManagementLeftGrid = (props: {
         },
       ];
       // костыль
-      dataKnobTemp[0].cmd = dataKnob[0].cmd
+      dataKnobTemp[0].cmd = dataKnob[0].cmd;
       dataKnobTemp[0].param = dataKnob[0].param;
       dataKnobTemp[0].region = dataKnob[0].region;
       dataKnobTemp[0].area = mass[i].areaNum;
@@ -287,7 +294,7 @@ const ManagementLeftGrid = (props: {
         },
       ];
       // костыль
-      dataKnobTemp[0].cmd = dataKnob[0].cmd
+      dataKnobTemp[0].cmd = dataKnob[0].cmd;
       dataKnobTemp[0].param = dataKnob[0].param;
       dataKnobTemp[0].region = dataKnob[0].region;
       dataKnobTemp[0].area = masArea[i];
@@ -299,7 +306,10 @@ const ManagementLeftGrid = (props: {
 
     for (let i = 0; i < massKnop.length; i++) {
       // изменение param по всему кусту региона
-      if (massKnop[i].cmd === dataKnob[0].cmd && massKnop[i].region === dataKnob[0].region) {
+      if (
+        massKnop[i].cmd === dataKnob[0].cmd &&
+        massKnop[i].region === dataKnob[0].region
+      ) {
         massKnop[i].param = dataKnob[0].param;
       }
     }
@@ -321,13 +331,13 @@ const ManagementLeftGrid = (props: {
             },
           ];
           // костыль
-          dataKnobTemp[0].cmd = dataKnob[0].cmd
+          dataKnobTemp[0].cmd = dataKnob[0].cmd;
           dataKnobTemp[0].param = dataKnob[0].param;
           dataKnobTemp[0].region = dataKnob[0].region;
           dataKnobTemp[0].area = mass[i].areaNum;
           dataKnobTemp[0].subarea = mass[i].areaNum;
           massKnopTemp.push(dataKnobTemp[0]);
-         }
+        }
       }
       massKnop = massKnop.concat(massKnopTemp); // ОбЪединение массивов
       for (let i = 0; i < massKnop.length; i++) {
@@ -370,7 +380,7 @@ const ManagementLeftGrid = (props: {
         massKnob[0].subarea = dataKnob[0].subarea;
         massKnop.push(massKnob[0]);
       }
-      if (dataKnob[0].area === '0' && dataKnob[0].subarea === 0) {
+      if (dataKnob[0].area === "0" && dataKnob[0].subarea === 0) {
         RecordInAria();
       } else {
         RecordInSubaria();
@@ -428,7 +438,7 @@ const ManagementLeftGrid = (props: {
   return (
     <Grid container>
       <Grid item xs={2.5} sx={styleMG01}>
-        <Box sx={{ overflowX: 'auto' }}>{props.open && <SpisMLG />}</Box>
+        <Box sx={{ overflowX: "auto" }}>{props.open && <SpisMLG />}</Box>
       </Grid>
       <Grid item xs sx={{ border: 0 }}>
         <Grid container>
