@@ -30,9 +30,25 @@ import { XctrlInfo } from "./interfaceGl.d";
 import { RegionInfo } from "./interfaceGl.d";
 import { Statistic } from "./interfaceStat.d";
 
-import { styleModalMenu, styleInt01, styleApp02 } from "./AppStyle";
+import { styleModalMenu, styleInt01 } from "./AppStyle";
 import { styleImpServis, styleInp, styleDatePicker } from "./AppStyle";
 import { MakeInterval } from "./AppServiceFunctions";
+
+export interface Stater {
+  region: number;
+  area: number;
+  id: number;
+  TLen: number;
+  stat: Array<any>;
+}
+
+export let dateStat: Stater = {
+  region: 0,
+  area: 0,
+  id: 0,
+  TLen: 0,
+  stat: [],
+};
 
 export interface Pointer {
   newXt: boolean;
@@ -91,7 +107,6 @@ const App = () => {
     const { maskpointReducer } = state;
     return maskpointReducer.maskpoint;
   });
-  //console.log('maskpoint_App:', maskpoint);
   const dispatch = useDispatch();
   //========================================================
   const [pointsXctrl, setPointsXctrl] = React.useState<Array<XctrlInfo>>([]);
@@ -354,7 +369,7 @@ const App = () => {
     setTrigger(!trigger);
   };
 
-  const InputNewDate = () => {
+  const InputNewDateInterval = () => {
     const InputDate = () => {
       const handleChangeDP = (event: any) => {
         if (event <= new Date()) {
@@ -453,7 +468,13 @@ const App = () => {
 
     return (
       <>
-        <Grid item container sx={{ width: "150px" }}>
+        <Grid item container sx={{ border: 0, marginRight: 1, width: "140px" }}>
+          <Grid item xs sx={{ textAlign: "left" }}>
+            {ButtonMenu("5", "Сохр.в файл")}
+          </Grid>
+        </Grid>
+
+        <Grid item container sx={{ border: 0, width: "150px" }}>
           <Grid item xs={7} sx={{ textAlign: "right" }}>
             Интервал:
           </Grid>
@@ -467,6 +488,7 @@ const App = () => {
             </Box>
           </Grid>
         </Grid>
+
         <Box sx={styleImpServis}>
           <Grid item container>
             <Grid item xs sx={styleInp}>
@@ -488,6 +510,18 @@ const App = () => {
   };
 
   const ButtonMenu = (mode: string, soob: string) => {
+    const styleApp02 = {
+      fontSize: 14,
+      marginRight: 1,
+      minWidth: (soob.length + 10) * 6.5,
+      maxWidth: (soob.length + 10) * 6.5,
+      maxHeight: "21px",
+      minHeight: "21px",
+      backgroundColor: "#E9F5D8",
+      color: "black",
+      textTransform: "unset !important",
+    };
+
     return (
       <Button
         sx={styleApp02}
@@ -528,11 +562,13 @@ const App = () => {
               {!bsLogin && <>{ButtonMenu("1", "Управление")}</>}
               {!bsLogin && <>{ButtonMenu("2", "Характерные точки")}</>}
               {!bsLogin && <>{ButtonMenu("3", "Статистика")}</>}
-              {!bsLogin && value === "3" && isOpenSt && <InputNewDate />}
+              {!bsLogin && value === "3" && isOpenSt && (
+                <InputNewDateInterval />
+              )}
               {!bsLogin &&
                 value === "4" &&
                 isOpenOldSt &&
-                !nullOldStatistics && <InputNewDate />}
+                !nullOldStatistics && <InputNewDateInterval />}
             </Stack>
           </Box>
           <TabPanel value="1">
@@ -598,6 +634,13 @@ const App = () => {
                 interval={interval}
                 func={SetIdOld}
               />
+            )}
+          </TabPanel>
+          <TabPanel value="5">
+            {WS !== null && regionGlob !== 0 && !nullOldStatistics && (
+              <>
+              {console.log('###:',formSett,pointsSt)}
+              </>
             )}
           </TabPanel>
         </TabContext>

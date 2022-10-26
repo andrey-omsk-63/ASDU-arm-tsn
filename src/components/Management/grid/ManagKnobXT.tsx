@@ -81,25 +81,28 @@ const ManagementKnobXT = (props: {
   const stylePK = {
     position: 'absolute',
     top: '22.8%',
-    left: '47.7%',
+    left: '33%',
     transform: 'translate(-50%, -50%)',
     width: 164,
     bgcolor: 'background.paper',
     border: '2px solid #000',
+    borderColor: 'primary.main',
+    borderRadius: 2,
     boxShadow: 24,
     p: 2,
   };
-
+  
   const styleBatton = {
     fontSize: 10,
-    backgroundColor: '#F1F3F4',
+    //backgroundColor: '#F1F3F4',
+    backgroundColor: "#E9F5D8",
     color: 'black',
   };
 
   const styleSoob = {
     fontSize: 12,
     backgroundColor: '#F1F3F4',
-    color: '#5B1080',
+    color: 'black',
     textAlign: 'center',
   };
 
@@ -110,7 +113,8 @@ const ManagementKnobXT = (props: {
 
   const styleBatMenu = {
     fontSize: 12.9,
-    backgroundColor: '#F1F3F4',
+    //backgroundColor: '#F1F3F4',
+    backgroundColor: "#E9F5D8",
     color: 'black',
     marginTop: 1,
     textTransform: 'unset !important',
@@ -177,10 +181,7 @@ const ManagementKnobXT = (props: {
       <Button size="small" sx={styleBatton} variant="contained" onClick={handleOpen}>
         XT
       </Button>
-      <Modal
-        open={open}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description">
+      <Modal open={open} hideBackdrop>
         <Box sx={stylePK}>
           <Stack direction="column">
             <Button sx={styleBatMenu} variant="contained" onClick={() => setValue(0)}>

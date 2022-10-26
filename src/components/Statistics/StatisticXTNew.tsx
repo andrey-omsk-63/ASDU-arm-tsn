@@ -377,6 +377,7 @@ const StatisticXTNew = (props: {
       maskMmatrix.Datas = datas;
       matrix.push(maskMmatrix);
     }
+    console.log('matrix:',matrix)
   };
 
   const CompletMatrix = () => {

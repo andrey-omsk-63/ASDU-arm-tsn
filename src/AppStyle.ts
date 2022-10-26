@@ -26,18 +26,18 @@ export const styleApp01 = {
   textTransform: "unset !important",
 };
 
-export const styleApp02 = {
-  fontSize: 14,
-  marginRight: 1,
-  maxHeight: "21px",
-  minHeight: "21px",
-  maxWidth: "180px",
-  minWidth: "180px",
-  //width: '20%',
-  backgroundColor: "#F1F3F4",
-  color: "black",
-  textTransform: "unset !important",
-};
+// export const styleApp02 = {
+//   fontSize: 14,
+//   marginRight: 1,
+//   maxHeight: "21px",
+//   minHeight: "21px",
+//   maxWidth: "180px",
+//   minWidth: "180px",
+//   backgroundColor: "#F1F3F4",
+//   color: "black",
+//   textTransform: "unset !important",
+// };
+
 export const styleApp99 = {
   fontSize: 14,
   marginRight: 1,
@@ -83,6 +83,7 @@ export const styleModalMenu = {
 };
 //====== DatePicker =======================================================
 export const styleImpServis = {
+  //border: 1,
   fontSize: 14,
   marginLeft: "auto",
   maxHeight: "21px",

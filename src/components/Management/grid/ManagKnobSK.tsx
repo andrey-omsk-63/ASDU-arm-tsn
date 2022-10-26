@@ -80,25 +80,28 @@ const ManagementKnobSK = (props: {
 
   const stylePK = {
     position: 'absolute',
-    top: '46%',
-    left: '34.2%',
+    top: '42%',
+    left: '30%',
     transform: 'translate(-50%, -50%)',
     width: 64,
     bgcolor: 'background.paper',
     border: '2px solid #000',
+    borderColor: 'primary.main',
+    borderRadius: 2,
     boxShadow: 24,
     p: 2,
   };
 
   const styleBatton = {
     fontSize: 10,
-    backgroundColor: '#F1F3F4',
+    //backgroundColor: '#F1F3F4',
+    backgroundColor: "#E9F5D8",
     color: 'black',
     marginRight: 1,
   };
 
   const styleSoob = {
-    fontSize: 10,
+    fontSize: 11,
     backgroundColor: '#F1F3F4',
     color: '#5B1080',
     textAlign: 'center',
@@ -111,7 +114,9 @@ const ManagementKnobSK = (props: {
 
   const styleBatMenu = {
     fontSize: 12.9,
-    backgroundColor: '#F1F3F4',
+    marginTop: 0.5,
+    //backgroundColor: '#F1F3F4',
+    backgroundColor: "#E9F5D8",
     color: 'black',
     textTransform: 'unset !important',
   };
@@ -203,10 +208,7 @@ const ManagementKnobSK = (props: {
       <Button size="small" sx={styleBatton} variant="contained" onClick={handleOpen}>
         СК
       </Button>
-      <Modal
-        open={open}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description">
+      <Modal open={open} hideBackdrop>
         <Box sx={stylePK}>
           <Stack direction="column">
             {ButtonKnob(0)}

@@ -1,8 +1,8 @@
-import React from 'react';
-import Modal from '@mui/material/Modal';
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
+import React from "react";
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 
 export interface DataKnob {
   knop: Knob[];
@@ -17,14 +17,14 @@ export interface Knob {
 }
 
 let otpravka = true;
-let soobDispatch = '';
-let nomDispatch = 'Авт';
+let soobDispatch = "";
+let nomDispatch = "Авт";
 let dataKnob: Knob[] = [
   {
     cmd: 7,
     param: 99,
-    region: '',
-    area: '',
+    region: "",
+    area: "",
     subarea: 0,
   },
 ];
@@ -45,7 +45,9 @@ const ManagementKnobSK = (props: {
     const handleSendOpen = () => {
       if (props.ws !== null) {
         if (props.ws.readyState === WebSocket.OPEN) {
-          props.ws.send(JSON.stringify({ type: 'stopDevices', region: props.region }));
+          props.ws.send(
+            JSON.stringify({ type: "stopDevices", region: props.region })
+          );
           otpravka = true;
         } else {
           setTimeout(() => {
@@ -63,10 +65,12 @@ const ManagementKnobSK = (props: {
     const handleSendOpen = () => {
       if (props.ws !== null) {
         if (props.ws.readyState === WebSocket.OPEN) {
-          props.ws.send(JSON.stringify({ type: 'getDevices', region: props.region }));
+          props.ws.send(
+            JSON.stringify({ type: "getDevices", region: props.region })
+          );
           otpravka = false;
-          soobDispatch = '';
-          nomDispatch = 'Авт';
+          soobDispatch = "";
+          nomDispatch = "Авт";
         } else {
           setTimeout(() => {
             handleSendOpen();
@@ -79,49 +83,58 @@ const ManagementKnobSK = (props: {
   };
 
   const stylePK = {
-    position: 'absolute',
-    top: '45%',
-    left: '39.3%',
-    transform: 'translate(-50%, -50%)',
+    position: "absolute",
+    top: "42%",
+    left: "30%",
+    transform: "translate(-50%, -50%)",
     width: 64,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    borderColor: 'primary.main',
+    borderRadius: 2,
     boxShadow: 24,
     p: 2,
   };
 
   const styleBatton = {
     fontSize: 10,
-    backgroundColor: '#F1F3F4',
-    color: 'black',
+    //backgroundColor: '#F1F3F4',
+    backgroundColor: "#E9F5D8",
+    color: "black",
     marginRight: 1,
   };
 
   const styleSoob = {
-    fontSize: 10,
-    backgroundColor: '#F1F3F4',
-    color: '#5B1080',
-    textAlign: 'center',
+    fontSize: 11,
+    backgroundColor: "#F1F3F4",
+    color: "#5B1080",
+    textAlign: "center",
   };
 
   const styleSoobPusto = {
-    backgroundColor: '#F1F3F4',
-    color: '#F1F3F4',
+    backgroundColor: "#F1F3F4",
+    color: "#F1F3F4",
   };
 
   const styleBatMenu = {
     fontSize: 12.9,
-    backgroundColor: '#F1F3F4',
-    color: 'black',
-    textTransform: 'unset !important',
+    marginTop: 0.5,
+    //backgroundColor: '#F1F3F4',
+    backgroundColor: "#E9F5D8",
+    color: "black",
+    textTransform: "unset !important",
   };
 
   const ButtonKnob = (val: number) => {
-    let valumeKnob: string = 'Авт';
+    let valumeKnob: string = "Авт";
     if (val !== 0) valumeKnob = val.toString();
 
     return (
-      <Button sx={styleBatMenu} variant="contained" onClick={() => setValue(val)}>
+      <Button
+        sx={styleBatMenu}
+        variant="contained"
+        onClick={() => setValue(val)}
+      >
         {valumeKnob}
       </Button>
     );
@@ -134,7 +147,7 @@ const ManagementKnobSK = (props: {
           if (props.ws.readyState === WebSocket.OPEN) {
             props.ws.send(
               JSON.stringify({
-                type: 'dispatch',
+                type: "dispatch",
                 data: {
                   cmd: 7,
                   param: value,
@@ -142,12 +155,12 @@ const ManagementKnobSK = (props: {
                   area: props.areaa,
                   subarea: props.subArea,
                 },
-              }),
+              })
             );
             //отключение ХТ
             props.ws.send(
               JSON.stringify({
-                type: 'dispatch',
+                type: "dispatch",
                 data: {
                   cmd: 13,
                   param: 0,
@@ -155,7 +168,7 @@ const ManagementKnobSK = (props: {
                   area: props.areaa,
                   subarea: props.subArea,
                 },
-              }),
+              })
             );
           } else {
             setTimeout(() => {
@@ -170,19 +183,19 @@ const ManagementKnobSK = (props: {
       };
 
       handleSendOpen();
-      soobDispatch = 'Отправлено';
+      soobDispatch = "Отправлено";
       if (value !== 0) {
-        nomDispatch = 'НК ' + value.toString();
+        nomDispatch = "НК " + value.toString();
       }
       otpravka = false;
     } else {
-      soobDispatch = '';
-      nomDispatch = 'Авт';
+      soobDispatch = "";
+      nomDispatch = "Авт";
     }
 
     return (
       <>
-        {soobDispatch === 'Отправлено' && (
+        {soobDispatch === "Отправлено" && (
           <>
             <Box sx={styleSoobPusto}>Pusto</Box>
             <Box sx={styleSoob}>
@@ -200,13 +213,15 @@ const ManagementKnobSK = (props: {
 
   return (
     <div>
-      <Button size="small" sx={styleBatton} variant="contained" onClick={handleOpen}>
+      <Button
+        size="small"
+        sx={styleBatton}
+        variant="contained"
+        onClick={handleOpen}
+      >
         НК
       </Button>
-      <Modal
-        open={open}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description">
+      <Modal open={open} hideBackdrop>
         <Box sx={stylePK}>
           <Stack direction="column">
             {ButtonKnob(0)}

@@ -53,21 +53,28 @@ const ManagementLeftGrid = (props: {
 
   const styleButt01 = {
     fontSize: 12,
+    marginTop: 0.5,
     maxHeight: "21px",
     minHeight: "21px",
     // backgroundColor: 'white',
-    backgroundColor: "#E8EAED",
+    //backgroundColor: "#E8EAED",
+    backgroundColor: "#E9F5D8",
+    //backgroundColor: "#F1F3F4",
     color: "black",
+    borderRadius: 2,
     textTransform: "unset !important",
   };
 
   const styleButt02 = {
     fontSize: 15,
+    marginTop: 0.5,
     maxHeight: "21px",
     minHeight: "21px",
     // backgroundColor: 'white',
-    backgroundColor: "#E8EAED",
+    //backgroundColor: "#E8EAED",
+    backgroundColor: "#E9F5D8",
     color: "#5B1080",
+    borderRadius: 2,
     textTransform: "unset !important",
   };
 
@@ -361,7 +368,6 @@ const ManagementLeftGrid = (props: {
       for (let i = 0; i < massKnop.length; i++) {
         if (
           massKnop[i].cmd === dataKnob[0].cmd &&
-          //massKnop[i].param === dataKnob[0].param &&
           massKnop[i].param === dataKnob[0].param &&
           massKnop[i].region === dataKnob[0].region &&
           massKnop[i].area === dataKnob[0].area &&
@@ -432,8 +438,6 @@ const ManagementLeftGrid = (props: {
       </Grid>
     );
   };
-
-  //console.log('LEFTmasknobOut:', massKnop)
 
   return (
     <Grid container>

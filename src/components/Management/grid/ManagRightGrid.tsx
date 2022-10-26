@@ -155,7 +155,7 @@ const ManagementRightGrid = (props: {
     const StrokaHeaderMode2 = () => {
       let resStr = [];
       resStr.push(
-        <Grid item container>
+        <Grid item container key={Math.random()}>
           {StrokaGridHeader(0.3, "№")}
           {StrokaGridHeader(1.1, "Подрайон")}
           {StrokaGridHeader(4.5, "Устройствa")}
@@ -169,7 +169,7 @@ const ManagementRightGrid = (props: {
     const StrokaHeaderMode3 = () => {
       let resStr = [];
       resStr.push(
-        <Grid item container>
+        <Grid item container key={Math.random()}>
           {StrokaGridHeader(0.3, "№")}
           {StrokaGridHeader(1.1, "Подрайон")}
           {StrokaGridHeader(0.4, "ДК")}

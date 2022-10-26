@@ -44,10 +44,10 @@ const PointsMenuLevel1 = (props: {
     fontSize: 13.9,
     maxHeight: "20px",
     minHeight: "20px",
-    backgroundColor: "#F1F3F4",
+    //backgroundColor: "#F1F3F4",
+    backgroundColor: "#E9F5D8",
     color: "black",
     marginRight: 1,
-    //marginTop: 2,
     textTransform: "unset !important",
   };
 
