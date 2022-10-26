@@ -5,8 +5,8 @@ const intialState = {
   datestat: dateStat,
 };
 
-export const mapReducer = (state = intialState, action: any) => {
-  //console.log('mapReducer:', action);
+export const statsaveReducer = (state = intialState, action: any) => {
+  //console.log('statsaveReducer:', action);
   switch (action.type) {
     case STATSAVE_CREATE:
       return {

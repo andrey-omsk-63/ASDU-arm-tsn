@@ -1,4 +1,7 @@
 import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { statsaveCreate } from './../../redux/actions';
+
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -54,10 +57,22 @@ const StatisticXTNew = (props: {
   areaid: number;
   interval: number;
 }) => {
+  //== Piece of Redux ======================================
+  let datestat = useSelector((state: any) => {
+    const { statsaveReducer } = state;
+    return statsaveReducer.datestat;
+  });
+
+  //console.log('Datestat:', datestat);
+  const dispatch = useDispatch();
+  //========================================================
   const isOpen = props.open;
   const points = props.statist;
   const areaId = props.areaid;
   const interval = props.interval;
+  datestat.area = areaId;
+  dispatch(statsaveCreate(datestat));
+  console.log('Datestat:', areaId, datestat);
 
   let colChanel = 0;
   const [value, setValue] = React.useState('0');
@@ -377,7 +392,7 @@ const StatisticXTNew = (props: {
       maskMmatrix.Datas = datas;
       matrix.push(maskMmatrix);
     }
-    console.log('matrix:',matrix)
+    console.log('matrix:', matrix);
   };
 
   const CompletMatrix = () => {
