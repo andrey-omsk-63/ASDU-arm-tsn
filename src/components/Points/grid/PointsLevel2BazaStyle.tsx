@@ -84,6 +84,7 @@ export const styleBut02 = {
   maxWidth: '2%',
   minWidth: '2%',
   backgroundColor: '#FFFBE5',
+  //backgroundColor: "#E9F5D8",
   color: 'black',
   textTransform: 'unset !important',
 };
@@ -95,7 +96,8 @@ export const styleBut03 = {
   minHeight: '21px',
   maxWidth: '193px',
   minWidth: '193px',
-  backgroundColor: '#FFFBE5',
+  //backgroundColor: '#FFFBE5',
+  backgroundColor: "#E9F5D8",
   color: 'black',
   textTransform: 'unset !important',
 };
@@ -115,10 +117,7 @@ export const styleSetInf = {
   fontSize: 17,
   position: 'absolute',
   left: '36%',
-  //top: "50%",
   marginTop: '15vh',
-  // marginLeft: '64vh',
-  // width: 340,
   width: 270,
   bgcolor: 'background.paper',
   border: '3px solid #000',
@@ -132,10 +131,7 @@ export const styleSetInff = {
   fontSize: 17,
   position: 'absolute',
   left: '36%',
-  //top: "50%",
   marginTop: '15vh',
-  // marginLeft: '64vh',
-  // width: 340,
   width: 380,
   bgcolor: 'background.paper',
   border: '3px solid #000',
@@ -146,7 +142,6 @@ export const styleSetInff = {
 };
 
 export const styleInpName = {
-  //textAlign: 'center',
   '& > :not(style)': { m: 0, width: '27ch', bgcolor: '#FFFBE5' },
 };
 
@@ -159,7 +154,8 @@ export const styleInpKnop = {
   marginTop: 1,
   maxHeight: '21px',
   minHeight: '21px',
-  backgroundColor: '#F1F3F4',
+  //backgroundColor: '#F1F3F4',
+  backgroundColor: "#E9F5D8",
   textAlign: 'center',
   textTransform: 'unset !important',
 };
