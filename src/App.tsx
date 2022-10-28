@@ -272,6 +272,9 @@ const App = () => {
     WS = new WebSocket(host);
     flagOpenWS = false;
     if (WS.url === "wss://localhost:3000/W") debug = true;
+    // let pageUrl = new URL(window.location.href);
+    // let homeRegion = String(Number(pageUrl.searchParams.get("Region")));
+    // console.log('homeRegion:',homeRegion)
   }
 
   React.useEffect(() => {
