@@ -459,7 +459,7 @@ const StatisticXTArchive = (props: {
     datestat.id = points[areaId].id;
     datestat.TLen = step;
     datestat.stat = JSON.parse(JSON.stringify(MATRIX));
-    datestat.data = props.date;
+    datestat.data = new Date(props.date).toLocaleDateString();
     datestat.time = "24:00";
     dispatch(statsaveCreate(datestat));
     //========================================================

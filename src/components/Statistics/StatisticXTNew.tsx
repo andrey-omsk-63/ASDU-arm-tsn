@@ -425,14 +425,6 @@ const StatisticXTNew = (props: {
     }
   };
 
-  const MakeDate = (tekData: Date) => {
-    let SMes = tekData.getMonth() + 1;
-    let sDate = tekData.getFullYear() + "-";
-    if (SMes < 10) sDate = sDate + "0";
-    sDate = sDate + SMes + "-" + tekData.getDate();
-    return sDate;
-  };
-
   const CompletMatrix = () => {
     const step = points[areaId].Statistics[0].TLen;
     const typeStat = points[areaId].Statistics[0].Type;
@@ -466,14 +458,8 @@ const StatisticXTNew = (props: {
     datestat.id = points[areaId].id;
     datestat.TLen = step;
     datestat.stat = JSON.parse(JSON.stringify(MATRIX));
-    datestat.data = MakeDate(new Date());
-    datestat.time = "";
-    let dat = new Date();
-    if (dat.getHours() < 10) datestat.time = "0";
-    datestat.time += String(dat.getHours());
-    datestat.time += ":";
-    if (dat.getMinutes() < 10) datestat.time += "0";
-    datestat.time += String(dat.getMinutes());
+    datestat.data = new Date().toLocaleDateString();
+    datestat.time = new Date().toLocaleTimeString().slice(0, -3);
     dispatch(statsaveCreate(datestat));
     //========================================================
     let stepInterval = interval / step;
