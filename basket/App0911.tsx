@@ -1,46 +1,44 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { maskpointCreate, statsaveCreate } from './redux/actions';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { maskpointCreate, statsaveCreate } from "./redux/actions";
 
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import TabContext from '@mui/lab/TabContext';
-import TabPanel from '@mui/lab/TabPanel';
-import Modal from '@mui/material/Modal';
-import TextField from '@mui/material/TextField';
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import TabContext from "@mui/lab/TabContext";
+import TabPanel from "@mui/lab/TabPanel";
+import Modal from "@mui/material/Modal";
+import TextField from "@mui/material/TextField";
 
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { ru } from 'date-fns/locale';
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { ru } from "date-fns/locale";
 
-import axios from 'axios';
+import axios from "axios";
 
-import Management from './components/Management/Management';
-import Points from './components/Points/Points';
-import StatisticsNew from './components/Statistics/StatisticsNew';
-import StatisticsArchive from './components/Statistics/StatisticsArchive';
-import EndSeans from './AppEndSeans';
-import InputInterval from './AppInpInerval';
+import Management from "./components/Management/Management";
+import Points from "./components/Points/Points";
+import StatisticsNew from "./components/Statistics/StatisticsNew";
+import StatisticsArchive from "./components/Statistics/StatisticsArchive";
+import EndSeans from "./AppEndSeans";
+import InputInterval from "./AppInpInerval";
 
-import { Tflight } from './interfaceMNG.d';
-import { XctrlInfo } from './interfaceGl.d';
-import { RegionInfo } from './interfaceGl.d';
-import { Statistic } from './interfaceStat.d';
+import { Tflight } from "./interfaceMNG.d";
+import { XctrlInfo } from "./interfaceGl.d";
+import { RegionInfo } from "./interfaceGl.d";
+import { Statistic } from "./interfaceStat.d";
 
-import { styleModalMenu, styleInt01 } from './AppStyle';
-import { styleImpServis, styleInp, styleDatePicker } from './AppStyle';
-import { styleInpOk, styleButOk, styleImpBlock } from './AppStyle';
-
-import { MakeInterval, WriteToCsvFile } from './AppServiceFunctions';
+import { styleModalMenu, styleInt01 } from "./AppStyle";
+import { styleImpServis, styleInp, styleDatePicker } from "./AppStyle";
+import { MakeInterval, WriteToCsvFile } from "./AppServiceFunctions";
 
 const MakeDate = (tekData: Date) => {
   let SMes = tekData.getMonth() + 1;
-  let sDate = tekData.getFullYear() + '-';
-  if (SMes < 10) sDate = sDate + '0';
-  sDate = sDate + SMes + '-' + tekData.getDate();
+  let sDate = tekData.getFullYear() + "-";
+  if (SMes < 10) sDate = sDate + "0";
+  sDate = sDate + SMes + "-" + tekData.getDate();
   return sDate;
 };
 
@@ -57,7 +55,7 @@ export let dateStat: Stater = {
   area: 0,
   id: 0,
   data: MakeDate(new Date()),
-  time: '24:00',
+  time: "24:00",
   TLen: 0,
   stat: [],
 };
@@ -89,14 +87,10 @@ let massNameRegion: Array<string> = [];
 let pointsEtalonXctrl: XctrlInfo[];
 let flagEtalonInf = true;
 
-const date = new Date();
-const tekYear = date.getFullYear();
+let date = new Date();
 let formSett = MakeDate(date);
 let formSettToday = MakeDate(date);
 let formSettOld = MakeDate(date);
-
-let eventInp: any = null;
-let inpDate = false;
 
 let interval = 5;
 let tekIdNow = 0;
@@ -123,7 +117,9 @@ const App = () => {
   const dispatch = useDispatch();
   //========================================================
   const [pointsXctrl, setPointsXctrl] = React.useState<Array<XctrlInfo>>([]);
-  const [pointsReg, setPointsReg] = React.useState<RegionInfo>({} as RegionInfo);
+  const [pointsReg, setPointsReg] = React.useState<RegionInfo>(
+    {} as RegionInfo
+  );
   const [isOpenInf, setIsOpenInf] = React.useState(false);
   const [pointsTfl, setPointsTfl] = React.useState<Array<Tflight>>([]);
   const [isOpenDev, setIsOpenDev] = React.useState(false);
@@ -131,9 +127,11 @@ const App = () => {
   const [pointsOldSt, setPointsOldSt] = React.useState<Array<Statistic>>([]);
   const [isOpenSt, setIsOpenSt] = React.useState(false);
   const [isOpenOldSt, setIsOpenOldSt] = React.useState(false);
-  const [bsLogin, setBsLogin] = React.useState('');
-  const [valueDate, setValueDate] = React.useState<Date | null>(new Date(formSett));
-  const [value, setValue] = React.useState('1');
+  const [bsLogin, setBsLogin] = React.useState("");
+  const [valueDate, setValueDate] = React.useState<Date | null>(
+    new Date(formSett)
+  );
+  const [value, setValue] = React.useState("1");
   const [trigger, setTrigger] = React.useState(true);
 
   const [open, setOpen] = React.useState(true);
@@ -152,7 +150,8 @@ const App = () => {
           // ключ - символьное число
           massRegion.push(Number(key));
           massNameRegion.push(pointsReg[key]);
-          if (pointsReg[key].length > dlStrMenu) dlStrMenu = pointsReg[key].length;
+          if (pointsReg[key].length > dlStrMenu)
+            dlStrMenu = pointsReg[key].length;
         }
       }
       regionGlob = massRegion[0];
@@ -171,23 +170,24 @@ const App = () => {
             key={i}
             sx={styleModalMenu}
             variant="contained"
-            onClick={() => handleCloseModal(massRegion[i])}>
+            onClick={() => handleCloseModal(massRegion[i])}
+          >
             <b>{massNameRegion[i]}</b>
-          </Button>,
+          </Button>
         );
       }
       return resStr;
     };
 
     const styleModal = {
-      position: 'absolute',
-      left: '50%',
-      top: '50%',
-      transform: 'translate(-50%, -50%)',
+      position: "absolute",
+      left: "50%",
+      top: "50%",
+      transform: "translate(-50%, -50%)",
       width: dlStrMenu,
-      bgcolor: 'background.paper',
-      border: '2px solid #000',
-      borderColor: 'primary.main',
+      bgcolor: "background.paper",
+      border: "2px solid #000",
+      borderColor: "primary.main",
       borderRadius: 4,
       boxShadow: 24,
       p: 3,
@@ -197,7 +197,7 @@ const App = () => {
       <Modal open={open}>
         <Box sx={styleModal}>
           <Stack direction="column">
-            <Box sx={{ textAlign: 'center' }}>Выбор региона:</Box>
+            <Box sx={{ textAlign: "center" }}>Выбор региона:</Box>
             {/* <Box sx={{ overflowX: 'auto', height: '36vh' }}>{SpisRegion()}</Box> */}
             {SpisRegion()}
           </Stack>
@@ -223,7 +223,7 @@ const App = () => {
           }
         }
         if (newRecord) {
-          console.log('Points новая запись i=', i);
+          console.log("Points новая запись i=", i);
           pointsAdd.push(pointsXctrl[i]);
         }
       }
@@ -262,12 +262,16 @@ const App = () => {
   };
 
   const host =
-    'wss://' + window.location.host + window.location.pathname + 'W' + window.location.search;
+    "wss://" +
+    window.location.host +
+    window.location.pathname +
+    "W" +
+    window.location.search;
 
   if (flagOpenWS) {
     WS = new WebSocket(host);
     flagOpenWS = false;
-    if (WS.url === 'wss://localhost:3000/W') debug = true;
+    if (WS.url === "wss://localhost:3000/W") debug = true;
     // let pageUrl = new URL(window.location.href);
     // let homeRegion = String(Number(pageUrl.searchParams.get("Region")));
     // console.log('homeRegion:',homeRegion)
@@ -275,15 +279,15 @@ const App = () => {
 
   React.useEffect(() => {
     WS.onopen = function (event: any) {
-      console.log('WS.current.onopen:', event);
+      console.log("WS.current.onopen:", event);
     };
 
     WS.onclose = function (event: any) {
-      console.log('WS.current.onclose:', event);
+      console.log("WS.current.onclose:", event);
     };
 
     WS.onerror = function (event: any) {
-      console.log('WS.current.onerror:', event);
+      console.log("WS.current.onerror:", event);
     };
 
     WS.onmessage = function (event: any) {
@@ -291,59 +295,59 @@ const App = () => {
       let data = allData.data;
       //console.log('пришло:', data);
       switch (allData.type) {
-        case 'getDevices':
-          console.log('data_getDevices:', data);
+        case "getDevices":
+          console.log("data_getDevices:", data);
           setPointsTfl(data.tflight ?? []);
           setIsOpenDev(true);
           break;
-        case 'xctrlInfo':
-          console.log('data_xctrlInfo:', data);
+        case "xctrlInfo":
+          console.log("data_xctrlInfo:", data);
           setPointsXctrl(data.xctrlInfo ?? []);
           if (regionGlob === 0) setPointsReg(data.regionInfo ?? []);
           setIsOpenInf(true);
           break;
-        case 'getStatistics':
-          console.log('data_NewStatistics:', data);
+        case "getStatistics":
+          console.log("data_NewStatistics:", data);
           setPointsSt(data.statistics ?? []);
           SetStatisticsIntervalNow(data.statistics ?? []);
           nullNewStatistics = false;
           setIsOpenSt(true);
           break;
-        case 'getOldStatistics':
-          console.log('data_OLDSTATistics:', formSettOld, data);
+        case "getOldStatistics":
+          console.log("data_OLDSTATistics:", formSettOld, data);
           setPointsOldSt(data.statistics ?? []);
           SetStatisticsIntervalOld(data.statistics ?? []);
           nullOldStatistics = false;
           if (!data.statistics) nullOldStatistics = true;
           setIsOpenOldSt(true);
           break;
-        case 'busy':
+        case "busy":
           setBsLogin(data.login);
           break;
         default:
-          console.log('data_default:', data);
+          console.log("data_default:", data);
       }
     };
   }, []);
 
   if (debug && flagOpenDebug) {
-    console.log('РЕЖИМ ОТЛАДКИ!!! ');
+    console.log("РЕЖИМ ОТЛАДКИ!!! ");
     regionGlob = 1;
-    axios.get('http://localhost:3000/otladkaPoints.json').then(({ data }) => {
+    axios.get("http://localhost:3000/otladkaPoints.json").then(({ data }) => {
       setPointsTfl(data.data.tflight);
       setIsOpenDev(true);
     });
-    const ipAdress: string = 'http://localhost:3000/otladkaXctrl.json';
+    const ipAdress: string = "http://localhost:3000/otladkaXctrl.json";
     //const ipAdress: string = "http://localhost:3000/otladkaGlob.json";
     axios.get(ipAdress).then(({ data }) => {
-      console.log('data:', data.data.xctrlInfo);
+      console.log("data:", data.data.xctrlInfo);
       setPointsXctrl(data.data.xctrlInfo);
       if (regionGlob === 0) setPointsReg(data.data.regionInfo ?? []);
       maskPoint.pointForRedax = data.data.xctrlInfo[0];
       dispatch(maskpointCreate(maskpoint));
       setIsOpenInf(true);
     });
-    axios.get('http://localhost:3000/otladkaStatNow.json').then(({ data }) => {
+    axios.get("http://localhost:3000/otladkaStatNow.json").then(({ data }) => {
       SetStatisticsIntervalNow(data.data.statistics);
       setPointsSt(data.data.statistics);
       dispatch(statsaveCreate(datestat));
@@ -351,7 +355,7 @@ const App = () => {
       // setPointsSt([]);
       setIsOpenSt(true);
     });
-    axios.get('http://localhost:3000/otladkaStatOld.json').then(({ data }) => {
+    axios.get("http://localhost:3000/otladkaStatOld.json").then(({ data }) => {
       formSettOld = formSett;
       SetStatisticsIntervalOld(data.data.statistics);
       setPointsOldSt(data.data.statistics);
@@ -377,83 +381,50 @@ const App = () => {
   };
 
   const InputNewDateInterval = () => {
-    //const [inpDate, setInpDate] = React.useState(false);
-
-    const InputOk = () => {
-      if (eventInp <= date) {
-        formSett = MakeDate(eventInp);
-        if (formSett === formSettToday) {
-          interval = massIntervalNow[tekIdNow];
-          SetValue('3');
-          console.log('ПЕРЕХОД В СТАТИСТИКУ');
-        } else {
-          interval = massIntervalOld[tekIdOld];
-          nullOldStatistics = false;
-          console.log('ПЕРЕХОД В АРХИВ', interval, tekIdOld, massIntervalOld);
-          if (!massIntervalOld.length) {
-            massIntervalOld = [1, 5, 10, 15, 30, 60];
-            interval = 5;
-          }
-          if (formSett !== formSettOld) {
-            console.log('ПЕРЕХОД В НОВЫЙ АРХИВ', debug);
-            if (!debug) {
-              setPointsOldSt([]);
-              setIsOpenOldSt(false);
-            } else {
-              SetStatisticsIntervalOld(pointsOldSt);
-            }
-          }
-          SetValue('4');
-        }
-        setValueDate(eventInp);
-        //setTrigger(!trigger);
-      } else {
-        alert('Введённая дата ещё не наступила!!!');
-        setValueDate(new Date(formSett));
-        //setTrigger(!trigger);
-      }
-      inpDate = false;
-      setTrigger(!trigger);
-    };
-
-    const handleChangeDP = (event: any) => {
-      // if (event === 'Invalid Date') {
-      //   console.log('event Invalid Date');
-      // } else {
-      //   console.log('event !!!', tekYear - event.getFullYear());
-      //   if (tekYear - event.getFullYear() <= 5) {
-      //     console.log('event OK');
-      //     eventInp = event;
-      //     setValueDate(eventInp);
-      //     inpDate = true;
-      //     console.log('eventInp:', inpDate, eventInp, typeof eventInp);
-      //     //setTrigger(!trigger);
-      //   }
-      // }
-      console.log('eventInp:', inpDate, event);
-      if (event !== 'Invalid Date' && tekYear - event.getFullYear() <= 5) {
-        console.log('event OK');
-        eventInp = event;
-        setValueDate(eventInp);
-        inpDate = true;
-      } else {
-        console.log('event No');
-        inpDate = false;
-        //setTrigger(!trigger);
-      }
-    };
-
     const InputDate = () => {
+      const handleChangeDP = (event: any) => {
+        if (event <= new Date()) {
+          formSett = MakeDate(event);
+          if (formSett === formSettToday) {
+            interval = massIntervalNow[tekIdNow];
+            SetValue("3");
+            console.log("ПЕРЕХОД В СТАТИСТИКУ");
+          } else {
+            interval = massIntervalOld[tekIdOld];
+            nullOldStatistics = false;
+            console.log("ПЕРЕХОД В АРХИВ", interval, tekIdOld, massIntervalOld);
+            if (!massIntervalOld.length) {
+              massIntervalOld = [1, 5, 10, 15, 30, 60];
+              interval = 5;
+            }
+            if (formSett !== formSettOld) {
+              console.log("ПЕРЕХОД В НОВЫЙ АРХИВ", debug);
+              if (!debug) {
+                setPointsOldSt([]);
+                setIsOpenOldSt(false);
+              } else {
+                SetStatisticsIntervalOld(pointsOldSt);
+              }
+            }
+            SetValue("4");
+          }
+          setValueDate(event);
+          setTrigger(!trigger);
+        }
+      };
+
       return (
         <Box sx={styleDatePicker}>
           <LocalizationProvider adapterLocale={ru} dateAdapter={AdapterDateFns}>
             <DatePicker
-              views={['day']}
+              views={["day"]}
               value={valueDate}
               inputFormat="dd-MM-yyyy"
               InputProps={{ style: { fontSize: 14 } }}
               onChange={handleChangeDP}
-              renderInput={(params: any) => <TextField {...params} helperText={null} />}
+              renderInput={(params: any) => (
+                <TextField {...params} helperText={null} />
+              )}
             />
           </LocalizationProvider>
         </Box>
@@ -461,7 +432,7 @@ const App = () => {
     };
 
     let dat = MakeInterval(massIntervalNowStart[tekIdNow]);
-    if (value === '4') {
+    if (value === "4") {
       dat = MakeInterval(massIntervalOldStart[tekIdOld]);
     } else {
       if (formSett !== formSettToday) {
@@ -478,21 +449,23 @@ const App = () => {
     }
     for (let i = 0; i < massKey.length; i++) {
       let maskCurrencies = {
-        value: '',
-        label: '',
+        value: "",
+        label: "",
       };
       maskCurrencies.value = massKey[i];
       maskCurrencies.label = massDat[i];
       currencies.push(maskCurrencies);
     }
 
-    const [currency, setCurrency] = React.useState(massKey[massDat.indexOf(interval.toString())]);
+    const [currency, setCurrency] = React.useState(
+      massKey[massDat.indexOf(interval.toString())]
+    );
 
     const handleChangeInt = (event: any) => {
       setCurrency(event.target.value);
       interval = Number(massDat[Number(event.target.value)]);
 
-      if (value === '4') {
+      if (value === "4") {
         massIntervalOld[tekIdOld] = interval;
       } else {
         if (formSett !== formSettToday) {
@@ -506,46 +479,43 @@ const App = () => {
 
     return (
       <>
-        <Grid item container sx={{ border: 0, marginRight: 0.3, width: '140px' }}>
-          <Grid item xs sx={{ textAlign: 'left' }}>
-            {ButtonMenu('5', 'Сохр.в файл')}
+        <Grid item container sx={{ border: 0, marginRight: 1, width: "140px" }}>
+          <Grid item xs sx={{ textAlign: "left" }}>
+            {ButtonMenu("5", "Сохр.в файл")}
           </Grid>
         </Grid>
 
-        <Grid item container sx={{ border: 0, width: '120px' }}>
-          <Grid item xs={7} sx={{ textAlign: 'left' }}>
+        <Grid item container sx={{ border: 0, width: "150px" }}>
+          <Grid item xs={7} sx={{ textAlign: "right" }}>
             Интервал:
           </Grid>
           <Grid item xs={5}>
             <Box sx={styleInt01}>
-              <InputInterval curr={currencies} cur={currency} func={handleChangeInt} />
+              <InputInterval
+                curr={currencies}
+                cur={currency}
+                func={handleChangeInt}
+              />
             </Box>
           </Grid>
         </Grid>
 
-        <Grid item container sx={styleImpBlock}>
-          <Grid item xs={2.3} sx={styleInpOk}>
-            {inpDate && (
-              <Button sx={styleButOk} variant="contained" onClick={() => InputOk()}>
-                Да
-              </Button>
-            )}
-          </Grid>
-          <Grid item xs sx={styleImpServis}>
-            <Box sx={styleInp}>
+        <Box sx={styleImpServis}>
+          <Grid item container>
+            <Grid item xs sx={styleInp}>
               <InputDate />
-            </Box>
+            </Grid>
           </Grid>
-        </Grid>
+        </Box>
       </>
     );
   };
 
   const SetValue = (mode: string) => {
-    if (mode === '5') {
+    if (mode === "5") {
       WriteToCsvFile(datestat);
     } else {
-      if (mode === '3') {
+      if (mode === "3") {
         formSett = formSettToday;
         interval = massIntervalNow[tekIdNow];
         setValueDate(new Date(formSett));
@@ -560,15 +530,19 @@ const App = () => {
       marginRight: 1,
       minWidth: (soob.length + 10) * 6.5,
       maxWidth: (soob.length + 10) * 6.5,
-      maxHeight: '21px',
-      minHeight: '21px',
-      backgroundColor: '#E9F5D8',
-      color: 'black',
-      textTransform: 'unset !important',
+      maxHeight: "21px",
+      minHeight: "21px",
+      backgroundColor: "#E9F5D8",
+      color: "black",
+      textTransform: "unset !important",
     };
 
     return (
-      <Button sx={styleApp02} variant="contained" onClick={() => SetValue(mode)}>
+      <Button
+        sx={styleApp02}
+        variant="contained"
+        onClick={() => SetValue(mode)}
+      >
         <b>{soob}</b>
       </Button>
     );
@@ -596,17 +570,20 @@ const App = () => {
     <>
       <EndSeans bsLogin={bsLogin} />
       {regionGlob === 0 && isOpenInf && <BeginSeans />}
-      <Box sx={{ width: '98.8%', typography: 'body2' }}>
+      <Box sx={{ width: "98.8%", typography: "body2" }}>
         <TabContext value={value}>
-          <Box sx={{ marginLeft: 0.5, backgroundColor: '#F1F5FB' }}>
+          <Box sx={{ marginLeft: 0.5, backgroundColor: "#F1F5FB" }}>
             <Stack direction="row">
-              {!bsLogin && <>{ButtonMenu('1', 'Управление')}</>}
-              {!bsLogin && <>{ButtonMenu('2', 'Характерные точки')}</>}
-              {!bsLogin && <>{ButtonMenu('3', 'Статистика')}</>}
-              {!bsLogin && value === '3' && isOpenSt && <InputNewDateInterval />}
-              {!bsLogin && value === '4' && isOpenOldSt && !nullOldStatistics && (
+              {!bsLogin && <>{ButtonMenu("1", "Управление")}</>}
+              {!bsLogin && <>{ButtonMenu("2", "Характерные точки")}</>}
+              {!bsLogin && <>{ButtonMenu("3", "Статистика")}</>}
+              {!bsLogin && value === "3" && isOpenSt && (
                 <InputNewDateInterval />
               )}
+              {!bsLogin &&
+                value === "4" &&
+                isOpenOldSt &&
+                !nullOldStatistics && <InputNewDateInterval />}
             </Stack>
           </Box>
           <TabPanel value="1">
