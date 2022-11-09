@@ -82,27 +82,56 @@ export const styleModalMenu = {
   textTransform: "unset !important",
 };
 //====== DatePicker =======================================================
-export const styleImpServis = {
-  //border: 1,
+export const styleImpBlock = {
   fontSize: 14,
+  //border: 0,
   marginLeft: "auto",
+  marginRight: "-15px",
   maxHeight: "21px",
   minHeight: "21px",
-  maxWidth: "120px",
-  minWidth: "120px",
+  width: "190px",
+};
+
+export const styleImpServis = {
+  fontSize: 14,
+  maxHeight: "21px",
+  minHeight: "21px",
+  maxWidth: "124px",
+  minWidth: "124px",
 };
 
 export const styleInp = {
   backgroundColor: "#FFFBE5",
   maxHeight: "21px",
   minHeight: "21px",
-  maxWidth: "75px",
-  minWidth: "75px",
+  // maxWidth: "75px",
+  // minWidth: "75px",
+  width: "144px",
+};
+
+export const styleInpOk = {
+  fontSize: 12,
+  maxHeight: "21px",
+  minHeight: "21px",
+  maxWidth: "15px",
+  minWidth: "15px",
+};
+
+export const styleButOk = {
+  fontSize: 12,
+  marginRight: 1,
+  maxWidth: "21px",
+  minWidth: "21px",
+  maxHeight: "21px",
+  minHeight: "21px",
+  backgroundColor: "#E9F5D8",
+  color: "black",
+  textTransform: "unset !important",
 };
 
 export const styleDatePicker = {
   "& > :not(style)": {
-    width: "120px",
+    width: "136px",
     height: "21px",
     display: "flex",
     flexWrap: "nowrap",
@@ -117,8 +146,8 @@ export const styleInt01 = {
   marginRight: 1,
   maxHeight: "21px",
   minHeight: "21px",
-  maxWidth: "50px",
-  minWidth: "50px",
+  maxWidth: "35px",
+  minWidth: "35px",
   backgroundColor: "#FFFBE5",
 };
 
@@ -126,6 +155,6 @@ export const styleBoxFormInt = {
   "& > :not(style)": {
     marginTop: "-2px",
     marginLeft: "-0px",
-    width: "55px",
+    width: "35px",
   },
 };

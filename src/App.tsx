@@ -32,9 +32,12 @@ import { Statistic } from "./interfaceStat.d";
 
 import { styleModalMenu, styleInt01 } from "./AppStyle";
 import { styleImpServis, styleInp, styleDatePicker } from "./AppStyle";
+import { styleInpOk, styleButOk, styleImpBlock } from "./AppStyle";
+
 import { MakeInterval, WriteToCsvFile } from "./AppServiceFunctions";
 
 const MakeDate = (tekData: Date) => {
+  console.log("tekData:", tekData);
   let SMes = tekData.getMonth() + 1;
   let sDate = tekData.getFullYear() + "-";
   if (SMes < 10) sDate = sDate + "0";
@@ -91,6 +94,8 @@ let date = new Date();
 let formSett = MakeDate(date);
 let formSettToday = MakeDate(date);
 let formSettOld = MakeDate(date);
+let eventInp: any = null;
+let inpDate = false;
 
 let interval = 5;
 let tekIdNow = 0;
@@ -381,38 +386,56 @@ const App = () => {
   };
 
   const InputNewDateInterval = () => {
-    const InputDate = () => {
-      const handleChangeDP = (event: any) => {
-        if (event <= new Date()) {
-          formSett = MakeDate(event);
-          if (formSett === formSettToday) {
-            interval = massIntervalNow[tekIdNow];
-            SetValue("3");
-            console.log("ПЕРЕХОД В СТАТИСТИКУ");
-          } else {
-            interval = massIntervalOld[tekIdOld];
-            nullOldStatistics = false;
-            console.log("ПЕРЕХОД В АРХИВ", interval, tekIdOld, massIntervalOld);
-            if (!massIntervalOld.length) {
-              massIntervalOld = [1, 5, 10, 15, 30, 60];
-              interval = 5;
-            }
-            if (formSett !== formSettOld) {
-              console.log("ПЕРЕХОД В НОВЫЙ АРХИВ", debug);
-              if (!debug) {
-                setPointsOldSt([]);
-                setIsOpenOldSt(false);
-              } else {
-                SetStatisticsIntervalOld(pointsOldSt);
-              }
-            }
-            SetValue("4");
-          }
-          setValueDate(event);
-          setTrigger(!trigger);
-        }
-      };
+    //const [inpDate, setInpDate] = React.useState(false);
 
+    const InputOk = () => {
+      console.log("@@@:", formSett, eventInp);
+      if (eventInp <= new Date()) {
+        formSett = MakeDate(eventInp);
+        if (formSett === formSettToday) {
+          interval = massIntervalNow[tekIdNow];
+          SetValue("3");
+          console.log("ПЕРЕХОД В СТАТИСТИКУ");
+        } else {
+          interval = massIntervalOld[tekIdOld];
+          nullOldStatistics = false;
+          console.log("ПЕРЕХОД В АРХИВ", interval, tekIdOld, massIntervalOld);
+          if (!massIntervalOld.length) {
+            massIntervalOld = [1, 5, 10, 15, 30, 60];
+            interval = 5;
+          }
+          if (formSett !== formSettOld) {
+            console.log("ПЕРЕХОД В НОВЫЙ АРХИВ", debug);
+            if (!debug) {
+              setPointsOldSt([]);
+              setIsOpenOldSt(false);
+            } else {
+              SetStatisticsIntervalOld(pointsOldSt);
+            }
+          }
+          SetValue("4");
+        }
+        setValueDate(eventInp);
+        //setTrigger(!trigger);
+      } else {
+        alert("Введённая дата ещё не наступила!!!");
+        setValueDate(new Date(formSett));
+        //setTrigger(!trigger);
+      }
+      inpDate = false;
+      setTrigger(!trigger);
+    };
+
+    const handleChangeDP = (event: any) => {
+      eventInp = event;
+      setValueDate(eventInp);
+      //setInpDate(true);
+      inpDate = true;
+      console.log("eventInp:", inpDate, eventInp);
+      //setTrigger(!trigger);
+    };
+
+    const InputDate = () => {
       return (
         <Box sx={styleDatePicker}>
           <LocalizationProvider adapterLocale={ru} dateAdapter={AdapterDateFns}>
@@ -479,14 +502,18 @@ const App = () => {
 
     return (
       <>
-        <Grid item container sx={{ border: 0, marginRight: 1, width: "140px" }}>
+        <Grid
+          item
+          container
+          sx={{ border: 0, marginRight: 0.3, width: "140px" }}
+        >
           <Grid item xs sx={{ textAlign: "left" }}>
             {ButtonMenu("5", "Сохр.в файл")}
           </Grid>
         </Grid>
 
-        <Grid item container sx={{ border: 0, width: "150px" }}>
-          <Grid item xs={7} sx={{ textAlign: "right" }}>
+        <Grid item container sx={{ border: 0, width: "120px" }}>
+          <Grid item xs={7} sx={{ textAlign: "left" }}>
             Интервал:
           </Grid>
           <Grid item xs={5}>
@@ -500,13 +527,24 @@ const App = () => {
           </Grid>
         </Grid>
 
-        <Box sx={styleImpServis}>
-          <Grid item container>
-            <Grid item xs sx={styleInp}>
-              <InputDate />
-            </Grid>
+        <Grid item container sx={styleImpBlock}>
+          <Grid item xs={2.3} sx={styleInpOk}>
+            {/* {inpDate && ( */}
+              <Button
+                sx={styleButOk}
+                variant="contained"
+                onClick={() => InputOk()}
+              >
+                Да
+              </Button>
+            {/* )} */}
           </Grid>
-        </Box>
+          <Grid item xs sx={styleImpServis}>
+            <Box sx={styleInp}>
+              <InputDate />
+            </Box>
+          </Grid>
+        </Grid>
       </>
     );
   };
