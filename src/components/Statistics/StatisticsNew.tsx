@@ -127,7 +127,7 @@ const StatisticsNew = (props: {
 
   const handleChangeNull = () => {
     console.log("ПЕРЕДАЛ:", 0, massInterval[0]);
-    props.func(-1, massInterval[0]);
+    //props.func(-1, massInterval[0]);
     return <Box sx={styleSt1}>Нет данных по статистике</Box>;
   };
 
@@ -153,8 +153,8 @@ const StatisticsNew = (props: {
 
   return (
     <>
-      {isOpen && !pointsEtalon.length && <>{handleChangeNull()} </>}
-      {isOpen && pointsEtalon.length && (
+      {isOpen && pointsEtalon.length === 0 && <>{handleChangeNull()} </>}
+      {isOpen && pointsEtalon.length !==0 && (
         <>
           <Box sx={styleSt2}>
             <Tabs

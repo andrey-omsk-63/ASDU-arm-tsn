@@ -36,9 +36,10 @@ export const WriteToCsvFile = (datestat: Stater) => {
     textFile += ";";
     for (let j = 0; j < datestat.stat[i].Datas.length; j++) {
       textFile += datestat.stat[i].Datas[j].in;
-      textFile += ";";
+      if (j+1 !== datestat.stat[i].Datas.length) textFile += ";";
     }
-    textFile += ";;\n";
+    //textFile += ";;\n";
+    textFile += "\n";
   }
   const file = new Blob([textFile], { type: "text/plain" });
   element.href = URL.createObjectURL(file);
