@@ -26,32 +26,25 @@ export const MakeInterval = (mode: number) => {
 };
 
 export const WriteToCsvFile = (datestat: Stater) => {
-  console.log("Datestat:", datestat);
-  const element = document.createElement("a");
-  let textFile = "";
+  console.log('Datestat:', datestat);
+  const element = document.createElement('a');
+  let textFile = '';
   for (let i = 0; i < datestat.stat.length; i++) {
     textFile += datestat.stat[i].Hour;
-    textFile += ";";
+    textFile += ';';
     textFile += datestat.stat[i].Min;
-    textFile += ";";
+    textFile += ';';
     for (let j = 0; j < datestat.stat[i].Datas.length; j++) {
       textFile += datestat.stat[i].Datas[j].in;
-      if (j+1 !== datestat.stat[i].Datas.length) textFile += ";";
+      if (j + 1 !== datestat.stat[i].Datas.length) textFile += ';';
     }
     //textFile += ";;\n";
-    textFile += "\n";
+    textFile += '\n';
   }
-  const file = new Blob([textFile], { type: "text/plain" });
+  const file = new Blob([textFile], { type: 'text/plain' });
   element.href = URL.createObjectURL(file);
   let nameFile =
-    datestat.area +
-    "." +
-    datestat.id +
-    " " +
-    datestat.data +
-    " " +
-    datestat.time +
-    ".csv";
+    datestat.area + '.' + datestat.id + ' ' + datestat.data + ' ' + datestat.time + '.csv';
   element.download = nameFile;
   document.body.appendChild(element); // Required for this to work in FireFox
   element.click();
