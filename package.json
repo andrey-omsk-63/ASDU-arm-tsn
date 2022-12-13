@@ -5,6 +5,7 @@
   "dependencies": {
     "@emotion/react": "^11.6.0",
     "@emotion/styled": "^11.6.0",
+    "@material-ui/lab": "^4.0.0-alpha.61",
     "@mui/icons-material": "^5.2.0",
     "@mui/lab": "^5.0.0-alpha.54",
     "@mui/material": "^5.1.0",
@@ -19,6 +20,7 @@
     "axios": "^0.24.0",
     "chart.js": "^3.6.2",
     "date-fns": "^2.29.2",
+    "dayjs": "^1.11.7",
     "faker": "^5.5.3",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",

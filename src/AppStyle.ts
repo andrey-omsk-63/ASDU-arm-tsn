@@ -132,6 +132,7 @@ export const styleButOk = {
 export const styleDatePicker = {
   '& > :not(style)': {
     width: '140px',
+    //width: '240px',
     height: '21px',
     display: 'flex',
     flexWrap: 'nowrap',
