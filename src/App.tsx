@@ -331,11 +331,11 @@ const App = () => {
           console.log('data_OLDSTATistics:', formSettOld, data);
           setPointsOldSt(data.statistics ?? []);
           //SetStatisticsIntervalOld(data.statistics ?? []);
-          let stold = dataStatNow.data.statistics;
-          if (data.statistics) stold = data.statistics;
-          SetStatisticsIntervalOld(stold);
+          let stOld = dataStatNow.data.statistics;
+          if (data.statistics) stOld = data.statistics;
+          SetStatisticsIntervalOld(stOld);
           nullOldStatistics = false;
-          if (!data.statistics) nullOldStatistics = true;
+          //if (!data.statistics) nullOldStatistics = true;
           setIsOpenOldSt(true);
           break;
         case 'busy':
