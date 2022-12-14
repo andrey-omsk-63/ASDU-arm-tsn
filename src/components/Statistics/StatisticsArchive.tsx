@@ -3,8 +3,6 @@ import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 
-//import axios from 'axios';
-
 import StatisticXTArchive from './StatisticXTArchive';
 
 import { Statistic } from '../../interfaceStat.d';
@@ -95,7 +93,7 @@ const StatisticsArchive = (props: {
   };
 
   const handleChangeNull = () => {
-    console.log('ПЕРЕДАЛ:', 0, massInterval[0]);
+    //console.log('ПЕРЕДАЛ:', 0, massInterval[0]);
     //props.func(-1, massInterval[0]);
     return <Box sx={styleSt1}>На эту дату данных по статистике НЕТ</Box>;
   };
