@@ -118,6 +118,7 @@ const StatisticsNew = (props: {
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
     tekValue = newValue;
+    console.log('###tekValue:',tekValue,pointsEtalon[tekValue].area,pointsEtalon[tekValue].id)
     props.func(tekValue, massInterval[tekValue]);
   };
 

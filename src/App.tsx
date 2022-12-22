@@ -63,6 +63,8 @@ export interface Stater {
   time: string;
   TLen: number;
   stat: Array<any>;
+  tekArea: number;
+  tekId: number;
 }
 
 export let dateStat: Stater = {
@@ -72,6 +74,8 @@ export let dateStat: Stater = {
   time: "24:00",
   TLen: 0,
   stat: [],
+  tekArea: 0,
+  tekId: 0,
 };
 
 export interface Pointer {
@@ -267,6 +271,7 @@ const App = () => {
       massIntervalNowStart.push(points[i].Statistics[0].TLen);
       if (!i) interval = massIntervalNow[0];
     }
+    console.log("IntervalNow:",points, interval, massIntervalNow);
   };
 
   const SetStatisticsIntervalOld = (points: any) => {
@@ -278,6 +283,7 @@ const App = () => {
         massIntervalOldStart.push(points[i].Statistics[0].TLen);
         if (!i) interval = massIntervalOld[0];
       }
+      console.log("IntervalOld:", interval, massIntervalNow);
       tekIdOld = 0;
       formSettOld = formSett;
     }
@@ -382,6 +388,7 @@ const App = () => {
       // SetStatisticsIntervalNow([]);   // костыль для отладки
       let st = dataStatNow.data.statistics;
       if (data.statistics) st = data.statistics;
+      console.log('ST',st)
       SetStatisticsIntervalNow(st);
       // setPointsSt([]);
       setIsOpenSt(true);
@@ -400,6 +407,7 @@ const App = () => {
   }
 
   const SetIdNow = (newId: number, intervalId: number) => {
+    console.log('SetIdNow:',newId, intervalId)
     tekIdNow = newId;
     interval = intervalId;
     if (tekIdNow < 0) {
@@ -410,6 +418,7 @@ const App = () => {
   };
 
   const SetIdOld = (newId: number, intervalId: number) => {
+    console.log('SetIdOld:',newId, intervalId)
     tekIdOld = newId;
     if (intervalId) interval = intervalId;
     setTrigger(!trigger);
@@ -419,20 +428,21 @@ const App = () => {
     const InputOk = () => {
       if (eventInp <= date) {
         formSett = MakeDate(eventInp);
+        console.log("Даты:", formSett, formSettToday);
         if (formSett === formSettToday) {
           interval = massIntervalNow[tekIdNow];
           SetValue("3");
-          //console.log('ПЕРЕХОД В СТАТИСТИКУ');
+          console.log("ПЕРЕХОД В СТАТИСТИКУ",interval,tekIdOld,massIntervalOld);
         } else {
           interval = massIntervalOld[tekIdOld];
           nullOldStatistics = false;
-          //console.log('ПЕРЕХОД В АРХИВ', interval, tekIdOld, massIntervalOld);
+          console.log("ПЕРЕХОД В АРХИВ", interval, tekIdOld, massIntervalOld);
           if (!massIntervalOld.length) {
             massIntervalOld = [1, 5, 10, 15, 30, 60];
             interval = 5;
           }
           if (formSett !== formSettOld) {
-            //console.log('ПЕРЕХОД В НОВЫЙ АРХИВ', debug);
+            console.log("ПЕРЕХОД В НОВЫЙ АРХИВ", debug);
             if (!debug) {
               setPointsOldSt([]);
               setIsOpenOldSt(false);
@@ -525,6 +535,8 @@ const App = () => {
       currencies.push(maskCurrencies);
     }
 
+    console.log("interval", interval);
+
     const [currency, setCurrency] = React.useState(
       massKey[massDat.indexOf(interval.toString())]
     );
@@ -597,6 +609,7 @@ const App = () => {
       if (mode === "3") {
         formSett = formSettToday;
         interval = massIntervalNow[tekIdNow];
+        console.log('SetValue:',mode,interval,tekIdNow, massIntervalNow)
         setValueDate(dayjs(formSett));
       }
       setValue(mode);
@@ -644,6 +657,8 @@ const App = () => {
   };
 
   UpdateXctrl(); // разноска обновлений Xctrl
+
+  console.log('!!!:',interval, formSett, formSettToday, nullNewStatistics, nullOldStatistics)
 
   return (
     <>
@@ -738,35 +753,3 @@ const App = () => {
 
 export default App;
 
-// let massGoodDate: Array<string> = [
-// "2022-11-30",
-// "2022-11-29",
-// "2022-11-28",
-// "2022-11-27",
-// "2022-11-26",
-// "2022-11-25",
-// "2022-11-24",
-// "2022-11-23",
-// "2022-11-22",
-// "2022-11-21",
-// "2022-11-20",
-// "2022-11-19",
-// "2022-11-18",
-// "2022-11-17",
-// "2022-11-16",
-// "2022-11-15",
-// "2022-11-14",
-// "2022-11-13",
-// "2022-11-12",
-// "2022-11-11",
-// "2022-11-10",
-// "2022-11-09",
-// "2022-11-08",
-// "2022-11-07",
-// "2022-11-06",
-// "2022-11-05",
-// "2022-11-04",
-// "2022-11-03",
-// "2022-11-02",
-// "2022-11-01",
-// ];
