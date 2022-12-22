@@ -1,4 +1,7 @@
 import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { statsaveCreate } from '../../redux/actions';
+
 import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -23,6 +26,17 @@ const StatisticsArchive = (props: {
   interval: number;
   func: any;
 }) => {
+  //== Piece of Redux ======================================
+  // let maskpoint = useSelector((state: any) => {
+  //   const { maskpointReducer } = state;
+  //   return maskpointReducer.maskpoint;
+  // });
+  let datestat = useSelector((state: any) => {
+    const { statsaveReducer } = state;
+    return statsaveReducer.datestat;
+  });
+  const dispatch = useDispatch();
+  //========================================================
   let isOpen = props.open;
   let points = props.points;
   let reGion = props.region;
@@ -83,11 +97,25 @@ const StatisticsArchive = (props: {
     marginRight: -7,
   };
 
+  console.log('3££££££', tekValue, datestat.tekArea, datestat.tekId);
+  if (datestat.tekArea && datestat.tekId) {
+    tekValue = 0;
+    for (let i = 0; i < pointsEtalon.length; i++) {
+      if (pointsEtalon[i].area === datestat.tekArea && pointsEtalon[i].id === datestat.tekId)
+        tekValue = i;
+    }
+  }
+  console.log('4££££££', tekValue, datestat.tekArea, datestat.tekId);
+
   const [value, setValue] = React.useState(tekValue);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
     tekValue = newValue;
+    datestat.tekArea = pointsEtalon[tekValue].area;
+    datestat.tekId = pointsEtalon[tekValue].id;
+    console.log('$$$tekValue:', tekValue, datestat.tekArea, datestat.tekId);
+    dispatch(statsaveCreate(datestat));
     props.func(tekValue, massInterval[tekValue]);
     //console.log("Old_ПЕРЕДАЛ:", tekValue, massInterval[tekValue]);
   };
