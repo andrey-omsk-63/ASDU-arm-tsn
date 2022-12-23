@@ -70,7 +70,6 @@ const StatisticsNew = (props: {
       massInterval.push(5);
       massIntervalEt.push(5);
     }
-    console.log('massInterval', massInterval, points);
     points = [];
   } else {
     if (massInterval.length) massInterval[tekValue] = props.interval;
@@ -127,7 +126,7 @@ const StatisticsNew = (props: {
     marginRight: -7,
   };
 
-  console.log('1££££££', tekValue, datestat.tekArea, datestat.tekId);
+
   if (datestat.tekArea && datestat.tekId) {
     tekValue = 0;
     for (let i = 0; i < pointsEtalon.length; i++) {
@@ -135,7 +134,6 @@ const StatisticsNew = (props: {
         tekValue = i;
     }
   }
-  console.log('2££££££', tekValue, datestat.tekArea, datestat.tekId);
 
   const [value, setValue] = React.useState(tekValue);
 
@@ -144,14 +142,11 @@ const StatisticsNew = (props: {
     tekValue = newValue;
     datestat.tekArea = pointsEtalon[tekValue].area;
     datestat.tekId = pointsEtalon[tekValue].id;
-    console.log('###tekValue:', tekValue, datestat.tekArea, datestat.tekId);
     dispatch(statsaveCreate(datestat));
     props.func(tekValue, massInterval[tekValue]);
   };
 
   const handleChangeNull = () => {
-    console.log('ПЕРЕДАЛ:', 0, massInterval[0]);
-    //props.func(-1, massInterval[0]);
     return <Box sx={styleSt1}>На текущюю дату данных по статистике НЕТ</Box>;
   };
 
