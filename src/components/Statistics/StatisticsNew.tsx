@@ -126,7 +126,6 @@ const StatisticsNew = (props: {
     marginRight: -7,
   };
 
-
   if (datestat.tekArea && datestat.tekId) {
     tekValue = 0;
     for (let i = 0; i < pointsEtalon.length; i++) {
@@ -162,6 +161,7 @@ const StatisticsNew = (props: {
       );
     } else {
       for (let i = 0; i < pointsEtalon.length; i++) {
+        // =====
         labl = pointsEtalon[i].area.toString() + ':' + pointsEtalon[i].id.toString();
         resSps.push(<Tab key={i} sx={styleSt1} label={labl} />);
       }
