@@ -678,6 +678,7 @@ const App = () => {
                   date={formSett}
                   interval={interval}
                   func={SetIdNow}
+                  pointsTfl={pointsTfl}
                 />
               )}
             {WS !== null &&
@@ -692,6 +693,7 @@ const App = () => {
                   date={formSett}
                   interval={interval}
                   func={SetIdOld}
+                  pointsTfl={pointsTfl}
                 />
               )}
           </TabPanel>
@@ -705,6 +707,7 @@ const App = () => {
                 date={formSett}
                 interval={interval}
                 func={SetIdOld}
+                pointsTfl={pointsTfl}
               />
             )}
           </TabPanel>

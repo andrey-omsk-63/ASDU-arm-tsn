@@ -11,6 +11,7 @@ import Tab from '@mui/material/Tab';
 import StatisticXTNew from './StatisticXTNew';
 
 import { Statistic } from '../../interfaceStat.d';
+import { Tflight } from '../../interfaceMNG.d';
 
 let tekValue = 0;
 let pointsEtalon: Statistic[];
@@ -26,7 +27,10 @@ const StatisticsNew = (props: {
   date: string;
   interval: number;
   func: any;
+  pointsTfl: Tflight[];
 }) => {
+  // console.log('points:', props.points);
+  // console.log('pointsTfl:', props.pointsTfl);
   //== Piece of Redux ======================================
   // let maskpoint = useSelector((state: any) => {
   //   const { maskpointReducer } = state;
@@ -161,8 +165,16 @@ const StatisticsNew = (props: {
       );
     } else {
       for (let i = 0; i < pointsEtalon.length; i++) {
-        // =====
-        labl = pointsEtalon[i].area.toString() + ':' + pointsEtalon[i].id.toString();
+        let sub = '';
+        for (let j = 0; j < props.pointsTfl.length; j++) {
+          if (
+            Number(props.pointsTfl[j].region.num) === pointsEtalon[i].region &&
+            Number(props.pointsTfl[j].area.num) === pointsEtalon[i].area &&
+            props.pointsTfl[j].ID === pointsEtalon[i].id
+          )
+            sub = props.pointsTfl[j].subarea.toString();
+        }
+        labl = pointsEtalon[i].area + ':' + sub + ':' + pointsEtalon[i].id;
         resSps.push(<Tab key={i} sx={styleSt1} label={labl} />);
       }
     }
