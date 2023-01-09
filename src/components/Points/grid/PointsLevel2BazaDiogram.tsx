@@ -1,11 +1,11 @@
-import * as React from 'react';
-import Grid from '@mui/material/Grid';
-//import Button from "@mui/material/Button";
+import * as React from "react";
+import Grid from "@mui/material/Grid";
+//import Box from "@mui/material/Button";
 
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 
-import { XctrlInfo } from '../../../interfaceGl.d';
+import { XctrlInfo } from "../../../interfaceGl.d";
 
 let xtPropsOld = -1;
 let crossRoadOld = -1;
@@ -21,29 +21,29 @@ const PointsLevel2BazaDiogram = (props: {
   const crRoad = props.crossroad;
 
   const colorsGraf = [
-    'orange',
-    'Turquoise',
-    'YellowGreen',
+    "orange",
+    "Turquoise",
+    "YellowGreen",
 
-    'Yellow',
-    'Pink',
-    'Aqua',
+    "Yellow",
+    "Pink",
+    "Aqua",
 
-    'Lime',
-    'Tomato',
-    'teal',
+    "Lime",
+    "Tomato",
+    "teal",
 
-    'purple',
-    'RosyBrown',
-    'Coral',
+    "purple",
+    "RosyBrown",
+    "Coral",
 
-    'Olive',
-    'Magenta',
-    'DarkGray',
+    "Olive",
+    "Magenta",
+    "DarkGray",
 
-    'RoyalBlue',
-    'SpringGreen',
-    'Violet',
+    "RoyalBlue",
+    "SpringGreen",
+    "Violet",
   ];
 
   const [openLoader, setOpenLoader] = React.useState(true);
@@ -54,19 +54,22 @@ const PointsLevel2BazaDiogram = (props: {
   const axisHorizon = horizon;
   const steepHorizon = 12 / axisHorizon;
   const axisVertical = vertical;
-  //const steepVertical = 84.8 / axisVertical;
   const steepVertical = 86.4 / axisVertical;
-
+  
   let matrix: string[][] = [[]];
 
   let scale: number = 1;
-  let coler = 'red';
-  let colerOld = '';
+  let coler = "red";
+  let colerOld = "";
   let masStr = [];
   let masCol = [];
   let colBl = 0;
 
-  if (xtPropsOld !== xtProps || crossRoadOld !== crRoad || pointsOld !== points) {
+  if (
+    xtPropsOld !== xtProps ||
+    crossRoadOld !== crRoad ||
+    pointsOld !== points
+  ) {
     xtPropsOld = xtProps;
     crossRoadOld = crRoad;
     pointsOld = points;
@@ -81,7 +84,7 @@ const PointsLevel2BazaDiogram = (props: {
       let ratio = 0;
       let luchP = 1;
       let luchO = 1;
-      let coler = 'red';
+      let coler = "red";
       let i = 0;
       let j = 0;
 
@@ -89,7 +92,8 @@ const PointsLevel2BazaDiogram = (props: {
         luchO = points.xctrls[crRoad].StrategyB[num].vleft;
         luchP = points.xctrls[crRoad].StrategyB[num].vright;
         ratio =
-          points.xctrls[crRoad].StrategyB[num].xright / points.xctrls[crRoad].StrategyB[num].xleft;
+          points.xctrls[crRoad].StrategyB[num].xright /
+          points.xctrls[crRoad].StrategyB[num].xleft;
         coler = colorsGraf[num * 3];
         if (luchP !== 1 || luchO !== 1) {
           if (i < j * luchO * ratio) coler = colorsGraf[num * 3 + 1];
@@ -159,7 +163,7 @@ const PointsLevel2BazaDiogram = (props: {
 
     const PointsXt112Comp1Tab4Str = (j: number) => {
       resStr = [];
-      coler = 'red';
+      coler = "red";
       colerOld = matrix[j / scale][0 / scale];
       masStr = [];
       masCol = [];
@@ -187,8 +191,9 @@ const PointsLevel2BazaDiogram = (props: {
             item
             sx={{
               backgroundColor: masCol[i],
-              height: String(steepVertical * scale) + 'vh',
-            }}></Grid>,
+              height: String(steepVertical * scale) + "vh",
+            }}
+          ></Grid>
         );
       }
       return resStr;
@@ -199,7 +204,7 @@ const PointsLevel2BazaDiogram = (props: {
       resSps.push(
         <Grid key={j} item container sx={{ border: 0 }}>
           {PointsXt112Comp1Tab4Str(j)}
-        </Grid>,
+        </Grid>
       );
     }
 
@@ -211,7 +216,7 @@ const PointsLevel2BazaDiogram = (props: {
   };
 
   const styleBackdrop = {
-    color: '#fff',
+    color: "#fff",
     zIndex: (theme: any) => theme.zIndex.drawer + 1,
   };
 
@@ -232,11 +237,36 @@ const PointsLevel2BazaDiogram = (props: {
 
   if (openLoader) Output();
 
+  let vl01 = vertical / points.xctrls[crRoad].StrategyB[1].xleft;
+  let levelV01 = 86.4 / vl01;
+  let mt01 = "-" + levelV01 + "vh";
+  let dlBlok = (window.innerWidth / 30) * 2;
+  let hl01 = horizon / points.xctrls[crRoad].StrategyB[1].xright;
+  let levelH01 = dlBlok / hl01-6.3;
+  let ml01 = levelH01 + "vh";
+
+  const stylePointInf = {
+    //border: 1,
+    fontSize: 10.5,
+    position: "absolute",
+    // marginTop: "-86.4vh",
+    marginTop: mt01,
+    // marginLeft: "112vh",
+    marginLeft: ml01,
+    textAlign: "right",
+    width: "7vh",
+  };
+ 
   return (
-    <Grid container>
-      {openLoader && <Dinama />}
-      {!openLoader && <>{PointsXt112Comp1Tab4()}</>}
-    </Grid>
+    <>
+      <Grid container>
+        {openLoader && <Dinama />}
+        {!openLoader && <>{PointsXt112Comp1Tab4()}</>}
+      </Grid>
+      <Grid item sx={stylePointInf}>
+        <b>1000x9990</b>
+      </Grid>
+    </>
   );
 };
 

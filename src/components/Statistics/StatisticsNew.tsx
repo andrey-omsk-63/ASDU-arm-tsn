@@ -165,7 +165,7 @@ const StatisticsNew = (props: {
       );
     } else {
       for (let i = 0; i < pointsEtalon.length; i++) {
-        let sub = '';
+        let sub = '0';
         for (let j = 0; j < props.pointsTfl.length; j++) {
           if (
             Number(props.pointsTfl[j].region.num) === pointsEtalon[i].region &&
