@@ -323,15 +323,18 @@ const PointsLevel2Baza = (props: {
   const PointsLevel2BazaTab1 = () => {
     let name = formName.slice(0, 29);
 
+    console.log('!!!!!!:',pointsEt.yellow)
+
     return (
-      <Grid container sx={{ height: "15.5vh" }}>
-        <Grid item xs={12} sx={{ border: 0 }}>
+      <Grid container sx={{ height: "19.5vh" }}>
+        <Grid item xs={12} sx={{ border: 1 }}>
           <Grid container item>
             <Grid item xs={3.5}>
               <Box sx={{ fontSize: 10.5, marginTop: 0.5 }}>
                 <b>Наименование ХТ</b> <br /> <br />
                 <b>Максимум прямого</b> <br /> <br />
-                <b>Максимум обратного</b>
+                <b>Максимум обратного</b> <br /> <br />
+                <b>Работа по НК и СК</b>
               </Box>
             </Grid>
             <Grid item xs>
@@ -351,6 +354,8 @@ const PointsLevel2Baza = (props: {
                   {maskpoint.pointForRedax.xctrls[props.crossroad].left}
                   <br /> <br />
                   {maskpoint.pointForRedax.xctrls[props.crossroad].right}
+                  <br /> <br />
+                  Вкл с 00:00 до 06:00
                 </b>
               </Box>
             </Grid>

@@ -45,7 +45,7 @@ export const styleXTG02 = {
 export const styleXTG03 = {
   marginTop: 0.5,
   border: 1,
-  height: '35vh',
+  height: '33vh',
   borderRadius: 1,
   borderColor: 'primary.main',
 };

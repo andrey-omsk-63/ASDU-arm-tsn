@@ -57,7 +57,7 @@ const PointsLevel2Area = (props: {
   const [openSetStr, setOpenSetStr] = React.useState(false);
   const [points, setPoints] = React.useState(pointsEt);
   const [trigger, setTrigger] = React.useState(false);
-
+//Макс
   if (xtPropsOld !== xtProps || crossRoadOld !== crossRoad) {
     pointGraf = props.xctrll;
     xtPropsOld = xtProps;

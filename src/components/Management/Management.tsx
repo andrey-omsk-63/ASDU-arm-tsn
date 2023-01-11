@@ -19,7 +19,6 @@ const Management = (props: {
   xctrll: XctrlInfo[];
   region: string;
 }) => {
-  //if (props.ws.url === 'wss://localhost:3000/W') debug = true;
   let isOpen = props.open;
   let points = props.points;
   let pointsAdd: Tflight[] = [];
