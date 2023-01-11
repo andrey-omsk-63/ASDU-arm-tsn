@@ -55,7 +55,7 @@ const PointsLevel2BazaDiogram = (props: {
   const steepHorizon = 12 / axisHorizon;
   const axisVertical = vertical;
   const steepVertical = 86.4 / axisVertical;
-  const dlBlok = (window.innerWidth / 12.53) * 8;
+  const dlBlok = (window.innerWidth / 12.55) * 8;
 
   let matrix: string[][] = [[]];
 
@@ -238,7 +238,7 @@ const PointsLevel2BazaDiogram = (props: {
 
     for (let i = 0; i < lengStrategyB; i++) {
       let vl01 = vertical / points.xctrls[crRoad].StrategyB[i].xleft;
-      let mt01 = '-' + 86.4 / vl01 + 'vh';
+      let mt01 = '-' + 86.3 / vl01 + 'vh';
       let hl01 = horizon / points.xctrls[crRoad].StrategyB[i].xright;
       let ml01 = dlBlok / hl01 - 69 + 'px';
       let title =

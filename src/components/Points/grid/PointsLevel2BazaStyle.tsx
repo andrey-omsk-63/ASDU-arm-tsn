@@ -67,12 +67,13 @@ export const styleXTG05 = {
 
 export const styleBut01 = {
   fontSize: 10,
-  //marginTop: -0.1,
-  maxHeight: '18px',
-  minHeight: '18px',
+  marginTop: -0.3,
+  maxHeight: '15px',
+  minHeight: '15px',
   maxWidth: '205px',
   minWidth: '205px',
-  backgroundColor: '#FFFBE5',
+  // backgroundColor: '#FFFBE5', // молоко
+  backgroundColor: '#E9F5D8', // салатовый
   color: 'black',
   textTransform: 'unset !important',
 };
@@ -83,8 +84,8 @@ export const styleBut02 = {
   minHeight: '21px',
   maxWidth: '2%',
   minWidth: '2%',
-  backgroundColor: '#FFFBE5',
-  //backgroundColor: "#E9F5D8",
+  //backgroundColor: '#FFFBE5',
+  backgroundColor: '#E9F5D8',
   color: 'black',
   textTransform: 'unset !important',
 };
@@ -97,7 +98,7 @@ export const styleBut03 = {
   maxWidth: '193px',
   minWidth: '193px',
   //backgroundColor: '#FFFBE5',
-  backgroundColor: "#E9F5D8",
+  backgroundColor: '#E9F5D8',
   color: 'black',
   textTransform: 'unset !important',
 };
@@ -148,6 +149,9 @@ export const styleInpName = {
 export const styleInpArg = {
   '& > :not(style)': { width: '12ch', bgcolor: '#FFFBE5' },
 };
+export const styleInpTime = {
+  '& > :not(style)': { width: '2ch', bgcolor: '#FFFBE5' },
+};
 
 export const styleInpKnop = {
   color: 'black',
@@ -155,7 +159,7 @@ export const styleInpKnop = {
   maxHeight: '21px',
   minHeight: '21px',
   //backgroundColor: '#F1F3F4',
-  backgroundColor: "#E9F5D8",
+  backgroundColor: '#E9F5D8',
   textAlign: 'center',
   textTransform: 'unset !important',
 };
