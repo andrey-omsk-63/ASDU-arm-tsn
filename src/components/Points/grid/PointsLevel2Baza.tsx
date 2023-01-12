@@ -62,6 +62,8 @@ const PointsLevel2Baza = (props: {
   const crossRoad = props.crossroad;
   const xctrLl = props.xctrll;
 
+  console.log("pointsEt", pointsEt);
+
   const [openSetName, setOpenSetName] = React.useState(false);
   const [openSetStr, setOpenSetStr] = React.useState(false);
   const [points, setPoints] = React.useState(pointsEt);
@@ -72,6 +74,7 @@ const PointsLevel2Baza = (props: {
   const [maxRight, setMaxRight] = React.useState(
     pointsEt.xctrls[crossRoad].right
   );
+  const [yellow, setYellow] = React.useState(pointsEt.yellow.make);
   const [tmStart, setTmStart] = React.useState(pointsEt.yellow.start);
   const [tmStop, setTmStop] = React.useState(pointsEt.yellow.stop);
   const [trigger, setTrigger] = React.useState(false);
@@ -90,6 +93,7 @@ const PointsLevel2Baza = (props: {
     setMaxRight(pointsEt.xctrls[crossRoad].right);
     setTmStart(pointsEt.yellow.start);
     setTmStop(pointsEt.yellow.stop);
+    setYellow(pointsEt.yellow.make);
     setPoints(pointsEt);
     if (maskpoint.newXt) {
       maskpoint.pointForRedax = pointsEt;
@@ -115,10 +119,12 @@ const PointsLevel2Baza = (props: {
   }
 
   const SetName = () => {
+    let yell = 0;
+    if (yellow) yell = 1;
     const [valuen1, setValuen1] = React.useState(formName);
     const [valuen2, setValuen2] = React.useState(maxLeft);
     const [valuen3, setValuen3] = React.useState(maxRight);
-    const [valuen4, setValuen4] = React.useState(maxRight);
+    const [valuen4, setValuen4] = React.useState(yell);
     const [valuen5, setValuen5] = React.useState(TimeStr(tmStart).slice(0, 2));
     const [valuen6, setValuen6] = React.useState(TimeStr(tmStart).slice(3, 5));
     const [valuen7, setValuen7] = React.useState(TimeStr(tmStop).slice(0, 2));
@@ -166,9 +172,17 @@ const PointsLevel2Baza = (props: {
     const handleClose = () => {
       let pointRab = JSON.parse(JSON.stringify(maskpoint.pointForRedax));
 
+      console.log("111:", pointRab, valuen4);
+
       pointRab.xctrls[props.crossroad].name = valuen1;
       pointRab.xctrls[props.crossroad].left = valuen2;
       pointRab.xctrls[props.crossroad].right = valuen3;
+      let yell = true;
+      if (!valuen4) yell = false;
+      pointRab.yellow.make = yell;
+
+      console.log("yell:", yell);
+
       let timeStart = Number(valuen5) * 60 + Number(valuen6);
       pointRab.yellow.start = timeStart;
       let timeStop = Number(valuen7) * 60 + Number(valuen8);
@@ -176,9 +190,13 @@ const PointsLevel2Baza = (props: {
       pointRab.yellow.stop = timeStop;
       setPoints(pointRab);
       maskpoint.pointForRedax = pointRab;
+
+      console.log("222:", maskpoint.pointForRedax);
+
       setFormName(valuen1);
       setMaxLeft(valuen2);
       setMaxRight(valuen3);
+      setYellow(yell);
       setTmStart(timeStart);
       setTmStop(timeStop);
       setOpenSetName(false);
@@ -193,9 +211,9 @@ const PointsLevel2Baza = (props: {
 
     const InputerMode = () => {
       const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        console.log('получил:',event.target.value)
-        //setCurrency(event.target.value);
-        //massFaz[mode + shift] = massDat[Number(event.target.value)];
+        console.log("получил:", event.target.value);
+        setCurrency(Number(event.target.value));
+        setValuen4(Number(event.target.value));
       };
 
       const handleKey = (event: any) => {
@@ -204,7 +222,7 @@ const PointsLevel2Baza = (props: {
 
       const styleBoxForm = {
         "& > :not(style)": {
-          backgroundColor: '#FFFBE5', // молоко
+          backgroundColor: "#FFFBE5", // молоко
           marginTop: "0px",
           marginLeft: "-0px",
           width: "63px",
@@ -229,10 +247,8 @@ const PointsLevel2Baza = (props: {
         currencies.push(maskCurrencies);
       }
 
-      console.log("######", dat, massKey, massDat, currencies);
-
-      const [currency, setCurrency] = React.useState(1);
-      //const [trigger, setTrigger] = React.useState(true);
+      const [currency, setCurrency] = React.useState(valuen4);
+      console.log("######", dat, massKey, massDat, currency);
 
       return (
         <Box component="form" sx={styleBoxForm}>
