@@ -178,3 +178,12 @@ export const styleXTG045 = {
   borderRadius: 1,
   borderColor: 'primary.main',
 };
+
+export const styleBoxForm = {
+  '& > :not(style)': {
+    backgroundColor: '#FFFBE5', // молоко
+    marginTop: '0px',
+    marginLeft: '-0px',
+    width: '63px',
+  },
+};
