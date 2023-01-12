@@ -1,8 +1,8 @@
-import React from 'react';
-import Modal from '@mui/material/Modal';
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
+import React from "react";
+
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 
 export interface DataKnob {
   knop: Knob[];
@@ -17,14 +17,14 @@ export interface Knob {
 }
 
 let otpravka = true;
-let soobDispatch = '';
-let nomDispatch = 'Вкл';
+let soobDispatch = "";
+let nomDispatch = "Вкл";
 let dataKnob: Knob[] = [
   {
     cmd: 13,
     param: 99,
-    region: '',
-    area: '',
+    region: "",
+    area: "",
     subarea: 0,
   },
 ];
@@ -39,13 +39,16 @@ const ManagementKnobXT = (props: {
 }) => {
   const [value, setValue] = React.useState(21);
   const [open, setOpen] = React.useState(false);
+  const [trigger, setTrigger] = React.useState(false);
 
   const handleOpen = () => {
     setOpen(true);
     const handleSendOpen = () => {
       if (props.ws !== null) {
         if (props.ws.readyState === WebSocket.OPEN) {
-          props.ws.send(JSON.stringify({ type: 'stopDevices', region: props.region }));
+          props.ws.send(
+            JSON.stringify({ type: "stopDevices", region: props.region })
+          );
           otpravka = true;
         } else {
           setTimeout(() => {
@@ -58,15 +61,12 @@ const ManagementKnobXT = (props: {
   };
 
   const handleClose = () => {
-    setOpen(false);
-    setValue(21);
     const handleSendOpen = () => {
       if (props.ws !== null) {
         if (props.ws.readyState === WebSocket.OPEN) {
-          props.ws.send(JSON.stringify({ type: 'getDevices', region: props.region }));
-          otpravka = false;
-          soobDispatch = '';
-          nomDispatch = 'Вкл';
+          props.ws.send(
+            JSON.stringify({ type: "getDevices", region: props.region })
+          );
         } else {
           setTimeout(() => {
             handleSendOpen();
@@ -74,50 +74,59 @@ const ManagementKnobXT = (props: {
         }
       }
     };
+
+    setOpen(false);
+    setValue(21);
     handleSendOpen();
+    otpravka = true;
+    soobDispatch = "";
+    nomDispatch = "Вкл";
     props.setDataKn(dataKnob);
+    setTrigger(false);
   };
 
   const stylePK = {
-    position: 'absolute',
-    top: '22.8%',
-    left: '33%',
-    transform: 'translate(-50%, -50%)',
+    textAlign: "center",
+    position: "absolute",
+    top: "22.8%",
+    left: "33%",
+    transform: "translate(-50%, -50%)",
     width: 164,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    borderColor: 'primary.main',
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    borderColor: "primary.main",
     borderRadius: 2,
     boxShadow: 24,
     p: 2,
   };
-  
+
   const styleBatton = {
     fontSize: 10,
     //backgroundColor: '#F1F3F4',
     backgroundColor: "#E9F5D8",
-    color: 'black',
+    color: "black",
   };
 
   const styleSoob = {
     fontSize: 12,
-    backgroundColor: '#F1F3F4',
-    color: 'black',
-    textAlign: 'center',
+    backgroundColor: "#F1F3F4",
+    color: "black",
+    textAlign: "center",
   };
 
   const styleSoobPusto = {
-    backgroundColor: '#F1F3F4',
-    color: '#F1F3F4',
+    backgroundColor: "#F1F3F4",
+    color: "#F1F3F4",
   };
 
   const styleBatMenu = {
     fontSize: 12.9,
-    //backgroundColor: '#F1F3F4',
+    textAlign: "center",
     backgroundColor: "#E9F5D8",
-    color: 'black',
+    color: "black",
     marginTop: 1,
-    textTransform: 'unset !important',
+    width: "121px",
+    textTransform: "unset !important",
   };
 
   const ButtonDo = () => {
@@ -127,7 +136,7 @@ const ManagementKnobXT = (props: {
           if (props.ws.readyState === WebSocket.OPEN) {
             props.ws.send(
               JSON.stringify({
-                type: 'dispatch',
+                type: "dispatch",
                 data: {
                   cmd: 13,
                   param: value,
@@ -135,7 +144,7 @@ const ManagementKnobXT = (props: {
                   area: props.areaa,
                   subarea: props.subArea,
                 },
-              }),
+              })
             );
           } else {
             setTimeout(() => {
@@ -150,17 +159,17 @@ const ManagementKnobXT = (props: {
       };
 
       handleSendOpen();
-      soobDispatch = 'Отправлено';
-      if (value === 0) nomDispatch = 'Откл';
+      soobDispatch = "Отправлено";
+      if (value === 0) nomDispatch = "Откл";
       otpravka = false;
     } else {
-      soobDispatch = '';
-      nomDispatch = 'Вкл';
+      soobDispatch = "";
+      nomDispatch = "Вкл";
     }
 
     return (
       <>
-        {soobDispatch === 'Отправлено' && (
+        {soobDispatch === "Отправлено" && (
           <>
             <Box sx={styleSoobPusto}>Pusto</Box>
             <Box sx={styleSoob}>
@@ -176,28 +185,65 @@ const ManagementKnobXT = (props: {
     );
   };
 
+  const SetValue = (mode: number) => {
+    setValue(mode);
+    setTrigger(true);
+  };
+
+  const ButtMenu = (soob: string, mode: number) => {
+    return (
+      <Button
+        sx={styleBatMenu}
+        variant="contained"
+        onClick={() => SetValue(mode)}
+      >
+        {soob}
+      </Button>
+    );
+  };
+
+  const BoxMenu = (soob: string) => {
+    return (
+      <>
+        <Box>
+          <b>{soob}</b>
+        </Box>
+        <br />
+      </>
+    );
+  };
+
   return (
-    <div>
-      <Button size="small" sx={styleBatton} variant="contained" onClick={handleOpen}>
+    <>
+      <Button
+        size="small"
+        sx={styleBatton}
+        variant="contained"
+        onClick={handleOpen}
+      >
         XT
       </Button>
       <Modal open={open} hideBackdrop>
         <Box sx={stylePK}>
-          <Stack direction="column">
-            <Button sx={styleBatMenu} variant="contained" onClick={() => setValue(0)}>
-              Отключить
-            </Button>
-            <Button sx={styleBatMenu} variant="contained" onClick={() => setValue(1)}>
-              Включить
-            </Button>
-            <Button sx={styleBatMenu} variant="contained" onClick={handleClose}>
-              Выход
-            </Button>
-            {ButtonDo()}
-          </Stack>
+          {!trigger && (
+            <>
+              {ButtMenu("Отключить", 0)}
+              {ButtMenu("Включить", 1)}
+            </>
+          )}
+          {trigger && (
+            <>
+              {BoxMenu("Отключить")}
+              {BoxMenu("Включить")}
+            </>
+          )}
+          <Button sx={styleBatMenu} variant="contained" onClick={handleClose}>
+            Выход
+          </Button>
+          {trigger && <>{ButtonDo()}</>}
         </Box>
       </Modal>
-    </div>
+    </>
   );
 };
 

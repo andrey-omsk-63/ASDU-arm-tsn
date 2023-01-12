@@ -1,5 +1,10 @@
 import { Stater } from './App';
 
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+
 export const MakeInterval = (mode: number) => {
   let dat: any = [];
   switch (mode) {
@@ -71,3 +76,82 @@ export const SendSocketgetStatisticsList = (debug: boolean, ws: WebSocket, regio
   };
   handleSendOpen();
 };
+//=== PointsLevel2Baza =============================
+export const TimeStr = (tim: number) => {
+  let timLiner = "";
+  let hour = Math.trunc(tim / 60);
+  let min = tim % 60;
+  if (hour < 10) timLiner = "0";
+  timLiner += hour.toString();
+  timLiner += ":";
+  if (min < 10) timLiner += "0";
+  timLiner += min.toString();
+  return timLiner;
+};
+
+export const BoxTextField = (argum: any, hChange: any) => {
+  const handleKey = (event: any) => {
+    if (event.key === "Enter") event.preventDefault();
+  };
+  
+  return (
+    <TextField
+      size="small"
+      onKeyPress={handleKey} //отключение Enter
+      inputProps={{ style: { fontSize: 14 } }}
+      value={argum}
+      onChange={hChange}
+      variant="standard"
+    />
+  );
+};
+
+export const Inputer = (name: string, argum: any, hChange: any, styleX: any) => {
+  return (
+    <Grid container sx={{ fontSize: 15 }}>
+      <Grid item xs={5}>
+        {name}
+      </Grid>
+      <Grid item xs>
+        <Box sx={styleX}>{BoxTextField(argum, hChange)}</Box>
+      </Grid>
+    </Grid>
+  );
+};
+
+export const WorkMenuEdit = (xss: number, soob: string, servisFunc: any) => {
+  const styleBut03 = {
+    fontSize: 13.5,
+    marginTop: -0.5,
+    maxHeight: '21px',
+    minHeight: '21px',
+    maxWidth: '193px',
+    minWidth: '193px',
+    //backgroundColor: '#FFFBE5',
+    backgroundColor: '#E9F5D8',
+    color: 'black',
+    textTransform: 'unset !important',
+  };
+
+  const styleXTG05 = {
+    marginTop: -3.0,
+    height: '3vh',
+    textAlign: 'right',
+  };
+
+  return (
+    <Grid container item>
+      <Grid item xs={xss}></Grid>
+      <Grid item xs={3} sx={styleXTG05}>
+        <Button
+          sx={styleBut03}
+          variant="contained"
+          onClick={() => servisFunc()}
+        >
+          <b>{soob}</b>
+        </Button>
+      </Grid>
+    </Grid>
+  );
+};
+//==================================================
