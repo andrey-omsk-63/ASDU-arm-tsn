@@ -12,11 +12,11 @@ import TextField from "@mui/material/TextField";
 
 import PointsLevel2AreaDiogram from "./PointsLevel2AreaDiogram";
 
-import { styleSetInf, styleModalEnd } from "./PointsLevel2BazaStyle";
-import { styleInpArg, styleInpKnop } from "./PointsLevel2BazaStyle";
-import { styleXTG05, styleBut02, styleBut03 } from "./PointsLevel2BazaStyle";
-import { styleXTG00, styleXTG01, styleXTG021 } from "./PointsLevel2BazaStyle";
-import { styleXTG02, styleXTG035, styleXTG045 } from "./PointsLevel2BazaStyle";
+import { styleSetInf, styleModalEnd } from "./PointsGridStyle";
+import { styleInpArg, styleInpKnop } from "./PointsGridStyle";
+import { styleXTG05, styleBut02, styleBut03 } from "./PointsGridStyle";
+import { styleXTG00, styleXTG01, styleXTG021 } from "./PointsGridStyle";
+import { styleXTG02, styleXTG035, styleXTG045 } from "./PointsGridStyle";
 
 import { XctrlInfo } from "../../../interfaceGl.d";
 

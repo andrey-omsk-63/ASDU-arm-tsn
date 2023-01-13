@@ -18,13 +18,13 @@ import { WorkMenuEdit, ButtRec, ConclStr } from '../../../AppServiceFunctions';
 import { SendHandleSend, ConclHeader } from '../../../AppServiceFunctions';
 import { InputTimeAndMode, SaveFunc } from '../../../AppServiceFunctions';
 
-import { styleXTG00, styleXTG01, styleXTG011 } from './PointsLevel2BazaStyle';
-import { styleXTG021, styleXTG02, styleXTG03 } from './PointsLevel2BazaStyle';
-import { styleXTG04, styleBoxForm } from './PointsLevel2BazaStyle';
-import { styleBut02, styleModalEnd } from './PointsLevel2BazaStyle';
-import { styleSetInf, styleSetInff } from './PointsLevel2BazaStyle';
-import { styleInpName, styleInpKnop } from './PointsLevel2BazaStyle';
-import { styleInpArg, styleInpTime } from './PointsLevel2BazaStyle';
+import { styleXTG00, styleXTG01, styleXTG011 } from './PointsGridStyle';
+import { styleXTG021, styleXTG02, styleXTG03 } from './PointsGridStyle';
+import { styleXTG04, styleBoxForm } from './PointsGridStyle';
+import { styleBut02, styleModalEnd } from './PointsGridStyle';
+import { styleSetInf, styleSetInff } from './PointsGridStyle';
+import { styleInpName } from './PointsGridStyle';
+import { styleInpArg, styleInpTime } from './PointsGridStyle';
 
 import { XctrlInfo } from '../../../interfaceGl.d';
 

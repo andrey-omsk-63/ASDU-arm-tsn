@@ -12,7 +12,7 @@ const PointsMainScrGrid3 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: nu
     borderRight: 1,
     borderBottom: 1,
     borderColor: 'primary.main',
-    padding: 1,
+    padding: 0.7,
     textAlign: 'center',
     backgroundColor: '#C0C0C0',
   };
@@ -21,7 +21,7 @@ const PointsMainScrGrid3 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: nu
     //borderRight: 1,
     borderBottom: 1,
     borderColor: 'primary.main',
-    padding: 1,
+    padding: 0.7,
     textAlign: 'center',
     backgroundColor: '#C0C0C0',
   };
@@ -30,7 +30,7 @@ const PointsMainScrGrid3 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: nu
     borderRight: 1,
     borderBottom: 1,
     borderColor: 'primary.main',
-    padding: 1,
+    padding: 0.7,
     textAlign: 'center',
   };
 
@@ -38,7 +38,7 @@ const PointsMainScrGrid3 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: nu
     //borderRight: 1,
     borderBottom: 1,
     borderColor: 'primary.main',
-    padding: 1,
+    padding: 0.7,
     textAlign: 'center',
   };
 

@@ -4,6 +4,8 @@ import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 
+import ManagKnobError from "./ManagKnobError";
+
 export interface DataKnob {
   knop: Knob[];
 }
@@ -39,6 +41,8 @@ const ManagementKnobXT = (props: {
 }) => {
   const [value, setValue] = React.useState(21);
   const [open, setOpen] = React.useState(false);
+  const [openSoobErr, setOpenSoobErr] = React.useState(false);
+  const [beginWork, setBeginWork] = React.useState(true);
   const [trigger, setTrigger] = React.useState(false);
 
   const handleOpen = () => {
@@ -83,6 +87,7 @@ const ManagementKnobXT = (props: {
     nomDispatch = "Вкл";
     props.setDataKn(dataKnob);
     setTrigger(false);
+    setBeginWork(true);
   };
 
   const stylePK = {
@@ -213,6 +218,11 @@ const ManagementKnobXT = (props: {
     );
   };
 
+  if (props.areaa === "0" && !props.subArea && beginWork) {
+    setOpenSoobErr(true);
+    setBeginWork(false);
+  }
+
   return (
     <>
       <Button
@@ -225,6 +235,7 @@ const ManagementKnobXT = (props: {
       </Button>
       <Modal open={open} hideBackdrop>
         <Box sx={stylePK}>
+          {openSoobErr && <ManagKnobError setOpen={setOpenSoobErr} />}
           {!trigger && (
             <>
               {ButtMenu("Отключить", 0)}

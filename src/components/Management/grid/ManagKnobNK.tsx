@@ -1,8 +1,9 @@
 import React from "react";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+
+import ManagKnobError from "./ManagKnobError";
 
 export interface DataKnob {
   knop: Knob[];
@@ -39,6 +40,8 @@ const ManagementKnobSK = (props: {
 }) => {
   const [value, setValue] = React.useState(21);
   const [open, setOpen] = React.useState(false);
+  const [openSoobErr, setOpenSoobErr] = React.useState(false);
+  const [beginWork, setBeginWork] = React.useState(true);
 
   const handleOpen = () => {
     setOpen(true);
@@ -80,6 +83,7 @@ const ManagementKnobSK = (props: {
     };
     handleSendOpen();
     props.setDataKn(dataKnob);
+    setBeginWork(true);
   };
 
   const stylePK = {
@@ -90,7 +94,7 @@ const ManagementKnobSK = (props: {
     width: 64,
     bgcolor: "background.paper",
     border: "2px solid #000",
-    borderColor: 'primary.main',
+    borderColor: "primary.main",
     borderRadius: 2,
     boxShadow: 24,
     p: 2,
@@ -211,6 +215,11 @@ const ManagementKnobSK = (props: {
     );
   };
 
+  if (props.areaa === "0" && !props.subArea && beginWork) {
+    setOpenSoobErr(true);
+    setBeginWork(false);
+  }
+
   return (
     <div>
       <Button
@@ -223,24 +232,24 @@ const ManagementKnobSK = (props: {
       </Button>
       <Modal open={open} hideBackdrop>
         <Box sx={stylePK}>
-          <Stack direction="column">
-            {ButtonKnob(0)}
-            {ButtonKnob(1)}
-            {ButtonKnob(2)}
-            {ButtonKnob(3)}
-            {ButtonKnob(4)}
-            {ButtonKnob(5)}
-            {ButtonKnob(6)}
-            {ButtonKnob(7)}
-            {ButtonKnob(8)}
-            {ButtonKnob(9)}
-            {ButtonKnob(10)}
-            {ButtonKnob(11)}
-            {ButtonKnob(12)}
-            <Button sx={styleBatMenu} variant="contained" onClick={handleClose}>
-              Выход
-            </Button>
-          </Stack>
+          {openSoobErr && <ManagKnobError setOpen={setOpenSoobErr} />}
+          {ButtonKnob(0)}
+          {ButtonKnob(1)}
+          {ButtonKnob(2)}
+          {ButtonKnob(3)}
+          {ButtonKnob(4)}
+          {ButtonKnob(5)}
+          {ButtonKnob(6)}
+          {ButtonKnob(7)}
+          {ButtonKnob(8)}
+          {ButtonKnob(9)}
+          {ButtonKnob(10)}
+          {ButtonKnob(11)}
+          {ButtonKnob(12)}
+          <Button sx={styleBatMenu} variant="contained" onClick={handleClose}>
+            Выход
+          </Button>
+
           {ButtonDo()}
         </Box>
       </Modal>

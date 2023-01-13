@@ -187,3 +187,21 @@ export const styleBoxForm = {
     width: '63px',
   },
 };
+//====== PointsMainScrGrid2 =====================================================
+export const styleXTGl02 = {
+  borderRight: 1,
+  borderBottom: 1,
+  borderColor: "primary.main",
+  padding: 0.7,
+  textAlign: "center",
+  backgroundColor: "#C0C0C0",
+};
+
+export const styleXTGl021 = {
+  borderBottom: 1,
+  borderColor: "primary.main",
+  padding: 0.7,
+  textAlign: "center",
+  backgroundColor: "#C0C0C0",
+};
+//===============================================================================
