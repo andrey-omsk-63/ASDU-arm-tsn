@@ -1,12 +1,12 @@
-import * as React from "react";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
+import * as React from 'react';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 
-import PointsMainScrGrid1 from "./grid/PointsMainScrGrid1";
-import PointsMainScrGrid2 from "./grid/PointsMainScrGrid2";
-import PointsMainScrGrid3 from "./grid/PointsMainScrGrid3";
+import PointsMainScrGrid1 from './grid/PointsMainScrGrid1';
+import PointsMainScrGrid2 from './grid/PointsMainScrGrid2';
+import PointsMainScrGrid3 from './grid/PointsMainScrGrid3';
 
-import { XctrlInfo } from "../../interfaceGl.d";
+import { XctrlInfo } from '../../interfaceGl.d';
 
 const PointsMainScr = (props: {
   open: boolean;
@@ -20,7 +20,7 @@ const PointsMainScr = (props: {
   const styleXt02 = {
     border: 1,
     borderRadius: 1,
-    borderColor: "primary.main",
+    borderColor: 'primary.main',
     padding: 1,
     marginLeft: 0.5,
     marginRight: 1,
@@ -36,54 +36,54 @@ const PointsMainScr = (props: {
   const styleXt04 = {
     border: 1,
     borderRadius: 1,
-    borderColor: "primary.main",
+    borderColor: 'primary.main',
     padding: 1,
     margin: 1,
     marginTop: -0.5,
     marginLeft: -1,
-    height: "69%",
+    height: '69%',
   };
 
   const styleXt05 = {
     border: 1,
     borderRadius: 1,
-    borderColor: "primary.main",
+    borderColor: 'primary.main',
     padding: 1,
     margin: 1,
     marginTop: -0.5,
     marginLeft: -0.5,
     marginRight: 1.5,
-    height: "69%",
+    height: '69%',
   };
 
   const TimeStr = (tim: number) => {
-    let timLiner = "";
+    let timLiner = '';
     let hour = Math.trunc(tim / 60);
     let min = tim % 60;
-    if (hour < 10) timLiner = "0";
+    if (hour < 10) timLiner = '0';
     timLiner += hour.toString();
-    timLiner += ":";
-    if (min < 10) timLiner += "0";
+    timLiner += ':';
+    if (min < 10) timLiner += '0';
     timLiner += min.toString();
     return timLiner;
   };
 
-  let resStr1 = "Выключен";
-  let resStr2 = "Выключенo";
+  let resStr1 = 'Выключен';
+  let resStr2 = 'Выключенo';
 
   if (props.open) {
-    if (points.switch) resStr1 = "Включён";
-    if (points.release) resStr2 = "Включeнo";
+    if (points.switch) resStr1 = 'Включён';
+    if (points.release) resStr2 = 'Включeнo';
   }
 
-  let rachet = "Расчёт не возможен";
-  if (points.pkcalc > 0) rachet = "Расчёт выполнен";
+  let rachet = 'Расчёт не возможен';
+  if (points.pkcalc > 0) rachet = 'Расчёт выполнен';
 
-  let yellowSoob = "Выключен";
-  if (!points.yellow.make) yellowSoob = "Включён";
+  let yellowSoob = 'Выключен';
+  if (!points.yellow.make) yellowSoob = 'Включён';
 
-  let uprBP = "Управление по ВР";
-  if (points.pknow > 0) uprBP = "Выбран план №" + points.pknow.toString();
+  let uprBP = 'Управление по ВР';
+  if (points.pknow > 0) uprBP = 'Выбран план №' + points.pknow.toString();
 
   return (
     <Box sx={{ border: 0, marginTop: -3, marginLeft: -3, marginRight: -3 }}>
@@ -97,7 +97,7 @@ const PointsMainScr = (props: {
             <Grid item xs={12} sx={styleXt02}>
               <Grid container>
                 <Grid item xs={9.6} sx={{ border: 0 }}>
-                  <Box sx={{ display: "inline-block" }}>
+                  <Box sx={{ display: 'inline-block' }}>
                     <b>Расчёт ХТ </b>&nbsp;
                     {resStr1} &nbsp;<b> Управление</b>&nbsp;&nbsp;
                     {resStr2}
@@ -111,11 +111,11 @@ const PointsMainScr = (props: {
                   </Box>
                 </Grid>
                 <Grid item xs={2.4} sx={{ border: 0 }}>
-                  <Box sx={{ textAlign: "right" }}>
+                  <Box sx={{ textAlign: 'right' }}>
                     <b>{yellowSoob}</b>
-                    {" с "}
+                    {' с '}
                     <b>{TimeStr(points.yellow.start)}</b>
-                    {" до "}
+                    {' до '}
                     <b>{TimeStr(points.yellow.stop)}</b>
                   </Box>
                 </Grid>
@@ -127,11 +127,7 @@ const PointsMainScr = (props: {
                 <Box sx={{ marginRight: -1.5 }}>
                   <Grid container>
                     <Grid item xs={4} sx={styleXt04}>
-                      <PointsMainScrGrid1
-                        open={props.open}
-                        xctrll={props.xctrll}
-                        xtt={xtProps}
-                      />
+                      <PointsMainScrGrid1 open={props.open} xctrll={props.xctrll} xtt={xtProps} />
                     </Grid>
                     <Grid item xs={4} sx={styleXt05}>
                       <PointsMainScrGrid2
@@ -144,6 +140,7 @@ const PointsMainScr = (props: {
                     <Grid item xs sx={styleXt04}>
                       <PointsMainScrGrid3
                         open={props.open}
+                        ws={props.ws}
                         xctrll={props.xctrll}
                         xtt={xtProps}
                       />
