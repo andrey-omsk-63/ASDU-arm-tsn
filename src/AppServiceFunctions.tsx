@@ -207,8 +207,8 @@ export const SaveFunc = (func: any) => {
     marginTop: 1,
     maxHeight: '21px',
     minHeight: '21px',
-    //backgroundColor: '#F1F3F4',
-    backgroundColor: '#E9F5D8',
+    //backgroundColor: '#F1F3F4', // светлосерый
+    backgroundColor: '#E9F5D8',  // салатовый
     textAlign: 'center',
     textTransform: 'unset !important',
   };

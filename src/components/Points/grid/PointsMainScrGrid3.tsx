@@ -89,9 +89,9 @@ const PointsMainScrGrid3 = (props: {
             Номер записи <b> {props.nom + 1} </b>
           </Typography>{' '}
           <br />
-          {Inputer('0', valuen1, handleChange1, styleInpArg)}
-          {Inputer('1', valuen2, handleChange2, styleInpArg)}
-          {Inputer('2', valuen3, handleChange3, styleInpArg)}
+          {Inputer('« 0 »', valuen1, handleChange1, styleInpArg)}
+          {Inputer('« 1 »', valuen2, handleChange2, styleInpArg)}
+          {Inputer('« 2 »', valuen3, handleChange3, styleInpArg)}
           {SaveFunc(handleCloseStr)}
         </Box>
       </Modal>
