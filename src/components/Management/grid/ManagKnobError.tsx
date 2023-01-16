@@ -1,9 +1,9 @@
-import * as React from "react";
+import * as React from 'react';
 
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Modal from "@mui/material/Modal";
-import Typography from "@mui/material/Typography";
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Modal from '@mui/material/Modal';
+import Typography from '@mui/material/Typography';
 
 //import { styleModalEnd, styleSetInf } from "./components/MainMapStyle";
 
@@ -11,7 +11,7 @@ const ManagKnobError = (props: { setOpen: any }) => {
   const [openSet, setOpenSet] = React.useState(true);
 
   const styleSetInf = {
-    outline: "none",
+    outline: 'none',
     position: 'absolute',
     marginTop: '15vh',
     marginLeft: '24vh',
@@ -46,14 +46,11 @@ const ManagKnobError = (props: { setOpen: any }) => {
         <Button sx={styleModalEnd} onClick={handleClose}>
           <b>&#10006;</b>
         </Button>
-        <Typography variant="h6" sx={{ textAlign: "center", color: "red" }}>
+        <Typography variant="h6" sx={{ textAlign: 'center', color: 'red' }}>
           ПРЕДУПРЕЖДЕНИЕ
         </Typography>
-        <Typography variant="h6" sx={{ textAlign: "center", color: "red" }}>
-          Выбран весь регион
-        </Typography>
-        <Typography variant="h6" sx={{ textAlign: "center", color: "red" }}>
-          Будьте внимательны!
+        <Typography variant="h6" sx={{ textAlign: 'center', color: 'red' }}>
+          Выбран весь регион, будьте внимательны!
         </Typography>
       </Box>
     </Modal>
