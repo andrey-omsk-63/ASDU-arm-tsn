@@ -1,18 +1,18 @@
-import * as React from 'react';
+import * as React from "react";
 
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
-import Typography from '@mui/material/Typography';
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Modal from "@mui/material/Modal";
+import Typography from "@mui/material/Typography";
 
-import { Inputer, SaveFunc } from '../../../AppServiceFunctions';
-import { SendHandleSend } from '../../../AppServiceFunctions';
+import { Inputer, SaveFunc } from "../../../AppServiceFunctions";
+import { SendHandleSend } from "../../../AppServiceFunctions";
 
-import { styleXTGl02, styleXTGl021, styleBut02 } from './PointsGridStyle';
-import { styleModalEnd, styleSetInf, styleInpArg } from './PointsGridStyle';
+import { styleXTGl02, styleXTGl021, styleBut02 } from "./PointsGridStyle";
+import { styleModalEnd, styleSetInf, styleInpArg } from "./PointsGridStyle";
 
-import { XctrlInfo } from '../../../interfaceGl.d';
+import { XctrlInfo } from "../../../interfaceGl.d";
 
 let nomStr = 0;
 
@@ -27,8 +27,6 @@ const PointsMainScrGrid2 = (props: {
   const ws = props.ws;
 
   const [openSetStr, setOpenSetStr] = React.useState(false);
-
-  console.log('points2:', points);
 
   const HeaderMainScrGrid2 = () => {
     return (
@@ -77,12 +75,12 @@ const PointsMainScrGrid2 = (props: {
           <Button sx={styleModalEnd} onClick={handleClose}>
             <b>&#10006;</b>
           </Button>
-          <Typography sx={{ textAlign: 'center' }}>
+          <Typography sx={{ textAlign: "center" }}>
             Номер записи <b> {props.nom + 1} </b>
-          </Typography>{' '}
+          </Typography>{" "}
           <br />
-          {Inputer('КС на ДК', valuen1, handleChange1, styleInpArg)}
-          {Inputer('ПК', valuen2, handleChange2, styleInpArg)}
+          {Inputer("КС на ДК", valuen1, handleChange1, styleInpArg)}
+          {Inputer("ПК", valuen2, handleChange2, styleInpArg)}
           {SaveFunc(handleCloseStr)}
         </Box>
       </Modal>
@@ -102,22 +100,26 @@ const PointsMainScrGrid2 = (props: {
       const styleXTG03 = {
         borderRight: 1,
         borderBottom: bordBott,
-        borderColor: 'primary.main',
+        borderColor: "primary.main",
         padding: 0.7,
-        textAlign: 'center',
+        textAlign: "center",
       };
 
       const styleXTG033 = {
         borderBottom: bordBott,
-        borderColor: 'primary.main',
+        borderColor: "primary.main",
         padding: 0.7,
-        textAlign: 'center',
+        textAlign: "center",
       };
 
       resStr.push(
         <Grid key={i} container item xs={12}>
           <Grid xs={1.5} item sx={styleXTG03}>
-            <Button sx={styleBut02} variant="contained" onClick={() => SetOpenSetStr(i)}>
+            <Button
+              sx={styleBut02}
+              variant="contained"
+              onClick={() => SetOpenSetStr(i)}
+            >
               {i + 1}
             </Button>
           </Grid>
@@ -127,7 +129,7 @@ const PointsMainScrGrid2 = (props: {
           <Grid xs={5.25} item sx={styleXTG033}>
             {points.ext[i][1]}
           </Grid>
-        </Grid>,
+        </Grid>
       );
     }
     return resStr;

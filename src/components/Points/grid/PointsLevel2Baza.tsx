@@ -366,12 +366,12 @@ const PointsLevel2Baza = (props: {
 
     const handleChange6 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
-      if (form) setValuen6(Math.abs(form));
+      if (form > 0) setValuen6(form);
     };
 
     const handleChange7 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
-      if (form) setValuen7(Math.abs(form));
+      if (form > 0) setValuen7(form);
     };
 
     const handleChange8 = (event: any) => {

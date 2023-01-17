@@ -1,8 +1,10 @@
-import * as React from 'react';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import * as React from "react";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 
-import { XctrlInfo } from '../../../interfaceGl.d';
+import { TimeStr } from "../../../AppServiceFunctions";
+
+import { XctrlInfo } from "../../../interfaceGl.d";
 
 import {
   Chart as ChartJS,
@@ -13,9 +15,17 @@ import {
   Title,
   Tooltip,
   Legend,
-} from 'chart.js';
-import { Line } from 'react-chartjs-2';
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+} from "chart.js";
+import { Line } from "react-chartjs-2";
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 export interface DataGl {
   labels: string[];
@@ -49,19 +59,19 @@ const PointsLevel2Calc = (props: {
     labels,
     datasets: [
       {
-        label: 'Прямое',
+        label: "Прямое",
         data: [],
         borderWidth: 1,
-        borderColor: 'orange',
-        backgroundColor: 'orange',
+        borderColor: "orange",
+        backgroundColor: "orange",
         pointRadius: 1,
       },
       {
-        label: 'Обратное',
+        label: "Обратное",
         data: [],
         borderWidth: 1,
-        borderColor: 'blue',
-        backgroundColor: 'blue',
+        borderColor: "blue",
+        backgroundColor: "blue",
         pointRadius: 1,
       },
     ],
@@ -71,58 +81,85 @@ const PointsLevel2Calc = (props: {
     fontSize: 11,
     borderRight: 1,
     borderBottom: 1,
-    borderColor: 'primary.main',
+    borderColor: "primary.main",
     padding: 0.2,
-    textAlign: 'center',
+    textAlign: "center",
   };
 
   const styleXTG01 = {
     fontSize: 11,
     borderRight: 1,
     borderBottom: 1,
-    borderColor: 'primary.main',
+    borderColor: "primary.main",
     padding: 0.2,
-    backgroundColor: '#E6EEF5',
-    textAlign: 'center',
+    backgroundColor: "#E6EEF5",
+    textAlign: "center",
   };
 
   const styleXTG02 = {
     fontSize: 11,
     borderRight: 1,
     borderBottom: 1,
-    borderColor: 'primary.main',
+    borderColor: "primary.main",
     padding: 0.4,
-    textAlign: 'center',
-    backgroundColor: '#C0C0C0',
+    textAlign: "center",
+    backgroundColor: "#C0C0C0",
+  };
+
+  const styleXTG03 = {
+    border: 1,
+    borderRadius: 1,
+    borderColor: "primary.main",
   };
 
   const PointsGraf00 = () => {
     const colMin = 60 / points.results[namer][0].Time;
     for (let i = 0; i < points.results[namer].length; i++) {
-      let int = '';
+      let int = "";
       if (i % colMin === 0) {
-        if (i / colMin < 10) int += '0';
+        if (i / colMin < 10) int += "0";
         int += String(i / colMin);
-        int += ':00';
+        int += ":00";
       }
       labels.push(int);
     }
+    let int = 0;
     //график прямого
     let datas = [];
-    for (let i = 0; i < points.results[namer].length; i++) {
-      datas.push(points.results[namer][i].Value[0]);
+    // for (let i = 0; i < points.results[namer].length; i++) {
+    //   datas.push(points.results[namer][i].Value[0]);
+    // }
+    if (points.results[namer].length !== 0)
+      int = points.results[namer][points.results[namer].length - 1].Value[0];
+    datas.push(int);
+    for (let i = 0; i < points.results[namer].length - 1; i++) {
+      int = 0;
+      if (points.results[namer].length !== 0)
+        int = points.results[namer][i].Value[0];
+      datas.push(int);
     }
     data.datasets[0].data = datas;
     //график обратного
     datas = [];
-    for (let i = 0; i < points.results[namer].length; i++) {
-      datas.push(points.results[namer][i].Value[1]);
+    // for (let i = 0; i < points.results[namer].length; i++) {
+    //   datas.push(points.results[namer][i].Value[1]);
+    // }
+    if (points.results[namer].length !== 0)
+      int = points.results[namer][points.results[namer].length - 1].Value[1];
+    datas.push(int);
+    for (let i = 0; i < points.results[namer].length - 1; i++) {
+      int = 0;
+      if (points.results[namer].length !== 0)
+        int = points.results[namer][i].Value[1];
+      datas.push(int);
     }
     data.datasets[1].data = datas;
 
     return (
-      <Grid item xs sx={{ height: '28vh' }}>
-        <PointsGraf01 />
+      <Grid container item>
+        <Grid item xs sx={{ width: "99vh", height: "28vh" }}>
+          <PointsGraf01 />
+        </Grid>
       </Grid>
     );
   };
@@ -133,7 +170,7 @@ const PointsLevel2Calc = (props: {
       maintainAspectRatio: false,
       plugins: {
         legend: {
-          position: 'top' as const,
+          position: "top" as const,
         },
         title: {
           display: false,
@@ -158,90 +195,102 @@ const PointsLevel2Calc = (props: {
           <Grid xs={1} item sx={styleXTG02}>
             <b>КС на ДК</b>
           </Grid>
-          <Grid xs={1} item sx={styleXTG02}>
-            <b>Качество</b>
+          <Grid xs={2} item sx={styleXTG02}>
+            <b>Примечание</b>
           </Grid>
         </Grid>
       </Box>
     );
   };
 
-  const TimeStr = (tim: number) => {
-    let timLiner = '';
-    let hour = Math.trunc(tim / 60);
-    let min = tim % 60;
-
-    if (hour < 10) timLiner = '0';
-    timLiner += hour.toString();
-    timLiner += ':';
-    if (min < 10) timLiner += '0';
-    timLiner += min.toString();
-    return timLiner;
-  };
-
   const PointsLevel2CalcTab1Stroka = () => {
     let resStr = [];
     let pusto = false;
-    let kakchestvo = '';
+    let kakchestvo = "Работа по СК";
     if (points.results !== null) {
       if (points.results[namer]) {
         for (let i = 0; i < points.results[namer].length; i++) {
-          if (!points.results[namer][i].Good) {
-            pusto = true;
-            kakchestvo = 'Нет данных';
-          }
-          if (points.yellow.make) kakchestvo = 'ВР-НК';
+          // if (!points.results[namer][i].Good) {
+          //   pusto = true;
+          //   kakchestvo = "Нет данных";
+          // }
+          let tim = points.results[namer][i].Time;
+          kakchestvo = "Работа по СК";
+          if (
+            !points.yellow.make &&
+            tim >= points.yellow.start &&
+            tim <= points.yellow.stop
+          )
+            kakchestvo = "Работа по НК и СК";
+
           resStr.push(
             <Grid key={Math.random()} container item xs={12}>
               <Grid key={Math.random()} xs={0.5} item sx={styleXTG011}>
                 {TimeStr(points.results[namer][i].Time)}
               </Grid>
-              <Grid key={Math.random()} xs={1} item sx={pusto ? styleXTG011 : styleXTG01}>
+              <Grid
+                key={Math.random()}
+                xs={1}
+                item
+                sx={pusto ? styleXTG011 : styleXTG01}
+              >
                 {points.results[namer][i].Value[0]}
               </Grid>
-              <Grid key={Math.random()} xs={1} item sx={pusto ? styleXTG011 : styleXTG01}>
+              <Grid
+                key={Math.random()}
+                xs={1}
+                item
+                sx={pusto ? styleXTG011 : styleXTG01}
+              >
                 {points.results[namer][i].Value[1]}
               </Grid>
-              <Grid key={Math.random()} xs={1} item sx={pusto ? styleXTG011 : styleXTG01}>
+              <Grid
+                key={Math.random()}
+                xs={1}
+                item
+                sx={pusto ? styleXTG011 : styleXTG01}
+              >
                 {points.results[namer][i].Value[2]}
               </Grid>
-              <Grid key={Math.random()} xs={1} item sx={styleXTG011}>
+              <Grid key={Math.random()} xs={2} item sx={styleXTG011}>
                 {kakchestvo}
               </Grid>
-            </Grid>,
+            </Grid>
           );
           pusto = false;
-          kakchestvo = '';
+          kakchestvo = "";
         }
       }
     }
     return resStr;
   };
 
+  // const input = document.getElementById("exportToPDF");
+  // window.scrollTo(0, 0);
+  // html2canvas(input).then((canvas: any) => {
+  //   document.body.appendChild(canvas);
+  //   const imgData = canvas.toDataURL("image/png");
+  //   const pdf = new jsPDF();
+  //   pdf.addImage(imgData, "PNG", 0, 0);
+  //   pdf.save("test.pdf");
+  // });
+
   return (
-    <>
-      <Box sx={{ marginTop: -0.3, marginLeft: -0, marginRight: 0 }}>
-        <Grid container item sx={{ margin: 0, height: '28vh' }}>
-          <Grid item xs={12} sx={{ border: 1, borderRadius: 1, borderColor: 'primary.main' }}>
-            {points.results !== null && (
-              <div>
-                <PointsGraf00 />
-              </div>
-            )}
-          </Grid>
+    <Box sx={{ marginTop: -0.3 }}>
+      <Grid container item sx={{ height: "28vh" }}>
+        <Grid item xs sx={styleXTG03}>
+          {points.results !== null && <>{PointsGraf00()}</>}
         </Grid>
-        <Grid container item sx={{ marginTop: 0.5, height: '56vh' }}>
-          <Grid item xs={24} sx={{ border: 1, borderRadius: 1, borderColor: 'primary.main' }}>
-            <PointsLevel2CalcTab2Header />
-            <Box sx={{ overflowX: 'auto', height: '56vh' }}>
-              <Grid container item>
-                {PointsLevel2CalcTab1Stroka()}
-              </Grid>
-            </Box>
-          </Grid>
+      </Grid>
+      <Grid container item sx={{ marginTop: 0.5 }}>
+        <Grid item sx={styleXTG03}>
+          {PointsLevel2CalcTab2Header()}
+          <Box sx={{ overflowX: "auto", height: "56vh" }}>
+            <Grid container>{PointsLevel2CalcTab1Stroka()}</Grid>
+          </Box>
         </Grid>
-      </Box>
-    </>
+      </Grid>
+    </Box>
   );
 };
 
