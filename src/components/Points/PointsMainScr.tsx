@@ -1,4 +1,7 @@
 import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { statsaveCreate } from '../../redux/actions';
+
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
@@ -14,6 +17,15 @@ const PointsMainScr = (props: {
   xctrll: XctrlInfo[];
   xtt: number;
 }) => {
+  //== Piece of Redux ======================================
+  let datestat = useSelector((state: any) => {
+    const { statsaveReducer } = state;
+    return statsaveReducer.datestat;
+  });
+  const dispatch = useDispatch();
+  datestat.xtSave = false;
+  dispatch(statsaveCreate(datestat));
+  //========================================================
   const xtProps = props.xtt;
   const points = props.xctrll[xtProps];
 

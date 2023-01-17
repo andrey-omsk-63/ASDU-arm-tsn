@@ -17,7 +17,9 @@ const PointsMenuLevel2 = (props: {
   xtt: number;
   crossroad: number;
   setPoint: any;
+  saveXt: Function;
 }) => {
+  props.saveXt(false);
   const xtProps = props.xtt;
   const [value, setValue] = React.useState('1');
 
@@ -37,7 +39,7 @@ const PointsMenuLevel2 = (props: {
       minHeight: '21px',
       transform: 'rotate(270deg)',
       //backgroundColor: '#F1F3F4',
-      backgroundColor: "#E9F5D8",
+      backgroundColor: '#E9F5D8',
       color: 'black',
       marginBottom: 6.5,
       textTransform: 'unset !important',
@@ -77,7 +79,6 @@ const PointsMenuLevel2 = (props: {
                     ws={props.ws}
                     xctrll={props.xctrll}
                     xtt={xtProps}
-                    //value={value}
                     crossroad={props.crossroad}
                     setPoint={props.setPoint}
                   />
@@ -88,7 +89,6 @@ const PointsMenuLevel2 = (props: {
                     ws={props.ws}
                     xctrll={props.xctrll}
                     xtt={xtProps}
-                    //value={value}
                     crossroad={props.crossroad}
                     setPoint={props.setPoint}
                   />
@@ -98,8 +98,8 @@ const PointsMenuLevel2 = (props: {
                     open={props.open}
                     xctrll={props.xctrll}
                     xtt={xtProps}
-                    //value={value}
                     crossroad={props.crossroad}
+                    saveXt={props.saveXt}
                   />
                 )}
               </Grid>

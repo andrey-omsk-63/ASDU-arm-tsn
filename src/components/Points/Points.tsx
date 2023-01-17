@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { maskpointCreate } from './../../redux/actions';
+import { maskpointCreate, statsaveCreate } from './../../redux/actions';
 
 import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
@@ -20,14 +20,21 @@ const Points = (props: {
   xctrll: XctrlInfo[];
   region: string;
   setPoint: any;
+  saveXt: Function;
 }) => {
   //== Piece of Redux =======================================
   let maskpoint = useSelector((state: any) => {
     const { maskpointReducer } = state;
     return maskpointReducer.maskpoint;
   });
-  //console.log("maskpoint_Points:", maskpoint);
+  let datestat = useSelector((state: any) => {
+    const { statsaveReducer } = state;
+    return statsaveReducer.datestat;
+  });
   const dispatch = useDispatch();
+  datestat.xtSave = false;
+  dispatch(statsaveCreate(datestat));
+  props.saveXt(false);
   //===========================================================
   const stylePXt1 = {
     fontSize: 13.5,
@@ -129,7 +136,7 @@ const Points = (props: {
   };
 
   return (
-    <Box sx={{ border: 0, marginTop: -2.8, marginLeft: -3, marginRight: -5.5 }}>
+    <Box sx={{ border: 0, marginTop: -2.8, marginLeft: -3, marginRight: -5 }}>
       <Box
         sx={{
           maxWidth: '100%',
@@ -157,6 +164,7 @@ const Points = (props: {
               xctrll={pointsEtalon}
               xtt={tekValue}
               setPoint={props.setPoint}
+              saveXt={props.saveXt}
             />
           </>
         )}

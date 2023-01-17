@@ -65,6 +65,7 @@ export interface Stater {
   stat: Array<any>;
   tekArea: number;
   tekId: number;
+  xtSave: boolean;
 }
 
 export let dateStat: Stater = {
@@ -76,6 +77,7 @@ export let dateStat: Stater = {
   stat: [],
   tekArea: 0,
   tekId: 0,
+  xtSave: false,
 };
 
 export interface Pointer {
@@ -157,6 +159,7 @@ const App = () => {
   const [valueDate, setValueDate] = React.useState<Dayjs | null>(null);
   const [value, setValue] = React.useState('1');
   const [trigger, setTrigger] = React.useState(true);
+  const [saveXT, setSaveXT] = React.useState(false);
 
   const [open, setOpen] = React.useState(true);
 
@@ -624,7 +627,13 @@ const App = () => {
     setPointsXctrl(masRab);
   };
 
+  const SetSaveXT = (mode: boolean) => {
+    setSaveXT(mode);
+  };
+
   UpdateXctrl(); // разноска обновлений Xctrl
+
+  console.log('saveXT:', saveXT);
 
   return (
     <>
@@ -637,6 +646,7 @@ const App = () => {
               {!bsLogin && <>{ButtonMenu('1', 'Управление')}</>}
               {!bsLogin && <>{ButtonMenu('2', 'Характерные точки')}</>}
               {!bsLogin && <>{ButtonMenu('3', 'Статистика')}</>}
+              {!bsLogin && value === '2' && saveXT && <>{ButtonMenu('7', 'Сохр.в файл')}</>}
               {!bsLogin && value === '3' && isOpenSt && <InputNewDateInterval />}
               {!bsLogin && value === '4' && isOpenOldSt && !nullOldStatistics && (
                 <InputNewDateInterval />
@@ -662,6 +672,7 @@ const App = () => {
                 xctrll={pointsEtalonXctrl}
                 region={String(regionGlob)}
                 setPoint={SetPointsXctrl}
+                saveXt={SetSaveXT}
               />
             )}
           </TabPanel>
