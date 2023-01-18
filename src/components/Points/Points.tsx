@@ -32,8 +32,8 @@ const Points = (props: {
     return statsaveReducer.datestat;
   });
   const dispatch = useDispatch();
-  datestat.xtSave = false;
-  dispatch(statsaveCreate(datestat));
+  // datestat.xtSave = false;
+  //dispatch(statsaveCreate(datestat));
   props.saveXt(false);
   //===========================================================
   const stylePXt1 = {

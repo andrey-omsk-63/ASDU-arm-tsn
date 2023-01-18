@@ -204,4 +204,46 @@ export const styleXTGl021 = {
   textAlign: "center",
   backgroundColor: "#C0C0C0",
 };
+//====== PointsLevel2Calc =======================================================
+export const styleXTC011 = {
+  fontSize: 11,
+  borderRight: 1,
+  borderBottom: 1,
+  borderColor: "primary.main",
+  padding: 0.2,
+  textAlign: "center",
+};
+
+export const styleXTC01 = {
+  fontSize: 11,
+  borderRight: 1,
+  borderBottom: 1,
+  borderColor: "primary.main",
+  padding: 0.2,
+  backgroundColor: "#E6EEF5",
+  textAlign: "center",
+};
+
+export const styleXTC02 = {
+  fontSize: 11,
+  borderBottom: 1,
+  borderColor: "primary.main",
+  padding: 0.4,
+  textAlign: "center",
+  backgroundColor: "#C0C0C0",
+};
+
+export const styleXTC03 = {
+  border: 1,
+  borderRadius: 1,
+  borderColor: "primary.main",
+};
+
+export const styleXTC033 = {
+  border: 1,
+  borderRadius: 1,
+  borderColor: "primary.main",
+  //width: '99vh',
+  height: "59.5vh",
+};
 //===============================================================================
