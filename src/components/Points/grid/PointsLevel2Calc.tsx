@@ -58,7 +58,7 @@ const PointsLevel2Calc = (props: {
   const xtProps = props.xtt;
   const points = props.xctrll[xtProps];
   const namer = points.xctrls[props.crossroad].name;
-  console.log('points:', namer, points);
+
   if (points.results !== null) props.saveXt(true);
 
   const labels: string[] = [];
