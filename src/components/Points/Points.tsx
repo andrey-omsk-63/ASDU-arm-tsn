@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { maskpointCreate, statsaveCreate } from './../../redux/actions';
+import {
+  maskpointCreate,
+  //statsaveCreate
+} from './../../redux/actions';
 
 import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
@@ -27,10 +30,10 @@ const Points = (props: {
     const { maskpointReducer } = state;
     return maskpointReducer.maskpoint;
   });
-  let datestat = useSelector((state: any) => {
-    const { statsaveReducer } = state;
-    return statsaveReducer.datestat;
-  });
+  // let datestat = useSelector((state: any) => {
+  //   const { statsaveReducer } = state;
+  //   return statsaveReducer.datestat;
+  // });
   const dispatch = useDispatch();
   // datestat.xtSave = false;
   //dispatch(statsaveCreate(datestat));
