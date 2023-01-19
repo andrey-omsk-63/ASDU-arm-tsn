@@ -55,7 +55,7 @@ export const WriteToCsvFileForStat = (datestat: Stater) => {
 };
 
 export const WriteToCsvFileForXT = (datestat: Stater) => {
-  console.log('###', datestat.xtSave);
+  //console.log('###', datestat.xtSave);
   const element = document.createElement('a');
 
   let textFile = ' ;Прямой;Обратный;КС на ДК;Примечание;\n';

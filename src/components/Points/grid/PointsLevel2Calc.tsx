@@ -1,16 +1,19 @@
-import * as React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { statsaveCreate } from '../../../redux/actions';
+import * as React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { statsaveCreate } from "../../../redux/actions";
 
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 
-import { TimeStr } from '../../../AppServiceFunctions';
+import html2canvas from 'html2canvas';
+import { jsPDF } from 'jspdf';
 
-import { styleXTC011, styleXTC01, styleXTC02 } from './PointsGridStyle';
-import { styleXTC03, styleXTC033 } from './PointsGridStyle';
+import { TimeStr } from "../../../AppServiceFunctions";
 
-import { XctrlInfo } from '../../../interfaceGl.d';
+import { styleXTC011, styleXTC01, styleXTC02 } from "./PointsGridStyle";
+import { styleXTC03, styleXTC033 } from "./PointsGridStyle";
+
+import { XctrlInfo } from "../../../interfaceGl.d";
 
 import {
   Chart as ChartJS,
@@ -21,9 +24,18 @@ import {
   Title,
   Tooltip,
   Legend,
-} from 'chart.js';
-import { Line } from 'react-chartjs-2';
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+} from "chart.js";
+import { Line } from "react-chartjs-2";
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+
+  Title,
+  Tooltip,
+  Legend
+);
 
 export interface DataGl {
   labels: string[];
@@ -52,12 +64,14 @@ const PointsLevel2Calc = (props: {
     return statsaveReducer.datestat;
   });
   const dispatch = useDispatch();
-  datestat.xtSave = '';
+  datestat.xtSave = "";
   // dispatch(statsaveCreate(datestat));
   //========================================================
   const xtProps = props.xtt;
   const points = props.xctrll[xtProps];
   const namer = points.xctrls[props.crossroad].name;
+  const chartRef = React.useRef(null);
+  //const chartRef = React.useRef<ChartJS>(null);
 
   if (points.results !== null) props.saveXt(true);
 
@@ -66,19 +80,19 @@ const PointsLevel2Calc = (props: {
     labels,
     datasets: [
       {
-        label: 'Прямое',
+        label: "Прямое",
         data: [],
         borderWidth: 1,
-        borderColor: 'orange',
-        backgroundColor: 'orange',
+        borderColor: "orange",
+        backgroundColor: "orange",
         pointRadius: 1,
       },
       {
-        label: 'Обратное',
+        label: "Обратное",
         data: [],
         borderWidth: 1,
-        borderColor: 'blue',
-        backgroundColor: 'blue',
+        borderColor: "blue",
+        backgroundColor: "blue",
         pointRadius: 1,
       },
     ],
@@ -87,11 +101,11 @@ const PointsLevel2Calc = (props: {
   const PointsGraf00 = () => {
     const colMin = 60 / points.results[namer][0].Time;
     for (let i = 0; i < points.results[namer].length; i++) {
-      let int = '';
+      let int = "";
       if (i % colMin === 0) {
-        if (i / colMin < 10) int += '0';
+        if (i / colMin < 10) int += "0";
         int += String(i / colMin);
-        int += ':00';
+        int += ":00";
       }
       labels.push(int);
     }
@@ -106,7 +120,8 @@ const PointsLevel2Calc = (props: {
     datas.push(int);
     for (let i = 0; i < points.results[namer].length - 1; i++) {
       int = 0;
-      if (points.results[namer].length !== 0) int = points.results[namer][i].Value[0];
+      if (points.results[namer].length !== 0)
+        int = points.results[namer][i].Value[0];
       datas.push(int);
     }
     data.datasets[0].data = datas;
@@ -120,14 +135,15 @@ const PointsLevel2Calc = (props: {
     datas.push(int);
     for (let i = 0; i < points.results[namer].length - 1; i++) {
       int = 0;
-      if (points.results[namer].length !== 0) int = points.results[namer][i].Value[1];
+      if (points.results[namer].length !== 0)
+        int = points.results[namer][i].Value[1];
       datas.push(int);
     }
     data.datasets[1].data = datas;
 
     return (
       <Grid container item>
-        <Grid item xs sx={{ width: '99vh', height: '28vh' }}>
+        <Grid item xs sx={{ width: "99vh", height: "28vh" }}>
           <PointsGraf01 />
         </Grid>
       </Grid>
@@ -140,15 +156,39 @@ const PointsLevel2Calc = (props: {
       maintainAspectRatio: false,
       plugins: {
         legend: {
-          position: 'top' as const,
+          position: "top" as const,
         },
         title: {
           display: false,
         },
       },
     };
+    //let base64Image = null;
+    //chartRef.current && (base64Image = chartRef.current.chartInstance.toBase64Image();)
+    return <Line options={options} data={data} ref={chartRef}  />;
+  };
 
-    return <Line options={options} data={data} />;
+  const handleDownloadPdf = async () => {
+    
+    if (printRef.current) {
+      const element = printRef.current;
+      const canvas = await html2canvas(element);
+      console.log('@@@2:', canvas)
+      const data = canvas.toDataURL('image/png');
+    
+      const pdf = new jsPDF();
+      const imgProperties = pdf.getImageProperties(data);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight =
+        (imgProperties.height * pdfWidth) / imgProperties.width;
+  
+      pdf.addImage(data, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      console.log('@@@3:', pdfWidth, pdfHeight)
+      //pdf.addImage(data, 'PNG', 300, 0,267, 963, );
+      pdf.save('print.pdf');
+      console.log('Test,', pdfWidth, pdfHeight)
+    }
+    
   };
 
   const PointsLevel2CalcTab2Header = () => {
@@ -173,9 +213,9 @@ const PointsLevel2Calc = (props: {
 
   const PointsLevel2CalcTab1Stroka = () => {
     let resStr = [];
-    datestat.xtSave = '';
+    datestat.xtSave = "";
     let pusto = false;
-    let kakchestvo = 'Работа по СК';
+    let kakchestvo = "Работа по СК";
     if (points.results !== null) {
       if (points.results[namer]) {
         for (let i = 0; i < points.results[namer].length; i++) {
@@ -184,15 +224,19 @@ const PointsLevel2Calc = (props: {
           //   kakchestvo = "Нет данных";
           // }
           let tim = points.results[namer][i].Time;
-          kakchestvo = 'Работа по СК';
-          if (!points.yellow.make && tim >= points.yellow.start && tim <= points.yellow.stop)
-            kakchestvo = 'Работа по НК и СК';
+          kakchestvo = "Работа по СК";
+          if (
+            !points.yellow.make &&
+            tim >= points.yellow.start &&
+            tim <= points.yellow.stop
+          )
+            kakchestvo = "Работа по НК и СК";
 
-          let stroka = TimeStr(points.results[namer][i].Time) + ';';
-          stroka += points.results[namer][i].Value[0] + ';';
-          stroka += points.results[namer][i].Value[1] + ';';
-          stroka += points.results[namer][i].Value[2] + ';';
-          stroka += kakchestvo + ';\n';
+          let stroka = TimeStr(points.results[namer][i].Time) + ";";
+          stroka += points.results[namer][i].Value[0] + ";";
+          stroka += points.results[namer][i].Value[1] + ";";
+          stroka += points.results[namer][i].Value[2] + ";";
+          stroka += kakchestvo + ";\n";
           datestat.xtSave += stroka;
 
           resStr.push(
@@ -212,10 +256,10 @@ const PointsLevel2Calc = (props: {
               <Grid xs item sx={styleXTC011}>
                 {kakchestvo}
               </Grid>
-            </Grid>,
+            </Grid>
           );
           pusto = false;
-          kakchestvo = '';
+          kakchestvo = "";
         }
         datestat.data = new Date().toLocaleDateString();
         datestat.time = new Date().toLocaleTimeString().slice(0, -3);
@@ -228,18 +272,46 @@ const PointsLevel2Calc = (props: {
     return resStr;
   };
 
+  // const convertToPdf = () => {
+  //   //let canvas: any = null;
+
+  //   let canvas = document.querySelector(".canvas")[0];
+  //   const imgWidth = 190;
+  //   const pdf = new PdfConverter("p", "mm");
+  //   DomToImage.toPng(canvas).then((dataURL: any) => {
+  //     const imgHeight = (canvas.clientHeight * imgWidth) / canvas.clientWidth;
+  //     pdf.addImage(dataURL, "PNG", 10, 20, imgWidth, imgHeight);
+  //   });
+  //   pdf.save("save.pdf");
+  // };
+
+  // const clickHandler = () => {
+  //   const link = document.createElement("a");
+  //   //const pdfBlob = new Blob([chartRef.current], { type: 'application/pdf' });
+  //   link.download = "chart.jpeg";
+  //   if (chartRef.current) {
+  //     link.href = chartRef.current.toBase64Image("image/jpeg", 1);
+  //   }
+    
+  //   //link.href = URL.createObjectURL(chartRef);
+  //   //link.href = chartRef.current.toBase64Image("image/jpeg", 1);
+  //   //link.click();
+  // };
+  const printRef = React.useRef(null);
+  handleDownloadPdf()
+
   return (
     <Box sx={{ marginTop: -0.3 }}>
-      <Grid container item sx={{ height: '28vh' }}>
-        <Grid item xs sx={styleXTC03}>
+      <Grid container item sx={{ height: "28vh" }}>
+        <Grid ref={printRef} item xs sx={styleXTC03}>
           {points.results !== null && <>{PointsGraf00()}</>}
         </Grid>
       </Grid>
-      <Grid container item sx={{ marginTop: 0.5, height: '59.5vh' }}>
+      <Grid container item sx={{ marginTop: 0.5, height: "59.5vh" }}>
         {points.results !== null && (
           <Grid item sx={styleXTC033}>
             {PointsLevel2CalcTab2Header()}
-            <Box sx={{ overflowX: 'auto', height: '56vh' }}>
+            <Box sx={{ overflowX: "auto", height: "56vh" }}>
               <Grid container>{PointsLevel2CalcTab1Stroka()}</Grid>
             </Box>
           </Grid>

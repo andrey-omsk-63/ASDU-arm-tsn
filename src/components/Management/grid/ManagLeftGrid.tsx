@@ -38,6 +38,8 @@ const ManagementLeftGrid = (props: {
   const pointsXT = props.xctrll;
   let masXT: any = [];
 
+  console.log('pointsXT:', pointsXT)
+
   const styleMG01 = {
     border: 1,
     borderRadius: 1,
@@ -56,10 +58,7 @@ const ManagementLeftGrid = (props: {
     marginTop: 0.5,
     maxHeight: "21px",
     minHeight: "21px",
-    // backgroundColor: 'white',
-    //backgroundColor: "#E8EAED",
     backgroundColor: "#E9F5D8",
-    //backgroundColor: "#F1F3F4",
     color: "black",
     borderRadius: 2,
     textTransform: "unset !important",
@@ -70,8 +69,6 @@ const ManagementLeftGrid = (props: {
     marginTop: 0.5,
     maxHeight: "21px",
     minHeight: "21px",
-    // backgroundColor: 'white',
-    //backgroundColor: "#E8EAED",
     backgroundColor: "#E9F5D8",
     color: "#5B1080",
     borderRadius: 2,

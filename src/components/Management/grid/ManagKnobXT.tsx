@@ -165,7 +165,10 @@ const ManagementKnobXT = (props: {
 
       handleSendOpen();
       soobDispatch = "Отправлено";
-      if (value === 0) nomDispatch = "Откл";
+      if (value === 0) nomDispatch = "Отключить исполнение";
+      if (value === 1) nomDispatch = "Включить исполнение";
+      if (value === 2) nomDispatch = "Отключить расчёт";
+      if (value === 3) nomDispatch = "Включить расчёт";
       otpravka = false;
     } else {
       soobDispatch = "";
@@ -238,14 +241,18 @@ const ManagementKnobXT = (props: {
           {openSoobErr && <ManagKnobError setOpen={setOpenSoobErr} />}
           {!trigger && (
             <>
-              {ButtMenu("Отключить", 0)}
-              {ButtMenu("Включить", 1)}
+              {ButtMenu("Включить исполнение", 1)}
+              {ButtMenu("Отключить исполнение", 0)}
+              {ButtMenu("Включить расчёт", 3)}
+              {ButtMenu("Отключить расчёт", 2)}
             </>
           )}
           {trigger && (
             <>
-              {BoxMenu("Отключить")}
-              {BoxMenu("Включить")}
+              {BoxMenu("Включить исполнение")}
+              {BoxMenu("Отключить исполнение")}
+              {BoxMenu("Включить расчёт")}
+              {BoxMenu("Отключить расчёт")}
             </>
           )}
           <Button sx={styleBatMenu} variant="contained" onClick={handleClose}>

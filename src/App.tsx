@@ -29,6 +29,7 @@ import StatisticsNew from './components/Statistics/StatisticsNew';
 import StatisticsArchive from './components/Statistics/StatisticsArchive';
 import EndSeans from './AppEndSeans';
 import InputInterval from './AppInpInerval';
+import Test from './Test';
 
 import { Tflight } from './interfaceMNG.d';
 import { XctrlInfo } from './interfaceGl.d';
@@ -583,6 +584,7 @@ const App = () => {
   };
 
   const SetValue = (mode: string) => {
+    console.log('111',mode)
     switch (mode) {
       case '3':
         formSett = formSettToday;
@@ -597,19 +599,11 @@ const App = () => {
         console.log('Создаём файлы!!!');
         WriteToCsvFileForXT(datestat);
         break;
+        
       default:
+        console.log('222',mode)
         setValue(mode);
     }
-    // if (mode === "5") {
-    //   WriteToCsvFile(datestat);
-    // } else {
-    //   if (mode === "3") {
-    //     formSett = formSettToday;
-    //     interval = massIntervalNow[tekIdNow];
-    //     setValueDate(dayjs(formSett));
-    //   }
-    //   setValue(mode);
-    // }
   };
 
   const ButtonMenu = (mode: string, soob: string) => {
@@ -668,6 +662,7 @@ const App = () => {
               {!bsLogin && <>{ButtonMenu('1', 'Управление')}</>}
               {!bsLogin && <>{ButtonMenu('2', 'Характерные точки')}</>}
               {!bsLogin && <>{ButtonMenu('3', 'Статистика')}</>}
+              {!bsLogin && <>{ButtonMenu('12', 'Тест')}</>}
               {!bsLogin && value === '2' && saveXT && <>{ButtonMenu('7', 'Сохр.в файл')}</>}
               {!bsLogin && value === '3' && isOpenSt && <InputNewDateInterval />}
               {!bsLogin && value === '4' && isOpenOldSt && !nullOldStatistics && (
@@ -744,6 +739,7 @@ const App = () => {
               />
             )}
           </TabPanel>
+          <TabPanel value="12"><Test /></TabPanel>
         </TabContext>
       </Box>
     </>
