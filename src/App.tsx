@@ -68,6 +68,7 @@ export interface Stater {
   tekArea: number;
   tekId: number;
   xtSave: string;
+  xtGraf: any;
   xtName: string;
 }
 
@@ -81,6 +82,7 @@ export let dateStat: Stater = {
   tekArea: 0,
   tekId: 0,
   xtSave: '',
+  xtGraf: null,
   xtName: '',
 };
 
@@ -584,7 +586,6 @@ const App = () => {
   };
 
   const SetValue = (mode: string) => {
-    console.log('111',mode)
     switch (mode) {
       case '3':
         formSett = formSettToday;
@@ -596,12 +597,9 @@ const App = () => {
         WriteToCsvFileForStat(datestat);
         break;
       case '7':
-        console.log('Создаём файлы!!!');
         WriteToCsvFileForXT(datestat);
         break;
-        
       default:
-        console.log('222',mode)
         setValue(mode);
     }
   };
@@ -662,7 +660,7 @@ const App = () => {
               {!bsLogin && <>{ButtonMenu('1', 'Управление')}</>}
               {!bsLogin && <>{ButtonMenu('2', 'Характерные точки')}</>}
               {!bsLogin && <>{ButtonMenu('3', 'Статистика')}</>}
-              {!bsLogin && <>{ButtonMenu('12', 'Тест')}</>}
+              {/* {!bsLogin && <>{ButtonMenu('12', 'Тест')}</>} */}
               {!bsLogin && value === '2' && saveXT && <>{ButtonMenu('7', 'Сохр.в файл')}</>}
               {!bsLogin && value === '3' && isOpenSt && <InputNewDateInterval />}
               {!bsLogin && value === '4' && isOpenOldSt && !nullOldStatistics && (
@@ -739,7 +737,9 @@ const App = () => {
               />
             )}
           </TabPanel>
-          <TabPanel value="12"><Test /></TabPanel>
+          <TabPanel value="12">
+            <Test />
+          </TabPanel>
         </TabContext>
       </Box>
     </>

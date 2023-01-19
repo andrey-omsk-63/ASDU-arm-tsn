@@ -56,7 +56,6 @@ const PointsLevel2AreaDiogram = (props: {
   const axisHorizon = horizon * 1;
   const steepHorizon = 12 / axisHorizon;
   const axisVertical = vertical * 1;
-  // const steepVertical = 84.4 / axisVertical;
   const steepVertical = 86.4 / axisVertical;
   let matrix: string[][] = [[]];
   let scale = 2;
@@ -175,11 +174,9 @@ const PointsLevel2AreaDiogram = (props: {
   };
 
   const Output = () => {
-    //React.useEffect(() => {
     setTimeout(() => {
       setOpenLoader(false);
     }, 100);
-    //}, []);
   };
 
   const Dinama = () => {

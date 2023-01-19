@@ -5,6 +5,9 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
+import html2canvas from 'html2canvas';
+import { jsPDF } from 'jspdf';
+
 export const MakeInterval = (mode: number) => {
   let dat: any = [];
   switch (mode) {
@@ -55,20 +58,34 @@ export const WriteToCsvFileForStat = (datestat: Stater) => {
 };
 
 export const WriteToCsvFileForXT = (datestat: Stater) => {
-  //console.log('###', datestat.xtSave);
-  const element = document.createElement('a');
+  let nameFile = 'XT.' + datestat.xtName + ' ';
+  nameFile += datestat.data + ' ' + datestat.time;
 
+  const element = document.createElement('a');
   let textFile = ' ;Прямой;Обратный;КС на ДК;Примечание;\n';
   textFile += datestat.xtSave;
   const file = new Blob(['\ufeff', textFile], {
     type: 'text/csv;charset=utf-8',
   });
   element.href = URL.createObjectURL(file);
-  let nameFile = 'XT.' + datestat.xtName + ' ';
-  nameFile += datestat.data + ' ' + datestat.time + '.csv';
-  element.download = nameFile;
+  element.download = nameFile + '.csv';
   document.body.appendChild(element); // Required for this to work in FireFox
   element.click();
+
+  const handleDownloadPdf = async () => {
+    if (datestat.xtGraf.current) {
+      const element = datestat.xtGraf.current;
+      const canvas = await html2canvas(element);
+      const data = canvas.toDataURL('image/png');
+      let pdf = new jsPDF('l', 'pt', 'dl');
+      let imgProperties = pdf.getImageProperties(data);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
+      pdf.addImage(data, 'PNG', 0, 50, pdfWidth, pdfHeight + 33);
+      pdf.save(nameFile + '.pdf');
+    }
+  };
+  handleDownloadPdf();
 };
 
 export const SendSocketgetStatisticsList = (debug: boolean, ws: WebSocket, region: string) => {
