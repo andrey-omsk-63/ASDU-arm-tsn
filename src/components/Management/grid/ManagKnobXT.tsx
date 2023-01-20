@@ -210,16 +210,16 @@ const ManagementKnobXT = (props: {
     );
   };
 
-  const BoxMenu = (soob: string) => {
-    return (
-      <>
-        <Box>
-          <b>{soob}</b>
-        </Box>
-        <br />
-      </>
-    );
-  };
+  // const BoxMenu = (soob: string) => {
+  //   return (
+  //     <>
+  //       <Box>
+  //         <b>{soob}</b>
+  //       </Box>
+  //       <br />
+  //     </>
+  //   );
+  // };
 
   if (props.areaa === "0" && !props.subArea && beginWork) {
     setOpenSoobErr(true);
@@ -247,14 +247,14 @@ const ManagementKnobXT = (props: {
               {ButtMenu("Отключить расчёт", 2)}
             </>
           )}
-          {trigger && (
+          {/* {trigger && (
             <>
               {BoxMenu("Включить исполнение")}
               {BoxMenu("Отключить исполнение")}
               {BoxMenu("Включить расчёт")}
               {BoxMenu("Отключить расчёт")}
             </>
-          )}
+          )} */}
           <Button sx={styleBatMenu} variant="contained" onClick={handleClose}>
             Выход
           </Button>

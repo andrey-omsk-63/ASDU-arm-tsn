@@ -52,7 +52,6 @@ const ManagementKnobPK = (props: {
           props.ws.send(
             JSON.stringify({ type: "stopDevices", region: props.region })
           );
-          otpravka = true;
         } else {
           setTimeout(() => {
             handleSendOpen();
@@ -61,6 +60,7 @@ const ManagementKnobPK = (props: {
       }
     };
     handleSendOpen();
+    otpravka = true;
   };
 
   const handleClose = () => {
@@ -72,7 +72,7 @@ const ManagementKnobPK = (props: {
           props.ws.send(
             JSON.stringify({ type: "getDevices", region: props.region })
           );
-          otpravka = false;
+          otpravka = true;
           soobDispatch = "";
           nomDispatch = "Авт";
         } else {
@@ -124,7 +124,6 @@ const ManagementKnobPK = (props: {
   const styleBatMenu = {
     fontSize: 12.9,
     marginTop: 0.5,
-    //backgroundColor: '#F1F3F4',
     backgroundColor: "#E9F5D8",
     color: "black",
     textTransform: "unset !important",
@@ -146,6 +145,7 @@ const ManagementKnobPK = (props: {
   };
 
   const ButtonDo = () => {
+    // console.log("value =", value, otpravka);
     if (value !== 21 && otpravka) {
       const handleSendOpen = () => {
         if (props.ws !== null) {
@@ -190,12 +190,11 @@ const ManagementKnobPK = (props: {
       handleSendOpen();
       soobDispatch = "Отправлено";
       if (value !== 0) {
-        nomDispatch = "ПК " + value.toString();
+        nomDispatch = "ПК " + value;
+      } else {
+        nomDispatch = "Авт";
       }
       otpravka = false;
-    } else {
-      soobDispatch = "";
-      nomDispatch = "Авт";
     }
 
     return (
@@ -234,19 +233,23 @@ const ManagementKnobPK = (props: {
       <Modal open={open} hideBackdrop>
         <Box sx={stylePK}>
           {openSoobErr && <ManagKnobError setOpen={setOpenSoobErr} />}
-          {ButtonKnob(0)}
-          {ButtonKnob(1)}
-          {ButtonKnob(2)}
-          {ButtonKnob(3)}
-          {ButtonKnob(4)}
-          {ButtonKnob(5)}
-          {ButtonKnob(6)}
-          {ButtonKnob(7)}
-          {ButtonKnob(8)}
-          {ButtonKnob(9)}
-          {ButtonKnob(10)}
-          {ButtonKnob(11)}
-          {ButtonKnob(12)}
+          {value === 21 && (
+            <>
+              {ButtonKnob(0)}
+              {ButtonKnob(1)}
+              {ButtonKnob(2)}
+              {ButtonKnob(3)}
+              {ButtonKnob(4)}
+              {ButtonKnob(5)}
+              {ButtonKnob(6)}
+              {ButtonKnob(7)}
+              {ButtonKnob(8)}
+              {ButtonKnob(9)}
+              {ButtonKnob(10)}
+              {ButtonKnob(11)}
+              {ButtonKnob(12)}
+            </>
+          )}
           <Button sx={styleBatMenu} variant="contained" onClick={handleClose}>
             Выход
           </Button>

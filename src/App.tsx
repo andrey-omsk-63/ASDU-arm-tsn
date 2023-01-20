@@ -1,62 +1,64 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { maskpointCreate, statsaveCreate } from './redux/actions';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { maskpointCreate, statsaveCreate } from "./redux/actions";
 
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
-import Modal from '@mui/material/Modal';
-import Button from '@mui/material/Button';
-import TabPanel from '@mui/lab/TabPanel';
-import TextField from '@mui/material/TextField';
-import TabContext from '@mui/lab/TabContext';
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
+import Modal from "@mui/material/Modal";
+import Button from "@mui/material/Button";
+import TabPanel from "@mui/lab/TabPanel";
+//import TextField from "@mui/material/TextField";
+import TabContext from "@mui/lab/TabContext";
 
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import 'dayjs/locale/ru';
+// import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+// import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+// import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+// import { CalendarPickerSkeleton } from "@mui/x-date-pickers/CalendarPickerSkeleton";
+// import { PickersDay } from "@mui/x-date-pickers/PickersDay";
+// import Badge from "@mui/material/Badge";
+import "dayjs/locale/ru";
+import dayjs, { Dayjs } from "dayjs";
+import axios from "axios";
 
-import { CalendarPickerSkeleton } from '@mui/x-date-pickers/CalendarPickerSkeleton';
-import { PickersDay } from '@mui/x-date-pickers/PickersDay';
-import Badge from '@mui/material/Badge';
+import Management from "./components/Management/Management";
+import Points from "./components/Points/Points";
+import StatisticsNew from "./components/Statistics/StatisticsNew";
+import StatisticsArchive from "./components/Statistics/StatisticsArchive";
+import EndSeans from "./AppEndSeans";
+import InputInterval from "./AppInpInerval";
 
-import dayjs, { Dayjs } from 'dayjs';
-import axios from 'axios';
+import { Tflight } from "./interfaceMNG.d";
+import { XctrlInfo } from "./interfaceGl.d";
+import { Statistic } from "./interfaceStat.d";
+import { RegionInfo } from "./interfaceGl.d";
 
-import Management from './components/Management/Management';
-import Points from './components/Points/Points';
-import StatisticsNew from './components/Statistics/StatisticsNew';
-import StatisticsArchive from './components/Statistics/StatisticsArchive';
-import EndSeans from './AppEndSeans';
-import InputInterval from './AppInpInerval';
-import Test from './Test';
+import { styleModalMenu, styleInt01 } from "./AppStyle";
+import {
+  styleImpServis,
+  styleInp,
+  //styleDatePicker
+} from "./AppStyle";
+import { styleInpOk, styleButOk, styleImpBlock } from "./AppStyle";
 
-import { Tflight } from './interfaceMNG.d';
-import { XctrlInfo } from './interfaceGl.d';
-import { Statistic } from './interfaceStat.d';
-import { RegionInfo } from './interfaceGl.d';
+import { MakeInterval, WriteToCsvFileForStat } from "./AppServiceFunctions";
+import { WriteToCsvFileForXT, ButtonMenu } from "./AppServiceFunctions";
+import { SendSocketgetStatisticsList } from "./AppServiceFunctions";
+import { InputerDate, MakeDate } from "./AppServiceFunctions";
 
-import { styleModalMenu, styleInt01 } from './AppStyle';
-import { styleImpServis, styleInp, styleDatePicker } from './AppStyle';
-import { styleInpOk, styleButOk, styleImpBlock } from './AppStyle';
+import { dataStatNow } from "./NullStatNow";
 
-import { MakeInterval, WriteToCsvFileForStat } from './AppServiceFunctions';
-import { WriteToCsvFileForXT } from './AppServiceFunctions';
-import { SendSocketgetStatisticsList } from './AppServiceFunctions';
-
-import { dataStatNow } from './NullStatNow';
-
-const MakeDate = (tekData: Date) => {
-  let ddd = new Date(tekData.toString());
-  let SMes = ddd.getMonth() + 1;
-  let sDate = ddd.getFullYear() + '-';
-  let sDay = ddd.getDate();
-  if (SMes < 10) sDate = sDate + '0';
-  sDate += SMes + '-';
-  if (sDay < 10) sDate += '0';
-  sDate += sDay;
-  return sDate;
-};
+// const MakeDate = (tekData: Date) => {
+//   let ddd = new Date(tekData.toString());
+//   let SMes = ddd.getMonth() + 1;
+//   let sDate = ddd.getFullYear() + "-";
+//   let sDay = ddd.getDate();
+//   if (SMes < 10) sDate = sDate + "0";
+//   sDate += SMes + "-";
+//   if (sDay < 10) sDate += "0";
+//   sDate += sDay;
+//   return sDate;
+// };
 
 export interface Stater {
   area: number;
@@ -76,14 +78,14 @@ export let dateStat: Stater = {
   area: 0,
   id: 0,
   data: MakeDate(new Date()),
-  time: '24:00',
+  time: "24:00",
   TLen: 0,
   stat: [],
   tekArea: 0,
   tekId: 0,
-  xtSave: '',
+  xtSave: "",
   xtGraf: null,
-  xtName: '',
+  xtName: "",
 };
 
 export interface Pointer {
@@ -149,7 +151,9 @@ const App = () => {
   const dispatch = useDispatch();
   //========================================================
   const [pointsXctrl, setPointsXctrl] = React.useState<Array<XctrlInfo>>([]);
-  const [pointsReg, setPointsReg] = React.useState<RegionInfo>({} as RegionInfo);
+  const [pointsReg, setPointsReg] = React.useState<RegionInfo>(
+    {} as RegionInfo
+  );
   const [isOpenInf, setIsOpenInf] = React.useState(false);
   const [pointsTfl, setPointsTfl] = React.useState<Array<Tflight>>([]);
   const [isOpenDev, setIsOpenDev] = React.useState(false);
@@ -158,13 +162,13 @@ const App = () => {
   const [pointsOldSt, setPointsOldSt] = React.useState<Array<Statistic>>([]);
   const [isOpenSt, setIsOpenSt] = React.useState(false);
   const [isOpenOldSt, setIsOpenOldSt] = React.useState(false);
-  const [bsLogin, setBsLogin] = React.useState('');
+  const [bsLogin, setBsLogin] = React.useState("");
   // const [valueDate, setValueDate] = React.useState<Date | null>(
   //   new Date(formSett)
   // );
   //let initialValue = dayjs(formSett);
   const [valueDate, setValueDate] = React.useState<Dayjs | null>(null);
-  const [value, setValue] = React.useState('1');
+  const [value, setValue] = React.useState("1");
   const [trigger, setTrigger] = React.useState(true);
   const [saveXT, setSaveXT] = React.useState(false);
 
@@ -184,7 +188,8 @@ const App = () => {
         if (!isNaN(Number(key))) {
           massRegion.push(Number(key)); // ключ - символьное число
           massNameRegion.push(pointsReg[key]);
-          if (pointsReg[key].length > dlStrMenu) dlStrMenu = pointsReg[key].length;
+          if (pointsReg[key].length > dlStrMenu)
+            dlStrMenu = pointsReg[key].length;
         }
       }
       regionGlob = massRegion[0];
@@ -203,23 +208,24 @@ const App = () => {
             key={i}
             sx={styleModalMenu}
             variant="contained"
-            onClick={() => handleCloseModal(massRegion[i])}>
+            onClick={() => handleCloseModal(massRegion[i])}
+          >
             <b>{massNameRegion[i]}</b>
-          </Button>,
+          </Button>
         );
       }
       return resStr;
     };
 
     const styleModal = {
-      position: 'absolute',
-      left: '50%',
-      top: '50%',
-      transform: 'translate(-50%, -50%)',
+      position: "absolute",
+      left: "50%",
+      top: "50%",
+      transform: "translate(-50%, -50%)",
       width: dlStrMenu,
-      bgcolor: 'background.paper',
-      border: '2px solid #000',
-      borderColor: 'primary.main',
+      bgcolor: "background.paper",
+      border: "2px solid #000",
+      borderColor: "primary.main",
       borderRadius: 4,
       boxShadow: 24,
       p: 3,
@@ -229,7 +235,7 @@ const App = () => {
       <Modal open={open}>
         <Box sx={styleModal}>
           <Stack direction="column">
-            <Box sx={{ textAlign: 'center' }}>Выбор региона:</Box>
+            <Box sx={{ textAlign: "center" }}>Выбор региона:</Box>
             {/* <Box sx={{ overflowX: 'auto', height: '36vh' }}>{SpisRegion()}</Box> */}
             {SpisRegion()}
           </Stack>
@@ -255,7 +261,7 @@ const App = () => {
           }
         }
         if (newRecord) {
-          console.log('Points новая запись i=', i);
+          console.log("Points новая запись i=", i);
           pointsAdd.push(pointsXctrl[i]);
         }
       }
@@ -293,51 +299,47 @@ const App = () => {
     }
   };
 
-  const host =
-    'wss://' + window.location.host + window.location.pathname + 'W' + window.location.search;
+  let host = "wss://" + window.location.host + window.location.pathname;
+  host += "W" + window.location.search;
 
   if (flagOpenWS) {
     WS = new WebSocket(host);
     flagOpenWS = false;
-    if (WS.url === 'wss://localhost:3000/W') debug = true;
+    if (WS.url === "wss://localhost:3000/W") debug = true;
   }
 
   React.useEffect(() => {
     WS.onopen = function (event: any) {
-      console.log('WS.current.onopen:', event);
+      console.log("WS.current.onopen:", event);
     };
-
     WS.onclose = function (event: any) {
-      console.log('WS.current.onclose:', event);
+      console.log("WS.current.onclose:", event);
     };
-
     WS.onerror = function (event: any) {
-      console.log('WS.current.onerror:', event);
+      console.log("WS.current.onerror:", event);
     };
-
     WS.onmessage = function (event: any) {
       let allData = JSON.parse(event.data);
       let data = allData.data;
-      //console.log('пришло:', data);
       switch (allData.type) {
-        case 'getDevices':
-          console.log('data_getDevices:', data);
+        case "getDevices":
+          console.log("data_getDevices:", data);
           setPointsTfl(data.tflight ?? []);
           setIsOpenDev(true);
           break;
-        case 'xctrlInfo':
-          console.log('data_xctrlInfo:', data);
+        case "xctrlInfo":
+          console.log("data_xctrlInfo:", data);
           setPointsXctrl(data.xctrlInfo ?? []);
           if (regionGlob === 0) setPointsReg(data.regionInfo ?? []);
           setIsOpenInf(true);
           break;
-        case 'getStatisticsList':
+        case "getStatisticsList":
           for (let i = 0; i < data.dates.length; i++) {
             massGoodDate.push(data.dates[i].slice(0, 10));
           }
           break;
-        case 'getStatistics':
-          console.log('data_NewStatistics:', data);
+        case "getStatistics":
+          console.log("data_NewStatistics:", data);
           setPointsSt(data.statistics ?? []);
           // SetStatisticsIntervalNow(data.statistics ?? []);
           let st = dataStatNow.data.statistics;
@@ -346,8 +348,8 @@ const App = () => {
           nullNewStatistics = false;
           setIsOpenSt(true);
           break;
-        case 'getOldStatistics':
-          console.log('data_OLDSTATistics:', formSettOld, data);
+        case "getOldStatistics":
+          console.log("data_OLDSTATistics:", formSettOld, data);
           setPointsOldSt(data.statistics ?? []);
           //SetStatisticsIntervalOld(data.statistics ?? []);
           let stOld = dataStatNow.data.statistics;
@@ -357,23 +359,23 @@ const App = () => {
           //if (!data.statistics) nullOldStatistics = true;
           setIsOpenOldSt(true);
           break;
-        case 'busy':
+        case "busy":
           setBsLogin(data.login);
           break;
         default:
-          console.log('data_default:', data);
+          console.log("data_default:", data);
       }
     };
   }, []);
 
   if (debug && flagOpenDebug) {
-    console.log('РЕЖИМ ОТЛАДКИ!!! ');
+    console.log("РЕЖИМ ОТЛАДКИ!!! ");
     regionGlob = 1;
-    axios.get('http://localhost:3000/otladkaPoints.json').then(({ data }) => {
+    axios.get("http://localhost:3000/otladkaPoints.json").then(({ data }) => {
       setPointsTfl(data.data.tflight);
       setIsOpenDev(true);
     });
-    const ipAdress: string = 'http://localhost:3000/otladkaXctrl.json';
+    const ipAdress: string = "http://localhost:3000/otladkaXctrl.json";
     //const ipAdress: string = "http://localhost:3000/otladkaGlob.json";
     axios.get(ipAdress).then(({ data }) => {
       setPointsXctrl(data.data.xctrlInfo);
@@ -382,7 +384,7 @@ const App = () => {
       dispatch(maskpointCreate(maskpoint));
       setIsOpenInf(true);
     });
-    axios.get('http://localhost:3000/otladkaStatNow.json').then(({ data }) => {
+    axios.get("http://localhost:3000/otladkaStatNow.json").then(({ data }) => {
       setPointsSt(data.data.statistics);
       dispatch(statsaveCreate(datestat));
       // SetStatisticsIntervalNow([]);   // костыль для отладки
@@ -392,7 +394,7 @@ const App = () => {
       // setPointsSt([]);
       setIsOpenSt(true);
     });
-    axios.get('http://localhost:3000/otladkaStatOld.json').then(({ data }) => {
+    axios.get("http://localhost:3000/otladkaStatOld.json").then(({ data }) => {
       formSettOld = formSett;
       setPointsOldSt(data.data.statistics);
       let st = dataStatNow.data.statistics;
@@ -426,7 +428,7 @@ const App = () => {
         formSett = MakeDate(eventInp);
         if (formSett === formSettToday) {
           interval = massIntervalNow[tekIdNow];
-          SetValue('3');
+          SetValue("3");
         } else {
           interval = massIntervalOld[tekIdOld];
           nullOldStatistics = false;
@@ -444,11 +446,11 @@ const App = () => {
               SetStatisticsIntervalOld(pointsOldSt);
             }
           }
-          SetValue('4');
+          SetValue("4");
         }
         setValueDate(eventInp);
       } else {
-        alert('Введённая дата ещё не наступила!!!');
+        alert("Введённая дата ещё не наступила!!!");
         setValueDate(dayjs(formSett));
       }
       inpDate = false;
@@ -459,13 +461,11 @@ const App = () => {
       let dat = valueDate;
       const handleChangeDP = (event: any) => {
         let god = new Date(event.toString()).getFullYear();
-        if (event.toString() !== 'Invalid Date' && tekYear - god <= 5) {
-          //console.log("event OK");
+        if (event.toString() !== "Invalid Date" && tekYear - god <= 5) {
           eventInp = event;
           inpDate = true;
           setValueDate(eventInp);
         } else {
-          //console.log("event No");
           inpDate = false;
           setValueDate(dat);
           setTrigger(!trigger);
@@ -473,37 +473,40 @@ const App = () => {
       };
 
       return (
-        <Box sx={styleDatePicker}>
-          <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={'ru'}>
-            <DatePicker
-              views={['day']}
-              value={valueDate}
-              inputFormat="DD-MM-YYYY"
-              InputProps={{ style: { fontSize: 14 } }}
-              onChange={handleChangeDP}
-              renderInput={(params: any) => <TextField {...params} />}
-              renderLoading={() => <CalendarPickerSkeleton />}
-              renderDay={(day, _value, DayComponentProps) => {
-                const isSelected =
-                  !DayComponentProps.outsideCurrentMonth &&
-                  massGoodDate.indexOf(MakeDate(day)) >= 0;
-                return (
-                  <Badge
-                    key={day.toString()}
-                    overlap="circular"
-                    badgeContent={isSelected ? '👍' : undefined}>
-                    <PickersDay {...DayComponentProps} />
-                  </Badge>
-                );
-              }}
-            />
-          </LocalizationProvider>
-        </Box>
+        <>{InputerDate(valueDate, handleChangeDP, massGoodDate)}</>
+
+        // <Box sx={styleDatePicker}>
+        //   <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={"ru"}>
+        //     <DatePicker
+        //       views={["day"]}
+        //       value={valueDate}
+        //       inputFormat="DD-MM-YYYY"
+        //       InputProps={{ style: { fontSize: 14 } }}
+        //       onChange={handleChangeDP}
+        //       renderInput={(params: any) => <TextField {...params} />}
+        //       renderLoading={() => <CalendarPickerSkeleton />}
+        //       renderDay={(day, _value, DayComponentProps) => {
+        //         const isSelected =
+        //           !DayComponentProps.outsideCurrentMonth &&
+        //           massGoodDate.indexOf(MakeDate(day)) >= 0;
+        //         return (
+        //           <Badge
+        //             key={day.toString()}
+        //             overlap="circular"
+        //             badgeContent={isSelected ? "👍" : undefined}
+        //           >
+        //             <PickersDay {...DayComponentProps} />
+        //           </Badge>
+        //         );
+        //       }}
+        //     />
+        //   </LocalizationProvider>
+        // </Box>
       );
     };
 
     let dat = MakeInterval(massIntervalNowStart[tekIdNow]);
-    if (value === '4') {
+    if (value === "4") {
       dat = MakeInterval(massIntervalOldStart[tekIdOld]);
     } else {
       if (formSett !== formSettToday) {
@@ -520,8 +523,8 @@ const App = () => {
     }
     for (let i = 0; i < massKey.length; i++) {
       let maskCurrencies = {
-        value: '',
-        label: '',
+        value: "",
+        label: "",
       };
       maskCurrencies.value = massKey[i];
       maskCurrencies.label = massDat[i];
@@ -530,13 +533,15 @@ const App = () => {
 
     if (!interval) interval = 5;
 
-    const [currency, setCurrency] = React.useState(massKey[massDat.indexOf(interval.toString())]);
+    const [currency, setCurrency] = React.useState(
+      massKey[massDat.indexOf(interval.toString())]
+    );
 
     const handleChangeInt = (event: any) => {
       setCurrency(event.target.value);
       interval = Number(massDat[Number(event.target.value)]);
 
-      if (value === '4') {
+      if (value === "4") {
         massIntervalOld[tekIdOld] = interval;
       } else {
         if (formSett !== formSettToday) {
@@ -550,19 +555,23 @@ const App = () => {
 
     return (
       <>
-        <Grid item container sx={{ marginRight: 0.3, width: '140px' }}>
-          <Grid item xs sx={{ textAlign: 'left' }}>
-            {ButtonMenu('5', 'Сохр.в файл')}
+        <Grid item container sx={{ marginRight: 0.3, width: "140px" }}>
+          <Grid item xs sx={{ textAlign: "left" }}>
+            {ButtonMenu("5", "Сохр.в файл", SetValue)}
           </Grid>
         </Grid>
 
-        <Grid item container sx={{ border: 0, width: '120px' }}>
-          <Grid item xs={7} sx={{ textAlign: 'left' }}>
+        <Grid item container sx={{ border: 0, width: "120px" }}>
+          <Grid item xs={7} sx={{ textAlign: "left" }}>
             Интервал:
           </Grid>
           <Grid item xs={5}>
             <Box sx={styleInt01}>
-              <InputInterval curr={currencies} cur={currency} func={handleChangeInt} />
+              <InputInterval
+                curr={currencies}
+                cur={currency}
+                func={handleChangeInt}
+              />
             </Box>
           </Grid>
         </Grid>
@@ -570,7 +579,11 @@ const App = () => {
         <Grid item container sx={styleImpBlock}>
           <Grid item xs={2.3} sx={styleInpOk}>
             {inpDate && (
-              <Button sx={styleButOk} variant="contained" onClick={() => InputOk()}>
+              <Button
+                sx={styleButOk}
+                variant="contained"
+                onClick={() => InputOk()}
+              >
                 Да
               </Button>
             )}
@@ -587,41 +600,21 @@ const App = () => {
 
   const SetValue = (mode: string) => {
     switch (mode) {
-      case '3':
+      case "3":
         formSett = formSettToday;
         interval = massIntervalNow[tekIdNow];
         setValueDate(dayjs(formSett));
         setValue(mode);
         break;
-      case '5':
+      case "5":
         WriteToCsvFileForStat(datestat);
         break;
-      case '7':
+      case "7":
         WriteToCsvFileForXT(datestat);
         break;
       default:
         setValue(mode);
     }
-  };
-
-  const ButtonMenu = (mode: string, soob: string) => {
-    const styleApp02 = {
-      fontSize: 14,
-      marginRight: 1,
-      minWidth: (soob.length + 10) * 6.5,
-      maxWidth: (soob.length + 10) * 6.5,
-      maxHeight: '21px',
-      minHeight: '21px',
-      backgroundColor: '#E9F5D8',
-      color: 'black',
-      textTransform: 'unset !important',
-    };
-
-    return (
-      <Button sx={styleApp02} variant="contained" onClick={() => SetValue(mode)}>
-        <b>{soob}</b>
-      </Button>
-    );
   };
 
   const SetPointsXctrl = (points: any) => {
@@ -653,19 +646,25 @@ const App = () => {
     <>
       <EndSeans bsLogin={bsLogin} />
       {regionGlob === 0 && isOpenInf && <BeginSeans />}
-      <Box sx={{ width: '98.8%', typography: 'body2' }}>
+      <Box sx={{ width: "98.8%", typography: "body2" }}>
         <TabContext value={value}>
-          <Box sx={{ marginLeft: 0.5, backgroundColor: '#F1F5FB' }}>
+          <Box sx={{ marginLeft: 0.5, backgroundColor: "#F1F5FB" }}>
             <Stack direction="row">
-              {!bsLogin && <>{ButtonMenu('1', 'Управление')}</>}
-              {!bsLogin && <>{ButtonMenu('2', 'Характерные точки')}</>}
-              {!bsLogin && <>{ButtonMenu('3', 'Статистика')}</>}
-              {/* {!bsLogin && <>{ButtonMenu('12', 'Тест')}</>} */}
-              {!bsLogin && value === '2' && saveXT && <>{ButtonMenu('7', 'Сохр.в файл')}</>}
-              {!bsLogin && value === '3' && isOpenSt && <InputNewDateInterval />}
-              {!bsLogin && value === '4' && isOpenOldSt && !nullOldStatistics && (
+              {!bsLogin && <>{ButtonMenu("1", "Управление", SetValue)}</>}
+              {!bsLogin && (
+                <>{ButtonMenu("2", "Характерные точки", SetValue)}</>
+              )}
+              {!bsLogin && <>{ButtonMenu("3", "Статистика", SetValue)}</>}
+              {!bsLogin && value === "2" && saveXT && (
+                <>{ButtonMenu("7", "Сохр.в файл", SetValue)}</>
+              )}
+              {!bsLogin && value === "3" && isOpenSt && (
                 <InputNewDateInterval />
               )}
+              {!bsLogin &&
+                value === "4" &&
+                isOpenOldSt &&
+                !nullOldStatistics && <InputNewDateInterval />}
             </Stack>
           </Box>
           <TabPanel value="1">
@@ -736,9 +735,6 @@ const App = () => {
                 pointsTfl={pointsTfl}
               />
             )}
-          </TabPanel>
-          <TabPanel value="12">
-            <Test />
           </TabPanel>
         </TabContext>
       </Box>
