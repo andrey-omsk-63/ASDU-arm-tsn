@@ -8,15 +8,8 @@ import Stack from "@mui/material/Stack";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import TabPanel from "@mui/lab/TabPanel";
-//import TextField from "@mui/material/TextField";
 import TabContext from "@mui/lab/TabContext";
 
-// import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-// import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-// import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-// import { CalendarPickerSkeleton } from "@mui/x-date-pickers/CalendarPickerSkeleton";
-// import { PickersDay } from "@mui/x-date-pickers/PickersDay";
-// import Badge from "@mui/material/Badge";
 import "dayjs/locale/ru";
 import dayjs, { Dayjs } from "dayjs";
 import axios from "axios";
@@ -34,11 +27,7 @@ import { Statistic } from "./interfaceStat.d";
 import { RegionInfo } from "./interfaceGl.d";
 
 import { styleModalMenu, styleInt01 } from "./AppStyle";
-import {
-  styleImpServis,
-  styleInp,
-  //styleDatePicker
-} from "./AppStyle";
+import { styleImpServis, styleInp } from "./AppStyle";
 import { styleInpOk, styleButOk, styleImpBlock } from "./AppStyle";
 
 import { MakeInterval, WriteToCsvFileForStat } from "./AppServiceFunctions";
@@ -47,18 +36,6 @@ import { SendSocketgetStatisticsList } from "./AppServiceFunctions";
 import { InputerDate, MakeDate } from "./AppServiceFunctions";
 
 import { dataStatNow } from "./NullStatNow";
-
-// const MakeDate = (tekData: Date) => {
-//   let ddd = new Date(tekData.toString());
-//   let SMes = ddd.getMonth() + 1;
-//   let sDate = ddd.getFullYear() + "-";
-//   let sDay = ddd.getDate();
-//   if (SMes < 10) sDate = sDate + "0";
-//   sDate += SMes + "-";
-//   if (sDay < 10) sDate += "0";
-//   sDate += sDay;
-//   return sDate;
-// };
 
 export interface Stater {
   area: number;
@@ -163,10 +140,6 @@ const App = () => {
   const [isOpenSt, setIsOpenSt] = React.useState(false);
   const [isOpenOldSt, setIsOpenOldSt] = React.useState(false);
   const [bsLogin, setBsLogin] = React.useState("");
-  // const [valueDate, setValueDate] = React.useState<Date | null>(
-  //   new Date(formSett)
-  // );
-  //let initialValue = dayjs(formSett);
   const [valueDate, setValueDate] = React.useState<Dayjs | null>(null);
   const [value, setValue] = React.useState("1");
   const [trigger, setTrigger] = React.useState(true);
@@ -260,10 +233,7 @@ const App = () => {
             pointsEtalonXctrl[j] = pointsXctrl[i];
           }
         }
-        if (newRecord) {
-          console.log("Points новая запись i=", i);
-          pointsAdd.push(pointsXctrl[i]);
-        }
+        if (newRecord) pointsAdd.push(pointsXctrl[i]);
       }
       if (pointsAdd.length > 0) {
         for (let i = 0; i < pointsAdd.length; i++) {
@@ -472,37 +442,7 @@ const App = () => {
         }
       };
 
-      return (
-        <>{InputerDate(valueDate, handleChangeDP, massGoodDate)}</>
-
-        // <Box sx={styleDatePicker}>
-        //   <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={"ru"}>
-        //     <DatePicker
-        //       views={["day"]}
-        //       value={valueDate}
-        //       inputFormat="DD-MM-YYYY"
-        //       InputProps={{ style: { fontSize: 14 } }}
-        //       onChange={handleChangeDP}
-        //       renderInput={(params: any) => <TextField {...params} />}
-        //       renderLoading={() => <CalendarPickerSkeleton />}
-        //       renderDay={(day, _value, DayComponentProps) => {
-        //         const isSelected =
-        //           !DayComponentProps.outsideCurrentMonth &&
-        //           massGoodDate.indexOf(MakeDate(day)) >= 0;
-        //         return (
-        //           <Badge
-        //             key={day.toString()}
-        //             overlap="circular"
-        //             badgeContent={isSelected ? "👍" : undefined}
-        //           >
-        //             <PickersDay {...DayComponentProps} />
-        //           </Badge>
-        //         );
-        //       }}
-        //     />
-        //   </LocalizationProvider>
-        // </Box>
-      );
+      return <>{InputerDate(valueDate, handleChangeDP, massGoodDate)}</>;
     };
 
     let dat = MakeInterval(massIntervalNowStart[tekIdNow]);
