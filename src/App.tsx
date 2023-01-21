@@ -6,7 +6,6 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Modal from '@mui/material/Modal';
-import Button from '@mui/material/Button';
 import TabPanel from '@mui/lab/TabPanel';
 import TabContext from '@mui/lab/TabContext';
 
@@ -26,15 +25,14 @@ import { XctrlInfo } from './interfaceGl.d';
 import { Statistic } from './interfaceStat.d';
 import { RegionInfo } from './interfaceGl.d';
 
-import { styleModalMenu, styleInt01 } from './AppStyle';
 import { styleImpServis, styleInp } from './AppStyle';
-import { styleImpBlock } from './AppStyle';
+import { styleImpBlock, styleInt01 } from './AppStyle';
 
 import { MakeInterval, WriteToCsvFileForStat } from './AppServiceFunctions';
 import { WriteToCsvPdfFileForXT, ButtonMenu } from './AppServiceFunctions';
 import { SendSocketgetStatisticsList } from './AppServiceFunctions';
 import { InputerDate, MakeDate, InputerOk } from './AppServiceFunctions';
-import { PunktMenuSaveFile } from './AppServiceFunctions';
+import { PunktMenuSaveFile, MenuSpisRegion } from './AppServiceFunctions';
 
 import { dataStatNow } from './NullStatNow';
 
@@ -170,15 +168,7 @@ const App = () => {
     const SpisRegion = () => {
       let resStr = [];
       for (let i = 0; i < massRegion.length; i++) {
-        resStr.push(
-          <Button
-            key={i}
-            sx={styleModalMenu}
-            variant="contained"
-            onClick={() => handleCloseModal(massRegion[i])}>
-            <b>{massNameRegion[i]}</b>
-          </Button>,
-        );
+        resStr.push(<>{MenuSpisRegion(massRegion[i], massNameRegion[i], handleCloseModal)}</>);
       }
       return resStr;
     };
@@ -285,12 +275,10 @@ const App = () => {
       let data = allData.data;
       switch (allData.type) {
         case 'getDevices':
-          console.log('data_getDevices:', data);
           setPointsTfl(data.tflight ?? []);
           setIsOpenDev(true);
           break;
         case 'xctrlInfo':
-          console.log('data_xctrlInfo:', data);
           setPointsXctrl(data.xctrlInfo ?? []);
           if (regionGlob === 0) setPointsReg(data.regionInfo ?? []);
           setIsOpenInf(true);
@@ -301,7 +289,6 @@ const App = () => {
           }
           break;
         case 'getStatistics':
-          console.log('data_NewStatistics:', data);
           setPointsSt(data.statistics ?? []);
           // SetStatisticsIntervalNow(data.statistics ?? []);
           let st = dataStatNow.data.statistics;
@@ -311,14 +298,12 @@ const App = () => {
           setIsOpenSt(true);
           break;
         case 'getOldStatistics':
-          console.log('data_OLDSTATistics:', formSettOld, data);
           setPointsOldSt(data.statistics ?? []);
           //SetStatisticsIntervalOld(data.statistics ?? []);
           let stOld = dataStatNow.data.statistics;
           if (data.statistics) stOld = data.statistics;
           SetStatisticsIntervalOld(stOld);
           nullOldStatistics = false;
-          //if (!data.statistics) nullOldStatistics = true;
           setIsOpenOldSt(true);
           break;
         case 'busy':
@@ -338,7 +323,6 @@ const App = () => {
       setIsOpenDev(true);
     });
     const ipAdress: string = 'http://localhost:3000/otladkaXctrl.json';
-    //const ipAdress: string = "http://localhost:3000/otladkaGlob.json";
     axios.get(ipAdress).then(({ data }) => {
       setPointsXctrl(data.data.xctrlInfo);
       if (regionGlob === 0) setPointsReg(data.data.regionInfo ?? []);
@@ -349,11 +333,9 @@ const App = () => {
     axios.get('http://localhost:3000/otladkaStatNow.json').then(({ data }) => {
       setPointsSt(data.data.statistics);
       dispatch(statsaveCreate(datestat));
-      // SetStatisticsIntervalNow([]);   // костыль для отладки
       let st = dataStatNow.data.statistics;
       if (data.statistics) st = data.statistics;
       SetStatisticsIntervalNow(st);
-      // setPointsSt([]);
       setIsOpenSt(true);
     });
     axios.get('http://localhost:3000/otladkaStatOld.json').then(({ data }) => {
@@ -364,7 +346,6 @@ const App = () => {
       SetStatisticsIntervalOld(st);
       setIsOpenOldSt(true);
     });
-    //SetStatisticsIntervalOld([]);
     flagOpenDebug = false;
   }
 
@@ -466,7 +447,6 @@ const App = () => {
     const hChangeInt = (event: any) => {
       setCurrency(event.target.value);
       interval = Number(massDat[Number(event.target.value)]);
-
       if (value === '4') {
         massIntervalOld[tekIdOld] = interval;
       } else {
@@ -492,7 +472,6 @@ const App = () => {
             </Box>
           </Grid>
         </Grid>
-
         <Grid item container sx={styleImpBlock}>
           {InputerOk(inpDate, InputOk)}
           <Grid item xs sx={styleImpServis}>

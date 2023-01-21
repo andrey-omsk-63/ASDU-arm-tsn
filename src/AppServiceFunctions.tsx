@@ -14,7 +14,7 @@ import Badge from '@mui/material/Badge';
 import html2canvas from 'html2canvas';
 import { jsPDF } from 'jspdf';
 
-import { styleDatePicker } from './AppStyle';
+import { styleDatePicker, styleModalMenu } from './AppStyle';
 import { styleInpOk, styleButOk } from './AppStyle';
 
 export const MakeDate = (tekData: Date) => {
@@ -83,6 +83,18 @@ export const InputerOk = (inpDate: boolean, InputOk: Function) => {
         </Button>
       )}
     </Grid>
+  );
+};
+
+export const MenuSpisRegion = (region: any, nameRegion: string, handleCloseModal: Function) => {
+  return (
+    <Button
+      key={Math.random()}
+      sx={styleModalMenu}
+      variant="contained"
+      onClick={() => handleCloseModal(region)}>
+      <b>{nameRegion}</b>
+    </Button>
   );
 };
 
