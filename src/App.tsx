@@ -29,7 +29,7 @@ import { styleImpServis, styleInp } from './AppStyle';
 import { styleImpBlock, styleInt01 } from './AppStyle';
 
 import { MakeInterval, WriteToCsvFileForStat } from './AppServiceFunctions';
-import { WriteToCsvPdfFileForXT, ButtonMenu } from './AppServiceFunctions';
+import { WriteToAllFileForXT, ButtonMenu } from './AppServiceFunctions';
 import { SendSocketgetStatisticsList } from './AppServiceFunctions';
 import { InputerDate, MakeDate, InputerOk } from './AppServiceFunctions';
 import { PunktMenuSaveFile, MenuSpisRegion } from './AppServiceFunctions';
@@ -45,7 +45,8 @@ export interface Stater {
   stat: Array<any>;
   tekArea: number;
   tekId: number;
-  xtSave: string;
+  xtCsv: string;
+  xtTxt: string;
   xtGraf: any;
   xtName: string;
 }
@@ -59,7 +60,8 @@ export let dateStat: Stater = {
   stat: [],
   tekArea: 0,
   tekId: 0,
-  xtSave: '',
+  xtCsv: '',
+  xtTxt: '',
   xtGraf: null,
   xtName: '',
 };
@@ -141,6 +143,7 @@ const App = () => {
   const [trigger, setTrigger] = React.useState(true);
   const [saveXT, setSaveXT] = React.useState(false);
   const [open, setOpen] = React.useState(true);
+  const [write, setWrite] = React.useState(false);
 
   const handleCloseModal = (numer: number) => {
     regionGlob = numer;
@@ -496,7 +499,7 @@ const App = () => {
         WriteToCsvFileForStat(datestat);
         break;
       case '7':
-        WriteToCsvPdfFileForXT(datestat);
+        WriteToAllFileForXT(datestat);
         break;
       default:
         setValue(mode);
@@ -532,7 +535,7 @@ const App = () => {
     <>
       <EndSeans bsLogin={bsLogin} />
       {regionGlob === 0 && isOpenInf && <BeginSeans />}
-      <Box sx={{ width: '98.8%', typography: 'body2' }}>
+      <Box sx={{ width: '98.8%' }}>
         <TabContext value={value}>
           <Box sx={{ marginLeft: 0.5, backgroundColor: '#F1F5FB' }}>
             <Stack direction="row">
