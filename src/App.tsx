@@ -19,6 +19,7 @@ import StatisticsNew from './components/Statistics/StatisticsNew';
 import StatisticsArchive from './components/Statistics/StatisticsArchive';
 import EndSeans from './AppEndSeans';
 import InputInterval from './AppInpInerval';
+import AppWriteToAllFileForXT from './AppWriteToAllFileForXT';
 
 import { Tflight } from './interfaceMNG.d';
 import { XctrlInfo } from './interfaceGl.d';
@@ -29,7 +30,10 @@ import { styleImpServis, styleInp } from './AppStyle';
 import { styleImpBlock, styleInt01 } from './AppStyle';
 
 import { MakeInterval, WriteToCsvFileForStat } from './AppServiceFunctions';
-import { WriteToAllFileForXT, ButtonMenu } from './AppServiceFunctions';
+import {
+  //WriteToAllFileForXT,
+  ButtonMenu,
+} from './AppServiceFunctions';
 import { SendSocketgetStatisticsList } from './AppServiceFunctions';
 import { InputerDate, MakeDate, InputerOk } from './AppServiceFunctions';
 import { PunktMenuSaveFile, MenuSpisRegion } from './AppServiceFunctions';
@@ -499,7 +503,8 @@ const App = () => {
         WriteToCsvFileForStat(datestat);
         break;
       case '7':
-        WriteToAllFileForXT(datestat);
+        //WriteToAllFileForXT(datestat);
+        setWrite(true);
         break;
       default:
         setValue(mode);
@@ -535,6 +540,7 @@ const App = () => {
     <>
       <EndSeans bsLogin={bsLogin} />
       {regionGlob === 0 && isOpenInf && <BeginSeans />}
+      {write && <AppWriteToAllFileForXT setOpen={setWrite} />}
       <Box sx={{ width: '98.8%' }}>
         <TabContext value={value}>
           <Box sx={{ marginLeft: 0.5, backgroundColor: '#F1F5FB' }}>
