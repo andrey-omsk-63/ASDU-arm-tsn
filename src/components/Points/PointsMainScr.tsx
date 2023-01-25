@@ -102,12 +102,12 @@ const PointsMainScr = (props: {
       <Grid container item sx={{ margin: 0, border: 0 }}>
         <Grid item xs>
           <Grid container>
-            <Grid item xs={12} sx={{ margin: 1, marginLeft: 1 }}>
+            <Grid item xs={12} sx={{ fontSize: 15, margin: 1, marginLeft: 1 }}>
               Расчёт ХТ
             </Grid>
 
             <Grid item xs={12} sx={styleXt02}>
-              <Grid container>
+              <Grid container sx={{ fontSize: 15 }}>
                 <Grid item xs={9.6} sx={{ border: 0 }}>
                   <Box sx={{ display: 'inline-block' }}>
                     <b>Расчёт ХТ </b>&nbsp;
@@ -122,7 +122,7 @@ const PointsMainScr = (props: {
                     <b>{uprBP}</b>
                   </Box>
                 </Grid>
-                <Grid item xs={2.4} sx={{ border: 0 }}>
+                <Grid item xs={2.4} sx={{ fontSize: 14.5, border: 0 }}>
                   <Box sx={{ textAlign: 'right' }}>
                     <b>{yellowSoob}</b>
                     {' с '}

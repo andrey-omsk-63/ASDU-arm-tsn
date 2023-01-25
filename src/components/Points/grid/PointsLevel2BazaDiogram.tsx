@@ -240,7 +240,7 @@ const PointsLevel2BazaDiogram = (props: {
       let vl01 = vertical / points.xctrls[crRoad].StrategyB[i].xleft;
       let mt01 = '-' + 86.3 / vl01 + 'vh';
       let hl01 = horizon / points.xctrls[crRoad].StrategyB[i].xright;
-      let ml01 = dlBlok / hl01 - 69 + 'px';
+      let ml01 = dlBlok / hl01 - 73 + 'px';
       let title =
         points.xctrls[crRoad].StrategyB[i].xleft + 'x' + points.xctrls[crRoad].StrategyB[i].xright;
 

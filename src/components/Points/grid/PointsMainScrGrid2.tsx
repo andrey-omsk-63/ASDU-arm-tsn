@@ -113,7 +113,7 @@ const PointsMainScrGrid2 = (props: {
       };
 
       resStr.push(
-        <Grid key={i} container item xs={12}>
+        <Grid key={i} container item xs={12} sx={{fontSize: 14}}>
           <Grid xs={1.5} item sx={styleXTG03}>
             <Button
               sx={styleBut02}
@@ -136,7 +136,7 @@ const PointsMainScrGrid2 = (props: {
   };
 
   return (
-    <Grid item sx={{ margin: -1 }}>
+    <Grid item sx={{fontSize: 14.5, margin: -1 }}>
       <HeaderMainScrGrid2 />
       {props.open && <>{StrokaMainScrGrid2()}</>}
       {openSetStr && <SetStr nom={nomStr} />}

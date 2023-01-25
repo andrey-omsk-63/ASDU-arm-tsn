@@ -1,18 +1,18 @@
-import * as React from 'react';
+import * as React from "react";
 
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
-import Typography from '@mui/material/Typography';
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Modal from "@mui/material/Modal";
+import Typography from "@mui/material/Typography";
 
-import { Inputer, SaveFunc } from '../../../AppServiceFunctions';
-import { SendHandleSend } from '../../../AppServiceFunctions';
+import { Inputer, SaveFunc } from "../../../AppServiceFunctions";
+import { SendHandleSend } from "../../../AppServiceFunctions";
 
-import { styleXTGl02, styleXTGl021, styleBut02 } from './PointsGridStyle';
-import { styleModalEnd, styleSetInf, styleInpArg } from './PointsGridStyle';
+import { styleXTGl02, styleXTGl021, styleBut02 } from "./PointsGridStyle";
+import { styleModalEnd, styleSetInf, styleInpArg } from "./PointsGridStyle";
 
-import { XctrlInfo } from '../../../interfaceGl.d';
+import { XctrlInfo } from "../../../interfaceGl.d";
 
 let nomStr = 0;
 
@@ -35,13 +35,13 @@ const PointsMainScrGrid3 = (props: {
           <b>№</b>
         </Grid>
         <Grid xs={3.5} item sx={styleXTGl02}>
-          <b>0</b>
+          <b>« 0 »</b>
         </Grid>
         <Grid xs={3.5} item sx={styleXTGl02}>
-          <b>1</b>
+          <b>« 1 »</b>
         </Grid>
         <Grid xs={3.5} item sx={styleXTGl021}>
-          <b>2</b>
+          <b>« 2 »</b>
         </Grid>
       </Grid>
     );
@@ -85,13 +85,13 @@ const PointsMainScrGrid3 = (props: {
           <Button sx={styleModalEnd} onClick={handleClose}>
             <b>&#10006;</b>
           </Button>
-          <Typography sx={{ textAlign: 'center' }}>
+          <Typography sx={{ textAlign: "center" }}>
             Номер записи <b> {props.nom + 1} </b>
-          </Typography>{' '}
+          </Typography>{" "}
           <br />
-          {Inputer('« 0 »', valuen1, handleChange1, styleInpArg)}
-          {Inputer('« 1 »', valuen2, handleChange2, styleInpArg)}
-          {Inputer('« 2 »', valuen3, handleChange3, styleInpArg)}
+          {Inputer("« 0 »", valuen1, handleChange1, styleInpArg)}
+          {Inputer("« 1 »", valuen2, handleChange2, styleInpArg)}
+          {Inputer("« 1 »", valuen3, handleChange3, styleInpArg)}
           {SaveFunc(handleCloseStr)}
         </Box>
       </Modal>
@@ -111,22 +111,26 @@ const PointsMainScrGrid3 = (props: {
       const styleXTG03 = {
         borderRight: 1,
         borderBottom: bordBott,
-        borderColor: 'primary.main',
+        borderColor: "primary.main",
         padding: 0.7,
-        textAlign: 'center',
+        textAlign: "center",
       };
 
       const styleXTG033 = {
         borderBottom: bordBott,
-        borderColor: 'primary.main',
+        borderColor: "primary.main",
         padding: 0.7,
-        textAlign: 'center',
+        textAlign: "center",
       };
 
       resStr.push(
-        <Grid key={i} container item xs={12}>
+        <Grid key={i} container item xs={12} sx={{ fontSize: 14 }}>
           <Grid xs={1.5} item sx={styleXTG03}>
-            <Button sx={styleBut02} variant="contained" onClick={() => SetOpenSetStr(i)}>
+            <Button
+              sx={styleBut02}
+              variant="contained"
+              onClick={() => SetOpenSetStr(i)}
+            >
               {i + 1}
             </Button>
           </Grid>
@@ -139,14 +143,14 @@ const PointsMainScrGrid3 = (props: {
           <Grid xs={3.5} item sx={styleXTG033}>
             {points.prioryty[i][2]}
           </Grid>
-        </Grid>,
+        </Grid>
       );
     }
     return resStr;
   };
 
   return (
-    <Grid item sx={{ margin: -1 }}>
+    <Grid item sx={{ fontSize: 14.5, margin: -1 }}>
       <HeaderMainScrGrid3 />
       {props.open && <>{StrokaMainScrGrid3()}</>}
       {openSetStr && <SetStr nom={nomStr} />}
