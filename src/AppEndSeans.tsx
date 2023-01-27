@@ -2,32 +2,71 @@ import React from "react";
 
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import Modal from "@mui/material/Modal";
+import Typography from "@mui/material/Typography";
 
-import { styleBatMenu, styleMod } from "./AppStyle";
-
-const EndSeans = (props: { bsLogin: string }) => {
+const EndSeans = (props: { bsLogin: string; setOpen: any }) => {
+  const [openSet, setOpenSet] = React.useState(true);
   let soob = "В Арм-е Технолога системы работает пользователь " + props.bsLogin;
 
-  const handleClose = () => {
-    window.close();
+  const styleSetInf = {
+    outline: "none",
+    position: "absolute",
+    // marginTop: "15vh",
+    // marginLeft: "24vh",
+    left: "45%",
+    top: "46%",
+    transform: "translate(-50%, -50%)",
+    width: 380,
+    bgcolor: "background.paper",
+    border: "3px solid #000",
+    borderColor: "red",
+    borderRadius: 2,
+    boxShadow: 24,
+    p: 1.5,
+  };
+
+  const styleBatMenu = {
+    fontSize: 14,
+    //backgroundColor: "#F1F3F4",
+    backgroundColor: '#E9F5D8',
+    color: "red",
+    marginTop: 1,
+    marginRight: 1,
+    textTransform: "unset !important",
+  };
+
+  const handleClose = (mode: number) => {
+    if (!mode) window.close();
+    props.setOpen(false);
+    setOpenSet(false);
   };
 
   return (
-    <>
-      {props.bsLogin !== "" && (
-        <Box sx={styleMod}>
-          <Box sx={{ textAlign: "center", fontSize: 16, color: "red" }}>
-            <b>{soob}</b>
-          </Box>
-          <Box sx={{ color: "background.paper" }}>Pusto</Box>
-          <Box sx={{ textAlign: "center" }}>
-            <Button sx={styleBatMenu} variant="contained" onClick={handleClose}>
-              <b>Выход</b>
-            </Button>
-          </Box>
+    <Modal open={openSet} onClose={handleClose} hideBackdrop>
+      <Box sx={styleSetInf}>
+        <Typography variant="h6" sx={{ textAlign: "center", color: "red" }}>
+          {soob}
+        </Typography>
+        <Box sx={{ textAlign: "center" }}>
+          <Button
+            sx={styleBatMenu}
+            variant="contained"
+            onClick={() => handleClose(1)}
+          >
+            <b>Переход в «Статистику»</b>
+          </Button>
+          <Button
+            sx={styleBatMenu}
+            variant="contained"
+            onClick={() => handleClose(0)}
+          >
+            <b>Выход</b>
+          </Button>
+          {/* <Box sx={{ textAlign: "center" }}>{"  "}</Box> */}
         </Box>
-      )}
-    </>
+      </Box>
+    </Modal>
   );
 };
 
