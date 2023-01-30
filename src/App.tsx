@@ -145,7 +145,7 @@ const App = () => {
   const [saveXT, setSaveXT] = React.useState(false);
   const [open, setOpen] = React.useState(true);
   const [write, setWrite] = React.useState(false);
-  const [openSetErr, setOpenSetErr] = React.useState(false);
+  const [openSetErrLog, setOpenSetErrLog] = React.useState(false);
 
   const handleCloseModal = (numer: number) => {
     regionGlob = numer;
@@ -295,7 +295,6 @@ const App = () => {
           break;
         case 'getStatistics':
           setPointsSt(data.statistics ?? []);
-          // SetStatisticsIntervalNow(data.statistics ?? []);
           let st = dataStatNow.data.statistics;
           if (data.statistics) st = data.statistics;
           SetStatisticsIntervalNow(st);
@@ -304,7 +303,6 @@ const App = () => {
           break;
         case 'getOldStatistics':
           setPointsOldSt(data.statistics ?? []);
-          //SetStatisticsIntervalOld(data.statistics ?? []);
           let stOld = dataStatNow.data.statistics;
           if (data.statistics) stOld = data.statistics;
           SetStatisticsIntervalOld(stOld);
@@ -316,7 +314,7 @@ const App = () => {
           if (data.login) {
             setValue('3');
             setValueDate(dayjs(formSett));
-            setOpenSetErr(true);
+            setOpenSetErrLog(true);
           }
           break;
         default:
@@ -358,10 +356,10 @@ const App = () => {
     });
     flagOpenDebug = false;
     //======
-    // setBsLogin("@@@@@@");
-    // setValue("3");
+    // setBsLogin('@@@@@@');
+    // setValue('3');
     // setValueDate(dayjs(formSett));
-    // setOpenSetErr(true);
+    // setOpenSetErrLog(true);
   }
 
   const SetIdNow = (newId: number, intervalId: number) => {
@@ -511,7 +509,6 @@ const App = () => {
         WriteToCsvFileForStat(datestat);
         break;
       case '7':
-        //WriteToAllFileForXT(datestat);
         setWrite(true);
         break;
       default:
@@ -546,8 +543,8 @@ const App = () => {
 
   return (
     <>
-      {openSetErr && <EndSeans bsLogin={bsLogin} setOpen={setOpenSetErr} />}
-      {!openSetErr && (
+      {openSetErrLog && <EndSeans bsLogin={bsLogin} setOpen={setOpenSetErrLog} />}
+      {!openSetErrLog && (
         <>
           {regionGlob === 0 && isOpenInf && <BeginSeans />}
           {write && <AppWriteToAllFileForXT setOpen={setWrite} />}
