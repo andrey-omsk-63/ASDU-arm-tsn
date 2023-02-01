@@ -10,6 +10,7 @@ export interface Statistica {
   export interface Statistic {
     region: number;
     area: number;
+    subarea: number;
     id: number;
     date: Date;
     Statistics: StatisticElement[];

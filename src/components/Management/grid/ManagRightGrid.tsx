@@ -3,13 +3,11 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 
 import { Tflight } from "../../../interfaceMNG.d";
+//import { XctrlInfo } from "../../../interfaceGl.d";
 
 import { styleMgl, styleMRG01, styleMRG02 } from "./ManagRightGridStyle";
-import {
-  styleMRG02Center,
-  styleMRG03,
-  styleMRG04,
-} from "./ManagRightGridStyle";
+import { styleMRG02Center } from "./ManagRightGridStyle";
+import { styleMRG03, styleMRG04 } from "./ManagRightGridStyle";
 
 export interface DataKnob {
   knop: Knob[];
@@ -26,6 +24,7 @@ export interface Knob {
 const ManagementRightGrid = (props: {
   open: boolean;
   tflightt: Tflight[];
+  //xctrll: XctrlInfo[];
   mode: number;
   areaa: string;
   subArea: number;
@@ -41,6 +40,9 @@ const ManagementRightGrid = (props: {
   let massKnob: Knob[] = [];
   let massknob: Knob[] = [];
   const massClinch = [16, 17, 18, 38, 39];
+
+  // console.log("Points:", points);
+  // console.log("masxt:", props.masxt);
 
   const SearchInMassKnob = (cmd: number) => {
     for (let i = 0; i < massknob.length; i++) {
@@ -404,32 +406,35 @@ const ManagementRightGrid = (props: {
     let sumDk = points.length;
     let prosSv = "";
     let prosPch = "";
-    let proXT = "ХТ для данного района ";
+    //let proXT = "ХТ для данного района ";
+    let proXT = "";
     let soobBP = "";
     if (props.mode !== 3) {
       prosSv = ((100 * sostGl) / sumDk).toFixed(2).toString() + "%";
       prosPch = ((100 * podchGl) / sumDk).toFixed(2).toString() + "%";
-      let proXtWell = "назначен";
-      for (let k = 0; k < mass.length; k++) {
-        if (!mass[k].isXT) proXtWell = "отсутствует";
-      }
-      if (props.mode === 1) proXT = "ХТ для данного региона ";
-      proXT = proXT + proXtWell;
+      // let proXtWell = "назначен";
+      // for (let k = 0; k < mass.length; k++) {
+      //   if (!mass[k].isXT) proXtWell = "отсутствует";
+      // }
+      // if (props.mode === 1) proXT = "ХТ для данного региона ";
+      // proXT = proXT + proXtWell;
     } else {
       prosSv = sostGl.toString();
       prosPch = podchGl.toString();
-      proXT = "ХТ для данного подрайона отсутствует";
+      proXT = "ХТ для подрайона отсутствует";
       for (let j = 0; j < props.masxt.length; j++) {
         if (
           parseInt(points[0].area.num) === props.masxt[j].areaXT &&
           points[0].subarea === props.masxt[j].subareaXT
         ) {
-          proXT = "ХТ для данного подрайона назначен/";
-          if (props.masxt[j].releaseXT) {
-            proXT = proXT + "включён";
-          } else {
-            proXT = proXT + "выключен";
-          }
+          //proXT = "ХТ для данного подрайона назначен/";
+          proXT = "ХТ для подрайона назначен/";
+          if (props.masxt[j].releaseXT) proXT += "включён ";
+          if (!props.masxt[j].releaseXT) proXT += "выключен ";
+          
+          if (props.masxt[j].switchXT) proXT += "Расчёт включён";
+          if (!props.masxt[j].switchXT) proXT += "Расчёт выключен";
+
           if (props.masxt[j].pknowXT > 0)
             soobBP = " Выбран план №" + props.masxt[j].pknowXT.toString();
         }
@@ -442,13 +447,13 @@ const ManagementRightGrid = (props: {
         for (let i = 0; i < massKnob.length; i++) {
           switch (massKnob[i].cmd) {
             case 5:
-              soobBP = soobBP + " ПК" + massKnob[i].param.toString();
+              soobBP += " ПК" + massKnob[i].param.toString();
               break;
             case 6:
-              soobBP = soobBP + " CК" + massKnob[i].param.toString();
+              soobBP += " CК" + massKnob[i].param.toString();
               break;
             case 7:
-              soobBP = soobBP + " HК" + massKnob[i].param.toString();
+              soobBP += " HК" + massKnob[i].param.toString();
           }
         }
         if (soobBP === "") {
@@ -468,7 +473,7 @@ const ManagementRightGrid = (props: {
     );
   };
 
-  //=Тело компонента ===============================================================
+  //=== Тело компонента =======================================================
   massknob = [];
   massKnob = [];
   for (let i = 0; i < props.masknob.length; i++) {
@@ -681,3 +686,4 @@ const ManagementRightGrid = (props: {
 };
 
 export default ManagementRightGrid;
+//пре  назначен БП

@@ -1,17 +1,17 @@
-import * as React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { statsaveCreate } from '../../redux/actions';
+import * as React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { statsaveCreate } from "../../redux/actions";
 
-import Box from '@mui/material/Box';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+import Box from "@mui/material/Box";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 
 //import axios from 'axios';
 
-import StatisticXTNew from './StatisticXTNew';
+import StatisticXTNew from "./StatisticXTNew";
 
-import { Statistic } from '../../interfaceStat.d';
-import { Tflight } from '../../interfaceMNG.d';
+import { Statistic } from "../../interfaceStat.d";
+//import { Tflight } from "../../interfaceMNG.d";
 
 let tekValue = 0;
 let pointsEtalon: Statistic[];
@@ -27,9 +27,9 @@ const StatisticsNew = (props: {
   date: string;
   interval: number;
   func: any;
-  pointsTfl: Tflight[];
+  //pointsTfl: Tflight[];
 }) => {
-  // console.log('points:', props.points);
+  console.log("points:", props.points);
   // console.log('pointsTfl:', props.pointsTfl);
   //== Piece of Redux ======================================
   // let maskpoint = useSelector((state: any) => {
@@ -50,8 +50,12 @@ const StatisticsNew = (props: {
     const handleSend = () => {
       if (props.ws !== null) {
         if (props.ws.readyState === WebSocket.OPEN) {
-          props.ws.send(JSON.stringify({ type: 'stopDevices', region: reGion }));
-          props.ws.send(JSON.stringify({ type: 'getStatistics', region: reGion }));
+          props.ws.send(
+            JSON.stringify({ type: "stopDevices", region: reGion })
+          );
+          props.ws.send(
+            JSON.stringify({ type: "getStatistics", region: reGion })
+          );
         } else {
           setTimeout(() => {
             handleSend();
@@ -98,7 +102,7 @@ const StatisticsNew = (props: {
         }
       }
       if (newRecord) {
-        console.log('Stat новая запись i=', i);
+        console.log("Stat новая запись i=", i);
         pointsAdd.push(points[i]);
         pointsAddInterval.push(points[i].Statistics[0].TLen);
       }
@@ -115,10 +119,10 @@ const StatisticsNew = (props: {
 
   const styleSt1 = {
     fontSize: 13.5,
-    maxHeight: '20px',
-    minHeight: '20px',
-    backgroundColor: '#F1F3F4',
-    color: 'black',
+    maxHeight: "20px",
+    minHeight: "20px",
+    backgroundColor: "#F1F3F4",
+    color: "black",
     marginRight: 0.5,
   };
 
@@ -133,7 +137,10 @@ const StatisticsNew = (props: {
   if (datestat.tekArea && datestat.tekId) {
     tekValue = 0;
     for (let i = 0; i < pointsEtalon.length; i++) {
-      if (pointsEtalon[i].area === datestat.tekArea && pointsEtalon[i].id === datestat.tekId)
+      if (
+        pointsEtalon[i].area === datestat.tekArea &&
+        pointsEtalon[i].id === datestat.tekId
+      )
         tekValue = i;
     }
   }
@@ -155,26 +162,32 @@ const StatisticsNew = (props: {
 
   const SpisXT = () => {
     let resSps: any = [];
-    let labl: string = '';
+    let labl: string = "";
 
     if (pointsEtalon.length === 0) {
       resSps.push(
         <Box key={1} sx={styleSt1}>
           Нет данных по статистике
-        </Box>,
+        </Box>
       );
     } else {
       for (let i = 0; i < pointsEtalon.length; i++) {
-        let sub = '0';
-        for (let j = 0; j < props.pointsTfl.length; j++) {
-          if (
-            Number(props.pointsTfl[j].region.num) === pointsEtalon[i].region &&
-            Number(props.pointsTfl[j].area.num) === pointsEtalon[i].area &&
-            props.pointsTfl[j].ID === pointsEtalon[i].id
-          )
-            sub = props.pointsTfl[j].subarea.toString();
-        }
-        labl = pointsEtalon[i].area + ':' + sub + ':' + pointsEtalon[i].id;
+        // let sub = '0';
+        // for (let j = 0; j < props.pointsTfl.length; j++) {
+        //   if (
+        //     Number(props.pointsTfl[j].region.num) === pointsEtalon[i].region &&
+        //     Number(props.pointsTfl[j].area.num) === pointsEtalon[i].area &&
+        //     props.pointsTfl[j].ID === pointsEtalon[i].id
+        //   )
+        //     sub = props.pointsTfl[j].subarea.toString();
+        // }
+        // labl = pointsEtalon[i].area + ':' + sub + ':' + pointsEtalon[i].id;
+        labl =
+          pointsEtalon[i].area +
+          ":" +
+          pointsEtalon[i].subarea +
+          ":" +
+          pointsEtalon[i].id;
         resSps.push(<Tab key={i} sx={styleSt1} label={labl} />);
       }
     }
@@ -188,12 +201,13 @@ const StatisticsNew = (props: {
         <>
           <Box sx={styleSt2}>
             <Tabs
-              sx={{ maxHeight: '20px', minHeight: '20px' }}
+              sx={{ maxHeight: "20px", minHeight: "20px" }}
               value={value}
               onChange={handleChange}
               variant="scrollable"
               scrollButtons={true}
-              allowScrollButtonsMobile>
+              allowScrollButtonsMobile
+            >
               {SpisXT()}
             </Tabs>
           </Box>

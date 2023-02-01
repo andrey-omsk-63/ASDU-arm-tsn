@@ -185,16 +185,17 @@ const PointsLevel2Calc = (props: {
     datestat.xtCsv = "";
     datestat.xtTxt = "";
     let pusto = false;
-    let kakchestvo = "Работа по СК";
+    let kakchestvo = "";
     if (points.results !== null) {
       if (points.results[namer]) {
+        console.log('@@@@@@',points.results[namer])
         for (let i = 0; i < points.results[namer].length; i++) {
-          // if (!points.results[namer][i].Good) {
-          //   pusto = true;
-          //   kakchestvo = "Нет данных";
-          // }
+          if (!points.results[namer][i].Good) {
+            pusto = true;
+            kakchestvo = "Работа по СК";
+          }
           let tim = points.results[namer][i].Time;
-          kakchestvo = "Работа по СК";
+          //kakchestvo = "Работа по СК";
           if (
             !points.yellow.make &&
             tim >= points.yellow.start &&

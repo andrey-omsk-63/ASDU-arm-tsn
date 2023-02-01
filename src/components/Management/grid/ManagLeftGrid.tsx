@@ -154,6 +154,7 @@ const ManagementLeftGrid = (props: {
         areaXT: pointsXT[i].area,
         subareaXT: pointsXT[i].subarea,
         releaseXT: pointsXT[i].release,
+        switchXT: pointsXT[i].switch,
         pknowXT: pointsXT[i].pknow,
       };
     }
@@ -439,6 +440,7 @@ const ManagementLeftGrid = (props: {
           <ManagementRightGrid
             open={props.open}
             tflightt={points}
+            //xctrll={props.xctrll}
             mode={mode}
             areaa={areaa}
             subArea={subArea}

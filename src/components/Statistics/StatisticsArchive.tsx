@@ -9,7 +9,7 @@ import Tab from '@mui/material/Tab';
 import StatisticXTArchive from './StatisticXTArchive';
 
 import { Statistic } from '../../interfaceStat.d';
-import { Tflight } from '../../interfaceMNG.d';
+//import { Tflight } from '../../interfaceMNG.d';
 
 let tekValue = 0;
 let pointsEtalon: Statistic[];
@@ -26,8 +26,9 @@ const StatisticsArchive = (props: {
   date: string;
   interval: number;
   func: any;
-  pointsTfl: Tflight[];
+  //pointsTfl: Tflight[];
 }) => {
+  console.log('pointsOld:', props.points);
   //== Piece of Redux ======================================
   // let maskpoint = useSelector((state: any) => {
   //   const { maskpointReducer } = state;
@@ -144,16 +145,22 @@ const StatisticsArchive = (props: {
       );
     } else {
       for (let i = 0; i < pointsEtalon.length; i++) {
-        let sub = '0';
-        for (let j = 0; j < props.pointsTfl.length; j++) {
-          if (
-            Number(props.pointsTfl[j].region.num) === pointsEtalon[i].region &&
-            Number(props.pointsTfl[j].area.num) === pointsEtalon[i].area &&
-            props.pointsTfl[j].ID === pointsEtalon[i].id
-          )
-            sub = props.pointsTfl[j].subarea.toString();
-        }
-        labl = pointsEtalon[i].area + ':' + sub + ':' + pointsEtalon[i].id;
+        // let sub = '0';
+        // for (let j = 0; j < props.pointsTfl.length; j++) {
+        //   if (
+        //     Number(props.pointsTfl[j].region.num) === pointsEtalon[i].region &&
+        //     Number(props.pointsTfl[j].area.num) === pointsEtalon[i].area &&
+        //     props.pointsTfl[j].ID === pointsEtalon[i].id
+        //   )
+        //     sub = props.pointsTfl[j].subarea.toString();
+        // }
+        // labl = pointsEtalon[i].area + ':' + sub + ':' + pointsEtalon[i].id;
+        labl =
+          pointsEtalon[i].area +
+          ":" +
+          pointsEtalon[i].subarea +
+          ":" +
+          pointsEtalon[i].id;
         resSps.push(<Tab key={i} sx={styleSt1} label={labl} />);
       }
     }
