@@ -1,5 +1,5 @@
 import * as React from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // import { statsaveCreate } from '../../redux/actions';
 
 import Grid from '@mui/material/Grid';
@@ -8,6 +8,8 @@ import Box from '@mui/material/Box';
 import PointsMainScrGrid1 from './grid/PointsMainScrGrid1';
 import PointsMainScrGrid2 from './grid/PointsMainScrGrid2';
 import PointsMainScrGrid3 from './grid/PointsMainScrGrid3';
+
+import { WorkMenuEditMain } from '../../AppServiceFunctions';
 
 import { XctrlInfo } from '../../interfaceGl.d';
 
@@ -18,11 +20,12 @@ const PointsMainScr = (props: {
   xtt: number;
 }) => {
   //== Piece of Redux ======================================
-  // let datestat = useSelector((state: any) => {
-  //   const { statsaveReducer } = state;
-  //   return statsaveReducer.datestat;
-  // });
-  // const dispatch = useDispatch();
+  let maskpoint = useSelector((state: any) => {
+    const { maskpointReducer } = state;
+    return maskpointReducer.maskpoint;
+  });
+  console.log('maskpoint_PointsMainScr:', maskpoint);
+  const dispatch = useDispatch();
   // datestat.xtSave = false;
   // dispatch(statsaveCreate(datestat));
   //========================================================
@@ -97,74 +100,77 @@ const PointsMainScr = (props: {
   let uprBP = 'Управление по ВР';
   if (points.pknow > 0) uprBP = 'Выбран план №' + points.pknow.toString();
 
+  const StartEdit = () => {};
+  const SaveEdit = () => {};
+
   return (
-    <Box sx={{ border: 0, marginTop: -3, marginLeft: -3, marginRight: -3 }}>
-      <Grid container item sx={{ margin: 0, border: 0 }}>
-        <Grid item xs>
-          <Grid container>
-            <Grid item xs={12} sx={{ fontSize: 15, margin: 1, marginLeft: 1 }}>
-              Расчёт ХТ
-            </Grid>
+    <>
+      <Box sx={{ marginTop: -3, marginLeft: -3, marginRight: -3 }}>
+        {WorkMenuEditMain(6, 'Сохранить изменения', SaveEdit)}
+        {WorkMenuEditMain(9, 'Редактирование', StartEdit)}
+        <Grid container>
+          <Grid item xs={12} sx={{ fontSize: 15, margin: 1, marginLeft: 1 }}>
+            Расчёт ХТ
+          </Grid>
 
-            <Grid item xs={12} sx={styleXt02}>
-              <Grid container sx={{ fontSize: 15 }}>
-                <Grid item xs={9.6} sx={{ border: 0 }}>
-                  <Box sx={{ display: 'inline-block' }}>
-                    <b>Расчёт ХТ </b>&nbsp;
-                    {resStr1} &nbsp;<b> Управление</b>&nbsp;&nbsp;
-                    {resStr2}
-                    &nbsp;
-                    <b>
-                      &nbsp; Время&nbsp;
-                      {TimeStr(points.time)} &nbsp;
-                    </b>
-                    &nbsp;&nbsp; {rachet} &nbsp;&nbsp;
-                    <b>{uprBP}</b>
-                  </Box>
-                </Grid>
-                <Grid item xs={2.4} sx={{ fontSize: 14.5, border: 0 }}>
-                  <Box sx={{ textAlign: 'right' }}>
-                    <b>{yellowSoob}</b>
-                    {' с '}
-                    <b>{TimeStr(points.yellow.start)}</b>
-                    {' до '}
-                    <b>{TimeStr(points.yellow.stop)}</b>
-                  </Box>
-                </Grid>
+          <Grid item xs={12} sx={styleXt02}>
+            <Grid container sx={{ fontSize: 15 }}>
+              <Grid item xs={9.6} sx={{ border: 0 }}>
+                <Box sx={{ display: 'inline-block' }}>
+                  <b>Расчёт ХТ </b>&nbsp;
+                  {resStr1} &nbsp;<b> Управление</b>&nbsp;&nbsp;
+                  {resStr2}
+                  &nbsp;
+                  <b>
+                    &nbsp; Время&nbsp;
+                    {TimeStr(points.time)} &nbsp;
+                  </b>
+                  &nbsp;&nbsp; {rachet} &nbsp;&nbsp;
+                  <b>{uprBP}</b>
+                </Box>
               </Grid>
-            </Grid>
-
-            <Grid item xs={12} sx={styleXt03}>
-              <Grid item>
-                <Box sx={{ marginRight: -1.5 }}>
-                  <Grid container>
-                    <Grid item xs={4} sx={styleXt04}>
-                      <PointsMainScrGrid1 open={props.open} xctrll={props.xctrll} xtt={xtProps} />
-                    </Grid>
-                    <Grid item xs={4} sx={styleXt05}>
-                      <PointsMainScrGrid2
-                        open={props.open}
-                        ws={props.ws}
-                        xctrll={props.xctrll}
-                        xtt={xtProps}
-                      />
-                    </Grid>
-                    <Grid item xs sx={styleXt04}>
-                      <PointsMainScrGrid3
-                        open={props.open}
-                        ws={props.ws}
-                        xctrll={props.xctrll}
-                        xtt={xtProps}
-                      />
-                    </Grid>
-                  </Grid>
+              <Grid item xs={2.4} sx={{ fontSize: 14.5, border: 0 }}>
+                <Box sx={{ textAlign: 'right' }}>
+                  <b>{yellowSoob}</b>
+                  {' с '}
+                  <b>{TimeStr(points.yellow.start)}</b>
+                  {' до '}
+                  <b>{TimeStr(points.yellow.stop)}</b>
                 </Box>
               </Grid>
             </Grid>
           </Grid>
+
+          <Grid item xs={12} sx={styleXt03}>
+            <Grid item>
+              <Box sx={{ marginRight: -1.5 }}>
+                <Grid container>
+                  <Grid item xs={4} sx={styleXt04}>
+                    <PointsMainScrGrid1 open={props.open} xctrll={props.xctrll} xtt={xtProps} />
+                  </Grid>
+                  <Grid item xs={4} sx={styleXt05}>
+                    <PointsMainScrGrid2
+                      open={props.open}
+                      ws={props.ws}
+                      xctrll={props.xctrll}
+                      xtt={xtProps}
+                    />
+                  </Grid>
+                  <Grid item xs sx={styleXt04}>
+                    <PointsMainScrGrid3
+                      open={props.open}
+                      ws={props.ws}
+                      xctrll={props.xctrll}
+                      xtt={xtProps}
+                    />
+                  </Grid>
+                </Grid>
+              </Box>
+            </Grid>
+          </Grid>
         </Grid>
-      </Grid>
-    </Box>
+      </Box>
+    </>
   );
 };
 

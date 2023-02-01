@@ -50,6 +50,7 @@ const PointsMenuLevel1 = (props: {
     backgroundColor: '#E9F5D8',
     color: 'black',
     marginRight: 1,
+    marginTop: 0.7,
     textTransform: 'unset !important',
   };
 
@@ -156,7 +157,7 @@ const PointsMenuLevel1 = (props: {
     <Box>
       <TabContext value={valueLevel2}>
         <Box>
-          <Stack sx={{ marginLeft: 0.5, marginTop: 0.7 }} direction="row">
+          <Stack sx={{ marginLeft: 0.5, marginTop: 0.5 }} direction="row">
             <Button sx={stylePXt1} variant="contained" onClick={() => setValueLavel2('1')}>
               <b>Основной:</b>
             </Button>

@@ -423,40 +423,56 @@ const PointsLevel2Baza = (props: {
 
     return (
       <Grid container sx={{ height: '19.5vh' }}>
-        <Grid item xs={12} sx={{ border: 0 }}>
-          <Grid container item>
-            <Grid item xs={4.2}>
-              <Box sx={{ fontSize: 10.7, marginTop: 0.4 }}>
-                <b>Наименование ХТ</b> <br /> <br />
-                <b>Максимум прямого</b> <br /> <br />
-                <b>Максимум обратного</b> <br /> <br />
-                <b>Работа по НК и СК</b>
-              </Box>
+        <Grid item xs={4.3}>
+          <Grid container sx={{ fontSize: 10.7, marginTop: 0.4 }}>
+            <Grid item xs={12}>
+              <b>Наименование ХТ</b>
             </Grid>
-            <Grid item xs>
-              <Box sx={{ marginTop: 0.15, fontSize: 11, border: 0 }}>
-                {!flagEdit && (
-                  <>
-                    {ButtRec(name, SetOpenSetName)} <br /> <br />
-                    {ButtRec(maskpoint.pointForRedax.xctrls[props.crossroad].left, SetOpenSetName)}
-                    <br /> <br />
-                    {ButtRec(maskpoint.pointForRedax.xctrls[props.crossroad].right, SetOpenSetName)}
-                    <br /> <br />
-                    {ButtRec(yellowSoob, SetOpenSetName)}
-                  </>
-                )}
-                {flagEdit && (
-                  <b>
-                    {name} <br /> <br />
-                    {maskpoint.pointForRedax.xctrls[props.crossroad].left}
-                    <br /> <br />
-                    {maskpoint.pointForRedax.xctrls[props.crossroad].right}
-                    <br /> <br />
-                    {yellowSoob}
-                  </b>
-                )}
-              </Box>
+            <Grid item xs={12} sx={{ marginTop: 2 }}>
+              <b>Максимум прямого</b>
             </Grid>
+            <Grid item xs={12} sx={{ marginTop: 2 }}>
+              <b>Максимум обратного</b>
+            </Grid>
+            <Grid item xs={12} sx={{ marginTop: 2 }}>
+              <b>Работа по НК и СК</b>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item xs>
+          <Grid container sx={{ marginTop: 0.4, fontSize: 11 }}>
+            {flagEdit && (
+              <>
+                <Grid item xs={12}>
+                  {name}
+                </Grid>
+                <Grid item xs={12} sx={{ marginTop: 2 }}>
+                  {maskpoint.pointForRedax.xctrls[props.crossroad].left}
+                </Grid>
+                <Grid item xs={12} sx={{ marginTop: 2 }}>
+                  {maskpoint.pointForRedax.xctrls[props.crossroad].right}
+                </Grid>
+                <Grid item xs={12} sx={{ marginTop: 2 }}>
+                  {yellowSoob}
+                </Grid>
+              </>
+            )}
+            {!flagEdit && (
+              <>
+                <Grid item xs={12}>
+                  {ButtRec(name, SetOpenSetName)}
+                </Grid>
+                <Grid item xs={12} sx={{ marginTop: 2 }}>
+                  {ButtRec(maskpoint.pointForRedax.xctrls[props.crossroad].left, SetOpenSetName)}
+                </Grid>
+                <Grid item xs={12} sx={{ marginTop: 2 }}>
+                  {ButtRec(maskpoint.pointForRedax.xctrls[props.crossroad].right, SetOpenSetName)}
+                </Grid>
+                <Grid item xs={12} sx={{ marginTop: 2 }}>
+                  {ButtRec(yellowSoob, SetOpenSetName)}
+                </Grid>
+              </>
+            )}
           </Grid>
         </Grid>
       </Grid>
