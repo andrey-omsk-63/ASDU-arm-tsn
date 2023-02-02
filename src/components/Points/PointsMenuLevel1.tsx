@@ -1,18 +1,18 @@
-import * as React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { maskpointCreate } from './../../redux/actions';
+import * as React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { maskpointCreate } from "./../../redux/actions";
 
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
-import TabContext from '@mui/lab/TabContext';
-import TabPanel from '@mui/lab/TabPanel';
-import Modal from '@mui/material/Modal';
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import TabContext from "@mui/lab/TabContext";
+import TabPanel from "@mui/lab/TabPanel";
+import Modal from "@mui/material/Modal";
 
-import PointsMainScr from './PointsMainScr';
-import PointsMenuLevel2 from './PointsMenuLevel2';
+import PointsMainScr from "./PointsMainScr";
+import PointsMenuLevel2 from "./PointsMenuLevel2";
 
-import { XctrlInfo } from '../../interfaceGl.d';
+import { XctrlInfo } from "../../interfaceGl.d";
 
 let xtPropsOld = -1;
 let numerOld = -1;
@@ -44,17 +44,17 @@ const PointsMenuLevel1 = (props: {
 
   const stylePXt1 = {
     fontSize: 13.9,
-    maxHeight: '20px',
-    minHeight: '20px',
+    maxHeight: "20px",
+    minHeight: "20px",
     //backgroundColor: "#F1F3F4",
-    backgroundColor: '#E9F5D8',
-    color: 'black',
+    backgroundColor: "#E9F5D8",
+    color: "black",
     marginRight: 1,
     marginTop: 0.7,
-    textTransform: 'unset !important',
+    textTransform: "unset !important",
   };
 
-  const [valueLevel2, setValueLavel2] = React.useState('1');
+  const [valueLevel2, setValueLavel2] = React.useState("1");
   const [crossRoad, setCrossRoad] = React.useState(0);
 
   if (xtPropsOld !== xtProps) {
@@ -69,7 +69,7 @@ const PointsMenuLevel1 = (props: {
     const handleClose = (numer: number) => {
       if (numer !== 777) {
         setCrossRoad(numer);
-        setValueLavel2('2');
+        setValueLavel2("2");
         if (numerOld !== numer) {
           maskpoint.newXt = true;
           dispatch(maskpointCreate(maskpoint));
@@ -92,48 +92,53 @@ const PointsMenuLevel1 = (props: {
         // position: 'relative',
         // bottom: '-33vh',
         // marginLeft: '60vh',
-        position: 'absolute',
-        left: '50%',
-        top: '50%',
-        transform: 'translate(-50%, -50%)',
+        position: "absolute",
+        left: "50%",
+        top: "50%",
+        transform: "translate(-50%, -50%)",
         width: (dlStrMenu + 8) * 10,
-        bgcolor: 'background.paper',
-        border: '2px solid #000',
-        borderColor: 'primary.main',
+        bgcolor: "background.paper",
+        border: "2px solid #000",
+        borderColor: "primary.main",
         borderRadius: 2,
         boxShadow: 24,
         p: 3,
       };
 
       const styleModalEnd = {
-        position: 'absolute',
-        maxWidth: '3vh',
-        minWidth: '3vh',
-        maxHeight: '16px',
-        minHeight: '16px',
-        backgroundColor: 'fff',
+        position: "absolute",
+        maxWidth: "3vh",
+        minWidth: "3vh",
+        maxHeight: "16px",
+        minHeight: "16px",
+        backgroundColor: "fff",
         fontSize: 15,
-        color: 'black',
-        top: '0%',
-        left: 'auto',
-        right: '-1.2%',
+        color: "black",
+        top: "0%",
+        left: "auto",
+        right: "-1.2%",
       };
 
       const SpisPerekr = () => {
         let resStr = [];
         for (let i = 0; i < points.xctrls.length; i++) {
           resStr.push(
-            <Button key={i} sx={stylePXt1} variant="contained" onClick={() => handleClose(i)}>
+            <Button
+              key={i}
+              sx={stylePXt1}
+              variant="contained"
+              onClick={() => handleClose(i)}
+            >
               <b>
                 XT:{points.area}:1:&nbsp;&nbsp;{points.xctrls[i].name}
               </b>
-            </Button>,
+            </Button>
           );
         }
         resStr.push(
           <Button key={777} sx={styleModalEnd} onClick={() => handleClose(777)}>
             <b>&#10006;</b>
-          </Button>,
+          </Button>
         );
         return resStr;
       };
@@ -158,14 +163,24 @@ const PointsMenuLevel1 = (props: {
       <TabContext value={valueLevel2}>
         <Box>
           <Stack sx={{ marginLeft: 0.5, marginTop: 0.5 }} direction="row">
-            <Button sx={stylePXt1} variant="contained" onClick={() => setValueLavel2('1')}>
+            <Button
+              sx={stylePXt1}
+              variant="contained"
+              onClick={() => setValueLavel2("1")}
+            >
               <b>Основной:</b>
             </Button>
             {MenuCrossRoad()}
           </Stack>
         </Box>
         <TabPanel value="1">
-          <PointsMainScr open={isOpen} ws={props.ws} xctrll={props.xctrll} xtt={xtProps} />
+          <PointsMainScr
+            open={isOpen}
+            ws={props.ws}
+            xctrll={props.xctrll}
+            xtt={xtProps}
+            setPoint={props.setPoint}
+          />
         </TabPanel>
         <TabPanel value="2">
           <>

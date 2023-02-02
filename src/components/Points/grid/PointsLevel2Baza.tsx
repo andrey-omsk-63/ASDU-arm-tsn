@@ -1,32 +1,32 @@
-import * as React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { maskpointCreate } from './../../../redux/actions';
+import * as React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { maskpointCreate } from "./../../../redux/actions";
 
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
-import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import Modal from "@mui/material/Modal";
+import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
+import MenuItem from "@mui/material/MenuItem";
 
-import PointsLevel2BazaDiogram from './PointsLevel2BazaDiogram';
+import PointsLevel2BazaDiogram from "./PointsLevel2BazaDiogram";
 
-import { TimeStr, BoxTextField, Inputer } from '../../../AppServiceFunctions';
-import { WorkMenuEdit, ButtRec, ConclStr } from '../../../AppServiceFunctions';
-import { SendHandleSend, ConclHeader } from '../../../AppServiceFunctions';
-import { InputTimeAndMode, SaveFunc } from '../../../AppServiceFunctions';
+import { TimeStr, BoxTextField, Inputer } from "../../../AppServiceFunctions";
+import { WorkMenuEdit, ButtRec, ConclStr } from "../../../AppServiceFunctions";
+import { SendHandleSend, ConclHeader } from "../../../AppServiceFunctions";
+import { InputTimeAndMode, SaveFunc } from "../../../AppServiceFunctions";
 
-import { styleXTG00, styleXTG01, styleXTG011 } from './PointsGridStyle';
-import { styleXTG021, styleXTG02, styleXTG03 } from './PointsGridStyle';
-import { styleXTG04, styleBoxForm } from './PointsGridStyle';
-import { styleBut02, styleModalEnd } from './PointsGridStyle';
-import { styleSetInf, styleSetInff } from './PointsGridStyle';
-import { styleInpName } from './PointsGridStyle';
-import { styleInpArg, styleInpTime } from './PointsGridStyle';
+import { styleXTG00, styleXTG01, styleXTG011 } from "./PointsGridStyle";
+import { styleXTG021, styleXTG02, styleXTG03 } from "./PointsGridStyle";
+import { styleXTG04, styleBoxForm } from "./PointsGridStyle";
+import { styleBut02, styleModalEnd } from "./PointsGridStyle";
+import { styleSetInf, styleSetInff } from "./PointsGridStyle";
+import { styleInpName } from "./PointsGridStyle";
+import { styleInpArg, styleInpTime } from "./PointsGridStyle";
 
-import { XctrlInfo } from '../../../interfaceGl.d';
+import { XctrlInfo } from "../../../interfaceGl.d";
 
 let nomStr = 0;
 let flagSave = false;
@@ -37,7 +37,7 @@ let xtPropsOld = -1;
 let crossRoadOld = -1;
 
 let pointsTemp: any = null;
-let formTemp = '';
+let formTemp = "";
 let leftTemp = 0;
 let rightTemp = 0;
 let pointRab: any = null;
@@ -67,9 +67,13 @@ const PointsLevel2Baza = (props: {
   const [openSetName, setOpenSetName] = React.useState(false);
   const [openSetStr, setOpenSetStr] = React.useState(false);
   const [points, setPoints] = React.useState(pointsEt);
-  const [formName, setFormName] = React.useState(pointsEt.xctrls[crossRoad].name);
+  const [formName, setFormName] = React.useState(
+    pointsEt.xctrls[crossRoad].name
+  );
   const [maxLeft, setMaxLeft] = React.useState(pointsEt.xctrls[crossRoad].left);
-  const [maxRight, setMaxRight] = React.useState(pointsEt.xctrls[crossRoad].right);
+  const [maxRight, setMaxRight] = React.useState(
+    pointsEt.xctrls[crossRoad].right
+  );
   const [yellow, setYellow] = React.useState(pointsEt.yellow.make);
   const [tmStart, setTmStart] = React.useState(pointsEt.yellow.start);
   const [tmStop, setTmStop] = React.useState(pointsEt.yellow.stop);
@@ -143,22 +147,26 @@ const PointsLevel2Baza = (props: {
 
     const handleChange5 = (event: any) => {
       let form = event.target.value.trimStart(); // удаление пробелов в начале строки
-      if (Math.abs(form) && Number(form) < 24) setValuen5(Math.abs(form).toString());
+      if (Math.abs(form) && Number(form) < 24)
+        setValuen5(Math.abs(form).toString());
     };
 
     const handleChange6 = (event: any) => {
       let form = event.target.value.trimStart(); // удаление пробелов в начале строки
-      if (Math.abs(form) && Number(form) < 60) setValuen6(Math.abs(form).toString());
+      if (Math.abs(form) && Number(form) < 60)
+        setValuen6(Math.abs(form).toString());
     };
 
     const handleChange7 = (event: any) => {
       let form = event.target.value.trimStart(); // удаление пробелов в начале строки
-      if (Math.abs(form) && Number(form) < 24) setValuen7(Math.abs(form).toString());
+      if (Math.abs(form) && Number(form) < 24)
+        setValuen7(Math.abs(form).toString());
     };
 
     const handleChange8 = (event: any) => {
       let form = event.target.value.trimStart(); // удаление пробелов в начале строки
-      if (Math.abs(form) && Number(form) < 60) setValuen8(Math.abs(form).toString());
+      if (Math.abs(form) && Number(form) < 60)
+        setValuen8(Math.abs(form).toString());
     };
 
     const handleClose = () => {
@@ -200,10 +208,10 @@ const PointsLevel2Baza = (props: {
       };
 
       const handleKey = (event: any) => {
-        if (event.key === 'Enter') event.preventDefault();
+        if (event.key === "Enter") event.preventDefault();
       };
 
-      let dat = ['Вкл', 'Выкл'];
+      let dat = ["Вкл", "Выкл"];
       let massKey = [];
       let massDat: any[] = [];
       const currencies: any = [];
@@ -213,8 +221,8 @@ const PointsLevel2Baza = (props: {
       }
       for (let i = 0; i < massKey.length; i++) {
         let maskCurrencies = {
-          value: '',
-          label: '',
+          value: "",
+          label: "",
         };
         maskCurrencies.value = massKey[i];
         maskCurrencies.label = massDat[i];
@@ -233,9 +241,14 @@ const PointsLevel2Baza = (props: {
             onChange={handleChange}
             InputProps={{ style: { fontSize: 14 } }}
             variant="standard"
-            color="secondary">
+            color="secondary"
+          >
             {currencies.map((option: any) => (
-              <MenuItem key={option.value} value={option.value} sx={{ fontSize: 14 }}>
+              <MenuItem
+                key={option.value}
+                value={option.value}
+                sx={{ fontSize: 14 }}
+              >
                 {option.label}
               </MenuItem>
             ))}
@@ -248,7 +261,7 @@ const PointsLevel2Baza = (props: {
       return (
         <Box sx={styleInpTime}>
           {BoxTextField(valuen5, handleChange5)}
-          {' : '}
+          {" : "}
           {BoxTextField(valuen6, handleChange6)}
         </Box>
       );
@@ -258,7 +271,7 @@ const PointsLevel2Baza = (props: {
       return (
         <Box sx={styleInpTime}>
           {BoxTextField(valuen7, handleChange7)}
-          {' : '}
+          {" : "}
           {BoxTextField(valuen8, handleChange8)}
         </Box>
       );
@@ -270,12 +283,12 @@ const PointsLevel2Baza = (props: {
           <Button sx={styleModalEnd} onClick={handleCloseClinch}>
             <b>&#10006;</b>
           </Button>
-          {Inputer('Наименование ХТ', valuen1, handleChange1, styleInpName)}
-          {Inputer('Максимум прямого', valuen2, handleChange2, styleInpArg)}
-          {Inputer('Максимум обратного', valuen3, handleChange3, styleInpArg)}
-          {InputTimeAndMode('Работа по НК и СК', InputerMode)}
-          {InputTimeAndMode('Начало', FuncStart)}
-          {InputTimeAndMode('Конец', FuncStop)}
+          {Inputer("Наименование ХТ", valuen1, handleChange1, styleInpName)}
+          {Inputer("Максимум прямого", valuen2, handleChange2, styleInpArg)}
+          {Inputer("Максимум обратного", valuen3, handleChange3, styleInpArg)}
+          {InputTimeAndMode("Работа по НК и СК", InputerMode)}
+          {InputTimeAndMode("Начало", FuncStart)}
+          {InputTimeAndMode("Конец", FuncStop)}
           {SaveFunc(handleClose)}
         </Box>
       </Modal>
@@ -307,7 +320,10 @@ const PointsLevel2Baza = (props: {
       pointRab.xctrls[crossRoad].StrategyB[props.nom].vleft = valuen6;
       pointRab.xctrls[crossRoad].StrategyB[props.nom].vright = valuen7;
       pointRab.xctrls[crossRoad].StrategyB[props.nom].desc = valuen8;
-      if (props.nom === maskpoint.pointForRedax.xctrls[crossRoad].StrategyB.length - 1) {
+      if (
+        props.nom ===
+        maskpoint.pointForRedax.xctrls[crossRoad].StrategyB.length - 1
+      ) {
         if (pointRab.xctrls[crossRoad].left < valuen1) {
           pointRab.xctrls[crossRoad].left = valuen1;
           setMaxLeft(valuen1);
@@ -385,18 +401,18 @@ const PointsLevel2Baza = (props: {
           <Button sx={styleModalEnd} onClick={handleClose}>
             <b>&#10006;</b>
           </Button>
-          <Typography sx={{ textAlign: 'center' }}>
+          <Typography sx={{ textAlign: "center" }}>
             Номер записи <b> {props.nom} </b>
-          </Typography>{' '}
+          </Typography>{" "}
           <br />
-          {Inputer('Прямой', valuen1, handleChange1, styleInpArg)}
-          {Inputer('Обратный', valuen2, handleChange2, styleInpArg)}
-          {Inputer('КСП', valuen3, handleChange3, styleInpArg)}
-          {Inputer('КСС', valuen4, handleChange4, styleInpArg)}
-          {Inputer('КСО', valuen5, handleChange5, styleInpArg)}
-          {Inputer('Луч П', valuen6, handleChange6, styleInpArg)}
-          {Inputer('Луч О', valuen7, handleChange7, styleInpArg)}
-          {Inputer('Описание', valuen8, handleChange8, styleInpArg)}
+          {Inputer("Прямой", valuen1, handleChange1, styleInpArg)}
+          {Inputer("Обратный", valuen2, handleChange2, styleInpArg)}
+          {Inputer("КСП", valuen3, handleChange3, styleInpArg)}
+          {Inputer("КСС", valuen4, handleChange4, styleInpArg)}
+          {Inputer("КСО", valuen5, handleChange5, styleInpArg)}
+          {Inputer("Луч П", valuen6, handleChange6, styleInpArg)}
+          {Inputer("Луч О", valuen7, handleChange7, styleInpArg)}
+          {Inputer("Описание", valuen8, handleChange8, styleInpArg)}
           {SaveFunc(handleCloseStr)}
         </Box>
       </Modal>
@@ -414,15 +430,15 @@ const PointsLevel2Baza = (props: {
 
   const PointsLevel2BazaTab1 = () => {
     let name = formName.slice(0, 29);
-    let yellowSoob = 'Выкл с ';
-    if (!maskpoint.pointForRedax.yellow.make) yellowSoob = 'Вкл с ';
+    let yellowSoob = "Выкл с ";
+    if (!maskpoint.pointForRedax.yellow.make) yellowSoob = "Вкл с ";
     yellowSoob +=
       TimeStr(maskpoint.pointForRedax.yellow.start) +
-      ' до ' +
+      " до " +
       TimeStr(maskpoint.pointForRedax.yellow.stop);
 
     return (
-      <Grid container sx={{ height: '19.5vh' }}>
+      <Grid container sx={{ height: "19.5vh" }}>
         <Grid item xs={4.3}>
           <Grid container sx={{ fontSize: 10.7, marginTop: 0.4 }}>
             <Grid item xs={12}>
@@ -463,10 +479,16 @@ const PointsLevel2Baza = (props: {
                   {ButtRec(name, SetOpenSetName)}
                 </Grid>
                 <Grid item xs={12} sx={{ marginTop: 2 }}>
-                  {ButtRec(maskpoint.pointForRedax.xctrls[props.crossroad].left, SetOpenSetName)}
+                  {ButtRec(
+                    maskpoint.pointForRedax.xctrls[props.crossroad].left,
+                    SetOpenSetName
+                  )}
                 </Grid>
                 <Grid item xs={12} sx={{ marginTop: 2 }}>
-                  {ButtRec(maskpoint.pointForRedax.xctrls[props.crossroad].right, SetOpenSetName)}
+                  {ButtRec(
+                    maskpoint.pointForRedax.xctrls[props.crossroad].right,
+                    SetOpenSetName
+                  )}
                 </Grid>
                 <Grid item xs={12} sx={{ marginTop: 2 }}>
                   {ButtRec(yellowSoob, SetOpenSetName)}
@@ -482,15 +504,15 @@ const PointsLevel2Baza = (props: {
   const PointsLevel2BazaTab2Header = () => {
     return (
       <Grid container>
-        {ConclHeader(1.3, '№', styleXTG02)}
-        {ConclHeader(1.8, 'Прямой', styleXTG02)}
-        {ConclHeader(1.8, 'Обратный', styleXTG02)}
-        {ConclHeader(1, 'КСП', styleXTG02)}
-        {ConclHeader(1, 'КСС', styleXTG02)}
-        {ConclHeader(1, 'КСО', styleXTG02)}
-        {ConclHeader(1, 'Луч П', styleXTG02)}
-        {ConclHeader(1, 'Луч О', styleXTG02)}
-        {ConclHeader(2.1, 'Описание', styleXTG021)}
+        {ConclHeader(1.3, "№", styleXTG02)}
+        {ConclHeader(1.8, "Прямой", styleXTG02)}
+        {ConclHeader(1.8, "Обратный", styleXTG02)}
+        {ConclHeader(1, "КСП", styleXTG02)}
+        {ConclHeader(1, "КСС", styleXTG02)}
+        {ConclHeader(1, "КСО", styleXTG02)}
+        {ConclHeader(1, "Луч П", styleXTG02)}
+        {ConclHeader(1, "Луч О", styleXTG02)}
+        {ConclHeader(2.1, "Описание", styleXTG021)}
       </Grid>
     );
   };
@@ -499,11 +521,11 @@ const PointsLevel2Baza = (props: {
     return (
       <Grid container>
         <Grid xs={0.5} item sx={styleXTG02}></Grid>
-        {ConclHeader(1.75, 'Регион', styleXTG02)}
-        {ConclHeader(1.75, 'Район', styleXTG02)}
-        {ConclHeader(2, 'Перекрёсток', styleXTG02)}
-        {ConclHeader(3, 'Номера каналов прямого', styleXTG02)}
-        {ConclHeader(3, 'Номера каналов обратного', styleXTG021)}
+        {ConclHeader(1.75, "Регион", styleXTG02)}
+        {ConclHeader(1.75, "Район", styleXTG02)}
+        {ConclHeader(2, "Перекрёсток", styleXTG02)}
+        {ConclHeader(3, "Номера каналов прямого", styleXTG02)}
+        {ConclHeader(3, "Номера каналов обратного", styleXTG021)}
       </Grid>
     );
   };
@@ -518,7 +540,11 @@ const PointsLevel2Baza = (props: {
         <Grid key={i} container item xs={12}>
           <Grid xs={1.3} item sx={styleXTG011}>
             {!flagEdit && (
-              <Button sx={styleBut02} variant="contained" onClick={() => SetOpenSetStr(i)}>
+              <Button
+                sx={styleBut02}
+                variant="contained"
+                onClick={() => SetOpenSetStr(i)}
+              >
                 {i}
               </Button>
             )}
@@ -532,7 +558,7 @@ const PointsLevel2Baza = (props: {
           {ConclStr(1, elem.vleft, styleXTG01)}
           {ConclStr(1, elem.vright, styleXTG01)}
           {ConclStr(2.1, elem.desc, styleXTG00)}
-        </Grid>,
+        </Grid>
       );
     }
     return resStr;
@@ -556,7 +582,7 @@ const PointsLevel2Baza = (props: {
             {ConclStr(3, elem.chanL[0], styleXTG01)}
             {ConclStr(3, elem.chanR[0], styleXTG00)}
           </Grid>
-        </Grid>,
+        </Grid>
       );
     }
     return resStr;
@@ -607,12 +633,16 @@ const PointsLevel2Baza = (props: {
 
   return (
     <>
-      {(maskpoint.savePoint || flagSave) && <>{WorkMenuEdit(6, 'Сохранить изменения', SaveEdit)}</>}
-      {(maskpoint.redaxPoint || flagEdit) && <>{WorkMenuEdit(9, 'Редактирование', StartEdit)}</>}
-      {flagExit && <>{WorkMenuEdit(9, 'Выйти без cохранения', StopEdit)}</>}
+      {(maskpoint.savePoint || flagSave) && (
+        <>{WorkMenuEdit(6, "Сохранить изменения", SaveEdit)}</>
+      )}
+      {(maskpoint.redaxPoint || flagEdit) && (
+        <>{WorkMenuEdit(9, "Редактирование", StartEdit)}</>
+      )}
+      {flagExit && <>{WorkMenuEdit(9, "Выйти без cохранения", StopEdit)}</>}
 
       <Stack direction="row">
-        <Grid item xs={4} sx={{ height: '86.5vh', border: 0 }}>
+        <Grid item xs={4} sx={{ height: "86.5vh", border: 0 }}>
           <PointsLevel2BazaTab1 />
           <Grid container>
             <Grid item xs={12} sx={styleXTG03}>
@@ -629,7 +659,11 @@ const PointsLevel2Baza = (props: {
         </Grid>
 
         <Grid item xs sx={styleXTG04}>
-          <PointsLevel2BazaDiogram xctrll={pointGraf} xtt={xtProps} crossroad={props.crossroad} />
+          <PointsLevel2BazaDiogram
+            xctrll={pointGraf}
+            xtt={xtProps}
+            crossroad={props.crossroad}
+          />
         </Grid>
       </Stack>
       {openSetName && <SetName />}

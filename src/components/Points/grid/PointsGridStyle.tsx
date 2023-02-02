@@ -246,4 +246,43 @@ export const styleXTC033 = {
   //width: '99vh',
   height: "59.5vh",
 };
+//====== PointsMainScr ==========================================================
+export const styleXt02 = {
+  border: 1,
+  borderRadius: 1,
+  borderColor: "primary.main",
+  padding: 1,
+  marginLeft: 0.5,
+  marginRight: 1,
+};
+
+export const styleXt03 = {
+  padding: 1,
+  margin: 0.5,
+  marginTop: 0,
+  border: 0,
+};
+
+export const styleXt04 = {
+  border: 1,
+  borderRadius: 1,
+  borderColor: "primary.main",
+  padding: 1,
+  margin: 1,
+  marginTop: -0.5,
+  marginLeft: -1,
+  height: "69%",
+};
+
+export const styleXt05 = {
+  border: 1,
+  borderRadius: 1,
+  borderColor: "primary.main",
+  padding: 1,
+  margin: 1,
+  marginTop: -0.5,
+  marginLeft: -0.5,
+  marginRight: 1.5,
+  height: "69%",
+};
 //===============================================================================

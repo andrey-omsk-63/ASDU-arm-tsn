@@ -16,7 +16,7 @@ const PointsMenuLevel2 = (props: {
   xctrll: XctrlInfo[];
   xtt: number;
   crossroad: number;
-  setPoint: any;
+  setPoint: Function;
   saveXt: Function;
 }) => {
   props.saveXt(false);

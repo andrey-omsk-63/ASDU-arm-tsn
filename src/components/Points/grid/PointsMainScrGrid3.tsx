@@ -1,4 +1,6 @@
 import * as React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { maskpointCreate } from "./../../../redux/actions";
 
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -7,7 +9,6 @@ import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 
 import { Inputer, SaveFunc } from "../../../AppServiceFunctions";
-import { SendHandleSend } from "../../../AppServiceFunctions";
 
 import { styleXTGl02, styleXTGl021, styleBut02 } from "./PointsGridStyle";
 import { styleModalEnd, styleSetInf, styleInpArg } from "./PointsGridStyle";
@@ -15,18 +16,42 @@ import { styleModalEnd, styleSetInf, styleInpArg } from "./PointsGridStyle";
 import { XctrlInfo } from "../../../interfaceGl.d";
 
 let nomStr = 0;
+let flagEdit = true;
+let xtPropsOld = -1;
 
 const PointsMainScrGrid3 = (props: {
   open: boolean;
-  ws: WebSocket;
   xctrll: XctrlInfo[];
   xtt: number;
+  trigger: Function;
 }) => {
+  //== Piece of Redux =======================================
+  let maskpoint = useSelector((state: any) => {
+    const { maskpointReducer } = state;
+    return maskpointReducer.maskpoint;
+  });
+  const dispatch = useDispatch();
+  //===========================================================
   const xtProps = props.xtt;
-  const points = props.xctrll[xtProps];
-  const ws = props.ws;
+  const points = maskpoint.pointForRedax;
 
   const [openSetStr, setOpenSetStr] = React.useState(false);
+  const [valuen1, setValuen1] = React.useState(0);
+  const [valuen2, setValuen2] = React.useState(0);
+  const [valuen3, setValuen3] = React.useState(0);
+
+  if (xtPropsOld !== xtProps) {
+    xtPropsOld = xtProps;
+    flagEdit = true;
+  } else {
+    if (!maskpoint.redaxPoint && flagEdit) {
+      flagEdit = false; // Start
+    } else {
+      if (maskpoint.redaxPoint && !flagEdit) {
+        flagEdit = true; // Stop
+      }
+    }
+  }
 
   const HeaderMainScrGrid3 = () => {
     return (
@@ -47,21 +72,22 @@ const PointsMainScrGrid3 = (props: {
     );
   };
 
-  const SetStr = (props: { nom: number }) => {
-    const [valuen1, setValuen1] = React.useState(points.prioryty[props.nom][0]);
-    const [valuen2, setValuen2] = React.useState(points.prioryty[props.nom][1]);
-    const [valuen3, setValuen3] = React.useState(points.prioryty[props.nom][2]);
-
+  const SetStr = (nom: number) => {
     const handleClose = () => {
       setOpenSetStr(false);
     };
 
     const handleCloseStr = () => {
-      points.prioryty[props.nom][0] = valuen1;
-      points.prioryty[props.nom][1] = valuen2;
-      points.prioryty[props.nom][2] = valuen3;
-      SendHandleSend(ws, points); // прокидываем изменения на сервер
+      points.prioryty[nom][0] = valuen1;
+      points.prioryty[nom][1] = valuen2;
+      points.prioryty[nom][2] = valuen3;
+      maskpoint.pointForRedax.prioryty[nom][0] = valuen1;
+      maskpoint.pointForRedax.prioryty[nom][1] = valuen2;
+      maskpoint.pointForRedax.prioryty[nom][2] = valuen3;
+      maskpoint.savePoint = true;
+      dispatch(maskpointCreate(maskpoint));
       setOpenSetStr(false);
+      props.trigger();
     };
 
     const handleChange1 = (event: any) => {
@@ -86,12 +112,12 @@ const PointsMainScrGrid3 = (props: {
             <b>&#10006;</b>
           </Button>
           <Typography sx={{ textAlign: "center" }}>
-            Номер записи <b> {props.nom + 1} </b>
+            Номер записи <b> {nom + 1} </b>
           </Typography>{" "}
           <br />
           {Inputer("« 0 »", valuen1, handleChange1, styleInpArg)}
           {Inputer("« 1 »", valuen2, handleChange2, styleInpArg)}
-          {Inputer("« 1 »", valuen3, handleChange3, styleInpArg)}
+          {Inputer("« 2 »", valuen3, handleChange3, styleInpArg)}
           {SaveFunc(handleCloseStr)}
         </Box>
       </Modal>
@@ -100,6 +126,9 @@ const PointsMainScrGrid3 = (props: {
 
   const SetOpenSetStr = (nom: number) => {
     nomStr = nom;
+    setValuen1(points.prioryty[nom][0]);
+    setValuen2(points.prioryty[nom][1]);
+    setValuen3(points.prioryty[nom][2]);
     setOpenSetStr(true);
   };
 
@@ -126,13 +155,16 @@ const PointsMainScrGrid3 = (props: {
       resStr.push(
         <Grid key={i} container item xs={12} sx={{ fontSize: 14 }}>
           <Grid xs={1.5} item sx={styleXTG03}>
-            <Button
-              sx={styleBut02}
-              variant="contained"
-              onClick={() => SetOpenSetStr(i)}
-            >
-              {i + 1}
-            </Button>
+            {!flagEdit && (
+              <Button
+                sx={styleBut02}
+                variant="contained"
+                onClick={() => SetOpenSetStr(i)}
+              >
+                {i + 1}
+              </Button>
+            )}
+            {flagEdit && <Box sx={{ p: 0.2 }}>{i + 1}</Box>}
           </Grid>
           <Grid xs={3.5} item sx={styleXTG03}>
             {points.prioryty[i][0]}
@@ -153,7 +185,7 @@ const PointsMainScrGrid3 = (props: {
     <Grid item sx={{ fontSize: 14.5, margin: -1 }}>
       <HeaderMainScrGrid3 />
       {props.open && <>{StrokaMainScrGrid3()}</>}
-      {openSetStr && <SetStr nom={nomStr} />}
+      {openSetStr && <> {SetStr(nomStr)}</>}
     </Grid>
   );
 };
