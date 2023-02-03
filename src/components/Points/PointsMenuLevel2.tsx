@@ -1,14 +1,14 @@
-import * as React from 'react';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import * as React from "react";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 
-import PointsLevel2Baza from './grid/PointsLevel2Baza';
-import PointsLevel2Area from './grid/PointsLevel2Area';
-import PointsLevel2Calc from './grid/PointsLevel2Calc';
+import PointsLevel2Baza from "./grid/PointsLevel2Baza";
+import PointsLevel2Area from "./grid/PointsLevel2Area";
+import PointsLevel2Calc from "./grid/PointsLevel2Calc";
 
-import { XctrlInfo } from '../../interfaceGl.d';
+import { XctrlInfo } from "../../interfaceGl.d";
 
 const PointsMenuLevel2 = (props: {
   open: boolean;
@@ -21,12 +21,12 @@ const PointsMenuLevel2 = (props: {
 }) => {
   props.saveXt(false);
   const xtProps = props.xtt;
-  const [value, setValue] = React.useState('1');
+  const [value, setValue] = React.useState("1");
 
   const PointsMenuLevel2Menu = () => {
     const styleXTG01 = {
-      width: '70%',
-      height: '84vh',
+      width: "70%",
+      height: "84vh",
       marginTop: 2.5,
       marginLeft: -3,
       marginRight: -61,
@@ -35,26 +35,37 @@ const PointsMenuLevel2 = (props: {
 
     const styleXTG02 = {
       fontSize: 12.5,
-      maxHeight: '21px',
-      minHeight: '21px',
-      transform: 'rotate(270deg)',
-      //backgroundColor: '#F1F3F4',
-      backgroundColor: '#E9F5D8',
-      color: 'black',
+      maxHeight: "21px",
+      minHeight: "21px",
+      transform: "rotate(270deg)",
+      backgroundColor: "#E9F5D8",
+      color: "black",
       marginBottom: 6.5,
-      textTransform: 'unset !important',
+      textTransform: "unset !important",
     };
 
     return (
       <Box sx={styleXTG01}>
         <Stack sx={{ marginLeft: 1 }} direction="column">
-          <Button sx={styleXTG02} variant="contained" onClick={() => setValue('1')}>
+          <Button
+            sx={styleXTG02}
+            variant="contained"
+            onClick={() => setValue("1")}
+          >
             <b>Базовые</b>
           </Button>
-          <Button sx={styleXTG02} variant="contained" onClick={() => setValue('2')}>
+          <Button
+            sx={styleXTG02}
+            variant="contained"
+            onClick={() => setValue("2")}
+          >
             <b>Oбласти</b>
           </Button>
-          <Button sx={styleXTG02} variant="contained" onClick={() => setValue('3')}>
+          <Button
+            sx={styleXTG02}
+            variant="contained"
+            onClick={() => setValue("3")}
+          >
             <b>Расчёт</b>
           </Button>
         </Stack>
@@ -73,7 +84,7 @@ const PointsMenuLevel2 = (props: {
 
             <Grid item xs>
               <Grid item xs={12}>
-                {value === '1' && (
+                {value === "1" && (
                   <PointsLevel2Baza
                     open={props.open}
                     ws={props.ws}
@@ -83,7 +94,7 @@ const PointsMenuLevel2 = (props: {
                     setPoint={props.setPoint}
                   />
                 )}
-                {value === '2' && (
+                {value === "2" && (
                   <PointsLevel2Area
                     open={props.open}
                     ws={props.ws}
@@ -93,7 +104,7 @@ const PointsMenuLevel2 = (props: {
                     setPoint={props.setPoint}
                   />
                 )}
-                {value === '3' && (
+                {value === "3" && (
                   <PointsLevel2Calc
                     open={props.open}
                     xctrll={props.xctrll}

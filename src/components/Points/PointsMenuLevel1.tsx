@@ -89,9 +89,6 @@ const PointsMenuLevel1 = (props: {
       }
 
       const stylePK = {
-        // position: 'relative',
-        // bottom: '-33vh',
-        // marginLeft: '60vh',
         position: "absolute",
         left: "50%",
         top: "50%",

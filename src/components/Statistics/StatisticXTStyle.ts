@@ -100,7 +100,8 @@ export const styleHeader033 = {
 export const styleBatton = {
   marginLeft: 0.4,
   fontSize: 11,
-  backgroundColor: '#F1F3F4',
+  //backgroundColor: '#F1F3F4', // светло-серый 
+  backgroundColor: '#E9F5D8', // светло-салатовый
   color: 'black',
   maxWidth: '2.7vh',
   maxHeight: '23px',
@@ -117,7 +118,7 @@ export const styleClear = {
 
 export const styleBattonCl = {
   fontSize: 10.1,
-  backgroundColor: '#F1F3F4',
+  backgroundColor: '#E9F5D8', // светло-салатовый
   color: 'red',
   maxWidth: '5vh',
   maxHeight: '12px',

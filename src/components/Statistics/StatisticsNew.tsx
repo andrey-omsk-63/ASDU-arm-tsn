@@ -29,7 +29,6 @@ const StatisticsNew = (props: {
   func: any;
   //pointsTfl: Tflight[];
 }) => {
-  console.log("points:", props.points);
   // console.log('pointsTfl:', props.pointsTfl);
   //== Piece of Redux ======================================
   // let maskpoint = useSelector((state: any) => {

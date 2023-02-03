@@ -188,7 +188,6 @@ const PointsLevel2Calc = (props: {
     let kakchestvo = "";
     if (points.results !== null) {
       if (points.results[namer]) {
-        console.log('@@@@@@',points.results[namer])
         for (let i = 0; i < points.results[namer].length; i++) {
           if (!points.results[namer][i].Good) {
             pusto = true;

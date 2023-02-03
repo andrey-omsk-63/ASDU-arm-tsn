@@ -51,6 +51,8 @@ const PointsMainScrGrid3 = (props: {
         flagEdit = true; // Stop
       }
     }
+    // if (!maskpoint.redaxPoint && flagEdit) flagEdit = false; // Start
+    // if (maskpoint.redaxPoint && !flagEdit) flagEdit = true; // Stop
   }
 
   const HeaderMainScrGrid3 = () => {
