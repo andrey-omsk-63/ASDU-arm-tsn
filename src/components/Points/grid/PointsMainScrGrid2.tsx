@@ -1,19 +1,19 @@
-import * as React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { maskpointCreate } from "./../../../redux/actions";
+import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { maskpointCreate } from './../../../redux/actions';
 
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Modal from "@mui/material/Modal";
-import Typography from "@mui/material/Typography";
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Modal from '@mui/material/Modal';
+import Typography from '@mui/material/Typography';
 
-import { Inputer, SaveFunc } from "../../../AppServiceFunctions";
+import { Inputer, SaveFunc } from '../../../AppServiceFunctions';
 
-import { styleXTGl02, styleXTGl021, styleBut02 } from "./PointsGridStyle";
-import { styleModalEnd, styleSetInf, styleInpArg } from "./PointsGridStyle";
+import { styleXTGl02, styleXTGl021, styleBut02 } from './PointsGridStyle';
+import { styleModalEnd, styleSetInf, styleInpArg } from './PointsGridStyle';
 
-import { XctrlInfo } from "../../../interfaceGl.d";
+//import { XctrlInfo } from '../../../interfaceGl.d';
 
 let nomStr = 0;
 let flagEdit = true;
@@ -21,7 +21,7 @@ let xtPropsOld = -1;
 
 const PointsMainScrGrid2 = (props: {
   open: boolean;
-  xctrll: XctrlInfo[];
+  //xctrll: XctrlInfo[];
   xtt: number;
   trigger: Function;
 }) => {
@@ -86,12 +86,12 @@ const PointsMainScrGrid2 = (props: {
 
     const handleChange1 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
-      if (form) setValuen1(Math.abs(form));
+      setValuen1(Math.abs(form));
     };
 
     const handleChange2 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
-      if (form) setValuen2(Math.abs(form));
+      setValuen2(Math.abs(form));
     };
 
     return (
@@ -100,12 +100,12 @@ const PointsMainScrGrid2 = (props: {
           <Button sx={styleModalEnd} onClick={handleClose}>
             <b>&#10006;</b>
           </Button>
-          <Typography sx={{ textAlign: "center" }}>
+          <Typography sx={{ textAlign: 'center' }}>
             Номер записи <b> {nom + 1} </b>
-          </Typography>{" "}
+          </Typography>{' '}
           <br />
-          {Inputer("КС на ДК", valuen1, handleChange1, styleInpArg)}
-          {Inputer("ПК", valuen2, handleChange2, styleInpArg)}
+          {Inputer('КС на ДК', valuen1, handleChange1, styleInpArg)}
+          {Inputer('ПК', valuen2, handleChange2, styleInpArg)}
           {SaveFunc(handleCloseStr)}
         </Box>
       </Modal>
@@ -127,27 +127,23 @@ const PointsMainScrGrid2 = (props: {
       const styleXTG03 = {
         borderRight: 1,
         borderBottom: bordBott,
-        borderColor: "primary.main",
+        borderColor: 'primary.main',
         padding: 0.7,
-        textAlign: "center",
+        textAlign: 'center',
       };
 
       const styleXTG033 = {
         borderBottom: bordBott,
-        borderColor: "primary.main",
+        borderColor: 'primary.main',
         padding: 0.7,
-        textAlign: "center",
+        textAlign: 'center',
       };
 
       resStr.push(
         <Grid key={i} container item xs={12} sx={{ fontSize: 14 }}>
           <Grid xs={1.5} item sx={styleXTG03}>
             {!flagEdit && (
-              <Button
-                sx={styleBut02}
-                variant="contained"
-                onClick={() => SetOpenSetStr(i)}
-              >
+              <Button sx={styleBut02} variant="contained" onClick={() => SetOpenSetStr(i)}>
                 {i + 1}
               </Button>
             )}
@@ -159,7 +155,7 @@ const PointsMainScrGrid2 = (props: {
           <Grid xs={5.25} item sx={styleXTG033}>
             {points.ext[i][1]}
           </Grid>
-        </Grid>
+        </Grid>,
       );
     }
     return resStr;
