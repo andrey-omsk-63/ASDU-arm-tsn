@@ -1,18 +1,41 @@
 import * as React from 'react';
+import {
+  //useDispatch,
+  useSelector,
+} from 'react-redux';
+
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
 import { XctrlInfo } from '../../../interfaceGl.d';
 
-import { MakeDate, MakeDateRus } from '../../../AppServiceFunctions';
+import { MakeDate, MakeDateRus, TimeStr } from '../../../AppServiceFunctions';
 
-const PointsMainScrGrid1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number }) => {
+const PointsMainScrGrid1 = (props: {
+  open: boolean;
+  xctrll: XctrlInfo[];
+  xtt: number;
+  calc: boolean;
+  calcDeb: boolean;
+}) => {
+  console.log('CalcDeb:', props.calcDeb);
+  //== Piece of Redux =======================================
+  let datestat = useSelector((state: any) => {
+    const { statsaveReducer } = state;
+    return statsaveReducer.datestat;
+  });
+  //const dispatch = useDispatch();
+  //===========================================================
   const xtProps = props.xtt;
   const points = props.xctrll[xtProps];
+
+  let pointRec = points.results;
+  console.log('DATS', datestat.xttData, MakeDate(new Date()));
+  if (datestat.xttData !== MakeDate(new Date())) pointRec = datestat.result;
+  console.log('$$$$$$', pointRec, datestat);
   let resStr = [];
 
   const styleXTG02 = {
-    //paddingBottom: 2,
     borderRight: 1,
     borderBottom: 1,
     borderColor: 'primary.main',
@@ -44,12 +67,6 @@ const PointsMainScrGrid1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: nu
     textAlign: 'center',
   };
 
-  // const MakeDateRus = (dat: string) => {
-  //   let rusDat = dat.slice(8) + '-' + dat.slice(5, 7);
-  //   rusDat += '-' + dat.slice(0, 4);
-  //   return rusDat;
-  // };
-
   MakeDateRus(MakeDate(new Date()));
 
   const HeaderMainScrGrid1 = () => {
@@ -68,7 +85,7 @@ const PointsMainScrGrid1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: nu
           </Grid>
         </Grid>
         <Grid item container>
-          {points.results !== null && (
+          {pointRec !== null && (
             <Grid item xs={12} sx={styleXTG05}>
               {MakeDateRus(MakeDate(new Date()))}
             </Grid>
@@ -78,37 +95,24 @@ const PointsMainScrGrid1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: nu
     );
   };
 
-  const TimeStr = (tim: number) => {
-    let timLiner = '';
-    let hour = Math.trunc(tim / 60);
-    let min = tim % 60;
-
-    if (hour < 10) timLiner = '0';
-    timLiner += hour.toString();
-    timLiner += ':';
-    if (min < 10) timLiner += '0';
-    timLiner += min.toString();
-    return timLiner;
-  };
-
   const StrokaMainScrGrid1 = () => {
     resStr = [];
 
-    if (points.results !== null) {
-      if (Object.keys(points.results).length > 0) {
-        for (let i = 0; i < points.results.result.length; i++) {
+    if (pointRec !== null) {
+      if (Object.keys(pointRec).length > 0) {
+        for (let i = 0; i < pointRec.result.length; i++) {
           let kakchectvo = '';
-          if (!points.results.result[i].Good) kakchectvo = 'н/д';
+          if (!pointRec.result[i].Good) kakchectvo = 'н/д';
           resStr.push(
             <Grid key={i} container xs={12} item>
               <Grid xs={2} item sx={styleXTG03}>
-                {TimeStr(points.results.result[i].Time)}
+                {TimeStr(pointRec.result[i].Time)}
               </Grid>
               <Grid xs={3} item sx={styleXTG03}>
-                {points.results.result[i].Value[0]}
+                {pointRec.result[i].Value[0]}
               </Grid>
               <Grid xs={3} item sx={styleXTG03}>
-                {points.results.result[i].Value[1]}
+                {pointRec.result[i].Value[1]}
               </Grid>
               <Grid xs={4} item sx={styleXTG03}>
                 {kakchectvo}

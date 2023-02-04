@@ -1,9 +1,6 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  maskpointCreate,
-  //statsaveCreate
-} from './../../redux/actions';
+import { maskpointCreate, statsaveCreate } from './../../redux/actions';
 
 import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
@@ -32,19 +29,18 @@ const Points = (props: {
   setPoint: any;
   saveXt: Function;
   date: string;
+  calc: boolean;
 }) => {
   //== Piece of Redux =======================================
   let maskpoint = useSelector((state: any) => {
     const { maskpointReducer } = state;
     return maskpointReducer.maskpoint;
   });
-  // let datestat = useSelector((state: any) => {
-  //   const { statsaveReducer } = state;
-  //   return statsaveReducer.datestat;
-  // });
+  let datestat = useSelector((state: any) => {
+    const { statsaveReducer } = state;
+    return statsaveReducer.datestat;
+  });
   const dispatch = useDispatch();
-  // datestat.xtSave = false;
-  //dispatch(statsaveCreate(datestat));
   props.saveXt(false);
   //===========================================================
   const stylePXt1 = {
@@ -59,6 +55,8 @@ const Points = (props: {
   let reGion = props.region;
   let isOpen = props.open;
   let pointsGl = props.xctrll;
+  let debug = false;
+  if (props.ws.url === 'wss://localhost:3000/W') debug = true;
 
   //console.log("POINS:", reGion, pointsGl);
 
@@ -68,6 +66,7 @@ const Points = (props: {
   pointsEtalon = points; // замена проверки обновления Xctrl - проверка теперь в App
 
   const [value, setValue] = React.useState(tekValue);
+  const [calculate, setCalculate] = React.useState(true);
 
   React.useEffect(() => {
     const handleSend = () => {
@@ -119,15 +118,28 @@ const Points = (props: {
 
   if (isOpen) pointsEtalon = points; // замена проверки обновления - проверка теперь в App
 
-  console.log('PointsGl:', props.date, oldDate, oldXt, tekValue);
+  console.log('PointsGl:', debug, props.date, oldDate, oldXt, tekValue);
 
   if (props.date !== tekDate) {
     if (props.date !== oldDate || oldXt !== tekValue) {
+      if (debug) {
+        datestat.xttData = props.date;
+        setCalculate(!calculate);
+      } else {
+        datestat.xttData = 'sss';
+      }
+      datestat.xtt = tekValue;
       SendSocketOldDateXt(props.ws);
       oldXt = tekValue;
       oldDate = props.date;
+      // rerend
     }
+  } else {
+    datestat.dateXtt = '';
   }
+  dispatch(statsaveCreate(datestat));
+
+  console.log('Datestat', props.date, datestat);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -188,6 +200,8 @@ const Points = (props: {
               xtt={tekValue}
               setPoint={props.setPoint}
               saveXt={props.saveXt}
+              calc={props.calc}
+              calcDeb={calculate}
             />
           </>
         )}

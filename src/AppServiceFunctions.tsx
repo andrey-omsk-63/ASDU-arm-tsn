@@ -61,7 +61,7 @@ export const MakeInterval = (mode: number) => {
   }
   return dat;
 };
-
+//TimeStr
 export const ButtonMenu = (mode: string, soob: string, SetValue: Function) => {
   const styleApp02 = {
     fontSize: 14,

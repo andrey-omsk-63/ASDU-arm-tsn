@@ -29,7 +29,10 @@ const PointsMainScr = (props: {
   xctrll: XctrlInfo[];
   xtt: number;
   setPoint: Function;
+  calc: boolean;
+  calcDeb: boolean;
 }) => {
+  //console.log('CalcDeb:', props.calcDeb);
   //== Piece of Redux ======================================
   let maskpoint = useSelector((state: any) => {
     const { maskpointReducer } = state;
@@ -159,23 +162,19 @@ const PointsMainScr = (props: {
               <Box sx={{ marginRight: -1.5 }}>
                 <Grid container>
                   <Grid item xs={4} sx={styleXt04}>
-                    <PointsMainScrGrid1 open={props.open} xctrll={props.xctrll} xtt={xtProps} />
+                    <PointsMainScrGrid1
+                      open={props.open}
+                      xctrll={props.xctrll}
+                      xtt={xtProps}
+                      calc={props.calc}
+                      calcDeb={props.calcDeb}
+                    />
                   </Grid>
                   <Grid item xs={4} sx={styleXt05}>
-                    <PointsMainScrGrid2
-                      open={props.open}
-                      //xctrll={props.xctrll}
-                      xtt={xtProps}
-                      trigger={SetTrigger}
-                    />
+                    <PointsMainScrGrid2 open={props.open} xtt={xtProps} trigger={SetTrigger} />
                   </Grid>
                   <Grid item xs sx={styleXt04}>
-                    <PointsMainScrGrid3
-                      open={props.open}
-                      //xctrll={props.xctrll}
-                      xtt={xtProps}
-                      trigger={SetTrigger}
-                    />
+                    <PointsMainScrGrid3 open={props.open} xtt={xtProps} trigger={SetTrigger} />
                   </Grid>
                 </Grid>
               </Box>

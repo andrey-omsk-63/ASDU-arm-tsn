@@ -50,6 +50,7 @@ export interface Stater {
   xtTxt: string;
   xtGraf: any;
   xtName: string;
+  xttData: string;
   xtt: number;
   result: Array<any>;
 }
@@ -67,6 +68,7 @@ export let dateStat: Stater = {
   xtTxt: '',
   xtGraf: null,
   xtName: '',
+  xttData: 'ccc',
   xtt: -1,
   result: [],
 };
@@ -150,8 +152,7 @@ const App = () => {
   const [open, setOpen] = React.useState(true);
   const [write, setWrite] = React.useState(false);
   const [openSetErrLog, setOpenSetErrLog] = React.useState(false);
-  const [calculate, setCalculate] = React.useState<Array<any>>([]);
-
+  const [calculate, setCalculate] = React.useState(true);
   const handleCloseModal = (numer: number) => {
     regionGlob = numer;
     SendSocketgetStatisticsList(debug, WS, regionGlob.toString());
@@ -316,6 +317,10 @@ const App = () => {
           break;
         case 'getCalculation':
           console.log('getCalculation:', data);
+          datestat.result = data.results;
+          datestat.xttData = formSett;
+          dispatch(statsaveCreate(datestat));
+          setCalculate(!calculate);
           break;
         case 'busy':
           setBsLogin(data.login);
@@ -329,7 +334,7 @@ const App = () => {
           console.log('data_default:', data);
       }
     };
-  }, []);
+  }, [calculate, datestat, dispatch]);
 
   if (debug && flagOpenDebug) {
     console.log('РЕЖИМ ОТЛАДКИ!!! ');
@@ -364,11 +369,8 @@ const App = () => {
     });
     axios.get('http://localhost:3000/otladkaXctrll.json').then(({ data }) => {
       console.log('getCalculation:', data.data.results);
-      setCalculate(data.data.xctrlInfo);
-      //   if (regionGlob === 0) setPointsReg(data.data.regionInfo ?? []);
-      //   maskPoint.pointForRedax = data.data.xctrlInfo[0];
-      //   dispatch(maskpointCreate(maskpoint));
-      //   setIsOpenInf(true);
+      datestat.result = data.data.results;
+      dispatch(statsaveCreate(datestat));
     });
 
     flagOpenDebug = false;
@@ -527,6 +529,9 @@ const App = () => {
     switch (mode) {
       case '2':
         formSett = formSettToday;
+        datestat.xttData = MakeDate(new Date());
+        dispatch(statsaveCreate(datestat));
+        console.log('!!!Datestat', datestat);
         setValueDate(dayjs(formSett));
         setValue(mode);
         break;
@@ -617,6 +622,7 @@ const App = () => {
                     setPoint={SetPointsXctrl}
                     saveXt={SetSaveXT}
                     date={formSett}
+                    calc={calculate}
                   />
                 )}
               </TabPanel>
