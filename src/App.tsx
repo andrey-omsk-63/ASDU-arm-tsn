@@ -50,6 +50,8 @@ export interface Stater {
   xtTxt: string;
   xtGraf: any;
   xtName: string;
+  xtt: number;
+  result: Array<any>;
 }
 
 export let dateStat: Stater = {
@@ -65,6 +67,8 @@ export let dateStat: Stater = {
   xtTxt: '',
   xtGraf: null,
   xtName: '',
+  xtt: -1,
+  result: [],
 };
 
 export interface Pointer {
@@ -358,7 +362,6 @@ const App = () => {
       SetStatisticsIntervalOld(st);
       setIsOpenOldSt(true);
     });
-    //const ipAdress: string = ;
     axios.get('http://localhost:3000/otladkaXctrll.json').then(({ data }) => {
       console.log('getCalculation:', data.data.results);
       setCalculate(data.data.xctrlInfo);

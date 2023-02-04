@@ -28,7 +28,7 @@ const StatisticsArchive = (props: {
   func: any;
   //pointsTfl: Tflight[];
 }) => {
-  console.log('pointsOld:', props.points);
+  //console.log('pointsOld:', props.points);
   //== Piece of Redux ======================================
   // let maskpoint = useSelector((state: any) => {
   //   const { maskpointReducer } = state;
@@ -155,12 +155,7 @@ const StatisticsArchive = (props: {
         //     sub = props.pointsTfl[j].subarea.toString();
         // }
         // labl = pointsEtalon[i].area + ':' + sub + ':' + pointsEtalon[i].id;
-        labl =
-          pointsEtalon[i].area +
-          ":" +
-          pointsEtalon[i].subarea +
-          ":" +
-          pointsEtalon[i].id;
+        labl = pointsEtalon[i].area + ':' + pointsEtalon[i].subarea + ':' + pointsEtalon[i].id;
         resSps.push(<Tab key={i} sx={styleSt1} label={labl} />);
       }
     }

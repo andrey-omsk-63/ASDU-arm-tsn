@@ -1,68 +1,92 @@
-import * as React from "react";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
+import * as React from 'react';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 
-import { XctrlInfo } from "../../../interfaceGl.d";
+import { XctrlInfo } from '../../../interfaceGl.d';
 
-const PointsMainScrGrid1 = (props: {
-  open: boolean;
-  xctrll: XctrlInfo[];
-  xtt: number;
-}) => {
+import { MakeDate, MakeDateRus } from '../../../AppServiceFunctions';
+
+const PointsMainScrGrid1 = (props: { open: boolean; xctrll: XctrlInfo[]; xtt: number }) => {
   const xtProps = props.xtt;
   const points = props.xctrll[xtProps];
   let resStr = [];
 
   const styleXTG02 = {
+    //paddingBottom: 2,
     borderRight: 1,
     borderBottom: 1,
-    borderColor: "primary.main",
+    borderColor: 'primary.main',
     padding: 0.7,
-    textAlign: "center",
-    backgroundColor: "#C0C0C0",
+    textAlign: 'center',
+    backgroundColor: '#C0C0C0',
   };
 
   const styleXTG03 = {
     borderRight: 1,
     borderBottom: 1,
-    borderColor: "primary.main",
+    borderColor: 'primary.main',
     padding: 0.7,
-    textAlign: "center",
+    textAlign: 'center',
   };
 
   const styleXTG04 = {
     fontSize: 14.5,
     borderRight: 0,
-    borderColor: "primary.main",
+    borderColor: 'primary.main',
     margin: -1,
   };
 
+  const styleXTG05 = {
+    fontSize: 11,
+    borderRight: 1,
+    borderColor: 'primary.main',
+    backgroundColor: '#E5E5E5',
+    textAlign: 'center',
+  };
+
+  // const MakeDateRus = (dat: string) => {
+  //   let rusDat = dat.slice(8) + '-' + dat.slice(5, 7);
+  //   rusDat += '-' + dat.slice(0, 4);
+  //   return rusDat;
+  // };
+
+  MakeDateRus(MakeDate(new Date()));
+
   const HeaderMainScrGrid1 = () => {
     return (
-      <Grid item container xs={12}>
-        <Grid item xs={2} sx={styleXTG02}></Grid>
-        <Grid item xs={3} sx={styleXTG02}>
-          <b>КС на ДК</b>
+      <>
+        <Grid container>
+          <Grid item xs={2} sx={styleXTG02}></Grid>
+          <Grid item xs={3} sx={styleXTG02}>
+            <b>КС на ДК</b>
+          </Grid>
+          <Grid item xs={3} sx={styleXTG02}>
+            <b>ПК</b>
+          </Grid>
+          <Grid item xs={4} sx={styleXTG02}>
+            <b>Качество</b>
+          </Grid>
         </Grid>
-        <Grid item xs={3} sx={styleXTG02}>
-          <b>ПК</b>
+        <Grid item container>
+          {points.results !== null && (
+            <Grid item xs={12} sx={styleXTG05}>
+              {MakeDateRus(MakeDate(new Date()))}
+            </Grid>
+          )}
         </Grid>
-        <Grid item xs={4} sx={styleXTG02}>
-          <b>Качество</b>
-        </Grid>
-      </Grid>
+      </>
     );
   };
 
   const TimeStr = (tim: number) => {
-    let timLiner = "";
+    let timLiner = '';
     let hour = Math.trunc(tim / 60);
     let min = tim % 60;
 
-    if (hour < 10) timLiner = "0";
+    if (hour < 10) timLiner = '0';
     timLiner += hour.toString();
-    timLiner += ":";
-    if (min < 10) timLiner += "0";
+    timLiner += ':';
+    if (min < 10) timLiner += '0';
     timLiner += min.toString();
     return timLiner;
   };
@@ -73,8 +97,8 @@ const PointsMainScrGrid1 = (props: {
     if (points.results !== null) {
       if (Object.keys(points.results).length > 0) {
         for (let i = 0; i < points.results.result.length; i++) {
-          let kakchectvo = "";
-          if (!points.results.result[i].Good) kakchectvo = "н/д";
+          let kakchectvo = '';
+          if (!points.results.result[i].Good) kakchectvo = 'н/д';
           resStr.push(
             <Grid key={i} container xs={12} item>
               <Grid xs={2} item sx={styleXTG03}>
@@ -89,7 +113,7 @@ const PointsMainScrGrid1 = (props: {
               <Grid xs={4} item sx={styleXTG03}>
                 {kakchectvo}
               </Grid>
-            </Grid>
+            </Grid>,
           );
         }
       }
@@ -103,7 +127,7 @@ const PointsMainScrGrid1 = (props: {
       <Box sx={{ marginRight: 0.74, border: 0 }}>
         <HeaderMainScrGrid1 />
       </Box>
-      <Box sx={{ fontSize: 14, overflowX: "auto", height: "73vh" }}>
+      <Box sx={{ fontSize: 14, overflowX: 'auto', height: '72vh' }}>
         {props.open && <div>{StrokaMainScrGrid1()}</div>}
       </Box>
     </Grid>
