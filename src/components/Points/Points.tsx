@@ -8,7 +8,7 @@ import Tab from '@mui/material/Tab';
 
 import PointsMenuLevel1 from './PointsMenuLevel1';
 
-import { MakeDate } from '../../AppServiceFunctions';
+import { MakeDate, SendSocketOldDateXt } from '../../AppServiceFunctions';
 
 import { XctrlInfo } from '../../interfaceGl.d';
 
@@ -53,17 +53,17 @@ const Points = (props: {
   };
 
   let reGion = props.region;
+
   let isOpen = props.open;
   let pointsGl = props.xctrll;
   let debug = false;
   if (props.ws.url === 'wss://localhost:3000/W') debug = true;
 
-  //console.log("POINS:", reGion, pointsGl);
+  //console.log('POINS:', reGion, pointsGl);
 
   let points = pointsGl.filter((pointsGl) => pointsGl.region === Number(reGion));
-  //let points = pointsGl;  // для отладки
-
   pointsEtalon = points; // замена проверки обновления Xctrl - проверка теперь в App
+  //let reGion = pointsEtalon[tekValue].region.toString();
 
   const [value, setValue] = React.useState(tekValue);
   const [calculate, setCalculate] = React.useState(true);
@@ -85,40 +85,40 @@ const Points = (props: {
     handleSend();
   }, [props.ws, reGion]);
 
-  const SendSocketOldDateXt = (ws: any) => {
-    console.log(
-      'SendSocketOldDateXt',
-      date,
-      Number(props.region),
-      pointsEtalon[tekValue].area,
-      pointsEtalon[tekValue].subarea,
-      pointsEtalon[tekValue],
-    );
-    const handleSendOpen = () => {
-      if (ws !== null) {
-        if (ws.readyState === WebSocket.OPEN) {
-          ws.send(
-            JSON.stringify({
-              type: 'getCalculation',
-              date: new Date(props.date).toISOString(),
-              region: Number(props.region),
-              area: pointsEtalon[tekValue].area,
-              subarea: pointsEtalon[tekValue].subarea,
-            }),
-          );
-        } else {
-          setTimeout(() => {
-            handleSendOpen();
-          }, 1000);
-        }
-      }
-    };
-    handleSendOpen();
-  };
+  // const SendSocketOldDateXt = (ws: any) => {
+  //   console.log(
+  //     'SendSocketOldDateXt',
+  //     date,
+  //     pointsEtalon[tekValue].region,
+  //     pointsEtalon[tekValue].area,
+  //     pointsEtalon[tekValue].subarea,
+  //     pointsEtalon[tekValue],
+  //   );
+  //   const handleSendOpen = () => {
+  //     if (ws !== null) {
+  //       if (ws.readyState === WebSocket.OPEN) {
+  //         ws.send(
+  //           JSON.stringify({
+  //             type: 'getCalculation',
+  //             date: new Date(props.date).toISOString(),
+  //             region: pointsEtalon[tekValue].region,
+  //             area: pointsEtalon[tekValue].area,
+  //             subarea: pointsEtalon[tekValue].subarea,
+  //           }),
+  //         );
+  //       } else {
+  //         setTimeout(() => {
+  //           handleSendOpen();
+  //         }, 1000);
+  //       }
+  //     }
+  //   };
+  //   handleSendOpen();
+  // };
 
   if (isOpen) pointsEtalon = points; // замена проверки обновления - проверка теперь в App
 
-  console.log('PointsGl:', debug, props.date, oldDate, oldXt, tekValue);
+  //console.log('1PointsGl:', debug, props.date, oldDate, oldXt, tekValue);
 
   if (props.date !== tekDate) {
     if (props.date !== oldDate || oldXt !== tekValue) {
@@ -129,17 +129,19 @@ const Points = (props: {
         datestat.xttData = 'sss';
       }
       datestat.xtt = tekValue;
-      SendSocketOldDateXt(props.ws);
+      SendSocketOldDateXt(props.ws, props.date, pointsEtalon, tekValue);
       oldXt = tekValue;
       oldDate = props.date;
-      // rerend
     }
   } else {
-    datestat.dateXtt = '';
+    datestat.xttData = tekDate;
+    if (props.date !== oldDate) {
+      oldDate = props.date;
+      setCalculate(!calculate);
+    }
   }
   dispatch(statsaveCreate(datestat));
-
-  console.log('Datestat', props.date, datestat);
+  //console.log('Datestat', props.date, datestat.xttData, datestat);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -211,32 +213,3 @@ const Points = (props: {
 };
 
 export default Points;
-
-// разноска обновлений
-// if (isOpen && !flagEtalon) {
-//   let pointsAdd = [];
-//   let newRecord = true;
-//   for (let i = 0; i < points.length; i++) {
-//     newRecord = true;
-//     for (let j = 0; j < pointsEtalon.length; j++) {
-//       if (
-//         points[i].subarea === pointsEtalon[j].subarea &&
-//         points[i].region === pointsEtalon[j].region &&
-//         points[i].area === pointsEtalon[j].area
-//       ) {
-//         newRecord = false;
-//         pointsEtalon[j] = points[i];
-//         //console.log('Points обновилась запись i=', i);
-//       }
-//     }
-//     if (newRecord) {
-//       console.log('Points новая запись i=', i);
-//       pointsAdd.push(points[i]);
-//     }
-//   }
-//   if (pointsAdd.length > 0) {
-//     for (let i = 0; i < pointsAdd.length; i++) {
-//       pointsEtalon.push(pointsAdd[i]);
-//     }
-//   }
-// }

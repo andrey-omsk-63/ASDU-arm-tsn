@@ -398,7 +398,7 @@ const App = () => {
   };
 
   const InputNewDateInterval = (props: { mode: number }) => {
-    console.log('mode:', props.mode);
+    //console.log('mode:', props.mode);
     const InputOk = () => {
       if (eventInp <= date) {
         formSett = MakeDate(eventInp);
@@ -531,7 +531,6 @@ const App = () => {
         formSett = formSettToday;
         datestat.xttData = MakeDate(new Date());
         dispatch(statsaveCreate(datestat));
-        console.log('!!!Datestat', datestat);
         setValueDate(dayjs(formSett));
         setValue(mode);
         break;

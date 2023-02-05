@@ -30,9 +30,11 @@ const PointsMainScrGrid1 = (props: {
   const points = props.xctrll[xtProps];
 
   let pointRec = points.results;
-  console.log('DATS', datestat.xttData, MakeDate(new Date()));
+
+  console.log('DATS', datestat.xttData, datestat);
+
   if (datestat.xttData !== MakeDate(new Date())) pointRec = datestat.result;
-  console.log('$$$$$$', pointRec, datestat);
+  //console.log('$$$$$$', pointRec);
   let resStr = [];
 
   const styleXTG02 = {
@@ -85,9 +87,9 @@ const PointsMainScrGrid1 = (props: {
           </Grid>
         </Grid>
         <Grid item container>
-          {pointRec !== null && (
+          {pointRec !== null && datestat.xttData !== MakeDate(new Date()) && (
             <Grid item xs={12} sx={styleXTG05}>
-              {MakeDateRus(MakeDate(new Date()))}
+              {MakeDateRus(datestat.xttData)}
             </Grid>
           )}
         </Grid>

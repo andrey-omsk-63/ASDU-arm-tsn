@@ -187,6 +187,8 @@ const PointsMenuLevel1 = (props: {
                   crossroad={crossRoad}
                   setPoint={props.setPoint}
                   saveXt={props.saveXt}
+                  calc={props.calc}
+                  calcDeb={props.calcDeb}
                 />
               </>
             )}

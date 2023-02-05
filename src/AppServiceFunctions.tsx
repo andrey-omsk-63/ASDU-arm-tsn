@@ -392,4 +392,36 @@ export const WorkMenuEditMain = (xss: number, soob: string, servisFunc: any) => 
     </Grid>
   );
 };
+//=== Points =======================================
+export const SendSocketOldDateXt = (ws: any, date: any, pointsEtalon: any, tekValue: number) => {
+  console.log(
+    'SendSocketOldDateXt',
+    date,
+    pointsEtalon[tekValue].region,
+    pointsEtalon[tekValue].area,
+    pointsEtalon[tekValue].subarea,
+    pointsEtalon[tekValue],
+  );
+  const handleSendOpen = () => {
+    if (ws !== null) {
+      if (ws.readyState === WebSocket.OPEN) {
+        ws.send(
+          JSON.stringify({
+            type: 'getCalculation',
+            date: new Date(date).toISOString(),
+            region: pointsEtalon[tekValue].region,
+            area: pointsEtalon[tekValue].area,
+            subarea: pointsEtalon[tekValue].subarea,
+          }),
+        );
+      } else {
+        setTimeout(() => {
+          handleSendOpen();
+        }, 1000);
+      }
+    }
+  };
+  handleSendOpen();
+};
+
 //==================================================
