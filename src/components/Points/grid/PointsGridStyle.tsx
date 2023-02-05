@@ -191,66 +191,74 @@ export const styleBoxForm = {
 export const styleXTGl02 = {
   borderRight: 1,
   borderBottom: 1,
-  borderColor: "primary.main",
+  borderColor: 'primary.main',
   padding: 0.7,
-  textAlign: "center",
-  backgroundColor: "#C0C0C0",
+  textAlign: 'center',
+  backgroundColor: '#C0C0C0',
 };
 
 export const styleXTGl021 = {
   borderBottom: 1,
-  borderColor: "primary.main",
+  borderColor: 'primary.main',
   padding: 0.7,
-  textAlign: "center",
-  backgroundColor: "#C0C0C0",
+  textAlign: 'center',
+  backgroundColor: '#C0C0C0',
+};
+
+export const styleXTGl05 = {
+  fontSize: 11,
+  //borderRight: 1,
+  borderColor: 'primary.main',
+  backgroundColor: '#E5E5E5',
+  textAlign: 'center',
 };
 //====== PointsLevel2Calc =======================================================
 export const styleXTC011 = {
   fontSize: 11,
   borderRight: 1,
   borderBottom: 1,
-  borderColor: "primary.main",
+  borderColor: 'primary.main',
   padding: 0.2,
-  textAlign: "center",
+  textAlign: 'center',
 };
 
 export const styleXTC01 = {
   fontSize: 11,
   borderRight: 1,
   borderBottom: 1,
-  borderColor: "primary.main",
+  borderColor: 'primary.main',
   padding: 0.2,
-  backgroundColor: "#E6EEF5",
-  textAlign: "center",
+  backgroundColor: '#E6EEF5',
+  textAlign: 'center',
 };
 
 export const styleXTC02 = {
   fontSize: 11,
   borderBottom: 1,
-  borderColor: "primary.main",
+  borderColor: 'primary.main',
   padding: 0.4,
-  textAlign: "center",
-  backgroundColor: "#C0C0C0",
+  textAlign: 'center',
+  backgroundColor: '#C0C0C0',
 };
 
 export const styleXTC03 = {
   border: 1,
   borderRadius: 1,
-  borderColor: "primary.main",
+  borderColor: 'primary.main',
 };
 
 export const styleXTC033 = {
   border: 1,
   borderRadius: 1,
-  borderColor: "primary.main",
+  borderColor: 'primary.main',
   //width: '99vh',
-  height: "59.5vh",
+  height: '59.5vh',
 };
 //====== PointsMainScr ==========================================================
 export const styleXt02 = {
   border: 1,
   borderRadius: 1,
-  borderColor: "primary.main",
+  borderColor: 'primary.main',
   padding: 1,
   marginLeft: 0.5,
   marginRight: 1,
@@ -266,23 +274,23 @@ export const styleXt03 = {
 export const styleXt04 = {
   border: 1,
   borderRadius: 1,
-  borderColor: "primary.main",
+  borderColor: 'primary.main',
   padding: 1,
   margin: 1,
   marginTop: -0.5,
   marginLeft: -1,
-  height: "69%",
+  height: '69%',
 };
 
 export const styleXt05 = {
   border: 1,
   borderRadius: 1,
-  borderColor: "primary.main",
+  borderColor: 'primary.main',
   padding: 1,
   margin: 1,
   marginTop: -0.5,
   marginLeft: -0.5,
   marginRight: 1.5,
-  height: "69%",
+  height: '69%',
 };
 //===============================================================================

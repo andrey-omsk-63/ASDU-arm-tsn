@@ -9,9 +9,11 @@ import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 
 import { Inputer, SaveFunc } from '../../../AppServiceFunctions';
+import { MakeDate, MakeDateRus } from '../../../AppServiceFunctions';
 
 import { styleXTGl02, styleXTGl021, styleBut02 } from './PointsGridStyle';
 import { styleModalEnd, styleSetInf, styleInpArg } from './PointsGridStyle';
+import { styleXTGl05 } from './PointsGridStyle';
 
 //import { XctrlInfo } from '../../../interfaceGl.d';
 
@@ -30,6 +32,11 @@ const PointsMainScrGrid2 = (props: {
     const { maskpointReducer } = state;
     return maskpointReducer.maskpoint;
   });
+  let datestat = useSelector((state: any) => {
+    const { statsaveReducer } = state;
+    return statsaveReducer.datestat;
+  });
+  //console.log('ScrGrid2:', datestat);
   const dispatch = useDispatch();
   //===========================================================
   const xtProps = props.xtt;
@@ -54,17 +61,26 @@ const PointsMainScrGrid2 = (props: {
 
   const HeaderMainScrGrid2 = () => {
     return (
-      <Grid item container xs={12}>
-        <Grid item xs={1.5} sx={styleXTGl02}>
-          <b>№</b>
+      <>
+        <Grid item container xs={12}>
+          <Grid item xs={1.5} sx={styleXTGl02}>
+            <b>№</b>
+          </Grid>
+          <Grid item xs={5.25} sx={styleXTGl02}>
+            <b>КС на ДК</b>
+          </Grid>
+          <Grid item xs={5.25} sx={styleXTGl021}>
+            <b>ПК</b>
+          </Grid>
         </Grid>
-        <Grid item xs={5.25} sx={styleXTGl02}>
-          <b>КС на ДК</b>
+        <Grid item container>
+          {datestat.xttData !== MakeDate(new Date()) && (
+            <Grid item xs={12} sx={styleXTGl05}>
+              {MakeDateRus(MakeDate(new Date()))}
+            </Grid>
+          )}
         </Grid>
-        <Grid item xs={5.25} sx={styleXTGl021}>
-          <b>ПК</b>
-        </Grid>
-      </Grid>
+      </>
     );
   };
 

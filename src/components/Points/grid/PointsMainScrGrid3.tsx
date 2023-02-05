@@ -9,9 +9,11 @@ import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 
 import { Inputer, SaveFunc } from '../../../AppServiceFunctions';
+import { MakeDate, MakeDateRus } from '../../../AppServiceFunctions';
 
 import { styleXTGl02, styleXTGl021, styleBut02 } from './PointsGridStyle';
 import { styleModalEnd, styleSetInf, styleInpArg } from './PointsGridStyle';
+import { styleXTGl05 } from './PointsGridStyle';
 
 //import { XctrlInfo } from '../../../interfaceGl.d';
 
@@ -29,6 +31,10 @@ const PointsMainScrGrid3 = (props: {
   let maskpoint = useSelector((state: any) => {
     const { maskpointReducer } = state;
     return maskpointReducer.maskpoint;
+  });
+  let datestat = useSelector((state: any) => {
+    const { statsaveReducer } = state;
+    return statsaveReducer.datestat;
   });
   const dispatch = useDispatch();
   //===========================================================
@@ -57,20 +63,29 @@ const PointsMainScrGrid3 = (props: {
 
   const HeaderMainScrGrid3 = () => {
     return (
-      <Grid container item xs={12}>
-        <Grid xs={1.5} item sx={styleXTGl02}>
-          <b>№</b>
+      <>
+        <Grid container item xs={12}>
+          <Grid xs={1.5} item sx={styleXTGl02}>
+            <b>№</b>
+          </Grid>
+          <Grid xs={3.5} item sx={styleXTGl02}>
+            <b>« 0 »</b>
+          </Grid>
+          <Grid xs={3.5} item sx={styleXTGl02}>
+            <b>« 1 »</b>
+          </Grid>
+          <Grid xs={3.5} item sx={styleXTGl021}>
+            <b>« 2 »</b>
+          </Grid>
         </Grid>
-        <Grid xs={3.5} item sx={styleXTGl02}>
-          <b>« 0 »</b>
+        <Grid item container>
+          {datestat.xttData !== MakeDate(new Date()) && (
+            <Grid item xs={12} sx={styleXTGl05}>
+              {MakeDateRus(MakeDate(new Date()))}
+            </Grid>
+          )}
         </Grid>
-        <Grid xs={3.5} item sx={styleXTGl02}>
-          <b>« 1 »</b>
-        </Grid>
-        <Grid xs={3.5} item sx={styleXTGl021}>
-          <b>« 2 »</b>
-        </Grid>
-      </Grid>
+      </>
     );
   };
 

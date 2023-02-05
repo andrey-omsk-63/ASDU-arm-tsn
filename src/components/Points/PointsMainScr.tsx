@@ -94,7 +94,7 @@ const PointsMainScr = (props: {
                 &nbsp;&nbsp;&nbsp;{rachet}&nbsp;&nbsp;<b>{uprBP}</b>
               </Box>
             </Grid>
-            <Grid item xs={2.4} sx={{ fontSize: 14.5, border: 0 }}>
+            <Grid item xs={2.4} sx={{ fontSize: 14, border: 0 }}>
               <Box sx={{ textAlign: 'right' }}>
                 <b>{yellowSoob}</b> c <b>{TimeStr(points.yellow.start)}</b>
                 {' до '}
