@@ -5,7 +5,7 @@ import { statsaveCreate } from '../../../redux/actions';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
-import { TimeStr } from '../../../AppServiceFunctions';
+import { MakeDate, TimeStr } from '../../../AppServiceFunctions';
 
 import { styleXTC011, styleXTC01, styleXTC02 } from './PointsGridStyle';
 import { styleXTC03, styleXTC033 } from './PointsGridStyle';
@@ -50,6 +50,7 @@ export interface Datasets {
 
 const PointsLevel2Calc = (props: {
   open: boolean;
+  ws: WebSocket;
   xctrll: XctrlInfo[];
   xtt: number;
   crossroad: number;
@@ -63,14 +64,24 @@ const PointsLevel2Calc = (props: {
     const { statsaveReducer } = state;
     return statsaveReducer.datestat;
   });
+  console.log('Datestat', datestat.xttData, datestat);
   const dispatch = useDispatch();
   //========================================================
   const xtProps = props.xtt;
   const points = props.xctrll[xtProps];
-  const namer = points.xctrls[props.crossroad].name;
+
+  let namer = points.xctrls[props.crossroad].name;
+  let debug = false;
+  if (props.ws.url === 'wss://localhost:3000/W') debug = true;
+
   const printRef = React.useRef(null);
 
-  if (points.results !== null) props.saveXt(true);
+  let pointer = points.results;
+  if (datestat.xttData !== MakeDate(new Date())) {
+    pointer = datestat.result;
+    if (debug) namer = 'Без имени_09.09.2022_09-28-28';
+  }
+  if (pointer !== null) props.saveXt(true);
 
   const labels: string[] = [];
   let data: DataGl = {
@@ -96,8 +107,8 @@ const PointsLevel2Calc = (props: {
   };
 
   const PointsGraf00 = () => {
-    const colMin = 60 / points.results[namer][0].Time;
-    for (let i = 0; i < points.results[namer].length; i++) {
+    const colMin = 60 / pointer[namer][0].Time;
+    for (let i = 0; i < pointer[namer].length; i++) {
       let int = '';
       if (i % colMin === 0) {
         if (i / colMin < 10) int += '0';
@@ -109,29 +120,27 @@ const PointsLevel2Calc = (props: {
     let int = 0;
     //график прямого
     let datas = [];
-    // for (let i = 0; i < points.results[namer].length; i++) {
-    //   datas.push(points.results[namer][i].Value[0]);
+    // for (let i = 0; i < pointer[namer].length; i++) {
+    //   datas.push(pointer[namer][i].Value[0]);
     // }
-    if (points.results[namer].length !== 0)
-      int = points.results[namer][points.results[namer].length - 1].Value[0];
+    if (pointer[namer].length !== 0) int = pointer[namer][pointer[namer].length - 1].Value[0];
     datas.push(int);
-    for (let i = 0; i < points.results[namer].length - 1; i++) {
+    for (let i = 0; i < pointer[namer].length - 1; i++) {
       int = 0;
-      if (points.results[namer].length !== 0) int = points.results[namer][i].Value[0];
+      if (pointer[namer].length !== 0) int = pointer[namer][i].Value[0];
       datas.push(int);
     }
     data.datasets[0].data = datas;
     //график обратного
     datas = [];
-    // for (let i = 0; i < points.results[namer].length; i++) {
-    //   datas.push(points.results[namer][i].Value[1]);
+    // for (let i = 0; i < pointer[namer].length; i++) {
+    //   datas.push(pointer[namer][i].Value[1]);
     // }
-    if (points.results[namer].length !== 0)
-      int = points.results[namer][points.results[namer].length - 1].Value[1];
+    if (pointer[namer].length !== 0) int = pointer[namer][pointer[namer].length - 1].Value[1];
     datas.push(int);
-    for (let i = 0; i < points.results[namer].length - 1; i++) {
+    for (let i = 0; i < pointer[namer].length - 1; i++) {
       int = 0;
-      if (points.results[namer].length !== 0) int = points.results[namer][i].Value[1];
+      if (pointer[namer].length !== 0) int = pointer[namer][i].Value[1];
       datas.push(int);
     }
     data.datasets[1].data = datas;
@@ -187,33 +196,33 @@ const PointsLevel2Calc = (props: {
     datestat.xtTxt = '';
     let pusto = false;
     let kakchestvo = '';
-    if (points.results !== null) {
-      if (points.results[namer]) {
-        for (let i = 0; i < points.results[namer].length; i++) {
-          if (!points.results[namer][i].Good) {
+    if (pointer !== null) {
+      if (pointer[namer]) {
+        for (let i = 0; i < pointer[namer].length; i++) {
+          if (!pointer[namer][i].Good) {
             pusto = true;
             kakchestvo = 'Работа по СК';
           }
-          let tim = points.results[namer][i].Time;
+          let tim = pointer[namer][i].Time;
           //kakchestvo = "Работа по СК";
           if (!points.yellow.make && tim >= points.yellow.start && tim <= points.yellow.stop)
             kakchestvo = 'Работа по НК и СК';
 
-          let stroka = TimeStr(points.results[namer][i].Time) + ';';
-          stroka += points.results[namer][i].Value[0] + ';';
-          stroka += points.results[namer][i].Value[1] + ';';
-          stroka += points.results[namer][i].Value[2] + ';';
+          let stroka = TimeStr(pointer[namer][i].Time) + ';';
+          stroka += pointer[namer][i].Value[0] + ';';
+          stroka += pointer[namer][i].Value[1] + ';';
+          stroka += pointer[namer][i].Value[2] + ';';
           stroka += kakchestvo + ';\n';
           datestat.xtCsv += stroka;
 
-          stroka = TimeStr(points.results[namer][i].Time) + ' ';
-          let st = points.results[namer][i].Value[0].toString();
+          stroka = TimeStr(pointer[namer][i].Time) + ' ';
+          let st = pointer[namer][i].Value[0].toString();
           let stt = '     ' + st;
           stroka += stt.slice(st.length) + '  ';
-          st = points.results[namer][i].Value[1].toString();
+          st = pointer[namer][i].Value[1].toString();
           stt = '       ' + st;
           stroka += stt.slice(st.length) + '  ';
-          st = points.results[namer][i].Value[2].toString();
+          st = pointer[namer][i].Value[2].toString();
           stt = '       ' + st;
           stroka += stt.slice(st.length) + '  ';
           stt = '                 ' + kakchestvo;
@@ -223,16 +232,16 @@ const PointsLevel2Calc = (props: {
           resStr.push(
             <Grid key={Math.random()} container item xs={12}>
               <Grid xs={1} item sx={styleXTC011}>
-                {TimeStr(points.results[namer][i].Time)}
+                {TimeStr(pointer[namer][i].Time)}
               </Grid>
               <Grid xs={2} item sx={pusto ? styleXTC011 : styleXTC01}>
-                {points.results[namer][i].Value[0]}
+                {pointer[namer][i].Value[0]}
               </Grid>
               <Grid xs={2} item sx={pusto ? styleXTC011 : styleXTC01}>
-                {points.results[namer][i].Value[1]}
+                {pointer[namer][i].Value[1]}
               </Grid>
               <Grid xs={2} item sx={pusto ? styleXTC011 : styleXTC01}>
-                {points.results[namer][i].Value[2]}
+                {pointer[namer][i].Value[2]}
               </Grid>
               <Grid xs item sx={styleXTC011}>
                 {kakchestvo}
@@ -258,11 +267,11 @@ const PointsLevel2Calc = (props: {
     <Box sx={{ marginTop: -0.3 }}>
       <Grid container item sx={{ height: '28vh' }}>
         <Grid item xs sx={styleXTC03}>
-          {points.results !== null && <>{PointsGraf00()}</>}
+          {pointer !== null && <>{PointsGraf00()}</>}
         </Grid>
       </Grid>
       <Grid container item sx={{ marginTop: 0.5, height: '59.5vh' }}>
-        {points.results !== null && (
+        {pointer !== null && (
           <Grid item sx={styleXTC033}>
             {PointsLevel2CalcTab2Header()}
             <Box sx={{ overflowX: 'auto', height: '56vh' }}>

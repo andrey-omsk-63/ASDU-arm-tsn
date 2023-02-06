@@ -97,6 +97,7 @@ const PointsMenuLevel2 = (props: {
                 {value === '3' && (
                   <PointsLevel2Calc
                     open={props.open}
+                    ws={props.ws}
                     xctrll={props.xctrll}
                     xtt={xtProps}
                     crossroad={props.crossroad}

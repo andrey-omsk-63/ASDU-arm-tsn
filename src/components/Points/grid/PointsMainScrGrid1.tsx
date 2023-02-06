@@ -34,7 +34,7 @@ const PointsMainScrGrid1 = (props: {
   console.log('DATS', datestat.xttData, datestat);
 
   if (datestat.xttData !== MakeDate(new Date())) pointRec = datestat.result;
-  //console.log('$$$$$$', pointRec);
+
   let resStr = [];
 
   const styleXTG02 = {
