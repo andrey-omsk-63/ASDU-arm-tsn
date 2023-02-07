@@ -27,7 +27,7 @@ const PointsMenuLevel1 = (props: {
   calc: boolean;
   calcDeb: boolean;
 }) => {
-  //console.log('CalcDeb:', props.calcDeb);
+  //console.log('Calc_1:',props.calcDeb, props.calcDeb);
   //== Piece of Redux =======================================
   let maskpoint = useSelector((state: any) => {
     const { maskpointReducer } = state;

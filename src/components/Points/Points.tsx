@@ -85,37 +85,6 @@ const Points = (props: {
     handleSend();
   }, [props.ws, reGion]);
 
-  // const SendSocketOldDateXt = (ws: any) => {
-  //   console.log(
-  //     'SendSocketOldDateXt',
-  //     date,
-  //     pointsEtalon[tekValue].region,
-  //     pointsEtalon[tekValue].area,
-  //     pointsEtalon[tekValue].subarea,
-  //     pointsEtalon[tekValue],
-  //   );
-  //   const handleSendOpen = () => {
-  //     if (ws !== null) {
-  //       if (ws.readyState === WebSocket.OPEN) {
-  //         ws.send(
-  //           JSON.stringify({
-  //             type: 'getCalculation',
-  //             date: new Date(props.date).toISOString(),
-  //             region: pointsEtalon[tekValue].region,
-  //             area: pointsEtalon[tekValue].area,
-  //             subarea: pointsEtalon[tekValue].subarea,
-  //           }),
-  //         );
-  //       } else {
-  //         setTimeout(() => {
-  //           handleSendOpen();
-  //         }, 1000);
-  //       }
-  //     }
-  //   };
-  //   handleSendOpen();
-  // };
-
   if (isOpen) pointsEtalon = points; // замена проверки обновления - проверка теперь в App
 
   //console.log('1PointsGl:', debug, props.date, oldDate, oldXt, tekValue);
