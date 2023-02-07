@@ -1,5 +1,9 @@
 import * as React from 'react';
-import { useSelector } from 'react-redux';
+import {
+  //useDispatch,
+  useSelector,
+} from 'react-redux';
+//import { statsaveCreate } from './redux/actions';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -18,6 +22,9 @@ const AppWriteToAllFileForXT = (props: { setOpen: Function }) => {
   //========================================================
   const [openSet, setOpenSet] = React.useState(true);
 
+  let nameXt = datestat.xtName;
+  if (!datestat.xtName) nameXt = 'НетИмени';
+
   let nameFile = '.' + new Date().getDate();
   let dat: any = new Date().getMonth() + 1;
   if (dat < 10) dat = '0' + dat;
@@ -28,7 +35,7 @@ const AppWriteToAllFileForXT = (props: { setOpen: Function }) => {
   dat = new Date().getMinutes();
   if (dat < 10) dat = '0' + dat;
   nameFile += dat;
-  nameFile = 'XT.' + datestat.xtName + nameFile;
+  nameFile = 'XT.' + nameXt + nameFile;
 
   const styleModalEnd = {
     position: 'absolute',
@@ -96,7 +103,9 @@ const AppWriteToAllFileForXT = (props: { setOpen: Function }) => {
   };
 
   const handleDownloadPdf = async () => {
-    if (datestat.xtGraf.current) {
+    console.log('datestat.xtGraf:', datestat.xtGraf);
+    //if (datestat.xtGraf.current) {
+    if (datestat.xtGraf) {
       const element = datestat.xtGraf.current;
       const canvas = await html2canvas(element);
       const data = canvas.toDataURL('image/png');
