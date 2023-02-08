@@ -339,8 +339,11 @@ const App = () => {
             setOpenSetErrLog(true);
           }
           break;
+        case "close":
+          window.close();
+          break;
         default:
-          console.log("data_default:", data);
+          console.log("data_default:", allData.data);
       }
     };
   }, [calculate, datestat, dispatch]);
@@ -381,7 +384,6 @@ const App = () => {
       datestat.result = data.data.results;
       dispatch(statsaveCreate(datestat));
     });
-
     flagOpenDebug = false;
   }
 
@@ -402,24 +404,24 @@ const App = () => {
   };
 
   const InputDate = () => {
-    const InputDat = React.useMemo(() => {
-      let goodDate = massGoodDate;
-      if (value === "2") goodDate = [];
-      let dat = valueDate;
-      const handleChangeDP = (event: any) => {
-        let god = new Date(event.toString()).getFullYear();
-        if (event.toString() !== "Invalid Date" && tekYear - god <= 5) {
-          eventInp = event;
-          inpDate = true;
-          setValueDate(eventInp);
-        } else {
-          inpDate = false;
-          setValueDate(dat);
-        }
-      };
-      return <>{InputerDate(valueDate, handleChangeDP, goodDate)}</>;
-    }, []);
-    return InputDat;
+    // const InputDat = React.useMemo(() => {
+    let goodDate = massGoodDate;
+    if (value === "2") goodDate = [];
+    let dat = valueDate;
+    const handleChangeDP = (event: any) => {
+      let god = new Date(event.toString()).getFullYear();
+      if (event.toString() !== "Invalid Date" && tekYear - god <= 5) {
+        eventInp = event;
+        inpDate = true;
+        setValueDate(eventInp);
+      } else {
+        inpDate = false;
+        setValueDate(dat);
+      }
+    };
+    return <>{InputerDate(valueDate, handleChangeDP, goodDate)}</>;
+    // }, []);
+    // return InputDat;
   };
 
   const InputNewDateInterval = (props: { mode: number }) => {
@@ -459,27 +461,6 @@ const App = () => {
       inpDate = false;
       setTrigger(!trigger);
     };
-
-    // const InputDate = React.useCallback(() => {
-    //   let goodDate = massGoodDate;
-    //   if (value === "2") goodDate = [];
-    //   let dat = valueDate;
-    //   const handleChangeDP = (event: any) => {
-    //     let god = new Date(event.toString()).getFullYear();
-    //     if (event.toString() !== "Invalid Date" && tekYear - god <= 5) {
-    //       eventInp = event;
-    //       inpDate = true;
-    //       setValueDate(eventInp);
-    //     } else {
-    //       inpDate = false;
-    //       setValueDate(dat);
-    //       //setTrigger(!trigger);
-    //     }
-    //   };
-    //   return <>{InputerDate(valueDate, handleChangeDP, goodDate)}</>;
-    // }, []);
-
-    
 
     let dat = MakeInterval(massIntervalNowStart[tekIdNow]);
     if (value === "4") {

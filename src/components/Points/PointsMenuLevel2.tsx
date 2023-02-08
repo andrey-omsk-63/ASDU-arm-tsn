@@ -1,22 +1,20 @@
-import * as React from 'react';
-import { useSelector } from 'react-redux';
+import * as React from "react";
+import { useSelector } from "react-redux";
 
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 
-import PointsLevel2Baza from './grid/PointsLevel2Baza';
-import PointsLevel2Area from './grid/PointsLevel2Area';
-import PointsLevel2Calc from './grid/PointsLevel2Calc';
+import PointsLevel2Baza from "./grid/PointsLevel2Baza";
+import PointsLevel2Area from "./grid/PointsLevel2Area";
+import PointsLevel2Calc from "./grid/PointsLevel2Calc";
 
-import { MakeDate } from '../../AppServiceFunctions';
+import { MakeDate } from "../../AppServiceFunctions";
 
-import { XctrlInfo } from '../../interfaceGl.d';
+import { styleXTl201, styleXTl202 } from "./grid/PointsGridStyle";
 
-// let oldXtProps = -1;
-// let oldXttData = 'aaa';
-// let needRend = true;
+import { XctrlInfo } from "../../interfaceGl.d";
 
 const PointsMenuLevel2 = (props: {
   open: boolean;
@@ -39,48 +37,31 @@ const PointsMenuLevel2 = (props: {
 
   props.saveXt(false);
   const xtProps = props.xtt;
-  const [value, setValue] = React.useState('1');
-
-  // if (xtProps !== oldXtProps || datestat.xttData !== oldXttData) {
-  //   oldXtProps = xtProps;
-  //   oldXttData = datestat.xttData;
-  //   needRend = true;
-  // } else {
-  //   needRend = false;
-  // }
-  // console.log('MenuLevel2:', needRend, xtProps, datestat.xttData);
+  const [value, setValue] = React.useState("1");
 
   const PointsMenuLevel2Menu = () => {
-    const styleXTG01 = {
-      width: '70%',
-      height: '84vh',
-      marginTop: 2.5,
-      marginLeft: -3,
-      marginRight: -61,
-      border: 0,
-    };
-
-    const styleXTG02 = {
-      fontSize: 12.5,
-      maxHeight: '21px',
-      minHeight: '21px',
-      transform: 'rotate(270deg)',
-      backgroundColor: '#E9F5D8',
-      color: 'black',
-      marginBottom: 6.5,
-      textTransform: 'unset !important',
-    };
-
     return (
-      <Box sx={styleXTG01}>
+      <Box sx={styleXTl201}>
         <Stack sx={{ marginLeft: 1 }} direction="column">
-          <Button sx={styleXTG02} variant="contained" onClick={() => setValue('1')}>
+          <Button
+            sx={styleXTl202}
+            variant="contained"
+            onClick={() => setValue("1")}
+          >
             <b>Базовые</b>
           </Button>
-          <Button sx={styleXTG02} variant="contained" onClick={() => setValue('2')}>
+          <Button
+            sx={styleXTl202}
+            variant="contained"
+            onClick={() => setValue("2")}
+          >
             <b>Oбласти</b>
           </Button>
-          <Button sx={styleXTG02} variant="contained" onClick={() => setValue('3')}>
+          <Button
+            sx={styleXTl202}
+            variant="contained"
+            onClick={() => setValue("3")}
+          >
             <b>Расчёт</b>
           </Button>
         </Stack>
@@ -89,7 +70,7 @@ const PointsMenuLevel2 = (props: {
   };
 
   React.useEffect(() => {
-    if (datestat.xttData !== MakeDate(new Date())) setValue('3');
+    if (datestat.xttData !== MakeDate(new Date())) setValue("3");
   }, [datestat.xttData]);
 
   return (
@@ -98,12 +79,14 @@ const PointsMenuLevel2 = (props: {
         <Grid item xs={12}>
           <Grid container item>
             <Grid item xs={0.4}>
-              {datestat.xttData === MakeDate(new Date()) && <PointsMenuLevel2Menu />}
+              {datestat.xttData === MakeDate(new Date()) && (
+                <PointsMenuLevel2Menu />
+              )}
             </Grid>
 
             <Grid item xs>
               <Grid item xs={12}>
-                {value === '1' && datestat.xttData === MakeDate(new Date()) && (
+                {value === "1" && datestat.xttData === MakeDate(new Date()) && (
                   <PointsLevel2Baza
                     open={props.open}
                     ws={props.ws}
@@ -113,7 +96,7 @@ const PointsMenuLevel2 = (props: {
                     setPoint={props.setPoint}
                   />
                 )}
-                {value === '2' && datestat.xttData === MakeDate(new Date()) && (
+                {value === "2" && datestat.xttData === MakeDate(new Date()) && (
                   <PointsLevel2Area
                     open={props.open}
                     ws={props.ws}
@@ -123,7 +106,7 @@ const PointsMenuLevel2 = (props: {
                     setPoint={props.setPoint}
                   />
                 )}
-                {value === '3' && (
+                {value === "3" && (
                   <PointsLevel2Calc
                     open={props.open}
                     ws={props.ws}

@@ -293,4 +293,56 @@ export const styleXt05 = {
   marginRight: 1.5,
   height: '69%',
 };
+//====== PointsMainScrGrid1 =====================================================
+export const styleXTG102 = {
+  borderRight: 1,
+  borderBottom: 1,
+  borderColor: 'primary.main',
+  padding: 0.7,
+  textAlign: 'center',
+  backgroundColor: '#C0C0C0',
+};
+
+export const styleXTG103 = {
+  borderRight: 1,
+  borderBottom: 1,
+  borderColor: 'primary.main',
+  padding: 0.7,
+  textAlign: 'center',
+};
+
+export const styleXTG104 = {
+  fontSize: 14.5,
+  borderRight: 0,
+  borderColor: 'primary.main',
+  margin: -1,
+};
+
+export const styleXTG105 = {
+  fontSize: 11,
+  borderRight: 1,
+  borderColor: 'primary.main',
+  backgroundColor: '#E5E5E5',
+  textAlign: 'center',
+};
+//====== PointsMenuLevel2 =======================================================
+export const styleXTl201 = {
+  width: "70%",
+  height: "84vh",
+  marginTop: 2.5,
+  marginLeft: -3,
+  marginRight: -61,
+  border: 0,
+};
+
+export const styleXTl202 = {
+  fontSize: 12.5,
+  maxHeight: "21px",
+  minHeight: "21px",
+  transform: "rotate(270deg)",
+  backgroundColor: "#E9F5D8",
+  color: "black",
+  marginBottom: 6.5,
+  textTransform: "unset !important",
+};
 //===============================================================================

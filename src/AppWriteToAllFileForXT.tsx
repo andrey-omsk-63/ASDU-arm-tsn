@@ -103,7 +103,6 @@ const AppWriteToAllFileForXT = (props: { setOpen: Function }) => {
   };
 
   const handleDownloadPdf = async () => {
-    console.log('datestat.xtGraf:', datestat.xtGraf);
     //if (datestat.xtGraf.current) {
     if (datestat.xtGraf) {
       const element = datestat.xtGraf.current;
