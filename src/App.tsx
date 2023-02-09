@@ -5,7 +5,6 @@ import { maskpointCreate, statsaveCreate } from "./redux/actions";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
-import Modal from "@mui/material/Modal";
 import TabPanel from "@mui/lab/TabPanel";
 import TabContext from "@mui/lab/TabContext";
 
@@ -17,6 +16,7 @@ import Management from "./components/Management/Management";
 import Points from "./components/Points/Points";
 import StatisticsNew from "./components/Statistics/StatisticsNew";
 import StatisticsArchive from "./components/Statistics/StatisticsArchive";
+import BeginSeans from "./AppBeginSeans";
 import EndSeans from "./AppEndSeans";
 import InputInterval from "./AppInpInerval";
 import AppWriteToAllFileForXT from "./AppWriteToAllFileForXT";
@@ -31,9 +31,8 @@ import { styleImpBlock, styleInt01 } from "./AppStyle";
 
 import { MakeInterval, WriteToCsvFileForStat } from "./AppServiceFunctions";
 import { ButtonMenu } from "./AppServiceFunctions";
-import { SendSocketgetStatisticsList } from "./AppServiceFunctions";
 import { InputerDate, MakeDate, InputerOk } from "./AppServiceFunctions";
-import { PunktMenuSaveFile, MenuSpisRegion } from "./AppServiceFunctions";
+import { PunktMenuSaveFile } from "./AppServiceFunctions";
 
 import { dataStatNow } from "./NullStatNow";
 
@@ -94,8 +93,6 @@ let debug = false;
 let flagOpenDebug = true;
 
 let regionGlob: number = 0;
-let massRegion: Array<number> = [];
-let massNameRegion: Array<string> = [];
 
 let pointsEtalonXctrl: XctrlInfo[];
 let flagEtalonInf = true;
@@ -120,7 +117,6 @@ let massIntervalNowStart: any = [];
 let massIntervalOldStart: any = [1, 5, 10, 15, 30, 60];
 let nullOldStatistics = false;
 let nullNewStatistics = false;
-
 let massGoodDate: Array<string> = [];
 
 const App = () => {
@@ -151,73 +147,13 @@ const App = () => {
   const [value, setValue] = React.useState("1");
   const [trigger, setTrigger] = React.useState(true);
   const [saveXT, setSaveXT] = React.useState(false);
-  const [open, setOpen] = React.useState(true);
   const [write, setWrite] = React.useState(false);
   const [openSetErrLog, setOpenSetErrLog] = React.useState(false);
   const [calculate, setCalculate] = React.useState(true);
-  //const eventInputer = React.useRef(null);
 
-  const handleCloseModal = (numer: number) => {
+  const SetRegion = (numer: number) => {
     regionGlob = numer;
-    SendSocketgetStatisticsList(debug, WS, regionGlob.toString());
-    setOpen(false);
-  };
-
-  const BeginSeans = () => {
-    let dlStrMenu = 0;
-    if (isOpenInf && regionGlob === 0) {
-      for (let key in pointsReg) {
-        if (!isNaN(Number(key))) {
-          massRegion.push(Number(key)); // ключ - символьное число
-          massNameRegion.push(pointsReg[key]);
-          if (pointsReg[key].length > dlStrMenu)
-            dlStrMenu = pointsReg[key].length;
-        }
-      }
-      regionGlob = massRegion[0];
-      dlStrMenu = (dlStrMenu + 8) * 10;
-    }
-    if (massRegion.length === 1) {
-      handleCloseModal(massRegion[0]);
-    }
-
-    const SpisRegion = () => {
-      let resStr = [];
-      for (let i = 0; i < massRegion.length; i++) {
-        resStr.push(
-          <>
-            {MenuSpisRegion(massRegion[i], massNameRegion[i], handleCloseModal)}
-          </>
-        );
-      }
-      return resStr;
-    };
-
-    const styleModal = {
-      position: "absolute",
-      left: "50%",
-      top: "50%",
-      transform: "translate(-50%, -50%)",
-      width: dlStrMenu,
-      bgcolor: "background.paper",
-      border: "2px solid #000",
-      borderColor: "primary.main",
-      borderRadius: 4,
-      boxShadow: 24,
-      p: 3,
-    };
-
-    return (
-      <Modal open={open}>
-        <Box sx={styleModal}>
-          <Stack direction="column">
-            <Box sx={{ textAlign: "center" }}>Выбор региона:</Box>
-            {/* <Box sx={{ overflowX: 'auto', height: '36vh' }}>{SpisRegion()}</Box> */}
-            {SpisRegion()}
-          </Stack>
-        </Box>
-      </Modal>
-    );
+    setTrigger(!trigger);
   };
 
   const UpdateXctrl = () => {
@@ -325,7 +261,7 @@ const App = () => {
           setIsOpenOldSt(true);
           break;
         case "getCalculation":
-          console.log("getCalculation:", data);
+          //console.log("getCalculation:", data);
           datestat.result = data.results;
           datestat.xttData = formSett;
           dispatch(statsaveCreate(datestat));
@@ -404,24 +340,22 @@ const App = () => {
   };
 
   const InputDate = () => {
-    // const InputDat = React.useMemo(() => {
-    let goodDate = massGoodDate;
-    if (value === "2") goodDate = [];
-    let dat = valueDate;
-    const handleChangeDP = (event: any) => {
-      let god = new Date(event.toString()).getFullYear();
-      if (event.toString() !== "Invalid Date" && tekYear - god <= 5) {
-        eventInp = event;
-        inpDate = true;
-        setValueDate(eventInp);
-      } else {
-        inpDate = false;
-        setValueDate(dat);
-      }
-    };
-    return <>{InputerDate(valueDate, handleChangeDP, goodDate)}</>;
-    // }, []);
-    // return InputDat;
+    const InputDat = React.useMemo(() => {
+      let goodDate = massGoodDate;
+      if (value === "2") goodDate = [];
+      const handleChangeDP = (event: any) => {
+        let god = new Date(event.toString()).getFullYear();
+        if (event.toString() !== "Invalid Date" && tekYear - god <= 5) {
+          eventInp = event;
+          inpDate = true;
+          setValueDate(eventInp);
+        } else {
+          inpDate = false;
+        }
+      };
+      return <>{InputerDate(valueDate, handleChangeDP, goodDate)}</>;
+    }, []);
+    return InputDat;
   };
 
   const InputNewDateInterval = (props: { mode: number }) => {
@@ -469,7 +403,7 @@ const App = () => {
       if (formSett !== formSettToday)
         dat = MakeInterval(massIntervalOldStart[tekIdOld]);
     }
-
+    //Да
     let massKey = [];
     let massDat: any = [];
     const currencies: any = [];
@@ -533,8 +467,7 @@ const App = () => {
           {InputerOk(inpDate, InputOk)}
           <Grid item xs sx={styleImpServis}>
             <Box sx={styleInp}>
-              <InputDate />
-              {/* {InputDate()} */}
+              {InputDate()}
             </Box>
           </Grid>
         </Grid>
@@ -600,7 +533,9 @@ const App = () => {
       )}
       {!openSetErrLog && (
         <>
-          {regionGlob === 0 && isOpenInf && <BeginSeans />}
+          {regionGlob === 0 && isOpenInf && (
+            <BeginSeans ws={WS} pointsReg={pointsReg} SetRegion={SetRegion} />
+          )}
           {write && <AppWriteToAllFileForXT setOpen={setWrite} />}
           <Box sx={{ width: "98.8%" }}>
             <TabContext value={value}>

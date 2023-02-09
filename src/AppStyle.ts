@@ -1,20 +1,3 @@
-//import { dlStrMenu } from "./App";
-
-// export const styleModal = {
-//   position: "relative",
-//   bottom: "-48vh",
-//   marginLeft: "60vh",
-//   transform: "translate(-50%, -50%)",
-//   //width: (dlStrMenu + 8) * 10,
-//   width: dlStrMenu,
-//   bgcolor: "background.paper",
-//   border: "2px solid #000",
-//   borderColor: "primary.main",
-//   borderRadius: 2,
-//   boxShadow: 24,
-//   p: 3,
-// };
-
 export const styleApp01 = {
   fontSize: 14,
   marginRight: 1,
@@ -25,18 +8,6 @@ export const styleApp01 = {
   color: "black",
   textTransform: "unset !important",
 };
-
-// export const styleApp02 = {
-//   fontSize: 14,
-//   marginRight: 1,
-//   maxHeight: "21px",
-//   minHeight: "21px",
-//   maxWidth: "180px",
-//   minWidth: "180px",
-//   backgroundColor: "#F1F3F4",
-//   color: "black",
-//   textTransform: "unset !important",
-// };
 
 export const styleApp99 = {
   fontSize: 14,
@@ -65,7 +36,7 @@ export const styleMod = {
 
 export const styleBatMenu = {
   fontSize: 14,
-  backgroundColor: "#F1F3F4",
+  backgroundColor: '#E9F5D8',
   color: "red",
   marginTop: 1,
   textTransform: "unset !important",
@@ -75,7 +46,7 @@ export const styleModalMenu = {
   fontSize: 14,
   maxHeight: "20px",
   minHeight: "20px",
-  backgroundColor: "#F1F3F4",
+  backgroundColor: '#E9F5D8',
   color: "black",
   marginRight: 1,
   marginTop: 2,

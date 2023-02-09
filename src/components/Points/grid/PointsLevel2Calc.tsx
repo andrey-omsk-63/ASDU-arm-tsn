@@ -92,14 +92,12 @@ const PointsLevel2Calc = (props: {
     pointer = datestat.result;
     if (debug) namer = "Без имени_09.09.2022_09-28-28";
   }
-
-  // if (pointer !== null) {
-  //   props.saveXt(true);
-  // } else {
-  //   props.saveXt(false);
-  // }
-  if (pointer !== null) props.saveXt(true);
+  
   //props.saveXt(true);
+
+  React.useEffect(() => {
+    if (pointer !== null) props.saveXt(true);
+  }, [pointer, props]);
 
   const labels: string[] = [];
   let data: DataGl = {
@@ -227,7 +225,7 @@ const PointsLevel2Calc = (props: {
             pusto = true;
             kakchestvo = "Работа по СК";
           }
-          
+
           if (datestat.xttData === MakeDate(new Date())) {
             let tim = pointer[namer][i].Time; // работа в тек.сутки
             if (
