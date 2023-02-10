@@ -1,9 +1,13 @@
 import React from "react";
+
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 
 import ManagKnobError from "./ManagKnobError";
+
+import { stylePK, styleBatton, styleSoob } from "./ManagGridStyle";
+import { styleSoobPusto, styleBatMenu } from "./ManagGridStyle";
 
 export interface DataKnob {
   knop: Knob[];
@@ -86,61 +90,20 @@ const ManagementKnobSK = (props: {
     setBeginWork(true);
   };
 
-  const stylePK = {
-    position: "absolute",
-    top: "42%",
-    left: "30%",
-    transform: "translate(-50%, -50%)",
-    width: 64,
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    borderColor: "primary.main",
-    borderRadius: 2,
-    boxShadow: 24,
-    p: 2,
-  };
-
-  const styleBatton = {
-    fontSize: 10,
-    //backgroundColor: '#F1F3F4',
-    backgroundColor: "#E9F5D8",
-    color: "black",
-    marginRight: 1,
-  };
-
-  const styleSoob = {
-    fontSize: 11,
-    backgroundColor: "#F1F3F4",
-    color: "#5B1080",
-    textAlign: "center",
-  };
-
-  const styleSoobPusto = {
-    backgroundColor: "#F1F3F4",
-    color: "#F1F3F4",
-  };
-
-  const styleBatMenu = {
-    fontSize: 12.9,
-    marginTop: 0.5,
-    //backgroundColor: '#F1F3F4',
-    backgroundColor: "#E9F5D8",
-    color: "black",
-    textTransform: "unset !important",
-  };
-
   const ButtonKnob = (val: number) => {
     let valumeKnob: string = "Авт";
     if (val !== 0) valumeKnob = val.toString();
 
     return (
-      <Button
-        sx={styleBatMenu}
-        variant="contained"
-        onClick={() => setValue(val)}
-      >
-        {valumeKnob}
-      </Button>
+      <Box sx={{ textAlign: "center" }}>
+        <Button
+          sx={styleBatMenu}
+          variant="contained"
+          onClick={() => setValue(val)}
+        >
+          {valumeKnob}
+        </Button>
+      </Box>
     );
   };
 
@@ -194,7 +157,7 @@ const ManagementKnobSK = (props: {
         nomDispatch = "Авт";
       }
       otpravka = false;
-    } 
+    }
 
     return (
       <>
@@ -249,10 +212,11 @@ const ManagementKnobSK = (props: {
               {ButtonKnob(12)}
             </>
           )}
-          <Button sx={styleBatMenu} variant="contained" onClick={handleClose}>
-            Выход
-          </Button>
-
+          <Box sx={{ textAlign: "center" }}>
+            <Button sx={styleBatMenu} variant="contained" onClick={handleClose}>
+              Выход
+            </Button>
+          </Box>
           {ButtonDo()}
         </Box>
       </Modal>

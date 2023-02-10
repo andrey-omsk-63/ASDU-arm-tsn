@@ -10,7 +10,6 @@ import { XctrlInfo } from '../../interfaceGl.d';
 let pointsEtalon: Tflight[] = [];
 let pointsXctrlEtalon: XctrlInfo[] = [];
 let flagEtalon = true;
-//let debug = false;
 
 const Management = (props: {
   open: boolean;
@@ -26,10 +25,7 @@ const Management = (props: {
 
   let pointsGl = props.xctrll;
   let pointsXctrll = pointsGl.filter((pointsGl) => pointsGl.region === Number(reGion));
-
-  // console.log('ManagementPoints:', points)
-  // console.log('ManagementPointsXctrll:', pointsXctrll)
-
+  
   if (isOpen) pointsXctrlEtalon = pointsXctrll; // замена проверки обновления Xctrl - проверка теперь в App
 
   React.useEffect(() => {

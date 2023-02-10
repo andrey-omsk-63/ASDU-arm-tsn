@@ -18,30 +18,3 @@ export function statsaveCreate(dateStat: Stater) {
   };
 }
 
-// export function mapCreate(dateMap: DateMAP) {
-//   return {
-//     type: MAP_CREATE,
-//     data: { dateMap },
-//   };
-// }
-
-// export function massrouteCreate(massRouter: DateRoute) {
-//   return {
-//     type: MASSROUTE_CREATE,
-//     data: massRouter,
-//   };
-// }
-
-// export function massrouteproCreate(massRouterPro: DateRoute) {
-//   return {
-//     type: MASSROUTEPRO_CREATE,
-//     data: massRouterPro,
-//   };
-// }
-
-// export function coordinatesCreate(Coordinates: Array<Array<number>>) {
-//   return {
-//     type: COORDINATES_CREATE,
-//     data: Coordinates,
-//   };
-// }

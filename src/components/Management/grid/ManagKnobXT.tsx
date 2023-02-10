@@ -6,6 +6,9 @@ import Button from "@mui/material/Button";
 
 import ManagKnobError from "./ManagKnobError";
 
+import { styleSoobPusto, styleBatton, styleSoob } from "./ManagGridStyle";
+import { stylePKXt, styleBatMenuXt } from "./ManagGridStyle";
+
 export interface DataKnob {
   knop: Knob[];
 }
@@ -90,50 +93,6 @@ const ManagementKnobXT = (props: {
     setBeginWork(true);
   };
 
-  const stylePK = {
-    textAlign: "center",
-    position: "absolute",
-    top: "22.8%",
-    left: "33%",
-    transform: "translate(-50%, -50%)",
-    width: 164,
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    borderColor: "primary.main",
-    borderRadius: 2,
-    boxShadow: 24,
-    p: 2,
-  };
-
-  const styleBatton = {
-    fontSize: 10,
-    //backgroundColor: '#F1F3F4',
-    backgroundColor: "#E9F5D8",
-    color: "black",
-  };
-
-  const styleSoob = {
-    fontSize: 12,
-    backgroundColor: "#F1F3F4",
-    color: "black",
-    textAlign: "center",
-  };
-
-  const styleSoobPusto = {
-    backgroundColor: "#F1F3F4",
-    color: "#F1F3F4",
-  };
-
-  const styleBatMenu = {
-    fontSize: 12.9,
-    textAlign: "center",
-    backgroundColor: "#E9F5D8",
-    color: "black",
-    marginTop: 1,
-    width: "121px",
-    textTransform: "unset !important",
-  };
-
   const ButtonDo = () => {
     if (value !== 21 && otpravka) {
       const handleSendOpen = () => {
@@ -201,7 +160,7 @@ const ManagementKnobXT = (props: {
   const ButtMenu = (soob: string, mode: number) => {
     return (
       <Button
-        sx={styleBatMenu}
+        sx={styleBatMenuXt}
         variant="contained"
         onClick={() => SetValue(mode)}
       >
@@ -209,17 +168,6 @@ const ManagementKnobXT = (props: {
       </Button>
     );
   };
-
-  // const BoxMenu = (soob: string) => {
-  //   return (
-  //     <>
-  //       <Box>
-  //         <b>{soob}</b>
-  //       </Box>
-  //       <br />
-  //     </>
-  //   );
-  // };
 
   if (props.areaa === "0" && !props.subArea && beginWork) {
     setOpenSoobErr(true);
@@ -237,7 +185,7 @@ const ManagementKnobXT = (props: {
         XT
       </Button>
       <Modal open={open} hideBackdrop>
-        <Box sx={stylePK}>
+        <Box sx={stylePKXt}>
           {openSoobErr && <ManagKnobError setOpen={setOpenSoobErr} />}
           {!trigger && (
             <>
@@ -247,15 +195,7 @@ const ManagementKnobXT = (props: {
               {ButtMenu("Отключить расчёт", 2)}
             </>
           )}
-          {/* {trigger && (
-            <>
-              {BoxMenu("Включить исполнение")}
-              {BoxMenu("Отключить исполнение")}
-              {BoxMenu("Включить расчёт")}
-              {BoxMenu("Отключить расчёт")}
-            </>
-          )} */}
-          <Button sx={styleBatMenu} variant="contained" onClick={handleClose}>
+          <Button sx={styleBatMenuXt} variant="contained" onClick={handleClose}>
             Выход
           </Button>
           {trigger && <>{ButtonDo()}</>}

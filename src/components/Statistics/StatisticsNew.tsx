@@ -171,16 +171,6 @@ const StatisticsNew = (props: {
       );
     } else {
       for (let i = 0; i < pointsEtalon.length; i++) {
-        // let sub = '0';
-        // for (let j = 0; j < props.pointsTfl.length; j++) {
-        //   if (
-        //     Number(props.pointsTfl[j].region.num) === pointsEtalon[i].region &&
-        //     Number(props.pointsTfl[j].area.num) === pointsEtalon[i].area &&
-        //     props.pointsTfl[j].ID === pointsEtalon[i].id
-        //   )
-        //     sub = props.pointsTfl[j].subarea.toString();
-        // }
-        // labl = pointsEtalon[i].area + ':' + sub + ':' + pointsEtalon[i].id;
         labl =
           pointsEtalon[i].area +
           ":" +

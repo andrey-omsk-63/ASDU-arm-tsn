@@ -37,7 +37,6 @@ const PointsLevel2Area = (props: {
   ws: WebSocket;
   xctrll: XctrlInfo[];
   xtt: number;
-  //value: string;
   crossroad: number;
   setPoint: any;
 }) => {

@@ -367,17 +367,15 @@ const App = () => {
             interval = massIntervalNow[tekIdNow];
             SetValue("3");
           } else {
-            interval = massIntervalOld[tekIdOld];
+            interval = massIntervalOld[tekIdOld]; //console.log("ПЕРЕХОД В АРХИВ");
             nullOldStatistics = false;
-            //console.log("ПЕРЕХОД В АРХИВ", interval, tekIdOld, massIntervalOld);
             if (!massIntervalOld.length) {
               massIntervalOld = [1, 5, 10, 15, 30, 60];
               interval = 5;
             }
             if (formSett !== formSettOld) {
-              //console.log("ПЕРЕХОД В НОВЫЙ АРХИВ", debug);
               if (!debug) {
-                setPointsOldSt([]);
+                setPointsOldSt([]); //console.log("ПЕРЕХОД В НОВЫЙ АРХИВ");
                 setIsOpenOldSt(false);
               } else {
                 SetStatisticsIntervalOld(pointsOldSt);
@@ -386,7 +384,6 @@ const App = () => {
             SetValue("4");
           }
         }
-
         setValueDate(eventInp);
       } else {
         alert("Введённая дата ещё не наступила!!!");
@@ -403,7 +400,7 @@ const App = () => {
       if (formSett !== formSettToday)
         dat = MakeInterval(massIntervalOldStart[tekIdOld]);
     }
-    //Да
+
     let massKey = [];
     let massDat: any = [];
     const currencies: any = [];
@@ -446,7 +443,7 @@ const App = () => {
         {props.mode !== 0 && ( // работает только в статистике
           <>
             {PunktMenuSaveFile(SetValue)}
-            <Grid item container sx={{ border: 0, width: "120px" }}>
+            <Grid item container sx={{ width: "120px" }}>
               <Grid item xs={7} sx={{ textAlign: "left" }}>
                 Интервал:
               </Grid>
@@ -466,9 +463,7 @@ const App = () => {
         <Grid item container sx={styleImpBlock}>
           {InputerOk(inpDate, InputOk)}
           <Grid item xs sx={styleImpServis}>
-            <Box sx={styleInp}>
-              {InputDate()}
-            </Box>
+            <Box sx={styleInp}>{InputDate()}</Box>
           </Grid>
         </Grid>
       </>

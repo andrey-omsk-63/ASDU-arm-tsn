@@ -124,12 +124,10 @@ const StatisticsArchive = (props: {
     datestat.tekId = pointsEtalon[tekValue].id;
     dispatch(statsaveCreate(datestat));
     props.func(tekValue, massInterval[tekValue]);
-    //console.log("Old_ПЕРЕДАЛ:", tekValue, massInterval[tekValue]);
+   
   };
 
   const handleChangeNull = () => {
-    //console.log('ПЕРЕДАЛ:', 0, massInterval[0]);
-    //props.func(-1, massInterval[0]);
     return <Box sx={styleSt1}>На эту дату данных по статистике НЕТ</Box>;
   };
 
@@ -145,16 +143,6 @@ const StatisticsArchive = (props: {
       );
     } else {
       for (let i = 0; i < pointsEtalon.length; i++) {
-        // let sub = '0';
-        // for (let j = 0; j < props.pointsTfl.length; j++) {
-        //   if (
-        //     Number(props.pointsTfl[j].region.num) === pointsEtalon[i].region &&
-        //     Number(props.pointsTfl[j].area.num) === pointsEtalon[i].area &&
-        //     props.pointsTfl[j].ID === pointsEtalon[i].id
-        //   )
-        //     sub = props.pointsTfl[j].subarea.toString();
-        // }
-        // labl = pointsEtalon[i].area + ':' + sub + ':' + pointsEtalon[i].id;
         labl = pointsEtalon[i].area + ':' + pointsEtalon[i].subarea + ':' + pointsEtalon[i].id;
         resSps.push(<Tab key={i} sx={styleSt1} label={labl} />);
       }

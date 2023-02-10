@@ -76,50 +76,46 @@ const PointsMenuLevel2 = (props: {
   return (
     <Box sx={{ marginTop: -2, marginLeft: -3.5, marginRight: -2 }}>
       <Grid container item>
-        <Grid item xs={12}>
-          <Grid container item>
-            <Grid item xs={0.4}>
-              {datestat.xttData === MakeDate(new Date()) && (
-                <PointsMenuLevel2Menu />
-              )}
-            </Grid>
+        <Grid item xs={0.4}>
+          {datestat.xttData === MakeDate(new Date()) && (
+            <PointsMenuLevel2Menu />
+          )}
+        </Grid>
 
-            <Grid item xs>
-              <Grid item xs={12}>
-                {value === "1" && datestat.xttData === MakeDate(new Date()) && (
-                  <PointsLevel2Baza
-                    open={props.open}
-                    ws={props.ws}
-                    xctrll={props.xctrll}
-                    xtt={xtProps}
-                    crossroad={props.crossroad}
-                    setPoint={props.setPoint}
-                  />
-                )}
-                {value === "2" && datestat.xttData === MakeDate(new Date()) && (
-                  <PointsLevel2Area
-                    open={props.open}
-                    ws={props.ws}
-                    xctrll={props.xctrll}
-                    xtt={xtProps}
-                    crossroad={props.crossroad}
-                    setPoint={props.setPoint}
-                  />
-                )}
-                {value === "3" && (
-                  <PointsLevel2Calc
-                    open={props.open}
-                    ws={props.ws}
-                    xctrll={props.xctrll}
-                    xtt={xtProps}
-                    crossroad={props.crossroad}
-                    saveXt={props.saveXt}
-                    calc={props.calc}
-                    calcDeb={props.calcDeb}
-                  />
-                )}
-              </Grid>
-            </Grid>
+        <Grid item xs>
+          <Grid item xs={12}>
+            {value === "1" && datestat.xttData === MakeDate(new Date()) && (
+              <PointsLevel2Baza
+                open={props.open}
+                ws={props.ws}
+                xctrll={props.xctrll}
+                xtt={xtProps}
+                crossroad={props.crossroad}
+                setPoint={props.setPoint}
+              />
+            )}
+            {value === "2" && datestat.xttData === MakeDate(new Date()) && (
+              <PointsLevel2Area
+                open={props.open}
+                ws={props.ws}
+                xctrll={props.xctrll}
+                xtt={xtProps}
+                crossroad={props.crossroad}
+                setPoint={props.setPoint}
+              />
+            )}
+            {value === "3" && (
+              <PointsLevel2Calc
+                open={props.open}
+                ws={props.ws}
+                xctrll={props.xctrll}
+                xtt={xtProps}
+                crossroad={props.crossroad}
+                saveXt={props.saveXt}
+                calc={props.calc}
+                calcDeb={props.calcDeb}
+              />
+            )}
           </Grid>
         </Grid>
       </Grid>

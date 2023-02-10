@@ -1,21 +1,21 @@
-import * as React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { maskpointCreate } from './../../redux/actions';
+import * as React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { maskpointCreate } from "./../../redux/actions";
 
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 
-import PointsMainScrGrid1 from './grid/PointsMainScrGrid1';
-import PointsMainScrGrid2 from './grid/PointsMainScrGrid2';
-import PointsMainScrGrid3 from './grid/PointsMainScrGrid3';
+import PointsMainScrGrid1 from "./grid/PointsMainScrGrid1";
+import PointsMainScrGrid2 from "./grid/PointsMainScrGrid2";
+import PointsMainScrGrid3 from "./grid/PointsMainScrGrid3";
 
-import { styleXt02, styleXt03 } from './grid/PointsGridStyle';
-import { styleXt04, styleXt05 } from './grid/PointsGridStyle';
+import { styleXt02, styleXt03 } from "./grid/PointsGridStyle";
+import { styleXt04, styleXt05 } from "./grid/PointsGridStyle";
 
-import { TimeStr, WorkMenuEditMain } from '../../AppServiceFunctions';
-import { SendHandleSend } from '../../AppServiceFunctions';
+import { TimeStr, WorkMenuEditMain } from "../../AppServiceFunctions";
+import { SendHandleSend } from "../../AppServiceFunctions";
 
-import { XctrlInfo } from '../../interfaceGl.d';
+import { XctrlInfo } from "../../interfaceGl.d";
 
 let flagSave = false;
 let flagEdit = true;
@@ -60,22 +60,22 @@ const PointsMainScr = (props: {
     dispatch(maskpointCreate(maskpoint));
   }
 
-  let resStr1 = 'Выключен';
-  let resStr2 = 'Выключенo';
+  let resStr1 = "Выключен";
+  let resStr2 = "Выключенo";
 
   if (props.open) {
-    if (points.switch) resStr1 = 'Включён';
-    if (points.release) resStr2 = 'Включeнo';
+    if (points.switch) resStr1 = "Включён";
+    if (points.release) resStr2 = "Включeнo";
   }
 
-  let rachet = 'Расчёт не возможен';
-  if (points.pkcalc > 0) rachet = 'Расчёт выполнен';
+  let rachet = "Расчёт не возможен";
+  if (points.pkcalc > 0) rachet = "Расчёт выполнен";
 
-  let yellowSoob = 'Выключен';
-  if (!points.yellow.make) yellowSoob = 'Включён';
+  let yellowSoob = "Выключен";
+  if (!points.yellow.make) yellowSoob = "Включён";
 
-  let uprBP = 'Управление по ВР';
-  if (points.pknow > 0) uprBP = 'Выбран план №' + points.pknow.toString();
+  let uprBP = "Управление по ВР";
+  if (points.pknow > 0) uprBP = "Выбран план №" + points.pknow.toString();
 
   const HeaderMainScr = () => {
     return (
@@ -86,7 +86,7 @@ const PointsMainScr = (props: {
         <Grid item xs={12} sx={styleXt02}>
           <Grid container sx={{ fontSize: 15 }}>
             <Grid item xs={9.6} sx={{ border: 0 }}>
-              <Box sx={{ display: 'inline-block' }}>
+              <Box sx={{ display: "inline-block" }}>
                 <b>Расчёт ХТ </b>&nbsp;
                 {resStr1} &nbsp;<b> Управление</b>&nbsp;&nbsp;
                 {resStr2}&nbsp;&nbsp;
@@ -95,9 +95,9 @@ const PointsMainScr = (props: {
               </Box>
             </Grid>
             <Grid item xs={2.4} sx={{ fontSize: 14, border: 0 }}>
-              <Box sx={{ textAlign: 'right' }}>
+              <Box sx={{ textAlign: "right" }}>
                 <b>{yellowSoob}</b> c <b>{TimeStr(points.yellow.start)}</b>
-                {' до '}
+                {" до "}
                 <b>{TimeStr(points.yellow.stop)}</b>
               </Box>
             </Grid>
@@ -149,36 +149,44 @@ const PointsMainScr = (props: {
     <>
       <Box sx={{ marginTop: -3, marginLeft: -3, marginRight: -3 }}>
         {(maskpoint.savePoint || flagSave) && (
-          <>{WorkMenuEditMain(6, 'Сохранить изменения', SaveEdit)}</>
+          <>{WorkMenuEditMain(6, "Сохранить изменения", SaveEdit)}</>
         )}
         {(maskpoint.redaxPoint || flagEdit) && (
-          <>{WorkMenuEditMain(9, 'Редактирование', StartEdit)}</>
+          <>{WorkMenuEditMain(9, "Редактирование", StartEdit)}</>
         )}
-        {flagExit && <>{WorkMenuEditMain(9, 'Выйти без cохранения', StopEdit)}</>}
+        {flagExit && (
+          <>{WorkMenuEditMain(9, "Выйти без cохранения", StopEdit)}</>
+        )}
         <Grid container>
           {HeaderMainScr()}
           <Grid item xs={12} sx={styleXt03}>
-            <Grid item>
-              <Box sx={{ marginRight: -1.5 }}>
-                <Grid container>
-                  <Grid item xs={4} sx={styleXt04}>
-                    <PointsMainScrGrid1
-                      open={props.open}
-                      xctrll={props.xctrll}
-                      xtt={xtProps}
-                      calc={props.calc}
-                      calcDeb={props.calcDeb}
-                    />
-                  </Grid>
-                  <Grid item xs={4} sx={styleXt05}>
-                    <PointsMainScrGrid2 open={props.open} xtt={xtProps} trigger={SetTrigger} />
-                  </Grid>
-                  <Grid item xs sx={styleXt04}>
-                    <PointsMainScrGrid3 open={props.open} xtt={xtProps} trigger={SetTrigger} />
-                  </Grid>
+            <Box sx={{ marginRight: -1.5 }}>
+              <Grid container>
+                <Grid item xs={4} sx={styleXt04}>
+                  <PointsMainScrGrid1
+                    open={props.open}
+                    xctrll={props.xctrll}
+                    xtt={xtProps}
+                    calc={props.calc}
+                    calcDeb={props.calcDeb}
+                  />
                 </Grid>
-              </Box>
-            </Grid>
+                <Grid item xs={4} sx={styleXt05}>
+                  <PointsMainScrGrid2
+                    open={props.open}
+                    xtt={xtProps}
+                    trigger={SetTrigger}
+                  />
+                </Grid>
+                <Grid item xs sx={styleXt04}>
+                  <PointsMainScrGrid3
+                    open={props.open}
+                    xtt={xtProps}
+                    trigger={SetTrigger}
+                  />
+                </Grid>
+              </Grid>
+            </Box>
           </Grid>
         </Grid>
       </Box>

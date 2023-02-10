@@ -3,11 +3,10 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 
 import { Tflight } from "../../../interfaceMNG.d";
-//import { XctrlInfo } from "../../../interfaceGl.d";
 
-import { styleMgl, styleMRG01, styleMRG02 } from "./ManagRightGridStyle";
-import { styleMRG02Center } from "./ManagRightGridStyle";
-import { styleMRG03, styleMRG04 } from "./ManagRightGridStyle";
+import { styleMgl, styleMRG01, styleMRG02 } from "./ManagGridStyle";
+import { styleMRG02Center } from "./ManagGridStyle";
+import { styleMRG03, styleMRG04 } from "./ManagGridStyle";
 
 export interface DataKnob {
   knop: Knob[];
@@ -466,8 +465,8 @@ const ManagementRightGrid = (props: {
 
     return (
       <Grid item xs={12} sx={styleMgl}>
-        Всего ДК&nbsp;{sumDk}&nbsp;на связи&nbsp;{prosSv}&nbsp; подчинены&nbsp;
-        {prosPch}&nbsp;&nbsp;
+        Всего ДК&nbsp;<b>{sumDk}</b>&nbsp;на связи&nbsp;<b>{prosSv}</b>&nbsp;подчинены&nbsp;
+        <b>{prosPch}</b>&nbsp;&nbsp;
         <b>{soobBP}</b>&nbsp;&nbsp;<em>{proXT}</em>
       </Grid>
     );
@@ -686,4 +685,4 @@ const ManagementRightGrid = (props: {
 };
 
 export default ManagementRightGrid;
-//пре  назначен БП
+

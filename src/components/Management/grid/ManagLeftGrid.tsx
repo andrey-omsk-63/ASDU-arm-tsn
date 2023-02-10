@@ -13,6 +13,9 @@ import ManagementKnobXT from './ManagKnobXT';
 import { Tflight } from '../../../interfaceMNG.d';
 import { XctrlInfo } from '../../../interfaceGl.d';
 
+import { styleMG01, styleMG03, styleButt01 } from "./ManagGridStyle";
+import { styleButt02 } from "./ManagGridStyle";
+
 export interface DataKnob {
   knop: Knob[];
 }
@@ -37,44 +40,7 @@ const ManagementLeftGrid = (props: {
   const points = props.tflightt;
   const pointsXT = props.xctrll;
   let masXT: any = [];
-
-  //console.log('pointsXT:', pointsXT)
-
-  const styleMG01 = {
-    border: 1,
-    borderRadius: 1,
-    borderColor: 'primary.main',
-    margin: 0.5,
-    height: '94vh',
-  };
-
-  const styleMG03 = {
-    fontSize: 14,
-    padding: 0.3,
-  };
-
-  const styleButt01 = {
-    fontSize: 12,
-    marginTop: 0.5,
-    maxHeight: '21px',
-    minHeight: '21px',
-    backgroundColor: '#E9F5D8',
-    color: 'black',
-    borderRadius: 2,
-    textTransform: 'unset !important',
-  };
-
-  const styleButt02 = {
-    fontSize: 15,
-    marginTop: 0.5,
-    maxHeight: '21px',
-    minHeight: '21px',
-    backgroundColor: '#E9F5D8',
-    color: '#5B1080',
-    borderRadius: 2,
-    textTransform: 'unset !important',
-  };
-
+  
   const [mode, setMode] = React.useState(1);
   let reGion = '1';
   const [areaa, setAreaa] = React.useState('0');
@@ -189,7 +155,6 @@ const ManagementLeftGrid = (props: {
       <>
         <Stack direction="column">
           <Grid container>
-            {/* <Grid item xs={0.25} sx={styleMG03}></Grid> */}
             <Grid item xs sx={styleMG03}>
               <Button sx={styleButt01} onClick={() => handleClock(props.nom)}>
                 <b>
@@ -298,7 +263,6 @@ const ManagementLeftGrid = (props: {
       dataKnobTemp[0].region = dataKnob[0].region;
       dataKnobTemp[0].area = masArea[i];
       dataKnobTemp[0].subarea = 0;
-
       massKnopTemp.push(dataKnobTemp[0]);
     }
     massKnop = massKnop.concat(massKnopTemp); // ОбЪединение массивов
@@ -380,10 +344,8 @@ const ManagementLeftGrid = (props: {
       } else {
         RecordInSubaria();
       }
-      //console.log('LEFTmassKnopGl:', massKnop);
       // сортировка по cmd
       massKnop.sort((prev, next) => prev.cmd - next.cmd);
-      //console.log('LEFTmassKnopGlSort:', massKnop);
     }
   };
 
@@ -440,7 +402,6 @@ const ManagementLeftGrid = (props: {
           <ManagementRightGrid
             open={props.open}
             tflightt={points}
-            //xctrll={props.xctrll}
             mode={mode}
             areaa={areaa}
             subArea={subArea}

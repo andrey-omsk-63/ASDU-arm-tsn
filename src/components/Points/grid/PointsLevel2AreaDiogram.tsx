@@ -1,11 +1,11 @@
-import * as React from 'react';
-import Grid from '@mui/material/Grid';
+import * as React from "react";
+import Grid from "@mui/material/Grid";
 //import Button from "@mui/material/Button";
 
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 
-import { XctrlInfo } from '../../../interfaceGl.d';
+import { XctrlInfo } from "../../../interfaceGl.d";
 
 let xtPropsOld = -1;
 let crossRoadOld = -1;
@@ -20,32 +20,30 @@ const PointsLevel2AreaDiogram = (props: {
   const points = props.xctrll[xtProps];
   const crRoad = props.crossroad;
 
-  //console.log('Пришло Graf', props.xctrll);
-
   const colorsGraf = [
-    'orange',
-    'Turquoise',
-    'YellowGreen',
+    "orange",
+    "Turquoise",
+    "YellowGreen",
 
-    'Yellow',
-    'Pink',
-    'Aqua',
+    "Yellow",
+    "Pink",
+    "Aqua",
 
-    'Lime',
-    'Tomato',
-    'teal',
+    "Lime",
+    "Tomato",
+    "teal",
 
-    'purple',
-    'RosyBrown',
-    'Coral',
+    "purple",
+    "RosyBrown",
+    "Coral",
 
-    'Olive',
-    'Magenta',
-    'DarkGray',
+    "Olive",
+    "Magenta",
+    "DarkGray",
 
-    'RoyalBlue',
-    'SpringGreen',
-    'Violet',
+    "RoyalBlue",
+    "SpringGreen",
+    "Violet",
   ];
 
   const [openLoader, setOpenLoader] = React.useState(true);
@@ -60,13 +58,17 @@ const PointsLevel2AreaDiogram = (props: {
   let matrix: string[][] = [[]];
   let scale = 2;
 
-  let coler = 'red';
-  let colerOld = '';
+  let coler = "red";
+  let colerOld = "";
   let masStr = [];
   let masCol = [];
   let colBl = 0;
 
-  if (xtPropsOld !== xtProps || crossRoadOld !== crRoad || pointsOld !== points) {
+  if (
+    xtPropsOld !== xtProps ||
+    crossRoadOld !== crRoad ||
+    pointsOld !== points
+  ) {
     xtPropsOld = xtProps;
     crossRoadOld = crRoad;
     pointsOld = points;
@@ -81,7 +83,7 @@ const PointsLevel2AreaDiogram = (props: {
 
     const PointsXt112Comp1Tab4StrOptim = (j: number) => {
       resStr = [];
-      coler = 'red';
+      coler = "red";
       colerOld = matrix[j / scale][0 / scale];
       masStr = [];
       masCol = [];
@@ -109,8 +111,9 @@ const PointsLevel2AreaDiogram = (props: {
             item
             sx={{
               backgroundColor: masCol[i],
-              height: String(steepVertical * scale) + 'vh',
-            }}></Grid>,
+              height: String(steepVertical * scale) + "vh",
+            }}
+          ></Grid>
         );
       }
       return resStr;
@@ -120,14 +123,14 @@ const PointsLevel2AreaDiogram = (props: {
       resSps.push(
         <Grid key={j} item container>
           {PointsXt112Comp1Tab4StrOptim(j)}
-        </Grid>,
+        </Grid>
       );
     }
     return resSps;
   };
 
   const MakeMatrix = () => {
-    let coler = 'white';
+    let coler = "white";
 
     let coorPointX = 0;
     let coorPointY = 0;
@@ -136,7 +139,7 @@ const PointsLevel2AreaDiogram = (props: {
       matrix[j] = [];
 
       for (let i = 0; i < horizon; i += scale) {
-        coler = 'LightCyan';
+        coler = "LightCyan";
         let mass = [];
         let flag = true;
 
@@ -144,7 +147,7 @@ const PointsLevel2AreaDiogram = (props: {
           coorPointY = points.xctrls[crRoad].StrategyA[ij].xleft;
           coorPointX = points.xctrls[crRoad].StrategyA[ij].xright;
           if (coorPointY === j && coorPointX === i) {
-            coler = 'black';
+            coler = "black";
             flag = false;
           }
           let kvx = (i - coorPointX) ** 2;
@@ -169,7 +172,7 @@ const PointsLevel2AreaDiogram = (props: {
   };
 
   const styleBackdrop = {
-    color: '#fff',
+    color: "#fff",
     zIndex: (theme: any) => theme.zIndex.drawer + 1,
   };
 

@@ -220,7 +220,7 @@ export const TimeStr = (tim: number) => {
   timLiner += min.toString();
   return timLiner;
 };
-
+//InputerDate
 export const BoxTextField = (argum: any, hChange: any) => {
   const handleKey = (event: any) => {
     if (event.key === "Enter") event.preventDefault();
@@ -440,7 +440,7 @@ export const SendSocketOldDateXt = (
     date,
     pointsEtalon[tekValue].region,
     pointsEtalon[tekValue].area,
-    pointsEtalon[tekValue].subarea,
+    pointsEtalon[tekValue].subarea
     //pointsEtalon[tekValue]
   );
   const handleSendOpen = () => {
