@@ -261,7 +261,6 @@ const App = () => {
           setIsOpenOldSt(true);
           break;
         case "getCalculation":
-          //console.log("getCalculation:", data);
           datestat.result = data.results;
           datestat.xttData = formSett;
           dispatch(statsaveCreate(datestat));
