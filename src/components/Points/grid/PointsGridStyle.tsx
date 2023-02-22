@@ -147,7 +147,7 @@ export const styleInpName = {
 };
 
 export const styleInpArg = {
-  '& > :not(style)': { width: '12ch', bgcolor: '#FFFBE5' },
+  '& > :not(style)': { width: '12ch', marginTop: 0.5, bgcolor: '#FFFBE5' },
 };
 export const styleInpTime = {
   '& > :not(style)': { width: '2ch', bgcolor: '#FFFBE5' },

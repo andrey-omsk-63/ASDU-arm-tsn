@@ -56,7 +56,7 @@ const PointsLevel2Area = (props: {
   const [openSetStr, setOpenSetStr] = React.useState(false);
   const [points, setPoints] = React.useState(pointsEt);
   const [trigger, setTrigger] = React.useState(false);
-//Макс
+  //Макс
   if (xtPropsOld !== xtProps || crossRoadOld !== crossRoad) {
     pointGraf = props.xctrll;
     xtPropsOld = xtProps;
@@ -106,7 +106,7 @@ const PointsLevel2Area = (props: {
             <TextField
               size="small"
               onKeyPress={handleKey} //отключение Enter
-              inputProps={{ style: { fontSize: 14 } }}
+              InputProps={{ disableUnderline: true, style: { fontSize: 14 } }}
               value={argum}
               onChange={hChange}
               variant="standard"

@@ -220,7 +220,7 @@ export const TimeStr = (tim: number) => {
   timLiner += min.toString();
   return timLiner;
 };
-//InputerDate
+
 export const BoxTextField = (argum: any, hChange: any) => {
   const handleKey = (event: any) => {
     if (event.key === "Enter") event.preventDefault();
@@ -230,7 +230,7 @@ export const BoxTextField = (argum: any, hChange: any) => {
     <TextField
       size="small"
       onKeyPress={handleKey} //отключение Enter
-      inputProps={{ style: { fontSize: 14 } }}
+      InputProps={{ disableUnderline: true, style: { fontSize: 14 } }}
       value={argum}
       onChange={hChange}
       variant="standard"
@@ -332,7 +332,7 @@ export const ConclStr = (xss: number, elem: any, styleXX: any) => {
 
 export const InputTimeAndMode = (soob: string, func: any) => {
   return (
-    <Grid container sx={{ fontSize: 15 }}>
+    <Grid container sx={{ marginTop: 0.5, fontSize: 15 }}>
       <Grid item xs={5}>
         {soob}
       </Grid>
@@ -399,7 +399,6 @@ export const WorkMenuEditMain = (
     minHeight: "21px",
     maxWidth: "193px",
     minWidth: "193px",
-    //backgroundColor: '#FFFBE5',
     backgroundColor: "#E9F5D8",
     color: "black",
     textTransform: "unset !important",

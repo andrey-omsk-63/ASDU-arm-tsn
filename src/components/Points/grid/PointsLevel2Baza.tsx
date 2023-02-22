@@ -239,7 +239,7 @@ const PointsLevel2Baza = (props: {
             onKeyPress={handleKey} //отключение Enter
             value={currency}
             onChange={handleChange}
-            InputProps={{ style: { fontSize: 14 } }}
+            InputProps={{ disableUnderline: true, style: { fontSize: 14 } }}
             variant="standard"
             color="secondary"
           >

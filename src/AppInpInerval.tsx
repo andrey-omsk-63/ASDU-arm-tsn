@@ -19,7 +19,7 @@ const InputInterval = (props: { curr: any; cur: string; func: any }) => {
         onKeyPress={handleKey} //отключение Enter
         value={props.cur}
         onChange={props.func}
-        InputProps={{ style: { fontSize: 12.5 } }}
+        InputProps={{ disableUnderline: true, style: { fontSize: 12.5 } }}
         variant="standard"
         color="secondary"
       >
