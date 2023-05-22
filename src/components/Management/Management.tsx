@@ -46,10 +46,13 @@ const Management = (props: {
   }, [props.ws, reGion]);
 
   if (isOpen && flagEtalon) {
-    pointsEtalon = points;
-    flagEtalon = false;
-    points = [];
-    pointsXctrlEtalon = pointsXctrll;
+    console.log('###points',points)
+    if (points.length) {
+      pointsEtalon = points;
+      flagEtalon = false;
+      points = [];
+      pointsXctrlEtalon = pointsXctrll;
+    }
   }
   // разноска обновлений Tflight
   if (isOpen && !flagEtalon) {
@@ -108,7 +111,7 @@ const Management = (props: {
   return (
     <Box sx={{ fontSize: 12, marginTop: -3, marginLeft: -3, marginRight: -5 }}>
       <Grid container sx={{ border: 0, marginLeft: 0 }}>
-        {isOpen && (
+        {isOpen && !flagEtalon && (
           <>
             <ManagementLeftGrid
               open={isOpen}

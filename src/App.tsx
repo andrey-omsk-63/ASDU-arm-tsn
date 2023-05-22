@@ -35,6 +35,7 @@ import { InputerDate, MakeDate, InputerOk } from "./AppServiceFunctions";
 import { PunktMenuSaveFile } from "./AppServiceFunctions";
 
 import { dataStatNow } from "./NullStatNow";
+import { da } from "date-fns/locale";
 
 export interface Stater {
   area: number;
@@ -229,6 +230,7 @@ const App = () => {
     WS.onmessage = function (event: any) {
       let allData = JSON.parse(event.data);
       let data = allData.data;
+      console.log("пришло:", allData.type, data);
       switch (allData.type) {
         case "getDevices":
           setPointsTfl(data.tflight ?? []);
@@ -240,8 +242,10 @@ const App = () => {
           setIsOpenInf(true);
           break;
         case "getStatisticsList":
-          for (let i = 0; i < data.dates.length; i++) {
-            massGoodDate.push(data.dates[i].slice(0, 10));
+          if (data.dates) {
+            for (let i = 0; i < data.dates.length; i++) {
+              massGoodDate.push(data.dates[i].slice(0, 10));
+            }
           }
           break;
         case "getStatistics":
@@ -519,7 +523,7 @@ const App = () => {
   };
 
   UpdateXctrl(); // разноска обновлений Xctrl
-
+  console.log("!!!pointsTfl:", pointsTfl);
   return (
     <>
       {openSetErrLog && (
@@ -553,7 +557,9 @@ const App = () => {
                 </Stack>
               </Box>
               <TabPanel value="1">
-                {WS !== null && regionGlob !== 0 && (
+                {WS !== null && regionGlob !== 0 
+                //&& pointsTfl.length !== 0 
+                && (
                   <Management
                     open={isOpenDev}
                     ws={WS}
@@ -629,3 +635,8 @@ const App = () => {
 };
 
 export default App;
+{
+  /* <Box key={1} sx={styleSt1}>
+          Нет данных по статистике
+        </Box> */
+}
