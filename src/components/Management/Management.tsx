@@ -46,7 +46,6 @@ const Management = (props: {
   }, [props.ws, reGion]);
 
   if (isOpen && flagEtalon) {
-    console.log('###points',points)
     if (points.length) {
       pointsEtalon = points;
       flagEtalon = false;

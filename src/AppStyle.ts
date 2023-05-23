@@ -1,3 +1,11 @@
+export const styleBoxTabContext = {
+  marginLeft: 0.5,
+  backgroundColor: "#F1F5FB",
+  display: "flex",
+  alignItems: "left",
+  flexDirection: "row",
+};
+
 export const styleApp01 = {
   fontSize: 14,
   marginRight: 1,
@@ -36,7 +44,7 @@ export const styleMod = {
 
 export const styleBatMenu = {
   fontSize: 14,
-  backgroundColor: '#E9F5D8',
+  backgroundColor: "#E9F5D8",
   color: "red",
   marginTop: 1,
   textTransform: "unset !important",
@@ -46,7 +54,7 @@ export const styleModalMenu = {
   fontSize: 14,
   maxHeight: "20px",
   minHeight: "20px",
-  backgroundColor: '#E9F5D8',
+  backgroundColor: "#E9F5D8",
   color: "black",
   marginRight: 1,
   marginTop: 2,

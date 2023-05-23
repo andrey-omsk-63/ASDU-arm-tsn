@@ -56,7 +56,7 @@ export const MakeInterval = (mode: number) => {
       dat = ["20", "60"];
       break;
     default:
-      console.log("В БД некорректный интервал");
+      //console.log("В БД некорректный интервал");
       dat = ["1", "5", "10", "15", "30", "60"];
   }
   return dat;

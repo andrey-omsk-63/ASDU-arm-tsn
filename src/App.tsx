@@ -4,7 +4,6 @@ import { maskpointCreate, statsaveCreate } from "./redux/actions";
 
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
 import TabPanel from "@mui/lab/TabPanel";
 import TabContext from "@mui/lab/TabContext";
 
@@ -26,8 +25,8 @@ import { XctrlInfo } from "./interfaceGl.d";
 import { Statistic } from "./interfaceStat.d";
 import { RegionInfo } from "./interfaceGl.d";
 
-import { styleImpServis, styleInp } from "./AppStyle";
-import { styleImpBlock, styleInt01 } from "./AppStyle";
+import { styleImpServis, styleInp, styleInt01 } from "./AppStyle";
+import { styleImpBlock, styleBoxTabContext } from "./AppStyle";
 
 import { MakeInterval, WriteToCsvFileForStat } from "./AppServiceFunctions";
 import { ButtonMenu } from "./AppServiceFunctions";
@@ -35,7 +34,6 @@ import { InputerDate, MakeDate, InputerOk } from "./AppServiceFunctions";
 import { PunktMenuSaveFile } from "./AppServiceFunctions";
 
 import { dataStatNow } from "./NullStatNow";
-import { da } from "date-fns/locale";
 
 export interface Stater {
   area: number;
@@ -230,7 +228,7 @@ const App = () => {
     WS.onmessage = function (event: any) {
       let allData = JSON.parse(event.data);
       let data = allData.data;
-      console.log("пришло:", allData.type, data);
+      //console.log("пришло:", allData.type, data);
       switch (allData.type) {
         case "getDevices":
           setPointsTfl(data.tflight ?? []);
@@ -523,7 +521,7 @@ const App = () => {
   };
 
   UpdateXctrl(); // разноска обновлений Xctrl
-  console.log("!!!pointsTfl:", pointsTfl);
+
   return (
     <>
       {openSetErrLog && (
@@ -537,29 +535,23 @@ const App = () => {
           {write && <AppWriteToAllFileForXT setOpen={setWrite} />}
           <Box sx={{ width: "98.8%" }}>
             <TabContext value={value}>
-              <Box sx={{ marginLeft: 0.5, backgroundColor: "#F1F5FB" }}>
-                <Stack direction="row">
-                  {!bsLogin && <>{ButtonMenu("1", "Управление", SetValue)}</>}
-                  {!bsLogin && (
-                    <>{ButtonMenu("2", "Характерные точки", SetValue)}</>
-                  )}
-                  {ButtonMenu("3", "Статистика", SetValue)}
-                  {!bsLogin && value === "2" && saveXT && (
-                    <>{ButtonMenu("7", "Сохр.в файл", SetValue)}</>
-                  )}
-                  {value === "2" && <InputNewDateInterval mode={0} />}
-                  {value === "3" && isOpenSt && (
-                    <InputNewDateInterval mode={1} />
-                  )}
-                  {value === "4" && isOpenOldSt && !nullOldStatistics && (
-                    <InputNewDateInterval mode={1} />
-                  )}
-                </Stack>
+              <Box sx={styleBoxTabContext}>
+                {!bsLogin && <>{ButtonMenu("1", "Управление", SetValue)}</>}
+                {!bsLogin && (
+                  <>{ButtonMenu("2", "Характерные точки", SetValue)}</>
+                )}
+                {ButtonMenu("3", "Статистика", SetValue)}
+                {!bsLogin && value === "2" && saveXT && (
+                  <>{ButtonMenu("7", "Сохр.в файл", SetValue)}</>
+                )}
+                {value === "2" && <InputNewDateInterval mode={0} />}
+                {value === "3" && isOpenSt && <InputNewDateInterval mode={1} />}
+                {value === "4" && isOpenOldSt && !nullOldStatistics && (
+                  <InputNewDateInterval mode={1} />
+                )}
               </Box>
               <TabPanel value="1">
-                {WS !== null && regionGlob !== 0 
-                //&& pointsTfl.length !== 0 
-                && (
+                {WS !== null && regionGlob !== 0 && (
                   <Management
                     open={isOpenDev}
                     ws={WS}
@@ -635,8 +627,3 @@ const App = () => {
 };
 
 export default App;
-{
-  /* <Box key={1} sx={styleSt1}>
-          Нет данных по статистике
-        </Box> */
-}
