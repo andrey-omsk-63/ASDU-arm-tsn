@@ -174,9 +174,8 @@ const App = () => {
         if (newRecord) pointsAdd.push(pointsXctrl[i]);
       }
       if (pointsAdd.length > 0) {
-        for (let i = 0; i < pointsAdd.length; i++) {
+        for (let i = 0; i < pointsAdd.length; i++)
           pointsEtalonXctrl.push(pointsAdd[i]);
-        }
       }
     }
     if (isOpenInf && flagEtalonInf) {
@@ -228,7 +227,6 @@ const App = () => {
     WS.onmessage = function (event: any) {
       let allData = JSON.parse(event.data);
       let data = allData.data;
-      //console.log("пришло:", allData.type, data);
       switch (allData.type) {
         case "getDevices":
           setPointsTfl(data.tflight ?? []);
