@@ -161,7 +161,7 @@ export const InputerDate = (
           value={valueDate}
           inputFormat="DD-MM-YYYY"
           InputProps={{ style: { fontSize: 14 } }}
-          onChange={handleChangeDP}
+          onChange={handleChangeDP} 
           renderInput={(params: any) => <TextField {...params} />}
           renderLoading={() => <CalendarPickerSkeleton />}
           renderDay={(day, _value, DayComponentProps) => {

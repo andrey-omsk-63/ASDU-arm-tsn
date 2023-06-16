@@ -92,8 +92,9 @@ const PointsLevel2Calc = (props: {
     pointer = datestat.result;
     if (debug) namer = "Без имени_09.09.2022_09-28-28";
   }
-  
+
   //props.saveXt(true);
+  console.log("NAMER", namer,pointer[namer]);
 
   React.useEffect(() => {
     if (pointer !== null) props.saveXt(true);

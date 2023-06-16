@@ -1,11 +1,13 @@
 import * as React from "react";
 import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 //import Button from "@mui/material/Button";
 
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 
 import { XctrlInfo } from "../../../interfaceGl.d";
+//import { styleBoxFormInt } from "../../../AppStyle";
 
 let xtPropsOld = -1;
 let crossRoadOld = -1;
@@ -126,6 +128,7 @@ const PointsLevel2AreaDiogram = (props: {
         </Grid>
       );
     }
+    //resSps.push();
     return resSps;
   };
 
@@ -193,10 +196,41 @@ const PointsLevel2AreaDiogram = (props: {
 
   if (openLoader) Output();
 
+  let pv = 27.2 + 0.717 * 50;
+  let ph = 7.7 + 0.863 * 50;
+
+  const styleBox = {
+    border: 1,
+    outline: "none",
+    fontSize: 21,
+    // position: "relative",
+    // marginTop: "-86.2vh",   // -86.2
+    // marginLeft: "90vh",
+    // marginRight: "auto",
+    //======
+    position: "absolute",
+    //justifyContent: 'flex-end',
+    left: pv + "%", // 27.2
+    top: ph + "vh", //7.7
+
+    //left: '221px',
+    //top: '193px',
+    // transform: 'translate(-50%, -50%)',
+    //======
+    // width: '340px',
+    // bgcolor: 'background.paper',
+    // border: '3px solid #000',
+    // borderColor: 'primary.main',
+    // borderRadius: 2,
+    // boxShadow: 24,
+    // paddingBottom: 0.5,
+  };
+
   return (
     <Grid item container xs={12}>
       {openLoader && <Dinama />}
       {!openLoader && <>{PointsXt112Comp1Tab4()}</>}
+      <Box sx={styleBox}>•</Box>
     </Grid>
   );
 };

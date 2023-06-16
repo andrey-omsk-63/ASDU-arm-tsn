@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -270,6 +271,33 @@ const PointsLevel2BazaDiogram = (props: {
 
   if (openLoader) Output();
 
+  // const styleBox = {
+  //   border: 1,
+  //   outline: "none",
+  //   // position: "relative",
+  //   // marginTop: "-86.2vh",   // -86.2
+  //   // marginLeft: "90vh",
+  //   // marginRight: "auto",
+  //   //======
+  //   position: "absolute",
+  //   //justifyContent: 'flex-end',
+  //   left: "98%",
+  //   top: "50%",
+
+  //   //left: '221px',
+  //   //top: '193px',
+  //   // transform: 'translate(-50%, -50%)',
+  //   //======
+  //   // width: '340px',
+  //   // bgcolor: 'background.paper',
+  //   // border: '3px solid #000',
+  //   // borderColor: 'primary.main',
+  //   // borderRadius: 2,
+  //   // boxShadow: 24,
+  //   // paddingBottom: 0.5,
+  // };
+
+
   return (
     <>
       <Grid container>
@@ -277,6 +305,7 @@ const PointsLevel2BazaDiogram = (props: {
         {!openLoader && <>{PointsXt112Comp1Tab4()}</>}
       </Grid>
       {!openLoader && <>{PointInfoStr()}</>}
+      {/* <Box sx={styleBox}>AAA</Box> */}
     </>
   );
 };
