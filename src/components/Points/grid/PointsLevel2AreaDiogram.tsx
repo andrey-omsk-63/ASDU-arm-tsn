@@ -1,12 +1,12 @@
-import * as React from "react";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
+import * as React from 'react';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 //import Button from "@mui/material/Button";
 
-import Backdrop from "@mui/material/Backdrop";
-import CircularProgress from "@mui/material/CircularProgress";
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
-import { XctrlInfo } from "../../../interfaceGl.d";
+import { XctrlInfo } from '../../../interfaceGl.d';
 //import { styleBoxFormInt } from "../../../AppStyle";
 
 let xtPropsOld = -1;
@@ -23,29 +23,29 @@ const PointsLevel2AreaDiogram = (props: {
   const crRoad = props.crossroad;
 
   const colorsGraf = [
-    "orange",
-    "Turquoise",
-    "YellowGreen",
+    'orange',
+    'Turquoise',
+    'YellowGreen',
 
-    "Yellow",
-    "Pink",
-    "Aqua",
+    'Yellow',
+    'Pink',
+    'Aqua',
 
-    "Lime",
-    "Tomato",
-    "teal",
+    'Lime',
+    'Tomato',
+    'teal',
 
-    "purple",
-    "RosyBrown",
-    "Coral",
+    'purple',
+    'RosyBrown',
+    'Coral',
 
-    "Olive",
-    "Magenta",
-    "DarkGray",
+    'Olive',
+    'Magenta',
+    'DarkGray',
 
-    "RoyalBlue",
-    "SpringGreen",
-    "Violet",
+    'RoyalBlue',
+    'SpringGreen',
+    'Violet',
   ];
 
   const [openLoader, setOpenLoader] = React.useState(true);
@@ -60,17 +60,13 @@ const PointsLevel2AreaDiogram = (props: {
   let matrix: string[][] = [[]];
   let scale = 2;
 
-  let coler = "red";
-  let colerOld = "";
+  let coler = 'red';
+  let colerOld = '';
   let masStr = [];
   let masCol = [];
   let colBl = 0;
 
-  if (
-    xtPropsOld !== xtProps ||
-    crossRoadOld !== crRoad ||
-    pointsOld !== points
-  ) {
+  if (xtPropsOld !== xtProps || crossRoadOld !== crRoad || pointsOld !== points) {
     xtPropsOld = xtProps;
     crossRoadOld = crRoad;
     pointsOld = points;
@@ -85,7 +81,7 @@ const PointsLevel2AreaDiogram = (props: {
 
     const PointsXt112Comp1Tab4StrOptim = (j: number) => {
       resStr = [];
-      coler = "red";
+      coler = 'red';
       colerOld = matrix[j / scale][0 / scale];
       masStr = [];
       masCol = [];
@@ -113,9 +109,8 @@ const PointsLevel2AreaDiogram = (props: {
             item
             sx={{
               backgroundColor: masCol[i],
-              height: String(steepVertical * scale) + "vh",
-            }}
-          ></Grid>
+              height: String(steepVertical * scale) + 'vh',
+            }}></Grid>,
         );
       }
       return resStr;
@@ -125,7 +120,7 @@ const PointsLevel2AreaDiogram = (props: {
       resSps.push(
         <Grid key={j} item container>
           {PointsXt112Comp1Tab4StrOptim(j)}
-        </Grid>
+        </Grid>,
       );
     }
     //resSps.push();
@@ -133,7 +128,7 @@ const PointsLevel2AreaDiogram = (props: {
   };
 
   const MakeMatrix = () => {
-    let coler = "white";
+    let coler = 'white';
 
     let coorPointX = 0;
     let coorPointY = 0;
@@ -142,7 +137,7 @@ const PointsLevel2AreaDiogram = (props: {
       matrix[j] = [];
 
       for (let i = 0; i < horizon; i += scale) {
-        coler = "LightCyan";
+        coler = 'LightCyan';
         let mass = [];
         let flag = true;
 
@@ -150,7 +145,7 @@ const PointsLevel2AreaDiogram = (props: {
           coorPointY = points.xctrls[crRoad].StrategyA[ij].xleft;
           coorPointX = points.xctrls[crRoad].StrategyA[ij].xright;
           if (coorPointY === j && coorPointX === i) {
-            coler = "black";
+            coler = 'black';
             flag = false;
           }
           let kvx = (i - coorPointX) ** 2;
@@ -175,7 +170,7 @@ const PointsLevel2AreaDiogram = (props: {
   };
 
   const styleBackdrop = {
-    color: "#fff",
+    color: '#fff',
     zIndex: (theme: any) => theme.zIndex.drawer + 1,
   };
 
@@ -196,41 +191,24 @@ const PointsLevel2AreaDiogram = (props: {
 
   if (openLoader) Output();
 
-  let pv = 27.2 + 0.717 * 50;
-  let ph = 7.7 + 0.863 * 50;
+  // let pv = 0 + 0.717 * 0;
+  // let ph = 100 + 0.855 * 0;
 
-  const styleBox = {
-    border: 1,
-    outline: "none",
-    fontSize: 21,
-    // position: "relative",
-    // marginTop: "-86.2vh",   // -86.2
-    // marginLeft: "90vh",
-    // marginRight: "auto",
-    //======
-    position: "absolute",
-    //justifyContent: 'flex-end',
-    left: pv + "%", // 27.2
-    top: ph + "vh", //7.7
-
-    //left: '221px',
-    //top: '193px',
-    // transform: 'translate(-50%, -50%)',
-    //======
-    // width: '340px',
-    // bgcolor: 'background.paper',
-    // border: '3px solid #000',
-    // borderColor: 'primary.main',
-    // borderRadius: 2,
-    // boxShadow: 24,
-    // paddingBottom: 0.5,
-  };
+  // const styleBox = {
+  //   position: 'absolute',
+  //   left: pv + '%', // 27.2
+  //   top: ph + '%', //7.7
+  //   width: 6,
+  //   height: '6px',
+  //   bgcolor: 'blue',
+  //   borderRadius: 2,
+  // };
 
   return (
-    <Grid item container xs={12}>
+    <Grid item container sx={{ position: 'relative' }} xs={12}>
       {openLoader && <Dinama />}
       {!openLoader && <>{PointsXt112Comp1Tab4()}</>}
-      <Box sx={styleBox}>•</Box>
+      {/* <Box sx={styleBox}></Box> */}
     </Grid>
   );
 };
