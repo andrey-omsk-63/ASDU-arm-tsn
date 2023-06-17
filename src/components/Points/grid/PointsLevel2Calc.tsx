@@ -74,8 +74,10 @@ const PointsLevel2Calc = (props: {
 
   const xtProps = props.xtt;
   const points = props.xctrll[xtProps];
-
   let namer = points.xctrls[props.crossroad].name;
+
+console.log('@@@@@@:',xtProps,props.crossroad,points)
+
   let debug = false;
   if (props.ws.url === "wss://localhost:3000/W") debug = true;
 
@@ -90,11 +92,11 @@ const PointsLevel2Calc = (props: {
   let pointer = points.results;
   if (datestat.xttData !== MakeDate(new Date())) {
     pointer = datestat.result;
-    if (debug) namer = "Без имени_09.09.2022_09-28-28";
+    if (debug) namer = "Без имени_12.09.2022_10-12-57";
   }
 
   //props.saveXt(true);
-  console.log("NAMER", namer,pointer[namer]);
+  console.log("NAMER", namer);
 
   React.useEffect(() => {
     if (pointer !== null) props.saveXt(true);
