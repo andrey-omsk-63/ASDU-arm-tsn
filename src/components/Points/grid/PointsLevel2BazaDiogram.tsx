@@ -1,17 +1,22 @@
 import * as React from 'react';
 
 import Grid from '@mui/material/Grid';
-//import Box from '@mui/material/Box';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
+
+import { TimeStr } from '../../../AppServiceFunctions';
 
 import { XctrlInfo } from '../../../interfaceGl.d';
 
 let xtPropsOld = -1;
 let crossRoadOld = -1;
 let pointsOld: any = [];
+
+let phGl = -1;
+let pvGl = -1;
 
 const PointsLevel2BazaDiogram = (props: {
   xctrll: XctrlInfo[];
@@ -63,7 +68,6 @@ const PointsLevel2BazaDiogram = (props: {
   const axisVertical = vertical;
   const steepVertical = 86.4 / axisVertical;
   const dlBlok = (window.innerWidth / 12.55) * 8;
-  console.log('******:', horizon, vertical);
 
   let matrix: string[][] = [[]];
 
@@ -73,6 +77,8 @@ const PointsLevel2BazaDiogram = (props: {
   let masStr: any = [];
   let masCol: any = [];
   let colBl = 0;
+
+  const [pictInfo, setPictInfo] = React.useState(false);
 
   if (xtPropsOld !== xtProps || crossRoadOld !== crRoad || pointsOld !== points) {
     xtPropsOld = xtProps;
@@ -244,22 +250,6 @@ const PointsLevel2BazaDiogram = (props: {
     return resStr;
   };
 
-  const OutputerPict = () => {
-    let resStr = [];
-    if (pointer !== null) {
-      if (pointer[namer]) {
-        for (let i = 0; i < pointer[namer].length; i++) {
-          let prpv = vertical / 100;
-          let pv = 100 - pointer[namer][i].Value[0] / prpv;
-          let prph = horizon / 100;
-          let ph = pointer[namer][i].Value[1] / prph;
-          resStr.push(<>{OutputPict(pv, ph)}</>);
-        }
-      }
-    }
-    return resStr;
-  };
-
   //============ Dinama =====================================================
   const handleClose = () => {
     setOpenLoader(false);
@@ -287,13 +277,61 @@ const PointsLevel2BazaDiogram = (props: {
 
   if (openLoader) Output();
 
-  const OutputPict = (pv: number, ph: number) => {
+  const OutputerPict = () => {
+    let resStr = [];
+    if (pointer !== null) {
+      if (pointer[namer]) {
+        for (let i = 0; i < pointer[namer].length; i++) {
+          let prpv = vertical / 100;
+          let pv = 100 - pointer[namer][i].Value[0] / prpv;
+          let prph = horizon / 100;
+          let ph = pointer[namer][i].Value[1] / prph;
+          resStr.push(<>{OutputPict(i, pv, ph)}</>);
+        }
+      }
+    }
+    return resStr;
+  };
+
+  const PictInfo = (idx: number, pv: number, ph: number) => {
+    console.log(
+      'IDX:',
+      idx,
+      TimeStr(pointer[namer][idx].Time),
+      pointer[namer][idx].Value[0],
+      pointer[namer][idx].Value[1],
+    );
+    phGl = ph;
+    pvGl = pv;
+    setPictInfo(true);
+  };
+
+  const styleBoxGl = {
+    //border: 1,
+    position: 'absolute',
+    left: phGl - 1.7 + '%', // 27.2
+    //left: ph + '%', // 27.2
+    top: pvGl - 1.4 + '%', //7.7
+    //top: pv + '%', //7.7
+    //width: 5,
+    maxWidth: 5,
+    minWidth: 5,
+    //height: 5,
+    maxHeight: 5,
+    minHeight: 5,
+    //bgcolor: "white",
+    bgcolor: 'red',
+    //color: 'black',
+    borderRadius: 1,
+  };
+
+  const OutputPict = (idx: number, pv: number, ph: number) => {
     const styleBox = {
       //border: 1,
       position: 'absolute',
-      left: ph - 1 + '%', // 27.2
-      //left: ph - 1 + '%', // 27.2
-      top: pv - 1 + '%', //7.7
+      left: ph - 0.7 + '%', // 27.2
+      //left: ph + '%', // 27.2
+      top: pv - 0.4 + '%', //7.7
       //top: pv + '%', //7.7
       //width: 5,
       maxWidth: 5,
@@ -307,7 +345,11 @@ const PointsLevel2BazaDiogram = (props: {
       borderRadius: 1,
     };
     //return <Box sx={styleBox}></Box>;
-    return <Button sx={styleBox}>●{/* <Box sx={styleBox}></Box> */}</Button>;
+    return (
+      <Button sx={styleBox} onClick={() => PictInfo(idx, pv, ph)}>
+        ●
+      </Button>
+    );
   };
 
   return (
@@ -318,6 +360,11 @@ const PointsLevel2BazaDiogram = (props: {
           <>
             {PointsXt112Comp1Tab4()}
             {OutputerPict()}
+            {pictInfo && (
+              <>
+                <Box sx={styleBoxGl}></Box>
+              </>
+            )}
           </>
         )}
       </Grid>
