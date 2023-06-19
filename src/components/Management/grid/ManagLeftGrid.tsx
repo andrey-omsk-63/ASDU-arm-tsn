@@ -13,8 +13,8 @@ import ManagementKnobXT from './ManagKnobXT';
 import { Tflight } from '../../../interfaceMNG.d';
 import { XctrlInfo } from '../../../interfaceGl.d';
 
-import { styleMG01, styleMG03, styleButt01 } from "./ManagGridStyle";
-import { styleButt02 } from "./ManagGridStyle";
+import { styleMG01, styleMG03, styleButt01 } from './ManagGridStyle';
+import { styleButt02 } from './ManagGridStyle';
 
 export interface DataKnob {
   knop: Knob[];
@@ -40,11 +40,17 @@ const ManagementLeftGrid = (props: {
   const points = props.tflightt;
   const pointsXT = props.xctrll;
   let masXT: any = [];
-  
+
   const [mode, setMode] = React.useState(1);
+  const [tekMode, setTekMode] = React.useState(1);
   let reGion = '1';
   const [areaa, setAreaa] = React.useState('0');
+  const [tekArea, setTekArea] = React.useState('0');
   const [subArea, setSubArea] = React.useState(0);
+  const [tekSubArea, setTekSubArea] = React.useState(0);
+
+  console.log('******:', mode, areaa, subArea);
+
   const [dataKnob, setDataKnob] = React.useState<Array<Knob>>([
     {
       cmd: 0,
@@ -73,18 +79,27 @@ const ManagementLeftGrid = (props: {
     setMode(1);
     setAreaa('0');
     setSubArea(0);
+    setTekMode(1);
+    setTekArea('0');
+    setTekSubArea(0);
   };
 
   const handleClock = (area: string) => {
     setMode(2);
     setAreaa(area);
     setSubArea(0);
+    setTekMode(2);
+    setTekArea(area);
+    setTekSubArea(0);
   };
 
   const handleClick = (area: string, subarea: number) => {
     setMode(3);
     setAreaa(area);
     setSubArea(subarea);
+    setTekMode(3);
+    setTekArea(area);
+    setTekSubArea(subarea);
   };
 
   if (props.open) {
@@ -138,10 +153,7 @@ const ManagementLeftGrid = (props: {
           <Grid container key={i}>
             <Grid item xs={0.5} sx={styleMG03}></Grid>
             <Grid item xs sx={styleMG03}>
-              <Button
-                sx={styleButt01}
-                //variant="contained"
-                onClick={() => handleClick(props.nom, masSpis[i].subarea)}>
+              <Button sx={styleButt01} onClick={() => handleClick(props.nom, masSpis[i].subarea)}>
                 Подрайон:{masSpis[i].areaNum}:{masSpis[i].subarea}
               </Button>
             </Grid>
