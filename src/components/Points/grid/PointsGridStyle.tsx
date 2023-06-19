@@ -163,6 +163,18 @@ export const styleInpKnop = {
   textAlign: 'center',
   textTransform: 'unset !important',
 };
+//====== PointsLevel2BazaDiogram ================================================
+export const styleEndInf = {
+  fontSize: 11,
+  position: "absolute",
+  top: "0%",
+  left: "auto",
+  right: "0%",
+  height: "15px",
+  maxWidth: "2%",
+  minWidth: "2%",
+  color: "black",
+};
 //====== PointsLevel2Area =======================================================
 export const styleXTG035 = {
   border: 1,
@@ -335,14 +347,14 @@ export const styleXTl201 = {
   border: 0,
 };
 
-export const styleXTl202 = {
-  fontSize: 12.5,
-  maxHeight: "21px",
-  minHeight: "21px",
-  transform: "rotate(270deg)",
-  backgroundColor: "#E9F5D8",
-  color: "black",
-  marginBottom: 6.5,
-  textTransform: "unset !important",
-};
+// export const styleXTl202 = {
+//   fontSize: 12.5,
+//   maxHeight: "21px",
+//   minHeight: "21px",
+//   transform: "rotate(270deg)",
+//   backgroundColor: "#E9F5D8",
+//   color: "black",
+//   marginBottom: 6.5,
+//   textTransform: "unset !important",
+// };
 //===============================================================================

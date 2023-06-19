@@ -43,7 +43,17 @@ const PointsMenuLevel1 = (props: {
   const xtProps = props.xtt;
   const points = props.xctrll[xtProps];
 
-  const stylePXt1 = {
+  const [valueLevel2, setValueLavel2] = React.useState("1");
+  const [tekValue, setTekValue] = React.useState("1");
+
+  const [crossRoad, setCrossRoad] = React.useState(0);
+
+  if (xtPropsOld !== xtProps) {
+    xtPropsOld = xtProps;
+    setCrossRoad(0);
+  }
+
+  const stylePXt11 = {
     fontSize: 13.9,
     maxHeight: "20px",
     minHeight: "20px",
@@ -54,22 +64,23 @@ const PointsMenuLevel1 = (props: {
     textTransform: "unset !important",
   };
 
-  const [valueLevel2, setValueLavel2] = React.useState("1");
-  const [crossRoad, setCrossRoad] = React.useState(0);
-
-  if (xtPropsOld !== xtProps) {
-    xtPropsOld = xtProps;
-    setCrossRoad(0);
-  }
+  const SetValueLavel2 = (mode: string) => {
+    setValueLavel2(mode);
+    if (mode === "1") setTekValue(mode); //tekValue = mode;
+  };
 
   const MenuCrossRoad = () => {
     const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
+
+    const handleOpen = () => {
+      setOpen(true);
+      setTekValue("2");
+    };
 
     const handleClose = (numer: number) => {
       if (numer !== 777) {
         setCrossRoad(numer);
-        setValueLavel2("2");
+        SetValueLavel2("2");
         if (numerOld !== numer) {
           maskpoint.newXt = true;
           dispatch(maskpointCreate(maskpoint));
@@ -108,7 +119,7 @@ const PointsMenuLevel1 = (props: {
           resStr.push(
             <Button
               key={i}
-              sx={stylePXt1}
+              sx={stylePXt11}
               variant="contained"
               onClick={() => handleClose(i)}
             >
@@ -119,26 +130,49 @@ const PointsMenuLevel1 = (props: {
           );
         }
         resStr.push(
-          <Button key={777} sx={styleModalEnd} onClick={() => handleClose(777)}>
+          <Button key={Math.random()} sx={styleModalEnd} onClick={() => handleClose(777)}>
             <b>&#10006;</b>
           </Button>
         );
         return resStr;
       };
 
+      let soob = "XT:" + points.area + ":1 Перечень перекрёстков";
+
       return (
-        <div>
-          <Button sx={stylePXt1} variant="contained" onClick={handleOpen}>
-            <b>XT:{points.area}:1 &nbsp; Перечень перекрёстков</b>
-          </Button>
+        <>
+          {ButtonMenu("2", soob, handleOpen)}
           <Modal open={open} hideBackdrop>
             <Box sx={stylePK}>
               <Stack direction="column">{SpisPerekr()}</Stack>
             </Box>
           </Modal>
-        </div>
+        </>
       );
     }
+  };
+
+  const SetValueLavel21 = () => {
+    SetValueLavel2("1");
+  };
+
+  const ButtonMenu = (mode: string, soob: any, func: Function) => {
+    const styleButtonMenu = {
+      fontSize: 13.9,
+      maxHeight: "20px",
+      minHeight: "20px",
+      backgroundColor: mode === tekValue ? "#93D145" : "#E9F5D8",
+      color: "black",
+      marginRight: 1,
+      marginTop: 0.7,
+      textTransform: "unset !important",
+    };
+
+    return (
+      <Button sx={styleButtonMenu} variant="contained" onClick={() => func()}>
+        <b>{soob}</b>
+      </Button>
+    );
   };
 
   return (
@@ -146,13 +180,7 @@ const PointsMenuLevel1 = (props: {
       <TabContext value={valueLevel2}>
         <Box>
           <Stack sx={{ marginLeft: 0.5, marginTop: 0.5 }} direction="row">
-            <Button
-              sx={stylePXt1}
-              variant="contained"
-              onClick={() => setValueLavel2("1")}
-            >
-              <b>Основной:</b>
-            </Button>
+            {ButtonMenu("1", "Основной:", SetValueLavel21)}
             {MenuCrossRoad()}
           </Stack>
         </Box>

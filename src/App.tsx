@@ -117,6 +117,7 @@ let massIntervalOldStart: any = [1, 5, 10, 15, 30, 60];
 let nullOldStatistics = false;
 let nullNewStatistics = false;
 let massGoodDate: Array<string> = [];
+let tekValue = "1";
 
 const App = () => {
   //== Piece of Redux ======================================
@@ -441,7 +442,7 @@ const App = () => {
       <>
         {props.mode !== 0 && ( // работает только в статистике
           <>
-            {PunktMenuSaveFile(SetValue)}
+            {PunktMenuSaveFile(SetValue, tekValue)}
             <Grid item container sx={{ width: "120px" }}>
               <Grid item xs={7} sx={{ textAlign: "left" }}>
                 Интервал:
@@ -471,18 +472,24 @@ const App = () => {
 
   const SetValue = (mode: string) => {
     switch (mode) {
+      case "1":
+        setValue(mode);
+        tekValue = mode;
+        break;
       case "2":
         formSett = formSettToday;
         datestat.xttData = MakeDate(new Date());
         dispatch(statsaveCreate(datestat));
         setValueDate(dayjs(formSett));
         setValue(mode);
+        tekValue = mode;
         break;
       case "3":
         formSett = formSettToday;
         interval = massIntervalNow[tekIdNow];
         setValueDate(dayjs(formSett));
         setValue(mode);
+        tekValue = mode;
         break;
       case "5":
         WriteToCsvFileForStat(datestat);
@@ -534,13 +541,17 @@ const App = () => {
           <Box sx={{ width: "98.8%" }}>
             <TabContext value={value}>
               <Box sx={styleBoxTabContext}>
-                {!bsLogin && <>{ButtonMenu("1", "Управление", SetValue)}</>}
                 {!bsLogin && (
-                  <>{ButtonMenu("2", "Характерные точки", SetValue)}</>
+                  <>{ButtonMenu("1", "Управление", SetValue, tekValue)}</>
                 )}
-                {ButtonMenu("3", "Статистика", SetValue)}
+                {!bsLogin && (
+                  <>
+                    {ButtonMenu("2", "Характерные точки", SetValue, tekValue)}
+                  </>
+                )}
+                {ButtonMenu("3", "Статистика", SetValue, tekValue)}
                 {!bsLogin && value === "2" && saveXT && (
-                  <>{ButtonMenu("7", "Сохр.в файл", SetValue)}</>
+                  <>{ButtonMenu("7", "Сохр.в файл", SetValue, tekValue)}</>
                 )}
                 {value === "2" && <InputNewDateInterval mode={0} />}
                 {value === "3" && isOpenSt && <InputNewDateInterval mode={1} />}

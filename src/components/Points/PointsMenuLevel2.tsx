@@ -12,7 +12,9 @@ import PointsLevel2Calc from "./grid/PointsLevel2Calc";
 
 import { MakeDate } from "../../AppServiceFunctions";
 
-import { styleXTl201, styleXTl202 } from "./grid/PointsGridStyle";
+import { styleXTl201, 
+  //styleXTl202
+ } from "./grid/PointsGridStyle";
 
 import { XctrlInfo } from "../../interfaceGl.d";
 
@@ -38,32 +40,43 @@ const PointsMenuLevel2 = (props: {
   props.saveXt(false);
   const xtProps = props.xtt;
   const [value, setValue] = React.useState("1");
+  const [tekValue, setTekValue] = React.useState("1");
+
+  const SetValue = (mode: string) => {
+    setValue(mode);
+    setTekValue(mode);
+  };
+
+  const ButtonMenu = (mode: string, soob: any) => {
+    const styleXTl202 = {
+      fontSize: 12.5,
+      maxHeight: "21px",
+      minHeight: "21px",
+      transform: "rotate(270deg)",
+      backgroundColor: mode === tekValue ? "#93D145" : "#E9F5D8",
+      color: "black",
+      marginBottom: 6.5,
+      textTransform: "unset !important",
+    };
+
+    return (
+      <Button
+        sx={styleXTl202}
+        variant="contained"
+        onClick={() => SetValue(mode)}
+      >
+        <b>{soob}</b>
+      </Button>
+    );
+  };
 
   const PointsMenuLevel2Menu = () => {
     return (
       <Box sx={styleXTl201}>
         <Stack sx={{ marginLeft: 1 }} direction="column">
-          <Button
-            sx={styleXTl202}
-            variant="contained"
-            onClick={() => setValue("1")}
-          >
-            <b>Базовые</b>
-          </Button>
-          <Button
-            sx={styleXTl202}
-            variant="contained"
-            onClick={() => setValue("2")}
-          >
-            <b>Oбласти</b>
-          </Button>
-          <Button
-            sx={styleXTl202}
-            variant="contained"
-            onClick={() => setValue("3")}
-          >
-            <b>Расчёт</b>
-          </Button>
+          {ButtonMenu("1", "Базовые")}
+          {ButtonMenu("2", "Oбласти")}
+          {ButtonMenu("3", "Расчёт")}
         </Stack>
       </Box>
     );

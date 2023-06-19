@@ -18,6 +18,7 @@ import Badge from "@mui/material/Badge";
 
 import { styleDatePicker, styleModalMenu } from "./AppStyle";
 import { styleInpOk, styleButOk } from "./AppStyle";
+import { styleEndInf } from "./components/Points/grid/PointsGridStyle";
 
 export const MakeDate = (tekData: Date) => {
   let ddd = new Date(tekData.toString());
@@ -61,8 +62,14 @@ export const MakeInterval = (mode: number) => {
   }
   return dat;
 };
-//TimeStr
-export const ButtonMenu = (mode: string, soob: string, SetValue: Function) => {
+
+export const ButtonMenu = (
+  mode: string,
+  soob: string,
+  SetValue: Function,
+  tekValue: string
+) => {
+  //let colorMenu = mode === tekValue ? "#B1DE7A" : "#E9F5D8";
   const styleApp02 = {
     fontSize: 14,
     marginRight: 1,
@@ -70,7 +77,7 @@ export const ButtonMenu = (mode: string, soob: string, SetValue: Function) => {
     maxWidth: (soob.length + 10) * 6.5,
     maxHeight: "21px",
     minHeight: "21px",
-    backgroundColor: "#E9F5D8",
+    backgroundColor: mode === tekValue ? "#93D145" : "#E9F5D8",
     color: "black",
     textTransform: "unset !important",
   };
@@ -111,7 +118,7 @@ export const MenuSpisRegion = (
   );
 };
 
-export const PunktMenuSaveFile = (SetValue: Function) => {
+export const PunktMenuSaveFile = (SetValue: Function, tekValue: string) => {
   return (
     <Grid
       item
@@ -119,7 +126,7 @@ export const PunktMenuSaveFile = (SetValue: Function) => {
       sx={{ marginTop: -0.25, marginRight: 0.3, width: "140px" }}
     >
       <Grid item xs sx={{ textAlign: "left" }}>
-        {ButtonMenu("5", "Сохр.в файл", SetValue)}
+        {ButtonMenu("5", "Сохр.в файл", SetValue, tekValue)}
       </Grid>
     </Grid>
   );
@@ -161,7 +168,7 @@ export const InputerDate = (
           value={valueDate}
           inputFormat="DD-MM-YYYY"
           InputProps={{ style: { fontSize: 14 } }}
-          onChange={handleChangeDP} 
+          onChange={handleChangeDP}
           renderInput={(params: any) => <TextField {...params} />}
           renderLoading={() => <CalendarPickerSkeleton />}
           renderDay={(day, _value, DayComponentProps) => {
@@ -463,5 +470,88 @@ export const SendSocketOldDateXt = (
   };
   handleSendOpen();
 };
+//=== PointsLevel2BazaDiogram ======================
+export const OutputPict = (
+  idx: number,
+  pv: number,
+  ph: number,
+  PictInfo: Function
+) => {
+  const styleBox = {
+    position: "absolute",
+    left: ph - 0.7 + "%", // 27.2
+    top: pv - 0.4 + "%", //7.7
+    maxWidth: 5,
+    minWidth: 5,
+    maxHeight: 5,
+    minHeight: 5,
+    color: "black",
+    borderRadius: 1,
+  };
 
+  return (
+    // <Grid key={Math.random()} item container>
+      <Button sx={styleBox} onClick={() => PictInfo(idx, pv, ph)}>
+        ●
+      </Button>
+    // </Grid>
+  );
+};
+
+export const PictInfoBox = (
+  pvGl: number,
+  phGl: number,
+  pointer: any,
+  setPictInfo: Function
+) => {
+  const styleBoxGl = {
+    position: "absolute",
+    left: phGl - 24 + "%",
+    top: pvGl - 11.5 + "%",
+    width: 140,
+    height: 70,
+    bgcolor: "background.paper",
+    border: "1px solid #000",
+    borderColor: "primary.main",
+    borderRadius: 1,
+    boxShadow: 24,
+    p: 1,
+  };
+
+  return (
+    <Box sx={styleBoxGl}>
+      <Button sx={styleEndInf} onClick={() => setPictInfo(false)}>
+        &#10006;
+      </Button>
+      <Grid container sx={{ fontSize: 12.9, marginTop: 0.5 }}>
+        <Grid item xs={8}>
+          <Grid container>
+            <Grid item xs={12} sx={{ marginTop: 0 }}>
+              <b>Время</b>
+            </Grid>
+            <Grid item xs={12} sx={{ marginTop: 1 }}>
+              <b>Прямой</b>
+            </Grid>
+            <Grid item xs={12} sx={{ marginTop: 1 }}>
+              <b>Обратный</b>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item xs>
+          <Grid container>
+            <Grid item xs={12} sx={{ marginTop: 0 }}>
+              {TimeStr(pointer.Time)}
+            </Grid>
+            <Grid item xs={12} sx={{ marginTop: 1 }}>
+              {pointer.Value[0]}
+            </Grid>
+            <Grid item xs={12} sx={{ marginTop: 1 }}>
+              {pointer.Value[1]}
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Box>
+  );
+};
 //==================================================
