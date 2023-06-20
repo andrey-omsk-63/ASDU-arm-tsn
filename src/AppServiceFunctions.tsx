@@ -491,9 +491,9 @@ export const OutputPict = (
 
   return (
     // <Grid key={Math.random()} item container>
-      <Button sx={styleBox} onClick={() => PictInfo(idx, pv, ph)}>
-        ●
-      </Button>
+    <Button sx={styleBox} onClick={() => PictInfo(idx, pv, ph)}>
+      ●
+    </Button>
     // </Grid>
   );
 };
@@ -504,9 +504,12 @@ export const PictInfoBox = (
   pointer: any,
   setPictInfo: Function
 ) => {
+  let sdvig = (window.innerWidth - 1000) * 0.012;
+  //console.log("!!!!!!:",sdvig, window.screen.width,window.innerWidth,window.outerWidth);
+
   const styleBoxGl = {
     position: "absolute",
-    left: phGl - 24 + "%",
+    left: phGl - 24 + sdvig + "%",
     top: pvGl - 11.5 + "%",
     width: 140,
     height: 70,

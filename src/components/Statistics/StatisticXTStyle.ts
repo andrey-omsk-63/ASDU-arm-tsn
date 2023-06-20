@@ -97,18 +97,17 @@ export const styleHeader033 = {
   lineHeight: 2,
 };
 
-export const styleBatton = {
-  marginLeft: 0.4,
-  fontSize: 11,
-  //backgroundColor: '#F1F3F4', // светло-серый 
-  backgroundColor: '#E9F5D8', // светло-салатовый
-  color: 'black',
-  maxWidth: '2.7vh',
-  maxHeight: '23px',
-  minWidth: '2.7vh',
-  minHeight: '23px',
-  textAlign: 'center',
-};
+// export const styleBatton = {
+//   marginLeft: 0.4,
+//   fontSize: 11,
+//   backgroundColor: '#E9F5D8', // светло-салатовый
+//   color: 'black',
+//   maxWidth: '2.7vh',
+//   maxHeight: '23px',
+//   minWidth: '2.7vh',
+//   minHeight: '23px',
+//   textAlign: 'center',
+// };
 
 export const styleClear = {
   position: 'absolute',

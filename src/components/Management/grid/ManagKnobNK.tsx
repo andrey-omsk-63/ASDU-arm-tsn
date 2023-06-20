@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 
 import ManagKnobError from "./ManagKnobError";
 
-import { stylePK, styleBatton, styleSoob } from "./ManagGridStyle";
+import { stylePK, styleSoob } from "./ManagGridStyle";
 import { styleSoobPusto, styleBatMenu } from "./ManagGridStyle";
 
 export interface DataKnob {
@@ -177,13 +177,15 @@ const ManagementKnobSK = (props: {
     );
   };
 
-  if (props.areaa === "0" && !props.subArea && beginWork) {
-    setOpenSoobErr(true);
-    setBeginWork(false);
-  }
+  const ButtonKnop = () => {
+    const styleBatton = {
+      fontSize: 10,
+      backgroundColor: open ? "#93D145" : "#E9F5D8",
+      color: "black",
+      marginRight: 1,
+    };
 
-  return (
-    <div>
+    return (
       <Button
         size="small"
         sx={styleBatton}
@@ -192,6 +194,17 @@ const ManagementKnobSK = (props: {
       >
         НК
       </Button>
+    );
+  };
+
+  if (props.areaa === "0" && !props.subArea && beginWork) {
+    setOpenSoobErr(true);
+    setBeginWork(false);
+  }
+
+  return (
+    <>
+      {ButtonKnop()}
       <Modal open={open} hideBackdrop>
         <Box sx={stylePK}>
           {openSoobErr && <ManagKnobError setOpen={setOpenSoobErr} />}
@@ -220,7 +233,7 @@ const ManagementKnobSK = (props: {
           {ButtonDo()}
         </Box>
       </Modal>
-    </div>
+    </>
   );
 };
 

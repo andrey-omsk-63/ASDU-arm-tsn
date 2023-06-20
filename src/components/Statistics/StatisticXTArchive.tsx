@@ -15,7 +15,7 @@ import { Statistic } from "../../interfaceStat.d";
 import { colorsGraf, styleSt02, options } from "./StatisticXTStyle";
 import { styleSt04, styleSt05, styleStatMain } from "./StatisticXTStyle";
 import { styleSt06, styleHeader03, styleHeader033 } from "./StatisticXTStyle";
-import { styleBatton, styleClear, styleBattonCl } from "./StatisticXTStyle";
+import { styleClear, styleBattonCl } from "./StatisticXTStyle";
 
 import { Chart as ChartJS, CategoryScale } from "chart.js";
 import { LinearScale, PointElement } from "chart.js";
@@ -264,22 +264,39 @@ const StatisticXTArchive = (props: {
         let resStr = [];
         let xss = 12 / leng;
         for (let i = 1; i <= leng; i++) {
+          let illum = canal.indexOf(i - 1) >= 0 ? true : false;
+          const ButtonCanal = () => {
+            const styleBatton = {
+              marginLeft: 0.4,
+              fontSize: 11,
+              backgroundColor: illum ? "#93D145" : "#E9F5D8",
+              color: "black",
+              maxWidth: "2.7vh",
+              minWidth: "2.7vh",
+              maxHeight: "23px",
+              minHeight: "23px",
+              textAlign: "center",
+            };
+
+            return (
+              <Button
+                sx={styleBatton}
+                variant="contained"
+                onClick={() => SetValue(i.toString())}
+              >
+                <b>{i.toString()}</b>
+              </Button>
+            );
+          };
           resStr.push(
             <Grid item key={i} xs={xss}>
-              {/* <KnobBat num={i.toString()} key={Math.random()} /> */}
               <Grid
                 container
-                key={Math.random()}
+                key={i}
                 justifyContent="center"
                 sx={styleHeader03}
               >
-                <Button
-                  sx={styleBatton}
-                  variant="contained"
-                  onClick={() => SetValue(i.toString())}
-                >
-                  <b>{i.toString()}</b>
-                </Button>
+                {ButtonCanal()}
               </Grid>
             </Grid>
           );

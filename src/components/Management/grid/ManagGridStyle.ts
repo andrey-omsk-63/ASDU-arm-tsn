@@ -57,27 +57,27 @@ export const styleMG03 = {
   padding: 0.3,
 };
 
-export const styleButt01 = {
-  fontSize: 12,
-  marginTop: 0.5,
-  maxHeight: '21px',
-  minHeight: '21px',
-  backgroundColor: '#E9F5D8',
-  color: 'black',
-  borderRadius: 2,
-  textTransform: 'unset !important',
-};
+// export const styleButt01 = {
+//   fontSize: 12,
+//   marginTop: 0.5,
+//   maxHeight: '21px',
+//   minHeight: '21px',
+//   backgroundColor: '#E9F5D8',
+//   color: 'black',
+//   borderRadius: 2,
+//   textTransform: 'unset !important',
+// };
 
-export const styleButt02 = {
-  fontSize: 15,
-  marginTop: 0.5,
-  maxHeight: '21px',
-  minHeight: '21px',
-  backgroundColor: '#E9F5D8',
-  color: '#5B1080',
-  borderRadius: 2,
-  textTransform: 'unset !important',
-};
+// export const styleButt02 = {
+//   fontSize: 15,
+//   marginTop: 0.5,
+//   maxHeight: '21px',
+//   minHeight: '21px',
+//   backgroundColor: '#E9F5D8',
+//   color: '#5B1080',
+//   borderRadius: 2,
+//   textTransform: 'unset !important',
+// };
 //====== ManagementKnob =========================================================
 export const stylePK = {
   position: "absolute",
@@ -93,12 +93,12 @@ export const stylePK = {
   p: 2,
 };
 
-export const styleBatton = {
-  fontSize: 10,
-  backgroundColor: "#E9F5D8",
-  color: "black",
-  marginRight: 1,
-};
+// export const styleBatton = {
+//   fontSize: 10,
+//   backgroundColor: "#E9F5D8",
+//   color: "black",
+//   marginRight: 1,
+// };
 
 export const styleSoob = {
   fontSize: 11,
@@ -123,7 +123,7 @@ export const styleBatMenu = {
 export const stylePKXt = {
   textAlign: "center",
   position: "absolute",
-  top: "22.8%",
+  top: "29%",
   left: "33%",
   transform: "translate(-50%, -50%)",
   width: 164,
