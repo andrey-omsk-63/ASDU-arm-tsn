@@ -418,7 +418,7 @@ const ManagementLeftGrid = (props: {
 
   const FourKnops = () => {
     return (
-      <Grid item xs={12} sx={{ marginLeft: 0, marginTop: 1 }}>
+      <Grid item xs={12} sx={{ marginLeft: 0, marginTop: '0.5vh' }}>
         <Stack direction="row">
           <ManagementKnobPK
             open={props.open}
@@ -460,9 +460,11 @@ const ManagementLeftGrid = (props: {
   return (
     <Grid container>
       <Grid item xs={2.5} sx={styleMG01}>
-        <Box sx={{ overflowX: "auto" }}>{props.open && <SpisMLG />}</Box>
+        <Box sx={{ overflowX: "auto", height: "94vh" }}>
+          {props.open && <SpisMLG />}
+        </Box>
       </Grid>
-      <Grid item xs sx={{ border: 0 }}>
+      <Grid item xs sx={{ border: 1, height: "94vh", marginTop: 0.5 }}>
         <Grid container>
           <FourKnops />
           {CheckFourKnops()}

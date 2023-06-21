@@ -22,28 +22,30 @@ const PointsLevel2BazaDiogram = (props: {
   xtt: number;
   crossroad: number;
 }) => {
-  const xtProps = props.xtt;
-  const points = props.xctrll[xtProps];
+  //const xtProps = JSON.parse(JSON.stringify(props.xtt));
+  //const xtProps = props.xtt;
+  const points = props.xctrll[props.xtt];
+  //const points = JSON.parse(JSON.stringify(point));
   const crRoad = props.crossroad;
   const namer = points.xctrls[props.crossroad].name;
   const pointer = points.results;
 
   const colorsGraf = [
-    "orange",
+    "#d6bf36",
     "Turquoise",
     "YellowGreen",
 
-    "Yellow",
+    "#dae189",
     "Pink",
-    "Aqua",
+    "#ceffff",
 
-    "Lime",
-    "Tomato",
-    "teal",
+    "#badbad",
+    "#d8aa9e",
+    "#c5c6ff",
 
     "purple",
     "RosyBrown",
-    "Coral",
+    "#ff8199",
 
     "Olive",
     "Magenta",
@@ -77,11 +79,11 @@ const PointsLevel2BazaDiogram = (props: {
   const [pictInfo, setPictInfo] = React.useState(false);
 
   if (
-    xtPropsOld !== xtProps ||
+    xtPropsOld !== props.xtt ||
     crossRoadOld !== crRoad ||
     pointsOld !== points
   ) {
-    xtPropsOld = xtProps;
+    xtPropsOld = props.xtt;
     crossRoadOld = crRoad;
     pointsOld = points;
     setOpenLoader(true);
@@ -262,7 +264,7 @@ const PointsLevel2BazaDiogram = (props: {
   };
 
   const OutputerPict = () => {
-    let resStr = [];
+    let resStrr = [];
     if (pointer !== null) {
       if (pointer[namer]) {
         for (let i = 0; i < pointer[namer].length; i++) {
@@ -270,11 +272,12 @@ const PointsLevel2BazaDiogram = (props: {
           let pv = 100 - pointer[namer][i].Value[0] / prpv;
           let prph = horizon / 100;
           let ph = pointer[namer][i].Value[1] / prph;
-          resStr.push(<>{OutputPict(i, pv, ph, PictInfo)}</>);
+          let flagEnd = i === pointer[namer].length - 1 ? true : false;
+          resStrr.push(<>{OutputPict(i, pv, ph, PictInfo, flagEnd)}</>);
         }
       }
     }
-    return resStr;
+    return resStrr;
   };
 
   //============ Dinama =====================================================

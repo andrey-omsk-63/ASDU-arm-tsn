@@ -253,6 +253,7 @@ const StatisticXTNew = (props: {
         let xss = 12 / leng;
         for (let i = 1; i <= leng; i++) {
           let illum = canal.indexOf(i - 1) >= 0 ? true : false;
+          
           const ButtonCanal = () => {
             const styleBatton = {
               marginLeft: 0.4,
@@ -276,6 +277,7 @@ const StatisticXTNew = (props: {
               </Button>
             );
           };
+
           resStr.push(
             <Grid item key={i} xs={xss}>
               <Grid

@@ -1,7 +1,8 @@
 //====== ManagementRightGrid ====================================================
 export const styleMgl = {
-  padding: 1,
-  margin: 1,
+  border: 1,
+  padding: '1vh',
+  //margin: 1,
   marginLeft: -0.5,
   marginTop: 0.5,
   marginBottom: 0,
@@ -31,7 +32,7 @@ export const styleMRG02Center = {
 export const styleMRG03 = {
   borderBottom: 1,
   borderColor: 'primary.main',
-  padding: 0.4,
+  padding: '0.4vh',
   textAlign: 'center',
   backgroundColor: '#C0C0C0',
 };
@@ -40,8 +41,9 @@ export const styleMRG04 = {
   border: 1,
   borderRadius: 1,
   borderColor: 'primary.main',
-  marginTop: 0.5,
-  marginBottom: 0.5,
+  marginTop: '0.5vh',
+  //marginBottom: 0.5,
+  height: '86vh',
 };
 //====== ManagementLeftGrid =====================================================
 export const styleMG01 = {

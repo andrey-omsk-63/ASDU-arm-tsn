@@ -119,10 +119,11 @@ export const styleBattonCl = {
   fontSize: 10.1,
   backgroundColor: '#E9F5D8', // светло-салатовый
   color: 'red',
-  maxWidth: '5vh',
-  maxHeight: '12px',
-  minWidth: '5vh',
-  minHeight: '12px',
+  //maxHeight: '18px',
+  //minHeight: '18px',
+  height: '18px',
+  maxWidth: '4vh',
+  minWidth: '4vh',
   textTransform: 'unset !important',
 };
 

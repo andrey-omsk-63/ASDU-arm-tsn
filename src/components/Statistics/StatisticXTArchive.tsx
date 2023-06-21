@@ -265,6 +265,7 @@ const StatisticXTArchive = (props: {
         let xss = 12 / leng;
         for (let i = 1; i <= leng; i++) {
           let illum = canal.indexOf(i - 1) >= 0 ? true : false;
+
           const ButtonCanal = () => {
             const styleBatton = {
               marginLeft: 0.4,
@@ -288,6 +289,7 @@ const StatisticXTArchive = (props: {
               </Button>
             );
           };
+
           resStr.push(
             <Grid item key={i} xs={xss}>
               <Grid
@@ -531,7 +533,6 @@ const StatisticXTArchive = (props: {
     CreateMatrix();
     CompletMatrix();
     StatSpis();
-    //Output();
   }
 
   Output();
@@ -540,8 +541,6 @@ const StatisticXTArchive = (props: {
     <Box sx={{ marginTop: 0.8, marginLeft: -2.5, marginRight: -4 }}>
       <Grid container item sx={{ height: "28vh" }}>
         <Grid item xs={12} sx={styleStatMain}>
-          {/* {openLoader && <Dinama />}
-          {!openLoader && <StatGraf00 />} */}
           <StatGraf00 />
         </Grid>
       </Grid>

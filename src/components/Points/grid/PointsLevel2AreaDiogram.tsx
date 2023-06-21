@@ -23,21 +23,21 @@ const PointsLevel2AreaDiogram = (props: {
   const crRoad = props.crossroad;
 
   const colorsGraf = [
-    "orange",
+    "#d6bf36",
     "Turquoise",
     "YellowGreen",
 
-    "Yellow",
+    "#dae189",
     "Pink",
-    "Aqua",
+    "#ceffff",
 
-    "Lime",
-    "Tomato",
-    "teal",
+    "#badbad",
+    "#d8aa9e",
+    "#c5c6ff",
 
     "purple",
     "RosyBrown",
-    "Coral",
+    "#ff8199",
 
     "Olive",
     "Magenta",

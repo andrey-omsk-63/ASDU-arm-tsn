@@ -17,6 +17,7 @@ import { TimeStr, BoxTextField, Inputer } from "../../../AppServiceFunctions";
 import { WorkMenuEdit, ButtRec, ConclStr } from "../../../AppServiceFunctions";
 import { SendHandleSend, ConclHeader } from "../../../AppServiceFunctions";
 import { InputTimeAndMode, SaveFunc } from "../../../AppServiceFunctions";
+import { Grider } from "../../../AppServiceFunctions";
 
 import { styleXTG00, styleXTG01, styleXTG011 } from "./PointsGridStyle";
 import { styleXTG021, styleXTG02, styleXTG03 } from "./PointsGridStyle";
@@ -81,6 +82,7 @@ const PointsLevel2Baza = (props: {
 
   if (xtPropsOld !== xtProps || crossRoadOld !== crossRoad) {
     pointGraf = props.xctrll;
+    //pointGraf = JSON.parse(JSON.stringify(props.xctrll));
     xtPropsOld = xtProps;
     crossRoadOld = crossRoad;
     nomStr = 0;
@@ -436,63 +438,35 @@ const PointsLevel2Baza = (props: {
       TimeStr(maskpoint.pointForRedax.yellow.start) +
       " до " +
       TimeStr(maskpoint.pointForRedax.yellow.stop);
+    let rec1 = maskpoint.pointForRedax.xctrls[props.crossroad].left;
+    let rec2 = maskpoint.pointForRedax.xctrls[props.crossroad].right;
 
     return (
       <Grid container sx={{ height: "19.5vh" }}>
         <Grid item xs={4.3}>
           <Grid container sx={{ fontSize: 10.7, marginTop: 0.4 }}>
-            <Grid item xs={12}>
-              <b>Наименование ХТ</b>
-            </Grid>
-            <Grid item xs={12} sx={{ marginTop: 2 }}>
-              <b>Максимум прямого</b>
-            </Grid>
-            <Grid item xs={12} sx={{ marginTop: 2 }}>
-              <b>Максимум обратного</b>
-            </Grid>
-            <Grid item xs={12} sx={{ marginTop: 2 }}>
-              <b>Работа по НК и СК</b>
-            </Grid>
+            {Grider("Наименование ХТ", 0, true)}
+            {Grider("Максимум прямого", 2, true)}
+            {Grider("Максимум обратного", 2, true)}
+            {Grider("Работа по НК и СК", 2, true)}
           </Grid>
         </Grid>
         <Grid item xs>
           <Grid container sx={{ marginTop: 0.4, fontSize: 11 }}>
             {flagEdit && (
               <>
-                <Grid item xs={12}>
-                  {name}
-                </Grid>
-                <Grid item xs={12} sx={{ marginTop: 2 }}>
-                  {maskpoint.pointForRedax.xctrls[props.crossroad].left}
-                </Grid>
-                <Grid item xs={12} sx={{ marginTop: 2 }}>
-                  {maskpoint.pointForRedax.xctrls[props.crossroad].right}
-                </Grid>
-                <Grid item xs={12} sx={{ marginTop: 2 }}>
-                  {yellowSoob}
-                </Grid>
+                {Grider(name, 0, false)}
+                {Grider(rec1, 2, false)}
+                {Grider(rec2, 2, false)}
+                {Grider(yellowSoob, 2, false)}
               </>
             )}
             {!flagEdit && (
               <>
-                <Grid item xs={12}>
-                  {ButtRec(name, SetOpenSetName)}
-                </Grid>
-                <Grid item xs={12} sx={{ marginTop: 2 }}>
-                  {ButtRec(
-                    maskpoint.pointForRedax.xctrls[props.crossroad].left,
-                    SetOpenSetName
-                  )}
-                </Grid>
-                <Grid item xs={12} sx={{ marginTop: 2 }}>
-                  {ButtRec(
-                    maskpoint.pointForRedax.xctrls[props.crossroad].right,
-                    SetOpenSetName
-                  )}
-                </Grid>
-                <Grid item xs={12} sx={{ marginTop: 2 }}>
-                  {ButtRec(yellowSoob, SetOpenSetName)}
-                </Grid>
+                {Grider(ButtRec(name, SetOpenSetName), 0, false)}
+                {Grider(ButtRec(rec1, SetOpenSetName), 2, false)}
+                {Grider(ButtRec(rec2, SetOpenSetName), 2, false)}
+                {Grider(ButtRec(yellowSoob, SetOpenSetName), 2, false)}
               </>
             )}
           </Grid>
@@ -607,7 +581,8 @@ const PointsLevel2Baza = (props: {
     setMaxRight(rightTemp);
     setPoints(pointsTemp);
     maskpoint.pointForRedax = props.xctrll[xtProps];
-    pointGraf = props.xctrll;
+    //pointGraf = props.xctrll;
+    pointGraf = JSON.parse(JSON.stringify(props.xctrll));
     flagExit = false;
     flagEdit = true;
     maskpoint.redaxPoint = true;

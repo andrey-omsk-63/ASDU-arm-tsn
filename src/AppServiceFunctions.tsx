@@ -272,7 +272,6 @@ export const WorkMenuEdit = (xss: number, soob: string, servisFunc: any) => {
     minHeight: "21px",
     maxWidth: "193px",
     minWidth: "193px",
-    //backgroundColor: '#FFFBE5',
     backgroundColor: "#E9F5D8",
     color: "black",
     textTransform: "unset !important",
@@ -393,6 +392,23 @@ export const SendHandleSend = (ws: any, mask: any) => {
   };
   handleSendOpen();
 };
+
+export const Grider = (soob: any, sdvig: number, fat: boolean) => {
+  return (
+    <>
+      {fat && (
+        <Grid item xs={12} sx={{ marginTop: sdvig }}>
+          <b>{soob}</b>
+        </Grid>
+      )}
+      {!fat && (
+        <Grid item xs={12} sx={{ marginTop: sdvig }}>
+          {soob}
+        </Grid>
+      )}
+    </>
+  );
+};
 //=== PointsMainScr ================================
 export const WorkMenuEditMain = (
   xss: number,
@@ -475,7 +491,8 @@ export const OutputPict = (
   idx: number,
   pv: number,
   ph: number,
-  PictInfo: Function
+  PictInfo: Function,
+  flagEnd: boolean
 ) => {
   const styleBox = {
     position: "absolute",
@@ -489,12 +506,12 @@ export const OutputPict = (
     borderRadius: 1,
   };
 
+  let soob = flagEnd ? "🔴" : "●";
+
   return (
-    // <Grid key={Math.random()} item container>
     <Button sx={styleBox} onClick={() => PictInfo(idx, pv, ph)}>
-      ●
+      {soob}
     </Button>
-    // </Grid>
   );
 };
 
@@ -558,3 +575,4 @@ export const PictInfoBox = (
   );
 };
 //==================================================
+//OutputPict
