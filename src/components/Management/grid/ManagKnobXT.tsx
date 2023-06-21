@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 
-import ManagKnobError from "./ManagKnobError";
+import ManagKnobError from './ManagKnobError';
 
-import { styleSoobPusto, styleSoob } from "./ManagGridStyle";
-import { stylePKXt, styleBatMenuXt } from "./ManagGridStyle";
+import { styleSoobPusto, styleSoob } from './ManagGridStyle';
+import { stylePKXt, styleBatMenuXt } from './ManagGridStyle';
 
 export interface DataKnob {
   knop: Knob[];
@@ -22,14 +22,14 @@ export interface Knob {
 }
 
 let otpravka = true;
-let soobDispatch = "";
-let nomDispatch = "Вкл";
+let soobDispatch = '';
+let nomDispatch = 'Вкл';
 let dataKnob: Knob[] = [
   {
     cmd: 13,
     param: 99,
-    region: "",
-    area: "",
+    region: '',
+    area: '',
     subarea: 0,
   },
 ];
@@ -53,9 +53,7 @@ const ManagementKnobXT = (props: {
     const handleSendOpen = () => {
       if (props.ws !== null) {
         if (props.ws.readyState === WebSocket.OPEN) {
-          props.ws.send(
-            JSON.stringify({ type: "stopDevices", region: props.region })
-          );
+          props.ws.send(JSON.stringify({ type: 'stopDevices', region: props.region }));
           otpravka = true;
         } else {
           setTimeout(() => {
@@ -71,9 +69,7 @@ const ManagementKnobXT = (props: {
     const handleSendOpen = () => {
       if (props.ws !== null) {
         if (props.ws.readyState === WebSocket.OPEN) {
-          props.ws.send(
-            JSON.stringify({ type: "getDevices", region: props.region })
-          );
+          props.ws.send(JSON.stringify({ type: 'getDevices', region: props.region }));
         } else {
           setTimeout(() => {
             handleSendOpen();
@@ -86,8 +82,8 @@ const ManagementKnobXT = (props: {
     setValue(21);
     handleSendOpen();
     otpravka = true;
-    soobDispatch = "";
-    nomDispatch = "Вкл";
+    soobDispatch = '';
+    nomDispatch = 'Вкл';
     props.setDataKn(dataKnob);
     setTrigger(false);
     setBeginWork(true);
@@ -100,7 +96,7 @@ const ManagementKnobXT = (props: {
           if (props.ws.readyState === WebSocket.OPEN) {
             props.ws.send(
               JSON.stringify({
-                type: "dispatch",
+                type: 'dispatch',
                 data: {
                   cmd: 13,
                   param: value,
@@ -108,7 +104,7 @@ const ManagementKnobXT = (props: {
                   area: props.areaa,
                   subarea: props.subArea,
                 },
-              })
+              }),
             );
           } else {
             setTimeout(() => {
@@ -123,20 +119,20 @@ const ManagementKnobXT = (props: {
       };
 
       handleSendOpen();
-      soobDispatch = "Отправлено";
-      if (value === 0) nomDispatch = "Отключить исполнение";
-      if (value === 1) nomDispatch = "Включить исполнение";
-      if (value === 2) nomDispatch = "Отключить расчёт";
-      if (value === 3) nomDispatch = "Включить расчёт";
+      soobDispatch = 'Отправлено';
+      if (value === 0) nomDispatch = 'Отключить исполнение';
+      if (value === 1) nomDispatch = 'Включить исполнение';
+      if (value === 2) nomDispatch = 'Отключить расчёт';
+      if (value === 3) nomDispatch = 'Включить расчёт';
       otpravka = false;
     } else {
-      soobDispatch = "";
-      nomDispatch = "Вкл";
+      soobDispatch = '';
+      nomDispatch = 'Вкл';
     }
 
     return (
       <>
-        {soobDispatch === "Отправлено" && (
+        {soobDispatch === 'Отправлено' && (
           <>
             <Box sx={styleSoobPusto}>Pusto</Box>
             <Box sx={styleSoob}>
@@ -159,11 +155,7 @@ const ManagementKnobXT = (props: {
 
   const ButtMenu = (soob: string, mode: number) => {
     return (
-      <Button
-        sx={styleBatMenuXt}
-        variant="contained"
-        onClick={() => SetValue(mode)}
-      >
+      <Button sx={styleBatMenuXt} variant="contained" onClick={() => SetValue(mode)}>
         {soob}
       </Button>
     );
@@ -172,24 +164,20 @@ const ManagementKnobXT = (props: {
   const ButtonKnop = () => {
     const styleBatton = {
       fontSize: 10,
-      backgroundColor: open ? "#93D145" : "#E9F5D8",
-      color: "black",
+      height: '3.5vh',
+      backgroundColor: open ? '#93D145' : '#E9F5D8',
+      color: 'black',
       marginRight: 1,
     };
 
     return (
-      <Button
-        size="small"
-        sx={styleBatton}
-        variant="contained"
-        onClick={handleOpen}
-      >
+      <Button size="small" sx={styleBatton} variant="contained" onClick={handleOpen}>
         XT
       </Button>
     );
   };
 
-  if (props.areaa === "0" && !props.subArea && beginWork) {
+  if (props.areaa === '0' && !props.subArea && beginWork) {
     setOpenSoobErr(true);
     setBeginWork(false);
   }
@@ -202,10 +190,10 @@ const ManagementKnobXT = (props: {
           {openSoobErr && <ManagKnobError setOpen={setOpenSoobErr} />}
           {!trigger && (
             <>
-              {ButtMenu("Включить исполнение", 1)}
-              {ButtMenu("Отключить исполнение", 0)}
-              {ButtMenu("Включить расчёт", 3)}
-              {ButtMenu("Отключить расчёт", 2)}
+              {ButtMenu('Включить исполнение', 1)}
+              {ButtMenu('Отключить исполнение', 0)}
+              {ButtMenu('Включить расчёт', 3)}
+              {ButtMenu('Отключить расчёт', 2)}
             </>
           )}
           <Button sx={styleBatMenuXt} variant="contained" onClick={handleClose}>

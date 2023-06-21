@@ -122,8 +122,8 @@ export const styleBattonCl = {
   //maxHeight: '18px',
   //minHeight: '18px',
   height: '18px',
-  maxWidth: '4vh',
-  minWidth: '4vh',
+  maxWidth: '5vh',
+  minWidth: '5vh',
   textTransform: 'unset !important',
 };
 

@@ -1,10 +1,11 @@
 //====== ManagementRightGrid ====================================================
 export const styleMgl = {
-  border: 1,
+  border: 0,
   padding: '1vh',
+  height: '4vh',
   //margin: 1,
   marginLeft: -0.5,
-  marginTop: 0.5,
+  marginTop: '0.5vh',
   marginBottom: 0,
 };
 
@@ -32,7 +33,8 @@ export const styleMRG02Center = {
 export const styleMRG03 = {
   borderBottom: 1,
   borderColor: 'primary.main',
-  padding: '0.4vh',
+  height: '3vh',
+  //padding: '0.4vh',
   textAlign: 'center',
   backgroundColor: '#C0C0C0',
 };
@@ -43,7 +45,7 @@ export const styleMRG04 = {
   borderColor: 'primary.main',
   marginTop: '0.5vh',
   //marginBottom: 0.5,
-  height: '86vh',
+  height: '84.4vh',
 };
 //====== ManagementLeftGrid =====================================================
 export const styleMG01 = {
@@ -82,14 +84,14 @@ export const styleMG03 = {
 // };
 //====== ManagementKnob =========================================================
 export const stylePK = {
-  position: "absolute",
-  top: "42%",
-  left: "30%",
-  transform: "translate(-50%, -50%)",
+  position: 'absolute',
+  top: '42%',
+  left: '30%',
+  transform: 'translate(-50%, -50%)',
   width: 77,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  borderColor: "primary.main",
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  borderColor: 'primary.main',
   borderRadius: 2,
   boxShadow: 24,
   p: 2,
@@ -104,34 +106,34 @@ export const stylePK = {
 
 export const styleSoob = {
   fontSize: 11,
-  backgroundColor: "#F1F3F4",
-  color: "#5B1080",
-  textAlign: "center",
+  backgroundColor: '#F1F3F4',
+  color: '#5B1080',
+  textAlign: 'center',
 };
 
 export const styleSoobPusto = {
-  backgroundColor: "#F1F3F4",
-  color: "#F1F3F4",
+  backgroundColor: '#F1F3F4',
+  color: '#F1F3F4',
 };
 
 export const styleBatMenu = {
   fontSize: 12.9,
   marginTop: 0.5,
-  backgroundColor: "#E9F5D8",
-  color: "black",
-  textTransform: "unset !important",
+  backgroundColor: '#E9F5D8',
+  color: 'black',
+  textTransform: 'unset !important',
 };
 //====== ManagementKnobXT =======================================================
 export const stylePKXt = {
-  textAlign: "center",
-  position: "absolute",
-  top: "29%",
-  left: "33%",
-  transform: "translate(-50%, -50%)",
+  textAlign: 'center',
+  position: 'absolute',
+  top: '29%',
+  left: '33%',
+  transform: 'translate(-50%, -50%)',
   width: 164,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  borderColor: "primary.main",
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  borderColor: 'primary.main',
   borderRadius: 2,
   boxShadow: 24,
   p: 2,
@@ -139,11 +141,11 @@ export const stylePKXt = {
 
 export const styleBatMenuXt = {
   fontSize: 12.9,
-  textAlign: "center",
-  backgroundColor: "#E9F5D8",
-  color: "black",
+  textAlign: 'center',
+  backgroundColor: '#E9F5D8',
+  color: 'black',
   marginTop: 1,
-  width: "121px",
-  textTransform: "unset !important",
+  width: '121px',
+  textTransform: 'unset !important',
 };
 //===============================================================================
