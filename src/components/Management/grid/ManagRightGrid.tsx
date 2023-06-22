@@ -665,7 +665,7 @@ const ManagementRightGrid = (props: {
       <Grid item container sx={styleMRG04}>
         <Grid item xs={12}>
           <HeaderMRG03 />
-          <Box sx={{ border: 0, overflowX: 'auto', height: '81.2vh' }}>
+          <Box sx={{ border: 0, overflowX: 'auto', height: '81.6vh' }}>
             {props.open && <StrokaMRG03 />}
           </Box>
         </Grid>

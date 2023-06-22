@@ -1,19 +1,19 @@
-import * as React from 'react';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
+import * as React from "react";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
 
-import ManagementRightGrid from './ManagRightGrid';
-import ManagementKnobPK from './ManagKnobPK';
-import ManagementKnobSK from './ManagKnobSK';
-import ManagementKnobNK from './ManagKnobNK';
-import ManagementKnobXT from './ManagKnobXT';
+import ManagementRightGrid from "./ManagRightGrid";
+import ManagementKnobPK from "./ManagKnobPK";
+import ManagementKnobSK from "./ManagKnobSK";
+import ManagementKnobNK from "./ManagKnobNK";
+import ManagementKnobXT from "./ManagKnobXT";
 
-import { Tflight } from '../../../interfaceMNG.d';
-import { XctrlInfo } from '../../../interfaceGl.d';
+import { Tflight } from "../../../interfaceMNG.d";
+import { XctrlInfo } from "../../../interfaceGl.d";
 
-import { styleMG01, styleMG03 } from './ManagGridStyle';
+import { styleMG01, styleMG03 } from "./ManagGridStyle";
 
 export interface DataKnob {
   knop: Knob[];
@@ -41,16 +41,16 @@ const ManagementLeftGrid = (props: {
   let masXT: any = [];
 
   const [mode, setMode] = React.useState(1);
-  let reGion = '1';
-  const [areaa, setAreaa] = React.useState('0');
+  let reGion = "1";
+  const [areaa, setAreaa] = React.useState("0");
   const [subArea, setSubArea] = React.useState(0);
 
   const [dataKnob, setDataKnob] = React.useState<Array<Knob>>([
     {
       cmd: 0,
       param: 99,
-      region: '',
-      area: '',
+      region: "",
+      area: "",
       subarea: 88,
     },
   ]);
@@ -59,8 +59,8 @@ const ManagementLeftGrid = (props: {
     {
       cmd: 0,
       param: 99,
-      region: '',
-      area: '',
+      region: "",
+      area: "",
       subarea: 99,
     },
   ];
@@ -80,7 +80,10 @@ const ManagementLeftGrid = (props: {
     let j = 0;
 
     for (let i = 1; i < points.length; i++) {
-      if (mass[j].areaNum !== points[i].area.num || mass[j].subarea !== points[i].subarea) {
+      if (
+        mass[j].areaNum !== points[i].area.num ||
+        mass[j].subarea !== points[i].subarea
+      ) {
         j++;
         masRab[j] = points[i].area.num;
         mass[j] = {
@@ -108,7 +111,7 @@ const ManagementLeftGrid = (props: {
 
   const handleClickGl = () => {
     setMode(1);
-    setAreaa('0');
+    setAreaa("0");
     setSubArea(0);
   };
 
@@ -126,29 +129,38 @@ const ManagementLeftGrid = (props: {
 
   const SpisAreaMLG = (props: { nom: string }) => {
     let masSpis: any = [];
-    masSpis = mass.filter((mass: { areaNum: string }) => mass.areaNum === props.nom);
+    masSpis = mass.filter(
+      (mass: { areaNum: string }) => mass.areaNum === props.nom
+    );
 
     const SpisSubAreaMLG = () => {
       let resStr = [];
 
       const ButtonSubArea = (i: number) => {
         let illum = false;
-        if (mode === 3 && areaa === masSpis[i].areaNum && subArea === masSpis[i].subarea)
+        if (
+          mode === 3 &&
+          areaa === masSpis[i].areaNum &&
+          subArea === masSpis[i].subarea
+        )
           illum = true;
 
         const styleButSubArea = {
           fontSize: 12,
           marginTop: 0.2,
-          height: '18px',
-          backgroundColor: illum ? '#93D145' : '#E9F5D8',
-          color: 'black',
+          height: "18px",
+          backgroundColor: illum ? "#93D145" : "#E9F5D8",
+          color: "black",
           borderRadius: 2,
           boxShadow: 1,
-          textTransform: 'unset !important',
+          textTransform: "unset !important",
         };
 
         return (
-          <Button sx={styleButSubArea} onClick={() => handleClick(props.nom, masSpis[i].subarea)}>
+          <Button
+            sx={styleButSubArea}
+            onClick={() => handleClick(props.nom, masSpis[i].subarea)}
+          >
             Подрайон:{masSpis[i].areaNum}:{masSpis[i].subarea}
           </Button>
         );
@@ -161,7 +173,7 @@ const ManagementLeftGrid = (props: {
             <Grid item xs sx={styleMG03}>
               {ButtonSubArea(i)}
             </Grid>
-          </Grid>,
+          </Grid>
         );
       }
       return resStr;
@@ -169,17 +181,18 @@ const ManagementLeftGrid = (props: {
 
     const ButtonArea = () => {
       let illum = false;
-      if (mode === 2 && areaa === masSpis[0].areaNum && subArea === 0) illum = true;
+      if (mode === 2 && areaa === masSpis[0].areaNum && subArea === 0)
+        illum = true;
 
       const styleButArea = {
         fontSize: 12,
         marginTop: 0.3,
-        height: '20px',
-        backgroundColor: illum ? '#93D145' : '#E9F5D8',
-        color: 'black',
+        height: "20px",
+        backgroundColor: illum ? "#93D145" : "#E9F5D8",
+        color: "black",
         borderRadius: 2,
         boxShadow: 1,
-        textTransform: 'unset !important',
+        textTransform: "unset !important",
       };
       return (
         <Button sx={styleButArea} onClick={() => handleClock(props.nom)}>
@@ -213,17 +226,17 @@ const ManagementLeftGrid = (props: {
 
     const ButtonRegion = () => {
       let illum = false;
-      if (mode === 1 && areaa === '0' && subArea === 0) illum = true;
+      if (mode === 1 && areaa === "0" && subArea === 0) illum = true;
 
       const styleButRegion = {
         fontSize: 15,
         marginTop: 0.5,
-        height: '20px',
-        backgroundColor: illum ? '#93D145' : '#E9F5D8',
-        color: '#5B1080',
+        height: "20px",
+        backgroundColor: illum ? "#93D145" : "#E9F5D8",
+        color: "#5B1080",
         borderRadius: 2,
         boxShadow: 2,
-        textTransform: 'unset !important',
+        textTransform: "unset !important",
       };
 
       return (
@@ -320,7 +333,10 @@ const ManagementLeftGrid = (props: {
 
     for (let i = 0; i < massKnop.length; i++) {
       // изменение param по всему кусту региона
-      if (massKnop[i].cmd === dataKnob[0].cmd && massKnop[i].region === dataKnob[0].region) {
+      if (
+        massKnop[i].cmd === dataKnob[0].cmd &&
+        massKnop[i].region === dataKnob[0].region
+      ) {
         massKnop[i].param = dataKnob[0].param;
       }
     }
@@ -390,7 +406,7 @@ const ManagementLeftGrid = (props: {
         massKnob[0].subarea = dataKnob[0].subarea;
         massKnop.push(massKnob[0]);
       }
-      if (dataKnob[0].area === '0' && dataKnob[0].subarea === 0) {
+      if (dataKnob[0].area === "0" && dataKnob[0].subarea === 0) {
         RecordInAria();
       } else {
         RecordInSubaria();
@@ -402,7 +418,7 @@ const ManagementLeftGrid = (props: {
 
   const FourKnops = () => {
     return (
-      <Grid item xs={12} sx={{ border: 0, height: '4vh', marginTop: '0.5vh' }}>
+      <Grid item xs={12} sx={{ border: 0, height: "4vh", marginTop: "0.5vh" }}>
         <Stack direction="row">
           <ManagementKnobPK
             open={props.open}
@@ -444,9 +460,11 @@ const ManagementLeftGrid = (props: {
   return (
     <Grid container>
       <Grid item xs={2.5} sx={styleMG01}>
-        <Box sx={{ overflowX: 'auto', height: '94vh' }}>{props.open && <SpisMLG />}</Box>
+        <Box sx={{ border: 0, overflowX: "auto", height: "94.5vh" }}>
+          {props.open && <SpisMLG />}
+        </Box>
       </Grid>
-      <Grid item xs sx={{ border: 0, height: '94vh', marginTop: '0.5vh' }}>
+      <Grid item xs sx={{ border: 0, height: "94.5vh", marginTop: "0.5vh" }}>
         <Grid container>
           <FourKnops />
           {CheckFourKnops()}

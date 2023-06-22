@@ -228,6 +228,7 @@ const App = () => {
     WS.onmessage = function (event: any) {
       let allData = JSON.parse(event.data);
       let data = allData.data;
+      console.log("пришло:", allData.type, data);
       switch (allData.type) {
         case "getDevices":
           setPointsTfl(data.tflight ?? []);

@@ -23,21 +23,21 @@ const PointsLevel2AreaDiogram = (props: {
   const crRoad = props.crossroad;
 
   const colorsGraf = [
-    "#d6bf36",
+    "#d6bf36", // хаки
     "Turquoise",
     "YellowGreen",
 
-    "#dae189",
-    "Pink",
-    "#ceffff",
+    "#dae189", // салатовый
+    "#ffd5dc", // розовый
+    "#ceffff", // светло голубой
 
-    "#badbad",
-    "#d8aa9e",
-    "#c5c6ff",
+    "#badbad", // светло зелёный
+    "#d8aa9e", // светло кирпичный
+    "#c5c6ff", //светло фиолетовый
 
     "purple",
     "RosyBrown",
-    "#ff8199",
+    "#ff8199", // красно розовый
 
     "Olive",
     "Magenta",
@@ -56,7 +56,7 @@ const PointsLevel2AreaDiogram = (props: {
   const axisHorizon = horizon * 1;
   const steepHorizon = 12 / axisHorizon;
   const axisVertical = vertical * 1;
-  const steepVertical = 86.4 / axisVertical;
+  const steepVertical = 85.6 / axisVertical;
   let matrix: string[][] = [[]];
   let scale = 2;
 

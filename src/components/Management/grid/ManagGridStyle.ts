@@ -3,7 +3,6 @@ export const styleMgl = {
   border: 0,
   padding: '1vh',
   height: '4vh',
-  //margin: 1,
   marginLeft: -0.5,
   marginTop: '0.5vh',
   marginBottom: 0,
@@ -34,9 +33,9 @@ export const styleMRG03 = {
   borderBottom: 1,
   borderColor: 'primary.main',
   height: '3vh',
-  //padding: '0.4vh',
   textAlign: 'center',
   backgroundColor: '#C0C0C0',
+  paddingTop: '0.4vh',
 };
 
 export const styleMRG04 = {
@@ -44,44 +43,23 @@ export const styleMRG04 = {
   borderRadius: 1,
   borderColor: 'primary.main',
   marginTop: '0.5vh',
-  //marginBottom: 0.5,
-  height: '84.4vh',
+  height: '85.1vh',
 };
 //====== ManagementLeftGrid =====================================================
 export const styleMG01 = {
   border: 1,
   borderRadius: 1,
   borderColor: 'primary.main',
-  margin: 0.5,
-  height: '94vh',
+  marginTop: '0.5vh',
+  marginLeft: 0.5,
+  marginRight: 0.5,
+  height: '94.5vh',
 };
 
 export const styleMG03 = {
   fontSize: 14,
   padding: 0.3,
 };
-
-// export const styleButt01 = {
-//   fontSize: 12,
-//   marginTop: 0.5,
-//   maxHeight: '21px',
-//   minHeight: '21px',
-//   backgroundColor: '#E9F5D8',
-//   color: 'black',
-//   borderRadius: 2,
-//   textTransform: 'unset !important',
-// };
-
-// export const styleButt02 = {
-//   fontSize: 15,
-//   marginTop: 0.5,
-//   maxHeight: '21px',
-//   minHeight: '21px',
-//   backgroundColor: '#E9F5D8',
-//   color: '#5B1080',
-//   borderRadius: 2,
-//   textTransform: 'unset !important',
-// };
 //====== ManagementKnob =========================================================
 export const stylePK = {
   position: 'absolute',
@@ -96,13 +74,6 @@ export const stylePK = {
   boxShadow: 24,
   p: 2,
 };
-
-// export const styleBatton = {
-//   fontSize: 10,
-//   backgroundColor: "#E9F5D8",
-//   color: "black",
-//   marginRight: 1,
-// };
 
 export const styleSoob = {
   fontSize: 11,

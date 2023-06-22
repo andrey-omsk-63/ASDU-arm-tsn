@@ -100,10 +100,12 @@ const StatisticXTNew = (props: {
     massId[numIdInMas].canall = [];
     ZeroLabelsCanal();
   };
+  
 
   if (isOpen) {
     //начало работы (первый вход)
-    if (oldAreaid < 0) {
+      if (oldAreaid < 0) {
+      //if (points[areaId].Statistics[0].Datas === null) 
       massId.push({ id: areaId, canall: [], lbl: [], labels, datasets: [] });
       oldAreaid = areaId;
       canal = [];

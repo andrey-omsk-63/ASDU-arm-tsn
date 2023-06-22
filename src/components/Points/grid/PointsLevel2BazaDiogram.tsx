@@ -31,21 +31,21 @@ const PointsLevel2BazaDiogram = (props: {
   const pointer = points.results;
 
   const colorsGraf = [
-    "#d6bf36",
+    "#d6bf36", // хаки
     "Turquoise",
     "YellowGreen",
 
-    "#dae189",
-    "Pink",
-    "#ceffff",
+    "#dae189", // салатовый
+    "#ffd5dc", // розовый
+    "#ceffff", // светло голубой
 
-    "#badbad",
-    "#d8aa9e",
-    "#c5c6ff",
+    "#badbad", // светло зелёный
+    "#d8aa9e", // светло кирпичный
+    "#c5c6ff", //светло фиолетовый
 
     "purple",
     "RosyBrown",
-    "#ff8199",
+    "#ff8199", // красно розовый
 
     "Olive",
     "Magenta",
@@ -64,7 +64,8 @@ const PointsLevel2BazaDiogram = (props: {
   const axisHorizon = horizon;
   const steepHorizon = 12 / axisHorizon;
   const axisVertical = vertical;
-  const steepVertical = 86.4 / axisVertical;
+  //const steepVertical = 86.4 / axisVertical;
+  const steepVertical = 85.6 / axisVertical;
   const dlBlok = (window.innerWidth / 12.55) * 8;
 
   let matrix: string[][] = [[]];
@@ -309,7 +310,10 @@ const PointsLevel2BazaDiogram = (props: {
 
   return (
     <>
-      <Grid container sx={{ position: "relative" }}>
+      <Grid
+        container
+        sx={{ border: 0, height: "85.8vh", position: "relative" }}
+      >
         {openLoader && <Dinama />}
         {!openLoader && (
           <>

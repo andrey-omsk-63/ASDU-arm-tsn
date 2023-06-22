@@ -171,7 +171,7 @@ const ManagementKnobSK = (props: {
 
   const ButtonKnop = () => {
     const styleBatton = {
-      fontSize: 10,
+      fontSize: 11,
       height: '3.5vh',
       backgroundColor: open ? '#93D145' : '#E9F5D8',
       color: 'black',
@@ -179,8 +179,8 @@ const ManagementKnobSK = (props: {
     };
 
     return (
-      <Button size="small" sx={styleBatton} variant="contained" onClick={handleOpen}>
-        НК
+      <Button sx={styleBatton} variant="contained" onClick={handleOpen}>
+        <b>НК</b>
       </Button>
     );
   };

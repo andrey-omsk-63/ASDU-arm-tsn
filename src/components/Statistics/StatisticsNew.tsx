@@ -156,7 +156,7 @@ const StatisticsNew = (props: {
   };
 
   const handleChangeNull = () => {
-    return <Box sx={styleSt1}>На текущюю дату данных по статистике НЕТ</Box>;
+    return <h2>На текущюю дату данных по статистике НЕТ</h2>;
   };
 
   const SpisXT = () => {
@@ -165,9 +165,9 @@ const StatisticsNew = (props: {
 
     if (pointsEtalon.length === 0) {
       resSps.push(
-        <Box key={1} sx={styleSt1}>
-          Нет данных по статистике
-        </Box>
+        <Box key={1}>
+          <h2>Нет данных по статистике</h2>
+        </Box>,
       );
     } else {
       for (let i = 0; i < pointsEtalon.length; i++) {
@@ -182,6 +182,23 @@ const StatisticsNew = (props: {
     }
     return resSps;
   };
+
+  const CheckClinch = () => {
+    let clinch = false;
+    if (!flagEtalon) {
+      if(pointsEtalon.length === 0) {
+        clinch = true;
+      } else{
+        for (let i = 0; i < pointsEtalon[value].Statistics.length; i++) {
+          if (pointsEtalon[value].Statistics[i].Datas === null) clinch = true;
+        }
+      }
+    }
+    
+    return clinch;
+  };
+
+  let clinch = CheckClinch()
 
   return (
     <>
@@ -201,7 +218,7 @@ const StatisticsNew = (props: {
             </Tabs>
           </Box>
           <>
-            {pointsEtalon.length > 0 && (
+            {pointsEtalon.length > 0 && !clinch && (
               <StatisticXTNew
                 open={isOpen}
                 statist={pointsEtalon}
@@ -210,6 +227,7 @@ const StatisticsNew = (props: {
               />
             )}
           </>
+          <>{clinch && <h2>Некорректная структура статистики по данному ХТ</h2>}</>
         </>
       )}
     </>

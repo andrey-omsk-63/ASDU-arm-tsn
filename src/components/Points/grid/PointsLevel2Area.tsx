@@ -358,7 +358,7 @@ const PointsLevel2Area = (props: {
       )}
 
       <Stack direction="row">
-        <Grid item xs={3} sx={{ height: "86.5vh", border: 0 }}>
+        <Grid item xs={3} sx={{ height: "85.8vh", border: 0 }}>
           <Grid container>
             <Grid item xs={12} sx={styleXTG035}>
               <PointsLevel2AreaTab1Header />

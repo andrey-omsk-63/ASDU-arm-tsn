@@ -43,16 +43,16 @@ export const styleXTG02 = {
 };
 
 export const styleXTG03 = {
-  marginTop: 0.5,
+  marginTop: '0.5vh',
   border: 1,
-  height: '33vh',
+  height: '32.6vh',  // 33
   borderRadius: 1,
   borderColor: 'primary.main',
 };
 
 export const styleXTG04 = {
   //height: '84.4vh',
-  height: '86.5vh',
+  height: '85.8vh',
   border: 1,
   marginLeft: 0.5,
   borderRadius: 1,
@@ -178,7 +178,7 @@ export const styleEndInf = {
 //====== PointsLevel2Area =======================================================
 export const styleXTG035 = {
   border: 1,
-  height: '86.5vh',
+  height: '85.8vh',
   borderRadius: 1,
   borderColor: 'primary.main',
 };
@@ -264,7 +264,7 @@ export const styleXTC033 = {
   borderRadius: 1,
   borderColor: 'primary.main',
   //width: '99vh',
-  height: '59.5vh',
+  height: '57.9vh',
 };
 //====== PointsMainScr ==========================================================
 export const styleXt02 = {
@@ -340,8 +340,8 @@ export const styleXTG105 = {
 //====== PointsMenuLevel2 =======================================================
 export const styleXTl201 = {
   width: "70%",
-  height: "84vh",
-  marginTop: 2.5,
+  height: "83.5vh",
+  marginTop: '2.5vh',
   marginLeft: -3,
   marginRight: -61,
   border: 0,

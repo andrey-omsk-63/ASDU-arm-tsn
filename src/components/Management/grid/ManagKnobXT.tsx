@@ -163,7 +163,7 @@ const ManagementKnobXT = (props: {
 
   const ButtonKnop = () => {
     const styleBatton = {
-      fontSize: 10,
+      fontSize: 11,
       height: '3.5vh',
       backgroundColor: open ? '#93D145' : '#E9F5D8',
       color: 'black',
@@ -171,8 +171,8 @@ const ManagementKnobXT = (props: {
     };
 
     return (
-      <Button size="small" sx={styleBatton} variant="contained" onClick={handleOpen}>
-        XT
+      <Button sx={styleBatton} variant="contained" onClick={handleOpen}>
+        <b>XT</b>
       </Button>
     );
   };

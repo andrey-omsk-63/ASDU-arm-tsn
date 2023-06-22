@@ -128,7 +128,7 @@ const StatisticsArchive = (props: {
   };
 
   const handleChangeNull = () => {
-    return <Box sx={styleSt1}>На эту дату данных по статистике НЕТ</Box>;
+    return <h2>На текущюю дату данных по статистике НЕТ</h2>;
   };
 
   const SpisXT = () => {
@@ -137,8 +137,8 @@ const StatisticsArchive = (props: {
 
     if (pointsEtalon.length === 0) {
       resSps.push(
-        <Box key={1} sx={styleSt1}>
-          Нет данных по статистике за эту дату
+        <Box key={1}>
+          <h2>Нет данных по статистике</h2>
         </Box>,
       );
     } else {
@@ -151,6 +151,23 @@ const StatisticsArchive = (props: {
   };
 
   if (isOpen && pointsEtalon.length !== 0 && tekValue !== value) setValue(tekValue);
+
+  const CheckClinch = () => {
+    let clinch = false;
+    if (!flagEtalon) {
+      if(pointsEtalon.length === 0) {
+        clinch = true;
+      } else{
+        for (let i = 0; i < pointsEtalon[value].Statistics.length; i++) {
+          if (pointsEtalon[value].Statistics[i].Datas === null) clinch = true;
+        }
+      }
+    }
+    
+    return clinch;
+  };
+
+  let clinch = CheckClinch()
 
   return (
     <>
@@ -169,7 +186,7 @@ const StatisticsArchive = (props: {
             </Tabs>
           </Box>
           <>
-            {pointsEtalon.length > 0 && (
+            {pointsEtalon.length > 0 && !clinch && (
               <StatisticXTArchive
                 open={isOpen}
                 statist={pointsEtalon}
@@ -179,6 +196,7 @@ const StatisticsArchive = (props: {
               />
             )}
           </>
+          <>{clinch && <h2>Некорректная структура статистики по данному ХТ</h2>}</>
         </>
       )}
     </>
@@ -186,3 +204,4 @@ const StatisticsArchive = (props: {
 };
 
 export default StatisticsArchive;
+//эту
