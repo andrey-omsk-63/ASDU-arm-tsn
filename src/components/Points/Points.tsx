@@ -43,15 +43,6 @@ const Points = (props: {
   const dispatch = useDispatch();
   props.saveXt(false);
   //===========================================================
-  const stylePXt1 = {
-    fontSize: 13.5,
-    maxHeight: "20px",
-    minHeight: "20px",
-    backgroundColor: "#F1F3F4",
-    color: "black",
-    marginRight: 0.5,
-  };
-
   let reGion = props.region;
   let isOpen = props.open;
   let pointsGl = props.xctrll;
@@ -133,12 +124,23 @@ const Points = (props: {
 
     if (pointsEtalon.length === 0) {
       resSps.push(
-        <Box key={1} sx={stylePXt1}>
-          Нет данных по ХТ
+        <Box key={1}>
+          <h2>Нет данных по ХТ</h2>
         </Box>
       );
     } else {
       for (let i = 0; i < pointsEtalon.length; i++) {
+        const stylePXt1 = {
+          fontSize: 13.5,
+          maxHeight: "20px",
+          minHeight: "20px",
+          border: 1,
+          borderColor: value !== i ? "#93D145" : "#E9F5D8",
+          backgroundColor: value === i ? "#93D145" : "#E9F5D8",
+          //borderRadius: 1,
+          color: "black",
+          marginRight: 0.5,
+        };
         labl =
           "XT:" +
           pointsEtalon[i].area.toString() +
@@ -156,6 +158,7 @@ const Points = (props: {
     marginTop: 0.5,
     marginLeft: -4.6,
     marginRight: -7,
+    //backgroundColor: '#E9F5D8',
   };
 
   return (
@@ -166,8 +169,11 @@ const Points = (props: {
           value={value}
           onChange={handleChange}
           variant="scrollable"
+          textColor="inherit"
+          //indicatorColor="secondary"
           scrollButtons={true}
           allowScrollButtonsMobile
+          TabIndicatorProps={{ sx: { backgroundColor: "#93D145" } }}
         >
           {SpisXT()}
         </Tabs>

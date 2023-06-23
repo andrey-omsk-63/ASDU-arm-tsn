@@ -1,14 +1,14 @@
-import * as React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { statsaveCreate } from '../../redux/actions';
+import * as React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { statsaveCreate } from "../../redux/actions";
 
-import Box from '@mui/material/Box';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+import Box from "@mui/material/Box";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 
-import StatisticXTArchive from './StatisticXTArchive';
+import StatisticXTArchive from "./StatisticXTArchive";
 
-import { Statistic } from '../../interfaceStat.d';
+import { Statistic } from "../../interfaceStat.d";
 //import { Tflight } from '../../interfaceMNG.d';
 
 let tekValue = 0;
@@ -16,7 +16,7 @@ let pointsEtalon: Statistic[];
 let flagEtalon = true;
 let massInterval: any = [];
 
-let oldDate = '';
+let oldDate = "";
 
 const StatisticsArchive = (props: {
   open: boolean;
@@ -49,14 +49,18 @@ const StatisticsArchive = (props: {
     const handleSend = () => {
       if (props.ws !== null && oldDate !== props.date) {
         if (props.ws.readyState === WebSocket.OPEN) {
-          props.ws.send(JSON.stringify({ type: 'stopDevices', region: reGion }));
-          props.ws.send(JSON.stringify({ type: 'stopStatistics', region: reGion }));
+          props.ws.send(
+            JSON.stringify({ type: "stopDevices", region: reGion })
+          );
+          props.ws.send(
+            JSON.stringify({ type: "stopStatistics", region: reGion })
+          );
           props.ws.send(
             JSON.stringify({
-              type: 'getOldStatistics',
+              type: "getOldStatistics",
               region: reGion,
               date: new Date(props.date).toISOString(),
-            }),
+            })
           );
         } else {
           setTimeout(() => {
@@ -81,7 +85,10 @@ const StatisticsArchive = (props: {
 
     if (datestat.tekArea && datestat.tekId) {
       for (let i = 0; i < pointsEtalon.length; i++) {
-        if (pointsEtalon[i].area === datestat.tekArea && pointsEtalon[i].id === datestat.tekId)
+        if (
+          pointsEtalon[i].area === datestat.tekArea &&
+          pointsEtalon[i].id === datestat.tekId
+        )
           tekValue = i;
       }
     }
@@ -89,28 +96,21 @@ const StatisticsArchive = (props: {
     if (massInterval.length) massInterval[tekValue] = props.interval;
   }
 
-  const styleSt1 = {
-    fontSize: 13.5,
-    maxHeight: '20px',
-    minHeight: '20px',
-    backgroundColor: '#F1F3F4',
-    color: 'black',
-    marginRight: 0.5,
-  };
-
   const styleSt2 = {
-    maxWidth: 850,
-    minWidth: 850,
+    width: 850,
     fontSize: 12,
-    marginTop: -2,
-    marginLeft: -3,
+    marginTop: '-2vh',
+    marginLeft: -7.6,
     marginRight: -7,
   };
 
   if (datestat.tekArea && datestat.tekId && pointsEtalon) {
     tekValue = 0;
     for (let i = 0; i < pointsEtalon.length; i++) {
-      if (pointsEtalon[i].area === datestat.tekArea && pointsEtalon[i].id === datestat.tekId)
+      if (
+        pointsEtalon[i].area === datestat.tekArea &&
+        pointsEtalon[i].id === datestat.tekId
+      )
         tekValue = i;
     }
   }
@@ -124,7 +124,6 @@ const StatisticsArchive = (props: {
     datestat.tekId = pointsEtalon[tekValue].id;
     dispatch(statsaveCreate(datestat));
     props.func(tekValue, massInterval[tekValue]);
-   
   };
 
   const handleChangeNull = () => {
@@ -133,41 +132,57 @@ const StatisticsArchive = (props: {
 
   const SpisXT = () => {
     let resSps: any = [];
-    let labl: string = '';
+    let labl: string = "";
 
     if (pointsEtalon.length === 0) {
       resSps.push(
         <Box key={1}>
           <h2>Нет данных по статистике</h2>
-        </Box>,
+        </Box>
       );
     } else {
       for (let i = 0; i < pointsEtalon.length; i++) {
-        labl = pointsEtalon[i].area + ':' + pointsEtalon[i].subarea + ':' + pointsEtalon[i].id;
+        const styleSt1 = {
+          fontSize: 14.3,
+          maxHeight: "20px",
+          minHeight: "20px", 
+          border: 1,
+          borderColor: value !== i ? "#93D145" : "#E9F5D8",
+          backgroundColor: value === i ? "#93D145" : "#E9F5D8",
+          color: "black",
+          marginRight: 0.5,
+        };
+        labl =
+          pointsEtalon[i].area +
+          ":" +
+          pointsEtalon[i].subarea +
+          ":" +
+          pointsEtalon[i].id;
         resSps.push(<Tab key={i} sx={styleSt1} label={labl} />);
       }
     }
     return resSps;
   };
 
-  if (isOpen && pointsEtalon.length !== 0 && tekValue !== value) setValue(tekValue);
+  if (isOpen && pointsEtalon.length !== 0 && tekValue !== value)
+    setValue(tekValue);
 
   const CheckClinch = () => {
     let clinch = false;
     if (!flagEtalon) {
-      if(pointsEtalon.length === 0) {
+      if (pointsEtalon.length === 0) {
         clinch = true;
-      } else{
+      } else {
         for (let i = 0; i < pointsEtalon[value].Statistics.length; i++) {
           if (pointsEtalon[value].Statistics[i].Datas === null) clinch = true;
         }
       }
     }
-    
+
     return clinch;
   };
 
-  let clinch = CheckClinch()
+  let clinch = CheckClinch();
 
   return (
     <>
@@ -176,12 +191,15 @@ const StatisticsArchive = (props: {
         <>
           <Box sx={styleSt2}>
             <Tabs
-              sx={{ maxHeight: '20px', minHeight: '20px' }}
+              sx={{ maxHeight: "20px", minHeight: "20px" }}
               value={value}
               onChange={handleChange}
               variant="scrollable"
+              textColor="inherit"
               scrollButtons={true}
-              allowScrollButtonsMobile>
+              allowScrollButtonsMobile
+              TabIndicatorProps={{ sx: { backgroundColor: "#93D145" } }}
+            >
               {SpisXT()}
             </Tabs>
           </Box>
@@ -196,7 +214,9 @@ const StatisticsArchive = (props: {
               />
             )}
           </>
-          <>{clinch && <h2>Некорректная структура статистики по данному ХТ</h2>}</>
+          <>
+            {clinch && <h2>Некорректная структура статистики по данному ХТ</h2>}
+          </>
         </>
       )}
     </>

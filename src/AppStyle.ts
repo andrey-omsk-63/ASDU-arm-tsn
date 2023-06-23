@@ -77,6 +77,7 @@ export const styleImpServis = {
   minHeight: "21px",
   maxWidth: "124px",
   minWidth: "124px",
+  //boxShadow: 10,
 };
 
 export const styleInp = {
@@ -117,6 +118,7 @@ export const styleDatePicker = {
     flexWrap: "nowrap",
     flexDirection: "row",
     flex: "1 1 0px",
+    //boxShadow: 10,
   },
 };
 //====== Interval =========================================================

@@ -64,8 +64,7 @@ const PointsLevel2BazaDiogram = (props: {
   const axisHorizon = horizon;
   const steepHorizon = 12 / axisHorizon;
   const axisVertical = vertical;
-  //const steepVertical = 86.4 / axisVertical;
-  const steepVertical = 85.6 / axisVertical;
+  const steepVertical = 85.7 / axisVertical;
   const dlBlok = (window.innerWidth / 12.55) * 8;
 
   let matrix: string[][] = [[]];

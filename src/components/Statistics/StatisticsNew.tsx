@@ -116,20 +116,11 @@ const StatisticsNew = (props: {
     }
   }
 
-  const styleSt1 = {
-    fontSize: 13.5,
-    maxHeight: "20px",
-    minHeight: "20px",
-    backgroundColor: "#F1F3F4",
-    color: "black",
-    marginRight: 0.5,
-  };
-
   const styleSt2 = {
     width: 850,
     fontSize: 12,
-    marginTop: -2,
-    marginLeft: -3,
+    marginTop: '-2vh',
+    marginLeft: -7.6,
     marginRight: -7,
   };
 
@@ -167,10 +158,20 @@ const StatisticsNew = (props: {
       resSps.push(
         <Box key={1}>
           <h2>Нет данных по статистике</h2>
-        </Box>,
+        </Box>
       );
     } else {
       for (let i = 0; i < pointsEtalon.length; i++) {
+        const styleSt1 = {
+          fontSize: 14.3,
+          maxHeight: "20px",
+          minHeight: "20px",
+          border: 1,
+          borderColor: value !== i ? "#93D145" : "#E9F5D8",
+          backgroundColor: value === i ? "#93D145" : "#E9F5D8",
+          color: "black",
+          marginRight: 0.5,
+        };
         labl =
           pointsEtalon[i].area +
           ":" +
@@ -186,19 +187,19 @@ const StatisticsNew = (props: {
   const CheckClinch = () => {
     let clinch = false;
     if (!flagEtalon) {
-      if(pointsEtalon.length === 0) {
+      if (pointsEtalon.length === 0) {
         clinch = true;
-      } else{
+      } else {
         for (let i = 0; i < pointsEtalon[value].Statistics.length; i++) {
           if (pointsEtalon[value].Statistics[i].Datas === null) clinch = true;
         }
       }
     }
-    
+
     return clinch;
   };
 
-  let clinch = CheckClinch()
+  let clinch = CheckClinch();
 
   return (
     <>
@@ -211,8 +212,10 @@ const StatisticsNew = (props: {
               value={value}
               onChange={handleChange}
               variant="scrollable"
+              textColor="inherit"
               scrollButtons={true}
               allowScrollButtonsMobile
+              TabIndicatorProps={{ sx: { backgroundColor: "#93D145" } }}
             >
               {SpisXT()}
             </Tabs>
@@ -227,7 +230,9 @@ const StatisticsNew = (props: {
               />
             )}
           </>
-          <>{clinch && <h2>Некорректная структура статистики по данному ХТ</h2>}</>
+          <>
+            {clinch && <h2>Некорректная структура статистики по данному ХТ</h2>}
+          </>
         </>
       )}
     </>

@@ -581,7 +581,6 @@ const PointsLevel2Baza = (props: {
     setMaxRight(rightTemp);
     setPoints(pointsTemp);
     maskpoint.pointForRedax = props.xctrll[xtProps];
-    //pointGraf = props.xctrll;
     pointGraf = JSON.parse(JSON.stringify(props.xctrll));
     flagExit = false;
     flagEdit = true;
@@ -617,7 +616,6 @@ const PointsLevel2Baza = (props: {
       {flagExit && <>{WorkMenuEdit(9, "Выйти без cохранения", StopEdit)}</>}
 
       <Stack direction="row">
-        {/* <Grid item xs={4} sx={{ height: "86.5vh", border: 1 }}> */}
         <Grid item xs={4} sx={{ height: "85.8vh", border: 0 }}>
           <PointsLevel2BazaTab1 />
           <Grid container>
