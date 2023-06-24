@@ -266,6 +266,7 @@ const StatisticXTNew = (props: {
               minWidth: "2.7vh",
               maxHeight: "23px",
               minHeight: "23px",
+              //height: "23.5px",
               textAlign: "center",
             };
 
