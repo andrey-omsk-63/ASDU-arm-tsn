@@ -33,9 +33,9 @@ const PointsLevel2BazaDiogram = (props: {
   const colorsGraf = [
     "#d6bf36", // хаки
     "Turquoise",
-    "YellowGreen",
+    "#c0de7c", // средне зелёный
 
-    "#dae189", // салатовый
+    "#e1e69d", // салатовый
     "#ffd5dc", // розовый
     "#ceffff", // светло голубой
 
@@ -57,6 +57,7 @@ const PointsLevel2BazaDiogram = (props: {
   ];
 
   const [openLoader, setOpenLoader] = React.useState(true);
+  const [pictInfo, setPictInfo] = React.useState(false);
 
   let dlMas = points.xctrls[crRoad].StrategyB.length;
   const horizon = points.xctrls[crRoad].StrategyB[dlMas - 1].xright;
@@ -75,8 +76,6 @@ const PointsLevel2BazaDiogram = (props: {
   let masStr: any = [];
   let masCol: any = [];
   let colBl = 0;
-
-  const [pictInfo, setPictInfo] = React.useState(false);
 
   if (
     xtPropsOld !== props.xtt ||
@@ -255,7 +254,7 @@ const PointsLevel2BazaDiogram = (props: {
     }
     return resStr;
   };
-
+  //============ OutputerPict ===============================================
   const PictInfo = (idx: number, pv: number, ph: number) => {
     phGl = ph;
     pvGl = pv;
@@ -279,7 +278,6 @@ const PointsLevel2BazaDiogram = (props: {
     }
     return resStrr;
   };
-
   //============ Dinama =====================================================
   const handleClose = () => {
     setOpenLoader(false);

@@ -328,7 +328,6 @@ const StatisticXTNew = (props: {
     if (isOpen) {
       kakchestvo = " ";
       resStr = [];
-
       //формирование времение в формате 00:00
       let timLiner = "";
       if (matrix[numMas].Hour < 10) timLiner = "0";

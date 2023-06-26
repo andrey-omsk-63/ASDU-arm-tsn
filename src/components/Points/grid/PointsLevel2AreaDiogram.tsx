@@ -6,12 +6,18 @@ import Grid from "@mui/material/Grid";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 
+import { OutputPict, PictInfoBox } from "../../../AppServiceFunctions";
+
 import { XctrlInfo } from "../../../interfaceGl.d";
 //import { styleBoxFormInt } from "../../../AppStyle";
 
 let xtPropsOld = -1;
 let crossRoadOld = -1;
 let pointsOld: any = [];
+
+let phGl = -1;
+let pvGl = -1;
+let IDX = -1;
 
 const PointsLevel2AreaDiogram = (props: {
   xctrll: XctrlInfo[];
@@ -21,13 +27,15 @@ const PointsLevel2AreaDiogram = (props: {
   const xtProps = props.xtt;
   const points = props.xctrll[xtProps];
   const crRoad = props.crossroad;
+  const namer = points.xctrls[props.crossroad].name;
+  const pointer = points.results;
 
   const colorsGraf = [
     "#d6bf36", // хаки
     "Turquoise",
-    "YellowGreen",
+    "#c0de7c", // средне зелёный
 
-    "#dae189", // салатовый
+    "#e1e69d", // салатовый
     "#ffd5dc", // розовый
     "#ceffff", // светло голубой
 
@@ -49,6 +57,7 @@ const PointsLevel2AreaDiogram = (props: {
   ];
 
   const [openLoader, setOpenLoader] = React.useState(true);
+  const [pictInfo, setPictInfo] = React.useState(false);
 
   let dlMas = points.xctrls[crRoad].StrategyA.length;
   const horizon = points.xctrls[crRoad].right;
@@ -95,7 +104,7 @@ const PointsLevel2AreaDiogram = (props: {
           coorPointY = points.xctrls[crRoad].StrategyA[ij].xleft;
           coorPointX = points.xctrls[crRoad].StrategyA[ij].xright;
           if (coorPointY === j && coorPointX === i) {
-            coler = "black";
+            coler = "blue";
             flag = false;
           }
           let kvx = (i - coorPointX) ** 2;
@@ -169,8 +178,30 @@ const PointsLevel2AreaDiogram = (props: {
     }
     return resSps;
   };
+  //============ OutputerPict ===============================================
+  const PictInfo = (idx: number, pv: number, ph: number) => {
+    phGl = ph;
+    pvGl = pv;
+    IDX = idx;
+    setPictInfo(true);
+  };
 
-  
+  const OutputerPict = () => {
+    let resStrr = [];
+    if (pointer !== null) {
+      if (pointer[namer]) {
+        for (let i = 0; i < pointer[namer].length; i++) {
+          let prpv = vertical / 100;
+          let pv = 100 - pointer[namer][i].Value[0] / prpv;
+          let prph = horizon / 100;
+          let ph = pointer[namer][i].Value[1] / prph;
+          let flagEnd = i === pointer[namer].length - 1 ? true : false;
+          resStrr.push(<>{OutputPict(i, pv, ph, PictInfo, flagEnd)}</>);
+        }
+      }
+    }
+    return resStrr;
+  };
   //============ Dinama =====================================================
   const handleClose = () => {
     setOpenLoader(false);
@@ -201,7 +232,15 @@ const PointsLevel2AreaDiogram = (props: {
   return (
     <Grid item container sx={{ position: "relative" }} xs={12}>
       {openLoader && <Dinama />}
-      {!openLoader && <>{PointsXt112Comp1Tab4()}</>}
+      {!openLoader && (
+        <>
+          {PointsXt112Comp1Tab4()}
+          {OutputerPict()}
+          {pictInfo && (
+            <>{PictInfoBox(pvGl, phGl, pointer[namer][IDX], setPictInfo)}</>
+          )}
+        </>
+      )}
     </Grid>
   );
 };
