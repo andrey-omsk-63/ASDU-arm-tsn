@@ -292,14 +292,10 @@ const App = () => {
     });
     const ipAdress: string = 'http://localhost:3000/otladkaXctrl.json';
     axios.get(ipAdress).then(({ data }) => {
-      //console.log('1data.data.xctrlInfo', data.data);
-      //console.log('2data.data.xctrlInfo', data.data.xctrlInfo);
-      setPointsXctrl(data.data.xctrlInfo ?? []);
-      if (regionGlob === 0) setPointsReg(data.data.regionInfo ?? []);
-      if (data.data.xctrlInfo !== null) {
-        maskPoint.pointForRedax = data.data.xctrlInfo[0];
-        dispatch(maskpointCreate(maskpoint));
-      }
+      console.log('data.data.xctrlInfo', data.xctrlInfo, data.regionInfo);
+      setPointsXctrl(data.xctrlInfo ?? []);
+      if (regionGlob === 0) setPointsReg(data.regionInfo ?? []);
+      //maskPoint.pointForRedax = data.xctrlInfo[0];
       setIsOpenInf(true);
     });
     axios.get('http://localhost:3000/otladkaStatNow.json').then(({ data }) => {
@@ -523,25 +519,19 @@ const App = () => {
 
   UpdateXctrl(); // разноска обновлений Xctrl
 
-  // const SetRegion = (numer: number) => {
-  //   setRegionGlob(numer);
-  //   console.log('SetRegion', numer, regionGlob);
-  //   //setTrigger(!trigger);
-  // };
-
-  // console.log('Region', regionGlob, isOpenInf);
+  const SetRegion = (numer: number) => {
+    setRegionGlob(numer);
+    setTrigger(!trigger);
+  };
 
   return (
     <>
       {regionGlob === 0 && isOpenInf && (
-        <BeginSeans ws={WS} pointsReg={pointsReg} SetRegion={setRegionGlob} />
+        <BeginSeans ws={WS} pointsReg={pointsReg} SetRegion={SetRegion} />
       )}
       {openSetErrLog && <EndSeans bsLogin={bsLogin} setOpen={setOpenSetErrLog} />}
       {!openSetErrLog && (
         <>
-          {/* {regionGlob === 0 && isOpenInf && (
-            <BeginSeans ws={WS} pointsReg={pointsReg} SetRegion={SetRegion} />
-          )} */}
           {write && <AppWriteToAllFileForXT setOpen={setWrite} />}
           <Box sx={{ width: '98.8%' }}>
             <TabContext value={value}>
