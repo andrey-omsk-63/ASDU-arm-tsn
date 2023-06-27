@@ -1,10 +1,8 @@
 import React from "react";
 
 import Box from "@mui/material/Box";
-//import Button from '@mui/material/Button';
 import Stack from "@mui/material/Stack";
 import Modal from "@mui/material/Modal";
-//import Typography from '@mui/material/Typography';
 
 import { MenuSpisRegion } from "./AppServiceFunctions";
 import { SendSocketgetStatisticsList } from "./AppServiceFunctions";
@@ -20,6 +18,7 @@ const BeginSeans = (props: {
   pointsReg: any;
   SetRegion: Function;
 }) => {
+  console.log('!!!regionGlob',regionGlob)
   const [open, setOpen] = React.useState(true);
 
   let debug = false;
@@ -28,8 +27,8 @@ const BeginSeans = (props: {
 
   const handleCloseModal = (numer: number) => {
     regionGlob = numer;
-    props.SetRegion(numer);
     SendSocketgetStatisticsList(debug, props.ws, regionGlob.toString());
+    props.SetRegion(numer);
     setOpen(false);
   };
 
@@ -45,9 +44,18 @@ const BeginSeans = (props: {
     regionGlob = massRegion[0];
     dlStrMenu = (dlStrMenu + 8) * 10;
   }
-  if (massRegion.length === 1) {
-    handleCloseModal(massRegion[0]);
-  }
+
+  const OneRegin = () => {
+    regionGlob = massRegion[0];
+    SendSocketgetStatisticsList(debug, props.ws, regionGlob.toString());
+    props.SetRegion(massRegion[0]);
+    // if (massRegion.length === 1) {
+    //   console.log("%%%:", massRegion[0]);
+    //   handleCloseModal(massRegion[0]);
+    // }
+  };
+
+  //console.log("2massRegion", massRegion, massRegion.length);
 
   const SpisRegion = () => {
     let resStr = [];
@@ -78,16 +86,21 @@ const BeginSeans = (props: {
   };
 
   return (
-    <Modal open={open}>
-      <Box sx={styleModal}>
-        <Stack direction="column">
-          <Box sx={{ textAlign: "center" }}>Выбор региона:</Box>
-          {/* <Box sx={{ overflowX: 'auto', height: '36vh' }}>{SpisRegion()}</Box> */}
-          {SpisRegion()}
-          <Box sx={{ marginBottom: 1 }}> </Box>
-        </Stack>
-      </Box>
-    </Modal>
+    <>
+      {massRegion.length > 1 && (
+        <Modal open={open}>
+          <Box sx={styleModal}>
+            <Stack direction="column">
+              <Box sx={{ textAlign: "center" }}>Выбор региона:</Box>
+              {/* <Box sx={{ overflowX: 'auto', height: '36vh' }}>{SpisRegion()}</Box> */}
+              {SpisRegion()}
+              <Box sx={{ marginBottom: 1 }}> </Box>
+            </Stack>
+          </Box>
+        </Modal>
+      )}
+      {massRegion.length === 1 && <>{OneRegin()}</>}
+    </>
   );
 };
 

@@ -209,6 +209,7 @@ const PointsLevel2AreaDiogram = (props: {
 
   const styleBackdrop = {
     color: "#fff",
+    marginLeft: window.innerWidth * 0.274 + "px",
     zIndex: (theme: any) => theme.zIndex.drawer + 1,
   };
 
@@ -246,4 +247,3 @@ const PointsLevel2AreaDiogram = (props: {
 };
 
 export default PointsLevel2AreaDiogram;
-//black

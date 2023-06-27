@@ -81,6 +81,7 @@ const StatisticXTNew = (props: {
 
   let colChanel = 0;
   const [value, setValue] = React.useState("0");
+  const [openLoader, setOpenLoader] = React.useState(true);
   const [trigger, setTrigger] = React.useState(true);
 
   let resStr: any = [];
@@ -100,12 +101,11 @@ const StatisticXTNew = (props: {
     massId[numIdInMas].canall = [];
     ZeroLabelsCanal();
   };
-  
 
   if (isOpen) {
     //начало работы (первый вход)
-      if (oldAreaid < 0) {
-      //if (points[areaId].Statistics[0].Datas === null) 
+    if (oldAreaid < 0) {
+      //if (points[areaId].Statistics[0].Datas === null)
       massId.push({ id: areaId, canall: [], lbl: [], labels, datasets: [] });
       oldAreaid = areaId;
       canal = [];
@@ -132,6 +132,7 @@ const StatisticXTNew = (props: {
       }
       oldAreaid = areaId;
       setValue("0");
+      setOpenLoader(true);
     }
   }
 
@@ -255,7 +256,7 @@ const StatisticXTNew = (props: {
         let xss = 12 / leng;
         for (let i = 1; i <= leng; i++) {
           let illum = canal.indexOf(i - 1) >= 0 ? true : false;
-          
+
           const ButtonCanal = () => {
             const styleBatton = {
               marginLeft: 0.4,
@@ -504,7 +505,6 @@ const StatisticXTNew = (props: {
     }
   };
   //============ Dinama =====================================================
-  const [openLoader, setOpenLoader] = React.useState(true);
   const handleClose = () => {
     setOpenLoader(false);
   };
@@ -515,11 +515,9 @@ const StatisticXTNew = (props: {
   };
 
   const Output = () => {
-    React.useEffect(() => {
-      setTimeout(() => {
-        setOpenLoader(false);
-      }, 100);
-    }, []);
+    setTimeout(() => {
+      setOpenLoader(false);
+    }, 100);
   };
 
   const Dinama = () => {

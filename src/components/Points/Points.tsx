@@ -49,7 +49,7 @@ const Points = (props: {
   let debug = false;
   if (props.ws.url === "wss://localhost:3000/W") debug = true;
 
-  //console.log('POINS:', reGion, pointsGl);
+  console.log("POINS:", reGion, pointsGl);
 
   let points = pointsGl.filter(
     (pointsGl) => pointsGl.region === Number(reGion)
@@ -122,6 +122,8 @@ const Points = (props: {
     let resSps: any = [];
     let labl: string = "";
 
+    console.log("pointsEtalon:", pointsEtalon, pointsEtalon.length);
+
     if (pointsEtalon.length === 0) {
       resSps.push(
         <Box key={1}>
@@ -163,37 +165,40 @@ const Points = (props: {
 
   return (
     <Box sx={{ border: 0, marginTop: -2.8, marginLeft: -3, marginRight: -5 }}>
-      <Box sx={stylePoints01}>
-        <Tabs
-          sx={{ maxHeight: "20px", minHeight: "20px" }}
-          value={value}
-          onChange={handleChange}
-          variant="scrollable"
-          textColor="inherit"
-          //indicatorColor="secondary"
-          scrollButtons={true}
-          allowScrollButtonsMobile
-          TabIndicatorProps={{ sx: { backgroundColor: "#93D145" } }}
-        >
-          {SpisXT()}
-        </Tabs>
-      </Box>
-      <>
-        {pointsEtalon.length > 0 && (
-          <>
-            <PointsMenuLevel1
-              open={isOpen}
-              ws={props.ws}
-              xctrll={pointsEtalon}
-              xtt={tekValue}
-              setPoint={props.setPoint}
-              saveXt={props.saveXt}
-              calc={props.calc}
-              calcDeb={calculate}
-            />
-          </>
-        )}
-      </>
+      {pointsEtalon.length > 0 && (
+        <>
+          <Box sx={stylePoints01}>
+            <Tabs
+              sx={{ maxHeight: "20px", minHeight: "20px" }}
+              value={value}
+              onChange={handleChange}
+              variant="scrollable"
+              textColor="inherit"
+              //indicatorColor="secondary"
+              scrollButtons={true}
+              allowScrollButtonsMobile
+              TabIndicatorProps={{ sx: { backgroundColor: "#93D145" } }}
+            >
+              {SpisXT()}
+            </Tabs>
+          </Box>
+          <PointsMenuLevel1
+            open={isOpen}
+            ws={props.ws}
+            xctrll={pointsEtalon}
+            xtt={tekValue}
+            setPoint={props.setPoint}
+            saveXt={props.saveXt}
+            calc={props.calc}
+            calcDeb={calculate}
+          />
+        </>
+      )}
+      {pointsEtalon.length === 0 && (
+        <Box sx={{ marginLeft: 3 }}>
+          <h2>Нет данных по ХТ</h2>
+        </Box>
+      )}
     </Box>
   );
 };

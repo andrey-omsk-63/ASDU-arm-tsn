@@ -83,6 +83,7 @@ const StatisticXTArchive = (props: {
 
   let colChanel = 0;
   const [value, setValue] = React.useState("0");
+  const [openLoader, setOpenLoader] = React.useState(true);
   const [trigger, setTrigger] = React.useState(true);
 
   let resStr: any = [];
@@ -111,6 +112,7 @@ const StatisticXTArchive = (props: {
     oldAreaid = -1;
     numIdInMas = 0;
     oldDate = props.date;
+    //setOpenLoader(true);
   }
 
   if (isOpen) {
@@ -142,6 +144,7 @@ const StatisticXTArchive = (props: {
       }
       oldAreaid = areaId;
       setValue("0");
+      setOpenLoader(true);
     }
   }
 
@@ -503,7 +506,6 @@ const StatisticXTArchive = (props: {
     }
   };
   //============ Dinama =====================================================
-  const [openLoader, setOpenLoader] = React.useState(true);
   const handleClose = () => {
     setOpenLoader(false);
   };
@@ -514,11 +516,11 @@ const StatisticXTArchive = (props: {
   };
 
   const Output = () => {
-    React.useEffect(() => {
+    //React.useEffect(() => {
       setTimeout(() => {
         setOpenLoader(false);
       }, 100);
-    }, []);
+    //}, []);
   };
 
   const Dinama = () => {
@@ -535,7 +537,7 @@ const StatisticXTArchive = (props: {
     StatSpis();
   }
 
-  Output();
+  if (openLoader) Output();
 
   return (
     <Box sx={{ marginTop: 0.8, marginLeft: -2.5, marginRight: -4 }}>

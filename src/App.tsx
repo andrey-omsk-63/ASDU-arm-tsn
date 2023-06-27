@@ -32,7 +32,7 @@ import { MakeInterval, WriteToCsvFileForStat } from "./AppServiceFunctions";
 import { ButtonMenu } from "./AppServiceFunctions";
 import { InputerDate, MakeDate, InputerOk } from "./AppServiceFunctions";
 import { PunktMenuSaveFile } from "./AppServiceFunctions";
-
+//getStatisticsList
 import { dataStatNow } from "./NullStatNow";
 
 export interface Stater {
@@ -91,7 +91,7 @@ let WS: any = null;
 let debug = false;
 let flagOpenDebug = true;
 
-let regionGlob: number = 0;
+//let regionGlob: number = 0;
 
 let pointsEtalonXctrl: XctrlInfo[];
 let flagEtalonInf = true;
@@ -135,6 +135,7 @@ const App = () => {
   const [pointsReg, setPointsReg] = React.useState<RegionInfo>(
     {} as RegionInfo
   );
+  const [regionGlob, setRegionGlob] = React.useState(0);
   const [isOpenInf, setIsOpenInf] = React.useState(false);
   const [pointsTfl, setPointsTfl] = React.useState<Array<Tflight>>([]);
   const [isOpenDev, setIsOpenDev] = React.useState(false);
@@ -150,11 +151,6 @@ const App = () => {
   const [write, setWrite] = React.useState(false);
   const [openSetErrLog, setOpenSetErrLog] = React.useState(false);
   const [calculate, setCalculate] = React.useState(true);
-
-  const SetRegion = (numer: number) => {
-    regionGlob = numer;
-    setTrigger(!trigger);
-  };
 
   const UpdateXctrl = () => {
     if (isOpenInf && !flagEtalonInf) {
@@ -235,8 +231,13 @@ const App = () => {
           setIsOpenDev(true);
           break;
         case "xctrlInfo":
-          setPointsXctrl(data.xctrlInfo ?? []);
-          if (regionGlob === 0) setPointsReg(data.regionInfo ?? []);
+          //console.log("@@@:", data.xctrlInfo);
+          let dat = data;
+          //data.xctrlInfo = null
+          // setPointsXctrl(data.xctrlInfo ?? []);
+          // if (regionGlob === 0) setPointsReg(data.regionInfo ?? []);
+          setPointsXctrl(dat.xctrlInfo ?? []);
+          if (regionGlob === 0) setPointsReg(dat.regionInfo ?? []);
           setIsOpenInf(true);
           break;
         case "getStatisticsList":
@@ -283,18 +284,19 @@ const App = () => {
           console.log("data_default:", allData.data);
       }
     };
-  }, [calculate, datestat, dispatch]);
+  }, [calculate, datestat, dispatch, regionGlob]);
 
   if (debug && flagOpenDebug) {
     console.log("РЕЖИМ ОТЛАДКИ!!! ");
-    regionGlob = 1;
+    //regionGlob = 0;
     axios.get("http://localhost:3000/otladkaPoints.json").then(({ data }) => {
       setPointsTfl(data.data.tflight);
       setIsOpenDev(true);
     });
     const ipAdress: string = "http://localhost:3000/otladkaXctrl.json";
     axios.get(ipAdress).then(({ data }) => {
-      setPointsXctrl(data.data.xctrlInfo);
+      console.log("data.data.xctrlInfo", data.data.xctrlInfo);
+      setPointsXctrl(data.data.xctrlInfo ?? []);
       if (regionGlob === 0) setPointsReg(data.data.regionInfo ?? []);
       maskPoint.pointForRedax = data.data.xctrlInfo[0];
       dispatch(maskpointCreate(maskpoint));
@@ -528,16 +530,27 @@ const App = () => {
 
   UpdateXctrl(); // разноска обновлений Xctrl
 
+  const SetRegion = (numer: number) => {
+    setRegionGlob(numer);
+    console.log("SetRegion", numer, regionGlob);
+    //setTrigger(!trigger);
+  };
+
+  console.log("Region",  regionGlob,isOpenInf);
+
   return (
     <>
+      {regionGlob === 0 && isOpenInf && (
+        <BeginSeans ws={WS} pointsReg={pointsReg} SetRegion={SetRegion} />
+      )}
       {openSetErrLog && (
         <EndSeans bsLogin={bsLogin} setOpen={setOpenSetErrLog} />
       )}
       {!openSetErrLog && (
         <>
-          {regionGlob === 0 && isOpenInf && (
+          {/* {regionGlob === 0 && isOpenInf && (
             <BeginSeans ws={WS} pointsReg={pointsReg} SetRegion={SetRegion} />
-          )}
+          )} */}
           {write && <AppWriteToAllFileForXT setOpen={setWrite} />}
           <Box sx={{ width: "98.8%" }}>
             <TabContext value={value}>

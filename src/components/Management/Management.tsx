@@ -1,11 +1,11 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 
-import ManagementLeftGrid from './grid/ManagLeftGrid';
+import ManagementLeftGrid from "./grid/ManagLeftGrid";
 
-import { Tflight } from '../../interfaceMNG.d';
-import { XctrlInfo } from '../../interfaceGl.d';
+import { Tflight } from "../../interfaceMNG.d";
+import { XctrlInfo } from "../../interfaceGl.d";
 
 let pointsEtalon: Tflight[] = [];
 let pointsXctrlEtalon: XctrlInfo[] = [];
@@ -24,17 +24,27 @@ const Management = (props: {
   let reGion = props.region;
 
   let pointsGl = props.xctrll;
-  let pointsXctrll = pointsGl.filter((pointsGl) => pointsGl.region === Number(reGion));
-  
+  let pointsXctrll: any = [];
+
+  if (pointsGl !== null) {
+    pointsXctrll = pointsGl.filter(
+      (pointsGl) => pointsGl.region === Number(reGion)
+    );
+  }
+
   if (isOpen) pointsXctrlEtalon = pointsXctrll; // замена проверки обновления Xctrl - проверка теперь в App
 
   React.useEffect(() => {
     const handleSendOpen = () => {
       if (props.ws !== null) {
         if (props.ws.readyState === WebSocket.OPEN) {
-          props.ws.send(JSON.stringify({ type: 'stopStatistics', region: reGion }));
-          props.ws.send(JSON.stringify({ type: 'stopOldStatistics', region: reGion }));
-          props.ws.send(JSON.stringify({ type: 'getDevices', region: reGion }));
+          props.ws.send(
+            JSON.stringify({ type: "stopStatistics", region: reGion })
+          );
+          props.ws.send(
+            JSON.stringify({ type: "stopOldStatistics", region: reGion })
+          );
+          props.ws.send(JSON.stringify({ type: "getDevices", region: reGion }));
         } else {
           setTimeout(() => {
             handleSendOpen();
@@ -71,7 +81,7 @@ const Management = (props: {
         }
       }
       if (newRecord) {
-        console.log('MNG новая запись i=', i);
+        console.log("MNG новая запись i=", i);
         pointsAdd.push(points[i]);
       }
     }

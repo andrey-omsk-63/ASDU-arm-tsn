@@ -285,6 +285,7 @@ const PointsLevel2BazaDiogram = (props: {
 
   const styleBackdrop = {
     color: "#fff",
+    marginLeft: window.innerWidth * 0.355 + "px",
     zIndex: (theme: any) => theme.zIndex.drawer + 1,
   };
 
