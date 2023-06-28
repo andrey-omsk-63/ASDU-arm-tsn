@@ -30,6 +30,8 @@ const PointsLevel2AreaDiogram = (props: {
   const namer = points.xctrls[props.crossroad].name;
   const pointer = points.results;
 
+  console.log("###:", points.xctrls[crRoad].StrategyA.length, points);
+
   const colorsGraf = [
     "#d6bf36", // хаки
     "Turquoise",
@@ -62,12 +64,10 @@ const PointsLevel2AreaDiogram = (props: {
   let dlMas = points.xctrls[crRoad].StrategyA.length;
   const horizon = points.xctrls[crRoad].right;
   const vertical = points.xctrls[crRoad].left;
-  const axisHorizon = horizon * 1;
-  const steepHorizon = 12 / axisHorizon;
-  const axisVertical = vertical * 1;
-  const steepVertical = 85.6 / axisVertical;
+  const steepHorizon = 12 / horizon;
+  const steepVertical = 85.6 / vertical;
   let matrix: string[][] = [[]];
-  let scale = 2;
+  let scale = points.xctrls[crRoad].StrategyA.length > 4 ? 2 : 1;
 
   let coler = "red";
   let colerOld = "";
@@ -80,9 +80,10 @@ const PointsLevel2AreaDiogram = (props: {
     crossRoadOld !== crRoad ||
     pointsOld !== points
   ) {
-    xtPropsOld = xtProps;
+    xtPropsOld = xtProps; // сменился ХТ
     crossRoadOld = crRoad;
     pointsOld = points;
+    setPictInfo(false);
     setOpenLoader(true);
   }
 
@@ -184,6 +185,7 @@ const PointsLevel2AreaDiogram = (props: {
     pvGl = pv;
     IDX = idx;
     setPictInfo(true);
+    //e.preventDefault(); // чтобы страница не перезагружалась !!!!!!
   };
 
   const OutputerPict = () => {
@@ -210,6 +212,9 @@ const PointsLevel2AreaDiogram = (props: {
   const styleBackdrop = {
     color: "#fff",
     marginLeft: window.innerWidth * 0.274 + "px",
+    marginRight: "1.7vh",
+    marginTop: 11,
+    marginBottom: "4vh",
     zIndex: (theme: any) => theme.zIndex.drawer + 1,
   };
 
@@ -222,7 +227,7 @@ const PointsLevel2AreaDiogram = (props: {
   const Dinama = () => {
     return (
       <Backdrop sx={styleBackdrop} open={openLoader} onClick={handleClose}>
-        <CircularProgress color="inherit" size={548} />
+        <CircularProgress color="inherit" size={212} />
       </Backdrop>
     );
   };

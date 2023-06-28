@@ -13,8 +13,6 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { CalendarPickerSkeleton } from "@mui/x-date-pickers/CalendarPickerSkeleton";
 import { PickersDay } from "@mui/x-date-pickers/PickersDay";
 import Badge from "@mui/material/Badge";
-// import html2canvas from 'html2canvas';
-// import { jsPDF } from 'jspdf';
 
 import { styleDatePicker, styleModalMenu } from "./AppStyle";
 import { styleInpOk, styleButOk } from "./AppStyle";
@@ -69,7 +67,6 @@ export const ButtonMenu = (
   SetValue: Function,
   tekValue: string
 ) => {
-  //let colorMenu = mode === tekValue ? "#B1DE7A" : "#E9F5D8";
   const styleApp02 = {
     fontSize: 14,
     marginRight: 1,
@@ -266,7 +263,6 @@ export const Inputer = (
 export const WorkMenuEdit = (xss: number, soob: string, servisFunc: any) => {
   const styleBut03 = {
     fontSize: 13.5,
-    //marginTop: -0.5,
     marginTop: -2,
     maxHeight: "21px",
     minHeight: "21px",
@@ -307,7 +303,6 @@ export const ButtRec = (rec: any, func: any) => {
     minHeight: "15px",
     maxWidth: "205px",
     minWidth: "205px",
-    // backgroundColor: '#FFFBE5', // молоко
     backgroundColor: "#E9F5D8", // салатовый
     color: "black",
     textTransform: "unset !important",
@@ -355,7 +350,6 @@ export const SaveFunc = (func: any) => {
     marginTop: 1,
     maxHeight: "21px",
     minHeight: "21px",
-    //backgroundColor: '#F1F3F4', // светлосерый
     backgroundColor: "#E9F5D8", // салатовый
     textAlign: "center",
     textTransform: "unset !important",
@@ -428,7 +422,6 @@ export const WorkMenuEditMain = (
   };
 
   const styleXTG05 = {
-    //border: 1,
     marginTop: -3.3,
     height: "3vh",
     textAlign: "right",
@@ -463,7 +456,6 @@ export const SendSocketOldDateXt = (
     pointsEtalon[tekValue].region,
     pointsEtalon[tekValue].area,
     pointsEtalon[tekValue].subarea
-    //pointsEtalon[tekValue]
   );
   const handleSendOpen = () => {
     if (ws !== null) {
@@ -575,4 +567,3 @@ export const PictInfoBox = (
   );
 };
 //==================================================
-//SendSocketgetStatisticsList

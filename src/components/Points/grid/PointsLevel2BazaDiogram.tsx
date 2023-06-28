@@ -22,10 +22,7 @@ const PointsLevel2BazaDiogram = (props: {
   xtt: number;
   crossroad: number;
 }) => {
-  //const xtProps = JSON.parse(JSON.stringify(props.xtt));
-  //const xtProps = props.xtt;
   const points = props.xctrll[props.xtt];
-  //const points = JSON.parse(JSON.stringify(point));
   const crRoad = props.crossroad;
   const namer = points.xctrls[props.crossroad].name;
   const pointer = points.results;
@@ -62,10 +59,10 @@ const PointsLevel2BazaDiogram = (props: {
   let dlMas = points.xctrls[crRoad].StrategyB.length;
   const horizon = points.xctrls[crRoad].StrategyB[dlMas - 1].xright;
   const vertical = points.xctrls[crRoad].StrategyB[dlMas - 1].xleft;
-  const axisHorizon = horizon;
-  const steepHorizon = 12 / axisHorizon;
-  const axisVertical = vertical;
-  const steepVertical = 85.7 / axisVertical;
+  //const axisHorizon = horizon;
+  const steepHorizon = 12 / horizon;
+  //const axisVertical = vertical;
+  const steepVertical = 85.7 / vertical;
   const dlBlok = (window.innerWidth / 12.55) * 8;
 
   let matrix: string[][] = [[]];
@@ -82,10 +79,11 @@ const PointsLevel2BazaDiogram = (props: {
     crossRoadOld !== crRoad ||
     pointsOld !== points
   ) {
-    xtPropsOld = props.xtt;
+    xtPropsOld = props.xtt; // сменился ХТ
     crossRoadOld = crRoad;
     pointsOld = points;
     setOpenLoader(true);
+    setPictInfo(false);
   }
 
   const PointsXt112Comp1Tab4 = () => {
@@ -181,6 +179,7 @@ const PointsLevel2BazaDiogram = (props: {
       masCol = [];
       colBl = 0;
 
+      //for (let i = 0; i < horizon * 2; i += scale) {
       for (let i = 0; i < horizon; i += scale) {
         coler = matrix[j / scale][i / scale];
         if (coler === colerOld) {
@@ -203,6 +202,7 @@ const PointsLevel2BazaDiogram = (props: {
             item
             sx={{
               backgroundColor: masCol[i],
+              //height: String((steepVertical * scale) / 2) + "vh",
               height: String(steepVertical * scale) + "vh",
             }}
           ></Grid>
@@ -286,6 +286,9 @@ const PointsLevel2BazaDiogram = (props: {
   const styleBackdrop = {
     color: "#fff",
     marginLeft: window.innerWidth * 0.355 + "px",
+    marginRight: "1.7vh",
+    marginTop: 11,
+    marginBottom: "4vh",
     zIndex: (theme: any) => theme.zIndex.drawer + 1,
   };
 
@@ -298,7 +301,7 @@ const PointsLevel2BazaDiogram = (props: {
   const Dinama = () => {
     return (
       <Backdrop sx={styleBackdrop} open={openLoader} onClick={handleClose}>
-        <CircularProgress color="inherit" size={548} />
+        <CircularProgress color="inherit" size={212} />
       </Backdrop>
     );
   };

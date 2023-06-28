@@ -512,6 +512,10 @@ const StatisticXTArchive = (props: {
 
   const styleBackdrop = {
     color: "#fff",
+    marginLeft: '0.3vh',
+    marginRight: '1.7vh',
+    marginTop: '34vh',
+    marginBottom: '4vh',
     zIndex: (theme: any) => theme.zIndex.drawer + 1,
   };
 

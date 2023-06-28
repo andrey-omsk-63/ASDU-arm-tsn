@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Modal from '@mui/material/Modal';
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import Modal from "@mui/material/Modal";
 
-import { MenuSpisRegion } from './AppServiceFunctions';
-import { SendSocketgetStatisticsList } from './AppServiceFunctions';
+import { MenuSpisRegion } from "./AppServiceFunctions";
+import { SendSocketgetStatisticsList } from "./AppServiceFunctions";
 
 let massRegion: Array<number> = [];
 let massNameRegion: Array<string> = [];
@@ -13,17 +13,19 @@ let regionGlob = 0;
 let pointsReg: any = null;
 let dlStrMenu = 0;
 
-const BeginSeans = (props: { ws: WebSocket; pointsReg: any; SetRegion: Function }) => {
-  //console.log('!!!regionGlob',regionGlob)
+const BeginSeans = (props: {
+  ws: WebSocket;
+  pointsReg: any;
+  SetRegion: Function;
+}) => {
   const [open, setOpen] = React.useState(true);
 
   let debug = false;
-  if (props.ws.url === 'wss://localhost:3000/W') debug = true;
+  if (props.ws.url === "wss://localhost:3000/W") debug = true;
   if (!pointsReg) pointsReg = props.pointsReg;
 
   const handleCloseModal = (numer: number) => {
-    regionGlob = numer;
-    SendSocketgetStatisticsList(debug, props.ws, regionGlob.toString());
+    SendSocketgetStatisticsList(debug, props.ws, numer.toString());
     props.SetRegion(numer);
     setOpen(false);
   };
@@ -33,7 +35,8 @@ const BeginSeans = (props: { ws: WebSocket; pointsReg: any; SetRegion: Function 
       if (!isNaN(Number(key))) {
         massRegion.push(Number(key)); // ключ - символьное число
         massNameRegion.push(pointsReg[key]);
-        if (pointsReg[key].length > dlStrMenu) dlStrMenu = pointsReg[key].length;
+        if (pointsReg[key].length > dlStrMenu)
+          dlStrMenu = pointsReg[key].length;
       }
     }
     regionGlob = massRegion[0];
@@ -41,36 +44,33 @@ const BeginSeans = (props: { ws: WebSocket; pointsReg: any; SetRegion: Function 
   }
 
   const OneRegin = () => {
-    regionGlob = massRegion[0];
-    SendSocketgetStatisticsList(debug, props.ws, regionGlob.toString());
+    SendSocketgetStatisticsList(debug, props.ws, massRegion[0].toString());
     props.SetRegion(massRegion[0]);
-    // if (massRegion.length === 1) {
-    //   console.log("%%%:", massRegion[0]);
-    //   handleCloseModal(massRegion[0]);
-    // }
   };
-
-  //console.log("2massRegion", massRegion, massRegion.length);
 
   const SpisRegion = () => {
     let resStr = [];
     for (let i = 0; i < massRegion.length; i++) {
-      resStr.push(<>{MenuSpisRegion(massRegion[i], massNameRegion[i], handleCloseModal)}</>);
+      resStr.push(
+        <>
+          {MenuSpisRegion(massRegion[i], massNameRegion[i], handleCloseModal)}
+        </>
+      );
     }
     return resStr;
   };
 
   const styleModal = {
-    outline: 'none',
-    position: 'absolute',
-    left: '50%',
-    top: '50%',
+    outline: "none",
+    position: "absolute",
+    left: "50%",
+    top: "50%",
     marginBottom: 1,
-    transform: 'translate(-50%, -50%)',
+    transform: "translate(-50%, -50%)",
     width: dlStrMenu,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    borderColor: 'primary.main',
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    borderColor: "primary.main",
     borderRadius: 2,
     boxShadow: 24,
     p: 3,
@@ -82,8 +82,7 @@ const BeginSeans = (props: { ws: WebSocket; pointsReg: any; SetRegion: Function 
         <Modal open={open}>
           <Box sx={styleModal}>
             <Stack direction="column">
-              <Box sx={{ textAlign: 'center' }}>Выбор региона:</Box>
-              {/* <Box sx={{ overflowX: 'auto', height: '36vh' }}>{SpisRegion()}</Box> */}
+              <Box sx={{ textAlign: "center" }}>Выбор региона:</Box>
               {SpisRegion()}
               <Box sx={{ marginBottom: 1 }}> </Box>
             </Stack>
