@@ -511,17 +511,62 @@ export const PictInfoBox = (
   pvGl: number,
   phGl: number,
   pointer: any,
-  setPictInfo: Function
+  setPictInfo: Function,
+  point: any,
+  mode: number
 ) => {
-  let sdvig = (window.innerWidth - 1000) * 0.012;
-  //console.log("!!!!!!:",sdvig, window.screen.width,window.innerWidth,window.outerWidth);
+  console.log("PVGL:", pvGl, phGl, point);
+  let snos = mode ? 1000 : 850;
+  let sdvigH = (window.innerWidth - snos) * 0.012;
+  let sdvigV = pvGl < 50 ? 0 : 15;
+  let numArea = 0;
+  if (mode) {
+    let num = 1; // Диограмма лучей
+    let pStB = point.StrategyB;
+    for (let i = 0; i < pStB.length; i++) {
+      if (pointer.Value[0] > pStB[i].xright || pointer.Value[1] > pStB[i].xleft)
+        num = i + 2;
+    }
+    let luchO = pStB[num - 1].vleft;
+    let luchP = pStB[num - 1].vright;
+    let ratio = pStB[num - 1].xright / pStB[num - 1].xleft;
+    numArea = pStB[num - 1].pks;
+    if (luchP !== 1 || luchO !== 1) {
+      if (pointer.Value[1] < pointer.Value[0] * luchO * ratio)
+        numArea = pStB[num - 1].pkl;
+      if (pointer.Value[1] > pointer.Value[0] * luchP * ratio)
+        numArea = pStB[num - 1].pkr;
+    }
+  } else {
+    let pStA = point.StrategyA; // Диограмма областей
+    numArea = -1;
+    let area = [1,2,3,4,5,6]
+    let mass = [];
+    for (let i = 0; i < pStA.length; i++) {
+      console.log(
+        "@@@:",
+        pointer.Value[0],
+        pStA[i].xright,
+        pointer.Value[1],
+        pStA[i].xleft
+      );
+      let coorPointY = pStA[i].xleft;
+      let coorPointX = pStA[i].xright;
+      let kvx = (pointer.Value[0] - coorPointX) ** 2;
+      let kvy = (pointer.Value[1] - coorPointY) ** 2;
+      console.log('&&&:',coorPointY,coorPointX,kvx + kvy)
+      mass.push(kvx + kvy);
+      
+    }
+    numArea = area[mass.indexOf(Math.min.apply(null, mass))];
+   }
 
   const styleBoxGl = {
     position: "absolute",
-    left: phGl - 24 + sdvig + "%",
-    top: pvGl - 11.5 + "%",
+    left: phGl - 24 + sdvigH + "%",
+    top: pvGl - sdvigV + "%",
     width: 140,
-    height: 70,
+    height: 96,
     bgcolor: "background.paper",
     border: "1px solid #000",
     borderColor: "primary.main",
@@ -538,28 +583,18 @@ export const PictInfoBox = (
       <Grid container sx={{ fontSize: 12.9, marginTop: 0.5 }}>
         <Grid item xs={8}>
           <Grid container>
-            <Grid item xs={12} sx={{ marginTop: 0 }}>
-              <b>Время</b>
-            </Grid>
-            <Grid item xs={12} sx={{ marginTop: 1 }}>
-              <b>Прямой</b>
-            </Grid>
-            <Grid item xs={12} sx={{ marginTop: 1 }}>
-              <b>Обратный</b>
-            </Grid>
+            {Grider("Время", 0, true)}
+            {Grider("Прямой", 1, true)}
+            {Grider("Обратный", 1, true)}
+            {Grider("КС", 1, true)}
           </Grid>
         </Grid>
         <Grid item xs>
           <Grid container>
-            <Grid item xs={12} sx={{ marginTop: 0 }}>
-              {TimeStr(pointer.Time)}
-            </Grid>
-            <Grid item xs={12} sx={{ marginTop: 1 }}>
-              {pointer.Value[0]}
-            </Grid>
-            <Grid item xs={12} sx={{ marginTop: 1 }}>
-              {pointer.Value[1]}
-            </Grid>
+            {Grider(TimeStr(pointer.Time), 0, false)}
+            {Grider(pointer.Value[0], 1, false)}
+            {Grider(pointer.Value[1], 1, false)}
+            {Grider(numArea, 1, false)}
           </Grid>
         </Grid>
       </Grid>
@@ -567,3 +602,4 @@ export const PictInfoBox = (
   );
 };
 //==================================================
+//console.log("!!!!!!:",window.screen.width,window.innerWidth,window.outerWidth);

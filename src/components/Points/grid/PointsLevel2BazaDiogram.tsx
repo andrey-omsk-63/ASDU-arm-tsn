@@ -59,9 +59,7 @@ const PointsLevel2BazaDiogram = (props: {
   let dlMas = points.xctrls[crRoad].StrategyB.length;
   const horizon = points.xctrls[crRoad].StrategyB[dlMas - 1].xright;
   const vertical = points.xctrls[crRoad].StrategyB[dlMas - 1].xleft;
-  //const axisHorizon = horizon;
   const steepHorizon = 12 / horizon;
-  //const axisVertical = vertical;
   const steepVertical = 85.7 / vertical;
   const dlBlok = (window.innerWidth / 12.55) * 8;
 
@@ -95,15 +93,12 @@ const PointsLevel2BazaDiogram = (props: {
       let luchP = 1;
       let luchO = 1;
       let coler = "red";
-      let i = 0;
-      let j = 0;
+      let pStB = points.xctrls[crRoad].StrategyB;
 
-      const MakeMatrixColor = (num: number) => {
-        luchO = points.xctrls[crRoad].StrategyB[num].vleft;
-        luchP = points.xctrls[crRoad].StrategyB[num].vright;
-        ratio =
-          points.xctrls[crRoad].StrategyB[num].xright /
-          points.xctrls[crRoad].StrategyB[num].xleft;
+      const MakeMatrixColor = (num: number, i: number, j: number) => {
+        luchO = pStB[num].vleft;
+        luchP = pStB[num].vright;
+        ratio = pStB[num].xright / pStB[num].xleft;
         coler = colorsGraf[num * 3];
         if (luchP !== 1 || luchO !== 1) {
           if (i < j * luchO * ratio) coler = colorsGraf[num * 3 + 1];
@@ -111,51 +106,30 @@ const PointsLevel2BazaDiogram = (props: {
         }
       };
 
-      for (j = 0; j < vertical; j += scale) {
+      for (let j = 0; j < vertical; j += scale) {
         matrix[j] = [];
-
-        for (i = 0; i < horizon; i += scale) {
-          if (
-            dlMas >= 1 &&
-            points.xctrls[crRoad].StrategyB[0].xright >= i &&
-            points.xctrls[crRoad].StrategyB[0].xleft >= j
-          ) {
-            MakeMatrixColor(0);
+        for (let i = 0; i < horizon; i += scale) {
+          if (dlMas >= 1 && pStB[0].xright >= i && pStB[0].xleft >= j) {
+            MakeMatrixColor(0, i, j);
           } else {
-            if (
-              dlMas >= 2 &&
-              points.xctrls[crRoad].StrategyB[1].xright >= i &&
-              points.xctrls[crRoad].StrategyB[1].xleft >= j
-            ) {
-              MakeMatrixColor(1);
+            if (dlMas >= 2 && pStB[1].xright >= i && pStB[1].xleft >= j) {
+              MakeMatrixColor(1, i, j);
             } else {
-              if (
-                dlMas >= 3 &&
-                points.xctrls[crRoad].StrategyB[2].xright >= i &&
-                points.xctrls[crRoad].StrategyB[2].xleft >= j
-              ) {
-                MakeMatrixColor(2);
+              if (dlMas >= 3 && pStB[2].xright >= i && pStB[2].xleft >= j) {
+                MakeMatrixColor(2, i, j);
               } else {
-                if (
-                  dlMas >= 4 &&
-                  points.xctrls[crRoad].StrategyB[3].xright >= i &&
-                  points.xctrls[crRoad].StrategyB[3].xleft >= j
-                ) {
-                  MakeMatrixColor(3);
+                if (dlMas >= 4 && pStB[3].xright >= i && pStB[3].xleft >= j) {
+                  MakeMatrixColor(3, i, j);
                 } else {
-                  if (
-                    dlMas >= 5 &&
-                    points.xctrls[crRoad].StrategyB[4].xright >= i &&
-                    points.xctrls[crRoad].StrategyB[4].xleft >= j
-                  ) {
-                    MakeMatrixColor(4);
+                  if (dlMas >= 5 && pStB[4].xright >= i && pStB[4].xleft >= j) {
+                    MakeMatrixColor(4, i, j);
                   } else {
                     if (
                       dlMas >= 6 &&
-                      points.xctrls[crRoad].StrategyB[5].xright >= i &&
-                      points.xctrls[crRoad].StrategyB[5].xleft >= j
+                      pStB[5].xright >= i &&
+                      pStB[5].xleft >= j
                     ) {
-                      MakeMatrixColor(5);
+                      MakeMatrixColor(5, i, j);
                     }
                   }
                 }
@@ -202,7 +176,6 @@ const PointsLevel2BazaDiogram = (props: {
             item
             sx={{
               backgroundColor: masCol[i],
-              //height: String((steepVertical * scale) / 2) + "vh",
               height: String(steepVertical * scale) + "vh",
             }}
           ></Grid>
@@ -321,7 +294,16 @@ const PointsLevel2BazaDiogram = (props: {
             {PointsXt112Comp1Tab4()}
             {OutputerPict()}
             {pictInfo && (
-              <>{PictInfoBox(pvGl, phGl, pointer[namer][IDX], setPictInfo)}</>
+              <>
+                {PictInfoBox(
+                  pvGl,
+                  phGl,
+                  pointer[namer][IDX],
+                  setPictInfo,
+                  points.xctrls[crRoad],
+                  1
+                )}
+              </>
             )}
           </>
         )}

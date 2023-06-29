@@ -243,7 +243,16 @@ const PointsLevel2AreaDiogram = (props: {
           {PointsXt112Comp1Tab4()}
           {OutputerPict()}
           {pictInfo && (
-            <>{PictInfoBox(pvGl, phGl, pointer[namer][IDX], setPictInfo)}</>
+            <>
+              {PictInfoBox(
+                pvGl,
+                phGl,
+                pointer[namer][IDX],
+                setPictInfo,
+                points.xctrls[crRoad],
+                0
+              )}
+            </>
           )}
         </>
       )}
