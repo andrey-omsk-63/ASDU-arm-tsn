@@ -30,8 +30,6 @@ const PointsLevel2AreaDiogram = (props: {
   const namer = points.xctrls[props.crossroad].name;
   const pointer = points.results;
 
-  console.log("###:", points.xctrls[crRoad].StrategyA.length, points);
-
   const colorsGraf = [
     "#d6bf36", // хаки
     "Turquoise",
@@ -61,7 +59,6 @@ const PointsLevel2AreaDiogram = (props: {
   const [openLoader, setOpenLoader] = React.useState(true);
   const [pictInfo, setPictInfo] = React.useState(false);
 
-  let dlMas = points.xctrls[crRoad].StrategyA.length;
   const horizon = points.xctrls[crRoad].right;
   const vertical = points.xctrls[crRoad].left;
   const steepHorizon = 12 / horizon;
@@ -88,37 +85,32 @@ const PointsLevel2AreaDiogram = (props: {
   }
 
   const MakeMatrix = () => {
-    let coler = "white";
+    let pStA = points.xctrls[crRoad].StrategyA;
+    //console.log("111:", pStA.length, pStA);
 
-    let coorPointX = 0;
-    let coorPointY = 0;
-
-    for (let j = 0; j < vertical; j += scale) {
+    for (let j = 0; j < vertical + 1; j += scale) {
       matrix[j] = [];
-
-      for (let i = 0; i < horizon; i += scale) {
-        coler = "LightCyan";
+      for (let i = 0; i < horizon + 1; i += scale) {
+        let coler = "red";
         let mass = [];
         let flag = true;
-
-        for (let ij = 0; ij < dlMas; ij++) {
-          coorPointY = points.xctrls[crRoad].StrategyA[ij].xleft;
-          coorPointX = points.xctrls[crRoad].StrategyA[ij].xright;
+        for (let k = 0; k < pStA.length; k++) {
+          let coorPointY = pStA[k].xleft;
+          let coorPointX = pStA[k].xright;
+          let kvx = (i - coorPointX) ** 2;
+          let kvy = (j - coorPointY) ** 2;
           if (coorPointY === j && coorPointX === i) {
+            //console.log("!!!:", k, coorPointY, j, coorPointX, i, kvx + kvy);
             coler = "blue";
             flag = false;
           }
-          let kvx = (i - coorPointX) ** 2;
-          let kvy = (j - coorPointY) ** 2;
           mass.push(kvx + kvy);
         }
-        if (flag) {
-          coler = colorsGraf[mass.indexOf(Math.min.apply(null, mass))];
-        }
+        if (flag) coler = colorsGraf[mass.indexOf(Math.min.apply(null, mass))];
+        //if (coler === "blue") console.log("2blue", i, j);
         matrix[j].push(coler);
       }
     }
-
     matrix = matrix.filter(function (el) {
       return el != null; //избавляемся от пустых значений
     });
@@ -141,6 +133,7 @@ const PointsLevel2AreaDiogram = (props: {
 
       for (let i = 0; i < horizon; i += scale) {
         coler = matrix[j / scale][i / scale];
+        //if (coler === 'blue') console.log("1blue");
         if (coler === colerOld) {
           colBl++;
         } else {

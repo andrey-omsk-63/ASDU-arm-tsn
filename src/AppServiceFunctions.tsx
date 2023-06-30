@@ -515,7 +515,6 @@ export const PictInfoBox = (
   point: any,
   mode: number
 ) => {
-  console.log("PVGL:", pvGl, phGl, point);
   let snos = mode ? 1000 : 850;
   let sdvigH = (window.innerWidth - snos) * 0.012;
   let sdvigV = pvGl < 50 ? 0 : 15;
@@ -540,23 +539,14 @@ export const PictInfoBox = (
   } else {
     let pStA = point.StrategyA; // Диограмма областей
     numArea = -1;
-    let area = [1,2,3,4,5,6]
+    let area = [1,2,3,4,5,6,7,8,9.10,11,12]
     let mass = [];
     for (let i = 0; i < pStA.length; i++) {
-      console.log(
-        "@@@:",
-        pointer.Value[0],
-        pStA[i].xright,
-        pointer.Value[1],
-        pStA[i].xleft
-      );
       let coorPointY = pStA[i].xleft;
       let coorPointX = pStA[i].xright;
       let kvx = (pointer.Value[0] - coorPointX) ** 2;
       let kvy = (pointer.Value[1] - coorPointY) ** 2;
-      console.log('&&&:',coorPointY,coorPointX,kvx + kvy)
       mass.push(kvx + kvy);
-      
     }
     numArea = area[mass.indexOf(Math.min.apply(null, mass))];
    }

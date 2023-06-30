@@ -530,7 +530,7 @@ const StatisticXTArchive = (props: {
   const Dinama = () => {
     return (
       <Backdrop sx={styleBackdrop} open={openLoader} onClick={handleClose}>
-        <CircularProgress color="inherit" size={548} />
+        <CircularProgress color="inherit" size={212} />
       </Backdrop>
     );
   };
