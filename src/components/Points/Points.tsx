@@ -49,8 +49,6 @@ const Points = (props: {
   let debug = false;
   if (props.ws.url === 'wss://localhost:3000/W') debug = true;
 
-  //console.log("POINS:", reGion, pointsGl);
-
   let points = pointsGl.filter((pointsGl) => pointsGl.region === Number(reGion));
   //pointsEtalon = points; // замена проверки обновления Xctrl - проверка теперь в App
 
@@ -114,8 +112,6 @@ const Points = (props: {
     let resSps: any = [];
     let labl: string = '';
 
-    //console.log("pointsEtalon:", pointsEtalon, pointsEtalon.length);
-
     if (pointsEtalon.length === 0) {
       resSps.push(
         <Box key={1}>
@@ -128,15 +124,29 @@ const Points = (props: {
           fontSize: 13.5,
           maxHeight: '20px',
           minHeight: '20px',
-          border: 1,
-          borderColor: value !== i ? '#93D145' : '#E9F5D8',
-          backgroundColor: value === i ? '#93D145' : '#E9F5D8',
+          bgcolor: '#BAE186', // тёмно-салатовый
+          border: '1px solid #000',
+          borderColor: '#93D145', // ярко-салатовый
           //borderRadius: 1,
+          boxShadow: 4,
           color: 'black',
           marginRight: 0.5,
         };
+        const stylePXt11 = {
+          fontSize: 13.5,
+          maxHeight: '20px',
+          minHeight: '20px',
+          bgcolor: '#E6F5D6', // светло-салатовый
+          border: '1px solid #000',
+          borderColor: '#d4d4d4', // серый
+          //borderRadius: 1,
+          boxShadow: 2,
+          color: 'black',
+          marginRight: 0.5,
+        };
+        let illum = value === i ? stylePXt1 : stylePXt11;
         labl = 'XT:' + pointsEtalon[i].area.toString() + ':' + pointsEtalon[i].subarea.toString();
-        resSps.push(<Tab key={i} sx={stylePXt1} label={labl} />);
+        resSps.push(<Tab key={i} sx={illum} label={labl} />);
       }
     }
     return resSps;

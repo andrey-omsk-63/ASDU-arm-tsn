@@ -1,23 +1,24 @@
-import * as React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { maskpointCreate } from "./../../redux/actions";
+import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { maskpointCreate } from './../../redux/actions';
 
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
-import TabContext from "@mui/lab/TabContext";
-import TabPanel from "@mui/lab/TabPanel";
-import Modal from "@mui/material/Modal";
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import TabContext from '@mui/lab/TabContext';
+import TabPanel from '@mui/lab/TabPanel';
+import Modal from '@mui/material/Modal';
 
-import PointsMainScr from "./PointsMainScr";
-import PointsMenuLevel2 from "./PointsMenuLevel2";
+import PointsMainScr from './PointsMainScr';
+import PointsMenuLevel2 from './PointsMenuLevel2';
 
-import { styleModalEnd } from "./grid/PointsGridStyle";
+import { styleModalEnd } from './grid/PointsGridStyle';
 
-import { XctrlInfo } from "../../interfaceGl.d";
+import { XctrlInfo } from '../../interfaceGl.d';
 
 let xtPropsOld = -1;
 let numerOld = -1;
+let nomIllum = -1;
 
 const PointsMenuLevel1 = (props: {
   open: boolean;
@@ -43,30 +44,50 @@ const PointsMenuLevel1 = (props: {
   const xtProps = props.xtt;
   const points = props.xctrll[xtProps];
 
-  const [valueLevel2, setValueLavel2] = React.useState("1");
-  const [tekValue, setTekValue] = React.useState("1");
+  const [valueLevel2, setValueLavel2] = React.useState('1');
+  const [tekValue, setTekValue] = React.useState('1');
 
   const [crossRoad, setCrossRoad] = React.useState(0);
 
   if (xtPropsOld !== xtProps) {
     xtPropsOld = xtProps;
+    nomIllum = -1;
     setCrossRoad(0);
   }
 
   const stylePXt11 = {
     fontSize: 13.9,
-    maxHeight: "20px",
-    minHeight: "20px",
-    backgroundColor: "#E9F5D8",
-    color: "black",
+    maxHeight: '20px',
+    minHeight: '20px',
+    color: 'black',
+    bgcolor: '#BAE186', // тёмно-салатовый
+    border: '1px solid #000',
+    borderColor: '#93D145', // ярко-салатовый
+    borderRadius: 1,
+    boxShadow: 6,
     marginRight: 1,
     marginTop: 0.7,
-    textTransform: "unset !important",
+    textTransform: 'unset !important',
+  };
+
+  const stylePXt12 = {
+    fontSize: 13.9,
+    maxHeight: '20px',
+    minHeight: '20px',
+    bgcolor: '#E6F5D6', // светло-салатовый
+    border: '1px solid #000',
+    borderColor: '#d4d4d4', // серый
+    borderRadius: 1,
+    boxShadow: 4,
+    color: 'black',
+    marginRight: 1,
+    marginTop: 0.7,
+    textTransform: 'unset !important',
   };
 
   const SetValueLavel2 = (mode: string) => {
     setValueLavel2(mode);
-    if (mode === "1") setTekValue(mode); //tekValue = mode;
+    if (mode === '1') setTekValue(mode); //tekValue = mode;
   };
 
   const MenuCrossRoad = () => {
@@ -74,13 +95,14 @@ const PointsMenuLevel1 = (props: {
 
     const handleOpen = () => {
       setOpen(true);
-      setTekValue("2");
+      setTekValue('2');
     };
 
     const handleClose = (numer: number) => {
+      nomIllum = numer;
       if (numer !== 777) {
         setCrossRoad(numer);
-        SetValueLavel2("2");
+        SetValueLavel2('2');
         if (numerOld !== numer) {
           maskpoint.newXt = true;
           dispatch(maskpointCreate(maskpoint));
@@ -100,14 +122,15 @@ const PointsMenuLevel1 = (props: {
       }
 
       const stylePK = {
-        position: "absolute",
-        left: "50%",
-        top: "50%",
-        transform: "translate(-50%, -50%)",
+        outline: 'none',
+        position: 'absolute',
+        left: '50%',
+        top: '50%',
+        transform: 'translate(-50%, -50%)',
         width: (dlStrMenu + 8) * 10,
-        bgcolor: "background.paper",
-        border: "2px solid #000",
-        borderColor: "primary.main",
+        bgcolor: 'background.paper',
+        border: '1px solid #000',
+        borderColor: 'primary.main',
         borderRadius: 2,
         boxShadow: 24,
         p: 3,
@@ -116,33 +139,29 @@ const PointsMenuLevel1 = (props: {
       const SpisPerekr = () => {
         let resStr = [];
         for (let i = 0; i < points.xctrls.length; i++) {
+          let illum = nomIllum === i ? stylePXt11 : stylePXt12;
           resStr.push(
-            <Button
-              key={i}
-              sx={stylePXt11}
-              variant="contained"
-              onClick={() => handleClose(i)}
-            >
+            <Button key={i} sx={illum} onClick={() => handleClose(i)}>
               <b>
                 XT:{points.area}:1:&nbsp;&nbsp;{points.xctrls[i].name}
               </b>
-            </Button>
+            </Button>,
           );
         }
         resStr.push(
           <Button key={Math.random()} sx={styleModalEnd} onClick={() => handleClose(777)}>
             <b>&#10006;</b>
-          </Button>
+          </Button>,
         );
         return resStr;
       };
 
-      let soob = "XT:" + points.area + ":1 Перечень перекрёстков";
+      let soob = 'XT:' + points.area + ':1 Перечень перекрёстков';
 
       return (
         <>
-          {ButtonMenu("2", soob, handleOpen)}
-          <Modal open={open} hideBackdrop>
+          {ButtonMenu('2', soob, handleOpen)}
+          <Modal open={open} hideBackdrop={false}>
             <Box sx={stylePK}>
               <Stack direction="column">{SpisPerekr()}</Stack>
             </Box>
@@ -153,23 +172,44 @@ const PointsMenuLevel1 = (props: {
   };
 
   const SetValueLavel21 = () => {
-    SetValueLavel2("1");
+    SetValueLavel2('1');
   };
 
   const ButtonMenu = (mode: string, soob: any, func: Function) => {
-    const styleButtonMenu = {
+    const styleButtonMenu01 = {
       fontSize: 13.9,
-      maxHeight: "20px",
-      minHeight: "20px",
-      backgroundColor: mode === tekValue ? "#93D145" : "#E9F5D8",
-      color: "black",
+      maxHeight: '20px',
+      minHeight: '20px',
+      color: 'black',
+      bgcolor: '#BAE186', // тёмно-салатовый
+      border: '1px solid #000',
+      borderColor: '#93D145', // ярко-салатовый
+      borderRadius: 1,
+      boxShadow: 6,
       marginRight: 1,
       marginTop: 0.7,
-      textTransform: "unset !important",
+      textTransform: 'unset !important',
     };
 
+    const styleButtonMenu02 = {
+      fontSize: 13.9,
+      maxHeight: '20px',
+      minHeight: '20px',
+      color: 'black',
+      bgcolor: '#E6F5D6', // светло-салатовый
+      border: '1px solid #000',
+      borderColor: '#d4d4d4', // серый
+      borderRadius: 1,
+      boxShadow: 2,
+      marginRight: 1,
+      marginTop: 0.7,
+      textTransform: 'unset !important',
+    };
+
+    let illum = mode === tekValue ? styleButtonMenu01 : styleButtonMenu02;
+
     return (
-      <Button sx={styleButtonMenu} variant="contained" onClick={() => func()}>
+      <Button sx={illum} onClick={() => func()}>
         <b>{soob}</b>
       </Button>
     );
@@ -180,7 +220,7 @@ const PointsMenuLevel1 = (props: {
       <TabContext value={valueLevel2}>
         <Box>
           <Stack sx={{ marginLeft: 0.5, marginTop: 0.5 }} direction="row">
-            {ButtonMenu("1", "Основной:", SetValueLavel21)}
+            {ButtonMenu('1', 'Основной:', SetValueLavel21)}
             {MenuCrossRoad()}
           </Stack>
         </Box>

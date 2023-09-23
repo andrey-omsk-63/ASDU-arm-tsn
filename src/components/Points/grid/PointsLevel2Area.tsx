@@ -1,26 +1,27 @@
-import * as React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { maskpointCreate } from "./../../../redux/actions";
+import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { maskpointCreate } from './../../../redux/actions';
 
-import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Modal from "@mui/material/Modal";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
+import Grid from '@mui/material/Grid';
+import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Modal from '@mui/material/Modal';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
 
-import PointsLevel2AreaDiogram from "./PointsLevel2AreaDiogram";
+import PointsLevel2AreaDiogram from './PointsLevel2AreaDiogram';
 
-import { styleSetInf, styleModalEnd } from "./PointsGridStyle";
-import { styleInpArg, styleInpKnop } from "./PointsGridStyle";
-import { styleXTG05, styleBut02, styleBut03 } from "./PointsGridStyle";
-import { styleXTG00, styleXTG01, styleXTG021 } from "./PointsGridStyle";
-import { styleXTG02, styleXTG035, styleXTG045 } from "./PointsGridStyle";
+import { styleSetInf, styleModalEnd } from './PointsGridStyle';
+import { styleInpArg, styleInpKnop, styleBut021 } from './PointsGridStyle';
+import { styleXTG05, styleBut02, styleBut03 } from './PointsGridStyle';
+import { styleXTG00, styleXTG01, styleXTG021 } from './PointsGridStyle';
+import { styleXTG02, styleXTG035, styleXTG045 } from './PointsGridStyle';
 
-import { XctrlInfo } from "../../../interfaceGl.d";
+import { XctrlInfo } from '../../../interfaceGl.d';
 
-let nomStr = 0;
+let nomStr = -1;
+let nomIllum = -1;
 let flagSave = false;
 let flagEdit = true;
 let flagExit = false;
@@ -62,6 +63,7 @@ const PointsLevel2Area = (props: {
     xtPropsOld = xtProps;
     crossRoadOld = crossRoad;
     nomStr = 0;
+    nomIllum = -1;
     flagSave = false;
     flagEdit = true;
     flagExit = false;
@@ -82,7 +84,7 @@ const PointsLevel2Area = (props: {
       flagEdit = false;
     } else {
       if (maskpoint.redaxPoint && !flagEdit) {
-        console.log("2");
+        console.log('2');
         setPoints(pointsTemp); // Stop
         flagExit = false;
         flagEdit = true;
@@ -92,16 +94,16 @@ const PointsLevel2Area = (props: {
   }
 
   const handleKey = (event: any) => {
-    if (event.key === "Enter") event.preventDefault();
+    if (event.key === 'Enter') event.preventDefault();
   };
 
   const Inputer = (name: string, argum: any, hChange: any, styleX: any) => {
     return (
       <Grid container sx={{ fontSize: 15 }}>
-        <Grid item xs={5}>
+        <Grid item xs={5} sx={{ marginTop: 1 }}>
           {name}
         </Grid>
-        <Grid item xs>
+        <Grid item xs sx={{ marginTop: 0 }}>
           <Box sx={styleX}>
             <TextField
               size="small"
@@ -174,21 +176,17 @@ const PointsLevel2Area = (props: {
           <Button sx={styleModalEnd} onClick={handleClose}>
             <b>&#10006;</b>
           </Button>
-          <Typography sx={{ textAlign: "center" }}>
+          <Typography sx={{ textAlign: 'center' }}>
             КС <b> &nbsp;{elem.pk} </b>
-          </Typography>{" "}
+          </Typography>{' '}
           <br />
-          {Inputer("Прямой", valuen1, handleChange1, styleInpArg)}
-          {Inputer("Обратный", valuen2, handleChange2, styleInpArg)}
-          {Inputer("Описание", valuen3, handleChange3, styleInpArg)}
-          <Box sx={{ textAlign: "center" }}>
-            {" "}
+          {Inputer('Прямой', valuen1, handleChange1, styleInpArg)}
+          {Inputer('Обратный', valuen2, handleChange2, styleInpArg)}
+          {Inputer('Описание', valuen3, handleChange3, styleInpArg)}
+          <Box sx={{ textAlign: 'center' }}>
+            {' '}
             <br />
-            <Button
-              sx={styleInpKnop}
-              variant="contained"
-              onClick={handleCloseStr}
-            >
+            <Button sx={styleInpKnop} onClick={handleCloseStr}>
               <b>Сохранить</b>
             </Button>
           </Box>
@@ -199,6 +197,7 @@ const PointsLevel2Area = (props: {
 
   const SetOpenSetStr = (nom: number) => {
     nomStr = nom;
+    nomIllum = nom;
     setOpenSetStr(true);
   };
 
@@ -227,16 +226,13 @@ const PointsLevel2Area = (props: {
 
     for (let i = 0; i < elemm.length; i++) {
       let elem = elemm[i].pk;
+      let illum = nomIllum === i ? styleBut021 : styleBut02;
       resStr.push(
         <Grid key={i} container>
           <Grid xs={2} item sx={styleXTG01}>
             {/* {points.xctrls[props.crossroad].StrategyA[i].pk} */}
             {!flagEdit && (
-              <Button
-                sx={styleBut02}
-                variant="contained"
-                onClick={() => SetOpenSetStr(i)}
-              >
+              <Button sx={illum} onClick={() => SetOpenSetStr(i)}>
                 {elem}
               </Button>
             )}
@@ -251,7 +247,7 @@ const PointsLevel2Area = (props: {
           <Grid xs={3.5} item sx={styleXTG00}>
             {elemm[i].desc}
           </Grid>
-        </Grid>
+        </Grid>,
       );
     }
     return resStr;
@@ -286,9 +282,9 @@ const PointsLevel2Area = (props: {
         if (props.ws.readyState === WebSocket.OPEN) {
           props.ws.send(
             JSON.stringify({
-              type: "changeXctrl",
+              type: 'changeXctrl',
               data: maskpoint.pointForRedax,
-            })
+            }),
           );
         } else {
           setTimeout(() => {
@@ -316,11 +312,7 @@ const PointsLevel2Area = (props: {
         <Grid container>
           <Grid item xs={6}></Grid>
           <Grid item xs={3} sx={styleXTG05}>
-            <Button
-              sx={styleBut03}
-              variant="contained"
-              onClick={() => SaveEdit()}
-            >
+            <Button sx={styleBut03} onClick={() => SaveEdit()}>
               <b>Сохранить изменения</b>
             </Button>
           </Grid>
@@ -331,11 +323,7 @@ const PointsLevel2Area = (props: {
         <Grid container>
           <Grid item xs={9}></Grid>
           <Grid item xs={3} sx={styleXTG05}>
-            <Button
-              sx={styleBut03}
-              variant="contained"
-              onClick={() => StartEdit()}
-            >
+            <Button sx={styleBut03} onClick={() => StartEdit()}>
               <b>Редактирование</b>
             </Button>
           </Grid>
@@ -346,11 +334,7 @@ const PointsLevel2Area = (props: {
         <Grid container>
           <Grid item xs={9}></Grid>
           <Grid item xs={3} sx={styleXTG05}>
-            <Button
-              sx={styleBut03}
-              variant="contained"
-              onClick={() => StopEdit()}
-            >
+            <Button sx={styleBut03} onClick={() => StopEdit()}>
               <b>Выйти без cохранения</b>
             </Button>
           </Grid>
@@ -358,7 +342,7 @@ const PointsLevel2Area = (props: {
       )}
 
       <Stack direction="row">
-        <Grid item xs={3} sx={{ height: "85.8vh", border: 0 }}>
+        <Grid item xs={3} sx={{ height: '85.8vh', border: 0 }}>
           <Grid container>
             <Grid item xs={12} sx={styleXTG035}>
               <PointsLevel2AreaTab1Header />
@@ -369,11 +353,7 @@ const PointsLevel2Area = (props: {
 
         <Grid item xs sx={styleXTG045}>
           <Grid container>
-            <PointsLevel2AreaDiogram
-              xctrll={pointGraf}
-              xtt={xtProps}
-              crossroad={props.crossroad}
-            />
+            <PointsLevel2AreaDiogram xctrll={pointGraf} xtt={xtProps} crossroad={props.crossroad} />
           </Grid>
         </Grid>
       </Stack>

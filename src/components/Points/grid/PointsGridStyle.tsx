@@ -45,7 +45,7 @@ export const styleXTG02 = {
 export const styleXTG03 = {
   marginTop: '0.5vh',
   border: 1,
-  height: '32.6vh',  // 33
+  height: '32.6vh', // 33
   borderRadius: 1,
   borderColor: 'primary.main',
 };
@@ -82,11 +82,29 @@ export const styleBut02 = {
   fontSize: 11,
   maxHeight: '21px',
   minHeight: '21px',
-  maxWidth: '2%',
-  minWidth: '2%',
-  //backgroundColor: '#FFFBE5',
-  backgroundColor: '#E9F5D8',
+  maxWidth: '3%',
+  minWidth: '3%',
   color: 'black',
+  bgcolor: '#E6F5D6', // светло-салатовый
+  border: '1px solid #000',
+  borderColor: '#d4d4d4', // серый
+  borderRadius: 1,
+  boxShadow: 1,
+  textTransform: 'unset !important',
+};
+
+export const styleBut021 = {
+  fontSize: 11,
+  maxHeight: '21px',
+  minHeight: '21px',
+  maxWidth: '3%',
+  minWidth: '3%',
+  color: 'black',
+  bgcolor: '#BAE186', // тёмно-салатовый
+  border: '1px solid #000',
+  borderColor: '#93D145', // ярко-салатовый
+  borderRadius: 1,
+  boxShadow: 4,
   textTransform: 'unset !important',
 };
 
@@ -97,8 +115,11 @@ export const styleBut03 = {
   minHeight: '21px',
   maxWidth: '193px',
   minWidth: '193px',
-  //backgroundColor: '#FFFBE5',
-  backgroundColor: '#E9F5D8',
+  bgcolor: '#E6F5D6', // светло-салатовый
+  border: '1px solid #000',
+  borderColor: '#d4d4d4', // серый
+  borderRadius: 1,
+  boxShadow: 6,
   color: 'black',
   textTransform: 'unset !important',
 };
@@ -115,13 +136,14 @@ export const styleModalEnd = {
 };
 
 export const styleSetInf = {
+  outline: 'none',
   fontSize: 17,
   position: 'absolute',
   left: '36%',
   marginTop: '15vh',
   width: 270,
   bgcolor: 'background.paper',
-  border: '3px solid #000',
+  border: '1px solid #000',
   borderColor: 'primary.main',
   borderRadius: 2,
   boxShadow: 24,
@@ -129,13 +151,14 @@ export const styleSetInf = {
 };
 
 export const styleSetInff = {
+  outline: 'none',
   fontSize: 17,
   position: 'absolute',
   left: '36%',
   marginTop: '15vh',
   width: 380,
   bgcolor: 'background.paper',
-  border: '3px solid #000',
+  border: '1px solid #000',
   borderColor: 'primary.main',
   borderRadius: 2,
   boxShadow: 24,
@@ -143,37 +166,64 @@ export const styleSetInff = {
 };
 
 export const styleInpName = {
-  '& > :not(style)': { m: 0, width: '27ch', bgcolor: '#FFFBE5' },
+  '& > :not(style)': {
+    m: 0,
+    width: '27ch',
+    bgcolor: '#FFFBE5',
+    border: '1px solid #000',
+    borderColor: '#d4d4d4', // серый
+    borderRadius: 1,
+    boxShadow: 6,
+  },
 };
 
 export const styleInpArg = {
-  '& > :not(style)': { width: '12ch', marginTop: 0.5, bgcolor: '#FFFBE5' },
+  '& > :not(style)': {
+    width: '12ch',
+    marginTop: 0.5,
+    bgcolor: '#FFFBE5',
+    borderColor: '#d4d4d4', // серый
+    borderRadius: 1,
+    boxShadow: 6,
+  },
 };
 export const styleInpTime = {
-  '& > :not(style)': { width: '2ch', bgcolor: '#FFFBE5' },
+  '& > :not(style)': {
+    width: '2ch',
+    maxHeight: '21px',
+    minHeight: '21px',
+    bgcolor: '#FFFBE5',
+    border: '1px solid #000',
+    borderColor: '#d4d4d4', // серый
+    borderRadius: 1,
+    boxShadow: 6,
+  },
 };
 
 export const styleInpKnop = {
-  color: 'black',
   marginTop: 1,
   maxHeight: '21px',
   minHeight: '21px',
-  //backgroundColor: '#F1F3F4',
-  backgroundColor: '#E9F5D8',
+  color: 'black',
+  bgcolor: '#E6F5D6', // светло-салатовый
+  border: '1px solid #000',
+  borderColor: '#d4d4d4', // серый
+  borderRadius: 1,
+  boxShadow: 6,
   textAlign: 'center',
   textTransform: 'unset !important',
 };
 //====== PointsLevel2BazaDiogram ================================================
 export const styleEndInf = {
   fontSize: 11,
-  position: "absolute",
-  top: "0%",
-  left: "auto",
-  right: "0%",
-  height: "15px",
-  maxWidth: "2%",
-  minWidth: "2%",
-  color: "black",
+  position: 'absolute',
+  top: '0%',
+  left: 'auto',
+  right: '0%',
+  height: '15px',
+  maxWidth: '2%',
+  minWidth: '2%',
+  color: 'black',
 };
 //====== PointsLevel2Area =======================================================
 export const styleXTG035 = {
@@ -194,6 +244,10 @@ export const styleXTG045 = {
 export const styleBoxForm = {
   '& > :not(style)': {
     backgroundColor: '#FFFBE5', // молоко
+    border: '1px solid #000',
+    borderColor: '#d4d4d4', // серый
+    borderRadius: 1,
+    boxShadow: 6,
     marginTop: '0px',
     marginLeft: '-0px',
     width: '63px',
@@ -339,8 +393,8 @@ export const styleXTG105 = {
 };
 //====== PointsMenuLevel2 =======================================================
 export const styleXTl201 = {
-  width: "70%",
-  height: "83.5vh",
+  width: '70%',
+  height: '83.5vh',
   marginTop: '2.5vh',
   marginLeft: -3,
   marginRight: -61,
