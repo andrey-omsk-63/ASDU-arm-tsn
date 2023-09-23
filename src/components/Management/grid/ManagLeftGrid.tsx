@@ -13,7 +13,10 @@ import ManagementKnobXT from "./ManagKnobXT";
 import { Tflight } from "../../../interfaceMNG.d";
 import { XctrlInfo } from "../../../interfaceGl.d";
 
-import { styleMG01, styleMG03 } from "./ManagGridStyle";
+import { styleMG01, styleMG03, styleButSubArea01 } from "./ManagGridStyle";
+import { styleButSubArea02, styleButArea01 } from "./ManagGridStyle";
+import { styleButArea02, styleButRegion01 } from "./ManagGridStyle";
+import { styleButRegion02 } from "./ManagGridStyle";
 
 export interface DataKnob {
   knop: Knob[];
@@ -137,28 +140,16 @@ const ManagementLeftGrid = (props: {
       let resStr = [];
 
       const ButtonSubArea = (i: number) => {
-        let illum = false;
-        if (
+        let illum =
           mode === 3 &&
           areaa === masSpis[i].areaNum &&
           subArea === masSpis[i].subarea
-        )
-          illum = true;
-
-        const styleButSubArea = {
-          fontSize: 12,
-          marginTop: 0.2,
-          height: "18px",
-          backgroundColor: illum ? "#93D145" : "#E9F5D8",
-          color: "black",
-          borderRadius: 2,
-          boxShadow: 1,
-          textTransform: "unset !important",
-        };
+            ? styleButSubArea01
+            : styleButSubArea02;
 
         return (
           <Button
-            sx={styleButSubArea}
+            sx={illum}
             onClick={() => handleClick(props.nom, masSpis[i].subarea)}
           >
             Подрайон:{masSpis[i].areaNum}:{masSpis[i].subarea}
@@ -180,22 +171,13 @@ const ManagementLeftGrid = (props: {
     };
 
     const ButtonArea = () => {
-      let illum = false;
-      if (mode === 2 && areaa === masSpis[0].areaNum && subArea === 0)
-        illum = true;
+      let illum =
+        mode === 2 && areaa === masSpis[0].areaNum && subArea === 0
+          ? styleButArea01
+          : styleButArea02;
 
-      const styleButArea = {
-        fontSize: 12,
-        marginTop: 0.3,
-        height: "20px",
-        backgroundColor: illum ? "#93D145" : "#E9F5D8",
-        color: "black",
-        borderRadius: 2,
-        boxShadow: 1,
-        textTransform: "unset !important",
-      };
       return (
-        <Button sx={styleButArea} onClick={() => handleClock(props.nom)}>
+        <Button sx={illum} onClick={() => handleClock(props.nom)}>
           <b>
             Район:{masSpis[0].areaNum}&nbsp;{masSpis[0].areaName}
           </b>
@@ -225,22 +207,13 @@ const ManagementLeftGrid = (props: {
     };
 
     const ButtonRegion = () => {
-      let illum = false;
-      if (mode === 1 && areaa === "0" && subArea === 0) illum = true;
-
-      const styleButRegion = {
-        fontSize: 15,
-        marginTop: 0.5,
-        height: "20px",
-        backgroundColor: illum ? "#93D145" : "#E9F5D8",
-        color: "#5B1080",
-        borderRadius: 2,
-        boxShadow: 2,
-        textTransform: "unset !important",
-      };
+      let illum =
+        mode === 1 && areaa === "0" && subArea === 0
+          ? styleButRegion01
+          : styleButRegion02;
 
       return (
-        <Button sx={styleButRegion} onClick={handleClickGl}>
+        <Button sx={illum} onClick={handleClickGl}>
           <b>{points[0].region.nameRegion}</b>
         </Button>
       );

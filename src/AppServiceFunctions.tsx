@@ -74,13 +74,35 @@ export const ButtonMenu = (
     maxWidth: (soob.length + 10) * 6.5,
     maxHeight: "21px",
     minHeight: "21px",
-    backgroundColor: mode === tekValue ? "#93D145" : "#E9F5D8",
+    bgcolor: "#BAE186", // тёмно-салатовый
+    border: "1px solid #000",
+    borderColor: "#93D145", // ярко-салатовый
+    borderRadius: 1,
     color: "black",
     textTransform: "unset !important",
+    boxShadow: 8,
   };
 
+  const styleApp021 = {
+    fontSize: 14,
+    marginRight: 1,
+    minWidth: (soob.length + 10) * 6.5,
+    maxWidth: (soob.length + 10) * 6.5,
+    maxHeight: "21px",
+    minHeight: "21px",
+    bgcolor: "#E6F5D6", // светло-салатовый
+    border: "1px solid #000",
+    borderColor: "#d4d4d4", // серый
+    borderRadius: 1,
+    color: "black",
+    textTransform: "unset !important",
+    boxShadow: 1,
+  };
+
+  let illum = mode === tekValue ? styleApp02 : styleApp021;
+
   return (
-    <Button sx={styleApp02} variant="contained" onClick={() => SetValue(mode)}>
+    <Button sx={illum} onClick={() => SetValue(mode)}>
       <b>{soob}</b>
     </Button>
   );
@@ -539,7 +561,7 @@ export const PictInfoBox = (
   } else {
     let pStA = point.StrategyA; // Диограмма областей
     numArea = -1;
-    let area = [1,2,3,4,5,6,7,8,9.10,11,12]
+    let area = [1, 2, 3, 4, 5, 6, 7, 8, 9.1, 11, 12];
     let mass = [];
     for (let i = 0; i < pStA.length; i++) {
       let coorPointY = pStA[i].xleft;
@@ -549,7 +571,7 @@ export const PictInfoBox = (
       mass.push(kvx + kvy);
     }
     numArea = area[mass.indexOf(Math.min.apply(null, mass))];
-   }
+  }
 
   const styleBoxGl = {
     position: "absolute",

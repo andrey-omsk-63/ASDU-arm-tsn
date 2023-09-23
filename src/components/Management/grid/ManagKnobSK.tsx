@@ -8,6 +8,7 @@ import ManagKnobError from "./ManagKnobError";
 
 import { stylePK, styleSoob } from "./ManagGridStyle";
 import { styleSoobPusto, styleBatMenu } from "./ManagGridStyle";
+import { styleBatKnop01, styleBatKnop02 } from "./ManagGridStyle";
 
 export interface DataKnob {
   knop: Knob[];
@@ -96,11 +97,7 @@ const ManagementKnobSK = (props: {
 
     return (
       <Box sx={{ textAlign: "center" }}>
-        <Button
-          sx={styleBatMenu}
-          variant="contained"
-          onClick={() => setValue(val)}
-        >
+        <Button sx={styleBatMenu} onClick={() => setValue(val)}>
           {valumeKnob}
         </Button>
       </Box>
@@ -178,16 +175,10 @@ const ManagementKnobSK = (props: {
   };
 
   const ButtonKnop = () => {
-    const styleBatton = {
-      fontSize: 11,
-      height: "3.5vh",
-      backgroundColor: open ? "#93D145" : "#E9F5D8",
-      color: "black",
-      marginRight: 1,
-    };
+    let illum = open ? styleBatKnop01 : styleBatKnop02;
 
     return (
-      <Button sx={styleBatton} variant="contained" onClick={handleOpen}>
+      <Button sx={illum} onClick={handleOpen}>
         <b>СК</b>
       </Button>
     );
@@ -222,7 +213,7 @@ const ManagementKnobSK = (props: {
             </>
           )}
           <Box sx={{ textAlign: "center" }}>
-            <Button sx={styleBatMenu} variant="contained" onClick={handleClose}>
+            <Button sx={styleBatMenu} onClick={handleClose}>
               Выход
             </Button>
           </Box>
