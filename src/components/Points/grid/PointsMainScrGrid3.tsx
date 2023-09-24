@@ -13,20 +13,16 @@ import { MakeDate, MakeDateRus } from '../../../AppServiceFunctions';
 
 import { styleXTGl02, styleXTGl021, styleBut02 } from './PointsGridStyle';
 import { styleModalEnd, styleSetInf, styleInpArg } from './PointsGridStyle';
-import { styleXTGl05 } from './PointsGridStyle';
+import { styleXTGl05, styleBut021 } from './PointsGridStyle';
 
 //import { XctrlInfo } from '../../../interfaceGl.d';
 
 let nomStr = 0;
 let flagEdit = true;
 let xtPropsOld = -1;
+let nomIllum = -1;
 
-const PointsMainScrGrid3 = (props: {
-  open: boolean;
-  //xctrll: XctrlInfo[];
-  xtt: number;
-  trigger: Function;
-}) => {
+const PointsMainScrGrid3 = (props: { open: boolean; xtt: number; trigger: Function }) => {
   //== Piece of Redux =======================================
   let maskpoint = useSelector((state: any) => {
     const { maskpointReducer } = state;
@@ -49,6 +45,7 @@ const PointsMainScrGrid3 = (props: {
   if (xtPropsOld !== xtProps) {
     xtPropsOld = xtProps;
     flagEdit = true;
+    nomIllum = -1;
   } else {
     if (!maskpoint.redaxPoint && flagEdit) {
       flagEdit = false; // Start
@@ -143,6 +140,7 @@ const PointsMainScrGrid3 = (props: {
 
   const SetOpenSetStr = (nom: number) => {
     nomStr = nom;
+    nomIllum = nom;
     setValuen1(points.prioryty[nom][0]);
     setValuen2(points.prioryty[nom][1]);
     setValuen3(points.prioryty[nom][2]);
@@ -169,11 +167,13 @@ const PointsMainScrGrid3 = (props: {
         textAlign: 'center',
       };
 
+      let illum = nomIllum === i ? styleBut021 : styleBut02;
+
       resStr.push(
         <Grid key={i} container item xs={12} sx={{ fontSize: 14 }}>
           <Grid xs={1.5} item sx={styleXTG03}>
             {!flagEdit && (
-              <Button sx={styleBut02} variant="contained" onClick={() => SetOpenSetStr(i)}>
+              <Button sx={illum} onClick={() => SetOpenSetStr(i)}>
                 {i + 1}
               </Button>
             )}

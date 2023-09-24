@@ -177,7 +177,7 @@ export const styleBatMenu = {
   border: '1px solid #000',
   borderColor: '#d4d4d4', // серый
   borderRadius: 1,
-  boxShadow: 1,
+  boxShadow: 6,
   textTransform: 'unset !important',
 };
 
@@ -232,7 +232,7 @@ export const styleBatMenuXt = {
   border: '1px solid #000',
   borderColor: '#d4d4d4', // серый
   borderRadius: 1,
-  boxShadow: 1,
+  boxShadow: 6,
   marginTop: 1,
   width: '121px',
   textTransform: 'unset !important',

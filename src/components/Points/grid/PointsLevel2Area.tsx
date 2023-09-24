@@ -125,11 +125,11 @@ const PointsLevel2Area = (props: {
     const [valuen2, setValuen2] = React.useState(elem.xright);
     const [valuen3, setValuen3] = React.useState(elem.desc);
 
-    const handleClose = () => {
+    const handleClose = (mode: number) => {
       setOpenSetStr(false);
     };
 
-    const handleCloseStr = () => {
+    const handleCloseStr = (mode: number) => {
       pointRab = JSON.parse(JSON.stringify(maskpoint.pointForRedax));
       pointRab.xctrls[crossRoad].StrategyA[props.nom].xleft = valuen1;
       pointRab.xctrls[crossRoad].StrategyA[props.nom].xright = valuen2;
@@ -171,9 +171,9 @@ const PointsLevel2Area = (props: {
     };
 
     return (
-      <Modal open={openSetStr} onClose={handleClose} hideBackdrop>
+      <Modal open={openSetStr} onClose={handleClose} hideBackdrop={false}>
         <Box sx={styleSetInf}>
-          <Button sx={styleModalEnd} onClick={handleClose}>
+          <Button sx={styleModalEnd} onClick={() => handleClose(0)}>
             <b>&#10006;</b>
           </Button>
           <Typography sx={{ textAlign: 'center' }}>
@@ -186,7 +186,7 @@ const PointsLevel2Area = (props: {
           <Box sx={{ textAlign: 'center' }}>
             {' '}
             <br />
-            <Button sx={styleInpKnop} onClick={handleCloseStr}>
+            <Button sx={styleInpKnop} onClick={() => handleCloseStr(0)}>
               <b>Сохранить</b>
             </Button>
           </Box>
@@ -253,7 +253,7 @@ const PointsLevel2Area = (props: {
     return resStr;
   };
 
-  const StartEdit = () => {
+  const StartEdit = (mode: number) => {
     pointsEt = points;
     pointsTemp = JSON.parse(JSON.stringify(pointsEt));
     flagExit = true;
@@ -263,7 +263,8 @@ const PointsLevel2Area = (props: {
     setTrigger(!trigger);
   };
 
-  const StopEdit = () => {
+  const StopEdit = (mode: number) => {
+    console.log('StopEdit', mode);
     setPoints(pointsTemp);
     maskpoint.pointForRedax = props.xctrll[xtProps];
     pointGraf = props.xctrll;
@@ -276,7 +277,7 @@ const PointsLevel2Area = (props: {
     setTrigger(!trigger);
   };
 
-  const SaveEdit = () => {
+  const SaveEdit = (mode: number) => {
     const handleSend = () => {
       if (props.ws !== null) {
         if (props.ws.readyState === WebSocket.OPEN) {
@@ -312,7 +313,7 @@ const PointsLevel2Area = (props: {
         <Grid container>
           <Grid item xs={6}></Grid>
           <Grid item xs={3} sx={styleXTG05}>
-            <Button sx={styleBut03} onClick={() => SaveEdit()}>
+            <Button sx={styleBut03} onClick={() => SaveEdit(2)}>
               <b>Сохранить изменения</b>
             </Button>
           </Grid>
@@ -323,7 +324,7 @@ const PointsLevel2Area = (props: {
         <Grid container>
           <Grid item xs={9}></Grid>
           <Grid item xs={3} sx={styleXTG05}>
-            <Button sx={styleBut03} onClick={() => StartEdit()}>
+            <Button sx={styleBut03} onClick={() => StartEdit(1)}>
               <b>Редактирование</b>
             </Button>
           </Grid>
@@ -334,7 +335,7 @@ const PointsLevel2Area = (props: {
         <Grid container>
           <Grid item xs={9}></Grid>
           <Grid item xs={3} sx={styleXTG05}>
-            <Button sx={styleBut03} onClick={() => StopEdit()}>
+            <Button sx={styleBut03} onClick={() => StopEdit(1)}>
               <b>Выйти без cохранения</b>
             </Button>
           </Grid>

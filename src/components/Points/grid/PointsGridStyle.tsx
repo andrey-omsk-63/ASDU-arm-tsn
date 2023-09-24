@@ -104,7 +104,7 @@ export const styleBut021 = {
   border: '1px solid #000',
   borderColor: '#93D145', // ярко-салатовый
   borderRadius: 1,
-  boxShadow: 4,
+  boxShadow: 6,
   textTransform: 'unset !important',
 };
 
