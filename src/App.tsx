@@ -270,6 +270,7 @@ const App = () => {
             setValue("3");
             setValueDate(dayjs(formSett));
             setOpenSetErrLog(true);
+            tekValue = "3";
           }
           break;
         case "close":
@@ -527,11 +528,11 @@ const App = () => {
 
   return (
     <>
-      {regionGlob === 0 && isOpenInf && (
-        <BeginSeans ws={WS} pointsReg={pointsReg} SetRegion={setRegionGlob} />
-      )}
       {openSetErrLog && (
         <EndSeans bsLogin={bsLogin} setOpen={setOpenSetErrLog} />
+      )}
+      {regionGlob === 0 && isOpenInf && (
+        <BeginSeans ws={WS} pointsReg={pointsReg} SetRegion={setRegionGlob} />
       )}
       {!openSetErrLog && (
         <>
