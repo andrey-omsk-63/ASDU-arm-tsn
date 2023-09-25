@@ -143,12 +143,26 @@ const StatisticsArchive = (props: {
     } else {
       for (let i = 0; i < pointsEtalon.length; i++) {
         const styleSt1 = {
-          fontSize: 14.3,
+          fontSize: 13.5,
           maxHeight: "20px",
-          minHeight: "20px", 
-          border: 1,
-          borderColor: value !== i ? "#93D145" : "#E9F5D8",
-          backgroundColor: value === i ? "#93D145" : "#E9F5D8",
+          minHeight: "20px",
+          bgcolor: "#BAE186", // тёмно-салатовый
+          border: "1px solid #000",
+          borderColor: "#93D145", // ярко-салатовый
+          //borderRadius: 1,
+          boxShadow: 6,
+          color: "black",
+          marginRight: 0.5,
+        };
+        const styleSt11 = {
+          fontSize: 13.5,
+          maxHeight: "20px",
+          minHeight: "20px",
+          bgcolor: "#E6F5D6", // светло-салатовый
+          border: "1px solid #000",
+          borderColor: "#d4d4d4", // серый
+          //borderRadius: 1,
+          boxShadow: 2,
           color: "black",
           marginRight: 0.5,
         };
@@ -158,7 +172,8 @@ const StatisticsArchive = (props: {
           pointsEtalon[i].subarea +
           ":" +
           pointsEtalon[i].id;
-        resSps.push(<Tab key={i} sx={styleSt1} label={labl} />);
+        let illum = value === i ? styleSt1 : styleSt11;
+        resSps.push(<Tab key={i} sx={illum} label={labl} />);
       }
     }
     return resSps;

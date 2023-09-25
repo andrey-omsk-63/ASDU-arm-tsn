@@ -1,30 +1,30 @@
 export const colorsGraf = [
-  'red',
-  'orange',
-  'black',
+  "red",
+  "orange",
+  "black",
 
-  'blue',
-  'green',
-  'Violet',
+  "blue",
+  "green",
+  "Violet",
 
-  'lime',
-  'Silver',
-  'teal',
+  "lime",
+  "Silver",
+  "teal",
 
-  'YellowGreen',
-  'purple',
-  '',
+  "YellowGreen",
+  "purple",
+  "",
 
-  'Turquoise',
-  'RosyBrown',
-  'maroon',
+  "Turquoise",
+  "RosyBrown",
+  "maroon",
 
-  'Coral',
-  'Aqua',
-  'Tomato',
+  "Coral",
+  "Aqua",
+  "Tomato",
 
-  'Pink',
-  'Yellow',
+  "Pink",
+  "Yellow",
 ];
 
 export const styleSt02 = {
@@ -33,7 +33,7 @@ export const styleSt02 = {
   borderBottom: 1,
   fontSize: 11,
   lineHeight: 2,
-  borderColor: 'primary.main',
+  borderColor: "primary.main",
 };
 
 export const styleSt03 = {
@@ -42,10 +42,10 @@ export const styleSt03 = {
   borderBottom: 1,
   fontSize: 11,
   lineHeight: 2,
-  backgroundColor: '#E6EEF5', // голубой
+  backgroundColor: "#E6EEF5", // голубой
   //backgroundColor: "#E7F9EB", //зелёный
-  borderColor: 'primary.main',
-  textAlign: 'center',
+  borderColor: "primary.main",
+  textAlign: "center",
 };
 
 export const styleSt04 = {
@@ -54,17 +54,17 @@ export const styleSt04 = {
   borderBottom: 1,
   fontSize: 11,
   lineHeight: 2,
-  backgroundColor: '#FF80C0', // розовый
-  color: 'white',
-  textAlign: 'center',
+  backgroundColor: "#FF80C0", // розовый
+  color: "white",
+  textAlign: "center",
 };
 
 export const styleSt05 = {
   borderRight: 1,
   borderBottom: 1,
-  borderColor: 'primary.main',
+  borderColor: "primary.main",
   fontSize: 11,
-  textAlign: 'center',
+  textAlign: "center",
   lineHeight: 2,
 };
 
@@ -73,65 +73,89 @@ export const styleSt06 = {
   border: 1,
   borderTop: 0,
   borderLeft: 0,
-  borderColor: 'primary.main',
+  borderColor: "primary.main",
   fontSize: 11,
   lineHeight: 2,
 };
 
 export const styleHeader03 = {
   borderBottom: 1,
-  borderColor: 'primary.main',
-  backgroundColor: '#C0C0C0',
+  borderColor: "primary.main",
+  backgroundColor: "#C0C0C0",
   fontSize: 11,
-  textAlign: 'center',
+  textAlign: "center",
   lineHeight: 2,
 };
 
 export const styleHeader033 = {
   borderRight: 1,
   borderBottom: 1,
-  borderColor: 'primary.main',
-  backgroundColor: '#C0C0C0',
+  borderColor: "primary.main",
+  backgroundColor: "#C0C0C0",
   fontSize: 11,
-  textAlign: 'center',
+  textAlign: "center",
   lineHeight: 2,
 };
 
-// export const styleBatton = {
-//   marginLeft: 0.4,
-//   fontSize: 11,
-//   backgroundColor: '#E9F5D8', // светло-салатовый
-//   color: 'black',
-//   maxWidth: '2.7vh',
-//   maxHeight: '23px',
-//   minWidth: '2.7vh',
-//   minHeight: '23px',
-//   textAlign: 'center',
-// };
+export const styleBatton01 = {
+  marginLeft: 0.4,
+  fontSize: 11,
+  bgcolor: "#BAE186", // тёмно-салатовый
+  border: "1px solid #000",
+  borderColor: "#BAE186", // тёмно-салатовый
+  borderRadius: 1,
+  boxShadow: 9,
+  color: "black",
+  maxWidth: "2.7vh",
+  minWidth: "2.7vh",
+  maxHeight: "23px",
+  minHeight: "23px",
+  textAlign: "center",
+};
+
+export const styleBatton02 = {
+  marginLeft: 0.4,
+  fontSize: 11,
+  bgcolor: "#E6F5D6", // светло-салатовый
+  border: "1px solid #000",
+  borderColor: "#BAE186", // тёмно-салатовый
+  borderRadius: 1,
+  boxShadow: 1,
+  color: "black",
+  maxWidth: "2.7vh",
+  minWidth: "2.7vh",
+  maxHeight: "23px",
+  minHeight: "23px",
+  textAlign: "center",
+};
 
 export const styleClear = {
-  position: 'absolute',
-  marginTop: '-2.8vh',
-  left: '0.8vh',
+  position: "absolute",
+  marginTop: "-2.8vh",
+  left: "0.8vh",
 };
 
 export const styleBattonCl = {
   fontSize: 10.1,
-  backgroundColor: '#E9F5D8', // светло-салатовый
-  color: 'red',
+  backgroundColor: "#E9F5D8", // светло-салатовый
+  color: "red",
   //maxHeight: '18px',
   //minHeight: '18px',
-  height: '18px',
-  maxWidth: '5vh',
-  minWidth: '5vh',
-  textTransform: 'unset !important',
+  height: "18px",
+  maxWidth: "5vh",
+  minWidth: "5vh",
+  textTransform: "unset !important",
+  border: "1px solid #000",
+  borderColor: "#d4d4d4", // серый
+  borderRadius: 1,
+  boxShadow: 6,
 };
 
 export const options = {
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
-    legend: { display: true, position: 'top' as const },
+    legend: { display: true, position: "top" as const },
     title: { display: false },
   },
 };
@@ -139,5 +163,5 @@ export const options = {
 export const styleStatMain = {
   border: 1,
   borderRadius: 1,
-  borderColor: 'primary.main',
+  borderColor: "primary.main",
 };

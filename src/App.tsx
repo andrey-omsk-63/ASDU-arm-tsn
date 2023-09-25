@@ -51,6 +51,7 @@ export interface Stater {
   xttData: string;
   xtt: number;
   result: Array<any>;
+  needSave: boolean;
 }
 
 export let dateStat: Stater = {
@@ -69,6 +70,7 @@ export let dateStat: Stater = {
   xttData: "ccc",
   xtt: -1,
   result: [],
+  needSave: false,
 };
 
 export interface Pointer {

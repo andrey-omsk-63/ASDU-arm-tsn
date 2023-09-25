@@ -69,9 +69,9 @@ const BeginSeans = (props: {
     transform: "translate(-50%, -50%)",
     width: dlStrMenu,
     bgcolor: "background.paper",
-    border: "2px solid #000",
+    border: "1px solid #000",
     borderColor: "primary.main",
-    borderRadius: 2,
+    borderRadius: 1,
     boxShadow: 24,
     p: 3,
   };

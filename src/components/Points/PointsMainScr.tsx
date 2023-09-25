@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { maskpointCreate } from "./../../redux/actions";
+import { maskpointCreate, statsaveCreate } from "./../../redux/actions";
 
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -37,6 +37,10 @@ const PointsMainScr = (props: {
   let maskpoint = useSelector((state: any) => {
     const { maskpointReducer } = state;
     return maskpointReducer.maskpoint;
+  });
+  let datestat = useSelector((state: any) => {
+    const { statsaveReducer } = state;
+    return statsaveReducer.datestat;
   });
   //console.log("maskpoint_PointsMainScr:", maskpoint);
   const dispatch = useDispatch();
@@ -116,6 +120,10 @@ const PointsMainScr = (props: {
     maskpoint.savePoint = false;
     maskpoint.redaxPoint = true;
     dispatch(maskpointCreate(maskpoint));
+    //==================================================================
+    datestat.needSave = false;
+    dispatch(statsaveCreate(datestat));
+    //==================================================================
     setTrigger(!trigger);
   };
 
@@ -126,6 +134,10 @@ const PointsMainScr = (props: {
     maskpoint.redaxPoint = false;
     maskpoint.savePoint = true;
     dispatch(maskpointCreate(maskpoint));
+    //==================================================================
+    //datestat.needSave = true;
+    //dispatch(statsaveCreate(datestat));
+    //==================================================================
     setTrigger(!trigger);
   };
 
@@ -145,16 +157,18 @@ const PointsMainScr = (props: {
     setTrigger(!trigger);
   };
 
+  console.log("!!!!!!:", maskpoint.savePoint, flagSave, datestat.needSave);
+
   return (
     <>
       <Box sx={{ marginTop: -3, marginLeft: -3, marginRight: -3 }}>
-        {(maskpoint.savePoint || flagSave) && (
+        {(maskpoint.savePoint || flagSave) && datestat.needSave && (
           <>{WorkMenuEditMain(6, "Сохранить изменения", SaveEdit)}</>
         )}
-        {(maskpoint.redaxPoint || flagEdit) && (
+        {(maskpoint.redaxPoint || flagEdit) && !datestat.needSave && (
           <>{WorkMenuEditMain(9, "Редактирование", StartEdit)}</>
         )}
-        {flagExit && (
+        {flagExit && datestat.needSave && (
           <>{WorkMenuEditMain(9, "Выйти без cохранения", StopEdit)}</>
         )}
         <Grid container>

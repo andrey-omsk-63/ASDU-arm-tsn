@@ -86,7 +86,6 @@ const PointsLevel2AreaDiogram = (props: {
 
   const MakeMatrix = () => {
     let pStA = points.xctrls[crRoad].StrategyA;
-    //console.log("111:", pStA.length, pStA);
 
     for (let j = 0; j < vertical + 1; j += scale) {
       matrix[j] = [];
@@ -100,7 +99,6 @@ const PointsLevel2AreaDiogram = (props: {
           let kvx = (i - coorPointX) ** 2;
           let kvy = (j - coorPointY) ** 2;
           if (coorPointY === j && coorPointX === i) {
-            //console.log("!!!:", k, coorPointY, j, coorPointX, i, kvx + kvy);
             coler = "blue";
             flag = false;
           }

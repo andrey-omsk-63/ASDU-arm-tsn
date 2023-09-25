@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { maskpointCreate } from './../../../redux/actions';
+import { maskpointCreate, statsaveCreate } from './../../../redux/actions';
 
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -98,6 +98,8 @@ const PointsMainScrGrid3 = (props: { open: boolean; xtt: number; trigger: Functi
       maskpoint.pointForRedax.prioryty[nom][0] = valuen1;
       maskpoint.pointForRedax.prioryty[nom][1] = valuen2;
       maskpoint.pointForRedax.prioryty[nom][2] = valuen3;
+      datestat.needSave = true;
+      dispatch(statsaveCreate(datestat));
       maskpoint.savePoint = true;
       dispatch(maskpointCreate(maskpoint));
       setOpenSetStr(false);
@@ -120,7 +122,7 @@ const PointsMainScrGrid3 = (props: { open: boolean; xtt: number; trigger: Functi
     };
 
     return (
-      <Modal open={openSetStr} onClose={handleClose} hideBackdrop>
+      <Modal open={openSetStr} onClose={handleClose} hideBackdrop={false}>
         <Box sx={styleSetInf}>
           <Button sx={styleModalEnd} onClick={handleClose}>
             <b>&#10006;</b>

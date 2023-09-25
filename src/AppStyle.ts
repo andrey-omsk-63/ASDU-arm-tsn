@@ -54,7 +54,11 @@ export const styleModalMenu = {
   fontSize: 14,
   maxHeight: "20px",
   minHeight: "20px",
-  backgroundColor: "#E9F5D8",
+  bgcolor: '#E6F5D6', // светло-салатовый
+  border: '1px solid #000',
+  borderColor: '#d4d4d4', // серый
+  borderRadius: 1,
+  boxShadow: 6,
   color: "black",
   marginRight: 1,
   marginTop: 2,
@@ -104,21 +108,27 @@ export const styleButOk = {
   minWidth: "21px",
   maxHeight: "21px",
   minHeight: "21px",
-  backgroundColor: "#E9F5D8",
+  bgcolor: "#E9F5D8",
   color: "black",
+  border: "1px solid #000",
+  borderColor: "#d4d4d4", // серый
+  borderRadius: 1,
+  boxShadow: 4,
   textTransform: "unset !important",
 };
 
 export const styleDatePicker = {
   "& > :not(style)": {
     width: "140px",
-    //width: '240px',
     height: "21px",
     display: "flex",
     flexWrap: "nowrap",
     flexDirection: "row",
     flex: "1 1 0px",
-    //boxShadow: 10,
+    //border: "1px solid #000",
+    borderColor: "#d4d4d4", // серый
+    borderRadius: 1,
+    boxShadow: 4,
   },
 };
 //====== Interval =========================================================
@@ -140,6 +150,12 @@ export const styleBoxFormInt = {
   "& > :not(style)": {
     marginTop: "-3px",
     marginLeft: "-0px",
+    maxHeight: "18px",
+    minHeight: "18px",
     width: "35px",
+    border: "1px solid #000",
+    borderColor: "#d4d4d4", // серый
+    borderRadius: 1,
+    boxShadow: 4,
   },
 };

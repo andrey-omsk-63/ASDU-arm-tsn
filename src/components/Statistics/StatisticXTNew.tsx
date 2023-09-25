@@ -15,7 +15,8 @@ import { Statistic } from "../../interfaceStat.d";
 import { colorsGraf, styleSt02, options } from "./StatisticXTStyle";
 import { styleSt04, styleSt05, styleStatMain } from "./StatisticXTStyle";
 import { styleSt06, styleHeader03, styleHeader033 } from "./StatisticXTStyle";
-import { styleClear, styleBattonCl } from "./StatisticXTStyle";
+import { styleClear, styleBattonCl, styleBatton01 } from "./StatisticXTStyle";
+import { styleBatton02 } from "./StatisticXTStyle";
 
 import { Chart as ChartJS, CategoryScale } from "chart.js";
 import { LinearScale, PointElement } from "chart.js";
@@ -233,11 +234,7 @@ const StatisticXTNew = (props: {
     const KnobBatCl = () => {
       return (
         <Box sx={styleClear}>
-          <Button
-            sx={styleBattonCl}
-            variant="contained"
-            onClick={() => setValue("17")}
-          >
+          <Button sx={styleBattonCl} onClick={() => setValue("17")}>
             <b>Чистка</b>
           </Button>
         </Box>
@@ -255,28 +252,10 @@ const StatisticXTNew = (props: {
         let resStr = [];
         let xss = 12 / leng;
         for (let i = 1; i <= leng; i++) {
-          let illum = canal.indexOf(i - 1) >= 0 ? true : false;
-
+          let illum = canal.indexOf(i - 1) >= 0 ? styleBatton01 : styleBatton02;
           const ButtonCanal = () => {
-            const styleBatton = {
-              marginLeft: 0.4,
-              fontSize: 11,
-              backgroundColor: illum ? "#93D145" : "#E9F5D8",
-              color: "black",
-              maxWidth: "2.7vh",
-              minWidth: "2.7vh",
-              maxHeight: "23px",
-              minHeight: "23px",
-              //height: "23.5px",
-              textAlign: "center",
-            };
-
             return (
-              <Button
-                sx={styleBatton}
-                variant="contained"
-                onClick={() => SetValue(i.toString())}
-              >
+              <Button sx={illum} onClick={() => SetValue(i.toString())}>
                 <b>{i.toString()}</b>
               </Button>
             );
@@ -511,10 +490,10 @@ const StatisticXTNew = (props: {
 
   const styleBackdrop = {
     color: "#fff",
-    marginLeft: '0.3vh',
-    marginRight: '1.7vh',
-    marginTop: '34vh',
-    marginBottom: '4vh',
+    marginLeft: "0.3vh",
+    marginRight: "1.7vh",
+    marginTop: "34vh",
+    marginBottom: "4vh",
     zIndex: (theme: any) => theme.zIndex.drawer + 1,
   };
 

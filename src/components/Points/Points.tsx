@@ -1,16 +1,16 @@
-import * as React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { maskpointCreate, statsaveCreate } from './../../redux/actions';
+import * as React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { maskpointCreate, statsaveCreate } from "./../../redux/actions";
 
-import Box from '@mui/material/Box';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+import Box from "@mui/material/Box";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 
-import PointsMenuLevel1 from './PointsMenuLevel1';
+import PointsMenuLevel1 from "./PointsMenuLevel1";
 
-import { MakeDate, SendSocketOldDateXt } from '../../AppServiceFunctions';
+import { MakeDate, SendSocketOldDateXt } from "../../AppServiceFunctions";
 
-import { XctrlInfo } from '../../interfaceGl.d';
+import { XctrlInfo } from "../../interfaceGl.d";
 
 let tekValue = 0;
 let pointsEtalon: XctrlInfo[];
@@ -47,9 +47,11 @@ const Points = (props: {
   let isOpen = props.open;
   let pointsGl = props.xctrll;
   let debug = false;
-  if (props.ws.url === 'wss://localhost:3000/W') debug = true;
+  if (props.ws.url === "wss://localhost:3000/W") debug = true;
 
-  let points = pointsGl.filter((pointsGl) => pointsGl.region === Number(reGion));
+  let points = pointsGl.filter(
+    (pointsGl) => pointsGl.region === Number(reGion)
+  );
   //pointsEtalon = points; // замена проверки обновления Xctrl - проверка теперь в App
 
   const [value, setValue] = React.useState(tekValue);
@@ -59,9 +61,15 @@ const Points = (props: {
     const handleSend = () => {
       if (props.ws !== null) {
         if (props.ws.readyState === WebSocket.OPEN) {
-          props.ws.send(JSON.stringify({ type: 'stopDevices', region: reGion }));
-          props.ws.send(JSON.stringify({ type: 'stopStatistics', region: reGion }));
-          props.ws.send(JSON.stringify({ type: 'stopOldStatistics', region: reGion }));
+          props.ws.send(
+            JSON.stringify({ type: "stopDevices", region: reGion })
+          );
+          props.ws.send(
+            JSON.stringify({ type: "stopStatistics", region: reGion })
+          );
+          props.ws.send(
+            JSON.stringify({ type: "stopOldStatistics", region: reGion })
+          );
         } else {
           setTimeout(() => {
             handleSend();
@@ -82,7 +90,7 @@ const Points = (props: {
         datestat.xttData = props.date;
         setCalculate(!calculate);
       } else {
-        datestat.xttData = 'sss';
+        datestat.xttData = "sss";
       }
       datestat.xtt = tekValue;
       SendSocketOldDateXt(props.ws, props.date, pointsEtalon, tekValue);
@@ -102,6 +110,10 @@ const Points = (props: {
     setValue(newValue);
     tekValue = newValue;
     if (numerOld !== tekValue) {
+      //==================================================================
+      datestat.needSave = false;
+      dispatch(statsaveCreate(datestat));
+      //==================================================================
       maskpoint.newXt = true;
       dispatch(maskpointCreate(maskpoint));
       numerOld = tekValue;
@@ -110,42 +122,46 @@ const Points = (props: {
 
   const SpisXT = () => {
     let resSps: any = [];
-    let labl: string = '';
+    let labl: string = "";
 
     if (pointsEtalon.length === 0) {
       resSps.push(
         <Box key={1}>
           <h2>Нет данных по ХТ</h2>
-        </Box>,
+        </Box>
       );
     } else {
       for (let i = 0; i < pointsEtalon.length; i++) {
         const stylePXt1 = {
           fontSize: 13.5,
-          maxHeight: '20px',
-          minHeight: '20px',
-          bgcolor: '#BAE186', // тёмно-салатовый
-          border: '1px solid #000',
-          borderColor: '#93D145', // ярко-салатовый
+          maxHeight: "20px",
+          minHeight: "20px",
+          bgcolor: "#BAE186", // тёмно-салатовый
+          border: "1px solid #000",
+          borderColor: "#93D145", // ярко-салатовый
           //borderRadius: 1,
-          boxShadow: 4,
-          color: 'black',
+          boxShadow: 6,
+          color: "black",
           marginRight: 0.5,
         };
         const stylePXt11 = {
           fontSize: 13.5,
-          maxHeight: '20px',
-          minHeight: '20px',
-          bgcolor: '#E6F5D6', // светло-салатовый
-          border: '1px solid #000',
-          borderColor: '#d4d4d4', // серый
+          maxHeight: "20px",
+          minHeight: "20px",
+          bgcolor: "#E6F5D6", // светло-салатовый
+          border: "1px solid #000",
+          borderColor: "#d4d4d4", // серый
           //borderRadius: 1,
           boxShadow: 2,
-          color: 'black',
+          color: "black",
           marginRight: 0.5,
         };
         let illum = value === i ? stylePXt1 : stylePXt11;
-        labl = 'XT:' + pointsEtalon[i].area.toString() + ':' + pointsEtalon[i].subarea.toString();
+        labl =
+          "XT:" +
+          pointsEtalon[i].area.toString() +
+          ":" +
+          pointsEtalon[i].subarea.toString();
         resSps.push(<Tab key={i} sx={illum} label={labl} />);
       }
     }
@@ -153,7 +169,7 @@ const Points = (props: {
   };
 
   const stylePoints01 = {
-    maxWidth: '100%',
+    maxWidth: "100%",
     fontSize: 12,
     marginTop: 0.5,
     marginLeft: -4.6,
@@ -167,7 +183,7 @@ const Points = (props: {
         <>
           <Box sx={stylePoints01}>
             <Tabs
-              sx={{ maxHeight: '20px', minHeight: '20px' }}
+              sx={{ maxHeight: "20px", minHeight: "20px" }}
               value={value}
               onChange={handleChange}
               variant="scrollable"
@@ -175,7 +191,8 @@ const Points = (props: {
               //indicatorColor="secondary"
               scrollButtons={true}
               allowScrollButtonsMobile
-              TabIndicatorProps={{ sx: { backgroundColor: '#93D145' } }}>
+              TabIndicatorProps={{ sx: { backgroundColor: "#93D145" } }}
+            >
               {SpisXT()}
             </Tabs>
           </Box>

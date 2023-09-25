@@ -57,16 +57,20 @@ const AppWriteToAllFileForXT = (props: { setOpen: Function }) => {
     marginRight: 'auto',
     width: '33%',
     bgcolor: 'background.paper',
-    border: '3px solid #000',
+    border: '1px solid #000',
     borderColor: 'primary.main',
-    borderRadius: 2,
+    borderRadius: 1,
     boxShadow: 24,
   };
 
   const styleModalMenu = {
     maxHeight: '21px',
     minHeight: '21px',
-    backgroundColor: '#E6F5D6',
+    bgcolor: '#E6F5D6', // светло-салатовый
+    border: '1px solid #000',
+    borderColor: '#d4d4d4', // серый
+    borderRadius: 1,
+    boxShadow: 6,
     color: 'black',
     marginRight: 1,
     marginBottom: 2,
@@ -133,7 +137,7 @@ const AppWriteToAllFileForXT = (props: { setOpen: Function }) => {
   };
 
   return (
-    <Modal open={openSet} onClose={handleCloseSet} hideBackdrop>
+    <Modal open={openSet} onClose={handleCloseSet} hideBackdrop={false}>
       <Box sx={styleSetWrite}>
         <Button sx={styleModalEnd} onClick={handleCloseSet}>
           &#10006;

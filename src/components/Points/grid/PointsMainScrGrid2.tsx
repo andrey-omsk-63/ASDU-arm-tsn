@@ -1,19 +1,19 @@
-import * as React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { maskpointCreate } from './../../../redux/actions';
+import * as React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { maskpointCreate, statsaveCreate } from "./../../../redux/actions";
 
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
-import Typography from '@mui/material/Typography';
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Modal from "@mui/material/Modal";
+import Typography from "@mui/material/Typography";
 
-import { Inputer, SaveFunc } from '../../../AppServiceFunctions';
-import { MakeDate, MakeDateRus } from '../../../AppServiceFunctions';
+import { Inputer, SaveFunc } from "../../../AppServiceFunctions";
+import { MakeDate, MakeDateRus } from "../../../AppServiceFunctions";
 
-import { styleXTGl02, styleXTGl021, styleBut02 } from './PointsGridStyle';
-import { styleModalEnd, styleSetInf, styleInpArg } from './PointsGridStyle';
-import { styleXTGl05, styleBut021 } from './PointsGridStyle';
+import { styleXTGl02, styleXTGl021, styleBut02 } from "./PointsGridStyle";
+import { styleModalEnd, styleSetInf, styleInpArg } from "./PointsGridStyle";
+import { styleXTGl05, styleBut021 } from "./PointsGridStyle";
 
 //import { XctrlInfo } from '../../../interfaceGl.d';
 
@@ -98,6 +98,10 @@ const PointsMainScrGrid2 = (props: {
       maskpoint.pointForRedax.ext[nom][1] = valuen2;
       maskpoint.savePoint = true;
       dispatch(maskpointCreate(maskpoint));
+      //==================================================================
+      datestat.needSave = true;
+      dispatch(statsaveCreate(datestat));
+      //==================================================================
       setOpenSetStr(false);
       props.trigger();
     };
@@ -113,17 +117,17 @@ const PointsMainScrGrid2 = (props: {
     };
 
     return (
-      <Modal open={openSetStr} onClose={handleClose} hideBackdrop>
+      <Modal open={openSetStr} onClose={handleClose} hideBackdrop={false}>
         <Box sx={styleSetInf}>
           <Button sx={styleModalEnd} onClick={handleClose}>
             <b>&#10006;</b>
           </Button>
-          <Typography sx={{ textAlign: 'center' }}>
+          <Typography sx={{ textAlign: "center" }}>
             Номер записи <b> {nom + 1} </b>
-          </Typography>{' '}
+          </Typography>{" "}
           <br />
-          {Inputer('КС на ДК', valuen1, handleChange1, styleInpArg)}
-          {Inputer('ПК', valuen2, handleChange2, styleInpArg)}
+          {Inputer("КС на ДК", valuen1, handleChange1, styleInpArg)}
+          {Inputer("ПК", valuen2, handleChange2, styleInpArg)}
           {SaveFunc(handleCloseStr)}
         </Box>
       </Modal>
@@ -146,16 +150,16 @@ const PointsMainScrGrid2 = (props: {
       const styleXTG03 = {
         borderRight: 1,
         borderBottom: bordBott,
-        borderColor: 'primary.main',
+        borderColor: "primary.main",
         padding: 0.7,
-        textAlign: 'center',
+        textAlign: "center",
       };
 
       const styleXTG033 = {
         borderBottom: bordBott,
-        borderColor: 'primary.main',
+        borderColor: "primary.main",
         padding: 0.7,
-        textAlign: 'center',
+        textAlign: "center",
       };
 
       let illum = nomIllum === i ? styleBut021 : styleBut02;
@@ -176,7 +180,7 @@ const PointsMainScrGrid2 = (props: {
           <Grid xs={5.25} item sx={styleXTG033}>
             {points.ext[i][1]}
           </Grid>
-        </Grid>,
+        </Grid>
       );
     }
     return resStr;
