@@ -43,11 +43,13 @@ export const styleXTG02 = {
 };
 
 export const styleXTG03 = {
+  bgcolor: "#F1F5FB", // светло серый
   marginTop: '0.5vh',
   border: 1,
   height: '32.6vh', // 33
   borderRadius: 1,
   borderColor: 'primary.main',
+  boxShadow: 8,
 };
 
 export const styleXTG04 = {
@@ -57,6 +59,7 @@ export const styleXTG04 = {
   marginLeft: 0.5,
   borderRadius: 1,
   borderColor: 'primary.main',
+  boxShadow: 8,
 };
 
 export const styleXTG05 = {
@@ -227,10 +230,12 @@ export const styleEndInf = {
 };
 //====== PointsLevel2Area =======================================================
 export const styleXTG035 = {
+  bgcolor: "#F1F5FB", // светло серый
   border: 1,
   height: '85.8vh',
   borderRadius: 1,
   borderColor: 'primary.main',
+  boxShadow: 8,
 };
 
 export const styleXTG045 = {
@@ -239,6 +244,7 @@ export const styleXTG045 = {
   marginLeft: 0.5,
   borderRadius: 1,
   borderColor: 'primary.main',
+  boxShadow: 8,
 };
 
 export const styleBoxForm = {
@@ -308,26 +314,32 @@ export const styleXTC02 = {
 };
 
 export const styleXTC03 = {
+  bgcolor: "#F1F5FB", // светло серый
   border: 1,
   borderRadius: 1,
   borderColor: 'primary.main',
+  boxShadow: 8,
 };
 
 export const styleXTC033 = {
+  bgcolor: "#F1F5FB", // светло серый
   border: 1,
   borderRadius: 1,
   borderColor: 'primary.main',
   //width: '99vh',
   height: '57.9vh',
+  boxShadow: 8,
 };
 //====== PointsMainScr ==========================================================
 export const styleXt02 = {
+  bgcolor: "#F1F5FB", // светло серый
   border: 1,
   borderRadius: 1,
   borderColor: 'primary.main',
   padding: 1,
   marginLeft: 0.5,
   marginRight: 1,
+  boxShadow: 8,
 };
 
 export const styleXt03 = {
@@ -379,9 +391,11 @@ export const styleXTG103 = {
 
 export const styleXTG104 = {
   fontSize: 14.5,
+  bgcolor: "#F1F5FB", // светло серый
   borderRight: 0,
   borderColor: 'primary.main',
   margin: -1,
+  boxShadow: 8,
 };
 
 export const styleXTG105 = {

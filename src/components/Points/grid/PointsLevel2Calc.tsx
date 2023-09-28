@@ -311,7 +311,7 @@ const PointsLevel2Calc = (props: {
               {pointer !== null && <>{PointsGraf00()}</>}
             </Grid>
           </Grid>
-          <Grid container item sx={{ marginTop: 0.5, height: "58.0vh" }}>
+          <Grid container item sx={{ marginTop: 1, height: "58.0vh" }}>
             {pointer !== null && (
               <Grid item sx={styleXTC033}>
                 {PointsLevel2CalcTab2Header()}

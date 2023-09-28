@@ -187,7 +187,10 @@ const PointsMainScrGrid2 = (props: {
   };
 
   return (
-    <Grid item sx={{ fontSize: 14.5, margin: -1 }}>
+    <Grid
+      item
+      sx={{ bgcolor: "#F1F5FB", fontSize: 14.5, margin: -1, boxShadow: 8 }}
+    >
       <HeaderMainScrGrid2 />
       {props.open && <>{StrokaMainScrGrid2()}</>}
       {openSetStr && <> {SetStr(nomStr)}</>}

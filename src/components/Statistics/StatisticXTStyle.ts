@@ -161,7 +161,9 @@ export const options = {
 };
 
 export const styleStatMain = {
+  bgcolor: "#F1F5FB", // светло серый
   border: 1,
   borderRadius: 1,
   borderColor: "primary.main",
+  boxShadow: 8,
 };

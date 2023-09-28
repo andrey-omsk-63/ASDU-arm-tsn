@@ -188,7 +188,6 @@ const Points = (props: {
               onChange={handleChange}
               variant="scrollable"
               textColor="inherit"
-              //indicatorColor="secondary"
               scrollButtons={true}
               allowScrollButtonsMobile
               TabIndicatorProps={{ sx: { backgroundColor: "#93D145" } }}

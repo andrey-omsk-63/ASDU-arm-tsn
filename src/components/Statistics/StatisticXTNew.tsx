@@ -527,7 +527,7 @@ const StatisticXTNew = (props: {
           <StatGraf00 />
         </Grid>
       </Grid>
-      <Grid container item sx={{ marginTop: 0.5, height: "56vh" }}>
+      <Grid container item sx={{ marginTop: 1, height: "56vh" }}>
         <Grid item xs={24} sx={styleStatMain}>
           <StatisticHeader />
           <Box sx={{ overflowX: "auto", height: "59vh" }}>

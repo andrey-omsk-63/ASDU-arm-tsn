@@ -1,6 +1,6 @@
 export const styleBoxTabContext = {
   marginLeft: 0.5,
-  backgroundColor: "#F1F5FB",
+  //backgroundColor: "#F1F5FB", // светло серый
   display: "flex",
   alignItems: "left",
   flexDirection: "row",
