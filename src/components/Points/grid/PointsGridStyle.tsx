@@ -49,7 +49,7 @@ export const styleXTG03 = {
   height: '32.6vh', // 33
   borderRadius: 1,
   borderColor: 'primary.main',
-  boxShadow: 8,
+  boxShadow: 12,
 };
 
 export const styleXTG04 = {
@@ -235,7 +235,7 @@ export const styleXTG035 = {
   height: '85.8vh',
   borderRadius: 1,
   borderColor: 'primary.main',
-  boxShadow: 8,
+  boxShadow: 12,
 };
 
 export const styleXTG045 = {
@@ -318,7 +318,7 @@ export const styleXTC03 = {
   border: 1,
   borderRadius: 1,
   borderColor: 'primary.main',
-  boxShadow: 8,
+  boxShadow: 12,
 };
 
 export const styleXTC033 = {
@@ -328,7 +328,7 @@ export const styleXTC033 = {
   borderColor: 'primary.main',
   //width: '99vh',
   height: '57.9vh',
-  boxShadow: 8,
+  boxShadow: 12,
 };
 //====== PointsMainScr ==========================================================
 export const styleXt02 = {
@@ -339,7 +339,7 @@ export const styleXt02 = {
   padding: 1,
   marginLeft: 0.5,
   marginRight: 1,
-  boxShadow: 8,
+  boxShadow: 12,
 };
 
 export const styleXt03 = {
@@ -395,7 +395,7 @@ export const styleXTG104 = {
   borderRight: 0,
   borderColor: 'primary.main',
   margin: -1,
-  boxShadow: 8,
+  boxShadow: 12,
 };
 
 export const styleXTG105 = {

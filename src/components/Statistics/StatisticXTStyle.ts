@@ -165,5 +165,5 @@ export const styleStatMain = {
   border: 1,
   borderRadius: 1,
   borderColor: "primary.main",
-  boxShadow: 8,
+  boxShadow: 12,
 };

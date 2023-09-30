@@ -40,24 +40,26 @@ export const styleMRG03 = {
 
 export const styleMRG04 = {
   bgcolor: "#F1F5FB", // светло серый
+  //bgcolor: "#F0F0F0", // светло серый
   border: 1,
   borderRadius: 1,
   borderColor: 'primary.main',
   marginTop: '0.5vh',
   height: '85.1vh',
-  boxShadow: 8,
+  boxShadow: 12,
 };
 //====== ManagementLeftGrid =====================================================
 export const styleMG01 = {
   border: 1,
   borderRadius: 1,
   bgcolor: "#F1F5FB", // светло серый
+  //bgcolor: "#F0F0F0", // светло серый
   borderColor: 'primary.main',
   marginTop: '0.5vh',
   marginLeft: 0.5,
   marginRight: 0.5,
   height: '94.5vh',
-  boxShadow: 8,
+  boxShadow: 12,
 };
 
 export const styleMG03 = {
