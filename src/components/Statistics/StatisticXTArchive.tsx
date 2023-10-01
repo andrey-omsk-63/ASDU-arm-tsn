@@ -1,36 +1,28 @@
-import * as React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { statsaveCreate } from "./../../redux/actions";
+import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { statsaveCreate } from './../../redux/actions';
 
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
-import Backdrop from "@mui/material/Backdrop";
-import CircularProgress from "@mui/material/CircularProgress";
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
-import { Statistic } from "../../interfaceStat.d";
+import { Statistic } from '../../interfaceStat.d';
 
-import { colorsGraf, styleSt02, options } from "./StatisticXTStyle";
-import { styleSt04, styleSt05, styleStatMain } from "./StatisticXTStyle";
-import { styleSt06, styleHeader03, styleHeader033 } from "./StatisticXTStyle";
-import { styleClear, styleBattonCl, styleBatton01 } from "./StatisticXTStyle";
-import { styleBatton02 } from "./StatisticXTStyle";
+import { colorsGraf, styleSt02, options } from './StatisticXTStyle';
+import { styleSt04, styleSt05, styleStatMain } from './StatisticXTStyle';
+import { styleSt06, styleHeader03, styleHeader033 } from './StatisticXTStyle';
+import { styleClear, styleBattonCl, styleBatton01 } from './StatisticXTStyle';
+import { styleBatton02 } from './StatisticXTStyle';
 
-import { Chart as ChartJS, CategoryScale } from "chart.js";
-import { LinearScale, PointElement } from "chart.js";
-import { LineElement, Title, Tooltip, Legend } from "chart.js";
-import { Line } from "react-chartjs-2";
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
+import { Chart as ChartJS, CategoryScale } from 'chart.js';
+import { LinearScale, PointElement } from 'chart.js';
+import { LineElement, Title, Tooltip, Legend } from 'chart.js';
+import { Line } from 'react-chartjs-2';
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 export interface GrafGlob {
   //id: number;
@@ -57,11 +49,9 @@ let massId: any = [];
 let canal: number[] = [];
 let oldAreaid = -1;
 let numIdInMas = 0;
-let intervalGraf = [
-  -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-];
-let colorStat = "#E6EEF5"; // голубой
-let oldDate = "";
+let intervalGraf = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1];
+let colorStat = '#E6EEF5'; // голубой
+let oldDate = '';
 
 const StatisticXTArchive = (props: {
   open: boolean;
@@ -83,7 +73,7 @@ const StatisticXTArchive = (props: {
   const interval = props.interval;
 
   let colChanel = 0;
-  const [value, setValue] = React.useState("0");
+  const [value, setValue] = React.useState('0');
   const [openLoader, setOpenLoader] = React.useState(true);
   const [trigger, setTrigger] = React.useState(true);
 
@@ -91,7 +81,7 @@ const StatisticXTArchive = (props: {
   let resSps: any = [];
   let matrix: any = [];
   let MATRIX: any = [];
-  let kakchestvo = " ";
+  let kakchestvo = ' ';
 
   const ZeroLabelsCanal = () => {
     canal = [];
@@ -144,7 +134,7 @@ const StatisticXTArchive = (props: {
         }
       }
       oldAreaid = areaId;
-      setValue("0");
+      setValue('0');
       setOpenLoader(true);
     }
   }
@@ -152,11 +142,11 @@ const StatisticXTArchive = (props: {
   const StatGraf00 = () => {
     let datas = [];
     let datasetsMask: Datasets = {
-      label: "Канал ",
+      label: 'Канал ',
       data: [],
       borderWidth: 1,
-      borderColor: "",
-      backgroundColor: "",
+      borderColor: '',
+      backgroundColor: '',
       pointRadius: 1,
     };
 
@@ -168,14 +158,14 @@ const StatisticXTArchive = (props: {
     }
 
     if (isOpen && val >= 0 && !canal.includes(val)) {
-      if (value !== "0" && labels.length === 0 && val !== 16) {
+      if (value !== '0' && labels.length === 0 && val !== 16) {
         const colMin = 60 / matrix[0].TLen;
         for (let i = 0; i < matrix.length; i++) {
-          let int = "";
+          let int = '';
           if (i % colMin === 0) {
-            if (i / colMin < 10) int += "0";
+            if (i / colMin < 10) int += '0';
             int += String(i / colMin);
-            int += ":00";
+            int += ':00';
           }
           labels.push(int);
         }
@@ -223,7 +213,7 @@ const StatisticXTArchive = (props: {
     }
 
     return (
-      <Grid item xs sx={{ height: "28vh" }}>
+      <Grid item xs sx={{ height: '28vh' }}>
         <Line options={options} data={massId[numIdInMas]} />
       </Grid>
     );
@@ -236,8 +226,8 @@ const StatisticXTArchive = (props: {
     fontSize: 11,
     lineHeight: 2,
     backgroundColor: colorStat,
-    borderColor: "primary.main",
-    textAlign: "center",
+    borderColor: 'primary.main',
+    textAlign: 'center',
   };
 
   colChanel = points[areaId].Statistics[0].Datas.length;
@@ -246,11 +236,7 @@ const StatisticXTArchive = (props: {
     const KnobBatCl = () => {
       return (
         <Box sx={styleClear}>
-          <Button
-            sx={styleBattonCl}
-            variant="contained"
-            onClick={() => setValue("17")}
-          >
+          <Button sx={styleBattonCl} variant="contained" onClick={() => setValue('17')}>
             <b>Чистка</b>
           </Button>
         </Box>
@@ -279,15 +265,10 @@ const StatisticXTArchive = (props: {
 
           resStr.push(
             <Grid item key={i} xs={xss}>
-              <Grid
-                container
-                key={i}
-                justifyContent="center"
-                sx={styleHeader03}
-              >
+              <Grid container key={i} justifyContent="center" sx={styleHeader03}>
                 {ButtonCanal()}
               </Grid>
-            </Grid>
+            </Grid>,
           );
         }
         return resStr;
@@ -308,7 +289,7 @@ const StatisticXTArchive = (props: {
       <Grid container item sx={{ height: 24 }}>
         <Grid container sx={{ marginRight: 0.7 }}>
           <Grid item xs={0.5} sx={styleHeader03}></Grid>
-          <Grid item xs={0.51 * colChanel} sx={styleHeader03}>
+          <Grid item xs={0.512 * colChanel} sx={styleHeader03}>
             <MenuKnobBat />
             <KnobBatCl />
           </Grid>
@@ -322,55 +303,54 @@ const StatisticXTArchive = (props: {
 
   const StatStroka = (numMas: number) => {
     if (isOpen) {
-      kakchestvo = " ";
+      kakchestvo = ' ';
       resStr = [];
 
       //формирование времение в формате 00:00
-      let timLiner = "";
-      if (matrix[numMas].Hour < 10) timLiner = "0";
+      let timLiner = '';
+      if (matrix[numMas].Hour < 10) timLiner = '0';
       timLiner += matrix[numMas].Hour;
-      timLiner += ":";
-      if (matrix[numMas].Min < 10) timLiner += "0";
+      timLiner += ':';
+      if (matrix[numMas].Min < 10) timLiner += '0';
       timLiner += matrix[numMas].Min;
       //формирование начала строки
       resStr.push(
         <Grid key={Math.random()} item xs={0.5} sx={styleSt05}>
           {timLiner}
-        </Grid>
+        </Grid>,
       );
       if (!matrix[numMas].Avail) {
         //нет данных
         for (let i = 0; i < colChanel; i++) {
-          resStr.push(<Grid key={i} item xs={0.51} sx={styleSt02}></Grid>);
+          resStr.push(<Grid key={i} item xs={0.5122} sx={styleSt02}></Grid>);
         }
         //формирование конца строки
         resStr.push(
           <Grid key={Math.random()} item xs={3.3} sx={styleSt06}>
             нет данных
-          </Grid>
+          </Grid>,
         );
       } else {
         for (let i = 0; i < colChanel; i++) {
           if (matrix[numMas].Datas[i].st !== 0) {
             kakchestvo += i + 1;
-            kakchestvo += ", ";
+            kakchestvo += ', ';
           }
           resStr.push(
             <Grid
               key={Math.random()}
               item
-              xs={0.51}
-              sx={matrix[numMas].Datas[i].st === 0 ? styleSt03 : styleSt04}
-            >
+              xs={0.5122}
+              sx={matrix[numMas].Datas[i].st === 0 ? styleSt03 : styleSt04}>
               {matrix[numMas].Datas[i].in}
-            </Grid>
+            </Grid>,
           );
         }
         //формирование конца строки
         resStr.push(
           <Grid key={Math.random()} item xs={3.3} sx={styleSt06}>
             {kakchestvo.slice(0, -2)}
-          </Grid>
+          </Grid>,
         );
       }
     }
@@ -384,7 +364,7 @@ const StatisticXTArchive = (props: {
         resSps.push(
           <Grid key={i} item container sx={{ height: 27 }}>
             {StatStroka(i)}
-          </Grid>
+          </Grid>,
         );
       }
     }
@@ -436,8 +416,8 @@ const StatisticXTArchive = (props: {
   const CompletMatrix = () => {
     const step = points[areaId].Statistics[0].TLen;
     const typeStat = points[areaId].Statistics[0].Type;
-    colorStat = "#E6EEF5"; // голубой
-    if (typeStat > 1) colorStat = "#D8F5DF"; //зелёный
+    colorStat = '#E6EEF5'; // голубой
+    if (typeStat > 1) colorStat = '#D8F5DF'; //зелёный
     for (let i = 0; i < points[areaId].Statistics.length; i++) {
       let inHour = points[areaId].Statistics[i].Hour;
       let inTime = inHour * 60 + points[areaId].Statistics[i].Min;
@@ -466,7 +446,7 @@ const StatisticXTArchive = (props: {
     datestat.TLen = step;
     datestat.stat = JSON.parse(JSON.stringify(MATRIX));
     datestat.data = new Date(props.date).toLocaleDateString();
-    datestat.time = "24:00";
+    datestat.time = '24:00';
     dispatch(statsaveCreate(datestat));
     //========================================================
     let stepInterval = interval / step;
@@ -480,8 +460,7 @@ const StatisticXTArchive = (props: {
             sumRec.Min = matrix[i + k].Min;
             sumRec.Hour = matrix[i + k].Hour;
           }
-          if (typeStat > 1)
-            sumRec.Datas[j].in = sumRec.Datas[j].in / stepInterval;
+          if (typeStat > 1) sumRec.Datas[j].in = sumRec.Datas[j].in / stepInterval;
         }
         sumRec.TLen = interval;
         pointsMatrix.push(sumRec);
@@ -495,11 +474,11 @@ const StatisticXTArchive = (props: {
   };
 
   const styleBackdrop = {
-    color: "#fff",
-    marginLeft: "0.3vh",
-    marginRight: "1.7vh",
-    marginTop: "34vh",
-    marginBottom: "4vh",
+    color: '#fff',
+    marginLeft: '0.3vh',
+    marginRight: '1.7vh',
+    marginTop: '34vh',
+    marginBottom: '4vh',
     zIndex: (theme: any) => theme.zIndex.drawer + 1,
   };
 
@@ -529,15 +508,15 @@ const StatisticXTArchive = (props: {
 
   return (
     <Box sx={{ marginTop: 0.8, marginLeft: -2.5, marginRight: -4 }}>
-      <Grid container item sx={{ height: "28vh" }}>
+      <Grid container item sx={{ height: '28vh' }}>
         <Grid item xs={12} sx={styleStatMain}>
           <StatGraf00 />
         </Grid>
       </Grid>
-      <Grid container item sx={{ marginTop: 1, height: "56vh" }}>
+      <Grid container item sx={{ marginTop: 1, height: '56vh' }}>
         <Grid item xs={24} sx={styleStatMain}>
           <StatisticHeader />
-          <Box sx={{ overflowX: "auto", height: "59vh" }}>
+          <Box sx={{ overflowX: 'auto', height: '59vh' }}>
             <Grid container item>
               {openLoader && <Dinama />}
               {!openLoader && (

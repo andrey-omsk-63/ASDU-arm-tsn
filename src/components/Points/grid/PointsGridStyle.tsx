@@ -43,7 +43,7 @@ export const styleXTG02 = {
 };
 
 export const styleXTG03 = {
-  bgcolor: "#F1F5FB", // светло серый
+  bgcolor: '#F1F5FB', // светло серый
   marginTop: '0.5vh',
   border: 1,
   height: '32.6vh', // 33
@@ -230,7 +230,7 @@ export const styleEndInf = {
 };
 //====== PointsLevel2Area =======================================================
 export const styleXTG035 = {
-  bgcolor: "#F1F5FB", // светло серый
+  bgcolor: '#F1F5FB', // светло серый
   border: 1,
   height: '85.8vh',
   borderRadius: 1,
@@ -314,7 +314,7 @@ export const styleXTC02 = {
 };
 
 export const styleXTC03 = {
-  bgcolor: "#F1F5FB", // светло серый
+  bgcolor: '#F1F5FB', // светло серый
   border: 1,
   borderRadius: 1,
   borderColor: 'primary.main',
@@ -322,7 +322,7 @@ export const styleXTC03 = {
 };
 
 export const styleXTC033 = {
-  bgcolor: "#F1F5FB", // светло серый
+  bgcolor: '#F1F5FB', // светло серый
   border: 1,
   borderRadius: 1,
   borderColor: 'primary.main',
@@ -332,7 +332,7 @@ export const styleXTC033 = {
 };
 //====== PointsMainScr ==========================================================
 export const styleXt02 = {
-  bgcolor: "#F1F5FB", // светло серый
+  bgcolor: '#F1F5FB', // светло серый
   border: 1,
   borderRadius: 1,
   borderColor: 'primary.main',
@@ -373,7 +373,7 @@ export const styleXt05 = {
 };
 //====== PointsMainScrGrid1 =====================================================
 export const styleXTG102 = {
-  borderRight: 1,
+  //borderRight: 1,
   borderBottom: 1,
   borderColor: 'primary.main',
   padding: 0.7,
@@ -391,7 +391,7 @@ export const styleXTG103 = {
 
 export const styleXTG104 = {
   fontSize: 14.5,
-  bgcolor: "#F1F5FB", // светло серый
+  bgcolor: '#F1F5FB', // светло серый
   borderRight: 0,
   borderColor: 'primary.main',
   margin: -1,

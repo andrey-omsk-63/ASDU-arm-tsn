@@ -94,10 +94,10 @@ const PointsMainScrGrid1 = (props: {
 
   return (
     <Grid item sx={styleXTG104}>
-      <Box sx={{ marginRight: 0.74, border: 0 }}>
-        <HeaderMainScrGrid1 />
-      </Box>
-      <Box sx={{ fontSize: 14, overflowX: 'auto', height: '72vh' }}>
+      {/* <Box sx={{ marginRight: 0.74, border: 0 }}> */}
+      <HeaderMainScrGrid1 />
+      {/* </Box> */}
+      <Box sx={{ fontSize: 14, overflowX: 'auto', height: '74vh' }}>
         {props.open && <>{StrokaMainScrGrid1()}</>}
       </Box>
     </Grid>
