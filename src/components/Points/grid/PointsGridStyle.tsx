@@ -2,202 +2,204 @@
 export const styleXTG00 = {
   fontSize: 11,
   borderBottom: 1,
-  borderColor: 'primary.main',
+  borderColor: "primary.main",
   padding: 0.3,
-  textAlign: 'center',
+  textAlign: "center",
 };
 
 export const styleXTG01 = {
   fontSize: 11,
   borderRight: 1,
   borderBottom: 1,
-  borderColor: 'primary.main',
+  borderColor: "primary.main",
   padding: 0.3,
-  textAlign: 'center',
+  textAlign: "center",
 };
 
 export const styleXTG011 = {
   fontSize: 11,
   borderRight: 1,
   borderBottom: 1,
-  borderColor: 'primary.main',
-  //padding: 0.3,
-  textAlign: 'center',
+  borderColor: "primary.main",
+  padding: 0.3,
+  textAlign: "center",
 };
 
 export const styleXTG021 = {
   fontSize: 11,
   borderBottom: 1,
-  borderColor: 'primary.main',
-  textAlign: 'center',
-  backgroundColor: '#C0C0C0',
+  borderColor: "primary.main",
+  padding: 0.7,
+  textAlign: "center",
+  //backgroundColor: "#C0C0C0",
 };
 
 export const styleXTG02 = {
   fontSize: 11,
-  borderRight: 1,
+  //borderRight: 1,
   borderBottom: 1,
-  borderColor: 'primary.main',
-  textAlign: 'center',
-  backgroundColor: '#C0C0C0',
+  borderColor: "primary.main",
+  padding: 0.7,
+  textAlign: "center",
+  //backgroundColor: "#C0C0C0",
 };
 
 export const styleXTG03 = {
-  bgcolor: '#F1F5FB', // светло серый
-  marginTop: '0.5vh',
+  bgcolor: "#F1F5FB", // светло серый
+  marginTop: "0.5vh",
   border: 1,
-  height: '32.6vh', // 33
+  height: "32.6vh", // 33
   borderRadius: 1,
-  borderColor: 'primary.main',
+  borderColor: "primary.main",
   boxShadow: 12,
 };
 
 export const styleXTG04 = {
   //height: '84.4vh',
-  height: '85.8vh',
+  height: "85.8vh",
   border: 1,
   marginLeft: 0.5,
   borderRadius: 1,
-  borderColor: 'primary.main',
-  boxShadow: 8,
+  borderColor: "primary.main",
+  boxShadow: 12,
 };
 
 export const styleXTG05 = {
   marginTop: -3.0,
-  height: '3vh',
-  textAlign: 'right',
+  height: "3vh",
+  textAlign: "right",
 };
 
 export const styleBut01 = {
   fontSize: 10,
   marginTop: -0.3,
-  maxHeight: '15px',
-  minHeight: '15px',
-  maxWidth: '205px',
-  minWidth: '205px',
+  maxHeight: "15px",
+  minHeight: "15px",
+  maxWidth: "205px",
+  minWidth: "205px",
   // backgroundColor: '#FFFBE5', // молоко
-  backgroundColor: '#E9F5D8', // салатовый
-  color: 'black',
-  textTransform: 'unset !important',
+  backgroundColor: "#E9F5D8", // салатовый
+  color: "black",
+  textTransform: "unset !important",
 };
 
 export const styleBut02 = {
   fontSize: 11,
-  maxHeight: '21px',
-  minHeight: '21px',
-  maxWidth: '3%',
-  minWidth: '3%',
-  color: 'black',
-  bgcolor: '#E6F5D6', // светло-салатовый
-  border: '1px solid #000',
-  borderColor: '#d4d4d4', // серый
+  maxHeight: "21px",
+  minHeight: "21px",
+  maxWidth: "33px",
+  minWidth: "33px",
+  color: "black",
+  bgcolor: "#E6F5D6", // светло-салатовый
+  border: "1px solid #000",
+  borderColor: "#d4d4d4", // серый
   borderRadius: 1,
   boxShadow: 1,
-  textTransform: 'unset !important',
+  textTransform: "unset !important",
 };
 
 export const styleBut021 = {
   fontSize: 11,
-  maxHeight: '21px',
-  minHeight: '21px',
-  maxWidth: '3%',
-  minWidth: '3%',
-  color: 'black',
-  bgcolor: '#BAE186', // тёмно-салатовый
-  border: '1px solid #000',
-  borderColor: '#93D145', // ярко-салатовый
+  maxHeight: "21px",
+  minHeight: "21px",
+  maxWidth: "33px",
+  minWidth: "33px",
+  color: "black",
+  bgcolor: "#BAE186", // тёмно-салатовый
+  border: "1px solid #000",
+  borderColor: "#93D145", // ярко-салатовый
   borderRadius: 1,
   boxShadow: 6,
-  textTransform: 'unset !important',
+  textTransform: "unset !important",
 };
 
 export const styleBut03 = {
   fontSize: 13.5,
   marginTop: -0.5,
-  maxHeight: '21px',
-  minHeight: '21px',
-  maxWidth: '193px',
-  minWidth: '193px',
-  bgcolor: '#E6F5D6', // светло-салатовый
-  border: '1px solid #000',
-  borderColor: '#d4d4d4', // серый
+  maxHeight: "21px",
+  minHeight: "21px",
+  maxWidth: "193px",
+  minWidth: "193px",
+  bgcolor: "#E6F5D6", // светло-салатовый
+  border: "1px solid #000",
+  borderColor: "#d4d4d4", // серый
   borderRadius: 1,
   boxShadow: 6,
-  color: 'black',
-  textTransform: 'unset !important',
+  color: "black",
+  textTransform: "unset !important",
 };
 
 export const styleModalEnd = {
-  position: 'absolute',
-  top: '0%',
-  left: 'auto',
-  right: '-0%',
-  height: '21px',
-  maxWidth: '2%',
-  minWidth: '2%',
-  color: 'black',
+  position: "absolute",
+  top: "0%",
+  left: "auto",
+  right: "-0%",
+  height: "21px",
+  maxWidth: "2%",
+  minWidth: "2%",
+  color: "black",
 };
 
 export const styleSetInf = {
-  outline: 'none',
+  outline: "none",
   fontSize: 17,
-  position: 'absolute',
-  left: '36%',
-  marginTop: '15vh',
+  position: "absolute",
+  left: "36%",
+  marginTop: "15vh",
   width: 270,
-  bgcolor: 'background.paper',
-  border: '1px solid #000',
-  borderColor: 'primary.main',
-  borderRadius: 2,
+  bgcolor: "background.paper",
+  border: "1px solid #000",
+  borderColor: "primary.main",
+  borderRadius: 1,
   boxShadow: 24,
   p: 1.5,
 };
 
 export const styleSetInff = {
-  outline: 'none',
+  outline: "none",
   fontSize: 17,
-  position: 'absolute',
-  left: '36%',
-  marginTop: '15vh',
+  position: "absolute",
+  left: "36%",
+  marginTop: "15vh",
   width: 380,
-  bgcolor: 'background.paper',
-  border: '1px solid #000',
-  borderColor: 'primary.main',
-  borderRadius: 2,
+  bgcolor: "background.paper",
+  border: "1px solid #000",
+  borderColor: "primary.main",
+  borderRadius: 1,
   boxShadow: 24,
   p: 1.5,
 };
 
 export const styleInpName = {
-  '& > :not(style)': {
+  "& > :not(style)": {
     m: 0,
-    width: '27ch',
-    bgcolor: '#FFFBE5',
-    border: '1px solid #000',
-    borderColor: '#d4d4d4', // серый
+    width: "27ch",
+    bgcolor: "#FFFBE5",
+    border: "1px solid #000",
+    borderColor: "#d4d4d4", // серый
     borderRadius: 1,
     boxShadow: 6,
   },
 };
 
 export const styleInpArg = {
-  '& > :not(style)': {
-    width: '12ch',
+  "& > :not(style)": {
+    width: "12ch",
     marginTop: 0.5,
-    bgcolor: '#FFFBE5',
-    borderColor: '#d4d4d4', // серый
+    bgcolor: "#FFFBE5",
+    borderColor: "#d4d4d4", // серый
     borderRadius: 1,
     boxShadow: 6,
   },
 };
 export const styleInpTime = {
-  '& > :not(style)': {
-    width: '2ch',
-    maxHeight: '21px',
-    minHeight: '21px',
-    bgcolor: '#FFFBE5',
-    border: '1px solid #000',
-    borderColor: '#d4d4d4', // серый
+  "& > :not(style)": {
+    width: "2.5ch",
+    maxHeight: "21px",
+    minHeight: "21px",
+    bgcolor: "#FFFBE5",
+    border: "1px solid #000",
+    borderColor: "#d4d4d4", // серый
     borderRadius: 1,
     boxShadow: 6,
   },
@@ -205,36 +207,36 @@ export const styleInpTime = {
 
 export const styleInpKnop = {
   marginTop: 1,
-  maxHeight: '21px',
-  minHeight: '21px',
-  color: 'black',
-  bgcolor: '#E6F5D6', // светло-салатовый
-  border: '1px solid #000',
-  borderColor: '#d4d4d4', // серый
+  maxHeight: "21px",
+  minHeight: "21px",
+  color: "black",
+  bgcolor: "#E6F5D6", // светло-салатовый
+  border: "1px solid #000",
+  borderColor: "#d4d4d4", // серый
   borderRadius: 1,
   boxShadow: 6,
-  textAlign: 'center',
-  textTransform: 'unset !important',
+  textAlign: "center",
+  textTransform: "unset !important",
 };
 //====== PointsLevel2BazaDiogram ================================================
 export const styleEndInf = {
   fontSize: 11,
-  position: 'absolute',
-  top: '0%',
-  left: 'auto',
-  right: '0%',
-  height: '15px',
-  maxWidth: '2%',
-  minWidth: '2%',
-  color: 'black',
+  position: "absolute",
+  top: "0%",
+  left: "auto",
+  right: "0%",
+  height: "15px",
+  maxWidth: "2%",
+  minWidth: "2%",
+  color: "black",
 };
 //====== PointsLevel2Area =======================================================
 export const styleXTG035 = {
-  bgcolor: '#F1F5FB', // светло серый
+  bgcolor: "#F1F5FB", // светло серый
   border: 1,
-  height: '85.8vh',
+  height: "85.8vh",
   borderRadius: 1,
-  borderColor: 'primary.main',
+  borderColor: "primary.main",
   boxShadow: 12,
 };
 
@@ -243,99 +245,148 @@ export const styleXTG045 = {
   border: 1,
   marginLeft: 0.5,
   borderRadius: 1,
-  borderColor: 'primary.main',
-  boxShadow: 8,
+  borderColor: "primary.main",
+  boxShadow: 12,
 };
 
 export const styleBoxForm = {
-  '& > :not(style)': {
-    backgroundColor: '#FFFBE5', // молоко
-    border: '1px solid #000',
-    borderColor: '#d4d4d4', // серый
+  "& > :not(style)": {
+    backgroundColor: "#FFFBE5", // молоко
+    border: "1px solid #000",
+    borderColor: "#d4d4d4", // серый
     borderRadius: 1,
     boxShadow: 6,
-    marginTop: '0px',
-    marginLeft: '-0px',
-    width: '63px',
+    marginTop: "0px",
+    marginLeft: "-0px",
+    width: "63px",
   },
 };
-//====== PointsMainScrGrid2 =====================================================
-export const styleXTGl02 = {
+//====== PointsMainScrGrid1 =====================================================
+export const styleXTGHeader = {
+  bgcolor: "#C0C0C0",
+  borderColor: "#C0C0C0",
+  borderTopLeftRadius: 3,
+  borderTopRightRadius: 3,
+};
+
+export const styleXTG102 = {
+  //borderRight: 1,
+  borderBottom: 1,
+  borderColor: "primary.main",
+  padding: 0.7,
+  textAlign: "center",
+  //backgroundColor: "#C0C0C0",
+};
+
+export const styleXTG103 = {
   borderRight: 1,
   borderBottom: 1,
-  borderColor: 'primary.main',
+  borderColor: "primary.main",
   padding: 0.7,
-  textAlign: 'center',
-  backgroundColor: '#C0C0C0',
+  textAlign: "center",
+};
+
+export const styleXTG104 = {
+  fontSize: 14.5,
+  bgcolor: "#F1F5FB", // светло серый
+  borderColor: "primary.main",
+  borderRadius: 1,
+  margin: -1,
+  boxShadow: 12,
+};
+
+export const styleXTG105 = {
+  fontSize: 11,
+  borderRight: 1,
+  borderColor: "primary.main",
+  backgroundColor: "#E5E5E5",
+  textAlign: "center",
+};
+//====== PointsMainScrGrid2 =====================================================
+export const styleXTGrid = {
+  bgcolor: "#F1F5FB", // светло серый
+  fontSize: 14.5,
+  margin: -1,
+  borderRadius: 1,
+  boxShadow: 12,
+};
+
+export const styleXTGl02 = {
+  //borderRight: 1,
+  borderBottom: 1,
+  borderColor: "primary.main",
+  padding: 0.7,
+  textAlign: "center",
+  //backgroundColor: "#C0C0C0",
 };
 
 export const styleXTGl021 = {
   borderBottom: 1,
-  borderColor: 'primary.main',
+  borderColor: "primary.main",
   padding: 0.7,
-  textAlign: 'center',
-  backgroundColor: '#C0C0C0',
+  textAlign: "center",
+  //backgroundColor: "#C0C0C0",
 };
 
 export const styleXTGl05 = {
   fontSize: 11,
   //borderRight: 1,
-  borderColor: 'primary.main',
-  backgroundColor: '#E5E5E5',
-  textAlign: 'center',
+  borderColor: "primary.main",
+  backgroundColor: "#E5E5E5",
+  textAlign: "center",
 };
 //====== PointsLevel2Calc =======================================================
 export const styleXTC011 = {
   fontSize: 11,
   borderRight: 1,
   borderBottom: 1,
-  borderColor: 'primary.main',
+  borderColor: "primary.main",
   padding: 0.2,
-  textAlign: 'center',
+  textAlign: "center",
 };
 
 export const styleXTC01 = {
   fontSize: 11,
   borderRight: 1,
   borderBottom: 1,
-  borderColor: 'primary.main',
+  borderColor: "primary.main",
   padding: 0.2,
-  backgroundColor: '#E6EEF5',
-  textAlign: 'center',
+  backgroundColor: "#E6EEF5",
+  textAlign: "center",
 };
 
 export const styleXTC02 = {
   fontSize: 11,
   borderBottom: 1,
-  borderColor: 'primary.main',
+  borderColor: "primary.main",
   padding: 0.4,
-  textAlign: 'center',
-  backgroundColor: '#C0C0C0',
+  textAlign: "center",
+  backgroundColor: "#C0C0C0",
 };
 
 export const styleXTC03 = {
-  bgcolor: '#F1F5FB', // светло серый
+  bgcolor: "#F1F5FB", // светло серый
   border: 1,
   borderRadius: 1,
-  borderColor: 'primary.main',
+  borderColor: "primary.main",
   boxShadow: 12,
 };
 
 export const styleXTC033 = {
-  bgcolor: '#F1F5FB', // светло серый
+  bgcolor: "#F1F5FB", // светло серый
   border: 1,
   borderRadius: 1,
-  borderColor: 'primary.main',
+  borderColor: "primary.main",
   //width: '99vh',
-  height: '57.9vh',
+  height: "57.9vh",
   boxShadow: 12,
 };
 //====== PointsMainScr ==========================================================
 export const styleXt02 = {
-  bgcolor: '#F1F5FB', // светло серый
+  bgcolor: "#F1F5FB", // светло серый
   border: 1,
   borderRadius: 1,
-  borderColor: 'primary.main',
+  borderColor: "primary.main",
   padding: 1,
   marginLeft: 0.5,
   marginRight: 1,
@@ -352,64 +403,30 @@ export const styleXt03 = {
 export const styleXt04 = {
   border: 1,
   borderRadius: 1,
-  borderColor: 'primary.main',
+  borderColor: "primary.main",
   padding: 1,
   margin: 1,
   marginTop: -0.5,
   marginLeft: -1,
-  height: '69%',
+  height: "69%",
 };
 
 export const styleXt05 = {
   border: 1,
   borderRadius: 1,
-  borderColor: 'primary.main',
+  borderColor: "primary.main",
   padding: 1,
   margin: 1,
   marginTop: -0.5,
   marginLeft: -0.5,
   marginRight: 1.5,
-  height: '69%',
-};
-//====== PointsMainScrGrid1 =====================================================
-export const styleXTG102 = {
-  //borderRight: 1,
-  borderBottom: 1,
-  borderColor: 'primary.main',
-  padding: 0.7,
-  textAlign: 'center',
-  backgroundColor: '#C0C0C0',
-};
-
-export const styleXTG103 = {
-  borderRight: 1,
-  borderBottom: 1,
-  borderColor: 'primary.main',
-  padding: 0.7,
-  textAlign: 'center',
-};
-
-export const styleXTG104 = {
-  fontSize: 14.5,
-  bgcolor: '#F1F5FB', // светло серый
-  borderRight: 0,
-  borderColor: 'primary.main',
-  margin: -1,
-  boxShadow: 12,
-};
-
-export const styleXTG105 = {
-  fontSize: 11,
-  borderRight: 1,
-  borderColor: 'primary.main',
-  backgroundColor: '#E5E5E5',
-  textAlign: 'center',
+  height: "69%",
 };
 //====== PointsMenuLevel2 =======================================================
 export const styleXTl201 = {
-  width: '70%',
-  height: '83.5vh',
-  marginTop: '2.5vh',
+  width: "70%",
+  height: "83.5vh",
+  marginTop: "2.5vh",
   marginLeft: -3,
   marginRight: -61,
   border: 0,

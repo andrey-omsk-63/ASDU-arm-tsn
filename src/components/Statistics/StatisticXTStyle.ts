@@ -49,7 +49,7 @@ export const styleSt03 = {
 };
 
 export const styleSt04 = {
-  textIndent: 6,
+  //textIndent: 6,
   borderRight: 1,
   borderBottom: 1,
   fontSize: 11,
@@ -70,12 +70,14 @@ export const styleSt05 = {
 
 export const styleSt06 = {
   textIndent: 6,
-  border: 1,
-  borderTop: 0,
-  borderLeft: 0,
-  borderColor: "primary.main",
-  fontSize: 11,
+  // border: 1,
+  // borderTop: 0,
+  // borderLeft: 0,
+  borderRight: 1,
+  borderBottom: 1,
   lineHeight: 2,
+  fontSize: 11,
+  borderColor: "primary.main",
 };
 
 export const styleHeader03 = {
@@ -84,6 +86,7 @@ export const styleHeader03 = {
   backgroundColor: "#C0C0C0",
   fontSize: 11,
   textAlign: "center",
+  height: 24,
   lineHeight: 2,
 };
 
@@ -94,6 +97,7 @@ export const styleHeader033 = {
   backgroundColor: "#C0C0C0",
   fontSize: 11,
   textAlign: "center",
+  height: 24,
   lineHeight: 2,
 };
 
@@ -130,8 +134,9 @@ export const styleBatton02 = {
 };
 
 export const styleClear = {
+  //height: 24,
   position: "absolute",
-  marginTop: "-2.8vh",
+  marginTop: "-2.7vh",
   left: "0.8vh",
 };
 

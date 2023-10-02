@@ -29,12 +29,19 @@ export const styleMRG02Center = {
   textAlign: 'center',
 };
 
+export const styleMRGHeader = {
+  bgcolor: "#C0C0C0",
+  borderColor: "#C0C0C0",
+  borderTopLeftRadius: 3,
+  borderTopRightRadius: 3,
+};
+
 export const styleMRG03 = {
   borderBottom: 1,
   borderColor: 'primary.main',
   height: '3vh',
   textAlign: 'center',
-  backgroundColor: '#C0C0C0',
+  //backgroundColor: '#C0C0C0',
   paddingTop: '0.4vh',
 };
 

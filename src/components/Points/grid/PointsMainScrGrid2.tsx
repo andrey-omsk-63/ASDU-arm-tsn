@@ -13,9 +13,8 @@ import { MakeDate, MakeDateRus } from "../../../AppServiceFunctions";
 
 import { styleXTGl02, styleXTGl021, styleBut02 } from "./PointsGridStyle";
 import { styleModalEnd, styleSetInf, styleInpArg } from "./PointsGridStyle";
-import { styleXTGl05, styleBut021 } from "./PointsGridStyle";
-
-//import { XctrlInfo } from '../../../interfaceGl.d';
+import { styleXTGl05, styleBut021, styleXTGrid } from "./PointsGridStyle";
+import { styleXTGHeader } from "./PointsGridStyle";
 
 let nomStr = 0;
 let flagEdit = true;
@@ -37,7 +36,6 @@ const PointsMainScrGrid2 = (props: {
     const { statsaveReducer } = state;
     return statsaveReducer.datestat;
   });
-  //console.log('ScrGrid2:', datestat);
   const dispatch = useDispatch();
   //===========================================================
   const xtProps = props.xtt;
@@ -64,7 +62,7 @@ const PointsMainScrGrid2 = (props: {
   const HeaderMainScrGrid2 = () => {
     return (
       <>
-        <Grid item container xs={12}>
+        <Grid container xs={12} sx={styleXTGHeader}>
           <Grid item xs={1.5} sx={styleXTGl02}>
             <b>№</b>
           </Grid>
@@ -187,10 +185,7 @@ const PointsMainScrGrid2 = (props: {
   };
 
   return (
-    <Grid
-      item
-      sx={{ bgcolor: "#F1F5FB", fontSize: 14.5, margin: -1, boxShadow: 8 }}
-    >
+    <Grid item sx={styleXTGrid}>
       <HeaderMainScrGrid2 />
       {props.open && <>{StrokaMainScrGrid2()}</>}
       {openSetStr && <> {SetStr(nomStr)}</>}

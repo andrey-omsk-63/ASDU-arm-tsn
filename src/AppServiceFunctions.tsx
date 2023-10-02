@@ -255,7 +255,10 @@ export const BoxTextField = (argum: any, hChange: any) => {
     <TextField
       size="small"
       onKeyPress={handleKey} //отключение Enter
-      InputProps={{ disableUnderline: true, style: { fontSize: 14 } }}
+      InputProps={{
+        disableUnderline: true,
+        style: { paddingLeft: 2, fontSize: 14 },
+      }}
       value={argum}
       onChange={hChange}
       variant="standard"

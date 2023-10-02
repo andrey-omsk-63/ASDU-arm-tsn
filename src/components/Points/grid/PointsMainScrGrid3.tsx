@@ -13,9 +13,8 @@ import { MakeDate, MakeDateRus } from "../../../AppServiceFunctions";
 
 import { styleXTGl02, styleXTGl021, styleBut02 } from "./PointsGridStyle";
 import { styleModalEnd, styleSetInf, styleInpArg } from "./PointsGridStyle";
-import { styleXTGl05, styleBut021 } from "./PointsGridStyle";
-
-//import { XctrlInfo } from '../../../interfaceGl.d';
+import { styleXTGl05, styleBut021, styleXTGrid } from "./PointsGridStyle";
+import { styleXTGHeader } from "./PointsGridStyle";
 
 let nomStr = 0;
 let flagEdit = true;
@@ -58,14 +57,12 @@ const PointsMainScrGrid3 = (props: {
         flagEdit = true; // Stop
       }
     }
-    // if (!maskpoint.redaxPoint && flagEdit) flagEdit = false; // Start
-    // if (maskpoint.redaxPoint && !flagEdit) flagEdit = true; // Stop
   }
 
   const HeaderMainScrGrid3 = () => {
     return (
       <>
-        <Grid container item xs={12}>
+        <Grid container xs={12} sx={styleXTGHeader}>
           <Grid xs={1.5} item sx={styleXTGl02}>
             <b>№</b>
           </Grid>
@@ -201,10 +198,7 @@ const PointsMainScrGrid3 = (props: {
   };
 
   return (
-    <Grid
-      item
-      sx={{ bgcolor: "#F1F5FB", fontSize: 14.5, margin: -1, boxShadow: 8 }}
-    >
+    <Grid item sx={styleXTGrid}>
       <HeaderMainScrGrid3 />
       {props.open && <>{StrokaMainScrGrid3()}</>}
       {openSetStr && <> {SetStr(nomStr)}</>}

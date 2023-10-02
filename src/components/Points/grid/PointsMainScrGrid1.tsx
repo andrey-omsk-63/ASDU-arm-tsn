@@ -1,15 +1,15 @@
-import * as React from 'react';
-import { useSelector } from 'react-redux';
+import * as React from "react";
+import { useSelector } from "react-redux";
 
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 
-import { XctrlInfo } from '../../../interfaceGl.d';
+import { XctrlInfo } from "../../../interfaceGl.d";
 
-import { MakeDate, MakeDateRus, TimeStr } from '../../../AppServiceFunctions';
+import { MakeDate, MakeDateRus, TimeStr } from "../../../AppServiceFunctions";
 
-import { styleXTG102, styleXTG103 } from './PointsGridStyle';
-import { styleXTG104, styleXTG105 } from './PointsGridStyle';
+import { styleXTG102, styleXTG103, styleXTGHeader } from "./PointsGridStyle";
+import { styleXTG104, styleXTG105 } from "./PointsGridStyle";
 
 const PointsMainScrGrid1 = (props: {
   open: boolean;
@@ -39,7 +39,7 @@ const PointsMainScrGrid1 = (props: {
   const HeaderMainScrGrid1 = () => {
     return (
       <>
-        <Grid container>
+        <Grid container sx={styleXTGHeader}>
           <Grid item xs={2} sx={styleXTG102}></Grid>
           <Grid item xs={3} sx={styleXTG102}>
             <b>КС на ДК</b>
@@ -68,8 +68,8 @@ const PointsMainScrGrid1 = (props: {
     if (pointRec !== null) {
       if (Object.keys(pointRec).length > 0) {
         for (let i = 0; i < pointRec.result.length; i++) {
-          let kakchectvo = '';
-          if (!pointRec.result[i].Good) kakchectvo = 'н/д';
+          let kakchectvo = "";
+          if (!pointRec.result[i].Good) kakchectvo = "н/д";
           resStr.push(
             <Grid key={i} container xs={12} item>
               <Grid xs={2} item sx={styleXTG103}>
@@ -84,7 +84,7 @@ const PointsMainScrGrid1 = (props: {
               <Grid xs={4} item sx={styleXTG103}>
                 {kakchectvo}
               </Grid>
-            </Grid>,
+            </Grid>
           );
         }
       }
@@ -97,7 +97,7 @@ const PointsMainScrGrid1 = (props: {
       {/* <Box sx={{ marginRight: 0.74, border: 0 }}> */}
       <HeaderMainScrGrid1 />
       {/* </Box> */}
-      <Box sx={{ fontSize: 14, overflowX: 'auto', height: '74vh' }}>
+      <Box sx={{ fontSize: 14, overflowX: "auto", height: "74vh" }}>
         {props.open && <>{StrokaMainScrGrid1()}</>}
       </Box>
     </Grid>
