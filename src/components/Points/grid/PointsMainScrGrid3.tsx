@@ -62,7 +62,7 @@ const PointsMainScrGrid3 = (props: {
   const HeaderMainScrGrid3 = () => {
     return (
       <>
-        <Grid container xs={12} sx={styleXTGHeader}>
+        <Grid container sx={styleXTGHeader}>
           <Grid xs={1.5} item sx={styleXTGl02}>
             <b>№</b>
           </Grid>

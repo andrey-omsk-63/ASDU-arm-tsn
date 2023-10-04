@@ -97,11 +97,13 @@ const StatisticsArchive = (props: {
   }
 
   const styleSt2 = {
-    width: 850,
+    //border: 1,
+    // width: 850,
+    width: window.innerWidth - 21,
     fontSize: 12,
-    marginTop: '-2vh',
-    marginLeft: -7.6,
-    marginRight: -7,
+    marginTop: "-2vh",
+    marginLeft: -2.4,
+    //marginRight: -7,
   };
 
   if (datestat.tekArea && datestat.tekId && pointsEtalon) {
@@ -150,9 +152,9 @@ const StatisticsArchive = (props: {
           border: "1px solid #000",
           borderColor: "#93D145", // ярко-салатовый
           //borderRadius: 1,
-          boxShadow: 6,
+          boxShadow: '4px -6px 6px #d4d4d4',
           color: "black",
-          marginRight: 0.5,
+          marginRight: 1,
         };
         const styleSt11 = {
           fontSize: 13.5,
@@ -164,7 +166,7 @@ const StatisticsArchive = (props: {
           //borderRadius: 1,
           boxShadow: 2,
           color: "black",
-          marginRight: 0.5,
+          marginRight: 1,
         };
         labl =
           pointsEtalon[i].area +

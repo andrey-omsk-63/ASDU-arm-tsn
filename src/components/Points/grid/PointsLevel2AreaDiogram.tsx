@@ -58,6 +58,7 @@ const PointsLevel2AreaDiogram = (props: {
 
   const [openLoader, setOpenLoader] = React.useState(true);
   const [pictInfo, setPictInfo] = React.useState(false);
+  console.log("!!!:", points.xctrls[crRoad]);
 
   const horizon = points.xctrls[crRoad].right;
   const vertical = points.xctrls[crRoad].left;
@@ -189,7 +190,13 @@ const PointsLevel2AreaDiogram = (props: {
           let prph = horizon / 100;
           let ph = pointer[namer][i].Value[1] / prph;
           let flagEnd = i === pointer[namer].length - 1 ? true : false;
-          resStrr.push(<>{OutputPict(i, pv, ph, PictInfo, flagEnd)}</>);
+          resStrr.push(
+            <>
+              <Grid key={i} item container>
+                {OutputPict(i, pv, ph, PictInfo, flagEnd)}
+              </Grid>
+            </>
+          );
         }
       }
     }

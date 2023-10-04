@@ -80,7 +80,6 @@ const StatisticsNew = (props: {
     points = [];
   } else {
     if (massInterval.length) massInterval[tekValue] = props.interval;
-    //console.log("PROPS.massInterval", massInterval);
   }
 
   if (isOpen && !flagEtalon) {
@@ -106,7 +105,6 @@ const StatisticsNew = (props: {
         pointsAddInterval.push(points[i].Statistics[0].TLen);
       }
     }
-    //console.log('pointsAdd:', pointsAdd);
     if (pointsAdd.length > 0) {
       for (let i = 0; i < pointsAdd.length; i++) {
         pointsEtalon.push(pointsAdd[i]);
@@ -116,12 +114,16 @@ const StatisticsNew = (props: {
     }
   }
 
+  //console.log("window.innerWidth:", window.innerWidth);
+
   const styleSt2 = {
-    width: 850,
+    //border: 1,
+    // width: 850,
+    //bottom: 0,
+    width: window.innerWidth - 21,
     fontSize: 12,
     marginTop: "-2vh",
-    marginLeft: -7.6,
-    marginRight: -7,
+    marginLeft: -2.4,
   };
 
   if (datestat.tekArea && datestat.tekId) {
@@ -169,10 +171,9 @@ const StatisticsNew = (props: {
           bgcolor: "#BAE186", // тёмно-салатовый
           border: "1px solid #000",
           borderColor: "#93D145", // ярко-салатовый
-          //borderRadius: 1,
-          boxShadow: 6,
+          boxShadow: "6px -6px 6px  #d4d4d4",
           color: "black",
-          marginRight: 0.5,
+          marginRight: 1,
         };
         const styleSt11 = {
           fontSize: 13.5,
@@ -181,10 +182,9 @@ const StatisticsNew = (props: {
           bgcolor: "#E6F5D6", // светло-салатовый
           border: "1px solid #000",
           borderColor: "#d4d4d4", // серый
-          //borderRadius: 1,
           boxShadow: 2,
           color: "black",
-          marginRight: 0.5,
+          marginRight: 1,
         };
         labl =
           pointsEtalon[i].area +
@@ -223,7 +223,7 @@ const StatisticsNew = (props: {
         <>
           <Box sx={styleSt2}>
             <Tabs
-              sx={{ maxHeight: "20px", minHeight: "20px" }}
+              sx={{ maxHeight: "20px", minHeight: "20px", marginTop: 0 }}
               value={value}
               onChange={handleChange}
               variant="scrollable"

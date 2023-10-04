@@ -90,6 +90,7 @@ const PointsLevel2Calc = (props: {
   const printRef = React.useRef(null);
 
   let pointer = points.results;
+  console.log('######:',points)
   if (datestat.xttData !== MakeDate(new Date())) {
     pointer = datestat.result;
     if (debug) namer = "Без имени_12.09.2022_10-12-57";

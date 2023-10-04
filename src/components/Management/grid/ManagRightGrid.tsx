@@ -201,31 +201,32 @@ const ManagementRightGrid = (props: {
         let soobBP = "Назначен";
         let soobXT = "ХТ для данного района ";
         if (mass[i].isPK) {
-          soobBP = soobBP + " ПК";
+          soobBP += " ПК";
         } else {
           for (let i = 0; i < massKnob.length; i++) {
             if (massKnob[i].cmd === 5) {
-              soobBP = soobBP + " пк";
+              soobBP += " пк";
               break;
             }
           }
         }
+        // ХТ
         if (mass[i].isCK) {
-          soobBP = soobBP + " CК";
+          soobBP += " CК";
         } else {
           for (let i = 0; i < massKnob.length; i++) {
             if (massKnob[i].cmd === 6) {
-              soobBP = soobBP + " ск";
+              soobBP += " ск";
               break;
             }
           }
         }
         if (mass[i].isNK) {
-          soobBP = soobBP + " HК";
+          soobBP += " HК";
         } else {
           for (let i = 0; i < massKnob.length; i++) {
             if (massKnob[i].cmd === 7) {
-              soobBP = soobBP + " нк";
+              soobBP += " нк";
               break;
             }
           }
@@ -234,21 +235,21 @@ const ManagementRightGrid = (props: {
           for (let i = 0; i < massKnob.length; i++) {
             switch (massKnob[i].cmd) {
               case 5:
-                soobBP = soobBP + " ПК";
+                soobBP += " ПК";
                 break;
               case 6:
-                soobBP = soobBP + " CК";
+                soobBP += " CК";
                 break;
               case 7:
-                soobBP = soobBP + " HК";
+                soobBP += " HК";
             }
           }
         }
-        if (soobBP === "Назначен") soobBP = soobBP + " BP";
+        if (soobBP === "Назначен") soobBP += " ВР";
         if (mass[i].isXT) {
-          soobXT = soobXT + "назначен";
+          soobXT += "назначен";
         } else {
-          soobXT = soobXT + "отсутствует";
+          soobXT += "отсутствует";
         }
         resStr.push(
           <Grid item key={i} container>
@@ -273,31 +274,31 @@ const ManagementRightGrid = (props: {
         let soobBP = "Назначен";
         let soobXT = "ХТ для данного подрайона ";
         if (mass[i].isPK) {
-          soobBP = soobBP + " ПК";
+          soobBP += " ПК";
         } else {
           for (let i = 0; i < massKnob.length; i++) {
             if (massKnob[i].cmd === 5) {
-              soobBP = soobBP + " пк";
+              soobBP += " пк";
               break;
             }
           }
         }
         if (mass[i].isCK) {
-          soobBP = soobBP + " CК";
+          soobBP += " CК";
         } else {
           for (let i = 0; i < massKnob.length; i++) {
             if (massKnob[i].cmd === 6) {
-              soobBP = soobBP + " ск";
+              soobBP += " ск";
               break;
             }
           }
         }
         if (mass[i].isNK) {
-          soobBP = soobBP + " HК";
+          soobBP += " HК";
         } else {
           for (let i = 0; i < massKnob.length; i++) {
             if (massKnob[i].cmd === 7) {
-              soobBP = soobBP + " нк";
+              soobBP += " нк";
               break;
             }
           }
@@ -306,26 +307,26 @@ const ManagementRightGrid = (props: {
           for (let i = 0; i < massKnob.length; i++) {
             switch (massKnob[i].cmd) {
               case 5:
-                soobBP = soobBP + " ПК";
+                soobBP += " ПК";
                 break;
               case 6:
-                soobBP = soobBP + " CК";
+                soobBP += " CК";
                 break;
               case 7:
-                soobBP = soobBP + " HК";
+                soobBP += " HК";
             }
           }
         }
-        if (soobBP === "Назначен") soobBP = soobBP + " BP";
+        if (soobBP === "Назначен") soobBP = soobBP + " ВР";
         if (mass[i].isXT) {
           soobXT = soobXT + "назначен/";
           if (mass[i].releaseXT) {
-            soobXT = soobXT + "включён";
+            soobXT += "включён";
           } else {
-            soobXT = soobXT + "выключен";
+            soobXT += "выключен";
           }
         } else {
-          soobXT = soobXT + "отсутствует";
+          soobXT += "отсутствует";
         }
         resStr.push(
           <Grid item key={i} container>
@@ -350,22 +351,16 @@ const ManagementRightGrid = (props: {
     const StrokaSpsMode3 = () => {
       let resStr = [];
       for (let i = 0; i < points.length; i++) {
+        let rec1 = String(points[i].area.num) + ":" + String(points[i].subarea);
+        let rec2 = String(points[i].tlsost.description);
         resStr.push(
           <Grid item key={i} container>
             {StrokaGridInfo(0.3, styleMRG02Center, String(i + 1))}
-            {StrokaGridInfo(
-              1.1,
-              styleMRG02Center,
-              String(points[i].area.num) + ":" + String(points[i].subarea)
-            )}
+            {StrokaGridInfo(1.1, styleMRG02Center, rec1)}
             {StrokaGridInfo(0.4, styleMRG02Center, String(points[i].ID))}
             {StrokaGridInfo(4, styleMRG02, String(points[i].description))}
             {StrokaGridInfo(1.5, styleMRG02Center, String(points[i].idevice))}
-            {StrokaGridInfo(
-              2,
-              styleMRG02,
-              String(points[i].tlsost.description)
-            )}
+            {StrokaGridInfo(2, styleMRG02, rec2)}
             {StrokaGridInfo(0.5, styleMRG02Center, String(points[i].pk))}
             {StrokaGridInfo(0.5, styleMRG02Center, String(points[i].ck))}
             {StrokaGridInfo(0.5, styleMRG02Center, String(points[i].nk))}
@@ -416,7 +411,7 @@ const ManagementRightGrid = (props: {
       }
     }
     if (soobBP === "") {
-      soobBP = "Назначен BP";
+      soobBP = "Назначен ВР";
       if (massKnob.length > 0) {
         soobBP = "";
         for (let i = 0; i < massKnob.length; i++) {
@@ -432,7 +427,7 @@ const ManagementRightGrid = (props: {
           }
         }
         if (soobBP === "") {
-          soobBP = "Назначен BP";
+          soobBP = "Назначен ВР";
         } else {
           soobBP = "Назначен" + soobBP;
         }
@@ -458,9 +453,8 @@ const ManagementRightGrid = (props: {
       props.areaa === props.masknob[i].area &&
       props.subArea === props.masknob[i].subarea &&
       props.masknob[i].cmd !== 13
-    ) {
+    )
       if (props.masknob[i].param > 0) massKnob.push(props.masknob[i]);
-    }
   }
 
   switch (props.mode) {
@@ -572,9 +566,8 @@ const ManagementRightGrid = (props: {
           if (
             parseInt(mass[i].areaNum) === props.masxt[j].areaXT &&
             mass[i].subareaNum === props.masxt[j].subareaXT
-          ) {
+          )
             mass[i].isXT = true;
-          }
         }
       }
       break;
@@ -622,23 +615,13 @@ const ManagementRightGrid = (props: {
           // подчинён вручную?
           if (podchGl === podchGlOld) {
             if (points[i].StatusCommandDU.IsPK) {
-              if (points[i].pk === SearchInMassKnob(5)) {
-                podchGl++;
-              }
+              if (points[i].pk === SearchInMassKnob(5)) podchGl++;
             } else {
               if (points[i].StatusCommandDU.IsCK && SearchInMassKnob(7) <= 0) {
-                if (points[i].ck === SearchInMassKnob(6)) {
-                  podchGl++;
-                }
+                if (points[i].ck === SearchInMassKnob(6)) podchGl++;
               } else {
-                if (
-                  points[i].StatusCommandDU.IsNK &&
-                  SearchInMassKnob(6) <= 0
-                ) {
-                  if (points[i].nk === SearchInMassKnob(7)) {
-                    podchGl++;
-                  }
-                }
+                if (points[i].StatusCommandDU.IsNK && SearchInMassKnob(6) <= 0)
+                  if (points[i].nk === SearchInMassKnob(7)) podchGl++;
               }
             }
           }

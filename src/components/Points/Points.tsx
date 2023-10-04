@@ -139,10 +139,9 @@ const Points = (props: {
           bgcolor: "#BAE186", // тёмно-салатовый
           border: "1px solid #000",
           borderColor: "#93D145", // ярко-салатовый
-          //borderRadius: 1,
-          boxShadow: 6,
+          boxShadow: '6px -6px 6px #d4d4d4',
           color: "black",
-          marginRight: 0.5,
+          marginRight: 1,
         };
         const stylePXt11 = {
           fontSize: 13.5,
@@ -151,14 +150,13 @@ const Points = (props: {
           bgcolor: "#E6F5D6", // светло-салатовый
           border: "1px solid #000",
           borderColor: "#d4d4d4", // серый
-          //borderRadius: 1,
           boxShadow: 2,
           color: "black",
-          marginRight: 0.5,
+          marginRight: 1,
         };
         let illum = value === i ? stylePXt1 : stylePXt11;
         labl =
-          "XT:" +
+          "ХТ:" +
           pointsEtalon[i].area.toString() +
           ":" +
           pointsEtalon[i].subarea.toString();
@@ -169,12 +167,11 @@ const Points = (props: {
   };
 
   const stylePoints01 = {
-    maxWidth: "100%",
+    //border: 1,
+    width: window.innerWidth - 21,
     fontSize: 12,
     marginTop: 0.5,
-    marginLeft: -4.6,
-    marginRight: -7,
-    //backgroundColor: '#E9F5D8',
+    marginLeft: 0.5,
   };
 
   return (
@@ -190,7 +187,7 @@ const Points = (props: {
               textColor="inherit"
               scrollButtons={true}
               allowScrollButtonsMobile
-              TabIndicatorProps={{ sx: { backgroundColor: "#93D145" } }}
+              TabIndicatorProps={{ sx: { bgcolor: "#93D145" } }}
             >
               {SpisXT()}
             </Tabs>

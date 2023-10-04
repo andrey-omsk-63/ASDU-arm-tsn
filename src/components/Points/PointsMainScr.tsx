@@ -72,11 +72,12 @@ const PointsMainScr = (props: {
     if (points.release) resStr2 = "Включeнo";
   }
 
-  let rachet = "Расчёт не возможен";
-  if (points.pkcalc > 0) rachet = "Расчёт выполнен";
+  let rachet = points.pkcalc > 0 ? "Расчёт выполнен" : "Расчёт не возможен";
+  //if (points.pkcalc > 0) rachet = "Расчёт выполнен";
+  console.log("POINTS:", points);
 
-  let yellowSoob = "Выключен";
-  if (!points.yellow.make) yellowSoob = "Включён";
+  let yellowSoob = points.yellow.make ? "Выключен" : "Включён";
+  //if (!points.yellow.make) yellowSoob = "Включён";
 
   let uprBP = "Управление по ВР";
   if (points.pknow > 0) uprBP = "Выбран план №" + points.pknow.toString();
@@ -156,8 +157,6 @@ const PointsMainScr = (props: {
   const SetTrigger = () => {
     setTrigger(!trigger);
   };
-
-  console.log("!!!!!!:", maskpoint.savePoint, flagSave, datestat.needSave);
 
   return (
     <>

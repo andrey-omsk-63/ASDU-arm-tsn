@@ -242,7 +242,7 @@ const PointsMenuLevel1 = (props: {
     <Box>
       <TabContext value={valueLevel2}>
         <Box>
-          <Stack sx={{ marginLeft: 0.5, marginTop: 0.5 }} direction="row">
+          <Stack sx={{ marginLeft: 0.5, marginTop: 0 }} direction="row">
             {ButtonMenu("1", "Основной:", SetValueLavel21)}
             {MenuCrossRoad()}
           </Stack>
