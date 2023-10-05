@@ -74,7 +74,6 @@ const PointsMainScr = (props: {
 
   let rachet = points.pkcalc > 0 ? "Расчёт выполнен" : "Расчёт не возможен";
   //if (points.pkcalc > 0) rachet = "Расчёт выполнен";
-  console.log("POINTS:", points);
 
   let yellowSoob = points.yellow.make ? "Выключен" : "Включён";
   //if (!points.yellow.make) yellowSoob = "Включён";

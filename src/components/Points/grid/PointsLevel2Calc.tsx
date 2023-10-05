@@ -88,16 +88,17 @@ const PointsLevel2Calc = (props: {
   // }
 
   const printRef = React.useRef(null);
-
   let pointer = points.results;
-  console.log('######:',points)
+
+  //console.log('######:',pointer)
+
   if (datestat.xttData !== MakeDate(new Date())) {
     pointer = datestat.result;
     if (debug) namer = "Без имени_12.09.2022_10-12-57";
   }
 
   //props.saveXt(true);
-  //console.log("NAMER", namer);
+  //console.log("NAMER", namer, pointer[namer]);
 
   React.useEffect(() => {
     if (pointer !== null) props.saveXt(true);
@@ -128,6 +129,7 @@ const PointsLevel2Calc = (props: {
 
   const PointsGraf00 = () => {
     //if (needRend) datestatXtGraf = printRef;
+    // console.log("!!!######:", namer, pointer);
     const colMin = 60 / pointer[namer][0].Time;
     for (let i = 0; i < pointer[namer].length; i++) {
       let int = "";
@@ -229,17 +231,24 @@ const PointsLevel2Calc = (props: {
             pusto = true;
             kakchestvo = "Работа по СК";
           }
-
+          let tim = pointer[namer][i].Time;
+          if (
+            !points.yellow.make &&
+            tim >= points.yellow.start &&
+            tim <= points.yellow.stop
+          )
+            kakchestvo = "Работа по НК и СК";
           if (datestat.xttData === MakeDate(new Date())) {
-            let tim = pointer[namer][i].Time; // работа в тек.сутки
-            if (
-              !points.yellow.make &&
-              tim >= points.yellow.start &&
-              tim <= points.yellow.stop
-            )
-              kakchestvo = "Работа по НК и СК";
+            // работа в тек.сутки
             let tekTim = new Date().getHours() * 60 + new Date().getMinutes();
-            if (tim > tekTim) kakchestvo = "";
+            if (tim > tekTim) {
+              pusto = false;
+              kakchestvo = "";
+            }
+          }
+          if (!pointer[namer][i].Value[0] && !pointer[namer][i].Value[1]) {
+            pusto = false;
+            kakchestvo = "";
           }
 
           let stroka = TimeStr(pointer[namer][i].Time) + ";";
@@ -265,19 +274,19 @@ const PointsLevel2Calc = (props: {
 
           resStr.push(
             <Grid key={Math.random()} container item xs={12}>
-              <Grid xs={1} item sx={styleXTC011}>
+              <Grid xs={1} item sx={!pusto ? styleXTC011 : styleXTC01}>
                 {TimeStr(pointer[namer][i].Time)}
               </Grid>
-              <Grid xs={2} item sx={pusto ? styleXTC011 : styleXTC01}>
+              <Grid xs={2} item sx={!pusto ? styleXTC011 : styleXTC01}>
                 {pointer[namer][i].Value[0]}
               </Grid>
-              <Grid xs={2} item sx={pusto ? styleXTC011 : styleXTC01}>
+              <Grid xs={2} item sx={!pusto ? styleXTC011 : styleXTC01}>
                 {pointer[namer][i].Value[1]}
               </Grid>
-              <Grid xs={2} item sx={pusto ? styleXTC011 : styleXTC01}>
+              <Grid xs={2} item sx={!pusto ? styleXTC011 : styleXTC01}>
                 {pointer[namer][i].Value[2]}
               </Grid>
-              <Grid xs item sx={styleXTC011}>
+              <Grid xs item sx={!pusto ? styleXTC011 : styleXTC01}>
                 {kakchestvo}
               </Grid>
             </Grid>

@@ -325,8 +325,8 @@ const PointsLevel2Baza = (props: {
       pointRab.xctrls[crossRoad].StrategyB[props.nom].pkl = valuen3;
       pointRab.xctrls[crossRoad].StrategyB[props.nom].pks = valuen4;
       pointRab.xctrls[crossRoad].StrategyB[props.nom].pkr = valuen5;
-      pointRab.xctrls[crossRoad].StrategyB[props.nom].vleft = valuen6;
-      pointRab.xctrls[crossRoad].StrategyB[props.nom].vright = valuen7;
+      pointRab.xctrls[crossRoad].StrategyB[props.nom].vleft = Number(valuen6);
+      pointRab.xctrls[crossRoad].StrategyB[props.nom].vright = Number(valuen7);
       pointRab.xctrls[crossRoad].StrategyB[props.nom].desc = valuen8;
       if (
         props.nom ===
@@ -389,13 +389,13 @@ const PointsLevel2Baza = (props: {
     };
 
     const handleChange6 = (event: any) => {
-      let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
-      if (form > 0) setValuen6(form);
+      let form = event.target.value.trimStart(); // удаление пробелов в начале строки
+      if (Number(form) > 0) setValuen6(form);
     };
 
     const handleChange7 = (event: any) => {
-      let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
-      if (form > 0) setValuen7(form);
+      let form = event.target.value.trimStart(); // удаление пробелов в начале строки
+      if (Number(form) > 0) setValuen7(form);
     };
 
     const handleChange8 = (event: any) => {

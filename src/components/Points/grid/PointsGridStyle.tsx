@@ -342,6 +342,7 @@ export const styleXTC011 = {
   borderBottom: 1,
   borderColor: "primary.main",
   padding: 0.2,
+  //backgroundColor: "#ffffff", // белый
   textAlign: "center",
 };
 
@@ -351,7 +352,7 @@ export const styleXTC01 = {
   borderBottom: 1,
   borderColor: "primary.main",
   padding: 0.2,
-  backgroundColor: "#E6EEF5",
+  backgroundColor: "#e4eef7", // светло-голубой
   textAlign: "center",
 };
 

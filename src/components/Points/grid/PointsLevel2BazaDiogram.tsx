@@ -169,17 +169,12 @@ const PointsLevel2BazaDiogram = (props: {
       masCol.push(coler);
 
       for (let i = 0; i < masStr.length; i++) {
-        resStr.push(
-          <Grid
-            key={i}
-            xs={steepHorizon * scale * masStr[i]}
-            item
-            sx={{
-              backgroundColor: masCol[i],
-              height: String(steepVertical * scale) + "vh",
-            }}
-          ></Grid>
-        );
+        let xss = steepHorizon * scale * masStr[i];
+        const stylePict = {
+          backgroundColor: masCol[i],
+          height: String(steepVertical * scale) + "vh",
+        };
+        resStr.push(<Grid key={i} xs={xss} item sx={stylePict}></Grid>);
       }
       return resStr;
     };
@@ -192,7 +187,6 @@ const PointsLevel2BazaDiogram = (props: {
         </Grid>
       );
     }
-
     return resSps;
   };
 
@@ -229,23 +223,45 @@ const PointsLevel2BazaDiogram = (props: {
   };
   //============ OutputerPict ===============================================
   const PictInfo = (idx: number, pv: number, ph: number) => {
-    phGl = ph;
-    pvGl = pv;
-    IDX = idx;
-    setPictInfo(true);
+    const PuskBalloon = () => {
+      phGl = ph;
+      pvGl = pv;
+      IDX = idx;
+      setPictInfo(true);
+    };
+
+    if (pictInfo) {
+      setPictInfo(false);
+      setTimeout(() => {
+        PuskBalloon();
+      }, 10);
+    } else {
+      PuskBalloon();
+    }
   };
 
   const OutputerPict = () => {
     let resStrr = [];
     if (pointer !== null) {
       if (pointer[namer]) {
+        let I = 0;
+        let tekTime = new Date().getHours() * 60 + new Date().getMinutes();
+        for (let i = 0; i < pointer[namer].length; i++) {
+          if (pointer[namer][i].Time <= tekTime)
+            if (pointer[namer][i].Value[0] || pointer[namer][i].Value[1]) I = i;
+        }
+
         for (let i = 0; i < pointer[namer].length; i++) {
           let prpv = vertical / 100;
           let pv = 100 - pointer[namer][i].Value[0] / prpv;
           let prph = horizon / 100;
           let ph = pointer[namer][i].Value[1] / prph;
-          let flagEnd = i === pointer[namer].length - 1 ? true : false;
-          resStrr.push(<>{OutputPict(i, pv, ph, PictInfo, flagEnd)}</>);
+          // let flagEnd = i === pointer[namer].length - 1 ? true : false;
+          let flagEnd = i === I ? true : false;
+          if (pointer[namer][i].Value[0] || pointer[namer][i].Value[1]) {
+            if (pointer[namer][i].Time <= tekTime)
+              resStrr.push(<>{OutputPict(i, pv, ph, PictInfo, flagEnd)}</>);
+          }
         }
       }
     }

@@ -583,6 +583,9 @@ export const PictInfoBox = (
     numArea = area[mass.indexOf(Math.min.apply(null, mass))];
   }
 
+  let NumArea = mode ? numArea + " (" + pointer.Value[2] + ")" : numArea;
+  let KS = mode ? "КС (ПК)" : "КС";
+
   const styleBoxGl = {
     position: "absolute",
     left: phGl - 24 + sdvigH + "%",
@@ -608,7 +611,7 @@ export const PictInfoBox = (
             {Grider("Время", 0, true)}
             {Grider("Прямой", 1, true)}
             {Grider("Обратный", 1, true)}
-            {Grider("КС", 1, true)}
+            {Grider(KS, 1, true)}
           </Grid>
         </Grid>
         <Grid item xs>
@@ -616,7 +619,7 @@ export const PictInfoBox = (
             {Grider(TimeStr(pointer.Time), 0, false)}
             {Grider(pointer.Value[0], 1, false)}
             {Grider(pointer.Value[1], 1, false)}
-            {Grider(numArea, 1, false)}
+            {Grider(NumArea, 1, false)}
           </Grid>
         </Grid>
       </Grid>

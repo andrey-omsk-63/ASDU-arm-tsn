@@ -1,7 +1,5 @@
 import * as React from "react";
 import Grid from "@mui/material/Grid";
-//import Box from '@mui/material/Box';
-//import Button from "@mui/material/Button";
 
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -58,7 +56,6 @@ const PointsLevel2AreaDiogram = (props: {
 
   const [openLoader, setOpenLoader] = React.useState(true);
   const [pictInfo, setPictInfo] = React.useState(false);
-  console.log("!!!:", points.xctrls[crRoad]);
 
   const horizon = points.xctrls[crRoad].right;
   const vertical = points.xctrls[crRoad].left;
@@ -132,7 +129,6 @@ const PointsLevel2AreaDiogram = (props: {
 
       for (let i = 0; i < horizon; i += scale) {
         coler = matrix[j / scale][i / scale];
-        //if (coler === 'blue') console.log("1blue");
         if (coler === colerOld) {
           colBl++;
         } else {
@@ -173,10 +169,21 @@ const PointsLevel2AreaDiogram = (props: {
   };
   //============ OutputerPict ===============================================
   const PictInfo = (idx: number, pv: number, ph: number) => {
-    phGl = ph;
-    pvGl = pv;
-    IDX = idx;
-    setPictInfo(true);
+    const PuskBalloon = () => {
+      phGl = ph;
+      pvGl = pv;
+      IDX = idx;
+      setPictInfo(true);
+    };
+
+    if (pictInfo) {
+      setPictInfo(false);
+      setTimeout(() => {
+        PuskBalloon();
+      }, 10);
+    } else {
+      PuskBalloon();
+    }
     //e.preventDefault(); // чтобы страница не перезагружалась !!!!!!
   };
 
@@ -184,19 +191,29 @@ const PointsLevel2AreaDiogram = (props: {
     let resStrr = [];
     if (pointer !== null) {
       if (pointer[namer]) {
+        let I = 0;
+        let tekTime = new Date().getHours() * 60 + new Date().getMinutes();
+        for (let i = 0; i < pointer[namer].length; i++) {
+          if (pointer[namer][i].Time <= tekTime)
+            if (pointer[namer][i].Value[0] || pointer[namer][i].Value[1]) I = i;
+        }
         for (let i = 0; i < pointer[namer].length; i++) {
           let prpv = vertical / 100;
           let pv = 100 - pointer[namer][i].Value[0] / prpv;
           let prph = horizon / 100;
           let ph = pointer[namer][i].Value[1] / prph;
-          let flagEnd = i === pointer[namer].length - 1 ? true : false;
-          resStrr.push(
-            <>
-              <Grid key={i} item container>
-                {OutputPict(i, pv, ph, PictInfo, flagEnd)}
-              </Grid>
-            </>
-          );
+          // let flagEnd = i === pointer[namer].length - 1 ? true : false;
+          let flagEnd = i === I ? true : false;
+          if (pointer[namer][i].Value[0] || pointer[namer][i].Value[1]) {
+            if (pointer[namer][i].Time <= tekTime)
+              resStrr.push(
+                <>
+                  <Grid key={i} item container>
+                    {OutputPict(i, pv, ph, PictInfo, flagEnd)}
+                  </Grid>
+                </>
+              );
+          }
         }
       }
     }
