@@ -83,7 +83,6 @@ const PointsLevel2Baza = (props: {
 
   if (xtPropsOld !== xtProps || crossRoadOld !== crossRoad) {
     pointGraf = props.xctrll;
-    //pointGraf = JSON.parse(JSON.stringify(props.xctrll));
     xtPropsOld = xtProps;
     crossRoadOld = crossRoad;
     nomStr = 0;
@@ -121,6 +120,21 @@ const PointsLevel2Baza = (props: {
       }
     }
   }
+
+  const RemakePointGraf = (pointRab: any) => {
+    pointGraf = [];
+    for (let i = 0; i < xctrLl.length; i++) {
+      if (
+        xctrLl[i].region === points.region &&
+        xctrLl[i].area === points.area &&
+        xctrLl[i].subarea === points.subarea
+      ) {
+        pointGraf.push(pointRab);
+      } else {
+        pointGraf.push(xctrLl[i]);
+      }
+    }
+  };
 
   const SetName = () => {
     let yell = 0;
@@ -174,7 +188,13 @@ const PointsLevel2Baza = (props: {
     };
 
     const handleClose = () => {
+      let rend = false;
       let pointRab = JSON.parse(JSON.stringify(maskpoint.pointForRedax));
+      if (
+        pointRab.xctrls[props.crossroad].name !== valuen1 ||
+        pointRab.xctrls[props.crossroad].left !== valuen2
+      )
+        rend = true;
       pointRab.xctrls[props.crossroad].name = valuen1;
       pointRab.xctrls[props.crossroad].left = valuen2;
       pointRab.xctrls[props.crossroad].right = valuen3;
@@ -196,6 +216,7 @@ const PointsLevel2Baza = (props: {
       setTmStart(timeStart);
       setTmStop(timeStop);
       setOpenSetName(false);
+      rend && RemakePointGraf(pointRab);
       flagSave = true;
       maskpoint.savePoint = true;
       dispatch(maskpointCreate(maskpoint));
@@ -282,11 +303,7 @@ const PointsLevel2Baza = (props: {
     };
 
     return (
-      <Modal
-        open={openSetName}
-        onClose={handleCloseClinch}
-        hideBackdrop={false}
-      >
+      <Modal open={openSetName} onClose={handleCloseClinch}>
         <Box sx={styleSetInff}>
           <Button sx={styleModalEnd} onClick={handleCloseClinch}>
             <b>&#10006;</b>
@@ -328,6 +345,19 @@ const PointsLevel2Baza = (props: {
       pointRab.xctrls[crossRoad].StrategyB[props.nom].vleft = Number(valuen6);
       pointRab.xctrls[crossRoad].StrategyB[props.nom].vright = Number(valuen7);
       pointRab.xctrls[crossRoad].StrategyB[props.nom].desc = valuen8;
+      //=== сортировка массива ===
+      pointRab.xctrls[crossRoad].StrategyB.sort(function (a: any, b: any) {
+        let af = a.xleft;
+        let bf = b.xleft;
+        let as = a.xright;
+        let bs = b.xright;
+        if (af === bf) {
+          return as < bs ? -1 : as > bs ? 1 : 0;
+        } else {
+          return af < bf ? -1 : 1;
+        }
+      });
+      //==========================
       if (
         props.nom ===
         maskpoint.pointForRedax.xctrls[crossRoad].StrategyB.length - 1
@@ -343,24 +373,11 @@ const PointsLevel2Baza = (props: {
       }
       setPoints(pointRab);
       maskpoint.pointForRedax = pointRab;
-
-      pointGraf = [];
-      for (let i = 0; i < xctrLl.length; i++) {
-        if (
-          xctrLl[i].region === points.region &&
-          xctrLl[i].area === points.area &&
-          xctrLl[i].subarea === points.subarea
-        ) {
-          pointGraf.push(pointRab);
-        } else {
-          pointGraf.push(xctrLl[i]);
-        }
-      }
+      RemakePointGraf(pointRab);
       flagSave = true;
       maskpoint.savePoint = true;
       dispatch(maskpointCreate(maskpoint));
       setOpenSetStr(false);
-      setTrigger(!trigger);
     };
 
     const handleChange1 = (event: any) => {
@@ -390,12 +407,13 @@ const PointsLevel2Baza = (props: {
 
     const handleChange6 = (event: any) => {
       let form = event.target.value.trimStart(); // удаление пробелов в начале строки
-      if (Number(form) > 0) setValuen6(form);
+      console.log("form:", form, typeof form, Number(form));
+      setValuen6(form);
     };
 
     const handleChange7 = (event: any) => {
       let form = event.target.value.trimStart(); // удаление пробелов в начале строки
-      if (Number(form) > 0) setValuen7(form);
+      setValuen7(form);
     };
 
     const handleChange8 = (event: any) => {
@@ -549,16 +567,14 @@ const PointsLevel2Baza = (props: {
       let elem = elemm[i];
       resStr.push(
         <Grid key={i} container item xs={12}>
-          <Grid container item xs={12}>
-            <Grid xs={0.5} item sx={styleXTG01}>
-              {i}
-            </Grid>
-            {ConclStr(1.75, elem.region, styleXTG01)}
-            {ConclStr(1.75, elem.area, styleXTG01)}
-            {ConclStr(2, elem.id, styleXTG01)}
-            {ConclStr(3, elem.chanL[0], styleXTG01)}
-            {ConclStr(3, elem.chanR[0], styleXTG00)}
+          <Grid xs={0.5} item sx={styleXTG01}>
+            {i}
           </Grid>
+          {ConclStr(1.75, elem.region, styleXTG01)}
+          {ConclStr(1.75, elem.area, styleXTG01)}
+          {ConclStr(2, elem.id, styleXTG01)}
+          {ConclStr(3, elem.chanL[0], styleXTG01)}
+          {ConclStr(3, elem.chanR[0], styleXTG00)}
         </Grid>
       );
     }

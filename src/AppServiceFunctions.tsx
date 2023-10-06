@@ -545,12 +545,14 @@ export const PictInfoBox = (
   pointer: any,
   setPictInfo: Function,
   point: any,
-  mode: number
+  mode: number,
+  POINT: any
 ) => {
   let snos = mode ? 1000 : 850;
   let sdvigH = (window.innerWidth - snos) * 0.012;
   let sdvigV = pvGl < 50 ? 0 : 15;
   let numArea = 0;
+  let pk = 0;
   if (mode) {
     let num = 1; // Диограмма лучей
     let pStB = point.StrategyB;
@@ -568,6 +570,8 @@ export const PictInfoBox = (
       if (pointer.Value[1] > pointer.Value[0] * luchP * ratio)
         numArea = pStB[num - 1].pkr;
     }
+    for (let i = 0; i < POINT.ext.length; i++)
+      if (POINT.ext[i][0] === numArea) pk = POINT.ext[i][1];
   } else {
     let pStA = point.StrategyA; // Диограмма областей
     numArea = -1;
@@ -583,14 +587,16 @@ export const PictInfoBox = (
     numArea = area[mass.indexOf(Math.min.apply(null, mass))];
   }
 
-  let NumArea = mode ? numArea + " (" + pointer.Value[2] + ")" : numArea;
+  let NumArea = mode
+    ? numArea + "[" + pointer.Value[2] + "] (" + pk + ")"
+    : numArea;
   let KS = mode ? "КС (ПК)" : "КС";
 
   const styleBoxGl = {
     position: "absolute",
     left: phGl - 24 + sdvigH + "%",
     top: pvGl - sdvigV + "%",
-    width: 140,
+    width: 145,
     height: 96,
     bgcolor: "background.paper",
     border: "1px solid #000",

@@ -57,8 +57,11 @@ const PointsLevel2BazaDiogram = (props: {
   const [pictInfo, setPictInfo] = React.useState(false);
 
   let dlMas = points.xctrls[crRoad].StrategyB.length;
-  const horizon = points.xctrls[crRoad].StrategyB[dlMas - 1].xright;
-  const vertical = points.xctrls[crRoad].StrategyB[dlMas - 1].xleft;
+  const horizonLimit = points.xctrls[crRoad].StrategyB[dlMas - 1].xright;
+  const verticalLimit = points.xctrls[crRoad].StrategyB[dlMas - 1].xleft;
+  const horizon = points.xctrls[crRoad].right;
+  const vertical = points.xctrls[crRoad].left;
+ 
   const steepHorizon = 12 / horizon;
   const steepVertical = 85.7 / vertical;
   const dlBlok = (window.innerWidth / 12.55) * 8;
@@ -109,6 +112,7 @@ const PointsLevel2BazaDiogram = (props: {
       for (let j = 0; j < vertical; j += scale) {
         matrix[j] = [];
         for (let i = 0; i < horizon; i += scale) {
+          //console.log("2@@@:",i,j);
           if (dlMas >= 1 && pStB[0].xright >= i && pStB[0].xleft >= j) {
             MakeMatrixColor(0, i, j);
           } else {
@@ -136,6 +140,7 @@ const PointsLevel2BazaDiogram = (props: {
               }
             }
           }
+          if (i > horizonLimit || j > verticalLimit) coler = "#F1F5FB"; // светло серый
           matrix[j].push(coler);
         }
       }
@@ -317,7 +322,8 @@ const PointsLevel2BazaDiogram = (props: {
                   pointer[namer][IDX],
                   setPictInfo,
                   points.xctrls[crRoad],
-                  1
+                  1,
+                  points
                 )}
               </>
             )}
