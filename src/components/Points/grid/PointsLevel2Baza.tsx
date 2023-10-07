@@ -44,6 +44,7 @@ let leftTemp = 0;
 let rightTemp = 0;
 let pointRab: any = null;
 let pointGraf: XctrlInfo[] = [];
+let soobError = "";
 
 const PointsLevel2Baza = (props: {
   open: boolean;
@@ -137,8 +138,7 @@ const PointsLevel2Baza = (props: {
   };
 
   const SetName = () => {
-    let yell = 0;
-    if (yellow) yell = 1;
+    let yell = yellow ? 1 : 0;
     const [valuen1, setValuen1] = React.useState(formName);
     const [valuen2, setValuen2] = React.useState(maxLeft);
     const [valuen3, setValuen3] = React.useState(maxRight);
@@ -320,8 +320,60 @@ const PointsLevel2Baza = (props: {
     );
   };
 
+  const BadInput = (
+    badInput: boolean,
+    handleCloseEnd: Function,
+    soobError: string
+  ) => {
+    const styleSetPoint = {
+      outline: "none",
+      position: "absolute",
+      left: "47%",
+      top: "63%",
+      transform: "translate(-50%, -50%)",
+      width: 400,
+      bgcolor: "background.paper",
+      border: "1px solid #000",
+      borderColor: "red",
+      borderRadius: 1,
+      boxShadow: 24,
+      textAlign: "center",
+      p: 1,
+    };
+
+    const handleClose = () => {
+      handleCloseEnd(false);
+    };
+
+    const CloseEnd = (event: any, reason: string) => {
+      if (reason === "escapeKeyDown") handleClose();
+    };
+
+    return (
+      <Modal open={badInput} onClose={CloseEnd} hideBackdrop={false}>
+        <Box sx={styleSetPoint}>
+          <Button sx={styleModalEnd} onClick={() => handleClose()}>
+            <b>&#10006;</b>
+          </Button>
+          <Typography variant="h6" sx={{ color: "red" }}>
+            Предупреждение
+          </Typography>
+          <Box sx={{ marginTop: 0.5 }}>
+            <Box sx={{ marginBottom: 1.2 }}>{soobError}</Box>
+          </Box>
+        </Box>
+      </Modal>
+    );
+  };
+
   const SetStr = (props: { nom: number }) => {
-    let elem = maskpoint.pointForRedax.xctrls[crossRoad].StrategyB[props.nom];
+    let StrB = maskpoint.pointForRedax.xctrls[crossRoad].StrategyB;
+    let elem = StrB[props.nom];
+    let max1 = props.nom < StrB.length - 1 ? StrB[props.nom + 1].xleft : 0;
+    let max2 = props.nom < StrB.length - 1 ? StrB[props.nom + 1].xright : 0;
+    let min1 = props.nom ? StrB[props.nom - 1].xleft : 0;
+    let min2 = props.nom ? StrB[props.nom - 1].xright : 0;
+
     const [valuen1, setValuen1] = React.useState(elem.xleft);
     const [valuen2, setValuen2] = React.useState(elem.xright);
     const [valuen3, setValuen3] = React.useState(elem.pkl);
@@ -330,6 +382,7 @@ const PointsLevel2Baza = (props: {
     const [valuen6, setValuen6] = React.useState(elem.vleft);
     const [valuen7, setValuen7] = React.useState(elem.vright);
     const [valuen8, setValuen8] = React.useState(elem.desc);
+    const [badInput, setBadInput] = React.useState(false);
 
     const handleClose = () => {
       setOpenSetStr(false);
@@ -346,17 +399,17 @@ const PointsLevel2Baza = (props: {
       pointRab.xctrls[crossRoad].StrategyB[props.nom].vright = Number(valuen7);
       pointRab.xctrls[crossRoad].StrategyB[props.nom].desc = valuen8;
       //=== сортировка массива ===
-      pointRab.xctrls[crossRoad].StrategyB.sort(function (a: any, b: any) {
-        let af = a.xleft;
-        let bf = b.xleft;
-        let as = a.xright;
-        let bs = b.xright;
-        if (af === bf) {
-          return as < bs ? -1 : as > bs ? 1 : 0;
-        } else {
-          return af < bf ? -1 : 1;
-        }
-      });
+      // pointRab.xctrls[crossRoad].StrategyB.sort(function (a: any, b: any) {
+      //   let af = a.xleft;
+      //   let bf = b.xleft;
+      //   let as = a.xright;
+      //   let bs = b.xright;
+      //   if (af === bf) {
+      //     return as < bs ? -1 : as > bs ? 1 : 0;
+      //   } else {
+      //     return af < bf ? -1 : 1;
+      //   }
+      // });
       //==========================
       if (
         props.nom ===
@@ -380,14 +433,26 @@ const PointsLevel2Baza = (props: {
       setOpenSetStr(false);
     };
 
+    const EvilInput = (form: number, max: number, min: number) => {
+      if ((max && form >= max) || form <= min) {
+        let soob1 = max ? " больше " + max + " и " : "";
+        soobError =
+          "Вводимое значение не должно быть " + soob1 + "меньше " + min;
+        setBadInput(true);
+        return false;
+      }
+      return true;
+    };
+
     const handleChange1 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
-      if (form) setValuen1(Math.abs(form));
+      EvilInput(form, max1, min1) && form && setValuen1(Math.abs(form));
     };
 
     const handleChange2 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
-      if (form) setValuen2(Math.abs(form));
+      EvilInput(form, max2, min2) && form && setValuen2(Math.abs(form));
+      
     };
 
     const handleChange3 = (event: any) => {
@@ -423,24 +488,27 @@ const PointsLevel2Baza = (props: {
 
     return (
       <Modal open={openSetStr} onClose={handleClose} hideBackdrop={false}>
-        <Box sx={styleSetInf}>
-          <Button sx={styleModalEnd} onClick={handleClose}>
-            <b>&#10006;</b>
-          </Button>
-          <Typography sx={{ textAlign: "center" }}>
-            Номер записи <b> {props.nom} </b>
-          </Typography>{" "}
-          <br />
-          {Inputer("Прямой", valuen1, handleChange1, styleInpArg)}
-          {Inputer("Обратный", valuen2, handleChange2, styleInpArg)}
-          {Inputer("КСП", valuen3, handleChange3, styleInpArg)}
-          {Inputer("КСС", valuen4, handleChange4, styleInpArg)}
-          {Inputer("КСО", valuen5, handleChange5, styleInpArg)}
-          {Inputer("Луч П", valuen6, handleChange6, styleInpArg)}
-          {Inputer("Луч О", valuen7, handleChange7, styleInpArg)}
-          {Inputer("Описание", valuen8, handleChange8, styleInpArg)}
-          {SaveFunc(handleCloseStr)}
-        </Box>
+        <>
+          <Box sx={styleSetInf}>
+            <Button sx={styleModalEnd} onClick={handleClose}>
+              <b>&#10006;</b>
+            </Button>
+            <Typography sx={{ textAlign: "center" }}>
+              Номер записи <b> {props.nom} </b>
+            </Typography>{" "}
+            <br />
+            {Inputer("Прямой", valuen1, handleChange1, styleInpArg)}
+            {Inputer("Обратный", valuen2, handleChange2, styleInpArg)}
+            {Inputer("КСП", valuen3, handleChange3, styleInpArg)}
+            {Inputer("КСС", valuen4, handleChange4, styleInpArg)}
+            {Inputer("КСО", valuen5, handleChange5, styleInpArg)}
+            {Inputer("Луч П", valuen6, handleChange6, styleInpArg)}
+            {Inputer("Луч О", valuen7, handleChange7, styleInpArg)}
+            {Inputer("Описание", valuen8, handleChange8, styleInpArg)}
+            {SaveFunc(handleCloseStr)}
+          </Box>
+          {badInput && <>{BadInput(badInput, setBadInput, soobError)}</>}
+        </>
       </Modal>
     );
   };
