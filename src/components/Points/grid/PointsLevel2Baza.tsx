@@ -1,33 +1,33 @@
-import * as React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { maskpointCreate } from "./../../../redux/actions";
+import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { maskpointCreate } from './../../../redux/actions';
 
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
-import Modal from "@mui/material/Modal";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
-import MenuItem from "@mui/material/MenuItem";
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Modal from '@mui/material/Modal';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import MenuItem from '@mui/material/MenuItem';
 
-import PointsLevel2BazaDiogram from "./PointsLevel2BazaDiogram";
+import PointsLevel2BazaDiogram from './PointsLevel2BazaDiogram';
 
-import { TimeStr, BoxTextField, Inputer } from "../../../AppServiceFunctions";
-import { WorkMenuEdit, ButtRec, ConclStr } from "../../../AppServiceFunctions";
-import { SendHandleSend, ConclHeader } from "../../../AppServiceFunctions";
-import { InputTimeAndMode, SaveFunc } from "../../../AppServiceFunctions";
-import { Grider } from "../../../AppServiceFunctions";
+import { TimeStr, BoxTextField, Inputer } from '../../../AppServiceFunctions';
+import { WorkMenuEdit, ButtRec, ConclStr } from '../../../AppServiceFunctions';
+import { SendHandleSend, ConclHeader } from '../../../AppServiceFunctions';
+import { InputTimeAndMode, SaveFunc } from '../../../AppServiceFunctions';
+import { Grider, BadInput } from '../../../AppServiceFunctions';
 
-import { styleXTG00, styleXTG01, styleXTG011 } from "./PointsGridStyle";
-import { styleXTG021, styleXTG02, styleXTG03 } from "./PointsGridStyle";
-import { styleXTG04, styleBoxForm, styleBut021 } from "./PointsGridStyle";
-import { styleBut02, styleModalEnd } from "./PointsGridStyle";
-import { styleSetInf, styleSetInff } from "./PointsGridStyle";
-import { styleInpName, styleXTGHeader } from "./PointsGridStyle";
-import { styleInpArg, styleInpTime } from "./PointsGridStyle";
+import { styleXTG00, styleXTG01, styleXTG011 } from './PointsGridStyle';
+import { styleXTG021, styleXTG02, styleXTG03 } from './PointsGridStyle';
+import { styleXTG04, styleBoxForm, styleBut021 } from './PointsGridStyle';
+import { styleBut02, styleModalEnd } from './PointsGridStyle';
+import { styleSetInf, styleSetInff } from './PointsGridStyle';
+import { styleInpName, styleXTGHeader } from './PointsGridStyle';
+import { styleInpArg, styleInpTime } from './PointsGridStyle';
 
-import { XctrlInfo } from "../../../interfaceGl.d";
+import { XctrlInfo } from '../../../interfaceGl.d';
 
 let nomStr = 0;
 let nomIllum = -1;
@@ -39,12 +39,14 @@ let xtPropsOld = -1;
 let crossRoadOld = -1;
 
 let pointsTemp: any = null;
-let formTemp = "";
+let formTemp = '';
 let leftTemp = 0;
 let rightTemp = 0;
 let pointRab: any = null;
 let pointGraf: XctrlInfo[] = [];
-let soobError = "";
+let soobError = '';
+// let MaxLeft = 0;
+// let MaxRight = 0;
 
 const PointsLevel2Baza = (props: {
   open: boolean;
@@ -70,13 +72,9 @@ const PointsLevel2Baza = (props: {
   const [openSetName, setOpenSetName] = React.useState(false);
   const [openSetStr, setOpenSetStr] = React.useState(false);
   const [points, setPoints] = React.useState(pointsEt);
-  const [formName, setFormName] = React.useState(
-    pointsEt.xctrls[crossRoad].name
-  );
+  const [formName, setFormName] = React.useState(pointsEt.xctrls[crossRoad].name);
   const [maxLeft, setMaxLeft] = React.useState(pointsEt.xctrls[crossRoad].left);
-  const [maxRight, setMaxRight] = React.useState(
-    pointsEt.xctrls[crossRoad].right
-  );
+  const [maxRight, setMaxRight] = React.useState(pointsEt.xctrls[crossRoad].right);
   const [yellow, setYellow] = React.useState(pointsEt.yellow.make);
   const [tmStart, setTmStart] = React.useState(pointsEt.yellow.start);
   const [tmStop, setTmStop] = React.useState(pointsEt.yellow.stop);
@@ -99,6 +97,7 @@ const PointsLevel2Baza = (props: {
     setTmStop(pointsEt.yellow.stop);
     setYellow(pointsEt.yellow.make);
     setPoints(pointsEt);
+
     if (maskpoint.newXt) {
       maskpoint.pointForRedax = pointsEt;
       maskpoint.newXt = false;
@@ -139,6 +138,9 @@ const PointsLevel2Baza = (props: {
 
   const SetName = () => {
     let yell = yellow ? 1 : 0;
+    let elem = maskpoint.pointForRedax.xctrls[crossRoad].StrategyB;
+    let minLeft = elem[elem.length - 1].xleft;
+    let minRight = elem[elem.length - 1].xright;
     const [valuen1, setValuen1] = React.useState(formName);
     const [valuen2, setValuen2] = React.useState(maxLeft);
     const [valuen3, setValuen3] = React.useState(maxRight);
@@ -147,6 +149,16 @@ const PointsLevel2Baza = (props: {
     const [valuen6, setValuen6] = React.useState(TimeStr(tmStart).slice(3, 5));
     const [valuen7, setValuen7] = React.useState(TimeStr(tmStop).slice(0, 2));
     const [valuen8, setValuen8] = React.useState(TimeStr(tmStop).slice(3, 5));
+    const [badInput, setBadInput] = React.useState(false);
+
+    const EvilInput = (form: number, min: number) => {
+      if (form < min) {
+        soobError = 'Вводимое значение не должно быть меньше ' + min;
+        setBadInput(true);
+        return false;
+      }
+      return true;
+    };
 
     const handleChange1 = (event: any) => {
       let form = event.target.value.trimStart(); // удаление пробелов в начале строки
@@ -155,36 +167,32 @@ const PointsLevel2Baza = (props: {
 
     const handleChange2 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
-      if (form) setValuen2(Math.abs(form));
+      EvilInput(form, minLeft) && form && setValuen2(Math.abs(form));
     };
 
     const handleChange3 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
-      if (form) setValuen3(Math.abs(form));
+      EvilInput(form, minRight) && form && setValuen3(Math.abs(form));
     };
 
     const handleChange5 = (event: any) => {
       let form = event.target.value.trimStart(); // удаление пробелов в начале строки
-      if (Math.abs(form) && Number(form) < 24)
-        setValuen5(Math.abs(form).toString());
+      if (Math.abs(form) && Number(form) < 24) setValuen5(Math.abs(form).toString());
     };
 
     const handleChange6 = (event: any) => {
       let form = event.target.value.trimStart(); // удаление пробелов в начале строки
-      if (Math.abs(form) && Number(form) < 60)
-        setValuen6(Math.abs(form).toString());
+      if (Math.abs(form) && Number(form) < 60) setValuen6(Math.abs(form).toString());
     };
 
     const handleChange7 = (event: any) => {
       let form = event.target.value.trimStart(); // удаление пробелов в начале строки
-      if (Math.abs(form) && Number(form) < 24)
-        setValuen7(Math.abs(form).toString());
+      if (Math.abs(form) && Number(form) < 24) setValuen7(Math.abs(form).toString());
     };
 
     const handleChange8 = (event: any) => {
       let form = event.target.value.trimStart(); // удаление пробелов в начале строки
-      if (Math.abs(form) && Number(form) < 60)
-        setValuen8(Math.abs(form).toString());
+      if (Math.abs(form) && Number(form) < 60) setValuen8(Math.abs(form).toString());
     };
 
     const handleClose = () => {
@@ -233,10 +241,10 @@ const PointsLevel2Baza = (props: {
       };
 
       const handleKey = (event: any) => {
-        if (event.key === "Enter") event.preventDefault();
+        if (event.key === 'Enter') event.preventDefault();
       };
 
-      let dat = ["Вкл", "Выкл"];
+      let dat = ['Вкл', 'Выкл'];
       let massKey = [];
       let massDat: any[] = [];
       const currencies: any = [];
@@ -246,8 +254,8 @@ const PointsLevel2Baza = (props: {
       }
       for (let i = 0; i < massKey.length; i++) {
         let maskCurrencies = {
-          value: "",
-          label: "",
+          value: '',
+          label: '',
         };
         maskCurrencies.value = massKey[i];
         maskCurrencies.label = massDat[i];
@@ -266,14 +274,9 @@ const PointsLevel2Baza = (props: {
             onChange={handleChange}
             InputProps={{ disableUnderline: true, style: { fontSize: 14 } }}
             variant="standard"
-            color="secondary"
-          >
+            color="secondary">
             {currencies.map((option: any) => (
-              <MenuItem
-                key={option.value}
-                value={option.value}
-                sx={{ fontSize: 14 }}
-              >
+              <MenuItem key={option.value} value={option.value} sx={{ fontSize: 14 }}>
                 {option.label}
               </MenuItem>
             ))}
@@ -286,7 +289,7 @@ const PointsLevel2Baza = (props: {
       return (
         <Box sx={styleInpTime}>
           {BoxTextField(valuen5, handleChange5)}
-          {" : "}
+          {' : '}
           {BoxTextField(valuen6, handleChange6)}
         </Box>
       );
@@ -296,7 +299,7 @@ const PointsLevel2Baza = (props: {
       return (
         <Box sx={styleInpTime}>
           {BoxTextField(valuen7, handleChange7)}
-          {" : "}
+          {' : '}
           {BoxTextField(valuen8, handleChange8)}
         </Box>
       );
@@ -304,64 +307,21 @@ const PointsLevel2Baza = (props: {
 
     return (
       <Modal open={openSetName} onClose={handleCloseClinch}>
-        <Box sx={styleSetInff}>
-          <Button sx={styleModalEnd} onClick={handleCloseClinch}>
-            <b>&#10006;</b>
-          </Button>
-          {Inputer("Наименование ХТ", valuen1, handleChange1, styleInpName)}
-          {Inputer("Максимум прямого", valuen2, handleChange2, styleInpArg)}
-          {Inputer("Максимум обратного", valuen3, handleChange3, styleInpArg)}
-          {InputTimeAndMode("Работа по НК и СК", InputerMode)}
-          {InputTimeAndMode("Начало", FuncStart)}
-          {InputTimeAndMode("Конец", FuncStop)}
-          {SaveFunc(handleClose)}
-        </Box>
-      </Modal>
-    );
-  };
-
-  const BadInput = (
-    badInput: boolean,
-    handleCloseEnd: Function,
-    soobError: string
-  ) => {
-    const styleSetPoint = {
-      outline: "none",
-      position: "absolute",
-      left: "47%",
-      top: "63%",
-      transform: "translate(-50%, -50%)",
-      width: 400,
-      bgcolor: "background.paper",
-      border: "1px solid #000",
-      borderColor: "red",
-      borderRadius: 1,
-      boxShadow: 24,
-      textAlign: "center",
-      p: 1,
-    };
-
-    const handleClose = () => {
-      handleCloseEnd(false);
-    };
-
-    const CloseEnd = (event: any, reason: string) => {
-      if (reason === "escapeKeyDown") handleClose();
-    };
-
-    return (
-      <Modal open={badInput} onClose={CloseEnd} hideBackdrop={false}>
-        <Box sx={styleSetPoint}>
-          <Button sx={styleModalEnd} onClick={() => handleClose()}>
-            <b>&#10006;</b>
-          </Button>
-          <Typography variant="h6" sx={{ color: "red" }}>
-            Предупреждение
-          </Typography>
-          <Box sx={{ marginTop: 0.5 }}>
-            <Box sx={{ marginBottom: 1.2 }}>{soobError}</Box>
+        <>
+          <Box sx={styleSetInff}>
+            <Button sx={styleModalEnd} onClick={handleCloseClinch}>
+              <b>&#10006;</b>
+            </Button>
+            {Inputer('Наименование ХТ', valuen1, handleChange1, styleInpName)}
+            {Inputer('Максимум прямого', valuen2, handleChange2, styleInpArg)}
+            {Inputer('Максимум обратного', valuen3, handleChange3, styleInpArg)}
+            {InputTimeAndMode('Работа по НК и СК', InputerMode)}
+            {InputTimeAndMode('Начало', FuncStart)}
+            {InputTimeAndMode('Конец', FuncStop)}
+            {SaveFunc(handleClose)}
           </Box>
-        </Box>
+          {badInput && <>{BadInput(badInput, setBadInput, soobError)}</>}
+        </>
       </Modal>
     );
   };
@@ -398,23 +358,8 @@ const PointsLevel2Baza = (props: {
       pointRab.xctrls[crossRoad].StrategyB[props.nom].vleft = Number(valuen6);
       pointRab.xctrls[crossRoad].StrategyB[props.nom].vright = Number(valuen7);
       pointRab.xctrls[crossRoad].StrategyB[props.nom].desc = valuen8;
-      //=== сортировка массива ===
-      // pointRab.xctrls[crossRoad].StrategyB.sort(function (a: any, b: any) {
-      //   let af = a.xleft;
-      //   let bf = b.xleft;
-      //   let as = a.xright;
-      //   let bs = b.xright;
-      //   if (af === bf) {
-      //     return as < bs ? -1 : as > bs ? 1 : 0;
-      //   } else {
-      //     return af < bf ? -1 : 1;
-      //   }
-      // });
-      //==========================
-      if (
-        props.nom ===
-        maskpoint.pointForRedax.xctrls[crossRoad].StrategyB.length - 1
-      ) {
+
+      if (props.nom === maskpoint.pointForRedax.xctrls[crossRoad].StrategyB.length - 1) {
         if (pointRab.xctrls[crossRoad].left < valuen1) {
           pointRab.xctrls[crossRoad].left = valuen1;
           setMaxLeft(valuen1);
@@ -435,9 +380,8 @@ const PointsLevel2Baza = (props: {
 
     const EvilInput = (form: number, max: number, min: number) => {
       if ((max && form >= max) || form <= min) {
-        let soob1 = max ? " больше " + max + " и " : "";
-        soobError =
-          "Вводимое значение не должно быть " + soob1 + "меньше " + min;
+        let soob1 = max ? ' больше ' + max + ' и ' : '';
+        soobError = 'Вводимое значение не должно быть ' + soob1 + 'меньше ' + min;
         setBadInput(true);
         return false;
       }
@@ -452,7 +396,6 @@ const PointsLevel2Baza = (props: {
     const handleChange2 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
       EvilInput(form, max2, min2) && form && setValuen2(Math.abs(form));
-      
     };
 
     const handleChange3 = (event: any) => {
@@ -472,7 +415,7 @@ const PointsLevel2Baza = (props: {
 
     const handleChange6 = (event: any) => {
       let form = event.target.value.trimStart(); // удаление пробелов в начале строки
-      console.log("form:", form, typeof form, Number(form));
+      console.log('form:', form, typeof form, Number(form));
       setValuen6(form);
     };
 
@@ -493,18 +436,18 @@ const PointsLevel2Baza = (props: {
             <Button sx={styleModalEnd} onClick={handleClose}>
               <b>&#10006;</b>
             </Button>
-            <Typography sx={{ textAlign: "center" }}>
+            <Typography sx={{ textAlign: 'center' }}>
               Номер записи <b> {props.nom} </b>
-            </Typography>{" "}
+            </Typography>{' '}
             <br />
-            {Inputer("Прямой", valuen1, handleChange1, styleInpArg)}
-            {Inputer("Обратный", valuen2, handleChange2, styleInpArg)}
-            {Inputer("КСП", valuen3, handleChange3, styleInpArg)}
-            {Inputer("КСС", valuen4, handleChange4, styleInpArg)}
-            {Inputer("КСО", valuen5, handleChange5, styleInpArg)}
-            {Inputer("Луч П", valuen6, handleChange6, styleInpArg)}
-            {Inputer("Луч О", valuen7, handleChange7, styleInpArg)}
-            {Inputer("Описание", valuen8, handleChange8, styleInpArg)}
+            {Inputer('Прямой', valuen1, handleChange1, styleInpArg)}
+            {Inputer('Обратный', valuen2, handleChange2, styleInpArg)}
+            {Inputer('КСП', valuen3, handleChange3, styleInpArg)}
+            {Inputer('КСС', valuen4, handleChange4, styleInpArg)}
+            {Inputer('КСО', valuen5, handleChange5, styleInpArg)}
+            {Inputer('Луч П', valuen6, handleChange6, styleInpArg)}
+            {Inputer('Луч О', valuen7, handleChange7, styleInpArg)}
+            {Inputer('Описание', valuen8, handleChange8, styleInpArg)}
             {SaveFunc(handleCloseStr)}
           </Box>
           {badInput && <>{BadInput(badInput, setBadInput, soobError)}</>}
@@ -524,23 +467,23 @@ const PointsLevel2Baza = (props: {
 
   const PointsLevel2BazaTab1 = () => {
     let name = formName.slice(0, 29);
-    let yellowSoob = "Выкл с ";
-    if (!maskpoint.pointForRedax.yellow.make) yellowSoob = "Вкл с ";
+    let yellowSoob = 'Выкл с ';
+    if (!maskpoint.pointForRedax.yellow.make) yellowSoob = 'Вкл с ';
     yellowSoob +=
       TimeStr(maskpoint.pointForRedax.yellow.start) +
-      " до " +
+      ' до ' +
       TimeStr(maskpoint.pointForRedax.yellow.stop);
     let rec1 = maskpoint.pointForRedax.xctrls[props.crossroad].left;
     let rec2 = maskpoint.pointForRedax.xctrls[props.crossroad].right;
 
     return (
-      <Grid container sx={{ height: "19.5vh" }}>
+      <Grid container sx={{ height: '19.5vh' }}>
         <Grid item xs={4.3}>
           <Grid container sx={{ fontSize: 10.7, marginTop: 0.4 }}>
-            {Grider("Наименование ХТ", 0, true)}
-            {Grider("Максимум прямого", 2, true)}
-            {Grider("Максимум обратного", 2, true)}
-            {Grider("Работа по НК и СК", 2, true)}
+            {Grider('Наименование ХТ', 0, true)}
+            {Grider('Максимум прямого', 2, true)}
+            {Grider('Максимум обратного', 2, true)}
+            {Grider('Работа по НК и СК', 2, true)}
           </Grid>
         </Grid>
         <Grid item xs>
@@ -570,15 +513,15 @@ const PointsLevel2Baza = (props: {
   const PointsLevel2BazaTab2Header = () => {
     return (
       <Grid container sx={styleXTGHeader}>
-        {ConclHeader(1.3, "№", styleXTG02)}
-        {ConclHeader(1.8, "Прямой", styleXTG02)}
-        {ConclHeader(1.8, "Обратный", styleXTG02)}
-        {ConclHeader(1, "КСП", styleXTG02)}
-        {ConclHeader(1, "КСС", styleXTG02)}
-        {ConclHeader(1, "КСО", styleXTG02)}
-        {ConclHeader(1, "Луч П", styleXTG02)}
-        {ConclHeader(1, "Луч О", styleXTG02)}
-        {ConclHeader(2.1, "Описание", styleXTG021)}
+        {ConclHeader(1.3, '№', styleXTG02)}
+        {ConclHeader(1.8, 'Прямой', styleXTG02)}
+        {ConclHeader(1.8, 'Обратный', styleXTG02)}
+        {ConclHeader(1, 'КСП', styleXTG02)}
+        {ConclHeader(1, 'КСС', styleXTG02)}
+        {ConclHeader(1, 'КСО', styleXTG02)}
+        {ConclHeader(1, 'Луч П', styleXTG02)}
+        {ConclHeader(1, 'Луч О', styleXTG02)}
+        {ConclHeader(2.1, 'Описание', styleXTG021)}
       </Grid>
     );
   };
@@ -587,11 +530,11 @@ const PointsLevel2Baza = (props: {
     return (
       <Grid container sx={styleXTGHeader}>
         <Grid xs={0.5} item sx={styleXTG02}></Grid>
-        {ConclHeader(1.75, "Регион", styleXTG02)}
-        {ConclHeader(1.75, "Район", styleXTG02)}
-        {ConclHeader(2, "Перекрёсток", styleXTG02)}
-        {ConclHeader(3, "Номера каналов прямого", styleXTG02)}
-        {ConclHeader(3, "Номера каналов обратного", styleXTG021)}
+        {ConclHeader(1.75, 'Регион', styleXTG02)}
+        {ConclHeader(1.75, 'Район', styleXTG02)}
+        {ConclHeader(2, 'Перекрёсток', styleXTG02)}
+        {ConclHeader(3, 'Номера каналов прямого', styleXTG02)}
+        {ConclHeader(3, 'Номера каналов обратного', styleXTG021)}
       </Grid>
     );
   };
@@ -621,7 +564,7 @@ const PointsLevel2Baza = (props: {
           {ConclStr(1, elem.vleft, styleXTG01)}
           {ConclStr(1, elem.vright, styleXTG01)}
           {ConclStr(2.1, elem.desc, styleXTG00)}
-        </Grid>
+        </Grid>,
       );
     }
     return resStr;
@@ -643,7 +586,7 @@ const PointsLevel2Baza = (props: {
           {ConclStr(2, elem.id, styleXTG01)}
           {ConclStr(3, elem.chanL[0], styleXTG01)}
           {ConclStr(3, elem.chanR[0], styleXTG00)}
-        </Grid>
+        </Grid>,
       );
     }
     return resStr;
@@ -694,16 +637,12 @@ const PointsLevel2Baza = (props: {
 
   return (
     <>
-      {(maskpoint.savePoint || flagSave) && (
-        <>{WorkMenuEdit(6, "Сохранить изменения", SaveEdit)}</>
-      )}
-      {(maskpoint.redaxPoint || flagEdit) && (
-        <>{WorkMenuEdit(9, "Редактирование", StartEdit)}</>
-      )}
-      {flagExit && <>{WorkMenuEdit(9, "Выйти без cохранения", StopEdit)}</>}
+      {(maskpoint.savePoint || flagSave) && <>{WorkMenuEdit(6, 'Сохранить изменения', SaveEdit)}</>}
+      {(maskpoint.redaxPoint || flagEdit) && <>{WorkMenuEdit(9, 'Редактирование', StartEdit)}</>}
+      {flagExit && <>{WorkMenuEdit(9, 'Выйти без cохранения', StopEdit)}</>}
 
       <Stack direction="row">
-        <Grid item xs={4} sx={{ height: "85.8vh", border: 0 }}>
+        <Grid item xs={4} sx={{ height: '85.8vh', border: 0 }}>
           <PointsLevel2BazaTab1 />
           <Grid container>
             <Grid item xs={12} sx={styleXTG03}>
@@ -720,11 +659,7 @@ const PointsLevel2Baza = (props: {
         </Grid>
 
         <Grid item xs sx={styleXTG04}>
-          <PointsLevel2BazaDiogram
-            xctrll={pointGraf}
-            xtt={xtProps}
-            crossroad={props.crossroad}
-          />
+          <PointsLevel2BazaDiogram xctrll={pointGraf} xtt={xtProps} crossroad={props.crossroad} />
         </Grid>
       </Stack>
       {openSetName && <SetName />}
@@ -734,3 +669,17 @@ const PointsLevel2Baza = (props: {
 };
 
 export default PointsLevel2Baza;
+
+//=== сортировка массива ===
+// pointRab.xctrls[crossRoad].StrategyB.sort(function (a: any, b: any) {
+//   let af = a.xleft;
+//   let bf = b.xleft;
+//   let as = a.xright;
+//   let bs = b.xright;
+//   if (af === bf) {
+//     return as < bs ? -1 : as > bs ? 1 : 0;
+//   } else {
+//     return af < bf ? -1 : 1;
+//   }
+// });
+//==========================

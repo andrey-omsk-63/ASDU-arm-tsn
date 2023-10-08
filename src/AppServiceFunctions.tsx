@@ -1,38 +1,44 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { Stater } from "./App";
+import { Stater } from './App';
 
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Modal from '@mui/material/Modal';
+import Typography from '@mui/material/Typography';
 
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { CalendarPickerSkeleton } from "@mui/x-date-pickers/CalendarPickerSkeleton";
-import { PickersDay } from "@mui/x-date-pickers/PickersDay";
-import Badge from "@mui/material/Badge";
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { CalendarPickerSkeleton } from '@mui/x-date-pickers/CalendarPickerSkeleton';
+import { PickersDay } from '@mui/x-date-pickers/PickersDay';
+import Badge from '@mui/material/Badge';
 
-import { styleDatePicker, styleModalMenu } from "./AppStyle";
-import { styleInpOk, styleButOk } from "./AppStyle";
-import { styleEndInf } from "./components/Points/grid/PointsGridStyle";
+import { styleDatePicker, styleModalMenu } from './AppStyle';
+import { styleInpOk, styleButOk } from './AppStyle';
+import { styleEndInf, styleModalEnd } from './components/Points/grid/PointsGridStyle';
+
+const handleKey = (event: any) => {
+  if (event.key === 'Enter') event.preventDefault();
+};
 
 export const MakeDate = (tekData: Date) => {
   let ddd = new Date(tekData.toString());
   let SMes = ddd.getMonth() + 1;
-  let sDate = ddd.getFullYear() + "-";
+  let sDate = ddd.getFullYear() + '-';
   let sDay = ddd.getDate();
-  if (SMes < 10) sDate = sDate + "0";
-  sDate += SMes + "-";
-  if (sDay < 10) sDate += "0";
+  if (SMes < 10) sDate = sDate + '0';
+  sDate += SMes + '-';
+  if (sDay < 10) sDate += '0';
   sDate += sDay;
   return sDate;
 };
 
 export const MakeDateRus = (dat: string) => {
-  let rusDat = dat.slice(8) + "-" + dat.slice(5, 7);
-  rusDat += "-" + dat.slice(0, 4);
+  let rusDat = dat.slice(8) + '-' + dat.slice(5, 7);
+  rusDat += '-' + dat.slice(0, 4);
   return rusDat;
 };
 
@@ -40,46 +46,41 @@ export const MakeInterval = (mode: number) => {
   let dat: any = [];
   switch (mode) {
     case 1:
-      dat = ["1", "5", "10", "15", "30", "60"];
+      dat = ['1', '5', '10', '15', '30', '60'];
       break;
     case 5:
-      dat = ["5", "10", "15", "30", "60"];
+      dat = ['5', '10', '15', '30', '60'];
       break;
     case 10:
-      dat = ["10", "20", "30", "60"];
+      dat = ['10', '20', '30', '60'];
       break;
     case 15:
-      dat = ["15", "30", "60"];
+      dat = ['15', '30', '60'];
       break;
     case 20:
-      dat = ["20", "60"];
+      dat = ['20', '60'];
       break;
     default:
       //console.log("В БД некорректный интервал");
-      dat = ["1", "5", "10", "15", "30", "60"];
+      dat = ['1', '5', '10', '15', '30', '60'];
   }
   return dat;
 };
 
-export const ButtonMenu = (
-  mode: string,
-  soob: string,
-  SetValue: Function,
-  tekValue: string
-) => {
+export const ButtonMenu = (mode: string, soob: string, SetValue: Function, tekValue: string) => {
   const styleApp02 = {
     fontSize: 14,
     marginRight: 1,
     minWidth: (soob.length + 10) * 6.5,
     maxWidth: (soob.length + 10) * 6.5,
-    maxHeight: "21px",
-    minHeight: "21px",
-    bgcolor: "#BAE186", // тёмно-салатовый
-    border: "1px solid #000",
-    borderColor: "#93D145", // ярко-салатовый
+    maxHeight: '21px',
+    minHeight: '21px',
+    bgcolor: '#BAE186', // тёмно-салатовый
+    border: '1px solid #000',
+    borderColor: '#93D145', // ярко-салатовый
     borderRadius: 1,
-    color: "black",
-    textTransform: "unset !important",
+    color: 'black',
+    textTransform: 'unset !important',
     boxShadow: 8,
   };
 
@@ -88,14 +89,14 @@ export const ButtonMenu = (
     marginRight: 1,
     minWidth: (soob.length + 10) * 6.5,
     maxWidth: (soob.length + 10) * 6.5,
-    maxHeight: "21px",
-    minHeight: "21px",
-    bgcolor: "#E6F5D6", // светло-салатовый
-    border: "1px solid #000",
-    borderColor: "#d4d4d4", // серый
+    maxHeight: '21px',
+    minHeight: '21px',
+    bgcolor: '#E6F5D6', // светло-салатовый
+    border: '1px solid #000',
+    borderColor: '#d4d4d4', // серый
     borderRadius: 1,
-    color: "black",
-    textTransform: "unset !important",
+    color: 'black',
+    textTransform: 'unset !important',
     boxShadow: 1,
   };
 
@@ -120,17 +121,9 @@ export const InputerOk = (inpDate: boolean, InputOk: Function) => {
   );
 };
 
-export const MenuSpisRegion = (
-  region: any,
-  nameRegion: string,
-  handleCloseModal: Function
-) => {
+export const MenuSpisRegion = (region: any, nameRegion: string, handleCloseModal: Function) => {
   return (
-    <Button
-      key={Math.random()}
-      sx={styleModalMenu}
-      onClick={() => handleCloseModal(region)}
-    >
+    <Button key={Math.random()} sx={styleModalMenu} onClick={() => handleCloseModal(region)}>
       <b>{nameRegion}</b>
     </Button>
   );
@@ -138,34 +131,30 @@ export const MenuSpisRegion = (
 
 export const PunktMenuSaveFile = (SetValue: Function, tekValue: string) => {
   return (
-    <Grid
-      item
-      container
-      sx={{ marginTop: -0.25, marginRight: 0.3, width: "140px" }}
-    >
-      <Grid item xs sx={{ textAlign: "left" }}>
-        {ButtonMenu("5", "Сохр.в файл", SetValue, tekValue)}
+    <Grid item container sx={{ marginTop: -0.25, marginRight: 0.3, width: '140px' }}>
+      <Grid item xs sx={{ textAlign: 'left' }}>
+        {ButtonMenu('5', 'Сохр.в файл', SetValue, tekValue)}
       </Grid>
     </Grid>
   );
 };
 
 export const WriteToCsvFileForStat = (datestat: Stater) => {
-  const element = document.createElement("a");
-  let textFile = "";
+  const element = document.createElement('a');
+  let textFile = '';
   for (let i = 0; i < datestat.stat.length; i++) {
-    textFile += datestat.stat[i].Hour + ";";
-    textFile += datestat.stat[i].Min + ";";
+    textFile += datestat.stat[i].Hour + ';';
+    textFile += datestat.stat[i].Min + ';';
     for (let j = 0; j < datestat.stat[i].Datas.length; j++) {
       textFile += datestat.stat[i].Datas[j].in;
-      if (j + 1 !== datestat.stat[i].Datas.length) textFile += ";";
+      if (j + 1 !== datestat.stat[i].Datas.length) textFile += ';';
     }
-    textFile += "\n";
+    textFile += '\n';
   }
-  const file = new Blob([textFile], { type: "text/plain" });
+  const file = new Blob([textFile], { type: 'text/plain' });
   element.href = URL.createObjectURL(file);
-  let nameFile = datestat.area + "." + datestat.id + " ";
-  nameFile += datestat.data + " " + datestat.time + ".csv";
+  let nameFile = datestat.area + '.' + datestat.id + ' ';
+  nameFile += datestat.data + ' ' + datestat.time + '.csv';
   element.download = nameFile;
   document.body.appendChild(element); // Required for this to work in FireFox
   element.click();
@@ -173,16 +162,12 @@ export const WriteToCsvFileForStat = (datestat: Stater) => {
   // saveAs(dataURI, "test.txt");
 };
 
-export const InputerDate = (
-  valueDate: any,
-  handleChangeDP: any,
-  massGoodDate: any
-) => {
+export const InputerDate = (valueDate: any, handleChangeDP: any, massGoodDate: any) => {
   return (
     <Box sx={styleDatePicker}>
-      <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={"ru"}>
+      <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={'ru'}>
         <DatePicker
-          views={["day"]}
+          views={['day']}
           value={valueDate}
           inputFormat="DD-MM-YYYY"
           InputProps={{ style: { fontSize: 14 } }}
@@ -191,14 +176,12 @@ export const InputerDate = (
           renderLoading={() => <CalendarPickerSkeleton />}
           renderDay={(day, _value, DayComponentProps) => {
             const isSelected =
-              !DayComponentProps.outsideCurrentMonth &&
-              massGoodDate.indexOf(MakeDate(day)) >= 0;
+              !DayComponentProps.outsideCurrentMonth && massGoodDate.indexOf(MakeDate(day)) >= 0;
             return (
               <Badge
                 key={day.toString()}
                 overlap="circular"
-                badgeContent={isSelected ? "👍" : undefined}
-              >
+                badgeContent={isSelected ? '👍' : undefined}>
                 <PickersDay {...DayComponentProps} />
               </Badge>
             );
@@ -209,20 +192,16 @@ export const InputerDate = (
   );
 };
 
-export const SendSocketgetStatisticsList = (
-  debug: boolean,
-  ws: WebSocket,
-  region: string
-) => {
-  console.log("getStatisticsList:", region);
+export const SendSocketgetStatisticsList = (debug: boolean, ws: WebSocket, region: string) => {
+  console.log('getStatisticsList:', region);
   const handleSendOpen = () => {
     if (!debug) {
       if (ws.readyState === WebSocket.OPEN) {
         ws.send(
           JSON.stringify({
-            type: "getStatisticsList",
+            type: 'getStatisticsList',
             region,
-          })
+          }),
         );
       } else {
         setTimeout(() => {
@@ -235,22 +214,60 @@ export const SendSocketgetStatisticsList = (
 };
 //=== PointsLevel2Baza =============================
 export const TimeStr = (tim: number) => {
-  let timLiner = "";
+  let timLiner = '';
   let hour = Math.trunc(tim / 60);
   let min = tim % 60;
-  if (hour < 10) timLiner = "0";
+  if (hour < 10) timLiner = '0';
   timLiner += hour.toString();
-  timLiner += ":";
-  if (min < 10) timLiner += "0";
+  timLiner += ':';
+  if (min < 10) timLiner += '0';
   timLiner += min.toString();
   return timLiner;
 };
 
-export const BoxTextField = (argum: any, hChange: any) => {
-  const handleKey = (event: any) => {
-    if (event.key === "Enter") event.preventDefault();
+export const BadInput = (badInput: boolean, handleCloseEnd: Function, soobError: string) => {
+  const styleSetPoint = {
+    outline: 'none',
+    position: 'absolute',
+    left: '47%',
+    top: '63%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '1px solid #000',
+    borderColor: 'red',
+    borderRadius: 1,
+    boxShadow: 24,
+    textAlign: 'center',
+    p: 1,
   };
 
+  const handleClose = () => {
+    handleCloseEnd(false);
+  };
+
+  const CloseEnd = (event: any, reason: string) => {
+    if (reason === 'escapeKeyDown') handleClose();
+  };
+
+  return (
+    <Modal open={badInput} onClose={CloseEnd} hideBackdrop={true}>
+      <Box sx={styleSetPoint}>
+        <Button sx={styleModalEnd} onClick={() => handleClose()}>
+          <b>&#10006;</b>
+        </Button>
+        <Typography variant="h6" sx={{ color: 'red' }}>
+          Предупреждение
+        </Typography>
+        <Box sx={{ marginTop: 0.5 }}>
+          <Box sx={{ marginBottom: 1.2 }}>{soobError}</Box>
+        </Box>
+      </Box>
+    </Modal>
+  );
+};
+
+export const BoxTextField = (argum: any, hChange: any) => {
   return (
     <TextField
       size="small"
@@ -266,12 +283,7 @@ export const BoxTextField = (argum: any, hChange: any) => {
   );
 };
 
-export const Inputer = (
-  name: string,
-  argum: any,
-  hChange: any,
-  styleX: any
-) => {
+export const Inputer = (name: string, argum: any, hChange: any, styleX: any) => {
   return (
     <Grid container sx={{ fontSize: 15 }}>
       <Grid item xs={5} sx={{ marginTop: 0.5 }}>
@@ -288,23 +300,23 @@ export const WorkMenuEdit = (xss: number, soob: string, servisFunc: any) => {
   const styleBut03 = {
     fontSize: 13.5,
     marginTop: -2,
-    maxHeight: "21px",
-    minHeight: "21px",
-    maxWidth: "193px",
-    minWidth: "193px",
-    bgcolor: "#E6F5D6", // светло-салатовый
-    border: "1px solid #000",
-    borderColor: "#d4d4d4", // серый
+    maxHeight: '21px',
+    minHeight: '21px',
+    maxWidth: '193px',
+    minWidth: '193px',
+    bgcolor: '#E6F5D6', // светло-салатовый
+    border: '1px solid #000',
+    borderColor: '#d4d4d4', // серый
     borderRadius: 1,
     boxShadow: 6,
-    color: "black",
-    textTransform: "unset !important",
+    color: 'black',
+    textTransform: 'unset !important',
   };
 
   const styleXTG05 = {
     marginTop: -3.0,
-    height: "3vh",
-    textAlign: "right",
+    height: '3vh',
+    textAlign: 'right',
   };
 
   return (
@@ -323,17 +335,17 @@ export const ButtRec = (rec: any, func: any) => {
   const styleBut01 = {
     fontSize: 10,
     marginTop: -0.3,
-    maxHeight: "15px",
-    minHeight: "15px",
-    maxWidth: "205px",
-    minWidth: "205px",
-    bgcolor: "#E6F5D6", // светло-салатовый
-    border: "1px solid #000",
-    borderColor: "#d4d4d4", // серый
+    maxHeight: '15px',
+    minHeight: '15px',
+    maxWidth: '205px',
+    minWidth: '205px',
+    bgcolor: '#E6F5D6', // светло-салатовый
+    border: '1px solid #000',
+    borderColor: '#d4d4d4', // серый
     borderRadius: 1,
     boxShadow: 4,
-    color: "black",
-    textTransform: "unset !important",
+    color: 'black',
+    textTransform: 'unset !important',
   };
 
   return (
@@ -374,23 +386,23 @@ export const InputTimeAndMode = (soob: string, func: any) => {
 
 export const SaveFunc = (func: any) => {
   const styleInpKnop = {
-    color: "black",
+    color: 'black',
     marginTop: 1,
-    maxHeight: "21px",
-    minHeight: "21px",
-    bgcolor: "#E6F5D6", // светло-салатовый
-    border: "1px solid #000",
-    borderColor: "#d4d4d4", // серый
+    maxHeight: '21px',
+    minHeight: '21px',
+    bgcolor: '#E6F5D6', // светло-салатовый
+    border: '1px solid #000',
+    borderColor: '#d4d4d4', // серый
     borderRadius: 1,
     boxShadow: 6,
-    textAlign: "center",
-    textTransform: "unset !important",
+    textAlign: 'center',
+    textTransform: 'unset !important',
   };
 
   return (
     <>
       <br />
-      <Box sx={{ textAlign: "center" }}>
+      <Box sx={{ textAlign: 'center' }}>
         <Button sx={styleInpKnop} onClick={func}>
           <b>Сохранить</b>
         </Button>
@@ -405,9 +417,9 @@ export const SendHandleSend = (ws: any, mask: any) => {
       if (ws.readyState === WebSocket.OPEN) {
         ws.send(
           JSON.stringify({
-            type: "changeXctrl",
+            type: 'changeXctrl',
             data: mask,
-          })
+          }),
         );
       } else {
         setTimeout(() => {
@@ -436,31 +448,27 @@ export const Grider = (soob: any, sdvig: number, fat: boolean) => {
   );
 };
 //=== PointsMainScr ================================
-export const WorkMenuEditMain = (
-  xss: number,
-  soob: string,
-  servisFunc: any
-) => {
+export const WorkMenuEditMain = (xss: number, soob: string, servisFunc: any) => {
   const styleBut03 = {
     fontSize: 13.5,
     marginTop: 4,
-    maxHeight: "21px",
-    minHeight: "21px",
-    maxWidth: "193px",
-    minWidth: "193px",
-    color: "black",
-    bgcolor: "#E6F5D6", // светло-салатовый
-    border: "1px solid #000",
-    borderColor: "#d4d4d4", // серый
+    maxHeight: '21px',
+    minHeight: '21px',
+    maxWidth: '193px',
+    minWidth: '193px',
+    color: 'black',
+    bgcolor: '#E6F5D6', // светло-салатовый
+    border: '1px solid #000',
+    borderColor: '#d4d4d4', // серый
     borderRadius: 1,
     boxShadow: 6,
-    textTransform: "unset !important",
+    textTransform: 'unset !important',
   };
 
   const styleXTG05 = {
     marginTop: -3.3,
-    height: "3vh",
-    textAlign: "right",
+    height: '3vh',
+    textAlign: 'right',
     paddingRight: 1,
   };
 
@@ -476,30 +484,25 @@ export const WorkMenuEditMain = (
   );
 };
 //=== Points =======================================
-export const SendSocketOldDateXt = (
-  ws: any,
-  date: any,
-  pointsEtalon: any,
-  tekValue: number
-) => {
+export const SendSocketOldDateXt = (ws: any, date: any, pointsEtalon: any, tekValue: number) => {
   console.log(
-    "SendSocketOldDateXt",
+    'SendSocketOldDateXt',
     date,
     pointsEtalon[tekValue].region,
     pointsEtalon[tekValue].area,
-    pointsEtalon[tekValue].subarea
+    pointsEtalon[tekValue].subarea,
   );
   const handleSendOpen = () => {
     if (ws !== null) {
       if (ws.readyState === WebSocket.OPEN) {
         ws.send(
           JSON.stringify({
-            type: "getCalculation",
+            type: 'getCalculation',
             date: new Date(date).toISOString(),
             region: pointsEtalon[tekValue].region,
             area: pointsEtalon[tekValue].area,
             subarea: pointsEtalon[tekValue].subarea,
-          })
+          }),
         );
       } else {
         setTimeout(() => {
@@ -516,21 +519,21 @@ export const OutputPict = (
   pv: number,
   ph: number,
   PictInfo: Function,
-  flagEnd: boolean
+  flagEnd: boolean,
 ) => {
   const styleBox = {
-    position: "absolute",
-    left: ph - 0.7 + "%", // 27.2
-    top: pv - 0.4 + "%", //7.7
+    position: 'absolute',
+    left: ph - 0.7 + '%', // 27.2
+    top: pv - 0.4 + '%', //7.7
     maxWidth: 5,
     minWidth: 5,
     maxHeight: 5,
     minHeight: 5,
-    color: "black",
+    color: 'black',
     borderRadius: 1,
   };
 
-  let soob = flagEnd ? "🔴" : "●";
+  let soob = flagEnd ? '🔴' : '●';
 
   return (
     <Button sx={styleBox} onClick={() => PictInfo(idx, pv, ph)}>
@@ -546,7 +549,7 @@ export const PictInfoBox = (
   setPictInfo: Function,
   point: any,
   mode: number,
-  POINT: any
+  POINT: any,
 ) => {
   let snos = mode ? 1000 : 850;
   let sdvigH = (window.innerWidth - snos) * 0.012;
@@ -557,18 +560,15 @@ export const PictInfoBox = (
     let num = 1; // Диограмма лучей
     let pStB = point.StrategyB;
     for (let i = 0; i < pStB.length; i++) {
-      if (pointer.Value[0] > pStB[i].xright || pointer.Value[1] > pStB[i].xleft)
-        num = i + 2;
+      if (pointer.Value[0] > pStB[i].xright || pointer.Value[1] > pStB[i].xleft) num = i + 2;
     }
     let luchO = pStB[num - 1].vleft;
     let luchP = pStB[num - 1].vright;
     let ratio = pStB[num - 1].xright / pStB[num - 1].xleft;
     numArea = pStB[num - 1].pks;
     if (luchP !== 1 || luchO !== 1) {
-      if (pointer.Value[1] < pointer.Value[0] * luchO * ratio)
-        numArea = pStB[num - 1].pkl;
-      if (pointer.Value[1] > pointer.Value[0] * luchP * ratio)
-        numArea = pStB[num - 1].pkr;
+      if (pointer.Value[1] < pointer.Value[0] * luchO * ratio) numArea = pStB[num - 1].pkl;
+      if (pointer.Value[1] > pointer.Value[0] * luchP * ratio) numArea = pStB[num - 1].pkr;
     }
     for (let i = 0; i < POINT.ext.length; i++)
       if (POINT.ext[i][0] === numArea) pk = POINT.ext[i][1];
@@ -587,20 +587,18 @@ export const PictInfoBox = (
     numArea = area[mass.indexOf(Math.min.apply(null, mass))];
   }
 
-  let NumArea = mode
-    ? numArea + "[" + pointer.Value[2] + "] (" + pk + ")"
-    : numArea;
-  let KS = mode ? "КС (ПК)" : "КС";
+  let NumArea = mode ? numArea + '[' + pointer.Value[2] + '] (' + pk + ')' : numArea;
+  let KS = mode ? 'КС (ПК)' : 'КС';
 
   const styleBoxGl = {
-    position: "absolute",
-    left: phGl - 24 + sdvigH + "%",
-    top: pvGl - sdvigV + "%",
+    position: 'absolute',
+    left: phGl - 24 + sdvigH + '%',
+    top: pvGl - sdvigV + '%',
     width: 145,
     height: 96,
-    bgcolor: "background.paper",
-    border: "1px solid #000",
-    borderColor: "primary.main",
+    bgcolor: 'background.paper',
+    border: '1px solid #000',
+    borderColor: 'primary.main',
     borderRadius: 1,
     boxShadow: 24,
     p: 1,
@@ -614,9 +612,9 @@ export const PictInfoBox = (
       <Grid container sx={{ fontSize: 12.9, marginTop: 0.5 }}>
         <Grid item xs={8}>
           <Grid container>
-            {Grider("Время", 0, true)}
-            {Grider("Прямой", 1, true)}
-            {Grider("Обратный", 1, true)}
+            {Grider('Время', 0, true)}
+            {Grider('Прямой', 1, true)}
+            {Grider('Обратный', 1, true)}
             {Grider(KS, 1, true)}
           </Grid>
         </Grid>
