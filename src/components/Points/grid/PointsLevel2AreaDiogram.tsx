@@ -6,6 +6,9 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 import { OutputPict, PictInfoBox } from "../../../AppServiceFunctions";
 
+import { PointInfoDirStyle, PointInfoDirRotStyle } from "./PointsGridStyle";
+import { styleBackdropArea } from "./PointsGridStyle";
+
 import { XctrlInfo } from "../../../interfaceGl.d";
 //import { styleBoxFormInt } from "../../../AppStyle";
 
@@ -219,18 +222,30 @@ const PointsLevel2AreaDiogram = (props: {
     }
     return resStrr;
   };
+
+  const PointInfoStr = () => {
+    let resStr = [];
+    const dlBlok = (window.innerWidth / 12.55) * 9;
+    let elem = points.xctrls[props.crossroad].Calculates[0];
+    let stylePointInf1 = PointInfoDirRotStyle("-1.6vh", "-64px", 21);
+    resStr.push(
+      <Grid key={Math.random()} item sx={stylePointInf1}>
+        <b>{elem.chanL[0]}</b>
+      </Grid>
+    );
+    let ml01 = dlBlok - 63 + "px";
+    let stylePointInf2 = PointInfoDirStyle("83.8vh", ml01, 21);
+    resStr.push(
+      <Grid key={Math.random()} item sx={stylePointInf2}>
+        <b>{elem.chanR[0]}</b>
+      </Grid>
+    );
+
+    return resStr;
+  };
   //============ Dinama =====================================================
   const handleClose = () => {
     setOpenLoader(false);
-  };
-
-  const styleBackdrop = {
-    color: "#fff",
-    marginLeft: window.innerWidth * 0.274 + "px",
-    marginRight: "1.7vh",
-    marginTop: 11,
-    marginBottom: "4vh",
-    zIndex: (theme: any) => theme.zIndex.drawer + 1,
   };
 
   const Output = () => {
@@ -241,7 +256,7 @@ const PointsLevel2AreaDiogram = (props: {
 
   const Dinama = () => {
     return (
-      <Backdrop sx={styleBackdrop} open={openLoader} onClick={handleClose}>
+      <Backdrop sx={styleBackdropArea} open={openLoader} onClick={handleClose}>
         <CircularProgress color="inherit" size={212} />
       </Backdrop>
     );
@@ -251,28 +266,31 @@ const PointsLevel2AreaDiogram = (props: {
   if (openLoader) Output();
 
   return (
-    <Grid item container sx={{ position: "relative" }} xs={12}>
-      {openLoader && <Dinama />}
-      {!openLoader && (
-        <>
-          {PointsXt112Comp1Tab4()}
-          {OutputerPict()}
-          {pictInfo && (
-            <>
-              {PictInfoBox(
-                pvGl,
-                phGl,
-                pointer[namer][IDX],
-                setPictInfo,
-                points.xctrls[crRoad],
-                0,
-                points
-              )}
-            </>
-          )}
-        </>
-      )}
-    </Grid>
+    <>
+      <Grid item container sx={{ position: "relative" }} xs={12}>
+        {openLoader && <Dinama />}
+        {!openLoader && (
+          <>
+            {PointsXt112Comp1Tab4()}
+            {OutputerPict()}
+            {pictInfo && (
+              <>
+                {PictInfoBox(
+                  pvGl,
+                  phGl,
+                  pointer[namer][IDX],
+                  setPictInfo,
+                  points.xctrls[crRoad],
+                  0,
+                  points
+                )}
+              </>
+            )}
+          </>
+        )}
+      </Grid>
+      {!openLoader && <>{PointInfoStr()}</>}
+    </>
   );
 };
 

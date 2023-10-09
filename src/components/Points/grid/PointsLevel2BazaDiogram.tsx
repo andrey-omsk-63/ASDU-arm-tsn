@@ -7,6 +7,9 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 import { OutputPict, PictInfoBox } from "../../../AppServiceFunctions";
 
+import { PointInfoStrStyle, PointInfoDirStyle } from "./PointsGridStyle";
+import { PointInfoDirRotStyle, styleBackdropBaza } from "./PointsGridStyle";
+
 import { XctrlInfo } from "../../../interfaceGl.d";
 
 let xtPropsOld = -1;
@@ -61,7 +64,7 @@ const PointsLevel2BazaDiogram = (props: {
   const verticalLimit = points.xctrls[crRoad].StrategyB[dlMas - 1].xleft;
   const horizon = points.xctrls[crRoad].right;
   const vertical = points.xctrls[crRoad].left;
- 
+
   const steepHorizon = 12 / horizon;
   const steepVertical = 85.7 / vertical;
   const dlBlok = (window.innerWidth / 12.55) * 8;
@@ -112,7 +115,6 @@ const PointsLevel2BazaDiogram = (props: {
       for (let j = 0; j < vertical; j += scale) {
         matrix[j] = [];
         for (let i = 0; i < horizon; i += scale) {
-          //console.log("2@@@:",i,j);
           if (dlMas >= 1 && pStB[0].xright >= i && pStB[0].xleft >= j) {
             MakeMatrixColor(0, i, j);
           } else {
@@ -158,7 +160,6 @@ const PointsLevel2BazaDiogram = (props: {
       masCol = [];
       colBl = 0;
 
-      //for (let i = 0; i < horizon * 2; i += scale) {
       for (let i = 0; i < horizon; i += scale) {
         coler = matrix[j / scale][i / scale];
         if (coler === colerOld) {
@@ -203,27 +204,51 @@ const PointsLevel2BazaDiogram = (props: {
       let vl01 = vertical / points.xctrls[crRoad].StrategyB[i].xleft;
       let mt01 = "-" + 86.3 / vl01 + "vh";
       let hl01 = horizon / points.xctrls[crRoad].StrategyB[i].xright;
-      let ml01 = dlBlok / hl01 - 73 + "px";
+      let ml01 = dlBlok / hl01 - 67 + "px";
       let title =
         points.xctrls[crRoad].StrategyB[i].xleft +
         "x" +
         points.xctrls[crRoad].StrategyB[i].xright;
 
-      const stylePointInf = {
-        fontSize: 10.5,
-        position: "absolute",
-        marginTop: mt01,
-        marginLeft: ml01,
-        textAlign: "right",
-        width: "69px",
-      };
+      let stylePointInf0 = PointInfoStrStyle(mt01, ml01);
 
       resStr.push(
-        <Grid key={i} item sx={stylePointInf}>
+        <Grid key={i} item sx={stylePointInf0}>
           <b>{title}</b>
         </Grid>
       );
     }
+    let elem = points.xctrls[props.crossroad].Calculates[0];
+    let stylePointInf1 = PointInfoDirRotStyle("-81.5vh", "-58px", 18);
+    let mass = "";
+    for (let i = 0; i < elem.chanL.length; i++) {
+      if (!i) mass = elem.chanL[0].toString();
+      if (i) mass += "," + elem.chanL[i].toString();
+    }
+    //mass += ",4"; // для отладки
+    resStr.push(
+      <Grid key={Math.random()} item sx={stylePointInf1}>
+        прямой {"["}
+        <b>{mass}</b>
+        {"]"}
+      </Grid>
+    );
+    let ml01 = dlBlok - 110 + "px";
+    let stylePointInf2 = PointInfoDirStyle("-1.7vh", ml01, 16);
+    mass = "";
+    for (let i = 0; i < elem.chanR.length; i++) {
+      if (!i) mass = elem.chanR[0].toString();
+      if (i) mass += "," + elem.chanR[i].toString();
+    }
+    //mass += ",4"; // для отладки
+    resStr.push(
+      <Grid key={Math.random()} item sx={stylePointInf2}>
+        обратный {"["}
+        <b>{mass}</b>
+        {"]"}
+      </Grid>
+    );
+
     return resStr;
   };
   //============ OutputerPict ===============================================
@@ -277,15 +302,6 @@ const PointsLevel2BazaDiogram = (props: {
     setOpenLoader(false);
   };
 
-  const styleBackdrop = {
-    color: "#fff",
-    marginLeft: window.innerWidth * 0.355 + "px",
-    marginRight: "1.7vh",
-    marginTop: 11,
-    marginBottom: "4vh",
-    zIndex: (theme: any) => theme.zIndex.drawer + 1,
-  };
-
   const Output = () => {
     setTimeout(() => {
       setOpenLoader(false);
@@ -294,7 +310,7 @@ const PointsLevel2BazaDiogram = (props: {
 
   const Dinama = () => {
     return (
-      <Backdrop sx={styleBackdrop} open={openLoader} onClick={handleClose}>
+      <Backdrop sx={styleBackdropBaza} open={openLoader} onClick={handleClose}>
         <CircularProgress color="inherit" size={212} />
       </Backdrop>
     );
@@ -305,10 +321,7 @@ const PointsLevel2BazaDiogram = (props: {
 
   return (
     <>
-      <Grid
-        container
-        sx={{ border: 0, height: "85.8vh", position: "relative" }}
-      >
+      <Grid container sx={{ height: "85.8vh", position: "relative" }}>
         {openLoader && <Dinama />}
         {!openLoader && (
           <>

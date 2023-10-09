@@ -229,7 +229,7 @@ export const BadInput = (badInput: boolean, handleCloseEnd: Function, soobError:
   const styleSetPoint = {
     outline: 'none',
     position: 'absolute',
-    left: '47%',
+    left: '50%',
     top: '63%',
     transform: 'translate(-50%, -50%)',
     width: 400,

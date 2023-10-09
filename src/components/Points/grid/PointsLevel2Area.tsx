@@ -12,6 +12,8 @@ import TextField from "@mui/material/TextField";
 
 import PointsLevel2AreaDiogram from "./PointsLevel2AreaDiogram";
 
+import { BadInput } from "../../../AppServiceFunctions";
+
 import { styleSetInf, styleModalEnd, styleXTGHeader } from "./PointsGridStyle";
 import { styleInpArg, styleInpKnop, styleBut021 } from "./PointsGridStyle";
 import { styleXTG05, styleBut02, styleBut03 } from "./PointsGridStyle";
@@ -28,6 +30,7 @@ let flagExit = false;
 
 let xtPropsOld = -1;
 let crossRoadOld = -1;
+let soobError = "";
 
 let pointsTemp: any = null;
 let pointRab: any = null;
@@ -120,10 +123,16 @@ const PointsLevel2Area = (props: {
   };
 
   const SetStr = (props: { nom: number }) => {
-    let elem = maskpoint.pointForRedax.xctrls[crossRoad].StrategyA[props.nom];
+    let StrA = maskpoint.pointForRedax.xctrls[crossRoad].StrategyA;
+    let elem = StrA[props.nom];
+    let max1 = props.nom < StrA.length - 1 ? StrA[props.nom + 1].xleft : 0;
+    let max2 = props.nom < StrA.length - 1 ? StrA[props.nom + 1].xright : 0;
+    let min1 = props.nom ? StrA[props.nom - 1].xleft : 0;
+    let min2 = props.nom ? StrA[props.nom - 1].xright : 0;
     const [valuen1, setValuen1] = React.useState(elem.xleft);
     const [valuen2, setValuen2] = React.useState(elem.xright);
     const [valuen3, setValuen3] = React.useState(elem.desc);
+    const [badInput, setBadInput] = React.useState(false);
 
     const handleClose = (mode: number) => {
       setOpenSetStr(false);
@@ -155,14 +164,25 @@ const PointsLevel2Area = (props: {
       setTrigger(!trigger);
     };
 
+    const EvilInput = (form: number, max: number, min: number) => {
+      if ((max && form >= max) || form <= min) {
+        let soob1 = max ? " больше " + max + " и " : "";
+        soobError =
+          "Вводимое значение не должно быть " + soob1 + "меньше " + min;
+        setBadInput(true);
+        return false;
+      }
+      return true;
+    };
+
     const handleChange1 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
-      if (form) setValuen1(Math.abs(form));
+      EvilInput(form, max1, min1) && form && setValuen1(Math.abs(form));
     };
 
     const handleChange2 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
-      if (form) setValuen2(Math.abs(form));
+      EvilInput(form, max2, min2) && form && setValuen2(Math.abs(form));
     };
 
     const handleChange3 = (event: any) => {
@@ -172,25 +192,28 @@ const PointsLevel2Area = (props: {
 
     return (
       <Modal open={openSetStr} onClose={handleClose} hideBackdrop={false}>
-        <Box sx={styleSetInf}>
-          <Button sx={styleModalEnd} onClick={() => handleClose(0)}>
-            <b>&#10006;</b>
-          </Button>
-          <Typography sx={{ textAlign: "center" }}>
-            КС <b> &nbsp;{elem.pk} </b>
-          </Typography>{" "}
-          <br />
-          {Inputer("Прямой", valuen1, handleChange1, styleInpArg)}
-          {Inputer("Обратный", valuen2, handleChange2, styleInpArg)}
-          {Inputer("Описание", valuen3, handleChange3, styleInpArg)}
-          <Box sx={{ textAlign: "center" }}>
-            {" "}
-            <br />
-            <Button sx={styleInpKnop} onClick={() => handleCloseStr(0)}>
-              <b>Сохранить</b>
+        <>
+          <Box sx={styleSetInf}>
+            <Button sx={styleModalEnd} onClick={() => handleClose(0)}>
+              <b>&#10006;</b>
             </Button>
+            <Typography sx={{ textAlign: "center" }}>
+              КС <b> &nbsp;{elem.pk} </b>
+            </Typography>{" "}
+            <br />
+            {Inputer("Прямой", valuen1, handleChange1, styleInpArg)}
+            {Inputer("Обратный", valuen2, handleChange2, styleInpArg)}
+            {Inputer("Описание", valuen3, handleChange3, styleInpArg)}
+            <Box sx={{ textAlign: "center" }}>
+              {" "}
+              <br />
+              <Button sx={styleInpKnop} onClick={() => handleCloseStr(0)}>
+                <b>Сохранить</b>
+              </Button>
+            </Box>
           </Box>
-        </Box>
+          {badInput && <>{BadInput(badInput, setBadInput, soobError)}</>}
+        </>
       </Modal>
     );
   };

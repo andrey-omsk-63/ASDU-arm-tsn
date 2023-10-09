@@ -1,3 +1,33 @@
+export const styleEndInf = {
+  fontSize: 11,
+  position: "absolute",
+  top: "0%",
+  left: "auto",
+  right: "0%",
+  height: "15px",
+  maxWidth: "2%",
+  minWidth: "2%",
+  color: "black",
+};
+
+export const styleBackdropArea = {
+  color: "#fff",
+  marginLeft: window.innerWidth * 0.274 + "px",
+  marginRight: "1.7vh",
+  marginTop: 11,
+  marginBottom: "4vh",
+  zIndex: (theme: any) => theme.zIndex.drawer + 1,
+};
+
+export const styleBackdropBaza = {
+  color: "#fff",
+  // marginLeft: window.innerWidth * 0.355 + "px",
+  marginLeft: window.innerWidth * 0.355 + "px",
+  marginRight: "1.7vh",
+  marginTop: 11,
+  marginBottom: "4vh",
+  zIndex: (theme: any) => theme.zIndex.drawer + 1,
+};
 //====== PointsLevel2Baza =======================================================
 export const styleXTG00 = {
   fontSize: 11,
@@ -144,8 +174,9 @@ export const styleSetInf = {
   outline: "none",
   fontSize: 17,
   position: "absolute",
-  left: "36%",
-  marginTop: "15vh",
+  left: "50%",
+  top: "36%",
+  transform: "translate(-50%, -50%)",
   width: 270,
   bgcolor: "background.paper",
   border: "1px solid #000",
@@ -159,8 +190,9 @@ export const styleSetInff = {
   outline: "none",
   fontSize: 17,
   position: "absolute",
-  left: "36%",
-  marginTop: "15vh",
+  left: "50%",
+  top: "36%",
+  transform: "translate(-50%, -50%)",
   width: 380,
   bgcolor: "background.paper",
   border: "1px solid #000",
@@ -219,16 +251,51 @@ export const styleInpKnop = {
   textTransform: "unset !important",
 };
 //====== PointsLevel2BazaDiogram ================================================
-export const styleEndInf = {
-  fontSize: 11,
-  position: "absolute",
-  top: "0%",
-  left: "auto",
-  right: "0%",
-  height: "15px",
-  maxWidth: "2%",
-  minWidth: "2%",
-  color: "black",
+export const PointInfoStrStyle = (mt01: string, ml01: string) => {
+  const stylePointInf = {
+    fontSize: 10.5,
+    position: "absolute",
+    marginTop: mt01,
+    marginLeft: ml01,
+    textAlign: "right",
+    width: "69px",
+  };
+  return stylePointInf;
+};
+
+export const PointInfoDirStyle = (
+  mt01: string,
+  ml01: string,
+  fs: number,
+) => {
+  const stylePointInf = {
+    //border: 1,
+    fontSize: fs,
+    position: "absolute",
+    marginTop: mt01,
+    marginLeft: ml01,
+    textAlign: "right",
+    width: "111px",
+  };
+  return stylePointInf;
+};
+
+export const PointInfoDirRotStyle = (
+  mt01: string,
+  ml01: string,
+  fs: number,
+) => {
+  const stylePointInf = {
+    //border: 1,
+    fontSize: fs,
+    position: "absolute",
+    marginTop: mt01,
+    marginLeft: ml01,
+    transform: "rotate(270deg)",
+    textAlign: "right",
+    width: "108px",
+  };
+  return stylePointInf;
 };
 //====== PointsLevel2Area =======================================================
 export const styleXTG035 = {
@@ -432,15 +499,4 @@ export const styleXTl201 = {
   marginRight: -61,
   border: 0,
 };
-
-// export const styleXTl202 = {
-//   fontSize: 12.5,
-//   maxHeight: "21px",
-//   minHeight: "21px",
-//   transform: "rotate(270deg)",
-//   backgroundColor: "#E9F5D8",
-//   color: "black",
-//   marginBottom: 6.5,
-//   textTransform: "unset !important",
-// };
 //===============================================================================

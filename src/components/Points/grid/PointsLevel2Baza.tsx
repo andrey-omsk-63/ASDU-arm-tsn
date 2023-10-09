@@ -438,7 +438,7 @@ const PointsLevel2Baza = (props: {
             </Button>
             <Typography sx={{ textAlign: 'center' }}>
               Номер записи <b> {props.nom} </b>
-            </Typography>{' '}
+            </Typography>
             <br />
             {Inputer('Прямой', valuen1, handleChange1, styleInpArg)}
             {Inputer('Обратный', valuen2, handleChange2, styleInpArg)}
