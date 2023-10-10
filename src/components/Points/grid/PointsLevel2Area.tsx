@@ -134,8 +134,12 @@ const PointsLevel2Area = (props: {
     const [valuen3, setValuen3] = React.useState(elem.desc);
     const [badInput, setBadInput] = React.useState(false);
 
-    const handleClose = (mode: number) => {
+    const handleClose = () => {
       setOpenSetStr(false);
+    };
+
+    const handleCloseEnd = (event: any, reason: string) => {
+      if (reason === "escapeKeyDown") handleClose();
     };
 
     const handleCloseStr = (mode: number) => {
@@ -191,10 +195,10 @@ const PointsLevel2Area = (props: {
     };
 
     return (
-      <Modal open={openSetStr} onClose={handleClose} hideBackdrop={false}>
+      <Modal open={openSetStr} onClose={handleCloseEnd} hideBackdrop={false}>
         <>
           <Box sx={styleSetInf}>
-            <Button sx={styleModalEnd} onClick={() => handleClose(0)}>
+            <Button sx={styleModalEnd} onClick={() => handleClose()}>
               <b>&#10006;</b>
             </Button>
             <Typography sx={{ textAlign: "center" }}>
@@ -204,9 +208,7 @@ const PointsLevel2Area = (props: {
             {Inputer("Прямой", valuen1, handleChange1, styleInpArg)}
             {Inputer("Обратный", valuen2, handleChange2, styleInpArg)}
             {Inputer("Описание", valuen3, handleChange3, styleInpArg)}
-            <Box sx={{ textAlign: "center" }}>
-              {" "}
-              <br />
+            <Box sx={{ textAlign: "center", marginTop: 1 }}>
               <Button sx={styleInpKnop} onClick={() => handleCloseStr(0)}>
                 <b>Сохранить</b>
               </Button>
@@ -366,6 +368,7 @@ const PointsLevel2Area = (props: {
 
       <Stack direction="row">
         <Grid item xs={3} sx={{ height: "85.8vh", border: 0 }}>
+          <Grid container sx={{ height: "20vh" }}></Grid>
           <Grid container>
             <Grid item xs={12} sx={styleXTG035}>
               {PointsLevel2AreaTab1Header()}

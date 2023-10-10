@@ -61,7 +61,7 @@ export const styleModalMenu = {
   boxShadow: 6,
   color: "black",
   marginRight: 1,
-  marginTop: 2,
+  marginTop: 1,
   textTransform: "unset !important",
 };
 //====== DatePicker =======================================================

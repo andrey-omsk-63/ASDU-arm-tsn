@@ -20,7 +20,7 @@ import { styleDatePicker, styleModalMenu } from './AppStyle';
 import { styleInpOk, styleButOk } from './AppStyle';
 import { styleEndInf, styleModalEnd } from './components/Points/grid/PointsGridStyle';
 
-const handleKey = (event: any) => {
+export const handleKey = (event: any) => {
   if (event.key === 'Enter') event.preventDefault();
 };
 

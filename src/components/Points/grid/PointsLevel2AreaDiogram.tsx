@@ -224,20 +224,37 @@ const PointsLevel2AreaDiogram = (props: {
   };
 
   const PointInfoStr = () => {
-    let resStr = [];
+    let resStr: any = [];
     const dlBlok = (window.innerWidth / 12.55) * 9;
-    let elem = points.xctrls[props.crossroad].Calculates[0];
-    let stylePointInf1 = PointInfoDirRotStyle("-1.6vh", "-64px", 21);
+    let elem = points.xctrls[props.crossroad].Calculates;
+    let stylePointInf1 = PointInfoDirRotStyle("5.2vh", "-67px", 18);
+    let mass1 = "";
+    let mass2 = "";
+    for (let i = 0; i < elem.length; i++) {
+      if (!i) {
+        mass1 = elem[i].chanL[0].toString();
+        mass2 = elem[i].chanR[0].toString();
+      } else {
+        mass1 += "," + elem[i].chanL[0].toString();
+        mass2 += "," + elem[i].chanR[0].toString();
+      }
+    }
+    //mass1 += ",4,6"; // для отладки
     resStr.push(
       <Grid key={Math.random()} item sx={stylePointInf1}>
-        <b>{elem.chanL[0]}</b>
+        Прямой {"["}
+        <b>{mass1}</b>
+        {"]"}
       </Grid>
     );
-    let ml01 = dlBlok - 63 + "px";
-    let stylePointInf2 = PointInfoDirStyle("83.8vh", ml01, 21);
+    let ml01 = dlBlok - 129 + "px";
+    let stylePointInf2 = PointInfoDirStyle("84.2vh", ml01, 16);
+    //mass2 += ",5,7"; // для отладки
     resStr.push(
       <Grid key={Math.random()} item sx={stylePointInf2}>
-        <b>{elem.chanR[0]}</b>
+        Обратный {"["}
+        <b>{mass2}</b>
+        {"]"}
       </Grid>
     );
 

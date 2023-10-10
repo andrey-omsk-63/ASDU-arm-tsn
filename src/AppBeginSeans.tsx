@@ -84,7 +84,7 @@ const BeginSeans = (props: {
             <Stack direction="column">
               <Box sx={{ textAlign: "center" }}>Выбор региона:</Box>
               {SpisRegion()}
-              <Box sx={{ marginBottom: 1 }}> </Box>
+              <Box sx={{ marginBottom: 0.5 }}> </Box>
             </Stack>
           </Box>
         </Modal>

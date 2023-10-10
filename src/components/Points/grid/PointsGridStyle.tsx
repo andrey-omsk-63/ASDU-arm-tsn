@@ -15,7 +15,7 @@ export const styleBackdropArea = {
   marginLeft: window.innerWidth * 0.274 + "px",
   marginRight: "1.7vh",
   marginTop: 11,
-  marginBottom: "4vh",
+  marginBottom: "5.5vh",
   zIndex: (theme: any) => theme.zIndex.drawer + 1,
 };
 
@@ -25,7 +25,7 @@ export const styleBackdropBaza = {
   marginLeft: window.innerWidth * 0.355 + "px",
   marginRight: "1.7vh",
   marginTop: 11,
-  marginBottom: "4vh",
+  marginBottom: "5vh",
   zIndex: (theme: any) => theme.zIndex.drawer + 1,
 };
 //====== PointsLevel2Baza =======================================================
@@ -85,12 +85,12 @@ export const styleXTG03 = {
 };
 
 export const styleXTG04 = {
-  //height: '84.4vh',
-  height: "85.8vh",
+  height: "85.7vh",
+  bgcolor: "#BBBBBB", // серый
   border: 1,
   marginLeft: 0.5,
   borderRadius: 1,
-  borderColor: "primary.main",
+  borderColor: "#BBBBBB", // серый
   boxShadow: 12,
 };
 
@@ -275,7 +275,7 @@ export const PointInfoDirStyle = (
     marginTop: mt01,
     marginLeft: ml01,
     textAlign: "right",
-    width: "111px",
+    width: "132px",
   };
   return stylePointInf;
 };
@@ -293,7 +293,7 @@ export const PointInfoDirRotStyle = (
     marginLeft: ml01,
     transform: "rotate(270deg)",
     textAlign: "right",
-    width: "108px",
+    width: "128px",
   };
   return stylePointInf;
 };
@@ -301,18 +301,20 @@ export const PointInfoDirRotStyle = (
 export const styleXTG035 = {
   bgcolor: "#F1F5FB", // светло серый
   border: 1,
-  height: "85.8vh",
+  //height: "85.8vh",
+  height: "65.8vh",
   borderRadius: 1,
   borderColor: "primary.main",
   boxShadow: 12,
 };
 
 export const styleXTG045 = {
-  //height: '84.4vh',
+  height: '85.8vh',
+  bgcolor: "#BBBBBB", // серый
   border: 1,
   marginLeft: 0.5,
   borderRadius: 1,
-  borderColor: "primary.main",
+  borderColor: "#BBBBBB", // серый
   boxShadow: 12,
 };
 
