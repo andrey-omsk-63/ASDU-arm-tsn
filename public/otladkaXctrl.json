@@ -786,7 +786,7 @@
           "Без имени_12.09.2022_10-12-57": [
             {
               "Time": 15,
-              "Value": [0, 0, 0],
+              "Value": [0.01, 0.01, 0],
               "Good": false
             },
             {
@@ -796,7 +796,7 @@
             },
             {
               "Time": 45,
-              "Value": [0, 0, 0],
+              "Value": [0, 2, 0],
               "Good": false
             },
             {
@@ -2843,6 +2843,1553 @@
           ]
         },
         "devices": [437752, 270106]
+      },
+      {
+        "region": 1,
+        "area": 1,
+        "subarea": 11,
+        "switch": true,
+        "release": true,
+        "use": false,
+        "yellow": {
+          "make": true,
+          "start": 1120,
+          "stop": 390
+        },
+        "step": 10,
+        "ltime": 300,
+        "pkcalc": 0,
+        "pknow": 0,
+        "pklast": 0,
+        "status": [],
+        "xctrls": [
+          {
+            "name": "Байкальская",
+            "left": 2500,
+            "right": 2500,
+            "status": [],
+            "StrategyA": [],
+            "StrategyB": [
+              {
+                "xleft": 230,
+                "xright": 400,
+                "vleft": 0,
+                "vright": 0,
+                "pkl": 5,
+                "pks": 5,
+                "pkr": 5,
+                "desc": ""
+              },
+              {
+                "xleft": 800,
+                "xright": 850,
+                "vleft": 0,
+                "vright": 0,
+                "pkl": 3,
+                "pks": 3,
+                "pkr": 3,
+                "desc": ""
+              },
+              {
+                "xleft": 1450,
+                "xright": 1800,
+                "vleft": 0.87,
+                "vright": 1.55,
+                "pkl": 4,
+                "pks": 3,
+                "pkr": 2,
+                "desc": ""
+              },
+              {
+                "xleft": 2500,
+                "xright": 2500,
+                "vleft": 0.7,
+                "vright": 1.25,
+                "pkl": 4,
+                "pks": 7,
+                "pkr": 2,
+                "desc": ""
+              }
+            ],
+            "Calculates": [
+              {
+                "region": 1,
+                "area": 1,
+                "id": 13,
+                "chanL": [1],
+                "chanR": [2]
+              }
+            ]
+          }
+        ],
+        "ext": [
+          [1, 1],
+          [2, 2],
+          [3, 3],
+          [4, 4],
+          [5, 5],
+          [6, 6],
+          [7, 7],
+          [8, 8],
+          [9, 9],
+          [10, 10],
+          [11, 11],
+          [12, 12]
+        ],
+        "prioryty": [
+          [1, 2, 3],
+          [4, 5, 6],
+          [7, 8, 9],
+          [10, 11, 12]
+        ],
+        "time": 300,
+        "results": {
+          "result": [
+            {
+              "Time": 10,
+              "Value": [0, 0],
+              "Good": true
+            },
+            {
+              "Time": 20,
+              "Value": [0, 0],
+              "Good": true
+            },
+            {
+              "Time": 30,
+              "Value": [0, 0],
+              "Good": true
+            },
+            {
+              "Time": 40,
+              "Value": [0, 0],
+              "Good": true
+            },
+            {
+              "Time": 50,
+              "Value": [0, 0],
+              "Good": true
+            },
+            {
+              "Time": 60,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 70,
+              "Value": [0, 0],
+              "Good": true
+            },
+            {
+              "Time": 80,
+              "Value": [0, 0],
+              "Good": true
+            },
+            {
+              "Time": 90,
+              "Value": [0, 0],
+              "Good": true
+            },
+            {
+              "Time": 100,
+              "Value": [0, 0],
+              "Good": true
+            },
+            {
+              "Time": 110,
+              "Value": [0, 0],
+              "Good": true
+            },
+            {
+              "Time": 120,
+              "Value": [0, 0],
+              "Good": true
+            },
+            {
+              "Time": 130,
+              "Value": [0, 0],
+              "Good": true
+            },
+            {
+              "Time": 140,
+              "Value": [0, 0],
+              "Good": true
+            },
+            {
+              "Time": 150,
+              "Value": [0, 0],
+              "Good": true
+            },
+            {
+              "Time": 160,
+              "Value": [0, 0],
+              "Good": true
+            },
+            {
+              "Time": 170,
+              "Value": [0, 0],
+              "Good": true
+            },
+            {
+              "Time": 180,
+              "Value": [0, 0],
+              "Good": true
+            },
+            {
+              "Time": 190,
+              "Value": [0, 0],
+              "Good": true
+            },
+            {
+              "Time": 200,
+              "Value": [0, 0],
+              "Good": true
+            },
+            {
+              "Time": 210,
+              "Value": [0, 0],
+              "Good": true
+            },
+            {
+              "Time": 220,
+              "Value": [0, 0],
+              "Good": true
+            },
+            {
+              "Time": 230,
+              "Value": [0, 0],
+              "Good": true
+            },
+            {
+              "Time": 240,
+              "Value": [0, 0],
+              "Good": true
+            },
+            {
+              "Time": 250,
+              "Value": [0, 0],
+              "Good": true
+            },
+            {
+              "Time": 260,
+              "Value": [0, 0],
+              "Good": true
+            },
+            {
+              "Time": 270,
+              "Value": [0, 0],
+              "Good": true
+            },
+            {
+              "Time": 280,
+              "Value": [0, 0],
+              "Good": true
+            },
+            {
+              "Time": 290,
+              "Value": [0, 0],
+              "Good": true
+            },
+            {
+              "Time": 300,
+              "Value": [0, 0],
+              "Good": true
+            },
+            {
+              "Time": 310,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 320,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 330,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 340,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 350,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 360,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 370,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 380,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 390,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 400,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 410,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 420,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 430,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 440,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 450,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 460,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 470,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 480,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 490,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 500,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 510,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 520,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 530,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 540,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 550,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 560,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 570,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 580,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 590,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 600,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 610,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 620,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 630,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 640,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 650,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 660,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 670,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 680,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 690,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 700,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 710,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 720,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 730,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 740,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 750,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 760,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 770,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 780,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 790,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 800,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 810,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 820,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 830,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 840,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 850,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 860,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 870,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 880,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 890,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 900,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 910,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 920,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 930,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 940,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 950,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 960,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 970,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 980,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 990,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1000,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1010,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1020,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1030,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1040,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1050,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1060,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1070,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1080,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1090,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1100,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1110,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1120,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1130,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1140,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1150,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1160,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1170,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1180,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1190,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1200,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1210,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1220,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1230,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1240,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1250,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1260,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1270,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1280,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1290,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1300,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1310,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1320,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1330,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1340,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1350,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1360,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1370,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1380,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1390,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1400,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1410,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1420,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1430,
+              "Value": [0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1440,
+              "Value": [0, 0],
+              "Good": false
+            }
+          ],
+          "Байкальская": [
+            {
+              "Time": 10,
+              "Value": [96, 216, 0],
+              "Good": true
+            },
+            {
+              "Time": 20,
+              "Value": [18, 186, 0],
+              "Good": true
+            },
+            {
+              "Time": 30,
+              "Value": [48, 180, 0],
+              "Good": true
+            },
+            {
+              "Time": 40,
+              "Value": [30, 138, 0],
+              "Good": true
+            },
+            {
+              "Time": 50,
+              "Value": [48, 192, 0],
+              "Good": true
+            },
+            {
+              "Time": 60,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 70,
+              "Value": [0, 0, 0],
+              "Good": true
+            },
+            {
+              "Time": 80,
+              "Value": [0, 78, 0],
+              "Good": true
+            },
+            {
+              "Time": 90,
+              "Value": [18, 84, 0],
+              "Good": true
+            },
+            {
+              "Time": 100,
+              "Value": [18, 90, 0],
+              "Good": true
+            },
+            {
+              "Time": 110,
+              "Value": [12, 90, 0],
+              "Good": true
+            },
+            {
+              "Time": 120,
+              "Value": [18, 54, 0],
+              "Good": true
+            },
+            {
+              "Time": 130,
+              "Value": [12, 72, 0],
+              "Good": true
+            },
+            {
+              "Time": 140,
+              "Value": [18, 60, 0],
+              "Good": true
+            },
+            {
+              "Time": 150,
+              "Value": [30, 66, 0],
+              "Good": true
+            },
+            {
+              "Time": 160,
+              "Value": [0, 96, 0],
+              "Good": true
+            },
+            {
+              "Time": 170,
+              "Value": [12, 84, 0],
+              "Good": true
+            },
+            {
+              "Time": 180,
+              "Value": [0, 72, 0],
+              "Good": true
+            },
+            {
+              "Time": 190,
+              "Value": [6, 48, 0],
+              "Good": true
+            },
+            {
+              "Time": 200,
+              "Value": [6, 60, 0],
+              "Good": true
+            },
+            {
+              "Time": 210,
+              "Value": [0, 54, 0],
+              "Good": true
+            },
+            {
+              "Time": 220,
+              "Value": [18, 54, 0],
+              "Good": true
+            },
+            {
+              "Time": 230,
+              "Value": [18, 30, 0],
+              "Good": true
+            },
+            {
+              "Time": 240,
+              "Value": [0, 30, 0],
+              "Good": true
+            },
+            {
+              "Time": 250,
+              "Value": [0, 48, 0],
+              "Good": true
+            },
+            {
+              "Time": 260,
+              "Value": [24, 24, 0],
+              "Good": true
+            },
+            {
+              "Time": 270,
+              "Value": [6, 42, 0],
+              "Good": true
+            },
+            {
+              "Time": 280,
+              "Value": [6, 36, 0],
+              "Good": true
+            },
+            {
+              "Time": 290,
+              "Value": [12, 78, 0],
+              "Good": true
+            },
+            {
+              "Time": 300,
+              "Value": [6, 42, 0],
+              "Good": true
+            },
+            {
+              "Time": 310,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 320,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 330,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 340,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 350,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 360,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 370,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 380,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 390,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 400,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 410,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 420,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 430,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 440,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 450,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 460,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 470,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 480,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 490,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 500,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 510,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 520,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 530,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 540,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 550,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 560,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 570,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 580,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 590,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 600,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 610,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 620,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 630,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 640,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 650,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 660,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 670,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 680,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 690,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 700,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 710,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 720,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 730,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 740,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 750,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 760,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 770,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 780,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 790,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 800,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 810,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 820,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 830,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 840,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 850,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 860,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 870,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 880,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 890,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 900,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 910,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 920,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 930,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 940,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 950,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 960,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 970,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 980,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 990,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1000,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1010,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1020,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1030,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1040,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1050,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1060,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1070,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1080,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1090,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1100,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1110,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1120,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1130,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1140,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1150,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1160,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1170,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1180,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1190,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1200,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1210,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1220,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1230,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1240,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1250,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1260,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1270,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1280,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1290,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1300,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1310,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1320,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1330,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1340,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1350,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1360,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1370,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1380,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1390,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1400,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1410,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1420,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1430,
+              "Value": [0, 0, 0],
+              "Good": false
+            },
+            {
+              "Time": 1440,
+              "Value": [0, 0, 0],
+              "Good": false
+            }
+          ]
+        },
+        "devices": [145717, 322701]
       }
     ]
   }
