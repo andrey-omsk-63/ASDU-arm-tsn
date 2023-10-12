@@ -65,8 +65,6 @@ const PointsLevel2BazaDiogram = (props: {
   const horizon = points.xctrls[crRoad].right;
   const vertical = points.xctrls[crRoad].left;
 
-
-
   const steepHorizon = 12 / horizon;
   //const steepVertical = 85.7 / vertical;
   const steepVertical = 85.9 / vertical;
@@ -75,7 +73,7 @@ const PointsLevel2BazaDiogram = (props: {
 
   let matrix: string[][] = [[]];
 
-  let scale = horizon> 999 || vertical> 999 ? 4 : 1;
+  let scale = horizon > 999 || vertical > 999 ? 4 : 1;
   let coler = "red";
   let colerOld = "";
   let masStr: any = [];
@@ -111,9 +109,9 @@ const PointsLevel2BazaDiogram = (props: {
         ratio = pStB[num].xright / pStB[num].xleft;
         coler = colorsGraf[num * 3];
         //if (luchP !== 1 || luchO !== 1) {
-          if (i < j * luchO * ratio) coler = colorsGraf[num * 3 + 1];
-          if (i > j * luchP * ratio) coler = colorsGraf[num * 3 + 2];
-          //if (i >= j * luchP * ratio) coler = colorsGraf[num * 3 + 2];
+        if (i < j * luchO * ratio) coler = colorsGraf[num * 3 + 1];
+        if (i > j * luchP * ratio) coler = colorsGraf[num * 3 + 2];
+        //if (i >= j * luchP * ratio) coler = colorsGraf[num * 3 + 2];
         //}
       };
 

@@ -122,6 +122,8 @@ const PointsMainScrGrid3 = (props: {
       setValuen3(Math.abs(form));
     };
 
+    const hBlur = () => {};
+
     return (
       <Modal open={openSetStr} onClose={handleClose} hideBackdrop={false}>
         <Box sx={styleSetInf}>
@@ -132,9 +134,9 @@ const PointsMainScrGrid3 = (props: {
             Номер записи <b> {nom + 1} </b>
           </Typography>{" "}
           <br />
-          {Inputer("« 0 »", valuen1, handleChange1, styleInpArg)}
-          {Inputer("« 1 »", valuen2, handleChange2, styleInpArg)}
-          {Inputer("« 2 »", valuen3, handleChange3, styleInpArg)}
+          {Inputer("« 0 »", valuen1, handleChange1, hBlur, styleInpArg)}
+          {Inputer("« 1 »", valuen2, handleChange2, hBlur, styleInpArg)}
+          {Inputer("« 2 »", valuen3, handleChange3, hBlur, styleInpArg)}
           {SaveFunc(handleCloseStr)}
         </Box>
       </Modal>

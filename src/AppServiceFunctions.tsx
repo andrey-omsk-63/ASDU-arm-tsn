@@ -301,7 +301,7 @@ export const BadInput = (
   );
 };
 
-export const BoxTextField = (argum: any, hChange: any) => {
+export const BoxTextField = (argum: any, hChange: any, hBlur: any) => {
   return (
     <TextField
       size="small"
@@ -312,6 +312,7 @@ export const BoxTextField = (argum: any, hChange: any) => {
       }}
       value={argum}
       onChange={hChange}
+      onBlur={hBlur}
       variant="standard"
     />
   );
@@ -321,6 +322,7 @@ export const Inputer = (
   name: string,
   argum: any,
   hChange: any,
+  hBlur: any,
   styleX: any
 ) => {
   return (
@@ -329,7 +331,7 @@ export const Inputer = (
         {name}
       </Grid>
       <Grid item xs>
-        <Box sx={styleX}>{BoxTextField(argum, hChange)}</Box>
+        <Box sx={styleX}>{BoxTextField(argum, hChange, hBlur)}</Box>
       </Grid>
     </Grid>
   );

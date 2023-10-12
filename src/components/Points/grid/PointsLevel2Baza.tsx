@@ -162,19 +162,29 @@ const PointsLevel2Baza = (props: {
       return true;
     };
 
-    const handleChange1 = (event: any) => {
+    const hChange1 = (event: any) => {
       let form = event.target.value.trimStart(); // удаление пробелов в начале строки
       setValuen1(form);
     };
 
-    const handleChange2 = (event: any) => {
+    const hChange2 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
-      EvilInput(form, minLeft) && form && setValuen2(Math.abs(form));
+      //EvilInput(form, minLeft) && form && setValuen2(Math.abs(form));
+      form && setValuen2(Math.abs(form));
     };
 
-    const handleChange3 = (event: any) => {
+    const hBlur2 = () => {
+      !EvilInput(valuen2, minLeft) && setValuen2(maxLeft);
+    };
+
+    const hChange3 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
-      EvilInput(form, minRight) && form && setValuen3(Math.abs(form));
+      //EvilInput(form, minRight) && form && setValuen3(Math.abs(form));
+      form && setValuen3(Math.abs(form));
+    };
+
+    const hBlur3 = () => {
+      !EvilInput(valuen3, minRight) && setValuen3(maxRight);
     };
 
     const handleChange5 = (event: any) => {
@@ -296,12 +306,14 @@ const PointsLevel2Baza = (props: {
       );
     };
 
+    const hBlur = () => {};
+
     const FuncStart = () => {
       return (
         <Box sx={styleInpTime}>
-          {BoxTextField(valuen5, handleChange5)}
+          {BoxTextField(valuen5, handleChange5, hBlur)}
           {" : "}
-          {BoxTextField(valuen6, handleChange6)}
+          {BoxTextField(valuen6, handleChange6, hBlur)}
         </Box>
       );
     };
@@ -309,9 +321,9 @@ const PointsLevel2Baza = (props: {
     const FuncStop = () => {
       return (
         <Box sx={styleInpTime}>
-          {BoxTextField(valuen7, handleChange7)}
+          {BoxTextField(valuen7, handleChange7, hBlur)}
           {" : "}
-          {BoxTextField(valuen8, handleChange8)}
+          {BoxTextField(valuen8, handleChange8, hBlur)}
         </Box>
       );
     };
@@ -323,9 +335,15 @@ const PointsLevel2Baza = (props: {
             <Button sx={styleModalEnd} onClick={handleCloseEnd}>
               <b>&#10006;</b>
             </Button>
-            {Inputer("Наименование ХТ", valuen1, handleChange1, styleInpName)}
-            {Inputer("Максимум прямого", valuen2, handleChange2, styleInpArg)}
-            {Inputer("Максимум обратного", valuen3, handleChange3, styleInpArg)}
+            {Inputer("Наименование ХТ", valuen1, hChange1, hBlur, styleInpName)}
+            {Inputer("Максимум прямого", valuen2, hChange2, hBlur2, styleInpArg)}
+            {Inputer(
+              "Максимум обратного",
+              valuen3,
+              hChange3,
+              hBlur3,
+              styleInpArg
+            )}
             {InputTimeAndMode("Работа по НК и СК", InputerMode)}
             {InputTimeAndMode("Начало", FuncStart)}
             {InputTimeAndMode("Конец", FuncStop)}
@@ -409,12 +427,21 @@ const PointsLevel2Baza = (props: {
 
     const handleChange1 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
-      EvilInput(form, max1, min1) && form && setValuen1(Math.abs(form));
+      form && setValuen1(Math.abs(form));
+    };
+
+    const hBlur1 = () => {
+      !EvilInput(valuen1, max1, min1) && setValuen1(elem.xleft);
     };
 
     const handleChange2 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
-      EvilInput(form, max2, min2) && form && setValuen2(Math.abs(form));
+      //EvilInput(form, max2, min2) && form && setValuen2(Math.abs(form));
+      form && setValuen2(Math.abs(form));
+    };
+
+    const hBlur2 = () => {
+      !EvilInput(valuen2, max2, min2) && setValuen2(elem.xright);
     };
 
     const handleChange3 = (event: any) => {
@@ -448,6 +475,8 @@ const PointsLevel2Baza = (props: {
       setValuen8(form);
     };
 
+    const hBlur = () => {};
+
     return (
       <Modal open={openSetStr} onClose={handleClose} hideBackdrop={false}>
         <>
@@ -459,14 +488,14 @@ const PointsLevel2Baza = (props: {
               Номер записи <b> {props.nom} </b>
             </Typography>
             <br />
-            {Inputer("Прямой", valuen1, handleChange1, styleInpArg)}
-            {Inputer("Обратный", valuen2, handleChange2, styleInpArg)}
-            {Inputer("КСП", valuen3, handleChange3, styleInpArg)}
-            {Inputer("КСС", valuen4, handleChange4, styleInpArg)}
-            {Inputer("КСО", valuen5, handleChange5, styleInpArg)}
-            {Inputer("Луч П", valuen6, handleChange6, styleInpArg)}
-            {Inputer("Луч О", valuen7, handleChange7, styleInpArg)}
-            {Inputer("Описание", valuen8, handleChange8, styleInpArg)}
+            {Inputer("Прямой", valuen1, handleChange1, hBlur1, styleInpArg)}
+            {Inputer("Обратный", valuen2, handleChange2, hBlur2, styleInpArg)}
+            {Inputer("КСП", valuen3, handleChange3, hBlur, styleInpArg)}
+            {Inputer("КСС", valuen4, handleChange4, hBlur, styleInpArg)}
+            {Inputer("КСО", valuen5, handleChange5, hBlur, styleInpArg)}
+            {Inputer("Луч П", valuen6, handleChange6, hBlur, styleInpArg)}
+            {Inputer("Луч О", valuen7, handleChange7, hBlur, styleInpArg)}
+            {Inputer("Описание", valuen8, handleChange8, hBlur, styleInpArg)}
             {SaveFunc(handleCloseStr)}
           </Box>
           {badInput && <>{BadInput(badInput, setBadInput, soobError)}</>}

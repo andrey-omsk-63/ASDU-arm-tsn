@@ -66,6 +66,7 @@ const PointsLevel2AreaDiogram = (props: {
   const steepVertical = 85.6 / vertical;
   let matrix: string[][] = [[]];
   let scale = points.xctrls[crRoad].StrategyA.length > 4 ? 2 : 1;
+  scale = horizon > 999 || vertical > 999 ? 4 : scale;
 
   let coler = "red";
   let colerOld = "";
