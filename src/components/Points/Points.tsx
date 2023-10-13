@@ -82,8 +82,6 @@ const Points = (props: {
 
   if (isOpen) pointsEtalon = points; // замена проверки обновления - проверка теперь в App
 
-  //console.log('1PointsGl:', debug, props.date, oldDate, oldXt, tekValue);
-
   if (props.date !== tekDate) {
     if (props.date !== oldDate || oldXt !== tekValue) {
       if (debug) {
@@ -139,7 +137,7 @@ const Points = (props: {
           bgcolor: "#BAE186", // тёмно-салатовый
           border: "1px solid #000",
           borderColor: "#93D145", // ярко-салатовый
-          boxShadow: '6px -6px 6px #d4d4d4',
+          boxShadow: "6px -6px 6px #d4d4d4",
           color: "black",
           marginRight: 1,
         };

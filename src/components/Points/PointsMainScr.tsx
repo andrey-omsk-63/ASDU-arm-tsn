@@ -166,7 +166,8 @@ const PointsMainScr = (props: {
         {(maskpoint.redaxPoint || flagEdit) && !datestat.needSave && (
           <>{WorkMenuEditMain(9, "Редактирование", StartEdit)}</>
         )}
-        {flagExit && datestat.needSave && (
+        {/* {flagExit && datestat.needSave && ( */}
+        {flagExit  && (
           <>{WorkMenuEditMain(9, "Выйти без cохранения", StopEdit)}</>
         )}
         <Grid container>

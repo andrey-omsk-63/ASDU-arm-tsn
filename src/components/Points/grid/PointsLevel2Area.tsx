@@ -60,7 +60,7 @@ const PointsLevel2Area = (props: {
   const [openSetStr, setOpenSetStr] = React.useState(false);
   const [points, setPoints] = React.useState(pointsEt);
   const [trigger, setTrigger] = React.useState(false);
-  //Макс
+
   if (xtPropsOld !== xtProps || crossRoadOld !== crossRoad) {
     pointGraf = props.xctrll;
     xtPropsOld = xtProps;
@@ -100,7 +100,13 @@ const PointsLevel2Area = (props: {
     if (event.key === "Enter") event.preventDefault();
   };
 
-  const Inputer = (name: string, argum: any, hChange: any, styleX: any) => {
+  const Inputer = (
+    name: string,
+    argum: any,
+    hChange: any,
+    hBlur: any,
+    styleX: any
+  ) => {
     return (
       <Grid container sx={{ fontSize: 15 }}>
         <Grid item xs={5} sx={{ marginTop: 1 }}>
@@ -114,6 +120,7 @@ const PointsLevel2Area = (props: {
               InputProps={{ disableUnderline: true, style: { fontSize: 14 } }}
               value={argum}
               onChange={hChange}
+              onBlur={hBlur}
               variant="standard"
             />
           </Box>
@@ -181,18 +188,30 @@ const PointsLevel2Area = (props: {
 
     const handleChange1 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
-      EvilInput(form, max1, min1) && form && setValuen1(Math.abs(form));
+      //EvilInput(form, max1, min1) && form && setValuen1(Math.abs(form));
+      form && setValuen1(Math.abs(form));
+    };
+
+    const hBlur1 = () => {
+      !EvilInput(valuen1, max1, min1) && setValuen1(elem.xleft);
     };
 
     const handleChange2 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
-      EvilInput(form, max2, min2) && form && setValuen2(Math.abs(form));
+      //EvilInput(form, max2, min2) && form && setValuen2(Math.abs(form));
+      form && setValuen2(Math.abs(form));
+    };
+
+    const hBlur2 = () => {
+      !EvilInput(valuen2, max2, min2) && setValuen2(elem.xright);
     };
 
     const handleChange3 = (event: any) => {
       let form = event.target.value.trimStart(); // удаление пробелов в начале строки
       setValuen3(form);
     };
+
+    const hBlur = () => {};
 
     return (
       <Modal open={openSetStr} onClose={handleCloseEnd} hideBackdrop={false}>
@@ -205,9 +224,9 @@ const PointsLevel2Area = (props: {
               КС <b> &nbsp;{elem.pk} </b>
             </Typography>{" "}
             <br />
-            {Inputer("Прямой", valuen1, handleChange1, styleInpArg)}
-            {Inputer("Обратный", valuen2, handleChange2, styleInpArg)}
-            {Inputer("Описание", valuen3, handleChange3, styleInpArg)}
+            {Inputer("Прямой", valuen1, handleChange1, hBlur1, styleInpArg)}
+            {Inputer("Обратный", valuen2, handleChange2, hBlur2, styleInpArg)}
+            {Inputer("Описание", valuen3, handleChange3, hBlur, styleInpArg)}
             <Box sx={{ textAlign: "center", marginTop: 1 }}>
               <Button sx={styleInpKnop} onClick={() => handleCloseStr(0)}>
                 <b>Сохранить</b>

@@ -362,7 +362,6 @@ const PointsLevel2Baza = (props: {
     let max2 = props.nom < StrB.length - 1 ? StrB[props.nom + 1].xright : 0;
     let min1 = props.nom ? StrB[props.nom - 1].xleft : 0;
     let min2 = props.nom ? StrB[props.nom - 1].xright : 0;
-
     const [valuen1, setValuen1] = React.useState(elem.xleft);
     const [valuen2, setValuen2] = React.useState(elem.xright);
     const [valuen3, setValuen3] = React.useState(elem.pkl);
