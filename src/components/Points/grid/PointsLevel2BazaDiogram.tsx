@@ -19,6 +19,7 @@ let pointsOld: any = [];
 let phGl = -1;
 let pvGl = -1;
 let IDX = -1;
+let massRatio: Array<number> = [];
 
 const PointsLevel2BazaDiogram = (props: {
   xctrll: XctrlInfo[];
@@ -69,16 +70,21 @@ const PointsLevel2BazaDiogram = (props: {
   //const steepVertical = 85.7 / vertical;
   const steepVertical = 85.9 / vertical;
   const dlBlok = (window.innerWidth / 12.55) * 8;
-  //console.log('!!!:',vertical,steepVertical)
 
   let matrix: string[][] = [[]];
-
   let scale = horizon > 999 || vertical > 999 ? 4 : 1;
   let coler = "red";
   let colerOld = "";
   let masStr: any = [];
   let masCol: any = [];
   let colBl = 0;
+
+  massRatio = [];
+  for (let i = 0; i < dlMas; i++) {
+    let vert = points.xctrls[crRoad].StrategyB[i].xleft; // прямое
+    let hor = points.xctrls[crRoad].StrategyB[i].xright; // обратное
+    massRatio.push(vert / hor);
+  }
 
   if (
     xtPropsOld !== props.xtt ||
@@ -104,17 +110,21 @@ const PointsLevel2BazaDiogram = (props: {
       let pStB = points.xctrls[crRoad].StrategyB;
 
       const MakeMatrixColor = (num: number, i: number, j: number) => {
-        luchO = pStB[num].vleft;
-        luchP = pStB[num].vright;
+        // luchO = pStB[num].vleft;
+        // luchP = pStB[num].vright;
+        luchO = pStB[num].vleft * massRatio[num];
+        luchP = pStB[num].vright * massRatio[num];
         ratio = pStB[num].xright / pStB[num].xleft;
-        coler = colorsGraf[num * 3];
+        ///coler = colorsGraf[num * 3];
+        coler = colorsGraf[pStB[num].pks];
         //if (luchP !== 1 || luchO !== 1) {
-        if (i < j * luchO * ratio) coler = colorsGraf[num * 3 + 1];
-        if (i > j * luchP * ratio) coler = colorsGraf[num * 3 + 2];
+        ///if (i < j * luchO * ratio) coler = colorsGraf[num * 3 + 1];
+        ///if (i > j * luchP * ratio) coler = colorsGraf[num * 3 + 2];
+        if (i < j * luchO * ratio) coler = colorsGraf[pStB[num].pkl];
+        if (i >= j * luchP * ratio) coler = colorsGraf[pStB[num].pkr];
         //if (i >= j * luchP * ratio) coler = colorsGraf[num * 3 + 2];
         //}
       };
-
       for (let j = 0; j < vertical; j += scale) {
         matrix[j] = [];
         for (let i = 0; i < horizon; i += scale) {

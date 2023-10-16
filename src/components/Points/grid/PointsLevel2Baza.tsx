@@ -460,7 +460,6 @@ const PointsLevel2Baza = (props: {
 
     const handleChange6 = (event: any) => {
       let form = event.target.value.trimStart(); // удаление пробелов в начале строки
-      console.log("form:", form, typeof form, Number(form));
       setValuen6(form);
     };
 
@@ -689,7 +688,7 @@ const PointsLevel2Baza = (props: {
       {(maskpoint.redaxPoint || flagEdit) && (
         <>{WorkMenuEdit(9, "Редактирование", StartEdit)}</>
       )}
-      {flagExit && <>{WorkMenuEdit(9, "Выйти без cохранения", StopEdit)}</>}
+      {flagExit && <>{WorkMenuEdit(9, "Выйти без сохранения", StopEdit)}</>}
 
       <Stack direction="row">
         <Grid item xs={4} sx={{ height: "85.8vh", border: 0 }}>
