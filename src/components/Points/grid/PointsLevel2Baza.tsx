@@ -228,7 +228,7 @@ const PointsLevel2Baza = (props: {
       let timeStart = Number(valuen5) * 60 + Number(valuen6);
       pointRab.yellow.start = timeStart;
       let timeStop = Number(valuen7) * 60 + Number(valuen8);
-      if (timeStop < timeStart) timeStop = timeStart;
+      //if (timeStop < timeStart) timeStop = timeStart;
       pointRab.yellow.stop = timeStop;
       setPoints(pointRab);
       maskpoint.pointForRedax = pointRab;
