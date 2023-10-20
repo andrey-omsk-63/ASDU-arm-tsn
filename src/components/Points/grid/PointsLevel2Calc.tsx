@@ -226,18 +226,28 @@ const PointsLevel2Calc = (props: {
 
     if (pointer !== null) {
       if (pointer[namer]) {
+        console.log("!!!!!!:", points.yellow);
         for (let i = 0; i < pointer[namer].length; i++) {
+          kakchestvo = "";
+          pusto = true;
           if (!pointer[namer][i].Good) {
             pusto = true;
             kakchestvo = "Работа по СК";
           }
           let tim = pointer[namer][i].Time;
+
           if (
-            !points.yellow.make &&
+            points.yellow.make &&
             tim >= points.yellow.start &&
             tim <= points.yellow.stop
           )
             kakchestvo = "Работа по НК и СК";
+          //====== переход через 24:00 ======
+          if (points.yellow.start > points.yellow.stop && points.yellow.make) {
+            if (tim <= points.yellow.stop || tim >= points.yellow.start)
+              kakchestvo = "Работа по НК и СК";
+          }
+
           if (datestat.xttData === MakeDate(new Date())) {
             // работа в тек.сутки
             let tekTim = new Date().getHours() * 60 + new Date().getMinutes();
@@ -246,6 +256,7 @@ const PointsLevel2Calc = (props: {
               kakchestvo = "";
             }
           }
+
           if (!pointer[namer][i].Value[0] && !pointer[namer][i].Value[1]) {
             pusto = false;
             kakchestvo = "";

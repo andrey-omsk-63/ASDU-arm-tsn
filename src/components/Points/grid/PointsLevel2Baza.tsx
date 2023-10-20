@@ -92,6 +92,7 @@ const PointsLevel2Baza = (props: {
     flagEdit = true;
     flagExit = false;
     pointsTemp = pointsEt;
+    console.log('pointsEt:',pointsEt)
     setFormName(pointsEt.xctrls[crossRoad].name);
     setMaxLeft(pointsEt.xctrls[crossRoad].left);
     setMaxRight(pointsEt.xctrls[crossRoad].right);
@@ -189,25 +190,25 @@ const PointsLevel2Baza = (props: {
 
     const handleChange5 = (event: any) => {
       let form = event.target.value.trimStart(); // удаление пробелов в начале строки
-      if (Math.abs(form) && Number(form) < 24)
+      if ( Number(form) < 24)
         setValuen5(Math.abs(form).toString());
     };
 
     const handleChange6 = (event: any) => {
       let form = event.target.value.trimStart(); // удаление пробелов в начале строки
-      if (Math.abs(form) && Number(form) < 60)
+      if ( Number(form) < 60)
         setValuen6(Math.abs(form).toString());
     };
 
     const handleChange7 = (event: any) => {
       let form = event.target.value.trimStart(); // удаление пробелов в начале строки
-      if (Math.abs(form) && Number(form) < 24)
+      if ( Number(form) < 24)
         setValuen7(Math.abs(form).toString());
     };
 
     const handleChange8 = (event: any) => {
       let form = event.target.value.trimStart(); // удаление пробелов в начале строки
-      if (Math.abs(form) && Number(form) < 60)
+      if ( Number(form) < 60)
         setValuen8(Math.abs(form).toString());
     };
 
@@ -228,10 +229,13 @@ const PointsLevel2Baza = (props: {
       let timeStart = Number(valuen5) * 60 + Number(valuen6);
       pointRab.yellow.start = timeStart;
       let timeStop = Number(valuen7) * 60 + Number(valuen8);
-      //if (timeStop < timeStart) timeStop = timeStart;
+      //if (timeStop < timeStart) timeStop = timeStart; //!!!!!!
       pointRab.yellow.stop = timeStop;
       setPoints(pointRab);
       maskpoint.pointForRedax = pointRab;
+
+      console.log('###:', pointRab)
+
       pointsEt = pointRab;
       setFormName(valuen1);
       setMaxLeft(valuen2);
@@ -260,7 +264,7 @@ const PointsLevel2Baza = (props: {
         setValuen4(Number(event.target.value));
       };
 
-      let dat = ["Вкл", "Выкл"];
+      let dat = ["Выкл", "Вкл"];
       let massKey = [];
       let massDat: any[] = [];
       const currencies: any = [];
@@ -336,7 +340,13 @@ const PointsLevel2Baza = (props: {
               <b>&#10006;</b>
             </Button>
             {Inputer("Наименование ХТ", valuen1, hChange1, hBlur, styleInpName)}
-            {Inputer("Максимум прямого", valuen2, hChange2, hBlur2, styleInpArg)}
+            {Inputer(
+              "Максимум прямого",
+              valuen2,
+              hChange2,
+              hBlur2,
+              styleInpArg
+            )}
             {Inputer(
               "Максимум обратного",
               valuen3,
@@ -514,7 +524,9 @@ const PointsLevel2Baza = (props: {
   const PointsLevel2BazaTab1 = () => {
     let name = formName.slice(0, 29);
     let yellowSoob = "Выкл с ";
-    if (!maskpoint.pointForRedax.yellow.make) yellowSoob = "Вкл с ";
+    //====================================================================
+    //if (!maskpoint.pointForRedax.yellow.make) yellowSoob = "Вкл с ";
+    if (maskpoint.pointForRedax.yellow.make) yellowSoob = "Вкл с ";
     yellowSoob +=
       TimeStr(maskpoint.pointForRedax.yellow.start) +
       " до " +
