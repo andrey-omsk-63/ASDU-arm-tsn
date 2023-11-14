@@ -219,12 +219,12 @@ const StatisticXTNew = (props: {
   //=========================================================================
   const styleSt03 = {
     //textIndent: 6,
-    borderRight: 1,
-    borderBottom: 1,
+    borderRight: "1px solid #d4d4d4", // серый,
+    borderBottom: "1px solid #d4d4d4", // серый,
     fontSize: 11,
     lineHeight: 2,
     backgroundColor: colorStat,
-    borderColor: "primary.main",
+    //borderColor: "primary.main",
     textAlign: "center",
   };
 

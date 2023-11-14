@@ -29,29 +29,29 @@ export const colorsGraf = [
 
 export const styleSt02 = {
   textIndent: 6,
-  borderRight: 1,
-  borderBottom: 1,
+  borderRight: "1px solid #d4d4d4", // серый
+  borderBottom: "1px solid #d4d4d4", // серый
   fontSize: 11,
   lineHeight: 2,
-  borderColor: "primary.main",
+  //borderColor: "primary.main",
 };
 
 export const styleSt03 = {
   textIndent: 6,
-  borderRight: 1,
-  borderBottom: 1,
+  borderRight: "1px solid #d4d4d4", // серый
+  borderBottom: "1px solid #d4d4d4", // серый
   fontSize: 11,
   lineHeight: 2,
   backgroundColor: "#E6EEF5", // голубой
   //backgroundColor: "#E7F9EB", //зелёный
-  borderColor: "primary.main",
+  //borderColor: "primary.main",
   textAlign: "center",
 };
 
 export const styleSt04 = {
   //textIndent: 6,
-  borderRight: 1,
-  borderBottom: 1,
+  borderRight: "1px solid #d4d4d4", // серый
+  borderBottom: "1px solid #d4d4d4", // серый
   fontSize: 11,
   lineHeight: 2,
   backgroundColor: "#FF80C0", // розовый
@@ -60,9 +60,9 @@ export const styleSt04 = {
 };
 
 export const styleSt05 = {
-  borderRight: 1,
-  borderBottom: 1,
-  borderColor: "primary.main",
+  borderRight: "1px solid #d4d4d4", // серый
+  borderBottom: "1px solid #d4d4d4", // серый
+  //borderColor: "primary.main",
   fontSize: 11,
   textAlign: "center",
   lineHeight: 2,
@@ -70,19 +70,16 @@ export const styleSt05 = {
 
 export const styleSt06 = {
   textIndent: 6,
-  // border: 1,
-  // borderTop: 0,
-  // borderLeft: 0,
-  borderRight: 1,
-  borderBottom: 1,
+  borderRight: "1px solid #d4d4d4", // серый
+  borderBottom: "1px solid #d4d4d4", // серый
   lineHeight: 2,
   fontSize: 11,
-  borderColor: "primary.main",
+  //borderColor: "primary.main",
 };
 
 export const styleHeader03 = {
-  borderBottom: 1,
-  borderColor: "primary.main",
+  borderBottom: "1px solid #d4d4d4", // серый
+  //borderColor: "primary.main",
   backgroundColor: "#C0C0C0",
   fontSize: 11,
   textAlign: "center",
@@ -91,9 +88,9 @@ export const styleHeader03 = {
 };
 
 export const styleHeader033 = {
-  borderRight: 1,
-  borderBottom: 1,
-  borderColor: "primary.main",
+  borderRight: "1px solid #d4d4d4", // серый
+  borderBottom: "1px solid #d4d4d4", // серый
+  //borderColor: "primary.main",
   backgroundColor: "#C0C0C0",
   fontSize: 11,
   textAlign: "center",
@@ -167,8 +164,8 @@ export const options = {
 
 export const styleStatMain = {
   bgcolor: "#F1F5FB", // светло серый
-  border: 1,
+  border: "1px solid #d4d4d4", // серый
   borderRadius: 1,
-  borderColor: "primary.main",
+  //borderColor: "primary.main",
   boxShadow: 12,
 };

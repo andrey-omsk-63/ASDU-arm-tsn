@@ -226,7 +226,7 @@ const PointsLevel2Calc = (props: {
 
     if (pointer !== null) {
       if (pointer[namer]) {
-        console.log("!!!!!!:", points.yellow);
+        //console.log("!!!!!!:", points.yellow);
         for (let i = 0; i < pointer[namer].length; i++) {
           kakchestvo = "";
           pusto = true;
@@ -248,14 +248,14 @@ const PointsLevel2Calc = (props: {
               kakchestvo = "Работа по НК и СК";
           }
 
-          if (datestat.xttData === MakeDate(new Date())) {
-            // работа в тек.сутки
-            let tekTim = new Date().getHours() * 60 + new Date().getMinutes();
-            if (tim > tekTim) {
-              pusto = false;
-              kakchestvo = "";
-            }
-          }
+          // if (datestat.xttData === MakeDate(new Date())) {
+          //   // работа в тек.сутки
+          //   let tekTim = new Date().getHours() * 60 + new Date().getMinutes();
+          //   if (tim > tekTim) {
+          //     pusto = false;
+          //     kakchestvo = "";
+          //   }
+          // }
 
           if (!pointer[namer][i].Value[0] && !pointer[namer][i].Value[1]) {
             pusto = false;
@@ -284,7 +284,7 @@ const PointsLevel2Calc = (props: {
           datestat.xtTxt += stroka;
 
           resStr.push(
-            <Grid key={Math.random()} container item xs={12}>
+            <Grid key={i} container item xs={12}>
               <Grid xs={1} item sx={!pusto ? styleXTC011 : styleXTC01}>
                 {TimeStr(pointer[namer][i].Time)}
               </Grid>
@@ -328,7 +328,6 @@ const PointsLevel2Calc = (props: {
         <Box sx={{ marginTop: "-0.3vh" }}>
           <Grid container item sx={{ height: "28vh" }}>
             <Grid ref={printRef} item xs sx={styleXTC03}>
-              {/* {pointer !== null && needRend && <>{PointsGraf00()}</>} */}
               {pointer !== null && <>{PointsGraf00()}</>}
             </Grid>
           </Grid>

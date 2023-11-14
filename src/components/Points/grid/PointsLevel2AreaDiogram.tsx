@@ -107,7 +107,6 @@ const PointsLevel2AreaDiogram = (props: {
           mass.push(kvx + kvy);
         }
         if (flag) coler = colorsGraf[mass.indexOf(Math.min.apply(null, mass))];
-        //if (coler === "blue") console.log("2blue", i, j);
         matrix[j].push(coler);
       }
     }
@@ -196,9 +195,9 @@ const PointsLevel2AreaDiogram = (props: {
     if (pointer !== null) {
       if (pointer[namer]) {
         let I = 0;
-        let tekTime = new Date().getHours() * 60 + new Date().getMinutes();
+        //let tekTime = new Date().getHours() * 60 + new Date().getMinutes();
         for (let i = 0; i < pointer[namer].length; i++) {
-          if (pointer[namer][i].Time <= tekTime)
+          //if (pointer[namer][i].Time <= tekTime)
             if (pointer[namer][i].Value[0] || pointer[namer][i].Value[1]) I = i;
         }
         for (let i = 0; i < pointer[namer].length; i++) {
@@ -209,7 +208,7 @@ const PointsLevel2AreaDiogram = (props: {
           // let flagEnd = i === pointer[namer].length - 1 ? true : false;
           let flagEnd = i === I ? true : false;
           if (pointer[namer][i].Value[0] || pointer[namer][i].Value[1]) {
-            if (pointer[namer][i].Time <= tekTime)
+            //if (pointer[namer][i].Time <= tekTime)
               resStrr.push(
                 <>
                   <Grid key={i} item container>

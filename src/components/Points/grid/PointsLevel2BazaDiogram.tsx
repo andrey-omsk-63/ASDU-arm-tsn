@@ -289,10 +289,10 @@ const PointsLevel2BazaDiogram = (props: {
     if (pointer !== null) {
       if (pointer[namer]) {
         let I = 0;
-        let tekTime = new Date().getHours() * 60 + new Date().getMinutes();
+        //let tekTime = new Date().getHours() * 60 + new Date().getMinutes();
         for (let i = 0; i < pointer[namer].length; i++) {
-          if (pointer[namer][i].Time <= tekTime)
-            if (pointer[namer][i].Value[0] || pointer[namer][i].Value[1]) I = i;
+          // if (pointer[namer][i].Time <= tekTime)
+          if (pointer[namer][i].Value[0] || pointer[namer][i].Value[1]) I = i;
         }
         let prpv = vertical / 100;
         let prph = horizon / 100;
@@ -303,8 +303,8 @@ const PointsLevel2BazaDiogram = (props: {
           //console.log('###!!!:',pv,ph)
           let flagEnd = i === I ? true : false;
           if (pointer[namer][i].Value[0] || pointer[namer][i].Value[1]) {
-            if (pointer[namer][i].Time <= tekTime)
-              resStrr.push(<>{OutputPict(i, pv, ph, PictInfo, flagEnd)}</>);
+            // if (pointer[namer][i].Time <= tekTime)
+            resStrr.push(<>{OutputPict(i, pv, ph, PictInfo, flagEnd)}</>);
           }
         }
       }

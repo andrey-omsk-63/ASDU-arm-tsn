@@ -92,7 +92,7 @@ const PointsLevel2Baza = (props: {
     flagEdit = true;
     flagExit = false;
     pointsTemp = pointsEt;
-    console.log('pointsEt:',pointsEt)
+    console.log("pointsEt:", pointsEt);
     setFormName(pointsEt.xctrls[crossRoad].name);
     setMaxLeft(pointsEt.xctrls[crossRoad].left);
     setMaxRight(pointsEt.xctrls[crossRoad].right);
@@ -190,26 +190,22 @@ const PointsLevel2Baza = (props: {
 
     const handleChange5 = (event: any) => {
       let form = event.target.value.trimStart(); // удаление пробелов в начале строки
-      if ( Number(form) < 24)
-        setValuen5(Math.abs(form).toString());
+      if (Number(form) < 24) setValuen5(Math.abs(form).toString());
     };
 
     const handleChange6 = (event: any) => {
       let form = event.target.value.trimStart(); // удаление пробелов в начале строки
-      if ( Number(form) < 60)
-        setValuen6(Math.abs(form).toString());
+      if (Number(form) < 60) setValuen6(Math.abs(form).toString());
     };
 
     const handleChange7 = (event: any) => {
       let form = event.target.value.trimStart(); // удаление пробелов в начале строки
-      if ( Number(form) < 24)
-        setValuen7(Math.abs(form).toString());
+      if (Number(form) < 24) setValuen7(Math.abs(form).toString());
     };
 
     const handleChange8 = (event: any) => {
       let form = event.target.value.trimStart(); // удаление пробелов в начале строки
-      if ( Number(form) < 60)
-        setValuen8(Math.abs(form).toString());
+      if (Number(form) < 60) setValuen8(Math.abs(form).toString());
     };
 
     const handleClose = () => {
@@ -234,7 +230,7 @@ const PointsLevel2Baza = (props: {
       setPoints(pointRab);
       maskpoint.pointForRedax = pointRab;
 
-      console.log('###:', pointRab)
+      console.log("###:", pointRab);
 
       pointsEt = pointRab;
       setFormName(valuen1);
@@ -609,10 +605,10 @@ const PointsLevel2Baza = (props: {
           <Grid xs={1.3} item sx={styleXTG011}>
             {!flagEdit && (
               <Button sx={illum} onClick={() => SetOpenSetStr(i)}>
-                {i}
+                {i + 1}
               </Button>
             )}
-            {flagEdit && <Box sx={{ p: 0.35 }}>{i}</Box>}
+            {flagEdit && <Box sx={{ p: 0.35 }}>{i + 1}</Box>}
           </Grid>
           {ConclStr(1.8, elem.xleft, styleXTG01)}
           {ConclStr(1.8, elem.xright, styleXTG01)}
@@ -636,7 +632,7 @@ const PointsLevel2Baza = (props: {
       resStr.push(
         <Grid key={i} container item xs={12}>
           <Grid xs={0.5} item sx={styleXTG01}>
-            {i}
+            {i + 1}
           </Grid>
           {ConclStr(1.75, elem.region, styleXTG01)}
           {ConclStr(1.75, elem.area, styleXTG01)}

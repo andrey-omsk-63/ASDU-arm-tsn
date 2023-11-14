@@ -9,22 +9,22 @@ export const styleMgl = {
 };
 
 export const styleMRG01 = {
-  borderBottom: 1,
-  borderColor: 'primary.main',
+  borderBottom: "1px solid #d4d4d4", // серый
+  //borderColor: 'primary.main',
   padding: 0.4,
 };
 
 export const styleMRG02 = {
-  borderRight: 1,
-  borderBottom: 1,
-  borderColor: 'primary.main',
+  borderRight: "1px solid #d4d4d4", // серый
+  borderBottom: "1px solid #d4d4d4", // серый
+  //borderColor: 'primary.main',
   padding: 0.4,
 };
 
 export const styleMRG02Center = {
-  borderRight: 1,
-  borderBottom: 1,
-  borderColor: 'primary.main',
+  borderRight: "1px solid #d4d4d4", // серый
+  borderBottom: "1px solid #d4d4d4", // серый
+  //borderColor: 'primary.main',
   padding: 0.4,
   textAlign: 'center',
 };
@@ -37,8 +37,8 @@ export const styleMRGHeader = {
 };
 
 export const styleMRG03 = {
-  borderBottom: 1,
-  borderColor: 'primary.main',
+  borderBottom: "1px solid #d4d4d4", // серый
+  //borderColor: 'primary.main',
   height: '3vh',
   textAlign: 'center',
   //backgroundColor: '#C0C0C0',
@@ -48,20 +48,20 @@ export const styleMRG03 = {
 export const styleMRG04 = {
   bgcolor: "#F1F5FB", // светло серый
   //bgcolor: "#F0F0F0", // светло серый
-  border: 1,
+  border: "1px solid #d4d4d4", // серый
   borderRadius: 1,
-  borderColor: 'primary.main',
+  //borderColor: 'primary.main',
   marginTop: '0.5vh',
   height: '85.1vh',
   boxShadow: 12,
 };
 //====== ManagementLeftGrid =====================================================
 export const styleMG01 = {
-  border: 1,
+  border: "1px solid #d4d4d4", // серый
   borderRadius: 1,
   bgcolor: "#F1F5FB", // светло серый
   //bgcolor: "#F0F0F0", // светло серый
-  borderColor: 'primary.main',
+  //borderColor: 'primary.main',
   marginTop: '0.5vh',
   marginLeft: 0.5,
   marginRight: 0.5,

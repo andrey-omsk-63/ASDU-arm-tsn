@@ -31,34 +31,34 @@ export const styleBackdropBaza = {
 //====== PointsLevel2Baza =======================================================
 export const styleXTG00 = {
   fontSize: 11,
-  borderBottom: 1,
-  borderColor: "primary.main",
+  borderBottom: "1px solid #d4d4d4", // серый
+  //borderColor: "primary.main",
   padding: 0.3,
   textAlign: "center",
 };
 
 export const styleXTG01 = {
   fontSize: 11,
-  borderRight: 1,
-  borderBottom: 1,
-  borderColor: "primary.main",
+  borderRight: "1px solid #d4d4d4", // серый
+  borderBottom: "1px solid #d4d4d4", // серый
+  //borderColor: "primary.main",
   padding: 0.3,
   textAlign: "center",
 };
 
 export const styleXTG011 = {
   fontSize: 11,
-  borderRight: 1,
-  borderBottom: 1,
-  borderColor: "primary.main",
+  borderRight: "1px solid #d4d4d4", // серый
+  borderBottom: "1px solid #d4d4d4", // серый
+  //borderColor: "primary.main",
   padding: 0.3,
   textAlign: "center",
 };
 
 export const styleXTG021 = {
   fontSize: 11,
-  borderBottom: 1,
-  borderColor: "primary.main",
+  borderBottom: "1px solid #d4d4d4", // серый
+  //borderColor: "primary.main",
   padding: 0.7,
   textAlign: "center",
   //backgroundColor: "#C0C0C0",
@@ -67,8 +67,8 @@ export const styleXTG021 = {
 export const styleXTG02 = {
   fontSize: 11,
   //borderRight: 1,
-  borderBottom: 1,
-  borderColor: "primary.main",
+  borderBottom: "1px solid #d4d4d4", // серый
+  //borderColor: "primary.main",
   padding: 0.7,
   textAlign: "center",
   //backgroundColor: "#C0C0C0",
@@ -77,10 +77,10 @@ export const styleXTG02 = {
 export const styleXTG03 = {
   bgcolor: "#F1F5FB", // светло серый
   marginTop: "0.5vh",
-  border: 1,
+  border: "1px solid #d4d4d4", // серый
   height: "32.6vh", // 33
   borderRadius: 1,
-  borderColor: "primary.main",
+  //borderColor: "primary.main",
   boxShadow: 12,
 };
 
@@ -129,7 +129,7 @@ export const styleBut02 = {
 };
 
 export const styleBut021 = {
-  fontSize: 11,
+  fontSize: 12,
   maxHeight: "21px",
   minHeight: "21px",
   maxWidth: "33px",
@@ -139,7 +139,7 @@ export const styleBut021 = {
   border: "1px solid #000",
   borderColor: "#93D145", // ярко-салатовый
   borderRadius: 1,
-  boxShadow: 6,
+  boxShadow: 9,
   textTransform: "unset !important",
 };
 
@@ -300,11 +300,11 @@ export const PointInfoDirRotStyle = (
 //====== PointsLevel2Area =======================================================
 export const styleXTG035 = {
   bgcolor: "#F1F5FB", // светло серый
-  border: 1,
+  border: "1px solid #d4d4d4", // серый
   //height: "85.8vh",
   height: "65.8vh",
   borderRadius: 1,
-  borderColor: "primary.main",
+  //borderColor: "primary.main",
   boxShadow: 12,
 };
 
@@ -340,17 +340,17 @@ export const styleXTGHeader = {
 
 export const styleXTG102 = {
   //borderRight: 1,
-  borderBottom: 1,
-  borderColor: "primary.main",
+  borderBottom: "1px solid #d4d4d4", // серый
+  //borderColor: "primary.main",
   padding: 0.7,
   textAlign: "center",
   //backgroundColor: "#C0C0C0",
 };
 
 export const styleXTG103 = {
-  borderRight: 1,
-  borderBottom: 1,
-  borderColor: "primary.main",
+  borderRight: "1px solid #d4d4d4", // серый
+  borderBottom: "1px solid #d4d4d4", // серый
+  //borderColor: "primary.main",
   padding: 0.7,
   textAlign: "center",
 };
@@ -358,7 +358,8 @@ export const styleXTG103 = {
 export const styleXTG104 = {
   fontSize: 14.5,
   bgcolor: "#F1F5FB", // светло серый
-  borderColor: "primary.main",
+  border: "1px solid #d4d4d4", // серый
+  //borderColor: "primary.main",
   borderRadius: 1,
   margin: -1,
   boxShadow: 12,
@@ -366,8 +367,8 @@ export const styleXTG104 = {
 
 export const styleXTG105 = {
   fontSize: 11,
-  borderRight: 1,
-  borderColor: "primary.main",
+  borderRight: "1px solid #d4d4d4", // серый
+  //borderColor: "primary.main",
   backgroundColor: "#E5E5E5",
   textAlign: "center",
 };
@@ -382,16 +383,16 @@ export const styleXTGrid = {
 
 export const styleXTGl02 = {
   //borderRight: 1,
-  borderBottom: 1,
-  borderColor: "primary.main",
+  borderBottom: "1px solid #d4d4d4", // серый
+  //borderColor: "primary.main",
   padding: 0.7,
   textAlign: "center",
   //backgroundColor: "#C0C0C0",
 };
 
 export const styleXTGl021 = {
-  borderBottom: 1,
-  borderColor: "primary.main",
+  borderBottom: "1px solid #d4d4d4", // серый
+  //borderColor: "primary.main",
   padding: 0.7,
   textAlign: "center",
   //backgroundColor: "#C0C0C0",
@@ -407,9 +408,9 @@ export const styleXTGl05 = {
 //====== PointsLevel2Calc =======================================================
 export const styleXTC011 = {
   fontSize: 11,
-  borderRight: 1,
-  borderBottom: 1,
-  borderColor: "primary.main",
+  borderRight: "1px solid #d4d4d4", // серый
+  borderBottom: "1px solid #d4d4d4", // серый
+  //borderColor: "primary.main",
   padding: 0.2,
   //backgroundColor: "#ffffff", // белый
   textAlign: "center",
@@ -417,9 +418,9 @@ export const styleXTC011 = {
 
 export const styleXTC01 = {
   fontSize: 11,
-  borderRight: 1,
-  borderBottom: 1,
-  borderColor: "primary.main",
+  borderRight: "1px solid #d4d4d4", // серый
+  borderBottom: "1px solid #d4d4d4", // серый
+  //borderColor: "primary.main",
   padding: 0.2,
   backgroundColor: "#e4eef7", // светло-голубой
   textAlign: "center",
@@ -427,8 +428,8 @@ export const styleXTC01 = {
 
 export const styleXTC02 = {
   fontSize: 11,
-  borderBottom: 1,
-  borderColor: "primary.main",
+  borderBottom: "1px solid #d4d4d4", // серый
+  //borderColor: "primary.main",
   padding: 0.4,
   textAlign: "center",
   backgroundColor: "#C0C0C0",
@@ -436,17 +437,17 @@ export const styleXTC02 = {
 
 export const styleXTC03 = {
   bgcolor: "#F1F5FB", // светло серый
-  border: 1,
+  border: "1px solid #d4d4d4", // серый
   borderRadius: 1,
-  borderColor: "primary.main",
+  //borderColor: "primary.main",
   boxShadow: 12,
 };
 
 export const styleXTC033 = {
   bgcolor: "#F1F5FB", // светло серый
-  border: 1,
+  border: "1px solid #d4d4d4", // серый
   borderRadius: 1,
-  borderColor: "primary.main",
+  //borderColor: "primary.main",
   //width: '99vh',
   height: "57.9vh",
   boxShadow: 12,
@@ -454,9 +455,9 @@ export const styleXTC033 = {
 //====== PointsMainScr ==========================================================
 export const styleXt02 = {
   bgcolor: "#F1F5FB", // светло серый
-  border: 1,
+  border: "1px solid #d4d4d4", // серый
   borderRadius: 1,
-  borderColor: "primary.main",
+  //borderColor: "primary.main",
   padding: 1,
   marginLeft: 0.5,
   marginRight: 1,
@@ -471,9 +472,9 @@ export const styleXt03 = {
 };
 
 export const styleXt04 = {
-  border: 1,
+  borderRight: "1px solid #d4d4d4", // серый
   borderRadius: 1,
-  borderColor: "primary.main",
+  //borderColor: "primary.main",
   padding: 1,
   margin: 1,
   marginTop: -0.5,
@@ -482,9 +483,9 @@ export const styleXt04 = {
 };
 
 export const styleXt05 = {
-  border: 1,
+  borderRight: "1px solid #d4d4d4", // серый
   borderRadius: 1,
-  borderColor: "primary.main",
+  //borderColor: "primary.main",
   padding: 1,
   margin: 1,
   marginTop: -0.5,

@@ -23,7 +23,6 @@ let nomIllum = -1;
 
 const PointsMainScrGrid2 = (props: {
   open: boolean;
-  //xctrll: XctrlInfo[];
   xtt: number;
   trigger: Function;
 }) => {
@@ -145,19 +144,19 @@ const PointsMainScrGrid2 = (props: {
   const StrokaMainScrGrid2 = () => {
     let resStr = [];
     for (let i = 0; i < points.ext.length; i++) {
-      let bordBott = 1;
-      if (i === points.ext.length - 1) bordBott = 0;
+      let bordBott = "1px solid #d4d4d4"; // серый
+      if (i === points.ext.length - 1) bordBott = "0px solid #d4d4d4"; // серый
       const styleXTG03 = {
-        borderRight: 1,
+        borderRight: "1px solid #d4d4d4",
         borderBottom: bordBott,
-        borderColor: "primary.main",
+        //borderColor: "primary.main",
         padding: 0.7,
         textAlign: "center",
       };
 
       const styleXTG033 = {
         borderBottom: bordBott,
-        borderColor: "primary.main",
+        //borderColor: "primary.main",
         padding: 0.7,
         textAlign: "center",
       };
