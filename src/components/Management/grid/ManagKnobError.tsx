@@ -17,9 +17,9 @@ const ManagKnobError = (props: { setOpen: any }) => {
     marginLeft: '24vh',
     width: 380,
     bgcolor: 'background.paper',
-    border: '3px solid #000',
+    border: '1px solid #000',
     borderColor: 'red',
-    borderRadius: 2,
+    borderRadius: 1,
     boxShadow: 24,
     p: 1.5,
   };

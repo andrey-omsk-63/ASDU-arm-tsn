@@ -75,7 +75,7 @@ export const styleMG03 = {
 };
 
 export const styleButSubArea01 = {
-  fontSize: 12,
+  fontSize: 12.5,
   marginTop: 0.2,
   height: '18px',
   //backgroundColor: illum ? "#93D145" : "#E9F5D8",
@@ -84,7 +84,7 @@ export const styleButSubArea01 = {
   border: '1px solid #000',
   borderColor: '#93D145', // ярко-салатовый
   borderRadius: 1,
-  boxShadow: 8,
+  boxShadow: 10,
   textTransform: 'unset !important',
 };
 
@@ -103,7 +103,7 @@ export const styleButSubArea02 = {
 };
 
 export const styleButArea01 = {
-  fontSize: 12,
+  fontSize: 12.5,
   marginTop: 0.3,
   height: '20px',
   color: 'black',
@@ -111,7 +111,7 @@ export const styleButArea01 = {
   border: '1px solid #000',
   borderColor: '#93D145', // ярко-салатовый
   borderRadius: 1,
-  boxShadow: 8,
+  boxShadow: 10,
   textTransform: 'unset !important',
 };
 
@@ -129,15 +129,15 @@ export const styleButArea02 = {
 };
 
 export const styleButRegion01 = {
-  fontSize: 15,
+  fontSize: 16,
   marginTop: 0.5,
   height: '20px',
   bgcolor: '#BAE186', // тёмно-салатовый
-  border: '1px solid #000',
-  borderColor: '#93D145', // ярко-салатовый
+  border: '1px solid #93D145', // ярко-салатовый
+  //borderColor: '#93D145', // ярко-салатовый
   color: '#5B1080',
   borderRadius: 1,
-  boxShadow: 8,
+  boxShadow: 10,
   textTransform: 'unset !important',
 };
 
@@ -162,8 +162,8 @@ export const stylePK = {
   transform: 'translate(-50%, -50%)',
   width: 77,
   bgcolor: 'background.paper',
-  border: '1px solid #000',
-  borderColor: 'primary.main',
+  border: "1px solid #d4d4d4", // серый
+  //borderColor: 'primary.main',
   borderRadius: 1,
   boxShadow: 24,
   p: 2,
@@ -229,8 +229,8 @@ export const stylePKXt = {
   transform: 'translate(-50%, -50%)',
   width: 164,
   bgcolor: 'background.paper',
-  border: '1px solid #000',
-  borderColor: 'primary.main',
+  border: "1px solid #d4d4d4", // серый
+  //borderColor: 'primary.main',
   borderRadius: 1,
   boxShadow: 24,
   p: 2,

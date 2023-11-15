@@ -121,7 +121,7 @@ export const InputerOk = (inpDate: boolean, InputOk: Function) => {
   return (
     <Grid item xs={2.3} sx={styleInpOk}>
       {inpDate && (
-        <Button sx={styleButOk} variant="contained" onClick={() => InputOk()}>
+        <Button sx={styleButOk} onClick={() => InputOk()}>
           Да
         </Button>
       )}

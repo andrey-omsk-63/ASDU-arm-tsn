@@ -160,14 +160,12 @@ const PointsMainScrGrid3 = (props: {
       const styleXTG03 = {
         borderRight: "1px solid #d4d4d4",
         borderBottom: bordBott,
-        //borderColor: "primary.main",
         padding: 0.7,
         textAlign: "center",
       };
 
       const styleXTG033 = {
         borderBottom: bordBott,
-        //borderColor: "primary.main",
         padding: 0.7,
         textAlign: "center",
       };

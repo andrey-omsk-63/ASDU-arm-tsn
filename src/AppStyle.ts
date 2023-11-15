@@ -88,8 +88,6 @@ export const styleInp = {
   backgroundColor: "#FFFBE5",
   maxHeight: "21px",
   minHeight: "21px",
-  // maxWidth: "75px",
-  // minWidth: "75px",
   width: "140px",
 };
 
@@ -104,8 +102,8 @@ export const styleInpOk = {
 export const styleButOk = {
   fontSize: 12,
   marginRight: 1,
-  maxWidth: "21px",
-  minWidth: "21px",
+  maxWidth: "30px",
+  minWidth: "30px",
   maxHeight: "21px",
   minHeight: "21px",
   bgcolor: "#E9F5D8",

@@ -100,12 +100,12 @@ export const styleHeader033 = {
 
 export const styleBatton01 = {
   marginLeft: 0.4,
-  fontSize: 11,
+  fontSize: 12,
   bgcolor: "#BAE186", // тёмно-салатовый
   border: "1px solid #000",
   borderColor: "#BAE186", // тёмно-салатовый
   borderRadius: 1,
-  boxShadow: 9,
+  boxShadow: 10,
   color: "black",
   maxWidth: "2.7vh",
   minWidth: "2.7vh",
