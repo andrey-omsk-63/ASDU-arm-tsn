@@ -576,7 +576,7 @@ export const OutputPict = (
     //left: ph - 0.7 + '%', // 27.2
     //top: pv - 0.4 + '%', //7.7
     left: ph - 0.8 + "%",
-    top: pv - 1.2 + "%", 
+    top: pv - 1.2 + "%",
     maxWidth: 5,
     minWidth: 5,
     maxHeight: 5,
@@ -603,7 +603,7 @@ export const PictInfoBox = (
   mode: number,
   POINT: any
 ) => {
-  console.log('POINTER:',pointer)
+  console.log("POINTER:", pointer);
   let snos = mode ? 1000 : 850;
   let sdvigH = (window.innerWidth - snos) * 0.012;
   let sdvigV = pvGl < 50 ? 0 : 15;
@@ -626,8 +626,11 @@ export const PictInfoBox = (
       if (pointer.Value[1] > pointer.Value[0] * luchP * ratio)
         numArea = pStB[num - 1].pkr;
     }
-    for (let i = 0; i < POINT.ext.length; i++)
-      if (POINT.ext[i][0] === numArea) pk = POINT.ext[i][1];
+    //console.log('0###:',numArea, POINT.ext)
+    for (let i = 0; i < POINT.ext.length; i++) {
+      //console.log('###:',i,numArea, POINT.ext[i][0])
+      if (POINT.ext[i][0] === pointer.Value[2]) pk = POINT.ext[i][1];
+    }
   } else {
     let pStA = point.StrategyA; // Диограмма областей
     numArea = -1;
@@ -644,8 +647,8 @@ export const PictInfoBox = (
   }
 
   let NumArea = mode
-    // ? numArea + "[" + pointer.Value[2] + "] (" + pk + ")"
-    ? pointer.Value[2] + " (" + pk + ")"
+    ? // ? numArea + "[" + pointer.Value[2] + "] (" + pk + ")"
+      pointer.Value[2] + " (" + pk + ")"
     : numArea;
   let KS = mode ? "КС (ПК)" : "КС";
 
