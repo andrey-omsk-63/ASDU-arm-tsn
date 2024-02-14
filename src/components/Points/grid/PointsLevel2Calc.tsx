@@ -129,7 +129,7 @@ const PointsLevel2Calc = (props: {
 
   const PointsGraf00 = () => {
     //if (needRend) datestatXtGraf = printRef;
-    // console.log("!!!######:", namer, pointer);
+    console.log("!!!######:", namer, pointer[namer], pointer);
     const colMin = 60 / pointer[namer][0].Time;
     for (let i = 0; i < pointer[namer].length; i++) {
       let int = "";
@@ -225,7 +225,7 @@ const PointsLevel2Calc = (props: {
     let kakchestvo = "";
 
     if (pointer !== null) {
-      if (pointer[namer]) {
+      if (pointer[namer].length !== 0) {
         //console.log("!!!!!!:", points.yellow);
         for (let i = 0; i < pointer[namer].length; i++) {
           kakchestvo = "";
@@ -328,17 +328,27 @@ const PointsLevel2Calc = (props: {
         <Box sx={{ marginTop: "-0.3vh" }}>
           <Grid container item sx={{ height: "28vh" }}>
             <Grid ref={printRef} item xs sx={styleXTC03}>
-              {pointer !== null && <>{PointsGraf00()}</>}
+              {pointer !== null && (
+                <>{pointer[namer].length !== 0 && <>{PointsGraf00()}</>}</>
+              )}
             </Grid>
           </Grid>
           <Grid container item sx={{ marginTop: 1, height: "58.0vh" }}>
             {pointer !== null && (
-              <Grid item sx={styleXTC033}>
-                {PointsLevel2CalcTab2Header()}
-                <Box sx={{ overflowX: "auto", height: "55.4vh" }}>
-                  <Grid container>{PointsLevel2CalcTab1Stroka()}</Grid>
-                </Box>
-              </Grid>
+              <>
+                {pointer[namer].length !== 0 ? (
+                  <Grid item sx={styleXTC033}>
+                    {PointsLevel2CalcTab2Header()}
+                    <Box sx={{ overflowX: "auto", height: "55.4vh" }}>
+                      <Grid container>{PointsLevel2CalcTab1Stroka()}</Grid>
+                    </Box>
+                  </Grid>
+                ) : (
+                  <Box sx={{ fontSize: 21, textAlign: "center" }}>
+                    Нет информациии
+                  </Box>
+                )}
+              </>
             )}
           </Grid>
         </Box>
