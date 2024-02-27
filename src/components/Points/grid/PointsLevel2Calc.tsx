@@ -257,9 +257,13 @@ const PointsLevel2Calc = (props: {
           //   }
           // }
 
-          if (!pointer[namer][i].Value[0] && !pointer[namer][i].Value[1]) {
+          if (
+            !pointer[namer][i].Value[0] &&
+            !pointer[namer][i].Value[1] &&
+            !pointer[namer][i].Value[2]
+          ) {
             pusto = false;
-            kakchestvo = "";
+            //kakchestvo = "";
           }
 
           let stroka = TimeStr(pointer[namer][i].Time) + ";";
