@@ -449,7 +449,7 @@ export const styleXTC033 = {
   borderRadius: 1,
   //borderColor: "primary.main",
   //width: '99vh',
-  height: "57.9vh",
+  //height: "60.5vh",
   boxShadow: 12,
 };
 //====== PointsMainScr ==========================================================

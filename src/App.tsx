@@ -233,6 +233,7 @@ const App = () => {
         case "xctrlInfo":
           setPointsXctrl(data.xctrlInfo ?? []);
           if (regionGlob === 0) setPointsReg(data.regionInfo ?? []);
+          console.log("xctrlInfo:", data.xctrlInfo);
           setIsOpenInf(true);
           break;
         case "getStatisticsList":

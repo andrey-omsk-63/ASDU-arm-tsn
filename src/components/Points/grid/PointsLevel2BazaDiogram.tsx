@@ -20,6 +20,7 @@ let phGl = -1;
 let pvGl = -1;
 let IDX = -1;
 let massRatio: Array<number> = [];
+let oldXctrl: any = null;
 
 const PointsLevel2BazaDiogram = (props: {
   xctrll: XctrlInfo[];
@@ -59,6 +60,14 @@ const PointsLevel2BazaDiogram = (props: {
 
   const [openLoader, setOpenLoader] = React.useState(true);
   const [pictInfo, setPictInfo] = React.useState(false);
+  const [trigger, setTrigger] = React.useState(false);
+
+  if (oldXctrl !== props.xctrll) {
+    // пришло обновление
+    console.log("PointsLevel2BazaDiogram: пришло обновление");
+    oldXctrl = props.xctrll;
+    setTrigger(!trigger);
+  }
 
   let dlMas = points.xctrls[crRoad].StrategyB.length;
   const horizonLimit = points.xctrls[crRoad].StrategyB[dlMas - 1].xright;
@@ -246,7 +255,6 @@ const PointsLevel2BazaDiogram = (props: {
         mass2 += "," + elem[i].chanR[0].toString();
       }
     }
-    //mass1 += ",4,6"; // для отладки
     resStr.push(
       <Grid key={Math.random()} item sx={stylePointInf1}>
         Прямой {"["}
@@ -254,7 +262,6 @@ const PointsLevel2BazaDiogram = (props: {
         {"]"}
       </Grid>
     );
-    //mass2 += ",5,7"; // для отладки
     resStr.push(
       <Grid key={Math.random()} item sx={stylePointInf2}>
         Oбратный {"["}
@@ -285,25 +292,21 @@ const PointsLevel2BazaDiogram = (props: {
   };
 
   const OutputerPict = () => {
+    console.log('trigger:',trigger)
     let resStrr = [];
     if (pointer !== null) {
       if (pointer[namer]) {
         let I = 0;
-        //let tekTime = new Date().getHours() * 60 + new Date().getMinutes();
         for (let i = 0; i < pointer[namer].length; i++) {
-          // if (pointer[namer][i].Time <= tekTime)
           if (pointer[namer][i].Value[0] || pointer[namer][i].Value[1]) I = i;
         }
         let prpv = vertical / 100;
         let prph = horizon / 100;
-        //console.log('###:',prpv,prph)
         for (let i = 0; i < pointer[namer].length; i++) {
           let pv = 100 - pointer[namer][i].Value[0] / prpv;
           let ph = pointer[namer][i].Value[1] / prph;
-          //console.log('###!!!:',pv,ph)
           let flagEnd = i === I ? true : false;
           if (pointer[namer][i].Value[0] || pointer[namer][i].Value[1]) {
-            // if (pointer[namer][i].Time <= tekTime)
             resStrr.push(<>{OutputPict(i, pv, ph, PictInfo, flagEnd)}</>);
           }
         }
@@ -340,7 +343,8 @@ const PointsLevel2BazaDiogram = (props: {
         {!openLoader && (
           <>
             {PointsXt112Comp1Tab4()}
-            {OutputerPict()}
+            {trigger && <>{OutputerPict()}</>}
+            {!trigger && <>{OutputerPict()}</>}
             {pictInfo && (
               <>
                 {PictInfoBox(

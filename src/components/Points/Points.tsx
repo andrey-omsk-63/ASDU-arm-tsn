@@ -52,7 +52,6 @@ const Points = (props: {
   let points = pointsGl.filter(
     (pointsGl) => pointsGl.region === Number(reGion)
   );
-  //pointsEtalon = points; // замена проверки обновления Xctrl - проверка теперь в App
 
   const [value, setValue] = React.useState(tekValue);
   const [calculate, setCalculate] = React.useState(true);
@@ -173,7 +172,8 @@ const Points = (props: {
   };
 
   return (
-    <Box sx={{ border: 0, marginTop: -2.8, marginLeft: -3, marginRight: -5 }}>
+      <Box sx={{ border: 0, marginTop: -2.8, marginLeft: -3, marginRight: -5 }}>
+      {/* <Box sx={{ border: 1, marginTop: -2.8, marginLeft: -3, marginRight: -5 }}>  */}
       {pointsEtalon.length > 0 && (
         <>
           <Box sx={stylePoints01}>

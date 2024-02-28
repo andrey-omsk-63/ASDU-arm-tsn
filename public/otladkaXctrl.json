@@ -3669,152 +3669,152 @@
           "Байкальская": [
             {
               "Time": 10,
-              "Value": [96, 216, 0],
+              "Value": [96, 216, 2],
               "Good": true
             },
             {
               "Time": 20,
-              "Value": [18, 186, 0],
+              "Value": [18, 186, 2],
               "Good": true
             },
             {
               "Time": 30,
-              "Value": [48, 180, 0],
+              "Value": [48, 180, 2],
               "Good": true
             },
             {
               "Time": 40,
-              "Value": [30, 138, 0],
+              "Value": [30, 138, 3],
               "Good": true
             },
             {
               "Time": 50,
-              "Value": [48, 192, 0],
+              "Value": [48, 192, 3],
               "Good": true
             },
             {
               "Time": 60,
-              "Value": [0, 0, 0],
+              "Value": [0, 0, 3],
               "Good": false
             },
             {
               "Time": 70,
-              "Value": [0, 0, 0],
+              "Value": [0, 0, 5],
               "Good": true
             },
             {
               "Time": 80,
-              "Value": [0, 78, 0],
+              "Value": [0, 78, 5],
               "Good": true
             },
             {
               "Time": 90,
-              "Value": [18, 84, 0],
+              "Value": [18, 84, 5],
               "Good": true
             },
             {
               "Time": 100,
-              "Value": [18, 90, 0],
+              "Value": [18, 90, 5],
               "Good": true
             },
             {
               "Time": 110,
-              "Value": [12, 90, 0],
+              "Value": [12, 90, 6],
               "Good": true
             },
             {
               "Time": 120,
-              "Value": [18, 54, 0],
+              "Value": [18, 54, 6],
               "Good": true
             },
             {
               "Time": 130,
-              "Value": [12, 72, 0],
+              "Value": [12, 72, 6],
               "Good": true
             },
             {
               "Time": 140,
-              "Value": [18, 60, 0],
+              "Value": [18, 60, 1],
               "Good": true
             },
             {
               "Time": 150,
-              "Value": [30, 66, 0],
+              "Value": [30, 66, 1],
               "Good": true
             },
             {
               "Time": 160,
-              "Value": [0, 96, 0],
+              "Value": [0, 96, 1],
               "Good": true
             },
             {
               "Time": 170,
-              "Value": [12, 84, 0],
+              "Value": [12, 84, 1],
               "Good": true
             },
             {
               "Time": 180,
-              "Value": [0, 72, 0],
+              "Value": [0, 72, 1],
               "Good": true
             },
             {
               "Time": 190,
-              "Value": [6, 48, 0],
+              "Value": [6, 48, 2],
               "Good": true
             },
             {
               "Time": 200,
-              "Value": [6, 60, 0],
+              "Value": [6, 60, 2],
               "Good": true
             },
             {
               "Time": 210,
-              "Value": [0, 54, 0],
+              "Value": [0, 54, 2],
               "Good": true
             },
             {
               "Time": 220,
-              "Value": [18, 54, 0],
+              "Value": [18, 54, 2],
               "Good": true
             },
             {
               "Time": 230,
-              "Value": [18, 30, 0],
+              "Value": [18, 30, 7],
               "Good": true
             },
             {
               "Time": 240,
-              "Value": [0, 30, 0],
+              "Value": [0, 30, 7],
               "Good": true
             },
             {
               "Time": 250,
-              "Value": [0, 48, 0],
+              "Value": [0, 48, 7],
               "Good": true
             },
             {
               "Time": 260,
-              "Value": [24, 24, 0],
+              "Value": [24, 24, 7],
               "Good": true
             },
             {
               "Time": 270,
-              "Value": [6, 42, 0],
+              "Value": [6, 42, 5],
               "Good": true
             },
             {
               "Time": 280,
-              "Value": [6, 36, 0],
+              "Value": [6, 36, 5],
               "Good": true
             },
             {
               "Time": 290,
-              "Value": [12, 78, 0],
+              "Value": [12, 78, 5],
               "Good": true
             },
             {
               "Time": 300,
-              "Value": [6, 42, 0],
+              "Value": [6, 42, 5],
               "Good": true
             },
             {

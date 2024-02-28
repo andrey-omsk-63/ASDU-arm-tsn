@@ -81,16 +81,8 @@ const PointsLevel2Calc = (props: {
   let debug = false;
   if (props.ws.url === "wss://localhost:3000/W") debug = true;
 
-  // if (xtProps !== oldXtProps || datestat.xttData !== oldXttData) {
-  //   oldXtProps = xtProps;
-  //   oldXttData = datestat.xttData;
-  //   needRend = true;
-  // }
-
   const printRef = React.useRef(null);
   let pointer = points.results;
-
-  //console.log('######:',pointer)
 
   if (datestat.xttData !== MakeDate(new Date())) {
     pointer = datestat.result;
@@ -128,8 +120,7 @@ const PointsLevel2Calc = (props: {
   };
 
   const PointsGraf00 = () => {
-    //if (needRend) datestatXtGraf = printRef;
-    console.log("!!!######:", namer, pointer[namer], pointer);
+    //console.log("!!!######:", namer, pointer[namer], pointer);
     const colMin = 60 / pointer[namer][0].Time;
     for (let i = 0; i < pointer[namer].length; i++) {
       let int = "";
@@ -180,7 +171,6 @@ const PointsLevel2Calc = (props: {
   };
 
   const PointsGraf01 = () => {
-    //console.log('!!!!!!:',needRend,data)
     const options = {
       responsive: true,
       maintainAspectRatio: false,
@@ -193,7 +183,6 @@ const PointsLevel2Calc = (props: {
         },
       },
     };
-    // return <>{needRend && <Line options={options} data={data} />}</>;
     return <Line options={options} data={data} />;
   };
 
@@ -210,7 +199,7 @@ const PointsLevel2Calc = (props: {
         <Grid xs={2} item sx={styleXTC02}>
           <b>КС на ДК</b>
         </Grid>
-        <Grid xs item sx={styleXTC02}>
+        <Grid xs={5} item sx={styleXTC02}>
           <b>Примечание</b>
         </Grid>
       </Grid>
@@ -247,16 +236,6 @@ const PointsLevel2Calc = (props: {
             if (tim <= points.yellow.stop || tim >= points.yellow.start)
               kakchestvo = "Работа по НК и СК";
           }
-
-          // if (datestat.xttData === MakeDate(new Date())) {
-          //   // работа в тек.сутки
-          //   let tekTim = new Date().getHours() * 60 + new Date().getMinutes();
-          //   if (tim > tekTim) {
-          //     pusto = false;
-          //     kakchestvo = "";
-          //   }
-          // }
-
           if (
             !pointer[namer][i].Value[0] &&
             !pointer[namer][i].Value[1] &&
@@ -265,7 +244,7 @@ const PointsLevel2Calc = (props: {
             pusto = false;
             //kakchestvo = "";
           }
-
+          // создание символьного файла
           let stroka = TimeStr(pointer[namer][i].Time) + ";";
           stroka += pointer[namer][i].Value[0] + ";";
           stroka += pointer[namer][i].Value[1] + ";";
@@ -301,7 +280,7 @@ const PointsLevel2Calc = (props: {
               <Grid xs={2} item sx={!pusto ? styleXTC011 : styleXTC01}>
                 {pointer[namer][i].Value[2]}
               </Grid>
-              <Grid xs item sx={!pusto ? styleXTC011 : styleXTC01}>
+              <Grid xs={5} item sx={!pusto ? styleXTC011 : styleXTC01}>
                 {kakchestvo}
               </Grid>
             </Grid>
@@ -316,12 +295,84 @@ const PointsLevel2Calc = (props: {
         datestat.id = points.subarea;
         datestat.xtName = namer;
         datestat.xtGraf = printRef;
-        //if (needRend) datestat.xtGraf = datestatXtGraf;
-        //if (needRend) datestat.xtGraf = JSON.parse(JSON.stringify(datestatXtGraf));
-        //datestatXtGraf = null;
-
         dispatch(statsaveCreate(datestat));
       }
+    }
+    return resStr;
+  };
+
+  const OutputGraf = () => {
+    return (
+      <Grid container item sx={{}}>
+        <Grid ref={printRef} item xs sx={styleXTC03}>
+          {pointer !== null && (
+            <>{pointer[namer].length !== 0 && <>{PointsGraf00()}</>}</>
+          )}
+        </Grid>
+      </Grid>
+    );
+  };
+
+  const OutputMainTabl = () => {
+    return (
+      <Grid item xs={8} sx={styleXTC033}>
+        {PointsLevel2CalcTab2Header()}
+        <Box sx={{ overflowX: "auto", height: "54.1vh" }}>
+          <Grid container>{PointsLevel2CalcTab1Stroka()}</Grid>
+        </Box>
+      </Grid>
+    );
+  };
+
+  const HeaderSupportiveTabl = () => {
+    return (
+      <Grid container item xs={12} sx={{ marginRight: 0.74 }}>
+        <Grid xs={6} item sx={styleXTC02}>
+          <b>Время</b>
+        </Grid>
+        <Grid xs={6} item sx={styleXTC02}>
+          <b>ПК</b>
+        </Grid>
+      </Grid>
+    );
+  };
+
+  const AccordKStoPK = (ks: number) => {
+    let pk = 0;
+    for (let i = 0; i < points.ext.length; i++) {
+      if (points.ext[i][0] === ks) pk = points.ext[i][1];
+    }
+    return pk;
+  };
+
+  const CalcSupportiveTabl = () => {
+    //console.log("points", points.ext);
+    let masTime = [TimeStr(pointer[namer][0].Time)];
+    let masKs = [pointer[namer][0].Value[2]];
+
+    for (let i = 1; i < pointer[namer].length; i++) {
+      if (pointer[namer][i].Value[2] !== masKs[masKs.length - 1]) {
+        masTime.push(TimeStr(pointer[namer][i].Time));
+        masKs.push(pointer[namer][i].Value[2]);
+      }
+    }
+    for (let i = 0; i < masKs.length; i++) masKs[i] = AccordKStoPK(masKs[i]);
+
+    let resStr = [];
+    for (let i = 0; i < masTime.length; i++) {
+      let int = masTime[i] + " - ";
+      int += i !== masTime.length - 1 ? masTime[i + 1] : "24:00";
+
+      resStr.push(
+        <Grid key={i} container item xs={12}>
+          <Grid xs={6} item sx={styleXTC011}>
+            {int}
+          </Grid>
+          <Grid xs={6} item sx={styleXTC011}>
+            {!masKs[i] ? "Нет информациии" : masKs[i]}
+          </Grid>
+        </Grid>
+      );
     }
     return resStr;
   };
@@ -329,30 +380,35 @@ const PointsLevel2Calc = (props: {
   return (
     <>
       {datestat.xttData !== "sss" && (
-        <Box sx={{ marginTop: "-0.3vh" }}>
-          <Grid container item sx={{ height: "28vh" }}>
-            <Grid ref={printRef} item xs sx={styleXTC03}>
-              {pointer !== null && (
-                <>{pointer[namer].length !== 0 && <>{PointsGraf00()}</>}</>
-              )}
-            </Grid>
-          </Grid>
-          <Grid container item sx={{ marginTop: 1, height: "58.0vh" }}>
-            {pointer !== null && (
+         <Box sx={{ marginTop: 0, border: 0 }}>
+           {/* <Box sx={{ marginTop: "-0.3vh", border: 1 }}></Box> */}
+          {OutputGraf()}
+          <Grid container sx={{ marginTop: '0.6vh', height: "57.5vh" }}>
+            {pointer !== null ? (
               <>
                 {pointer[namer].length !== 0 ? (
-                  <Grid item sx={styleXTC033}>
-                    {PointsLevel2CalcTab2Header()}
-                    <Box sx={{ overflowX: "auto", height: "55.4vh" }}>
-                      <Grid container>{PointsLevel2CalcTab1Stroka()}</Grid>
-                    </Box>
+                  <Grid item xs={12}>
+                    <Grid container>
+                      {OutputMainTabl()}
+                      <Grid item xs={0.05}></Grid>
+                      <Grid item xs={3.95} sx={styleXTC033}>
+                        {HeaderSupportiveTabl()}
+                        <Box sx={{ overflowX: "auto", height: "54.1vh" }}>
+                          <Grid container>{CalcSupportiveTabl()}</Grid>
+                        </Box>
+                      </Grid>
+                    </Grid>
                   </Grid>
                 ) : (
-                  <Box sx={{ fontSize: 21, textAlign: "center" }}>
-                    Нет информациии
+                  <Box sx={{ textAlign: "center" }}>
+                    <h1>Нет информациии</h1>
                   </Box>
                 )}
               </>
+            ) : (
+              <Box sx={{ textAlign: "center" }}>
+                <h1>Нет информациии</h1>
+              </Box>
             )}
           </Grid>
         </Box>
