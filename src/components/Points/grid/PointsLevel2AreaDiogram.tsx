@@ -24,6 +24,7 @@ const PointsLevel2AreaDiogram = (props: {
   xctrll: XctrlInfo[];
   xtt: number;
   crossroad: number;
+  update: boolean;
 }) => {
   const xtProps = props.xtt;
   const points = props.xctrll[xtProps];
@@ -190,7 +191,11 @@ const PointsLevel2AreaDiogram = (props: {
     //e.preventDefault(); // чтобы страница не перезагружалась !!!!!!
   };
 
-  const OutputerPict = () => {
+  const OutputerPict = (update: boolean) => {
+    console.log(
+      "Area Обновление точек:",
+      new Date().toTimeString().slice(0, 5)
+    );
     let resStrr = [];
     if (pointer !== null) {
       if (pointer[namer]) {
@@ -198,7 +203,7 @@ const PointsLevel2AreaDiogram = (props: {
         //let tekTime = new Date().getHours() * 60 + new Date().getMinutes();
         for (let i = 0; i < pointer[namer].length; i++) {
           //if (pointer[namer][i].Time <= tekTime)
-            if (pointer[namer][i].Value[0] || pointer[namer][i].Value[1]) I = i;
+          if (pointer[namer][i].Value[0] || pointer[namer][i].Value[1]) I = i;
         }
         for (let i = 0; i < pointer[namer].length; i++) {
           let prpv = vertical / 100;
@@ -209,13 +214,13 @@ const PointsLevel2AreaDiogram = (props: {
           let flagEnd = i === I ? true : false;
           if (pointer[namer][i].Value[0] || pointer[namer][i].Value[1]) {
             //if (pointer[namer][i].Time <= tekTime)
-              resStrr.push(
-                <>
-                  <Grid key={i} item container>
-                    {OutputPict(i, pv, ph, PictInfo, flagEnd)}
-                  </Grid>
-                </>
-              );
+            resStrr.push(
+              <>
+                <Grid key={i} item container>
+                  {OutputPict(i, pv, ph, PictInfo, flagEnd)}
+                </Grid>
+              </>
+            );
           }
         }
       }
@@ -289,7 +294,7 @@ const PointsLevel2AreaDiogram = (props: {
         {!openLoader && (
           <>
             {PointsXt112Comp1Tab4()}
-            {OutputerPict()}
+            {OutputerPict(props.update)}
             {pictInfo && (
               <>
                 {PictInfoBox(

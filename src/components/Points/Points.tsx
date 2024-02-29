@@ -30,6 +30,7 @@ const Points = (props: {
   saveXt: Function;
   date: string;
   calc: boolean;
+  update: boolean;
 }) => {
   //== Piece of Redux =======================================
   let maskpoint = useSelector((state: any) => {
@@ -48,6 +49,8 @@ const Points = (props: {
   let pointsGl = props.xctrll;
   let debug = false;
   if (props.ws.url === "wss://localhost:3000/W") debug = true;
+
+  //console.log('Points:',props.xctrll)
 
   let points = pointsGl.filter(
     (pointsGl) => pointsGl.region === Number(reGion)
@@ -199,6 +202,7 @@ const Points = (props: {
             saveXt={props.saveXt}
             calc={props.calc}
             calcDeb={calculate}
+            update={props.update}
           />
         </>
       )}

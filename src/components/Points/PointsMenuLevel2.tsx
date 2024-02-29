@@ -26,6 +26,7 @@ const PointsMenuLevel2 = (props: {
   saveXt: Function;
   calc: boolean;
   calcDeb: boolean;
+  update: boolean;
 }) => {
   //== Piece of Redux =======================================
   let datestat = useSelector((state: any) => {
@@ -33,7 +34,7 @@ const PointsMenuLevel2 = (props: {
     return statsaveReducer.datestat;
   });
   //===========================================================
-  //console.log("MenuLevel2:", datestat.xttData);
+  //console.log("MenuLevel2:", props.xctrll);
 
   props.saveXt(false);
   const xtProps = props.xtt;
@@ -120,6 +121,7 @@ const PointsMenuLevel2 = (props: {
                 xtt={xtProps}
                 crossroad={props.crossroad}
                 setPoint={props.setPoint}
+                update={props.update}
               />
             )}
             {value === "2" && datestat.xttData === MakeDate(new Date()) && (
@@ -130,6 +132,7 @@ const PointsMenuLevel2 = (props: {
                 xtt={xtProps}
                 crossroad={props.crossroad}
                 setPoint={props.setPoint}
+                update={props.update}
               />
             )}
             {value === "3" && (
@@ -142,6 +145,7 @@ const PointsMenuLevel2 = (props: {
                 saveXt={props.saveXt}
                 calc={props.calc}
                 calcDeb={props.calcDeb}
+                update={props.update}
               />
             )}
           </Grid>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { maskpointCreate, statsaveCreate } from './redux/actions';
+import { maskpointCreate, statsaveCreate } from '../src/redux/actions';
 
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -11,29 +11,29 @@ import 'dayjs/locale/ru';
 import dayjs, { Dayjs } from 'dayjs';
 import axios from 'axios';
 
-import Management from './components/Management/Management';
-import Points from './components/Points/Points';
-import StatisticsNew from './components/Statistics/StatisticsNew';
-import StatisticsArchive from './components/Statistics/StatisticsArchive';
-import BeginSeans from './AppBeginSeans';
-import EndSeans from './AppEndSeans';
-import InputInterval from './AppInpInerval';
-import AppWriteToAllFileForXT from './AppWriteToAllFileForXT';
+import Management from '../src/components/Management/Management';
+import Points from '../src/components/Points/Points';
+import StatisticsNew from '../src/components/Statistics/StatisticsNew';
+import StatisticsArchive from '../src/components/Statistics/StatisticsArchive';
+import BeginSeans from '../src/AppBeginSeans';
+import EndSeans from '../src/AppEndSeans';
+import InputInterval from '../src/AppInpInerval';
+import AppWriteToAllFileForXT from '../src/AppWriteToAllFileForXT';
 
-import { Tflight } from './interfaceMNG.d';
-import { XctrlInfo } from './interfaceGl.d';
-import { Statistic } from './interfaceStat.d';
-import { RegionInfo } from './interfaceGl.d';
+import { Tflight } from '../src/interfaceMNG';
+import { XctrlInfo } from '../src/interfaceGl';
+import { Statistic } from '../src/interfaceStat';
+import { RegionInfo } from '../src/interfaceGl';
 
-import { styleImpServis, styleInp, styleInt01 } from './AppStyle';
-import { styleImpBlock, styleBoxTabContext } from './AppStyle';
+import { styleImpServis, styleInp, styleInt01 } from '../src/AppStyle';
+import { styleImpBlock, styleBoxTabContext } from '../src/AppStyle';
 
-import { MakeInterval, WriteToCsvFileForStat } from './AppServiceFunctions';
-import { ButtonMenu } from './AppServiceFunctions';
-import { InputerDate, MakeDate, InputerOk } from './AppServiceFunctions';
-import { PunktMenuSaveFile } from './AppServiceFunctions';
+import { MakeInterval, WriteToCsvFileForStat } from '../src/AppServiceFunctions';
+import { ButtonMenu } from '../src/AppServiceFunctions';
+import { InputerDate, MakeDate, InputerOk } from '../src/AppServiceFunctions';
+import { PunktMenuSaveFile } from '../src/AppServiceFunctions';
 //getStatisticsList
-import { dataStatNow } from './NullStatNow';
+import { dataStatNow } from '../src/NullStatNow';
 
 export interface Stater {
   area: number;

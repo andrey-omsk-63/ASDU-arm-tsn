@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-, "basket/Test.tsx"  ]
+, "basket/Test.tsx", "basket/AppOld.tsx"  ]
 }

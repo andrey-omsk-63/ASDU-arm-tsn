@@ -53,7 +53,9 @@ const PointsLevel2Baza = (props: {
   xtt: number;
   crossroad: number;
   setPoint: any;
+  update: boolean;
 }) => {
+  console.log("PointsLevel2Baza: пришло", props.update);
   //== Piece of Redux =======================================
   let maskpoint = useSelector((state: any) => {
     const { maskpointReducer } = state;
@@ -120,6 +122,9 @@ const PointsLevel2Baza = (props: {
         flagExit = false;
         flagEdit = true;
         flagSave = false;
+      } else {
+        pointGraf = props.xctrll;
+        console.log('ОБНОВЛЕНИЕ Baza pointGraf') //============
       }
     }
   }
@@ -720,6 +725,7 @@ const PointsLevel2Baza = (props: {
             xctrll={pointGraf}
             xtt={xtProps}
             crossroad={props.crossroad}
+            update={props.update}
           />
         </Grid>
       </Stack>

@@ -20,13 +20,14 @@ let phGl = -1;
 let pvGl = -1;
 let IDX = -1;
 let massRatio: Array<number> = [];
-let oldXctrl: any = null;
 
 const PointsLevel2BazaDiogram = (props: {
   xctrll: XctrlInfo[];
   xtt: number;
   crossroad: number;
+  update: boolean;
 }) => {
+  //console.log("PointsLevel2BazaDiogram: пришло обновление", props.update);
   const points = props.xctrll[props.xtt];
   const crRoad = props.crossroad;
   const namer = points.xctrls[props.crossroad].name;
@@ -60,14 +61,6 @@ const PointsLevel2BazaDiogram = (props: {
 
   const [openLoader, setOpenLoader] = React.useState(true);
   const [pictInfo, setPictInfo] = React.useState(false);
-  const [trigger, setTrigger] = React.useState(false);
-
-  if (oldXctrl !== props.xctrll) {
-    // пришло обновление
-    console.log("PointsLevel2BazaDiogram: пришло обновление");
-    oldXctrl = props.xctrll;
-    setTrigger(!trigger);
-  }
 
   let dlMas = points.xctrls[crRoad].StrategyB.length;
   const horizonLimit = points.xctrls[crRoad].StrategyB[dlMas - 1].xright;
@@ -291,8 +284,11 @@ const PointsLevel2BazaDiogram = (props: {
     }
   };
 
-  const OutputerPict = () => {
-    console.log('trigger:',trigger)
+  const OutputerPict = (update: boolean) => {
+    console.log(
+      "BAZA Обновление точек:",
+      new Date().toTimeString().slice(0, 5)
+    );
     let resStrr = [];
     if (pointer !== null) {
       if (pointer[namer]) {
@@ -343,8 +339,7 @@ const PointsLevel2BazaDiogram = (props: {
         {!openLoader && (
           <>
             {PointsXt112Comp1Tab4()}
-            {trigger && <>{OutputerPict()}</>}
-            {!trigger && <>{OutputerPict()}</>}
+            {OutputerPict(props.update)}
             {pictInfo && (
               <>
                 {PictInfoBox(

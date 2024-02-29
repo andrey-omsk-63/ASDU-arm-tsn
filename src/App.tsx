@@ -119,6 +119,9 @@ let nullNewStatistics = false;
 let massGoodDate: Array<string> = [];
 let tekValue = "1";
 
+let timerId: any = null;
+let timer = 20000;
+
 const App = () => {
   //== Piece of Redux ======================================
   let maskpoint = useSelector((state: any) => {
@@ -151,8 +154,13 @@ const App = () => {
   const [write, setWrite] = React.useState(false);
   const [openSetErrLog, setOpenSetErrLog] = React.useState(false);
   const [calculate, setCalculate] = React.useState(true);
+  const [update, setUpdate] = React.useState(true);
 
-  const UpdateXctrl = () => {
+  const UpdateXctrl = (update: boolean) => {
+    console.log(
+      "РАЗНОСКА обновлений Xctrl",
+      new Date().toTimeString().slice(0, 5)
+    );
     if (isOpenInf && !flagEtalonInf) {
       let pointsAdd = []; // разноска обновлений Xctrl
       let newRecord = true;
@@ -173,6 +181,9 @@ const App = () => {
       if (pointsAdd.length > 0) {
         for (let i = 0; i < pointsAdd.length; i++)
           pointsEtalonXctrl.push(pointsAdd[i]);
+      } else {
+        console.log("OОБНОВИЛСЯ эталон");
+        pointsEtalonXctrl = pointsXctrl;
       }
     }
     if (isOpenInf && flagEtalonInf) {
@@ -233,7 +244,8 @@ const App = () => {
         case "xctrlInfo":
           setPointsXctrl(data.xctrlInfo ?? []);
           if (regionGlob === 0) setPointsReg(data.regionInfo ?? []);
-          console.log("xctrlInfo:", data.xctrlInfo);
+          console.log("Пришло xctrlInfo:", data.xctrlInfo);
+          setUpdate(!update); // для обновдения точек в графиках
           setIsOpenInf(true);
           break;
         case "getStatisticsList":
@@ -281,7 +293,12 @@ const App = () => {
           console.log("data_default:", allData.data);
       }
     };
-  }, [calculate, datestat, dispatch, regionGlob]);
+  }, [calculate, datestat, dispatch, regionGlob, update]);
+
+  const DoTimerId = () => {
+    setUpdate(!update);
+    console.log("DoTimerId:", timerId, update);
+  };
 
   if (debug && flagOpenDebug) {
     console.log("РЕЖИМ ОТЛАДКИ!!! ");
@@ -292,6 +309,9 @@ const App = () => {
     const ipAdress: string = "http://localhost:3000/otladkaXctrl.json";
     axios.get(ipAdress).then(({ data }) => {
       setPointsXctrl(data.data.xctrlInfo ?? []);
+      //============
+      timerId = setInterval(() => DoTimerId(), timer);
+      //============
       if (regionGlob === 0) setPointsReg(data.data.regionInfo ?? []);
       if (data.data.xctrlInfo !== null) {
         maskPoint.pointForRedax = data.data.xctrlInfo[0];
@@ -525,7 +545,7 @@ const App = () => {
     }
   };
 
-  UpdateXctrl(); // разноска обновлений Xctrl
+  UpdateXctrl(update); // разноска обновлений Xctrl
 
   return (
     <>
@@ -581,6 +601,7 @@ const App = () => {
                     saveXt={SetSaveXT}
                     date={formSett}
                     calc={calculate}
+                    update={update}
                   />
                 )}
               </TabPanel>

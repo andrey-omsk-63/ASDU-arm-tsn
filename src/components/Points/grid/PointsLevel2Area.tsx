@@ -43,6 +43,7 @@ const PointsLevel2Area = (props: {
   xtt: number;
   crossroad: number;
   setPoint: any;
+  update: boolean;
 }) => {
   //== Piece of Redux =======================================
   let maskpoint = useSelector((state: any) => {
@@ -92,6 +93,9 @@ const PointsLevel2Area = (props: {
         flagExit = false;
         flagEdit = true;
         flagSave = false;
+      }  else {
+        pointGraf = props.xctrll;
+        console.log('ОБНОВЛЕНИЕ Area pointGraf') //============
       }
     }
   }
@@ -402,6 +406,7 @@ const PointsLevel2Area = (props: {
               xctrll={pointGraf}
               xtt={xtProps}
               crossroad={props.crossroad}
+              update={props.update}
             />
           </Grid>
         </Grid>

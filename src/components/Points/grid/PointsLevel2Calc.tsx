@@ -62,6 +62,7 @@ const PointsLevel2Calc = (props: {
   saveXt: Function;
   calc: boolean;
   calcDeb: boolean;
+  update: boolean;
 }) => {
   //== Piece of Redux ======================================
   let datestat = useSelector((state: any) => {
@@ -313,7 +314,8 @@ const PointsLevel2Calc = (props: {
     );
   };
 
-  const OutputMainTabl = () => {
+  const OutputMainTabl = (update: boolean) => {
+    console.log('Calc Обновление точек:', update)
     return (
       <Grid item xs={8} sx={styleXTC033}>
         {PointsLevel2CalcTab2Header()}
@@ -389,7 +391,7 @@ const PointsLevel2Calc = (props: {
                 {pointer[namer].length !== 0 ? (
                   <Grid item xs={12}>
                     <Grid container>
-                      {OutputMainTabl()}
+                      {OutputMainTabl(props.update)}
                       <Grid item xs={0.05}></Grid>
                       <Grid item xs={3.95} sx={styleXTC033}>
                         {HeaderSupportiveTabl()}
