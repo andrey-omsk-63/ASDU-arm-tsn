@@ -188,7 +188,6 @@ const PointsLevel2AreaDiogram = (props: {
     } else {
       PuskBalloon();
     }
-    //e.preventDefault(); // чтобы страница не перезагружалась !!!!!!
   };
 
   const OutputerPict = (update: boolean) => {
@@ -200,9 +199,7 @@ const PointsLevel2AreaDiogram = (props: {
     if (pointer !== null) {
       if (pointer[namer]) {
         let I = 0;
-        //let tekTime = new Date().getHours() * 60 + new Date().getMinutes();
         for (let i = 0; i < pointer[namer].length; i++) {
-          //if (pointer[namer][i].Time <= tekTime)
           if (pointer[namer][i].Value[0] || pointer[namer][i].Value[1]) I = i;
         }
         for (let i = 0; i < pointer[namer].length; i++) {
@@ -213,7 +210,6 @@ const PointsLevel2AreaDiogram = (props: {
           // let flagEnd = i === pointer[namer].length - 1 ? true : false;
           let flagEnd = i === I ? true : false;
           if (pointer[namer][i].Value[0] || pointer[namer][i].Value[1]) {
-            //if (pointer[namer][i].Time <= tekTime)
             resStrr.push(
               <>
                 <Grid key={i} item container>
@@ -244,7 +240,6 @@ const PointsLevel2AreaDiogram = (props: {
         mass2 += "," + elem[i].chanR[0].toString();
       }
     }
-    //mass1 += ",4,6"; // для отладки
     resStr.push(
       <Grid key={Math.random()} item sx={stylePointInf1}>
         Прямой {"["}
@@ -254,7 +249,6 @@ const PointsLevel2AreaDiogram = (props: {
     );
     let ml01 = dlBlok - 129 + "px";
     let stylePointInf2 = PointInfoDirStyle("84.2vh", ml01, 16);
-    //mass2 += ",5,7"; // для отладки
     resStr.push(
       <Grid key={Math.random()} item sx={stylePointInf2}>
         Обратный {"["}

@@ -10,6 +10,9 @@ import PointsMenuLevel1 from "./PointsMenuLevel1";
 
 import { MakeDate, SendSocketOldDateXt } from "../../AppServiceFunctions";
 
+import { stylePoint01, stylePoint02 } from "./grid/PointsGridStyle";
+import { stylePoint03 } from "./grid/PointsGridStyle";
+
 import { XctrlInfo } from "../../interfaceGl.d";
 
 let tekValue = 0;
@@ -50,11 +53,11 @@ const Points = (props: {
   let debug = false;
   if (props.ws.url === "wss://localhost:3000/W") debug = true;
 
-  //console.log('Points:',props.xctrll)
-
   let points = pointsGl.filter(
     (pointsGl) => pointsGl.region === Number(reGion)
   );
+
+  //console.log("Points:", props.xctrll, points);
 
   const [value, setValue] = React.useState(tekValue);
   const [calculate, setCalculate] = React.useState(true);
@@ -83,6 +86,7 @@ const Points = (props: {
   }, [props.ws, reGion]);
 
   if (isOpen) pointsEtalon = points; // замена проверки обновления - проверка теперь в App
+  //console.log("pointsEtalon:", reGion, pointsEtalon);
 
   if (props.date !== tekDate) {
     if (props.date !== oldDate || oldXt !== tekValue) {
@@ -132,29 +136,7 @@ const Points = (props: {
       );
     } else {
       for (let i = 0; i < pointsEtalon.length; i++) {
-        const stylePXt1 = {
-          fontSize: 13.5,
-          maxHeight: "20px",
-          minHeight: "20px",
-          bgcolor: "#BAE186", // тёмно-салатовый
-          border: "1px solid #000",
-          borderColor: "#93D145", // ярко-салатовый
-          boxShadow: "6px -6px 6px #d4d4d4",
-          color: "black",
-          marginRight: 1,
-        };
-        const stylePXt11 = {
-          fontSize: 13.5,
-          maxHeight: "20px",
-          minHeight: "20px",
-          bgcolor: "#E6F5D6", // светло-салатовый
-          border: "1px solid #000",
-          borderColor: "#d4d4d4", // серый
-          boxShadow: 2,
-          color: "black",
-          marginRight: 1,
-        };
-        let illum = value === i ? stylePXt1 : stylePXt11;
+        let illum = value === i ? stylePoint01 : stylePoint02;
         labl =
           "ХТ:" +
           pointsEtalon[i].area.toString() +
@@ -166,20 +148,11 @@ const Points = (props: {
     return resSps;
   };
 
-  const stylePoints01 = {
-    //border: 1,
-    width: window.innerWidth - 21,
-    fontSize: 12,
-    marginTop: 0.5,
-    marginLeft: 0.5,
-  };
-
   return (
-      <Box sx={{ border: 0, marginTop: -2.8, marginLeft: -3, marginRight: -5 }}>
-      {/* <Box sx={{ border: 1, marginTop: -2.8, marginLeft: -3, marginRight: -5 }}>  */}
+    <Box sx={{ marginTop: -2.8, marginLeft: -3, marginRight: -5 }}>
       {pointsEtalon.length > 0 && (
         <>
-          <Box sx={stylePoints01}>
+          <Box sx={stylePoint03}>
             <Tabs
               sx={{ maxHeight: "20px", minHeight: "20px" }}
               value={value}

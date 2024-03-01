@@ -12,7 +12,9 @@ import Modal from "@mui/material/Modal";
 import PointsMainScr from "./PointsMainScr";
 import PointsMenuLevel2 from "./PointsMenuLevel2";
 
-import { styleModalEnd } from "./grid/PointsGridStyle";
+import { stylePLevel01, styleModalEnd } from "./grid/PointsGridStyle";
+import { stylePLevel02, stylePLevel03 } from "./grid/PointsGridStyle";
+import { stylePLevel04, stylePLevel05 } from "./grid/PointsGridStyle";
 
 import { XctrlInfo } from "../../interfaceGl.d";
 
@@ -60,36 +62,6 @@ const PointsMenuLevel1 = (props: {
     setCrossRoad(0);
   }
 
-  const stylePXt11 = {
-    fontSize: 13.9,
-    maxHeight: "20px",
-    minHeight: "20px",
-    color: "black",
-    bgcolor: "#BAE186", // тёмно-салатовый
-    border: "1px solid #000",
-    borderColor: "#93D145", // ярко-салатовый
-    borderRadius: 1,
-    boxShadow: 6,
-    marginRight: 1,
-    marginTop: 0.7,
-    textTransform: "unset !important",
-  };
-
-  const stylePXt12 = {
-    fontSize: 13.9,
-    maxHeight: "20px",
-    minHeight: "20px",
-    bgcolor: "#E6F5D6", // светло-салатовый
-    border: "1px solid #000",
-    borderColor: "#d4d4d4", // серый
-    borderRadius: 1,
-    boxShadow: 4,
-    color: "black",
-    marginRight: 1,
-    marginTop: 0.7,
-    textTransform: "unset !important",
-  };
-
   const SetValueLavel2 = (mode: string) => {
     setValueLavel2(mode);
     if (mode === "1") setTekValue(mode); //tekValue = mode;
@@ -126,64 +98,51 @@ const PointsMenuLevel1 = (props: {
 
     let dlStrMenu = 0;
 
-    if (isOpen && points.xctrls.length !== 0) {
-      for (let i = 0; i < points.xctrls.length; i++) {
-        if (points.xctrls[i].name.length > dlStrMenu) {
-          dlStrMenu = points.xctrls[i].name.length;
-        }
-      }
+    //console.log("PointsMenuLevel1:", points);
 
-      const stylePK = {
-        outline: "none",
-        position: "absolute",
-        left: "50%",
-        top: "50%",
-        transform: "translate(-50%, -50%)",
-        width: (dlStrMenu + 8) * 10,
-        bgcolor: "background.paper",
-        border: "1px solid #FFFFFF", 
-        //borderColor: "primary.main",
-        borderRadius: 2,
-        boxShadow: 24,
-        p: 3,
-      };
-
-      const SpisPerekr = () => {
-        let resStr = [];
+    if (points) {
+      if (isOpen && points.xctrls.length !== 0) {
         for (let i = 0; i < points.xctrls.length; i++) {
-          let illum = nomIllum === i ? stylePXt11 : stylePXt12;
+          if (points.xctrls[i].name.length > dlStrMenu) {
+            dlStrMenu = points.xctrls[i].name.length;
+          }
+        }
+
+        const SpisPerekr = () => {
+          let resStr = [];
+          for (let i = 0; i < points.xctrls.length; i++) {
+            let illum = nomIllum === i ? stylePLevel02 : stylePLevel03;
+            resStr.push(
+              <Button key={i} sx={illum} onClick={() => handleClose(i)}>
+                <b>
+                  XT:{points.area}:1:&nbsp;&nbsp;{points.xctrls[i].name}
+                </b>
+              </Button>
+            );
+          }
           resStr.push(
-            <Button key={i} sx={illum} onClick={() => handleClose(i)}>
-              <b>
-                XT:{points.area}:1:&nbsp;&nbsp;{points.xctrls[i].name}
-              </b>
+            <Button
+              key={Math.random()}
+              sx={styleModalEnd}
+              onClick={() => handleClose(777)}
+            >
+              <b>&#10006;</b>
             </Button>
           );
-        }
-        resStr.push(
-          <Button
-            key={Math.random()}
-            sx={styleModalEnd}
-            onClick={() => handleClose(777)}
-          >
-            <b>&#10006;</b>
-          </Button>
+          return resStr;
+        };
+
+        let soob = "XT:" + points.area + ":1 Перечень перекрёстков";
+
+        return (
+          <>
+            {ButtonMenu("2", soob, handleOpen)}
+            <Modal open={open} hideBackdrop={false}>
+              <Box sx={stylePLevel01(dlStrMenu)}>{SpisPerekr()}</Box>
+            </Modal>
+          </>
         );
-        return resStr;
-      };
-
-      let soob = "XT:" + points.area + ":1 Перечень перекрёстков";
-
-      return (
-        <>
-          {ButtonMenu("2", soob, handleOpen)}
-          <Modal open={open} hideBackdrop={false}>
-            <Box sx={stylePK}>
-              <Stack direction="column">{SpisPerekr()}</Stack>
-            </Box>
-          </Modal>
-        </>
-      );
+      }
     }
   };
 
@@ -199,37 +158,7 @@ const PointsMenuLevel1 = (props: {
   };
 
   const ButtonMenu = (mode: string, soob: any, func: Function) => {
-    const styleButtonMenu01 = {
-      fontSize: 13.9,
-      maxHeight: "20px",
-      minHeight: "20px",
-      color: "black",
-      bgcolor: "#BAE186", // тёмно-салатовый
-      border: "1px solid #000",
-      borderColor: "#93D145", // ярко-салатовый
-      borderRadius: 1,
-      boxShadow: 6,
-      marginRight: 1,
-      marginTop: 0.7,
-      textTransform: "unset !important",
-    };
-
-    const styleButtonMenu02 = {
-      fontSize: 13.9,
-      maxHeight: "20px",
-      minHeight: "20px",
-      color: "black",
-      bgcolor: "#E6F5D6", // светло-салатовый
-      border: "1px solid #000",
-      borderColor: "#d4d4d4", // серый
-      borderRadius: 1,
-      boxShadow: 2,
-      marginRight: 1,
-      marginTop: 0.7,
-      textTransform: "unset !important",
-    };
-
-    let illum = mode === tekValue ? styleButtonMenu01 : styleButtonMenu02;
+    let illum = mode === tekValue ? stylePLevel04 : stylePLevel05;
 
     return (
       <Button sx={illum} onClick={() => func()}>
@@ -239,47 +168,51 @@ const PointsMenuLevel1 = (props: {
   };
 
   return (
-    <Box>
-      <TabContext value={valueLevel2}>
+    <>
+      {points && (
         <Box>
-          <Stack sx={{ marginLeft: 0.5, marginTop: 0 }} direction="row">
-            {ButtonMenu("1", "Основной:", SetValueLavel21)}
-            {MenuCrossRoad()}
-          </Stack>
-        </Box>
-        <TabPanel value="1">
-          <PointsMainScr
-            open={isOpen}
-            ws={props.ws}
-            xctrll={props.xctrll}
-            xtt={xtProps}
-            setPoint={props.setPoint}
-            calc={props.calc}
-            calcDeb={props.calcDeb}
-          />
-        </TabPanel>
-        <TabPanel value="2">
-          <>
-            {points.xctrls.length > 0 && (
+          <TabContext value={valueLevel2}>
+            <Box sx={{ marginLeft: 0.5 }}>
+              <Stack sx={{ marginLeft: 0.5, marginTop: 0 }} direction="row">
+                {ButtonMenu("1", "Основной:", SetValueLavel21)}
+                {MenuCrossRoad()}
+              </Stack>
+            </Box>
+            <TabPanel value="1">
+              <PointsMainScr
+                open={isOpen}
+                ws={props.ws}
+                xctrll={props.xctrll}
+                xtt={xtProps}
+                setPoint={props.setPoint}
+                calc={props.calc}
+                calcDeb={props.calcDeb}
+              />
+            </TabPanel>
+            <TabPanel value="2">
               <>
-                <PointsMenuLevel2
-                  open={isOpen}
-                  ws={props.ws}
-                  xctrll={props.xctrll}
-                  xtt={xtProps}
-                  crossroad={crossRoad}
-                  setPoint={props.setPoint}
-                  saveXt={props.saveXt}
-                  calc={props.calc}
-                  calcDeb={props.calcDeb}
-                  update={props.update}
-                />
+                {points.xctrls.length > 0 && (
+                  <>
+                    <PointsMenuLevel2
+                      open={isOpen}
+                      ws={props.ws}
+                      xctrll={props.xctrll}
+                      xtt={xtProps}
+                      crossroad={crossRoad}
+                      setPoint={props.setPoint}
+                      saveXt={props.saveXt}
+                      calc={props.calc}
+                      calcDeb={props.calcDeb}
+                      update={props.update}
+                    />
+                  </>
+                )}
               </>
-            )}
-          </>
-        </TabPanel>
-      </TabContext>
-    </Box>
+            </TabPanel>
+          </TabContext>
+        </Box>
+      )}
+    </>
   );
 };
 

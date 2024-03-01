@@ -159,7 +159,8 @@ const App = () => {
   const UpdateXctrl = (update: boolean) => {
     console.log(
       "РАЗНОСКА обновлений Xctrl",
-      new Date().toTimeString().slice(0, 5)
+      new Date().toTimeString().slice(0, 5),
+      pointsXctrl
     );
     if (isOpenInf && !flagEtalonInf) {
       let pointsAdd = []; // разноска обновлений Xctrl
@@ -173,21 +174,27 @@ const App = () => {
             pointsXctrl[i].area === pointsEtalonXctrl[j].area
           ) {
             newRecord = false;
-            pointsEtalonXctrl[j] = pointsXctrl[i];
+            pointsEtalonXctrl[j] = JSON.parse(JSON.stringify(pointsXctrl[i]));
           }
         }
-        if (newRecord) pointsAdd.push(pointsXctrl[i]);
+        if (newRecord)
+          pointsAdd.push(JSON.parse(JSON.stringify(pointsXctrl[i])));
       }
       if (pointsAdd.length > 0) {
+        console.log("OБНОВИЛСЯ эталон Изменилось количество ХТ");
         for (let i = 0; i < pointsAdd.length; i++)
           pointsEtalonXctrl.push(pointsAdd[i]);
       } else {
-        console.log("OОБНОВИЛСЯ эталон");
-        pointsEtalonXctrl = pointsXctrl;
+        //pointsEtalonXctrl = JSON.parse(JSON.stringify(pointsXctrl));
+        console.log(
+          "OБНОВИЛСЯ эталон Количество ХТ не изменилось",
+          pointsEtalonXctrl
+        );
       }
     }
     if (isOpenInf && flagEtalonInf) {
-      pointsEtalonXctrl = pointsXctrl; // получен первый WS
+      pointsEtalonXctrl = JSON.parse(JSON.stringify(pointsXctrl)); // получен первый WS
+      console.log("Cоздан эталон", pointsEtalonXctrl);
       flagEtalonInf = false;
     }
   };
@@ -235,16 +242,16 @@ const App = () => {
     WS.onmessage = function (event: any) {
       let allData = JSON.parse(event.data);
       let data = allData.data;
-      //console.log("пришло:", allData.type, data);
+      //console.log("ПРИШЛО:", data);
       switch (allData.type) {
         case "getDevices":
           setPointsTfl(data.tflight ?? []);
           setIsOpenDev(true);
           break;
         case "xctrlInfo":
+          console.log("Пришло xctrlInfo:", data.xctrlInfo);
           setPointsXctrl(data.xctrlInfo ?? []);
           if (regionGlob === 0) setPointsReg(data.regionInfo ?? []);
-          console.log("Пришло xctrlInfo:", data.xctrlInfo);
           setUpdate(!update); // для обновдения точек в графиках
           setIsOpenInf(true);
           break;
@@ -295,10 +302,10 @@ const App = () => {
     };
   }, [calculate, datestat, dispatch, regionGlob, update]);
 
-  const DoTimerId = () => {
-    setUpdate(!update);
-    console.log("DoTimerId:", timerId, update);
-  };
+  // const DoTimerId = () => {
+  //   setUpdate(!update);
+  //   console.log("DoTimerId:", timerId, update);
+  // };
 
   if (debug && flagOpenDebug) {
     console.log("РЕЖИМ ОТЛАДКИ!!! ");
@@ -310,7 +317,7 @@ const App = () => {
     axios.get(ipAdress).then(({ data }) => {
       setPointsXctrl(data.data.xctrlInfo ?? []);
       //============
-      timerId = setInterval(() => DoTimerId(), timer);
+      //timerId = setInterval(() => DoTimerId(), timer);
       //============
       if (regionGlob === 0) setPointsReg(data.data.regionInfo ?? []);
       if (data.data.xctrlInfo !== null) {

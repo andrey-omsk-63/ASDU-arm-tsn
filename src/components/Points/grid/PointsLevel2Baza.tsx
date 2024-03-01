@@ -124,7 +124,7 @@ const PointsLevel2Baza = (props: {
         flagSave = false;
       } else {
         pointGraf = props.xctrll;
-        console.log('ОБНОВЛЕНИЕ Baza pointGraf') //============
+        console.log('ОБНОВЛЕНИЕ Baza pointGraf ============') //============
       }
     }
   }
@@ -175,7 +175,6 @@ const PointsLevel2Baza = (props: {
 
     const hChange2 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
-      //EvilInput(form, minLeft) && form && setValuen2(Math.abs(form));
       form && setValuen2(Math.abs(form));
     };
 
@@ -185,7 +184,6 @@ const PointsLevel2Baza = (props: {
 
     const hChange3 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
-      //EvilInput(form, minRight) && form && setValuen3(Math.abs(form));
       form && setValuen3(Math.abs(form));
     };
 
@@ -446,7 +444,6 @@ const PointsLevel2Baza = (props: {
 
     const handleChange2 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
-      //EvilInput(form, max2, min2) && form && setValuen2(Math.abs(form));
       form && setValuen2(Math.abs(form));
     };
 
@@ -526,7 +523,6 @@ const PointsLevel2Baza = (props: {
     let name = formName.slice(0, 29);
     let yellowSoob = "Выкл с ";
     //====================================================================
-    //if (!maskpoint.pointForRedax.yellow.make) yellowSoob = "Вкл с ";
     if (maskpoint.pointForRedax.yellow.make) yellowSoob = "Вкл с ";
     yellowSoob +=
       TimeStr(maskpoint.pointForRedax.yellow.start) +

@@ -69,7 +69,6 @@ const PointsLevel2BazaDiogram = (props: {
   const vertical = points.xctrls[crRoad].left;
 
   const steepHorizon = 12 / horizon;
-  //const steepVertical = 85.7 / vertical;
   const steepVertical = 85.9 / vertical;
   const dlBlok = (window.innerWidth / 12.55) * 8;
 
@@ -112,20 +111,12 @@ const PointsLevel2BazaDiogram = (props: {
       let pStB = points.xctrls[crRoad].StrategyB;
 
       const MakeMatrixColor = (num: number, i: number, j: number) => {
-        // luchO = pStB[num].vleft;
-        // luchP = pStB[num].vright;
         luchO = pStB[num].vleft * massRatio[num];
         luchP = pStB[num].vright * massRatio[num];
         ratio = pStB[num].xright / pStB[num].xleft;
-        ///coler = colorsGraf[num * 3];
         coler = colorsGraf[pStB[num].pks];
-        //if (luchP !== 1 || luchO !== 1) {
-        ///if (i < j * luchO * ratio) coler = colorsGraf[num * 3 + 1];
-        ///if (i > j * luchP * ratio) coler = colorsGraf[num * 3 + 2];
         if (i < j * luchO * ratio) coler = colorsGraf[pStB[num].pkl];
         if (i >= j * luchP * ratio) coler = colorsGraf[pStB[num].pkr];
-        //if (i >= j * luchP * ratio) coler = colorsGraf[num * 3 + 2];
-        //}
       };
       for (let j = 0; j < vertical; j += scale) {
         matrix[j] = [];
@@ -293,18 +284,16 @@ const PointsLevel2BazaDiogram = (props: {
     if (pointer !== null) {
       if (pointer[namer]) {
         let I = 0;
-        for (let i = 0; i < pointer[namer].length; i++) {
+        for (let i = 0; i < pointer[namer].length; i++)
           if (pointer[namer][i].Value[0] || pointer[namer][i].Value[1]) I = i;
-        }
         let prpv = vertical / 100;
         let prph = horizon / 100;
         for (let i = 0; i < pointer[namer].length; i++) {
           let pv = 100 - pointer[namer][i].Value[0] / prpv;
           let ph = pointer[namer][i].Value[1] / prph;
           let flagEnd = i === I ? true : false;
-          if (pointer[namer][i].Value[0] || pointer[namer][i].Value[1]) {
+          if (pointer[namer][i].Value[0] || pointer[namer][i].Value[1])
             resStrr.push(<>{OutputPict(i, pv, ph, PictInfo, flagEnd)}</>);
-          }
         }
       }
     }

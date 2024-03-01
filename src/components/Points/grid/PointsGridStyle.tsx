@@ -21,18 +21,162 @@ export const styleBackdropArea = {
 
 export const styleBackdropBaza = {
   color: "#fff",
-  // marginLeft: window.innerWidth * 0.355 + "px",
   marginLeft: window.innerWidth * 0.355 + "px",
   marginRight: "1.7vh",
   marginTop: 11,
   marginBottom: "5vh",
   zIndex: (theme: any) => theme.zIndex.drawer + 1,
 };
+//====== Points =================================================================
+export const stylePoint01 = {
+  fontSize: 13.5,
+  maxHeight: "20px",
+  minHeight: "20px",
+  bgcolor: "#BAE186", // тёмно-салатовый
+  border: "1px solid #000",
+  borderColor: "#93D145", // ярко-салатовый
+  boxShadow: "6px -6px 6px #d4d4d4",
+  color: "black",
+  marginRight: 1,
+};
+export const stylePoint02 = {
+  fontSize: 13.5,
+  maxHeight: "20px",
+  minHeight: "20px",
+  bgcolor: "#E6F5D6", // светло-салатовый
+  border: "1px solid #000",
+  borderColor: "#d4d4d4", // серый
+  boxShadow: 2,
+  color: "black",
+  marginRight: 1,
+};
+
+export const stylePoint03 = {
+  width: window.innerWidth - 21,
+  fontSize: 12,
+  marginTop: 0.5,
+  marginLeft: 0.5,
+};
+//====== PointsMenuLevel1 =======================================================
+export const stylePLevel01 = (dlStrMenu: number) => {
+  const stylePLevel = {
+    outline: "none",
+    position: "absolute",
+    left: "50%",
+    top: "50%",
+    transform: "translate(-50%, -50%)",
+    width: (dlStrMenu + 8) * 10,
+    bgcolor: "background.paper",
+    border: "1px solid #FFFFFF",
+    borderRadius: 2,
+    boxShadow: 24,
+    p: 3,
+  };
+  return stylePLevel;
+};
+
+export const stylePLevel02 = {
+  fontSize: 13.9,
+  maxHeight: "20px",
+  minHeight: "20px",
+  color: "black",
+  bgcolor: "#BAE186", // тёмно-салатовый
+  border: "1px solid #000",
+  borderColor: "#93D145", // ярко-салатовый
+  borderRadius: 1,
+  boxShadow: 6,
+  marginRight: 1,
+  marginTop: 0.7,
+  textTransform: "unset !important",
+};
+
+export const stylePLevel03 = {
+  fontSize: 13.9,
+  maxHeight: "20px",
+  minHeight: "20px",
+  bgcolor: "#E6F5D6", // светло-салатовый
+  border: "1px solid #000",
+  borderColor: "#d4d4d4", // серый
+  borderRadius: 1,
+  boxShadow: 4,
+  color: "black",
+  marginRight: 1,
+  marginTop: 0.7,
+  textTransform: "unset !important",
+};
+
+export const stylePLevel04 = {
+  fontSize: 13.9,
+  maxHeight: "20px",
+  minHeight: "20px",
+  color: "black",
+  bgcolor: "#BAE186", // тёмно-салатовый
+  border: "1px solid #000",
+  borderColor: "#93D145", // ярко-салатовый
+  borderRadius: 1,
+  boxShadow: 6,
+  marginRight: 1,
+  marginTop: 0.7,
+  textTransform: "unset !important",
+};
+
+export const stylePLevel05 = {
+  fontSize: 13.9,
+  maxHeight: "20px",
+  minHeight: "20px",
+  color: "black",
+  bgcolor: "#E6F5D6", // светло-салатовый
+  border: "1px solid #000",
+  borderColor: "#d4d4d4", // серый
+  borderRadius: 1,
+  boxShadow: 2,
+  marginRight: 1,
+  marginTop: 0.7,
+  textTransform: "unset !important",
+};
+//====== PointsMenuLevel2 =======================================================
+export const styleXTl201 = {
+  width: "70%",
+  height: "83.5vh",
+  marginTop: "2.5vh",
+  marginLeft: -2,
+  marginRight: -61,
+  border: 0,
+};
+
+export const stylePLevel06 = {
+  fontSize: 12.5,
+  maxHeight: "21px",
+  minHeight: "21px",
+  transform: "rotate(270deg)",
+  bgcolor: "#BAE186", // тёмно-салатовый
+  border: "1px solid #000",
+  borderColor: "#93D145", // ярко-салатовый
+  borderRadius: 1,
+  boxShadow: 6,
+  color: "black",
+  marginBottom: 6.5,
+  textTransform: "unset !important",
+};
+
+export const stylePLevel07 = {
+  fontSize: 12.5,
+  maxHeight: "21px",
+  minHeight: "21px",
+  transform: "rotate(270deg)",
+  bgcolor: "#E6F5D6", // светло-салатовый
+  border: "1px solid #000",
+  borderColor: "#d4d4d4", // серый
+  borderRadius: 1,
+  boxShadow: 2,
+  color: "black",
+  marginBottom: 6.5,
+  textTransform: "unset !important",
+};
 //====== PointsLevel2Baza =======================================================
 export const styleXTG00 = {
   fontSize: 11,
   borderBottom: "1px solid #d4d4d4", // серый
-  //borderColor: "primary.main",
   padding: 0.3,
   textAlign: "center",
 };
@@ -41,7 +185,6 @@ export const styleXTG01 = {
   fontSize: 11,
   borderRight: "1px solid #d4d4d4", // серый
   borderBottom: "1px solid #d4d4d4", // серый
-  //borderColor: "primary.main",
   padding: 0.3,
   textAlign: "center",
 };
@@ -50,7 +193,6 @@ export const styleXTG011 = {
   fontSize: 11,
   borderRight: "1px solid #d4d4d4", // серый
   borderBottom: "1px solid #d4d4d4", // серый
-  //borderColor: "primary.main",
   padding: 0.3,
   textAlign: "center",
 };
@@ -58,20 +200,15 @@ export const styleXTG011 = {
 export const styleXTG021 = {
   fontSize: 11,
   borderBottom: "1px solid #d4d4d4", // серый
-  //borderColor: "primary.main",
   padding: 0.7,
   textAlign: "center",
-  //backgroundColor: "#C0C0C0",
 };
 
 export const styleXTG02 = {
   fontSize: 11,
-  //borderRight: 1,
   borderBottom: "1px solid #d4d4d4", // серый
-  //borderColor: "primary.main",
   padding: 0.7,
   textAlign: "center",
-  //backgroundColor: "#C0C0C0",
 };
 
 export const styleXTG03 = {
@@ -80,7 +217,6 @@ export const styleXTG03 = {
   border: "1px solid #d4d4d4", // серый
   height: "32.6vh", // 33
   borderRadius: 1,
-  //borderColor: "primary.main",
   boxShadow: 12,
 };
 
@@ -180,7 +316,6 @@ export const styleSetInf = {
   width: 270,
   bgcolor: "background.paper",
   border: "1px solid #FFFFFF",
-  //borderColor: "primary.main",
   borderRadius: 1,
   boxShadow: 24,
   p: 1.5,
@@ -196,7 +331,6 @@ export const styleSetInff = {
   width: 380,
   bgcolor: "background.paper",
   border: "1px solid #FFFFFF",
-  //borderColor: "primary.main",
   borderRadius: 1,
   boxShadow: 24,
   p: 1.5,
@@ -263,13 +397,8 @@ export const PointInfoStrStyle = (mt01: string, ml01: string) => {
   return stylePointInf;
 };
 
-export const PointInfoDirStyle = (
-  mt01: string,
-  ml01: string,
-  fs: number,
-) => {
+export const PointInfoDirStyle = (mt01: string, ml01: string, fs: number) => {
   const stylePointInf = {
-    //border: 1,
     fontSize: fs,
     position: "absolute",
     marginTop: mt01,
@@ -283,7 +412,7 @@ export const PointInfoDirStyle = (
 export const PointInfoDirRotStyle = (
   mt01: string,
   ml01: string,
-  fs: number,
+  fs: number
 ) => {
   const stylePointInf = {
     //border: 1,
@@ -301,15 +430,13 @@ export const PointInfoDirRotStyle = (
 export const styleXTG035 = {
   bgcolor: "#F1F5FB", // светло серый
   border: "1px solid #d4d4d4", // серый
-  //height: "85.8vh",
   height: "65.8vh",
   borderRadius: 1,
-  //borderColor: "primary.main",
   boxShadow: 12,
 };
 
 export const styleXTG045 = {
-  height: '85.8vh',
+  height: "85.8vh",
   bgcolor: "#BBBBBB", // серый
   border: 1,
   marginLeft: 0.5,
@@ -341,16 +468,13 @@ export const styleXTGHeader = {
 export const styleXTG102 = {
   //borderRight: 1,
   borderBottom: "1px solid #d4d4d4", // серый
-  //borderColor: "primary.main",
   padding: 0.7,
   textAlign: "center",
-  //backgroundColor: "#C0C0C0",
 };
 
 export const styleXTG103 = {
   borderRight: "1px solid #d4d4d4", // серый
   borderBottom: "1px solid #d4d4d4", // серый
-  //borderColor: "primary.main",
   padding: 0.7,
   textAlign: "center",
 };
@@ -359,7 +483,6 @@ export const styleXTG104 = {
   fontSize: 14.5,
   bgcolor: "#F1F5FB", // светло серый
   border: "1px solid #d4d4d4", // серый
-  //borderColor: "primary.main",
   borderRadius: 1,
   margin: -1,
   boxShadow: 12,
@@ -368,7 +491,6 @@ export const styleXTG104 = {
 export const styleXTG105 = {
   fontSize: 11,
   borderRight: "1px solid #d4d4d4", // серый
-  //borderColor: "primary.main",
   backgroundColor: "#E5E5E5",
   textAlign: "center",
 };
@@ -384,23 +506,18 @@ export const styleXTGrid = {
 export const styleXTGl02 = {
   //borderRight: 1,
   borderBottom: "1px solid #d4d4d4", // серый
-  //borderColor: "primary.main",
   padding: 0.7,
   textAlign: "center",
-  //backgroundColor: "#C0C0C0",
 };
 
 export const styleXTGl021 = {
   borderBottom: "1px solid #d4d4d4", // серый
-  //borderColor: "primary.main",
   padding: 0.7,
   textAlign: "center",
-  //backgroundColor: "#C0C0C0",
 };
 
 export const styleXTGl05 = {
   fontSize: 11,
-  //borderRight: 1,
   borderColor: "primary.main",
   backgroundColor: "#E5E5E5",
   textAlign: "center",
@@ -410,9 +527,7 @@ export const styleXTC011 = {
   fontSize: 11,
   borderRight: "1px solid #d4d4d4", // серый
   borderBottom: "1px solid #d4d4d4", // серый
-  //borderColor: "primary.main",
   padding: 0.2,
-  //backgroundColor: "#ffffff", // белый
   textAlign: "center",
 };
 
@@ -420,7 +535,6 @@ export const styleXTC01 = {
   fontSize: 11,
   borderRight: "1px solid #d4d4d4", // серый
   borderBottom: "1px solid #d4d4d4", // серый
-  //borderColor: "primary.main",
   padding: 0.2,
   backgroundColor: "#e4eef7", // светло-голубой
   textAlign: "center",
@@ -429,7 +543,6 @@ export const styleXTC01 = {
 export const styleXTC02 = {
   fontSize: 11,
   borderBottom: "1px solid #d4d4d4", // серый
-  //borderColor: "primary.main",
   padding: 0.4,
   textAlign: "center",
   backgroundColor: "#C0C0C0",
@@ -439,7 +552,6 @@ export const styleXTC03 = {
   bgcolor: "#F1F5FB", // светло серый
   border: "1px solid #d4d4d4", // серый
   borderRadius: 1,
-  //borderColor: "primary.main",
   boxShadow: 12,
 };
 
@@ -447,9 +559,6 @@ export const styleXTC033 = {
   bgcolor: "#F1F5FB", // светло серый
   border: "1px solid #d4d4d4", // серый
   borderRadius: 1,
-  //borderColor: "primary.main",
-  //width: '99vh',
-  //height: "60.5vh",
   boxShadow: 12,
 };
 //====== PointsMainScr ==========================================================
@@ -457,7 +566,6 @@ export const styleXt02 = {
   bgcolor: "#F1F5FB", // светло серый
   border: "1px solid #d4d4d4", // серый
   borderRadius: 1,
-  //borderColor: "primary.main",
   padding: 1,
   marginLeft: 0.5,
   marginRight: 1,
@@ -474,7 +582,6 @@ export const styleXt03 = {
 export const styleXt04 = {
   borderRight: "1px solid #d4d4d4", // серый
   borderRadius: 1,
-  //borderColor: "primary.main",
   padding: 1,
   margin: 1,
   marginTop: -0.5,
@@ -485,21 +592,11 @@ export const styleXt04 = {
 export const styleXt05 = {
   borderRight: "1px solid #d4d4d4", // серый
   borderRadius: 1,
-  //borderColor: "primary.main",
   padding: 1,
   margin: 1,
   marginTop: -0.5,
   marginLeft: -0.5,
   marginRight: 1.5,
   height: "69%",
-};
-//====== PointsMenuLevel2 =======================================================
-export const styleXTl201 = {
-  width: "70%",
-  height: "83.5vh",
-  marginTop: "2.5vh",
-  marginLeft: -3,
-  marginRight: -61,
-  border: 0,
 };
 //===============================================================================

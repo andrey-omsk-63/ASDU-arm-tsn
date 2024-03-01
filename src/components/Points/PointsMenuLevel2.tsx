@@ -1,7 +1,6 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
 
-import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -13,9 +12,11 @@ import PointsLevel2Calc from "./grid/PointsLevel2Calc";
 import { MakeDate } from "../../AppServiceFunctions";
 
 import { styleXTl201 } from "./grid/PointsGridStyle";
+import { stylePLevel06, stylePLevel07 } from "./grid/PointsGridStyle";
 
 import { XctrlInfo } from "../../interfaceGl.d";
 
+// Диспеспетчер меню второго уровня (вертикального)
 const PointsMenuLevel2 = (props: {
   open: boolean;
   ws: WebSocket;
@@ -47,37 +48,7 @@ const PointsMenuLevel2 = (props: {
   };
 
   const ButtonMenu = (mode: string, soob: any) => {
-    const styleXTl202 = {
-      fontSize: 12.5,
-      maxHeight: "21px",
-      minHeight: "21px",
-      transform: "rotate(270deg)",
-      bgcolor: "#BAE186", // тёмно-салатовый
-      border: "1px solid #000",
-      borderColor: "#93D145", // ярко-салатовый
-      borderRadius: 1,
-      boxShadow: 6,
-      color: "black",
-      marginBottom: 6.5,
-      textTransform: "unset !important",
-    };
-
-    const styleXTl203 = {
-      fontSize: 12.5,
-      maxHeight: "21px",
-      minHeight: "21px",
-      transform: "rotate(270deg)",
-      bgcolor: "#E6F5D6", // светло-салатовый
-      border: "1px solid #000",
-      borderColor: "#d4d4d4", // серый
-      borderRadius: 1,
-      boxShadow: 2,
-      color: "black",
-      marginBottom: 6.5,
-      textTransform: "unset !important",
-    };
-
-    let illum = mode === tekValue ? styleXTl202 : styleXTl203;
+    let illum = mode === tekValue ? stylePLevel06 : stylePLevel07;
 
     return (
       <Button sx={illum} onClick={() => SetValue(mode)}>
@@ -89,11 +60,9 @@ const PointsMenuLevel2 = (props: {
   const PointsMenuLevel2Menu = () => {
     return (
       <Box sx={styleXTl201}>
-        <Stack sx={{ marginLeft: 1 }} direction="column">
-          {ButtonMenu("1", "Базовые")}
-          {ButtonMenu("2", "Oбласти")}
-          {ButtonMenu("3", "Расчёт")}
-        </Stack>
+        {ButtonMenu("1", "Базовые")}
+        {ButtonMenu("2", "Oбласти")}
+        {ButtonMenu("3", "Расчёт")}
       </Box>
     );
   };
