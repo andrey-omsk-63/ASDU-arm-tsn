@@ -119,8 +119,8 @@ let nullNewStatistics = false;
 let massGoodDate: Array<string> = [];
 let tekValue = "1";
 
-let timerId: any = null;
-let timer = 20000;
+//let timerId: any = null;
+//let timer = 20000;
 
 const App = () => {
   //== Piece of Redux ======================================
@@ -317,7 +317,7 @@ const App = () => {
     axios.get(ipAdress).then(({ data }) => {
       setPointsXctrl(data.data.xctrlInfo ?? []);
       //============
-      //timerId = setInterval(() => DoTimerId(), timer);
+      //timerId = setInterval(() => DoTimerId(), 20000);
       //============
       if (regionGlob === 0) setPointsReg(data.data.regionInfo ?? []);
       if (data.data.xctrlInfo !== null) {
