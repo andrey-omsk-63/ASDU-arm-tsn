@@ -207,7 +207,6 @@ const PointsLevel2AreaDiogram = (props: {
           let pv = 100 - pointer[namer][i].Value[0] / prpv;
           let prph = horizon / 100;
           let ph = pointer[namer][i].Value[1] / prph;
-          // let flagEnd = i === pointer[namer].length - 1 ? true : false;
           let flagEnd = i === I ? true : false;
           if (pointer[namer][i].Value[0] || pointer[namer][i].Value[1]) {
             resStrr.push(

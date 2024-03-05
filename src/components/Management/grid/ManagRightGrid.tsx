@@ -393,17 +393,20 @@ const ManagementRightGrid = (props: {
       prosSv = sostGl.toString();
       prosPch = podchGl.toString();
       proXT = "ХТ для подрайона отсутствует";
+
+      console.log ('props.masxt:', props.masxt, points)
+
       for (let j = 0; j < props.masxt.length; j++) {
         if (
           parseInt(points[0].area.num) === props.masxt[j].areaXT &&
           points[0].subarea === props.masxt[j].subareaXT
         ) {
-          proXT = "ХТ для подрайона назначен/";
-          if (props.masxt[j].releaseXT) proXT += "включён ";
-          if (!props.masxt[j].releaseXT) proXT += "выключен ";
+          proXT = "Для данного подрайона проект ХТ загружен. ХТ ";
+          if (props.masxt[j].releaseXT) proXT += "включён. ";
+          if (!props.masxt[j].releaseXT) proXT += "выключен. ";
 
-          if (props.masxt[j].switchXT) proXT += "Расчёт включён";
-          if (!props.masxt[j].switchXT) proXT += "Расчёт выключен";
+          if (props.masxt[j].switchXT) proXT += "Pасчёт включён.";
+          if (!props.masxt[j].switchXT) proXT += "Pасчёт выключен.";
 
           if (props.masxt[j].pknowXT > 0)
             soobBP = " Выбран план №" + props.masxt[j].pknowXT.toString();

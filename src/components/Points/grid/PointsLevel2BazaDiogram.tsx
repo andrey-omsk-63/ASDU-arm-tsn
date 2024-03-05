@@ -14,13 +14,14 @@ import { XctrlInfo } from "../../../interfaceGl.d";
 
 let xtPropsOld = -1;
 let crossRoadOld = -1;
+let pointsOld: any = [];
 
 let phGl = -1;
 let pvGl = -1;
 let IDX = -1;
 let massRatio: Array<number> = [];
 let resStr: any = [];
-let flagOutput = false;
+//let flagOutput = false;
 
 const PointsLevel2BazaDiogram = (props: {
   xctrll: XctrlInfo[];
@@ -88,17 +89,22 @@ const PointsLevel2BazaDiogram = (props: {
     massRatio.push(vert / hor);
   }
 
-  if (xtPropsOld !== props.xtt || crossRoadOld !== crRoad) {
+  if (
+    xtPropsOld !== props.xtt ||
+    crossRoadOld !== crRoad ||
+    pointsOld !== points
+  ) {
     // сменился ХТ
     xtPropsOld = props.xtt;
     crossRoadOld = crRoad;
+    pointsOld = points;
     setOpenLoader(true);
-    flagOutput = true;
+    //flagOutput = true;
     setPictInfo(false);
   }
 
   const PointsXt112Comp1Tab4 = () => {
-    console.log('!!!Перерисовка графика')
+    console.log("!!!Перерисовка графика");
     resStr = [];
     let resSps = [];
 
@@ -276,10 +282,10 @@ const PointsLevel2BazaDiogram = (props: {
   };
 
   const OutputerPict = (update: boolean) => {
-    console.log(
-      "BAZA Обновление точек:",
-      new Date().toTimeString().slice(0, 5)
-    );
+    // console.log(
+    //   "BAZA Обновление точек:",
+    //   new Date().toTimeString().slice(0, 5)
+    // );
     let resStrr = [];
     if (pointer !== null) {
       if (pointer[namer]) {
@@ -292,9 +298,6 @@ const PointsLevel2BazaDiogram = (props: {
           let pv = 100 - pointer[namer][i].Value[0] / prpv;
           let ph = pointer[namer][i].Value[1] / prph;
           let flagEnd = i === I ? true : false;
-
-          if (flagEnd) console.log('КОНЕЦ:',i)
-
           if (pointer[namer][i].Value[0] || pointer[namer][i].Value[1])
             resStrr.push(<>{OutputPict(i, pv, ph, PictInfo, flagEnd)}</>);
         }
@@ -304,30 +307,22 @@ const PointsLevel2BazaDiogram = (props: {
   };
   //============ Dinama =====================================================
   const handleClose = () => {
-    flagOutput = false;
+    //flagOutput = false;
     setOpenLoader(false);
   };
 
   const Output = () => {
     setTimeout(() => {
-      flagOutput = false;
+      //flagOutput = false;
       setOpenLoader(false);
     }, 100);
   };
 
   const Dinama = () => {
     return (
-      <>
-        {flagOutput && (
-          <Backdrop
-            sx={styleBackdropBaza}
-            open={openLoader}
-            onClick={handleClose}
-          >
-            <CircularProgress color="inherit" size={212} />
-          </Backdrop>
-        )}
-      </>
+      <Backdrop sx={styleBackdropBaza} open={openLoader} onClick={handleClose}>
+        <CircularProgress color="inherit" size={212} />
+      </Backdrop>
     );
   };
   //=========================================================================

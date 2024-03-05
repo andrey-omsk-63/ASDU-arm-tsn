@@ -118,6 +118,8 @@ let nullOldStatistics = false;
 let nullNewStatistics = false;
 let massGoodDate: Array<string> = [];
 let tekValue = "1";
+let update = true;
+let updateDevice = true;
 
 //let timerId: any = null;
 //let timer = 20000;
@@ -154,14 +156,14 @@ const App = () => {
   const [write, setWrite] = React.useState(false);
   const [openSetErrLog, setOpenSetErrLog] = React.useState(false);
   const [calculate, setCalculate] = React.useState(true);
-  const [update, setUpdate] = React.useState(true);
+  //const [update, setUpdate] = React.useState(true);
 
-  const UpdateXctrl = (update: boolean) => {
-    console.log(
-      "РАЗНОСКА обновлений Xctrl",
-      new Date().toTimeString().slice(0, 5),
-      pointsXctrl
-    );
+  const UpdateXctrl = () => {
+    // console.log(
+    //   "РАЗНОСКА обновлений Xctrl",
+    //   new Date().toTimeString().slice(0, 5),
+    //   pointsXctrl
+    // );
     if (isOpenInf && !flagEtalonInf) {
       let pointsAdd = []; // разноска обновлений Xctrl
       let newRecord = true;
@@ -184,13 +186,14 @@ const App = () => {
         console.log("OБНОВИЛСЯ эталон Изменилось количество ХТ");
         for (let i = 0; i < pointsAdd.length; i++)
           pointsEtalonXctrl.push(pointsAdd[i]);
-      } else {
-        //pointsEtalonXctrl = JSON.parse(JSON.stringify(pointsXctrl));
-        console.log(
-          "OБНОВИЛСЯ эталон Количество ХТ не изменилось",
-          pointsEtalonXctrl
-        );
-      }
+      } 
+      // else {
+      //   //pointsEtalonXctrl = JSON.parse(JSON.stringify(pointsXctrl));
+      //   console.log(
+      //     "OБНОВИЛСЯ эталон Количество ХТ не изменилось",
+      //     pointsEtalonXctrl
+      //   );
+      // }
     }
     if (isOpenInf && flagEtalonInf) {
       pointsEtalonXctrl = JSON.parse(JSON.stringify(pointsXctrl)); // получен первый WS
@@ -245,15 +248,18 @@ const App = () => {
       //console.log("ПРИШЛО:", data);
       switch (allData.type) {
         case "getDevices":
+          console.log("Пришло xctrlInfo:", data.tflight);
           setPointsTfl(data.tflight ?? []);
           setIsOpenDev(true);
+          updateDevice = !updateDevice
           break;
         case "xctrlInfo":
           console.log("Пришло xctrlInfo:", data.xctrlInfo);
           setPointsXctrl(data.xctrlInfo ?? []);
           if (regionGlob === 0) setPointsReg(data.regionInfo ?? []);
-          setUpdate(!update); // для обновдения точек в графиках
-          setIsOpenInf(true);
+          //setUpdate(!update); // для обновдения точек в графиках
+          update = !update
+          !isOpenInf && setIsOpenInf(true);
           break;
         case "getStatisticsList":
           if (data.dates) {
@@ -300,10 +306,12 @@ const App = () => {
           console.log("data_default:", allData.data);
       }
     };
-  }, [calculate, datestat, dispatch, regionGlob, update]);
+  }, [calculate, datestat, dispatch, regionGlob, isOpenInf]);
 
   // const DoTimerId = () => {
-  //   setUpdate(!update);
+  //   //setUpdate(!update);
+  //   update = !update
+  //   setTrigger(!trigger);
   //   console.log("DoTimerId:", timerId, update);
   // };
 
@@ -552,7 +560,7 @@ const App = () => {
     }
   };
 
-  UpdateXctrl(update); // разноска обновлений Xctrl
+  UpdateXctrl(); // разноска обновлений Xctrl
 
   return (
     <>
@@ -594,6 +602,7 @@ const App = () => {
                     points={pointsTfl}
                     xctrll={pointsXctrl}
                     region={String(regionGlob)}
+                    update={updateDevice}
                   />
                 )}
               </TabPanel>

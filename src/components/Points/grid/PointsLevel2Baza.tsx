@@ -55,7 +55,7 @@ const PointsLevel2Baza = (props: {
   setPoint: any;
   update: boolean;
 }) => {
-  console.log("PointsLevel2Baza: пришло", props.update);
+  //console.log("PointsLevel2Baza: пришло", props.update);
   //== Piece of Redux =======================================
   let maskpoint = useSelector((state: any) => {
     const { maskpointReducer } = state;
@@ -124,7 +124,7 @@ const PointsLevel2Baza = (props: {
         flagSave = false;
       } else {
         pointGraf = props.xctrll;
-        console.log('ОБНОВЛЕНИЕ Baza pointGraf ============') //============
+        //console.log('ОБНОВЛЕНИЕ Baza pointGraf ============') //============
       }
     }
   }

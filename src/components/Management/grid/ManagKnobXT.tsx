@@ -111,6 +111,21 @@ const ManagementKnobXT = (props: {
                 },
               })
             );
+            if (!value) {
+              // включение PK - авт
+              props.ws.send(
+                JSON.stringify({
+                  type: "dispatch",
+                  data: {
+                    cmd: 5,
+                    param: 0,
+                    region: props.region,
+                    area: props.areaa,
+                    subarea: props.subArea,
+                  },
+                })
+              );
+            }
           } else {
             setTimeout(() => {
               handleSendOpen();
