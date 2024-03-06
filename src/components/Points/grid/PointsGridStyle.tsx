@@ -139,7 +139,7 @@ export const styleXTl201 = {
   width: "70%",
   height: "83.5vh",
   marginTop: "2.5vh",
-  marginLeft: -2,
+  marginLeft: -1.6,
   marginRight: -61,
   border: 0,
 };
@@ -148,6 +148,7 @@ export const stylePLevel06 = {
   fontSize: 12.5,
   maxHeight: "21px",
   minHeight: "21px",
+  width: '60px',
   transform: "rotate(270deg)",
   bgcolor: "#BAE186", // тёмно-салатовый
   border: "1px solid #000",
@@ -163,6 +164,7 @@ export const stylePLevel07 = {
   fontSize: 12.5,
   maxHeight: "21px",
   minHeight: "21px",
+  width: '60px',
   transform: "rotate(270deg)",
   bgcolor: "#E6F5D6", // светло-салатовый
   border: "1px solid #000",

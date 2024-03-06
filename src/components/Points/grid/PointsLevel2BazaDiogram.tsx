@@ -89,22 +89,22 @@ const PointsLevel2BazaDiogram = (props: {
     massRatio.push(vert / hor);
   }
 
+  //if (xtPropsOld !== props.xtt || crossRoadOld !== crRoad) setOpenLoader(true);
+
   if (
     xtPropsOld !== props.xtt ||
     crossRoadOld !== crRoad ||
     pointsOld !== points
   ) {
-    // сменился ХТ
     xtPropsOld = props.xtt;
     crossRoadOld = crRoad;
     pointsOld = points;
     setOpenLoader(true);
     //flagOutput = true;
-    setPictInfo(false);
+    pictInfo && setPictInfo(false);
   }
 
-  const PointsXt112Comp1Tab4 = () => {
-    console.log("!!!Перерисовка графика");
+  const PointsXt112Comp1Tab4 = (update: boolean) => {
     resStr = [];
     let resSps = [];
 
@@ -199,6 +199,7 @@ const PointsLevel2BazaDiogram = (props: {
     MakeMatrix();
 
     for (let j = 0; j < vertical; j += scale) {
+      !j && console.log("!!!Перерисовка графика");
       resSps.push(
         <Grid key={j} item container sx={{ border: 0 }}>
           {PointsXt112Comp1Tab4Str(j)}
@@ -282,10 +283,10 @@ const PointsLevel2BazaDiogram = (props: {
   };
 
   const OutputerPict = (update: boolean) => {
-    // console.log(
-    //   "BAZA Обновление точек:",
-    //   new Date().toTimeString().slice(0, 5)
-    // );
+    console.log(
+      "BAZA Обновление точек:",
+      new Date().toTimeString().slice(0, 5)
+    );
     let resStrr = [];
     if (pointer !== null) {
       if (pointer[namer]) {
@@ -335,7 +336,7 @@ const PointsLevel2BazaDiogram = (props: {
         {openLoader && <Dinama />}
         {!openLoader && (
           <>
-            {PointsXt112Comp1Tab4()}
+            {PointsXt112Comp1Tab4(props.update)}
             {OutputerPict(props.update)}
             {pictInfo && (
               <>

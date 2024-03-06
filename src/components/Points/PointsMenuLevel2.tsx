@@ -73,7 +73,7 @@ const PointsMenuLevel2 = (props: {
 
   return (
     <Box sx={{ marginTop: "-2vh", marginLeft: -3.5, marginRight: -2 }}>
-      <Grid container item>
+      <Grid container>
         <Grid item xs={0.4}>
           {datestat.xttData === MakeDate(new Date()) && (
             <PointsMenuLevel2Menu />

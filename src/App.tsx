@@ -248,7 +248,7 @@ const App = () => {
       //console.log("ПРИШЛО:", data);
       switch (allData.type) {
         case "getDevices":
-          console.log("Пришло xctrlInfo:", data.tflight);
+          console.log("Пришло tflight:", data.tflight);
           setPointsTfl(data.tflight ?? []);
           setIsOpenDev(true);
           updateDevice = !updateDevice
