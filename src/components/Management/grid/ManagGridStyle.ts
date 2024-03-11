@@ -250,4 +250,19 @@ export const styleBatMenuXt = {
   width: '121px',
   textTransform: 'unset !important',
 };
+
+export const styleMenuXt = {
+  fontSize: 12.9,
+  textAlign: "center",
+  color: "black",
+  bgcolor: "#F1F3F4", // светло-серый
+  border: "1px solid #000",
+  borderColor: "#d4d4d4", // серый
+  borderRadius: 1,
+  boxShadow: 1,
+  marginTop: 1,
+  marginLeft: 2.6,
+  width: "121px",
+  padding: "6px 0px 9px 0px",
+};
 //===============================================================================

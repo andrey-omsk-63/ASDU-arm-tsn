@@ -5,10 +5,13 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 
 import ManagKnobError from "./ManagKnobError";
+import ManagKnobXTEmpty from "./ManagKnobXTEmpty";
 
 import { styleSoobPusto, styleSoob } from "./ManagGridStyle";
-import { stylePKXt, styleBatMenuXt } from "./ManagGridStyle";
+import { stylePKXt, styleBatMenuXt, styleMenuXt } from "./ManagGridStyle";
 import { styleBatKnop01, styleBatKnop02 } from "./ManagGridStyle";
+
+//import { Tflight } from "../../../interfaceMNG.d";
 
 export interface DataKnob {
   knop: Knob[];
@@ -35,6 +38,10 @@ let dataKnob: Knob[] = [
   },
 ];
 
+let soobEmpty = "";
+let releaseXT = false;
+let switchXT = false;
+
 const ManagementKnobXT = (props: {
   open: boolean;
   ws: WebSocket;
@@ -42,10 +49,17 @@ const ManagementKnobXT = (props: {
   areaa: string;
   subArea: number;
   setDataKn: Function;
+  //tflightt: Tflight[];
+  masxt: any;
 }) => {
+  //console.log("MASXT:", props.areaa, props.subArea, props.masxt);
+  // let MASXT = props.masxt;
+  // MASXT[2].areaXT = 3;
+  //let points = props.tflightt;
   const [value, setValue] = React.useState(21);
   const [open, setOpen] = React.useState(false);
   const [openSoobErr, setOpenSoobErr] = React.useState(false);
+  const [openEmpty, setOpenEmpty] = React.useState(false);
   const [beginWork, setBeginWork] = React.useState(true);
   const [trigger, setTrigger] = React.useState(false);
 
@@ -173,11 +187,21 @@ const ManagementKnobXT = (props: {
     setTrigger(true);
   };
 
-  const ButtMenu = (soob: string, mode: number) => {
+  const ButtMenu = (soob: string, tip: boolean, mode: number) => {
+    let masSoob = soob.split(" ", 2);
     return (
-      <Button sx={styleBatMenuXt} onClick={() => SetValue(mode)}>
-        {soob}
-      </Button>
+      <>
+        {props.subArea && !tip ? (
+          <Box sx={styleMenuXt}>
+            <Box sx={{ padding: "0px 0px 6px 0px" }}>{masSoob[0]}</Box>
+            <Box>{masSoob[1]}</Box>
+          </Box>
+        ) : (
+          <Button sx={styleBatMenuXt} onClick={() => SetValue(mode)}>
+            {soob}
+          </Button>
+        )}
+      </>
     );
   };
 
@@ -191,30 +215,80 @@ const ManagementKnobXT = (props: {
     );
   };
 
+  const SetOpenEmpty = () => {
+    setOpenEmpty(false);
+    setOpen(false);
+    setBeginWork(true);
+  };
+  //== Начало работы =======================================
   if (props.areaa === "0" && !props.subArea && beginWork) {
+    // выбран весь регион
     setOpenSoobErr(true);
     setBeginWork(false);
+  } else {
+    let have = false;
+    if (props.areaa !== "0" && !props.subArea && beginWork) {
+      // выбран весь район
+      for (let j = 0; j < props.masxt.length; j++) {
+        if (Number(props.areaa) === props.masxt[j].areaXT) have = true;
+        //if (Number(props.areaa) === MASXT[j].areaXT) have = true;
+      }
+      if (!have) {
+        soobEmpty = "В выбранном районе ХТ отсутствуют";
+        setOpenEmpty(true);
+      }
+      setBeginWork(false);
+    } else {
+      // выбран кон,beginWorkкретный подрайон
+      if (beginWork) {
+        for (let j = 0; j < props.masxt.length; j++) {
+          if (
+            Number(props.areaa) === props.masxt[j].areaXT &&
+            props.subArea === props.masxt[j].subareaXT
+          ) {
+            have = true;
+            releaseXT = props.masxt[j].releaseXT;
+            switchXT = props.masxt[j].switchXT;
+          }
+        }
+        if (!have) {
+          soobEmpty = "Для данного подрайона проект ХТ не загружен";
+          setOpenEmpty(true);
+        }
+        setBeginWork(false);
+      }
+    }
   }
 
+  //========================================================
   return (
     <>
       {ButtonKnop()}
       <Modal open={open} hideBackdrop>
-        <Box sx={stylePKXt}>
-          {openSoobErr && <ManagKnobError setOpen={setOpenSoobErr} />}
-          {!trigger && (
-            <>
-              {ButtMenu("Включить исполнение", 1)}
-              {ButtMenu("Отключить исполнение", 0)}
-              {ButtMenu("Включить расчёт", 3)}
-              {ButtMenu("Отключить расчёт", 2)}
-            </>
+        <>
+          {openEmpty && (
+            <ManagKnobXTEmpty soob={soobEmpty} setOpen={SetOpenEmpty} />
           )}
-          <Button sx={styleBatMenuXt} onClick={handleClose}>
-            Выход
-          </Button>
-          {trigger && <>{ButtonDo()}</>}
-        </Box>
+          {!openEmpty && (
+            <Box sx={stylePKXt}>
+              {openSoobErr && <ManagKnobError setOpen={setOpenSoobErr} />}
+              <>
+                {!trigger && (
+                  <>
+                    {ButtMenu("Включить исполнение", !releaseXT, 1)}
+                    {ButtMenu("Отключить исполнение", releaseXT, 0)}
+                    {ButtMenu("Включить расчёт", !switchXT, 3)}
+                    {ButtMenu("Отключить расчёт", switchXT, 2)}
+                  </>
+                )}
+                <Button sx={styleBatMenuXt} onClick={handleClose}>
+                  Выход
+                </Button>
+                {trigger && <>{ButtonDo()}</>}
+              </>
+            </Box>
+          )}
+        </>
       </Modal>
     </>
   );

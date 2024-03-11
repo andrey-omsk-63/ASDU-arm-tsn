@@ -159,11 +159,11 @@ const App = () => {
   //const [update, setUpdate] = React.useState(true);
 
   const UpdateXctrl = () => {
-    // console.log(
-    //   "РАЗНОСКА обновлений Xctrl",
-    //   new Date().toTimeString().slice(0, 5),
-    //   pointsXctrl
-    // );
+    console.log(
+      "РАЗНОСКА обновлений Xctrl",
+      new Date().toTimeString().slice(0, 5),
+      pointsXctrl
+    );
     if (isOpenInf && !flagEtalonInf) {
       let pointsAdd = []; // разноска обновлений Xctrl
       let newRecord = true;
@@ -186,7 +186,7 @@ const App = () => {
         console.log("OБНОВИЛСЯ эталон Изменилось количество ХТ");
         for (let i = 0; i < pointsAdd.length; i++)
           pointsEtalonXctrl.push(pointsAdd[i]);
-      } 
+      }
       // else {
       //   //pointsEtalonXctrl = JSON.parse(JSON.stringify(pointsXctrl));
       //   console.log(
@@ -251,14 +251,50 @@ const App = () => {
           console.log("Пришло tflight:", data.tflight);
           setPointsTfl(data.tflight ?? []);
           setIsOpenDev(true);
-          updateDevice = !updateDevice
+          updateDevice = !updateDevice;
+          break;
+        case "dispatch":
+          console.log(
+            "Пришло dispatch:",
+            data.msg.param,
+            typeof pointsEtalonXctrl[0].region,
+            typeof pointsEtalonXctrl[0].area,
+            typeof pointsEtalonXctrl[0].subarea
+          );
+          if (data.status) {
+            for (let i = 0; i < pointsEtalonXctrl.length; i++) {
+              if (
+                data.msg.subarea === pointsEtalonXctrl[i].subarea &&
+                Number(data.msg.region) === pointsEtalonXctrl[i].region &&
+                Number(data.msg.area) === pointsEtalonXctrl[i].area
+              ) {
+                switch (data.msg.param) {
+                  case 0:
+                    pointsEtalonXctrl[i].release = false;
+                    break;
+                  case 1:
+                    pointsEtalonXctrl[i].release = true;
+                    break;
+                  case 2:
+                    pointsEtalonXctrl[i].switch = false;
+                    break;
+                  case 3:
+                    pointsEtalonXctrl[i].switch = true;
+                }
+                console.log("@@@pointsEtalonXctrl[i]:", pointsEtalonXctrl[i]);
+              }
+            }
+            console.log("!!!pointsEtalonXctrl:", pointsEtalonXctrl);
+            updateDevice = !updateDevice; // для обновления строки состояния
+            setPointsXctrl(pointsEtalonXctrl);
+            setTrigger(!trigger)
+          }
           break;
         case "xctrlInfo":
           console.log("Пришло xctrlInfo:", data.xctrlInfo);
           setPointsXctrl(data.xctrlInfo ?? []);
           if (regionGlob === 0) setPointsReg(data.regionInfo ?? []);
-          //setUpdate(!update); // для обновдения точек в графиках
-          update = !update
+          update = !update; // для обновдения точек в графиках
           !isOpenInf && setIsOpenInf(true);
           break;
         case "getStatisticsList":
@@ -306,7 +342,7 @@ const App = () => {
           console.log("data_default:", allData.data);
       }
     };
-  }, [calculate, datestat, dispatch, regionGlob, isOpenInf]);
+  }, [trigger, calculate, datestat, dispatch, regionGlob, isOpenInf]);
 
   // const DoTimerId = () => {
   //   //setUpdate(!update);
@@ -600,7 +636,8 @@ const App = () => {
                     open={isOpenDev}
                     ws={WS}
                     points={pointsTfl}
-                    xctrll={pointsXctrl}
+                    //xctrll={pointsXctrl}
+                    xctrll={pointsEtalonXctrl}
                     region={String(regionGlob)}
                     update={updateDevice}
                   />
