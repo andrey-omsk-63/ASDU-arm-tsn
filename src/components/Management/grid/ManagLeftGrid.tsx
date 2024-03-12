@@ -101,9 +101,6 @@ const ManagementLeftGrid = (props: {
       return masRab.indexOf(element) === index;
     });
     // создание массива ХТ
-
-    console.log('pointsXT:',pointsXT)
-
     for (let i = 0; i < pointsXT.length; i++) {
       masXT[i] = {
         areaXT: pointsXT[i].area,

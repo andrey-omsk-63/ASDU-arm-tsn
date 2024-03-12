@@ -394,8 +394,6 @@ const ManagementRightGrid = (props: {
       prosPch = podchGl.toString();
       proXT = "ХТ для подрайона отсутствует";
 
-      console.log ('props.masxt:', props.masxt, points)
-
       for (let j = 0; j < props.masxt.length; j++) {
         if (
           parseInt(points[0].area.num) === props.masxt[j].areaXT &&

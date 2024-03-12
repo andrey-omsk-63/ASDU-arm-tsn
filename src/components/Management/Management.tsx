@@ -90,9 +90,9 @@ const Management = (props: {
       for (let i = 0; i < pointsAdd.length; i++) {
         pointsEtalon.push(pointsAdd[i]);
       }
-    } else {
-      console.log("OБНОВИЛСЯ эталон Device");
-    }
+    } 
+    //else console.log("OБНОВИЛСЯ эталон Device");
+    
     // разноска обновлений Xctrl
     // let pointsAddd = [];
     // newRecord = true;

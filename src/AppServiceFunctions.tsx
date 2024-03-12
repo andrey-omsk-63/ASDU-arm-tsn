@@ -18,10 +18,10 @@ import Badge from "@mui/material/Badge";
 
 import { styleDatePicker, styleModalMenu } from "./AppStyle";
 import { styleInpOk, styleButOk } from "./AppStyle";
-import {
-  styleEndInf,
-  styleModalEnd,
-} from "./components/Points/grid/PointsGridStyle";
+import { styleEndInf } from "./components/Points/grid/PointsGridStyle";
+import { styleModalEnd } from "./components/Points/grid/PointsGridStyle";
+
+import { XctrlInfo } from "./interfaceGl.d";
 
 export const handleKey = (event: any) => {
   if (event.key === "Enter") event.preventDefault();
@@ -241,6 +241,32 @@ export const SendSocketgetStatisticsList = (
     }
   };
   handleSendOpen();
+};
+
+export const DispatchXctrl = (data: any, pointsEtalon: XctrlInfo[]) => {
+  let pointsEtalonXctrl = pointsEtalon;
+  for (let i = 0; i < pointsEtalonXctrl.length; i++) {
+    if (
+      data.msg.subarea === pointsEtalonXctrl[i].subarea &&
+      Number(data.msg.region) === pointsEtalonXctrl[i].region &&
+      Number(data.msg.area) === pointsEtalonXctrl[i].area
+    ) {
+      switch (data.msg.param) {
+        case 0:
+          pointsEtalonXctrl[i].release = false;
+          break;
+        case 1:
+          pointsEtalonXctrl[i].release = true;
+          break;
+        case 2:
+          pointsEtalonXctrl[i].switch = false;
+          break;
+        case 3:
+          pointsEtalonXctrl[i].switch = true;
+      }
+    }
+  }
+  return pointsEtalonXctrl;
 };
 //=== PointsLevel2Baza =============================
 export const TimeStr = (tim: number) => {
