@@ -264,7 +264,7 @@ const ManagementKnobXT = (props: {
   return (
     <>
       {ButtonKnop()}
-      <Modal open={open} hideBackdrop>
+      <Modal open={open} hideBackdrop={false}>
         <>
           {openEmpty && (
             <ManagKnobXTEmpty soob={soobEmpty} setOpen={SetOpenEmpty} />

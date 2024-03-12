@@ -192,7 +192,7 @@ const ManagementKnobPK = (props: {
   return (
     <>
       {ButtonKnop()}
-      <Modal open={open} hideBackdrop>
+      <Modal open={open} hideBackdrop={false}>
         <Box sx={stylePK}>
           {openSoobErr && <ManagKnobError setOpen={setOpenSoobErr} />}
           {value === 21 && (
