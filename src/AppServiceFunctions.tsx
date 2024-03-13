@@ -77,7 +77,7 @@ export const ButtonMenu = (
   tekValue: string
 ) => {
   const styleApp02 = {
-    fontSize: 14,
+    fontSize: 14.5,
     marginRight: 1,
     minWidth: (soob.length + 10) * 6.5,
     maxWidth: (soob.length + 10) * 6.5,
@@ -89,6 +89,7 @@ export const ButtonMenu = (
     borderRadius: 1,
     color: "black",
     textTransform: "unset !important",
+    textShadow: "1px 1px 1px rgba(0,0,0,0.3)",
     boxShadow: 8,
   };
 
@@ -294,8 +295,8 @@ export const BadInput = (
     transform: "translate(-50%, -50%)",
     width: 400,
     bgcolor: "background.paper",
-    border: "1px solid #000",
-    borderColor: "red",
+    border: "1px solid #fff",
+    //borderColor: "red",
     borderRadius: 1,
     boxShadow: 24,
     textAlign: "center",
@@ -317,7 +318,7 @@ export const BadInput = (
           <b>&#10006;</b>
         </Button>
         <Typography variant="h6" sx={{ color: "red" }}>
-          Предупреждение
+          ⚠️Предупреждение
         </Typography>
         <Box sx={{ marginTop: 0.5 }}>
           <Box sx={{ marginBottom: 1.2 }}>{soobError}</Box>
@@ -502,7 +503,11 @@ export const Grider = (soob: any, sdvig: number, fat: boolean) => {
   return (
     <>
       {fat && (
-        <Grid item xs={12} sx={{ marginTop: sdvig }}>
+        <Grid
+          item
+          xs={12}
+          sx={{ textShadow: "1px 1px 2px rgba(0,0,0,0.3)", marginTop: sdvig }}
+        >
           <b>{soob}</b>
         </Grid>
       )}

@@ -15,6 +15,7 @@ import { styleXTGl02, styleXTGl021, styleBut02 } from "./PointsGridStyle";
 import { styleModalEnd, styleSetInf, styleInpArg } from "./PointsGridStyle";
 import { styleXTGl05, styleBut021, styleXTGrid } from "./PointsGridStyle";
 import { styleXTGHeader } from "./PointsGridStyle";
+import { styleXTG101 } from "../../../AppStyle";
 
 let nomStr = 0;
 let flagEdit = true;
@@ -180,7 +181,11 @@ const PointsMainScrGrid3 = (props: {
                 {i + 1}
               </Button>
             )}
-            {flagEdit && <Box sx={{ p: 0.2 }}>{i + 1}</Box>}
+            {flagEdit && (
+              <Box sx={{ p: 0.2 }}>
+                <Box sx={styleXTG101}>{i + 1}</Box>
+              </Box>
+            )}
           </Grid>
           <Grid xs={3.5} item sx={styleXTG03}>
             {points.prioryty[i][0]}

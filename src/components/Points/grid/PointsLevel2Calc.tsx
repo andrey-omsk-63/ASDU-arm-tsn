@@ -9,6 +9,7 @@ import { MakeDate, TimeStr } from "../../../AppServiceFunctions";
 
 import { styleXTC011, styleXTC01, styleXTC02 } from "./PointsGridStyle";
 import { styleXTC03, styleXTC033 } from "./PointsGridStyle";
+import { styleStError, styleXTG101 } from "../../../AppStyle";
 
 import { XctrlInfo } from "../../../interfaceGl.d";
 
@@ -270,7 +271,7 @@ const PointsLevel2Calc = (props: {
           resStr.push(
             <Grid key={i} container item xs={12}>
               <Grid xs={1} item sx={!pusto ? styleXTC011 : styleXTC01}>
-                {TimeStr(pointer[namer][i].Time)}
+                <Box sx={styleXTG101}>{TimeStr(pointer[namer][i].Time)}</Box>
               </Grid>
               <Grid xs={2} item sx={!pusto ? styleXTC011 : styleXTC01}>
                 {pointer[namer][i].Value[0]}
@@ -315,7 +316,7 @@ const PointsLevel2Calc = (props: {
   };
 
   const OutputMainTabl = (update: boolean) => {
-    console.log('Calc Обновление точек:', update)
+    console.log("Calc Обновление точек:", update);
     return (
       <Grid item xs={8} sx={styleXTC033}>
         {PointsLevel2CalcTab2Header()}
@@ -347,8 +348,17 @@ const PointsLevel2Calc = (props: {
     return pk;
   };
 
+  const EmptyInfo = () => {
+    return (
+      <Grid item xs={12}>
+        <Box sx={styleStError}>
+          <h1>Нет информациии</h1>
+        </Box>
+      </Grid>
+    );
+  };
+
   const CalcSupportiveTabl = () => {
-    //console.log("points", points.ext);
     let masTime = [TimeStr(pointer[namer][0].Time)];
     let masKs = [pointer[namer][0].Value[2]];
 
@@ -368,7 +378,7 @@ const PointsLevel2Calc = (props: {
       resStr.push(
         <Grid key={i} container item xs={12}>
           <Grid xs={6} item sx={styleXTC011}>
-            {int}
+            <Box sx={styleXTG101}>{int}</Box>
           </Grid>
           <Grid xs={6} item sx={styleXTC011}>
             {!masKs[i] ? "Нет информациии" : masKs[i]}
@@ -379,13 +389,23 @@ const PointsLevel2Calc = (props: {
     return resStr;
   };
 
+  const OutputNotMainTabl = () => {
+    return (
+      <Grid item xs={3.95} sx={styleXTC033}>
+        {HeaderSupportiveTabl()}
+        <Box sx={{ overflowX: "auto", height: "54.1vh" }}>
+          <Grid container>{CalcSupportiveTabl()}</Grid>
+        </Box>
+      </Grid>
+    );
+  };
+
   return (
     <>
       {datestat.xttData !== "sss" && (
-         <Box sx={{ marginTop: 0, border: 0 }}>
-           {/* <Box sx={{ marginTop: "-0.3vh", border: 1 }}></Box> */}
+        <Box sx={{ marginTop: 0, border: 0 }}>
           {OutputGraf()}
-          <Grid container sx={{ marginTop: '0.6vh', height: "57.5vh" }}>
+          <Grid container sx={{ marginTop: "0.6vh", height: "57.5vh" }}>
             {pointer !== null ? (
               <>
                 {pointer[namer].length !== 0 ? (
@@ -393,24 +413,15 @@ const PointsLevel2Calc = (props: {
                     <Grid container>
                       {OutputMainTabl(props.update)}
                       <Grid item xs={0.05}></Grid>
-                      <Grid item xs={3.95} sx={styleXTC033}>
-                        {HeaderSupportiveTabl()}
-                        <Box sx={{ overflowX: "auto", height: "54.1vh" }}>
-                          <Grid container>{CalcSupportiveTabl()}</Grid>
-                        </Box>
-                      </Grid>
+                      {OutputNotMainTabl()}
                     </Grid>
                   </Grid>
                 ) : (
-                  <Box sx={{ textAlign: "center" }}>
-                    <h1>Нет информациии</h1>
-                  </Box>
+                  <>{EmptyInfo()}</>
                 )}
               </>
             ) : (
-              <Box sx={{ textAlign: "center" }}>
-                <h1>Нет информациии</h1>
-              </Box>
+              <>{EmptyInfo()}</>
             )}
           </Grid>
         </Box>

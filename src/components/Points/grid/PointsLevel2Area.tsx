@@ -19,6 +19,7 @@ import { styleInpArg, styleInpKnop, styleBut021 } from "./PointsGridStyle";
 import { styleXTG05, styleBut02, styleBut03 } from "./PointsGridStyle";
 import { styleXTG00, styleXTG01, styleXTG021 } from "./PointsGridStyle";
 import { styleXTG02, styleXTG035, styleXTG045 } from "./PointsGridStyle";
+import {  styleXTG101 } from "../../../AppStyle";
 
 import { XctrlInfo } from "../../../interfaceGl.d";
 
@@ -283,7 +284,11 @@ const PointsLevel2Area = (props: {
                 {elem}
               </Button>
             )}
-            {flagEdit && <Box sx={{ p: 0.35 }}>{elem}</Box>}
+            {flagEdit && (
+              <Box sx={{ p: 0.2 }}>
+                <Box sx={styleXTG101}>{elem}</Box>
+              </Box>
+            )}
           </Grid>
           <Grid xs={3} item sx={styleXTG01}>
             {elemm[i].xleft}

@@ -64,6 +64,17 @@ export const styleModalMenu = {
   marginTop: 1,
   textTransform: "unset !important",
 };
+
+export const styleStError = {
+  textAlign: "center",
+  textShadow: "2px 2px 3px rgba(0,0,0,0.3)",
+  color: "red",
+};
+
+export const styleXTG101 = {
+  textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
+  fontWeight: 500,
+};
 //====== DatePicker =======================================================
 export const styleImpBlock = {
   fontSize: 14,

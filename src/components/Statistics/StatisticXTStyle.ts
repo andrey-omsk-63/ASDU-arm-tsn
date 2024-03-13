@@ -27,20 +27,25 @@ export const colorsGraf = [
   "Yellow",
 ];
 
+// export const styleStError = {
+//   textAlign: "center",
+//   textShadow: "2px 2px 3px rgba(0,0,0,0.3)",
+//   color: "red",
+// };
+
 export const styleSt02 = {
   textIndent: 6,
   borderRight: "1px solid #d4d4d4", // серый
   borderBottom: "1px solid #d4d4d4", // серый
-  fontSize: 11,
+  fontSize: 12.9,
   lineHeight: 2,
-  //borderColor: "primary.main",
 };
 
 export const styleSt03 = {
   textIndent: 6,
   borderRight: "1px solid #d4d4d4", // серый
   borderBottom: "1px solid #d4d4d4", // серый
-  fontSize: 11,
+  fontSize: 12.9,
   lineHeight: 2,
   backgroundColor: "#E6EEF5", // голубой
   //backgroundColor: "#E7F9EB", //зелёный
@@ -52,7 +57,7 @@ export const styleSt04 = {
   //textIndent: 6,
   borderRight: "1px solid #d4d4d4", // серый
   borderBottom: "1px solid #d4d4d4", // серый
-  fontSize: 11,
+  fontSize: 12.9,
   lineHeight: 2,
   backgroundColor: "#FF80C0", // розовый
   color: "white",
@@ -62,8 +67,7 @@ export const styleSt04 = {
 export const styleSt05 = {
   borderRight: "1px solid #d4d4d4", // серый
   borderBottom: "1px solid #d4d4d4", // серый
-  //borderColor: "primary.main",
-  fontSize: 11,
+  fontSize: 12.9,
   textAlign: "center",
   lineHeight: 2,
 };
@@ -73,13 +77,11 @@ export const styleSt06 = {
   borderRight: "1px solid #d4d4d4", // серый
   borderBottom: "1px solid #d4d4d4", // серый
   lineHeight: 2,
-  fontSize: 11,
-  //borderColor: "primary.main",
+  fontSize: 12.9,
 };
 
 export const styleHeader03 = {
   borderBottom: "1px solid #d4d4d4", // серый
-  //borderColor: "primary.main",
   backgroundColor: "#C0C0C0",
   fontSize: 11,
   textAlign: "center",
@@ -131,10 +133,9 @@ export const styleBatton02 = {
 };
 
 export const styleClear = {
-  //height: 24,
   position: "absolute",
   marginTop: "-2.7vh",
-  left: "0.8vh",
+  left: "0.95vh",
 };
 
 export const styleBattonCl = {

@@ -17,6 +17,7 @@ import { styleSt04, styleSt05, styleStatMain } from './StatisticXTStyle';
 import { styleSt06, styleHeader03, styleHeader033 } from './StatisticXTStyle';
 import { styleClear, styleBattonCl, styleBatton01 } from './StatisticXTStyle';
 import { styleBatton02 } from './StatisticXTStyle';
+import { styleXTG101 } from "../../AppStyle";
 
 import { Chart as ChartJS, CategoryScale } from 'chart.js';
 import { LinearScale, PointElement } from 'chart.js';
@@ -223,10 +224,9 @@ const StatisticXTArchive = (props: {
     textIndent: 6,
     borderRight: "1px solid #d4d4d4", // серый,
     borderBottom: "1px solid #d4d4d4", // серый,
-    fontSize: 11,
+    fontSize: 12.9,
     lineHeight: 2,
     backgroundColor: colorStat,
-    //borderColor: 'primary.main',
     textAlign: 'center',
   };
 
@@ -316,7 +316,7 @@ const StatisticXTArchive = (props: {
       //формирование начала строки
       resStr.push(
         <Grid key={Math.random()} item xs={0.5} sx={styleSt05}>
-          {timLiner}
+           <Box sx={styleXTG101}>{timLiner}</Box>
         </Grid>,
       );
       if (!matrix[numMas].Avail) {

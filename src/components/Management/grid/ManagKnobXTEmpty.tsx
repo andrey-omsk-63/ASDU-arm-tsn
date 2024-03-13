@@ -17,8 +17,8 @@ const ManagKnobXTEmpty = (props: { soob: string; setOpen: any }) => {
     marginLeft: "24vh",
     width: 380,
     bgcolor: "background.paper",
-    border: "1px solid #000",
-    borderColor: "red",
+    border: "1px solid #fff",
+    //borderColor: "red",
     borderRadius: 1,
     boxShadow: 24,
     textShadow: "2px 2px 3px rgba(0,0,0,0.3)",
@@ -42,7 +42,7 @@ const ManagKnobXTEmpty = (props: { soob: string; setOpen: any }) => {
   };
 
   return (
-    <Modal open={openSet} onClose={handleClose}>
+    <Modal open={openSet} onClose={handleClose}  hideBackdrop={true}>
       <Box sx={styleSetInf}>
         <Button sx={styleModalEnd} onClick={handleClose}>
           <b>&#10006;</b>

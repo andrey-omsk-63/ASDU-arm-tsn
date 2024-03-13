@@ -10,6 +10,7 @@ import { MakeDate, MakeDateRus, TimeStr } from "../../../AppServiceFunctions";
 
 import { styleXTG102, styleXTG103, styleXTGHeader } from "./PointsGridStyle";
 import { styleXTG104, styleXTG105 } from "./PointsGridStyle";
+import { styleXTG101 } from "../../../AppStyle";
 
 const PointsMainScrGrid1 = (props: {
   open: boolean;
@@ -73,7 +74,7 @@ const PointsMainScrGrid1 = (props: {
           resStr.push(
             <Grid key={i} container xs={12} item>
               <Grid xs={2} item sx={styleXTG103}>
-                {TimeStr(pointRec.result[i].Time)}
+                <Box sx={styleXTG101}>{TimeStr(pointRec.result[i].Time)}</Box>
               </Grid>
               <Grid xs={3} item sx={styleXTG103}>
                 {pointRec.result[i].Value[0]}
@@ -94,10 +95,8 @@ const PointsMainScrGrid1 = (props: {
 
   return (
     <Grid item sx={styleXTG104}>
-      {/* <Box sx={{ marginRight: 0.74, border: 0 }}> */}
       <HeaderMainScrGrid1 />
-      {/* </Box> */}
-      <Box sx={{ fontSize: 14, overflowX: "auto", height: "74vh" }}>
+      <Box sx={{ fontSize: 14, overflowX: "auto", height: "72.5vh" }}>
         {props.open && <>{StrokaMainScrGrid1()}</>}
       </Box>
     </Grid>

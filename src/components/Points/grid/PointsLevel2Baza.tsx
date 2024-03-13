@@ -26,6 +26,7 @@ import { styleBut02, styleModalEnd } from "./PointsGridStyle";
 import { styleSetInf, styleSetInff } from "./PointsGridStyle";
 import { styleInpName, styleXTGHeader } from "./PointsGridStyle";
 import { styleInpArg, styleInpTime } from "./PointsGridStyle";
+import { styleXTG101 } from "../../../AppStyle";
 
 import { XctrlInfo } from "../../../interfaceGl.d";
 
@@ -94,7 +95,9 @@ const PointsLevel2Baza = (props: {
     flagEdit = true;
     flagExit = false;
     pointsTemp = pointsEt;
+
     console.log("pointsEt:", pointsEt);
+
     setFormName(pointsEt.xctrls[crossRoad].name);
     setMaxLeft(pointsEt.xctrls[crossRoad].left);
     setMaxRight(pointsEt.xctrls[crossRoad].right);
@@ -609,7 +612,11 @@ const PointsLevel2Baza = (props: {
                 {i + 1}
               </Button>
             )}
-            {flagEdit && <Box sx={{ p: 0.35 }}>{i + 1}</Box>}
+            {flagEdit && (
+              <Box sx={{ p: 0.2 }}>
+                <Box sx={styleXTG101}>{i + 1}</Box>
+              </Box>
+            )}
           </Grid>
           {ConclStr(1.8, elem.xleft, styleXTG01)}
           {ConclStr(1.8, elem.xright, styleXTG01)}

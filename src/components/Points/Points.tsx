@@ -12,6 +12,7 @@ import { MakeDate, SendSocketOldDateXt } from "../../AppServiceFunctions";
 
 import { stylePoint01, stylePoint02 } from "./grid/PointsGridStyle";
 import { stylePoint03 } from "./grid/PointsGridStyle";
+import { styleStError } from "../../AppStyle";
 
 import { XctrlInfo } from "../../interfaceGl.d";
 
@@ -130,8 +131,8 @@ const Points = (props: {
 
     if (pointsEtalon.length === 0) {
       resSps.push(
-        <Box key={1}>
-          <h2>Нет данных по ХТ</h2>
+        <Box key={1} sx={styleStError}>
+          <h1>Нет данных по ХТ</h1>
         </Box>
       );
     } else {
@@ -180,8 +181,8 @@ const Points = (props: {
         </>
       )}
       {pointsEtalon.length === 0 && (
-        <Box sx={{ marginLeft: 3 }}>
-          <h2>Нет данных по ХТ</h2>
+        <Box sx={styleStError}>
+          <h1>Нет данных по ХТ</h1>
         </Box>
       )}
     </Box>

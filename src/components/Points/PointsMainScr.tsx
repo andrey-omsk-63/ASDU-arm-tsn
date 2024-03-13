@@ -84,7 +84,16 @@ const PointsMainScr = (props: {
   const HeaderMainScr = () => {
     return (
       <>
-        <Grid item xs={12} sx={{ fontSize: 15, margin: 1, marginLeft: 1 }}>
+        <Grid
+          item
+          xs={12}
+          sx={{
+            textShadow: "2px 2px 3px rgba(0,0,0,0.3)",
+            fontSize: 15,
+            margin: 1,
+            marginLeft: 1,
+          }}
+        >
           Расчёт ХТ
         </Grid>
         <Grid item xs={12} sx={styleXt02}>
@@ -166,8 +175,7 @@ const PointsMainScr = (props: {
         {(maskpoint.redaxPoint || flagEdit) && !datestat.needSave && (
           <>{WorkMenuEditMain(9, "Редактирование", StartEdit)}</>
         )}
-        {/* {flagExit && datestat.needSave && ( */}
-        {flagExit  && (
+        {flagExit && (
           <>{WorkMenuEditMain(9, "Выйти без cохранения", StopEdit)}</>
         )}
         <Grid container>

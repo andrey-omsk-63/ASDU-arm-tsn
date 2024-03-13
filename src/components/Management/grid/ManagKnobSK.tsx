@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 
 import ManagKnobError from "./ManagKnobError";
 
-import { stylePK, styleSoob } from "./ManagGridStyle";
+import { stylePK, styleSoob, styleModalEnd } from "./ManagGridStyle";
 import { styleSoobPusto, styleBatMenu } from "./ManagGridStyle";
 import { styleBatKnop01, styleBatKnop02 } from "./ManagGridStyle";
 
@@ -194,6 +194,9 @@ const ManagementKnobSK = (props: {
       {ButtonKnop()}
       <Modal open={open} hideBackdrop={false}>
         <Box sx={stylePK}>
+          <Button sx={styleModalEnd} onClick={handleClose}>
+            <b>&#10006;</b>
+          </Button>
           {openSoobErr && <ManagKnobError setOpen={setOpenSoobErr} />}
           {value === 21 && (
             <>

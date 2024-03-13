@@ -6,9 +6,9 @@ import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 
-//import axios from 'axios';
-
 import StatisticXTNew from "./StatisticXTNew";
+
+import { styleStError } from "../../AppStyle";
 
 import { Statistic } from "../../interfaceStat.d";
 //import { Tflight } from "../../interfaceMNG.d";
@@ -117,9 +117,6 @@ const StatisticsNew = (props: {
   //console.log("window.innerWidth:", window.innerWidth);
 
   const styleSt2 = {
-    //border: 1,
-    // width: 850,
-    //bottom: 0,
     width: window.innerWidth - 21,
     fontSize: 12,
     marginTop: "-2vh",
@@ -149,7 +146,11 @@ const StatisticsNew = (props: {
   };
 
   const handleChangeNull = () => {
-    return <h2>На текущюю дату данных по статистике НЕТ</h2>;
+    return (
+      <Box sx={styleStError}>
+        <h1>На текущюю дату данных по статистике НЕТ</h1>
+      </Box>
+    );
   };
 
   const SpisXT = () => {
@@ -158,14 +159,14 @@ const StatisticsNew = (props: {
 
     if (pointsEtalon.length === 0) {
       resSps.push(
-        <Box key={1}>
-          <h2>Нет данных по статистике</h2>
+        <Box key={1} sx={styleStError}>
+          <h1>Нет данных по статистике</h1>
         </Box>
       );
     } else {
       for (let i = 0; i < pointsEtalon.length; i++) {
         const styleSt1 = {
-          fontSize: 13.5,
+          fontSize: 14.5,
           maxHeight: "20px",
           minHeight: "20px",
           bgcolor: "#BAE186", // тёмно-салатовый
@@ -174,6 +175,8 @@ const StatisticsNew = (props: {
           boxShadow: "6px -6px 6px  #d4d4d4",
           color: "black",
           marginRight: 1,
+          padding: "1px 0px 1px 0px",
+          textShadow: "1px 1px 1px rgba(0,0,0,0.3)",
         };
         const styleSt11 = {
           fontSize: 13.5,
@@ -185,6 +188,7 @@ const StatisticsNew = (props: {
           boxShadow: 2,
           color: "black",
           marginRight: 1,
+          padding: "1px 0px 1px 0px",
         };
         labl =
           pointsEtalon[i].area +
@@ -246,7 +250,11 @@ const StatisticsNew = (props: {
             )}
           </>
           <>
-            {clinch && <h2>Некорректная структура статистики по данному ХТ</h2>}
+            {clinch && (
+              <Box sx={styleStError}>
+                <h1>Некорректная структура статистики по данному ХТ</h1>
+              </Box>
+            )}
           </>
         </>
       )}

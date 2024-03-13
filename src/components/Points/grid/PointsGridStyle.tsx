@@ -29,7 +29,7 @@ export const styleBackdropBaza = {
 };
 //====== Points =================================================================
 export const stylePoint01 = {
-  fontSize: 13.5,
+  fontSize: 14.1,
   maxHeight: "20px",
   minHeight: "20px",
   bgcolor: "#BAE186", // тёмно-салатовый
@@ -38,6 +38,8 @@ export const stylePoint01 = {
   boxShadow: "6px -6px 6px #d4d4d4",
   color: "black",
   marginRight: 1,
+  padding: "1px 0px 1px 0px",
+  textShadow: "1px 1px 1px rgba(0,0,0,0.3)",
 };
 export const stylePoint02 = {
   fontSize: 13.5,
@@ -49,6 +51,7 @@ export const stylePoint02 = {
   boxShadow: 2,
   color: "black",
   marginRight: 1,
+  padding: "1px 0px 1px 0px",
 };
 
 export const stylePoint03 = {
@@ -106,7 +109,7 @@ export const stylePLevel03 = {
 };
 
 export const stylePLevel04 = {
-  fontSize: 13.9,
+  fontSize: 14.5,
   maxHeight: "20px",
   minHeight: "20px",
   color: "black",
@@ -114,10 +117,11 @@ export const stylePLevel04 = {
   border: "1px solid #000",
   borderColor: "#93D145", // ярко-салатовый
   borderRadius: 1,
-  boxShadow: 6,
+  boxShadow: 8,
   marginRight: 1,
   marginTop: 0.7,
   textTransform: "unset !important",
+  textShadow: "1px 1px 1px rgba(0,0,0,0.3)",
 };
 
 export const stylePLevel05 = {
@@ -145,26 +149,27 @@ export const styleXTl201 = {
 };
 
 export const stylePLevel06 = {
-  fontSize: 12.5,
+  fontSize: 12.9,
   maxHeight: "21px",
   minHeight: "21px",
-  width: '60px',
+  width: "60px",
   transform: "rotate(270deg)",
   bgcolor: "#BAE186", // тёмно-салатовый
   border: "1px solid #000",
   borderColor: "#93D145", // ярко-салатовый
   borderRadius: 1,
-  boxShadow: 6,
+  boxShadow: 8,
   color: "black",
   marginBottom: 6.5,
   textTransform: "unset !important",
+  textShadow: "1px 1px 1px rgba(0,0,0,0.3)",
 };
 
 export const stylePLevel07 = {
   fontSize: 12.5,
   maxHeight: "21px",
   minHeight: "21px",
-  width: '60px',
+  width: "60px",
   transform: "rotate(270deg)",
   bgcolor: "#E6F5D6", // светло-салатовый
   border: "1px solid #000",
@@ -252,7 +257,8 @@ export const styleBut01 = {
 };
 
 export const styleBut02 = {
-  fontSize: 11,
+  fontSize: 12.9,
+  fontWeight: 600,
   maxHeight: "21px",
   minHeight: "21px",
   maxWidth: "33px",
@@ -267,7 +273,8 @@ export const styleBut02 = {
 };
 
 export const styleBut021 = {
-  fontSize: 12,
+  fontSize: 14.0,
+  fontWeight: 700,
   maxHeight: "21px",
   minHeight: "21px",
   maxWidth: "33px",
@@ -467,8 +474,12 @@ export const styleXTGHeader = {
   borderTopRightRadius: 3,
 };
 
+// export const styleXTG101 = {
+//   textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
+//   fontWeight: 500,
+// };
+
 export const styleXTG102 = {
-  //borderRight: 1,
   borderBottom: "1px solid #d4d4d4", // серый
   padding: 0.7,
   textAlign: "center",
@@ -572,6 +583,7 @@ export const styleXt02 = {
   marginLeft: 0.5,
   marginRight: 1,
   boxShadow: 12,
+  textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
 };
 
 export const styleXt03 = {

@@ -8,6 +8,8 @@ import Tab from "@mui/material/Tab";
 
 import StatisticXTArchive from "./StatisticXTArchive";
 
+import { styleStError } from "../../AppStyle";
+
 import { Statistic } from "../../interfaceStat.d";
 //import { Tflight } from '../../interfaceMNG.d';
 
@@ -129,7 +131,11 @@ const StatisticsArchive = (props: {
   };
 
   const handleChangeNull = () => {
-    return <h2>На текущюю дату данных по статистике НЕТ</h2>;
+    return (
+      <Box sx={styleStError}>
+        <h1>На текущюю дату данных по статистике НЕТ</h1>
+      </Box>
+    );
   };
 
   const SpisXT = () => {
@@ -145,16 +151,17 @@ const StatisticsArchive = (props: {
     } else {
       for (let i = 0; i < pointsEtalon.length; i++) {
         const styleSt1 = {
-          fontSize: 13.5,
+          fontSize: 14.1,
           maxHeight: "20px",
           minHeight: "20px",
           bgcolor: "#BAE186", // тёмно-салатовый
           border: "1px solid #000",
           borderColor: "#93D145", // ярко-салатовый
-          //borderRadius: 1,
-          boxShadow: '4px -6px 6px #d4d4d4',
+          boxShadow: "4px -6px 6px #d4d4d4",
           color: "black",
           marginRight: 1,
+          padding: "1px 0px 1px 0px",
+          textShadow: "1px 1px 1px rgba(0,0,0,0.3)",
         };
         const styleSt11 = {
           fontSize: 13.5,
@@ -163,10 +170,10 @@ const StatisticsArchive = (props: {
           bgcolor: "#E6F5D6", // светло-салатовый
           border: "1px solid #000",
           borderColor: "#d4d4d4", // серый
-          //borderRadius: 1,
           boxShadow: 2,
           color: "black",
           marginRight: 1,
+          padding: "1px 0px 1px 0px",
         };
         labl =
           pointsEtalon[i].area +
@@ -232,7 +239,11 @@ const StatisticsArchive = (props: {
             )}
           </>
           <>
-            {clinch && <h2>Некорректная структура статистики по данному ХТ</h2>}
+            {clinch && (
+              <Box sx={styleStError}>
+                <h1>Некорректная структура статистики по данному ХТ</h1>
+              </Box>
+            )}
           </>
         </>
       )}

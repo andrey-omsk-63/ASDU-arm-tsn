@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import ManagKnobError from "./ManagKnobError";
 import ManagKnobXTEmpty from "./ManagKnobXTEmpty";
 
-import { styleSoobPusto, styleSoob } from "./ManagGridStyle";
+import { styleSoobPusto, styleSoob, styleModalEnd } from "./ManagGridStyle";
 import { stylePKXt, styleBatMenuXt, styleMenuXt } from "./ManagGridStyle";
 import { styleBatKnop01, styleBatKnop02 } from "./ManagGridStyle";
 
@@ -193,8 +193,17 @@ const ManagementKnobXT = (props: {
       <>
         {props.subArea && !tip ? (
           <Box sx={styleMenuXt}>
-            <Box sx={{ padding: "0px 0px 6px 0px" }}>{masSoob[0]}</Box>
-            <Box>{masSoob[1]}</Box>
+            <Box
+              sx={{
+                padding: "0px 0px 6px 0px",
+                textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
+              }}
+            >
+              {masSoob[0]}
+            </Box>
+            <Box sx={{ textShadow: "1px 1px 2px rgba(0,0,0,0.3)" }}>
+              {masSoob[1]}
+            </Box>
           </Box>
         ) : (
           <Button sx={styleBatMenuXt} onClick={() => SetValue(mode)}>
@@ -271,6 +280,9 @@ const ManagementKnobXT = (props: {
           )}
           {!openEmpty && (
             <Box sx={stylePKXt}>
+              <Button sx={styleModalEnd} onClick={handleClose}>
+                <b>&#10006;</b>
+              </Button>
               {openSoobErr && <ManagKnobError setOpen={setOpenSoobErr} />}
               <>
                 {!trigger && (
