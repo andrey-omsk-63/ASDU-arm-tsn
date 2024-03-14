@@ -30,7 +30,7 @@ const StatisticsArchive = (props: {
   func: any;
   //pointsTfl: Tflight[];
 }) => {
-  //console.log('pointsOld:', props.points);
+  console.log("pointsOld:", props.points);
   //== Piece of Redux ======================================
   // let maskpoint = useSelector((state: any) => {
   //   const { maskpointReducer } = state;
@@ -188,23 +188,22 @@ const StatisticsArchive = (props: {
     return resSps;
   };
 
-  if (isOpen && pointsEtalon.length !== 0 && tekValue !== value)
-    setValue(tekValue);
-
   const CheckClinch = () => {
     let clinch = false;
     if (!flagEtalon) {
       if (pointsEtalon.length === 0) {
         clinch = true;
       } else {
-        for (let i = 0; i < pointsEtalon[value].Statistics.length; i++) {
-          if (pointsEtalon[value].Statistics[i].Datas === null) clinch = true;
-        }
+        let val = tekValue !== value ? tekValue : value;
+        for (let i = 0; i < pointsEtalon[val].Statistics.length; i++)
+          if (pointsEtalon[val].Statistics[i].Datas === null) clinch = true;
       }
     }
-
     return clinch;
   };
+
+  if (isOpen && pointsEtalon.length !== 0 && tekValue !== value)
+    setValue(tekValue);
 
   let clinch = CheckClinch();
 

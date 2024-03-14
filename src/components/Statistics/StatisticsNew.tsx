@@ -209,12 +209,11 @@ const StatisticsNew = (props: {
       if (pointsEtalon.length === 0) {
         clinch = true;
       } else {
-        for (let i = 0; i < pointsEtalon[value].Statistics.length; i++) {
-          if (pointsEtalon[value].Statistics[i].Datas === null) clinch = true;
-        }
+        let val = tekValue !== value ? tekValue : value;
+        for (let i = 0; i < pointsEtalon[val].Statistics.length; i++)
+          if (pointsEtalon[val].Statistics[i].Datas === null) clinch = true;
       }
     }
-
     return clinch;
   };
 

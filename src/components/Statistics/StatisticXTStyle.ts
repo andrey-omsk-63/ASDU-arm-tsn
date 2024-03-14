@@ -92,12 +92,11 @@ export const styleHeader03 = {
 export const styleHeader033 = {
   borderRight: "1px solid #d4d4d4", // серый
   borderBottom: "1px solid #d4d4d4", // серый
-  //borderColor: "primary.main",
   backgroundColor: "#C0C0C0",
-  fontSize: 11,
+  fontSize: 12.9,
   textAlign: "center",
   height: 24,
-  lineHeight: 2,
+  lineHeight: 1.5,
 };
 
 export const styleBatton01 = {
@@ -114,6 +113,7 @@ export const styleBatton01 = {
   maxHeight: "23px",
   minHeight: "23px",
   textAlign: "center",
+  padding: "2px 0px 0px 0px",
 };
 
 export const styleBatton02 = {
@@ -130,6 +130,7 @@ export const styleBatton02 = {
   maxHeight: "23px",
   minHeight: "23px",
   textAlign: "center",
+  padding: "2px 0px 0px 0px",
 };
 
 export const styleClear = {
