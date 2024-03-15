@@ -238,23 +238,19 @@ const StatisticsNew = (props: {
               {SpisXT()}
             </Tabs>
           </Box>
-          <>
-            {pointsEtalon.length > 0 && !clinch && (
-              <StatisticXTNew
-                open={isOpen}
-                statist={pointsEtalon}
-                areaid={value}
-                interval={massInterval[tekValue]}
-              />
-            )}
-          </>
-          <>
-            {clinch && (
-              <Box sx={styleStError}>
-                <h1>Некорректная структура статистики по данному ХТ</h1>
-              </Box>
-            )}
-          </>
+          {pointsEtalon.length > 0 && !clinch && (
+            <StatisticXTNew
+              open={isOpen}
+              statist={pointsEtalon}
+              areaid={value}
+              interval={massInterval[tekValue]}
+            />
+          )}
+          {clinch && (
+            <Box sx={styleStError}>
+              <h1>Некорректная структура статистики по данному ХТ</h1>
+            </Box>
+          )}
         </>
       )}
     </>

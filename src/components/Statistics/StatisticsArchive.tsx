@@ -226,24 +226,20 @@ const StatisticsArchive = (props: {
               {SpisXT()}
             </Tabs>
           </Box>
-          <>
-            {pointsEtalon.length > 0 && !clinch && (
-              <StatisticXTArchive
-                open={isOpen}
-                statist={pointsEtalon}
-                areaid={value}
-                date={props.date}
-                interval={massInterval[tekValue]}
-              />
-            )}
-          </>
-          <>
-            {clinch && (
-              <Box sx={styleStError}>
-                <h1>Некорректная структура статистики по данному ХТ</h1>
-              </Box>
-            )}
-          </>
+          {pointsEtalon.length > 0 && !clinch && (
+            <StatisticXTArchive
+              open={isOpen}
+              statist={pointsEtalon}
+              areaid={value}
+              date={props.date}
+              interval={massInterval[tekValue]}
+            />
+          )}
+          {clinch && (
+            <Box sx={styleStError}>
+              <h1>Некорректная структура статистики по данному ХТ</h1>
+            </Box>
+          )}
         </>
       )}
     </>
