@@ -30,8 +30,8 @@ export const styleBackdropBaza = {
 //====== Points =================================================================
 export const stylePoint01 = {
   fontSize: 14.1,
-  maxHeight: "20px",
-  minHeight: "20px",
+  maxHeight: "22px",
+  minHeight: "22px",
   bgcolor: "#BAE186", // тёмно-салатовый
   border: "1px solid #000",
   borderColor: "#93D145", // ярко-салатовый
@@ -110,8 +110,7 @@ export const stylePLevel03 = {
 
 export const stylePLevel04 = {
   fontSize: 14.5,
-  maxHeight: "20px",
-  minHeight: "20px",
+  height: "21px",
   color: "black",
   bgcolor: "#BAE186", // тёмно-салатовый
   border: "1px solid #000",
@@ -126,8 +125,7 @@ export const stylePLevel04 = {
 
 export const stylePLevel05 = {
   fontSize: 13.9,
-  maxHeight: "20px",
-  minHeight: "20px",
+  height: "20px",
   color: "black",
   bgcolor: "#E6F5D6", // светло-салатовый
   border: "1px solid #000",
@@ -150,13 +148,11 @@ export const styleXTl201 = {
 
 export const stylePLevel06 = {
   fontSize: 12.9,
-  maxHeight: "21px",
-  minHeight: "21px",
+  height: "22px",
   width: "60px",
   transform: "rotate(270deg)",
   bgcolor: "#BAE186", // тёмно-салатовый
-  border: "1px solid #000",
-  borderColor: "#93D145", // ярко-салатовый
+  border: "1px solid #93D145", // ярко-салатовый
   borderRadius: 1,
   boxShadow: 8,
   color: "black",
@@ -167,13 +163,11 @@ export const stylePLevel06 = {
 
 export const stylePLevel07 = {
   fontSize: 12.5,
-  maxHeight: "21px",
-  minHeight: "21px",
+  height: "20px",
   width: "60px",
   transform: "rotate(270deg)",
   bgcolor: "#E6F5D6", // светло-салатовый
-  border: "1px solid #000",
-  borderColor: "#d4d4d4", // серый
+  border: "1px solid #d4d4d4", // серый
   borderRadius: 1,
   boxShadow: 2,
   color: "black",
@@ -424,7 +418,6 @@ export const PointInfoDirRotStyle = (
   fs: number
 ) => {
   const stylePointInf = {
-    //border: 1,
     fontSize: fs,
     position: "absolute",
     marginTop: mt01,

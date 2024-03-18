@@ -81,8 +81,7 @@ export const ButtonMenu = (
     marginRight: 1,
     minWidth: (soob.length + 10) * 6.5,
     maxWidth: (soob.length + 10) * 6.5,
-    maxHeight: "21px",
-    minHeight: "21px",
+    height: "22px",
     bgcolor: "#BAE186", // тёмно-салатовый
     border: "1px solid #000",
     borderColor: "#93D145", // ярко-салатовый
@@ -98,8 +97,9 @@ export const ButtonMenu = (
     marginRight: 1,
     minWidth: (soob.length + 10) * 6.5,
     maxWidth: (soob.length + 10) * 6.5,
-    maxHeight: "21px",
-    minHeight: "21px",
+    height: "21px",
+    // maxHeight: "21px",
+    // minHeight: "21px",
     bgcolor: "#E6F5D6", // светло-салатовый
     border: "1px solid #000",
     borderColor: "#d4d4d4", // серый

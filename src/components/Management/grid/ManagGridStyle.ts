@@ -69,10 +69,9 @@ export const styleMG03 = {
 };
 
 export const styleButSubArea01 = {
-  fontSize: 12.5,
+  fontSize: 13.3,
   marginTop: 0.2,
-  height: "18px",
-  //backgroundColor: illum ? "#93D145" : "#E9F5D8",
+  height: "20px",
   color: "black",
   bgcolor: "#BAE186", // тёмно-салатовый
   border: "1px solid #000",
@@ -86,7 +85,6 @@ export const styleButSubArea02 = {
   fontSize: 12,
   marginTop: 0.2,
   height: "18px",
-  //backgroundColor: illum ? "#93D145" : "#E9F5D8",
   color: "black",
   bgcolor: "#E6F5D6", // светло-салатовый
   border: "1px solid #000",
@@ -99,7 +97,7 @@ export const styleButSubArea02 = {
 export const styleButArea01 = {
   fontSize: 12.5,
   marginTop: 0.3,
-  height: "20px",
+  height: "21px",
   color: "black",
   bgcolor: "#BAE186", // тёмно-салатовый
   border: "1px solid #000",
@@ -125,7 +123,7 @@ export const styleButArea02 = {
 export const styleButRegion01 = {
   fontSize: 16,
   marginTop: 0.5,
-  height: "20px",
+  height: "21px",
   bgcolor: "#BAE186", // тёмно-салатовый
   border: "1px solid #93D145", // ярко-салатовый
   color: "#5B1080",

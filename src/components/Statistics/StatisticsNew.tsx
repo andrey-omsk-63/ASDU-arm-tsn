@@ -167,8 +167,8 @@ const StatisticsNew = (props: {
       for (let i = 0; i < pointsEtalon.length; i++) {
         const styleSt1 = {
           fontSize: 14.5,
-          maxHeight: "20px",
-          minHeight: "20px",
+          maxHeight: "22px",
+          minHeight: "22px",
           bgcolor: "#BAE186", // тёмно-салатовый
           border: "1px solid #000",
           borderColor: "#93D145", // ярко-салатовый
@@ -226,7 +226,7 @@ const StatisticsNew = (props: {
         <>
           <Box sx={styleSt2}>
             <Tabs
-              sx={{ maxHeight: "20px", minHeight: "20px", marginTop: 0 }}
+              sx={{ maxHeight: "20px", minHeight: "20px" }}
               value={value}
               onChange={handleChange}
               variant="scrollable"
