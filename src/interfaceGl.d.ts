@@ -54,6 +54,7 @@ export interface XctrlInfo {
     status: null;
     xctrls: Xctrl[];
     ext: Array<number[]>;
+    extdesc: string[];
     prioryty: Array<number[]>;
     time: number;
     results: { [key: string]: Result[] };

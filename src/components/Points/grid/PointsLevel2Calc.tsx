@@ -85,6 +85,9 @@ const PointsLevel2Calc = (props: {
 
   const printRef = React.useRef(null);
   let pointer = points.results;
+  let extDesc: any = points.extdesc;
+  if (extDesc === undefined)
+    extDesc = new Array(16).fill("поменяйте структуру");
 
   if (datestat.xttData !== MakeDate(new Date())) {
     pointer = datestat.result;
@@ -220,11 +223,14 @@ const PointsLevel2Calc = (props: {
         //console.log("!!!!!!:", points.yellow);
         for (let i = 0; i < pointer[namer].length; i++) {
           kakchestvo = "";
+          let ksdk = pointer[namer][i].Value[2];
+          if (ksdk) kakchestvo = extDesc[ksdk - 1];
           pusto = true;
           if (!pointer[namer][i].Good) {
             pusto = true;
             kakchestvo = "Работа по СК";
           }
+
           let tim = pointer[namer][i].Time;
 
           if (
@@ -287,8 +293,8 @@ const PointsLevel2Calc = (props: {
               </Grid>
             </Grid>
           );
-          pusto = false;
-          kakchestvo = "";
+          // pusto = false;
+          // kakchestvo = "";
         }
 
         datestat.data = new Date().toLocaleDateString();
@@ -316,7 +322,7 @@ const PointsLevel2Calc = (props: {
   };
 
   const OutputMainTabl = (update: boolean) => {
-    console.log("Calc Обновление точек:", update);
+    //console.log("Calc Обновление точек:", update);
     return (
       <Grid item xs={8} sx={styleXTC033}>
         {PointsLevel2CalcTab2Header()}
