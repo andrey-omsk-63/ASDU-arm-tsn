@@ -96,7 +96,7 @@ const PointsLevel2Baza = (props: {
     flagExit = false;
     pointsTemp = pointsEt;
 
-    console.log("pointsEt:", pointsEt);
+    //console.log("pointsEt:", pointsEt);
 
     setFormName(pointsEt.xctrls[crossRoad].name);
     setMaxLeft(pointsEt.xctrls[crossRoad].left);
@@ -236,7 +236,7 @@ const PointsLevel2Baza = (props: {
       setPoints(pointRab);
       maskpoint.pointForRedax = pointRab;
 
-      console.log("###:", pointRab);
+      //console.log("###:", pointRab);
 
       pointsEt = pointRab;
       setFormName(valuen1);

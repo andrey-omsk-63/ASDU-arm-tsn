@@ -199,7 +199,7 @@ const PointsLevel2BazaDiogram = (props: {
     MakeMatrix();
 
     for (let j = 0; j < vertical; j += scale) {
-      !j && console.log("!!!Перерисовка графика");
+      //!j && console.log("!!!Перерисовка графика");
       resSps.push(
         <Grid key={j} item container sx={{ border: 0 }}>
           {PointsXt112Comp1Tab4Str(j)}
@@ -283,10 +283,10 @@ const PointsLevel2BazaDiogram = (props: {
   };
 
   const OutputerPict = (update: boolean) => {
-    console.log(
-      "BAZA Обновление точек:",
-      new Date().toTimeString().slice(0, 5)
-    );
+    // console.log(
+    //   "BAZA Обновление точек:",
+    //   new Date().toTimeString().slice(0, 5)
+    // );
     let resStrr = [];
     if (pointer !== null) {
       if (pointer[namer]) {

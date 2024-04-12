@@ -89,14 +89,14 @@ const PointsLevel2Area = (props: {
       flagEdit = false;
     } else {
       if (maskpoint.redaxPoint && !flagEdit) {
-        console.log("2");
+        //console.log("2");
         setPoints(pointsTemp); // Stop
         flagExit = false;
         flagEdit = true;
         flagSave = false;
       }  else {
         pointGraf = props.xctrll;
-        console.log('ОБНОВЛЕНИЕ Area pointGraf') //============
+        //console.log('ОБНОВЛЕНИЕ Area pointGraf') //============
       }
     }
   }
@@ -316,7 +316,7 @@ const PointsLevel2Area = (props: {
   };
 
   const StopEdit = (mode: number) => {
-    console.log("StopEdit", mode);
+    //console.log("StopEdit", mode);
     setPoints(pointsTemp);
     maskpoint.pointForRedax = props.xctrll[xtProps];
     pointGraf = props.xctrll;

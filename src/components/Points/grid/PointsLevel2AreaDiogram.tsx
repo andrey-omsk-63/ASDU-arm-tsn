@@ -191,10 +191,10 @@ const PointsLevel2AreaDiogram = (props: {
   };
 
   const OutputerPict = (update: boolean) => {
-    console.log(
-      "Area Обновление точек:",
-      new Date().toTimeString().slice(0, 5)
-    );
+    // console.log(
+    //   "Area Обновление точек:",
+    //   new Date().toTimeString().slice(0, 5)
+    // );
     let resStrr = [];
     if (pointer !== null) {
       if (pointer[namer]) {
