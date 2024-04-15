@@ -49,11 +49,6 @@ export interface Datasets {
   pointRadius: number;
 }
 
-//let oldXtProps = -1;
-//let oldXttData = "aaa";
-//let needRend = true;
-//let datestatXtGraf: any = null;
-
 const PointsLevel2Calc = (props: {
   open: boolean;
   ws: WebSocket;
@@ -70,15 +65,12 @@ const PointsLevel2Calc = (props: {
     const { statsaveReducer } = state;
     return statsaveReducer.datestat;
   });
-  //console.log("Datestat", datestat.xttData, datestat);
   const dispatch = useDispatch();
   //========================================================
 
   const xtProps = props.xtt;
   const points = props.xctrll[xtProps];
   let namer = points.xctrls[props.crossroad].name;
-
-  //console.log('@@@@@@:', xtProps, props.crossroad, points);
 
   let debug = false;
   if (props.ws.url === "wss://localhost:3000/W") debug = true;
@@ -93,9 +85,6 @@ const PointsLevel2Calc = (props: {
     pointer = datestat.result;
     if (debug) namer = "Без имени_12.09.2022_10-12-57";
   }
-
-  //props.saveXt(true);
-  //console.log("NAMER", namer, pointer[namer]);
 
   React.useEffect(() => {
     if (pointer !== null) props.saveXt(true);
@@ -220,12 +209,11 @@ const PointsLevel2Calc = (props: {
 
     if (pointer !== null) {
       if (pointer[namer].length !== 0) {
-        //console.log("!!!!!!:", points.yellow);
         for (let i = 0; i < pointer[namer].length; i++) {
+          pusto = true;
           kakchestvo = "";
           let ksdk = pointer[namer][i].Value[2];
           if (ksdk) kakchestvo = extDesc[ksdk - 1];
-          pusto = true;
           if (!pointer[namer][i].Good) {
             pusto = true;
             kakchestvo = "Работа по СК";
@@ -248,10 +236,8 @@ const PointsLevel2Calc = (props: {
             !pointer[namer][i].Value[0] &&
             !pointer[namer][i].Value[1] &&
             !pointer[namer][i].Value[2]
-          ) {
+          )
             pusto = false;
-            //kakchestvo = "";
-          }
           // создание символьного файла
           let stroka = TimeStr(pointer[namer][i].Time) + ";";
           stroka += pointer[namer][i].Value[0] + ";";
@@ -293,8 +279,6 @@ const PointsLevel2Calc = (props: {
               </Grid>
             </Grid>
           );
-          // pusto = false;
-          // kakchestvo = "";
         }
 
         datestat.data = new Date().toLocaleDateString();
@@ -322,7 +306,6 @@ const PointsLevel2Calc = (props: {
   };
 
   const OutputMainTabl = (update: boolean) => {
-    //console.log("Calc Обновление точек:", update);
     return (
       <Grid item xs={8} sx={styleXTC033}>
         {PointsLevel2CalcTab2Header()}
