@@ -222,7 +222,12 @@ const App = () => {
   if (flagOpenWS) {
     WS = new WebSocket(host);
     flagOpenWS = false;
-    if (WS.url === "wss://localhost:3000/W") debug = true;
+    //if (WS.url === "wss://localhost:3000/W") debug = true;
+    if (
+      WS.url.slice(0, 20) === "wss://localhost:3000" ||
+      WS.url.slice(0, 27) === "wss://andrey-omsk-63.github"
+    )
+      debug = true;
   }
 
   React.useEffect(() => {
@@ -327,16 +332,19 @@ const App = () => {
 
   if (debug && flagOpenDebug) {
     console.log("РЕЖИМ ОТЛАДКИ!!! ");
-    axios.get("http://localhost:3000/otladkaPoints.json").then(({ data }) => {
+    let road =
+      window.location.origin.slice(0, 22) === "https://localhost:3000"
+        ? "https://localhost:3000/"
+        : "./";
+    axios.get(road + "otladkaPoints.json").then(({ data }) => {
       setPointsTfl(data.data.tflight);
       setIsOpenDev(true);
     });
-    const ipAdress: string = "http://localhost:3000/otladkaXctrl.json";
-    axios.get(ipAdress).then(({ data }) => {
+    axios.get(road + "otladkaXctrl.json").then(({ data }) => {
       setPointsXctrl(data.data.xctrlInfo ?? []);
-      //============
+      //===============
       //timerId = setInterval(() => DoTimerId(), 20000);
-      //============
+      //===============
       if (regionGlob === 0) setPointsReg(data.data.regionInfo ?? []);
       if (data.data.xctrlInfo !== null) {
         maskPoint.pointForRedax = data.data.xctrlInfo[0];
@@ -344,7 +352,7 @@ const App = () => {
       }
       setIsOpenInf(true);
     });
-    axios.get("http://localhost:3000/otladkaStatNow.json").then(({ data }) => {
+    axios.get(road + "otladkaStatNow.json").then(({ data }) => {
       setPointsSt(data.data.statistics);
       dispatch(statsaveCreate(datestat));
       let st = dataStatNow.data.statistics;
@@ -352,7 +360,7 @@ const App = () => {
       SetStatisticsIntervalNow(st);
       setIsOpenSt(true);
     });
-    axios.get("http://localhost:3000/otladkaStatOld.json").then(({ data }) => {
+    axios.get(road + "otladkaStatOld.json").then(({ data }) => {
       formSettOld = formSett;
       setPointsOldSt(data.data.statistics);
       let st = dataStatNow.data.statistics;
@@ -360,8 +368,7 @@ const App = () => {
       SetStatisticsIntervalOld(st);
       setIsOpenOldSt(true);
     });
-    axios.get("http://localhost:3000/otladkaXctrll.json").then(({ data }) => {
-      console.log("getCalculation:", data.data.results);
+    axios.get(road + "otladkaXctrll.json").then(({ data }) => {
       datestat.result = data.data.results;
       dispatch(statsaveCreate(datestat));
     });
