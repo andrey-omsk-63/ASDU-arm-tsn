@@ -37,7 +37,7 @@ const PointsLevel2BazaDiogram = (props: {
 
   const colorsGraf = [
     "#d6bf36", // хаки
-    "Turquoise",
+    "Turquoise", // бирюзовый
     "#c0de7c", // средне зелёный
 
     "#e1e69d", // салатовый
@@ -46,10 +46,10 @@ const PointsLevel2BazaDiogram = (props: {
 
     "#badbad", // светло зелёный
     "#d8aa9e", // светло кирпичный
-    "#c5c6ff", //светло фиолетовый/голубой
+    "#c5c6ff", // светло фиолетовый/голубой
 
     "#cd9eca", // светло фиолетовый
-    "#c8a1a1", // Розово-коричневый
+    "#c8a1a1", // розово-коричневый
     "#ffadba", // красно розовый
 
     "Olive",
@@ -300,7 +300,9 @@ const PointsLevel2BazaDiogram = (props: {
           let ph = pointer[namer][i].Value[1] / prph;
           let flagEnd = i === I ? true : false;
           if (pointer[namer][i].Value[0] || pointer[namer][i].Value[1])
-            resStrr.push(<>{OutputPict(i, pv, ph, PictInfo, flagEnd)}</>);
+            resStrr.push(
+              <>{OutputPict(i, pv, ph, PictInfo, setPictInfo, flagEnd)}</>
+            );
         }
       }
     }

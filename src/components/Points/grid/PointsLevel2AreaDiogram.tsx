@@ -34,7 +34,7 @@ const PointsLevel2AreaDiogram = (props: {
 
   const colorsGraf = [
     "#d6bf36", // хаки
-    "Turquoise",
+    "Turquoise", // бирюзовый
     "#c0de7c", // средне зелёный
 
     "#e1e69d", // салатовый
@@ -43,9 +43,9 @@ const PointsLevel2AreaDiogram = (props: {
 
     "#badbad", // светло зелёный
     "#d8aa9e", // светло кирпичный
-    "#c5c6ff", //светло фиолетовый
+    "#c5c6ff", // светло фиолетовый
 
-    "purple",
+    "purple", // фиолетовый
     "RosyBrown",
     "#ff8199", // красно розовый
 
@@ -212,7 +212,7 @@ const PointsLevel2AreaDiogram = (props: {
             resStrr.push(
               <>
                 <Grid key={i} item container>
-                  {OutputPict(i, pv, ph, PictInfo, flagEnd)}
+                  {OutputPict(i, pv, ph, PictInfo, setPictInfo, flagEnd)}
                 </Grid>
               </>
             );

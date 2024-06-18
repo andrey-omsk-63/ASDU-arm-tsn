@@ -18,7 +18,7 @@ import Badge from "@mui/material/Badge";
 
 import { styleDatePicker, styleModalMenu } from "./AppStyle";
 import { styleInpOk, styleButOk } from "./AppStyle";
-import { styleEndInf } from "./components/Points/grid/PointsGridStyle";
+//import { styleEndInf } from "./components/Points/grid/PointsGridStyle";
 import { styleModalEnd } from "./components/Points/grid/PointsGridStyle";
 
 import { XctrlInfo } from "./interfaceGl.d";
@@ -600,6 +600,7 @@ export const OutputPict = (
   pv: number,
   ph: number,
   PictInfo: Function,
+  setPictInfo: Function,
   flagEnd: boolean
 ) => {
   const styleBox = {
@@ -619,7 +620,12 @@ export const OutputPict = (
   let soob = flagEnd ? "🔴" : "●";
 
   return (
-    <Button sx={styleBox} onClick={() => PictInfo(idx, pv, ph)}>
+    <Button
+      sx={styleBox}
+      onMouseEnter={() =>PictInfo(idx, pv, ph)}
+      //onClick={() => PictInfo(idx, pv, ph)}
+      onMouseLeave={() => setPictInfo(false)}
+    >
       {soob}
     </Button>
   );
@@ -699,10 +705,10 @@ export const PictInfoBox = (
 
   return (
     <Box sx={styleBoxGl}>
-      <Button sx={styleEndInf} onClick={() => setPictInfo(false)}>
+      {/* <Button sx={styleEndInf} onClick={() => setPictInfo(false)}>
         &#10006;
-      </Button>
-      <Grid container sx={{ fontSize: 12.9, marginTop: 0.5 }}>
+      </Button> */}
+      <Grid container sx={{ fontSize: 12.9, marginTop: 0.25 }}>
         <Grid item xs={8}>
           <Grid container>
             {Grider("Время", 0, true)}
