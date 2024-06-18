@@ -222,7 +222,6 @@ const App = () => {
   if (flagOpenWS) {
     WS = new WebSocket(host);
     flagOpenWS = false;
-    //if (WS.url === "wss://localhost:3000/W") debug = true;
     if (
       WS.url.slice(0, 20) === "wss://localhost:3000" ||
       WS.url.slice(0, 27) === "wss://andrey-omsk-63.github"
