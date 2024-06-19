@@ -346,7 +346,6 @@ const PointsLevel2BazaDiogram = (props: {
                   pvGl,
                   phGl,
                   pointer[namer][IDX],
-                  setPictInfo,
                   points.xctrls[crRoad],
                   1,
                   points

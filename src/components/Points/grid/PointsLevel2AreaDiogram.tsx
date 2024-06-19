@@ -294,7 +294,6 @@ const PointsLevel2AreaDiogram = (props: {
                   pvGl,
                   phGl,
                   pointer[namer][IDX],
-                  setPictInfo,
                   points.xctrls[crRoad],
                   0,
                   points

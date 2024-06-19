@@ -461,16 +461,12 @@ export const styleBoxForm = {
 };
 //====== PointsMainScrGrid1 =====================================================
 export const styleXTGHeader = {
-  bgcolor: "#C0C0C0",
+  //bgcolor: "#C0E2C3", // серый
+  bgcolor: "#B8CBB9", // серо-салатовый
   borderColor: "#C0C0C0",
   borderTopLeftRadius: 3,
   borderTopRightRadius: 3,
 };
-
-// export const styleXTG101 = {
-//   textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
-//   fontWeight: 500,
-// };
 
 export const styleXTG102 = {
   borderBottom: "1px solid #d4d4d4", // серый
@@ -551,7 +547,8 @@ export const styleXTC02 = {
   borderBottom: "1px solid #d4d4d4", // серый
   padding: 0.4,
   textAlign: "center",
-  backgroundColor: "#C0C0C0",
+  //bgcolor: "#C0E2C3", // серый
+  bgcolor: "#B8CBB9", // серо-салатовый
 };
 
 export const styleXTC03 = {

@@ -59,7 +59,8 @@ export const styleSt04 = {
   borderBottom: "1px solid #d4d4d4", // серый
   fontSize: 12.9,
   lineHeight: 2,
-  backgroundColor: "#FF80C0", // розовый
+  //backgroundColor: "#FF80C0", // розовый
+  backgroundColor: "#ff97ca", // розовый
   color: "white",
   textAlign: "center",
 };
@@ -82,7 +83,8 @@ export const styleSt06 = {
 
 export const styleHeader03 = {
   borderBottom: "1px solid #d4d4d4", // серый
-  backgroundColor: "#C0C0C0",
+  //bgcolor: "#C0E2C3", // серый
+  bgcolor: "#B8CBB9", // серо-салатовый
   fontSize: 11,
   textAlign: "center",
   height: 24,
@@ -92,7 +94,8 @@ export const styleHeader03 = {
 export const styleHeader033 = {
   borderRight: "1px solid #d4d4d4", // серый
   borderBottom: "1px solid #d4d4d4", // серый
-  backgroundColor: "#C0C0C0",
+  //bgcolor: "#C0E2C3", // серый
+  bgcolor: "#B8CBB9", // серо-салатовый
   fontSize: 12.9,
   textAlign: "center",
   height: 24,

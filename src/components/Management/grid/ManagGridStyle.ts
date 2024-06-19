@@ -28,7 +28,8 @@ export const styleMRG02Center = {
 };
 
 export const styleMRGHeader = {
-  bgcolor: "#C0C0C0",
+  //bgcolor: "#C0E2C3", // серый
+  bgcolor: "#B8CBB9", // серо-салатовый
   borderColor: "#C0C0C0",
   borderTopLeftRadius: 3,
   borderTopRightRadius: 3,

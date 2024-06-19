@@ -622,7 +622,7 @@ export const OutputPict = (
   return (
     <Button
       sx={styleBox}
-      onMouseEnter={() =>PictInfo(idx, pv, ph)}
+      onMouseEnter={() => PictInfo(idx, pv, ph)}
       //onClick={() => PictInfo(idx, pv, ph)}
       onMouseLeave={() => setPictInfo(false)}
     >
@@ -635,7 +635,6 @@ export const PictInfoBox = (
   pvGl: number,
   phGl: number,
   pointer: any,
-  setPictInfo: Function,
   point: any,
   mode: number,
   POINT: any
@@ -683,10 +682,7 @@ export const PictInfoBox = (
     numArea = area[mass.indexOf(Math.min.apply(null, mass))];
   }
 
-  let NumArea = mode
-    ? // ? numArea + "[" + pointer.Value[2] + "] (" + pk + ")"
-      pointer.Value[2] + " (" + pk + ")"
-    : numArea;
+  let NumArea = mode ? pointer.Value[2] + " (" + pk + ")" : numArea;
   let KS = mode ? "КС (ПК)" : "КС";
 
   const styleBoxGl = {
@@ -697,7 +693,6 @@ export const PictInfoBox = (
     height: 96,
     bgcolor: "background.paper",
     border: "1px solid #fff",
-    //borderColor: "primary.main",
     borderRadius: 1,
     boxShadow: 24,
     p: 1,
@@ -705,9 +700,6 @@ export const PictInfoBox = (
 
   return (
     <Box sx={styleBoxGl}>
-      {/* <Button sx={styleEndInf} onClick={() => setPictInfo(false)}>
-        &#10006;
-      </Button> */}
       <Grid container sx={{ fontSize: 12.9, marginTop: 0.25 }}>
         <Grid item xs={8}>
           <Grid container>
@@ -727,6 +719,28 @@ export const PictInfoBox = (
         </Grid>
       </Grid>
     </Box>
+  );
+};
+//=== StatisticXTNew ===============================
+
+export const KnobBatCl = (setValue: Function) => {
+  const styleBattonCl = {
+    fontSize: 10.1,
+    backgroundColor: "#E9F5D8", // светло-салатовый
+    color: "red",
+    height: "18px",
+    maxWidth: "5vh",
+    minWidth: "5vh",
+    textTransform: "unset !important",
+    border: "1px solid #d4d4d4", // серый
+    borderRadius: 1,
+    boxShadow: 6,
+  };
+
+  return (
+    <Button sx={styleBattonCl} onClick={() => setValue("17")}>
+      <b>Чистка</b>
+    </Button>
   );
 };
 //==================================================

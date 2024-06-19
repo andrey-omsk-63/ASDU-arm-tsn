@@ -12,11 +12,13 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 import { Statistic } from "../../interfaceStat.d";
 
+import { KnobBatCl } from "../../AppServiceFunctions";
+
 import { colorsGraf, styleSt02, options } from "./StatisticXTStyle";
 import { styleSt04, styleSt05, styleStatMain } from "./StatisticXTStyle";
 import { styleSt06, styleHeader03, styleHeader033 } from "./StatisticXTStyle";
-import { styleClear, styleBattonCl, styleBatton01 } from "./StatisticXTStyle";
-import { styleBatton02 } from "./StatisticXTStyle";
+import { styleBatton02, styleBatton01 } from "./StatisticXTStyle";
+//import { styleBatton02 } from "./StatisticXTStyle";
 import { styleXTG101 } from "../../AppStyle";
 
 import { Chart as ChartJS, CategoryScale } from "chart.js";
@@ -231,16 +233,6 @@ const StatisticXTNew = (props: {
   colChanel = points[areaId].Statistics[0].Datas.length;
 
   const StatisticHeader = () => {
-    const KnobBatCl = () => {
-      return (
-        <Box sx={styleClear}>
-          <Button sx={styleBattonCl} onClick={() => setValue("17")}>
-            <b>Чистка</b>
-          </Button>
-        </Box>
-      );
-    };
-
     const SetValue = (nom: any) => {
       let oldValue = value;
       setValue(nom);
@@ -291,10 +283,11 @@ const StatisticXTNew = (props: {
     return (
       <Grid container item sx={{ height: 24 }}>
         <Grid container sx={{ marginRight: 0.7 }}>
-          <Grid item xs={0.5} sx={styleHeader03}></Grid>
+          <Grid item xs={0.5} sx={styleHeader03}>
+            {KnobBatCl(setValue)}
+          </Grid>
           <Grid item xs={0.512 * colChanel} sx={styleHeader03}>
             <MenuKnobBat />
-            <KnobBatCl />
           </Grid>
           <Grid item xs={3.3} sx={styleHeader033}>
             <b>Качество</b>
@@ -334,17 +327,10 @@ const StatisticXTNew = (props: {
         );
       } else {
         for (let i = 0; i < colChanel; i++) {
-          if (matrix[numMas].Datas[i].st !== 0) {
-            kakchestvo += i + 1;
-            kakchestvo += ", ";
-          }
+          if (matrix[numMas].Datas[i].st) kakchestvo += i + 1 + ", ";
+          let styleSt = !matrix[numMas].Datas[i].st ? styleSt03 : styleSt04;
           resStr.push(
-            <Grid
-              key={Math.random()}
-              item
-              xs={0.5122}
-              sx={matrix[numMas].Datas[i].st === 0 ? styleSt03 : styleSt04}
-            >
+            <Grid key={Math.random()} item xs={0.5122} sx={styleSt}>
               {matrix[numMas].Datas[i].in}
             </Grid>
           );

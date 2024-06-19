@@ -480,9 +480,7 @@ const App = () => {
       } else {
         if (formSett !== formSettToday) {
           massIntervalOld[tekIdOld] = interval;
-        } else {
-          massIntervalNow[tekIdNow] = interval;
-        }
+        } else massIntervalNow[tekIdNow] = interval;
       }
       setTrigger(!trigger);
     };
