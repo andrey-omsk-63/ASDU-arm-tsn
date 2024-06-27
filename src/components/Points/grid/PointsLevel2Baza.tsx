@@ -493,7 +493,7 @@ const PointsLevel2Baza = (props: {
             <Button sx={styleModalEnd} onClick={handleCloseEnd}>
               <b>&#10006;</b>
             </Button>
-            <Typography sx={{ textAlign: "center" }}>
+            <Typography sx={{ color: "#5B1080", textAlign: "center" }}>
               Номер записи <b> {props.nom} </b>
             </Typography>
             <br />

@@ -89,8 +89,6 @@ const PointsLevel2BazaDiogram = (props: {
     massRatio.push(vert / hor);
   }
 
-  //if (xtPropsOld !== props.xtt || crossRoadOld !== crRoad) setOpenLoader(true);
-
   if (
     xtPropsOld !== props.xtt ||
     crossRoadOld !== crRoad ||
@@ -199,7 +197,6 @@ const PointsLevel2BazaDiogram = (props: {
     MakeMatrix();
 
     for (let j = 0; j < vertical; j += scale) {
-      //!j && console.log("!!!Перерисовка графика");
       resSps.push(
         <Grid key={j} item container sx={{ border: 0 }}>
           {PointsXt112Comp1Tab4Str(j)}
@@ -310,13 +307,11 @@ const PointsLevel2BazaDiogram = (props: {
   };
   //============ Dinama =====================================================
   const handleClose = () => {
-    //flagOutput = false;
     setOpenLoader(false);
   };
 
   const Output = () => {
     setTimeout(() => {
-      //flagOutput = false;
       setOpenLoader(false);
     }, 100);
   };

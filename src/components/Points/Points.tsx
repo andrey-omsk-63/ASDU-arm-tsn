@@ -87,8 +87,6 @@ const Points = (props: {
   }, [props.ws, reGion]);
 
   if (isOpen) pointsEtalon = points; // замена проверки обновления - проверка теперь в App
-  //console.log("pointsEtalon:", reGion, pointsEtalon);
-
   if (props.date !== tekDate) {
     if (props.date !== oldDate || oldXt !== tekValue) {
       if (debug) {

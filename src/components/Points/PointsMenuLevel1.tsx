@@ -52,8 +52,6 @@ const PointsMenuLevel1 = (props: {
 
   const [valueLevel2, setValueLavel2] = React.useState("1");
   const [tekValue, setTekValue] = React.useState("1");
-  //const [trigger, setTrigger] = React.useState(false);
-
   const [crossRoad, setCrossRoad] = React.useState(0);
 
   if (xtPropsOld !== xtProps) {
@@ -64,7 +62,7 @@ const PointsMenuLevel1 = (props: {
 
   const SetValueLavel2 = (mode: string) => {
     setValueLavel2(mode);
-    if (mode === "1") setTekValue(mode); //tekValue = mode;
+    if (mode === "1") setTekValue(mode); // tekValue = mode;
   };
 
   const MenuCrossRoad = () => {
@@ -98,14 +96,11 @@ const PointsMenuLevel1 = (props: {
 
     let dlStrMenu = 0;
 
-    //console.log("PointsMenuLevel1:", points);
-
     if (points) {
       if (isOpen && points.xctrls.length !== 0) {
         for (let i = 0; i < points.xctrls.length; i++) {
-          if (points.xctrls[i].name.length > dlStrMenu) {
+          if (points.xctrls[i].name.length > dlStrMenu)
             dlStrMenu = points.xctrls[i].name.length;
-          }
         }
 
         const SpisPerekr = () => {

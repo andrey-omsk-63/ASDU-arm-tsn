@@ -19,7 +19,7 @@ import { styleInpArg, styleInpKnop, styleBut021 } from "./PointsGridStyle";
 import { styleXTG05, styleBut02, styleBut03 } from "./PointsGridStyle";
 import { styleXTG00, styleXTG01, styleXTG021 } from "./PointsGridStyle";
 import { styleXTG02, styleXTG035, styleXTG045 } from "./PointsGridStyle";
-import {  styleXTG101 } from "../../../AppStyle";
+import { styleXTG101 } from "../../../AppStyle";
 
 import { XctrlInfo } from "../../../interfaceGl.d";
 
@@ -89,15 +89,11 @@ const PointsLevel2Area = (props: {
       flagEdit = false;
     } else {
       if (maskpoint.redaxPoint && !flagEdit) {
-        //console.log("2");
         setPoints(pointsTemp); // Stop
         flagExit = false;
         flagEdit = true;
         flagSave = false;
-      }  else {
-        pointGraf = props.xctrll;
-        //console.log('ОБНОВЛЕНИЕ Area pointGraf') //============
-      }
+      } else pointGraf = props.xctrll;
     }
   }
 
@@ -169,9 +165,7 @@ const PointsLevel2Area = (props: {
           xctrLl[i].subarea === points.subarea
         ) {
           pointGraf.push(pointRab);
-        } else {
-          pointGraf.push(xctrLl[i]);
-        }
+        } else pointGraf.push(xctrLl[i]);
       }
       flagSave = true;
       maskpoint.savePoint = true;
@@ -193,7 +187,6 @@ const PointsLevel2Area = (props: {
 
     const handleChange1 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
-      //EvilInput(form, max1, min1) && form && setValuen1(Math.abs(form));
       form && setValuen1(Math.abs(form));
     };
 
@@ -203,7 +196,6 @@ const PointsLevel2Area = (props: {
 
     const handleChange2 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
-      //EvilInput(form, max2, min2) && form && setValuen2(Math.abs(form));
       form && setValuen2(Math.abs(form));
     };
 
@@ -225,7 +217,7 @@ const PointsLevel2Area = (props: {
             <Button sx={styleModalEnd} onClick={() => handleClose()}>
               <b>&#10006;</b>
             </Button>
-            <Typography sx={{ textAlign: "center" }}>
+            <Typography sx={{ color: "#5B1080", textAlign: "center" }}>
               КС <b> &nbsp;{elem.pk} </b>
             </Typography>{" "}
             <br />
@@ -316,7 +308,6 @@ const PointsLevel2Area = (props: {
   };
 
   const StopEdit = (mode: number) => {
-    //console.log("StopEdit", mode);
     setPoints(pointsTemp);
     maskpoint.pointForRedax = props.xctrll[xtProps];
     pointGraf = props.xctrll;

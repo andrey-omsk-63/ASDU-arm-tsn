@@ -35,7 +35,6 @@ const PointsMenuLevel2 = (props: {
     return statsaveReducer.datestat;
   });
   //===========================================================
-  //console.log("MenuLevel2:", props.xctrll);
 
   props.saveXt(false);
   const xtProps = props.xtt;

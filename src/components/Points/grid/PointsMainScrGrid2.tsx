@@ -106,12 +106,12 @@ const PointsMainScrGrid2 = (props: {
 
     const handleChange1 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
-      setValuen1(Math.abs(form));
+      form && setValuen1(Math.abs(form));
     };
 
     const handleChange2 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
-      setValuen2(Math.abs(form));
+      form && setValuen2(Math.abs(form));
     };
 
     const hBlur = () => {};
@@ -122,7 +122,7 @@ const PointsMainScrGrid2 = (props: {
           <Button sx={styleModalEnd} onClick={handleClose}>
             <b>&#10006;</b>
           </Button>
-          <Typography sx={{ textAlign: "center" }}>
+          <Typography sx={{ color: "#5B1080", textAlign: "center" }}>
             Номер записи <b> {nom + 1} </b>
           </Typography>{" "}
           <br />

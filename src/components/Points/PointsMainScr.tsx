@@ -32,7 +32,6 @@ const PointsMainScr = (props: {
   calc: boolean;
   calcDeb: boolean;
 }) => {
-  //console.log('CalcDeb:', props.calcDeb);
   //== Piece of Redux ======================================
   let maskpoint = useSelector((state: any) => {
     const { maskpointReducer } = state;
@@ -73,10 +72,7 @@ const PointsMainScr = (props: {
   }
 
   let rachet = points.pkcalc > 0 ? "Расчёт выполнен" : "Расчёт не возможен";
-  //if (points.pkcalc > 0) rachet = "Расчёт выполнен";
-
   let yellowSoob = points.yellow.make ? "Выключен" : "Включён";
-  //if (!points.yellow.make) yellowSoob = "Включён";
 
   let uprBP = "Управление по ВР";
   if (points.pknow > 0) uprBP = "Выбран план №" + points.pknow.toString();
