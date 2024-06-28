@@ -39,7 +39,7 @@ export const stylePoint01 = {
   color: "black",
   marginRight: 1,
   padding: "1px 0px 1px 0px",
-  textShadow: "1px 1px 1px rgba(0,0,0,0.3)",
+  textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
 };
 export const stylePoint02 = {
   fontSize: 13.5,
@@ -120,7 +120,7 @@ export const stylePLevel04 = {
   marginRight: 1,
   marginTop: 0.7,
   textTransform: "unset !important",
-  textShadow: "1px 1px 1px rgba(0,0,0,0.3)",
+  //textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
 };
 
 export const stylePLevel05 = {
@@ -158,7 +158,7 @@ export const stylePLevel06 = {
   color: "black",
   marginBottom: 6.5,
   textTransform: "unset !important",
-  textShadow: "1px 1px 1px rgba(0,0,0,0.3)",
+  //textShadow: "1px 1px 1px rgba(0,0,0,0.3)",
 };
 
 export const stylePLevel07 = {
@@ -213,7 +213,8 @@ export const styleXTG02 = {
 };
 
 export const styleXTG03 = {
-  bgcolor: "#F1F5FB", // светло серый
+  //bgcolor: "#F1F5FB", // светло серый
+  background: "linear-gradient(160deg, #F1F5FB 63%, #D0DEF0 )",
   marginTop: "0.5vh",
   border: "1px solid #d4d4d4", // серый
   height: "32.6vh", // 33
@@ -223,11 +224,11 @@ export const styleXTG03 = {
 
 export const styleXTG04 = {
   height: "85.7vh",
-  bgcolor: "#BBBBBB", // серый
-  border: 1,
+  //bgcolor: "#BBBBBB", // серый
+  //background: 'linear-gradient(160deg, #F1F5FB 63%, #D0DEF0 )',
+  //border: "1px solid #BBBBBB", // серый
   marginLeft: 0.5,
   borderRadius: 1,
-  borderColor: "#BBBBBB", // серый
   boxShadow: 12,
 };
 
@@ -430,7 +431,8 @@ export const PointInfoDirRotStyle = (
 };
 //====== PointsLevel2Area =======================================================
 export const styleXTG035 = {
-  bgcolor: "#F1F5FB", // светло серый
+  //bgcolor: "#F1F5FB", // светло серый
+  background: "linear-gradient(160deg, #F1F5FB 63%, #D0DEF0 )",
   border: "1px solid #d4d4d4", // серый
   height: "65.8vh",
   borderRadius: 1,
@@ -483,7 +485,8 @@ export const styleXTG103 = {
 
 export const styleXTG104 = {
   fontSize: 14.5,
-  bgcolor: "#F1F5FB", // светло серый
+  //bgcolor: "#F1F5FB", // светло серый
+  background: "linear-gradient(160deg, #F1F5FB 63%, #D0DEF0 )",
   border: "1px solid #d4d4d4", // серый
   borderRadius: 1,
   margin: -1,
@@ -498,7 +501,8 @@ export const styleXTG105 = {
 };
 //====== PointsMainScrGrid2 =====================================================
 export const styleXTGrid = {
-  bgcolor: "#F1F5FB", // светло серый
+  //bgcolor: "#F1F5FB", // светло серый
+  background: "linear-gradient(160deg, #F1F5FB 63%, #D0DEF0 )",
   fontSize: 14.5,
   margin: -1,
   borderRadius: 1,
@@ -559,7 +563,8 @@ export const styleXTC03 = {
 };
 
 export const styleXTC033 = {
-  bgcolor: "#F1F5FB", // светло серый
+  //bgcolor: "#F1F5FB", // светло серый
+  background: "linear-gradient(160deg, #F1F5FB 63%, #D0DEF0 )",
   border: "1px solid #d4d4d4", // серый
   borderRadius: 1,
   boxShadow: 12,

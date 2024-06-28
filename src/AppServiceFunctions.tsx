@@ -88,7 +88,7 @@ export const ButtonMenu = (
     borderRadius: 1,
     color: "black",
     textTransform: "unset !important",
-    textShadow: "1px 1px 1px rgba(0,0,0,0.3)",
+    //textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
     boxShadow: 8,
   };
 
@@ -98,8 +98,6 @@ export const ButtonMenu = (
     minWidth: (soob.length + 10) * 6.5,
     maxWidth: (soob.length + 10) * 6.5,
     height: "21px",
-    // maxHeight: "21px",
-    // minHeight: "21px",
     bgcolor: "#E6F5D6", // светло-салатовый
     border: "1px solid #000",
     borderColor: "#d4d4d4", // серый

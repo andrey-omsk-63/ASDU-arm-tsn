@@ -168,7 +168,8 @@ export const options = {
 };
 
 export const styleStatMain = {
-  bgcolor: "#F1F5FB", // светло серый
+  //bgcolor: "#F1F5FB", // светло серый
+  background: 'linear-gradient(160deg, #F1F5FB 63%, #D0DEF0 )',
   border: "1px solid #d4d4d4", // серый
   borderRadius: 1,
   //borderColor: "primary.main",

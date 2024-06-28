@@ -98,7 +98,6 @@ const PointsLevel2BazaDiogram = (props: {
     crossRoadOld = crRoad;
     pointsOld = points;
     setOpenLoader(true);
-    //flagOutput = true;
     pictInfo && setPictInfo(false);
   }
 
@@ -121,6 +120,7 @@ const PointsLevel2BazaDiogram = (props: {
         if (i < j * luchO * ratio) coler = colorsGraf[pStB[num].pkl];
         if (i >= j * luchP * ratio) coler = colorsGraf[pStB[num].pkr];
       };
+
       for (let j = 0; j < vertical; j += scale) {
         matrix[j] = [];
         for (let i = 0; i < horizon; i += scale) {
@@ -198,7 +198,7 @@ const PointsLevel2BazaDiogram = (props: {
 
     for (let j = 0; j < vertical; j += scale) {
       resSps.push(
-        <Grid key={j} item container sx={{ border: 0 }}>
+        <Grid key={j} item container>
           {PointsXt112Comp1Tab4Str(j)}
         </Grid>
       );
@@ -280,10 +280,6 @@ const PointsLevel2BazaDiogram = (props: {
   };
 
   const OutputerPict = (update: boolean) => {
-    // console.log(
-    //   "BAZA Обновление точек:",
-    //   new Date().toTimeString().slice(0, 5)
-    // );
     let resStrr = [];
     if (pointer !== null) {
       if (pointer[namer]) {

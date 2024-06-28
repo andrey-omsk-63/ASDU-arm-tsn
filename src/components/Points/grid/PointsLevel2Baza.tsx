@@ -707,7 +707,7 @@ const PointsLevel2Baza = (props: {
       {flagExit && <>{WorkMenuEdit(9, "Выйти без сохранения", StopEdit)}</>}
 
       <Stack direction="row">
-        <Grid item xs={4} sx={{ height: "85.8vh", border: 0 }}>
+        <Grid item xs={4} sx={{ height: "85.8vh" }}>
           <PointsLevel2BazaTab1 />
           <Grid container>
             <Grid item xs={12} sx={styleXTG03}>

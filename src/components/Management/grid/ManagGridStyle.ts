@@ -44,7 +44,7 @@ export const styleMRG03 = {
 
 export const styleMRG04 = {
   //bgcolor: "#F1F5FB", // светло серый
-  background: 'linear-gradient(180deg, #F1F5FB 59%, #DEE8F5 )',
+  background: 'linear-gradient(180deg, #F1F5FB 59%, #CBDAEF )',
   border: "1px solid #d4d4d4", // серый
   borderRadius: 1,
   marginTop: "0.5vh",
@@ -57,7 +57,7 @@ export const styleMG01 = {
   borderRadius: 1,
   //bgcolor: "#F1F5FB", // светло серый
   //bgcolor: "#F0F0F0", // светло серый
-  background: 'linear-gradient(160deg, #F1F5FB 63%, #DEE8F5 )',
+  background: 'linear-gradient(160deg, #F1F5FB 63%, #D0DEF0 )',
   marginTop: "0.5vh",
   marginLeft: 0.5,
   marginRight: 0.5,

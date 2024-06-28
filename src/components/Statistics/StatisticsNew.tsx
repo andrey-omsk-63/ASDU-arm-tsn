@@ -176,7 +176,7 @@ const StatisticsNew = (props: {
           color: "black",
           marginRight: 1,
           padding: "1px 0px 1px 0px",
-          textShadow: "1px 1px 1px rgba(0,0,0,0.3)",
+          textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
         };
         const styleSt11 = {
           fontSize: 13.5,
