@@ -1,5 +1,7 @@
 import * as React from "react";
+
 import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
 
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -223,7 +225,7 @@ const PointsLevel2AreaDiogram = (props: {
     let resStr: any = [];
     const dlBlok = (window.innerWidth / 12.55) * 9;
     let elem = points.xctrls[props.crossroad].Calculates;
-    let stylePointInf1 = PointInfoDirRotStyle("5.2vh", "-67px", 18);
+    let stylePointInf1 = PointInfoDirRotStyle("5.2vh", "-67px", 17);
     let mass1 = "";
     let mass2 = "";
     for (let i = 0; i < elem.length; i++) {
@@ -237,9 +239,11 @@ const PointsLevel2AreaDiogram = (props: {
     }
     resStr.push(
       <Grid key={Math.random()} item sx={stylePointInf1}>
-        Прямой {"["}
-        <b>{mass1}</b>
-        {"]"}
+        <Box sx={{ fontWeight: 500 }}>
+          Прямой {"["}
+          <b>{mass1}</b>
+          {"]"}
+        </Box>
       </Grid>
     );
     let ml01 = dlBlok - 129 + "px";
