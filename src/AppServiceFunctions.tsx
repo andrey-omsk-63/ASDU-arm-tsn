@@ -15,6 +15,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { CalendarPickerSkeleton } from "@mui/x-date-pickers/CalendarPickerSkeleton";
 import { PickersDay } from "@mui/x-date-pickers/PickersDay";
 import Badge from "@mui/material/Badge";
+import { BiSolidDownload } from "react-icons/bi";
 
 import { styleDatePicker, styleModalMenu } from "./AppStyle";
 import { styleInpOk, styleButOk } from "./AppStyle";
@@ -76,11 +77,12 @@ export const ButtonMenu = (
   SetValue: Function,
   tekValue: string
 ) => {
+  let dlSoob = soob !== "⇩" ? (soob.length + 10) * 6.5 : 33;
   const styleApp02 = {
     fontSize: 14.5,
-    marginRight: 1,
-    minWidth: (soob.length + 10) * 6.5,
-    maxWidth: (soob.length + 10) * 6.5,
+    marginRight: "3px",
+    minWidth: dlSoob,
+    maxWidth: dlSoob,
     height: "22px",
     bgcolor: "#BAE186", // тёмно-салатовый
     border: "1px solid #000",
@@ -88,16 +90,17 @@ export const ButtonMenu = (
     borderRadius: 1,
     color: "black",
     textTransform: "unset !important",
-    //textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
     boxShadow: 8,
+    textAlign: "center",
   };
 
   const styleApp021 = {
     fontSize: 14,
-    marginRight: 1,
-    minWidth: (soob.length + 10) * 6.5,
-    maxWidth: (soob.length + 10) * 6.5,
-    height: "21px",
+    marginRight: "3px",
+    minWidth: dlSoob,
+    maxWidth: dlSoob,
+    minHeight: "21px",
+    maxHeight: "21px",
     bgcolor: "#E6F5D6", // светло-салатовый
     border: "1px solid #000",
     borderColor: "#d4d4d4", // серый
@@ -105,14 +108,23 @@ export const ButtonMenu = (
     color: "black",
     textTransform: "unset !important",
     boxShadow: 1,
+    textAlign: "center",
   };
 
   let illum = mode === tekValue ? styleApp02 : styleApp021;
 
   return (
-    <Button sx={illum} onClick={() => SetValue(mode)}>
-      <b>{soob}</b>
-    </Button>
+    <>
+      {soob !== "⇩" ? (
+        <Button sx={illum} onClick={() => SetValue(mode)}>
+          <b>{soob}</b>
+        </Button>
+      ) : (
+        <Button sx={illum} onClick={() => SetValue(mode)}>
+          <BiSolidDownload />
+        </Button>
+      )}
+    </>
   );
 };
 
@@ -152,7 +164,8 @@ export const PunktMenuSaveFile = (SetValue: Function, tekValue: string) => {
       sx={{ marginTop: -0.25, marginRight: 0.3, width: "140px" }}
     >
       <Grid item xs sx={{ textAlign: "left" }}>
-        {ButtonMenu("5", "Сохр.в файл", SetValue, tekValue)}
+        {/* {ButtonMenu("5", "Сохр.в файл", SetValue, tekValue)} */}
+        {ButtonMenu("5", "⇩", SetValue, tekValue)}
       </Grid>
     </Grid>
   );

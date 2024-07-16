@@ -134,8 +134,8 @@ export const styleDatePicker = {
     flexWrap: "nowrap",
     flexDirection: "row",
     flex: "1 1 0px",
-    //border: "1px solid #000",
-    borderColor: "#d4d4d4", // серый
+    border: "1px solid #d4d4d4", // серый
+    //borderColor: "#d4d4d4", // серый
     borderRadius: 1,
     boxShadow: 4,
   },

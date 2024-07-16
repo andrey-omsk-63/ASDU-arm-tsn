@@ -596,7 +596,8 @@ const App = () => {
                 )}
                 {ButtonMenu("3", "Статистика", SetValue, tekValue)}
                 {!bsLogin && value === "2" && saveXT && (
-                  <>{ButtonMenu("7", "Сохр.в файл", SetValue, tekValue)}</>
+                  // <>{ButtonMenu("7", "Сохр.в файл", SetValue, tekValue)}</>
+                  <>{ButtonMenu("7", "⇩", SetValue, tekValue)}</>
                 )}
                 {value === "2" && <InputNewDateInterval mode={0} />}
                 {value === "3" && isOpenSt && <InputNewDateInterval mode={1} />}
