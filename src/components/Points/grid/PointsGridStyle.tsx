@@ -37,7 +37,7 @@ export const stylePoint01 = {
   borderColor: "#93D145", // ярко-салатовый
   boxShadow: "6px -6px 6px #d4d4d4",
   color: "black",
-  marginRight: 1,
+  marginRight: 0.4,
   padding: "1px 0px 1px 0px",
   textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
 };
@@ -50,7 +50,7 @@ export const stylePoint02 = {
   borderColor: "#d4d4d4", // серый
   boxShadow: 2,
   color: "black",
-  marginRight: 1,
+  marginRight: 0.4,
   padding: "1px 0px 1px 0px",
 };
 
@@ -117,7 +117,7 @@ export const stylePLevel04 = {
   borderColor: "#93D145", // ярко-салатовый
   borderRadius: 1,
   boxShadow: 8,
-  marginRight: 1,
+  marginRight: 0.4,
   marginTop: 0.7,
   textTransform: "unset !important",
   //textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
@@ -132,7 +132,7 @@ export const stylePLevel05 = {
   borderColor: "#d4d4d4", // серый
   borderRadius: 1,
   boxShadow: 2,
-  marginRight: 1,
+  marginRight: 0.4,
   marginTop: 0.7,
   textTransform: "unset !important",
 };
@@ -431,7 +431,6 @@ export const PointInfoDirRotStyle = (
 };
 //====== PointsLevel2Area =======================================================
 export const styleXTG035 = {
-  //bgcolor: "#F1F5FB", // светло серый
   background: "linear-gradient(160deg, #F1F5FB 63%, #D0DEF0 )",
   border: "1px solid #d4d4d4", // серый
   height: "65.8vh",
@@ -463,7 +462,6 @@ export const styleBoxForm = {
 };
 //====== PointsMainScrGrid1 =====================================================
 export const styleXTGHeader = {
-  //bgcolor: "#C0E2C3", // серый
   bgcolor: "#B8CBB9", // серо-салатовый
   borderColor: "#C0C0C0",
   borderTopLeftRadius: 3,
@@ -485,7 +483,6 @@ export const styleXTG103 = {
 
 export const styleXTG104 = {
   fontSize: 14.5,
-  //bgcolor: "#F1F5FB", // светло серый
   background: "linear-gradient(160deg, #F1F5FB 63%, #D0DEF0 )",
   border: "1px solid #d4d4d4", // серый
   borderRadius: 1,
@@ -501,7 +498,6 @@ export const styleXTG105 = {
 };
 //====== PointsMainScrGrid2 =====================================================
 export const styleXTGrid = {
-  //bgcolor: "#F1F5FB", // светло серый
   background: "linear-gradient(160deg, #F1F5FB 63%, #D0DEF0 )",
   fontSize: 14.5,
   margin: -1,
@@ -510,7 +506,6 @@ export const styleXTGrid = {
 };
 
 export const styleXTGl02 = {
-  //borderRight: 1,
   borderBottom: "1px solid #d4d4d4", // серый
   padding: 0.7,
   textAlign: "center",
@@ -551,7 +546,6 @@ export const styleXTC02 = {
   borderBottom: "1px solid #d4d4d4", // серый
   padding: 0.4,
   textAlign: "center",
-  //bgcolor: "#C0E2C3", // серый
   bgcolor: "#B8CBB9", // серо-салатовый
 };
 
@@ -563,7 +557,6 @@ export const styleXTC03 = {
 };
 
 export const styleXTC033 = {
-  //bgcolor: "#F1F5FB", // светло серый
   background: "linear-gradient(160deg, #F1F5FB 63%, #D0DEF0 )",
   border: "1px solid #d4d4d4", // серый
   borderRadius: 1,

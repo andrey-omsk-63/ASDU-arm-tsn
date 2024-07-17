@@ -17,9 +17,7 @@ import { KnobBatCl } from "../../AppServiceFunctions";
 import { colorsGraf, styleSt02, options } from "./StatisticXTStyle";
 import { styleSt04, styleSt05, styleStatMain } from "./StatisticXTStyle";
 import { styleSt06, styleHeader03, styleHeader033 } from "./StatisticXTStyle";
-//import { styleClear, styleBattonCl, styleBatton01 } from "./StatisticXTStyle";
 import { styleBatton02, styleBatton01 } from "./StatisticXTStyle";
-//import { styleBatton02 } from "./StatisticXTStyle";
 import { styleXTG101 } from "../../AppStyle";
 
 import { Chart as ChartJS, CategoryScale } from "chart.js";
@@ -37,7 +35,6 @@ ChartJS.register(
 );
 
 export interface GrafGlob {
-  //id: number;
   dataGraf: DataGraf[];
 }
 
@@ -117,7 +114,6 @@ const StatisticXTArchive = (props: {
     oldAreaid = -1;
     numIdInMas = 0;
     oldDate = props.date;
-    //setOpenLoader(true);
   }
 
   if (isOpen) {
@@ -234,7 +230,7 @@ const StatisticXTArchive = (props: {
   };
   //=========================================================================
   const styleSt03 = {
-    textIndent: 6,
+    //textIndent: 6,
     borderRight: "1px solid #d4d4d4", // серый,
     borderBottom: "1px solid #d4d4d4", // серый,
     fontSize: 12.9,
@@ -246,16 +242,6 @@ const StatisticXTArchive = (props: {
   colChanel = points[areaId].Statistics[0].Datas.length;
 
   const StatisticHeader = () => {
-    // const KnobBatCl = () => {
-    //   return (
-    //     <Box sx={styleClear}>
-    //       <Button sx={styleBattonCl} onClick={() => setValue("17")}>
-    //         <b>Чистка</b>
-    //       </Button>
-    //     </Box>
-    //   );
-    // };
-
     const SetValue = (nom: any) => {
       let oldValue = value;
       setValue(nom);
@@ -530,7 +516,6 @@ const StatisticXTArchive = (props: {
       <Grid container item sx={{ marginTop: 1, height: "56vh" }}>
         <Grid item xs={24} sx={styleStatMain}>
           <StatisticHeader />
-          {/* <Box sx={{ overflowX: 'auto', height: '59vh' }}> */}
           <Grid container item>
             {openLoader && <Dinama />}
             {!openLoader && (
@@ -541,7 +526,6 @@ const StatisticXTArchive = (props: {
               </Box>
             )}
           </Grid>
-          {/* </Box> */}
         </Grid>
       </Grid>
     </Box>

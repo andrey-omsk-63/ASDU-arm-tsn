@@ -27,12 +27,6 @@ export const colorsGraf = [
   "Yellow",
 ];
 
-// export const styleStError = {
-//   textAlign: "center",
-//   textShadow: "2px 2px 3px rgba(0,0,0,0.3)",
-//   color: "red",
-// };
-
 export const styleSt02 = {
   textIndent: 6,
   borderRight: "1px solid #d4d4d4", // серый
@@ -48,8 +42,6 @@ export const styleSt03 = {
   fontSize: 12.9,
   lineHeight: 2,
   backgroundColor: "#E6EEF5", // голубой
-  //backgroundColor: "#E7F9EB", //зелёный
-  //borderColor: "primary.main",
   textAlign: "center",
 };
 
@@ -83,7 +75,6 @@ export const styleSt06 = {
 
 export const styleHeader03 = {
   borderBottom: "1px solid #d4d4d4", // серый
-  //bgcolor: "#C0E2C3", // серый
   bgcolor: "#B8CBB9", // серо-салатовый
   fontSize: 11,
   textAlign: "center",
@@ -94,7 +85,6 @@ export const styleHeader03 = {
 export const styleHeader033 = {
   borderRight: "1px solid #d4d4d4", // серый
   borderBottom: "1px solid #d4d4d4", // серый
-  //bgcolor: "#C0E2C3", // серый
   bgcolor: "#B8CBB9", // серо-салатовый
   fontSize: 12.9,
   textAlign: "center",
@@ -146,8 +136,6 @@ export const styleBattonCl = {
   fontSize: 10.1,
   backgroundColor: "#E9F5D8", // светло-салатовый
   color: "red",
-  //maxHeight: '18px',
-  //minHeight: '18px',
   height: "18px",
   maxWidth: "5vh",
   minWidth: "5vh",
@@ -169,9 +157,8 @@ export const options = {
 
 export const styleStatMain = {
   //bgcolor: "#F1F5FB", // светло серый
-  background: 'linear-gradient(160deg, #F1F5FB 63%, #D0DEF0 )',
+  background: "linear-gradient(160deg, #F1F5FB 63%, #D0DEF0 )",
   border: "1px solid #d4d4d4", // серый
   borderRadius: 1,
-  //borderColor: "primary.main",
   boxShadow: 12,
 };

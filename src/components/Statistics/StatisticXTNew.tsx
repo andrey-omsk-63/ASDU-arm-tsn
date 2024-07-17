@@ -18,7 +18,6 @@ import { colorsGraf, styleSt02, options } from "./StatisticXTStyle";
 import { styleSt04, styleSt05, styleStatMain } from "./StatisticXTStyle";
 import { styleSt06, styleHeader03, styleHeader033 } from "./StatisticXTStyle";
 import { styleBatton02, styleBatton01 } from "./StatisticXTStyle";
-//import { styleBatton02 } from "./StatisticXTStyle";
 import { styleXTG101 } from "../../AppStyle";
 
 import { Chart as ChartJS, CategoryScale } from "chart.js";
@@ -36,7 +35,6 @@ ChartJS.register(
 );
 
 export interface GrafGlob {
-  //id: number;
   dataGraf: DataGraf[];
 }
 
@@ -109,7 +107,6 @@ const StatisticXTNew = (props: {
   if (isOpen) {
     //начало работы (первый вход)
     if (oldAreaid < 0) {
-      //if (points[areaId].Statistics[0].Datas === null)
       massId.push({ id: areaId, canall: [], lbl: [], labels, datasets: [] });
       oldAreaid = areaId;
       canal = [];
@@ -501,7 +498,6 @@ const StatisticXTNew = (props: {
     CreateMatrix();
     CompletMatrix();
     StatSpis();
-    //Output();
   }
 
   Output();

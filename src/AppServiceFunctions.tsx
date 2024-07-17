@@ -114,17 +114,9 @@ export const ButtonMenu = (
   let illum = mode === tekValue ? styleApp02 : styleApp021;
 
   return (
-    <>
-      {soob !== "⇩" ? (
-        <Button sx={illum} onClick={() => SetValue(mode)}>
-          <b>{soob}</b>
-        </Button>
-      ) : (
-        <Button sx={illum} onClick={() => SetValue(mode)}>
-          <BiSolidDownload />
-        </Button>
-      )}
-    </>
+    <Button sx={illum} onClick={() => SetValue(mode)}>
+      {soob === "⇩" ? <BiSolidDownload /> : <b>{soob}</b>}
+    </Button>
   );
 };
 

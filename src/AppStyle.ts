@@ -78,7 +78,6 @@ export const styleXTG101 = {
 //====== DatePicker =======================================================
 export const styleImpBlock = {
   fontSize: 14,
-  //border: 0,
   marginLeft: "auto",
   marginRight: "-15px",
   maxHeight: "21px",
@@ -92,7 +91,6 @@ export const styleImpServis = {
   minHeight: "21px",
   maxWidth: "124px",
   minWidth: "124px",
-  //boxShadow: 10,
 };
 
 export const styleInp = {
@@ -135,7 +133,6 @@ export const styleDatePicker = {
     flexDirection: "row",
     flex: "1 1 0px",
     border: "1px solid #d4d4d4", // серый
-    //borderColor: "#d4d4d4", // серый
     borderRadius: 1,
     boxShadow: 4,
   },
