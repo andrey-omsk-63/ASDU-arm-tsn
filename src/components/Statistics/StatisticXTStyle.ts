@@ -27,6 +27,40 @@ export const colorsGraf = [
   "Yellow",
 ];
 
+export const styleSt1 = {
+  fontSize: 14.1,
+  maxHeight: "22px",
+  minHeight: "22px",
+  bgcolor: "#BAE186", // тёмно-салатовый
+  border: "1px solid #000",
+  borderColor: "#93D145", // ярко-салатовый
+  boxShadow: "4px -6px 6px #d4d4d4",
+  color: "black",
+  marginRight: 0.4,
+  padding: "1px 0px 1px 0px",
+  //textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
+};
+
+export const styleSt11 = {
+  fontSize: 13.5,
+  maxHeight: "20px",
+  minHeight: "20px",
+  bgcolor: "#E6F5D6", // светло-салатовый
+  border: "1px solid #000",
+  borderColor: "#d4d4d4", // серый
+  boxShadow: 2,
+  color: "black",
+  marginRight: 0.4,
+  padding: "1px 0px 1px 0px",
+};
+
+export const styleSt2 = {
+  width: window.innerWidth - 21,
+  fontSize: 12,
+  marginTop: "-2vh",
+  marginLeft: -2.4,
+};
+
 export const styleSt02 = {
   textIndent: 6,
   borderRight: "1px solid #d4d4d4", // серый

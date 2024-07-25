@@ -8,6 +8,7 @@ import Tab from "@mui/material/Tab";
 
 import StatisticXTArchive from "./StatisticXTArchive";
 
+import { styleSt1, styleSt11, styleSt2 } from "./StatisticXTStyle";
 import { styleStError } from "../../AppStyle";
 
 import { Statistic } from "../../interfaceStat.d";
@@ -28,14 +29,8 @@ const StatisticsArchive = (props: {
   date: string;
   interval: number;
   func: any;
-  //pointsTfl: Tflight[];
 }) => {
-  console.log("pointsOld:", props.points);
   //== Piece of Redux ======================================
-  // let maskpoint = useSelector((state: any) => {
-  //   const { maskpointReducer } = state;
-  //   return maskpointReducer.maskpoint;
-  // });
   let datestat = useSelector((state: any) => {
     const { statsaveReducer } = state;
     return statsaveReducer.datestat;
@@ -94,19 +89,7 @@ const StatisticsArchive = (props: {
           tekValue = i;
       }
     }
-  } else {
-    if (massInterval.length) massInterval[tekValue] = props.interval;
-  }
-
-  const styleSt2 = {
-    //border: 1,
-    // width: 850,
-    width: window.innerWidth - 21,
-    fontSize: 12,
-    marginTop: "-2vh",
-    marginLeft: -2.4,
-    //marginRight: -7,
-  };
+  } else if (massInterval.length) massInterval[tekValue] = props.interval;
 
   if (datestat.tekArea && datestat.tekId && pointsEtalon) {
     tekValue = 0;
@@ -145,42 +128,13 @@ const StatisticsArchive = (props: {
     if (pointsEtalon.length === 0) {
       resSps.push(
         <Box key={1}>
-          <h2>Нет данных по статистике</h2>
+          <h1>Нет данных по статистике</h1>
         </Box>
       );
     } else {
       for (let i = 0; i < pointsEtalon.length; i++) {
-        const styleSt1 = {
-          fontSize: 14.1,
-          maxHeight: "22px",
-          minHeight: "22px",
-          bgcolor: "#BAE186", // тёмно-салатовый
-          border: "1px solid #000",
-          borderColor: "#93D145", // ярко-салатовый
-          boxShadow: "4px -6px 6px #d4d4d4",
-          color: "black",
-          marginRight: 1,
-          padding: "1px 0px 1px 0px",
-          textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
-        };
-        const styleSt11 = {
-          fontSize: 13.5,
-          maxHeight: "20px",
-          minHeight: "20px",
-          bgcolor: "#E6F5D6", // светло-салатовый
-          border: "1px solid #000",
-          borderColor: "#d4d4d4", // серый
-          boxShadow: 2,
-          color: "black",
-          marginRight: 1,
-          padding: "1px 0px 1px 0px",
-        };
-        labl =
-          pointsEtalon[i].area +
-          ":" +
-          pointsEtalon[i].subarea +
-          ":" +
-          pointsEtalon[i].id;
+        let pEt = pointsEtalon[i];
+        labl = pEt.area + ":" + pEt.subarea + ":" + pEt.id;
         let illum = value === i ? styleSt1 : styleSt11;
         resSps.push(<Tab key={i} sx={illum} label={labl} />);
       }
@@ -247,4 +201,4 @@ const StatisticsArchive = (props: {
 };
 
 export default StatisticsArchive;
-//эту
+

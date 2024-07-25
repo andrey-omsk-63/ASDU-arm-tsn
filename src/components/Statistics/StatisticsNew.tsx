@@ -8,6 +8,7 @@ import Tab from "@mui/material/Tab";
 
 import StatisticXTNew from "./StatisticXTNew";
 
+import { styleSt1, styleSt11, styleSt2 } from "./StatisticXTStyle";
 import { styleStError } from "../../AppStyle";
 
 import { Statistic } from "../../interfaceStat.d";
@@ -27,14 +28,8 @@ const StatisticsNew = (props: {
   date: string;
   interval: number;
   func: any;
-  //pointsTfl: Tflight[];
 }) => {
-  // console.log('pointsTfl:', props.pointsTfl);
   //== Piece of Redux ======================================
-  // let maskpoint = useSelector((state: any) => {
-  //   const { maskpointReducer } = state;
-  //   return maskpointReducer.maskpoint;
-  // });
   let datestat = useSelector((state: any) => {
     const { statsaveReducer } = state;
     return statsaveReducer.datestat;
@@ -63,7 +58,6 @@ const StatisticsNew = (props: {
       }
     };
     handleSend();
-    //console.log("ОТРАБОТАЛ useEFFECT ОСНОВНОЙ");
   }, [props.ws, reGion]);
 
   if (isOpen && flagEtalon) {
@@ -78,9 +72,7 @@ const StatisticsNew = (props: {
       massIntervalEt.push(5);
     }
     points = [];
-  } else {
-    if (massInterval.length) massInterval[tekValue] = props.interval;
-  }
+  } else if (massInterval.length) massInterval[tekValue] = props.interval;
 
   if (isOpen && !flagEtalon) {
     let pointsAdd = [];
@@ -94,7 +86,6 @@ const StatisticsNew = (props: {
           points[i].region === pointsEtalon[j].region &&
           points[i].area === pointsEtalon[j].area
         ) {
-          //console.log('Stat совподение записей i=', i, 'j=', j);
           newRecord = false;
           pointsEtalon[j] = points[i];
         }
@@ -113,15 +104,6 @@ const StatisticsNew = (props: {
       }
     }
   }
-
-  //console.log("window.innerWidth:", window.innerWidth);
-
-  const styleSt2 = {
-    width: window.innerWidth - 21,
-    fontSize: 12,
-    marginTop: "-2vh",
-    marginLeft: -2.4,
-  };
 
   if (datestat.tekArea && datestat.tekId) {
     tekValue = 0;
@@ -165,37 +147,8 @@ const StatisticsNew = (props: {
       );
     } else {
       for (let i = 0; i < pointsEtalon.length; i++) {
-        const styleSt1 = {
-          fontSize: 14.5,
-          maxHeight: "22px",
-          minHeight: "22px",
-          bgcolor: "#BAE186", // тёмно-салатовый
-          border: "1px solid #000",
-          borderColor: "#93D145", // ярко-салатовый
-          boxShadow: "6px -6px 6px  #d4d4d4",
-          color: "black",
-          marginRight: 1,
-          padding: "1px 0px 1px 0px",
-          textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
-        };
-        const styleSt11 = {
-          fontSize: 13.5,
-          maxHeight: "20px",
-          minHeight: "20px",
-          bgcolor: "#E6F5D6", // светло-салатовый
-          border: "1px solid #000",
-          borderColor: "#d4d4d4", // серый
-          boxShadow: 2,
-          color: "black",
-          marginRight: 1,
-          padding: "1px 0px 1px 0px",
-        };
-        labl =
-          pointsEtalon[i].area +
-          ":" +
-          pointsEtalon[i].subarea +
-          ":" +
-          pointsEtalon[i].id;
+        let pEt = pointsEtalon[i];
+        labl = pEt.area + ":" + pEt.subarea + ":" + pEt.id;
         let illum = value === i ? styleSt1 : styleSt11;
         resSps.push(<Tab key={i} sx={illum} label={labl} />);
       }

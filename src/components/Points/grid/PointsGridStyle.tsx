@@ -39,7 +39,7 @@ export const stylePoint01 = {
   color: "black",
   marginRight: 0.4,
   padding: "1px 0px 1px 0px",
-  textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
+  //textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
 };
 export const stylePoint02 = {
   fontSize: 13.5,
@@ -156,7 +156,7 @@ export const stylePLevel06 = {
   borderRadius: 1,
   boxShadow: 8,
   color: "black",
-  marginBottom: 6.5,
+  marginBottom: 5.9,
   textTransform: "unset !important",
   //textShadow: "1px 1px 1px rgba(0,0,0,0.3)",
 };
@@ -171,7 +171,7 @@ export const stylePLevel07 = {
   borderRadius: 1,
   boxShadow: 2,
   color: "black",
-  marginBottom: 6.5,
+  marginBottom: 5.9,
   textTransform: "unset !important",
 };
 //====== PointsLevel2Baza =======================================================
