@@ -89,7 +89,7 @@ const StatisticXTArchive = (props: {
   const [trigger, setTrigger] = React.useState(true);
 
   let resStr: any = [];
-  let resSps: any = [];
+  //let resSps: any = [];
   let matrix: any = [];
   let MATRIX: any = [];
   let kakchestvo = " ";
@@ -357,17 +357,29 @@ const StatisticXTArchive = (props: {
   };
 
   const StatSpis = () => {
-    if (isOpen) {
-      resSps = [];
-      for (let i = 0; i < matrix.length; i++) {
-        resSps.push(
-          <Grid key={i} item container sx={{ height: 27 }}>
-            {StatStroka(i)}
-          </Grid>
-        );
-      }
-    }
-    return resSps;
+    // if (isOpen) {
+    //   resSps = [];
+    //   for (let i = 0; i < matrix.length; i++) {
+    //     resSps.push(
+    //       <Grid key={i} item container sx={{ height: 27 }}>
+    //         {StatStroka(i)}
+    //       </Grid>
+    //     );
+    //   }
+    // }
+    // return resSps;
+    return (
+      <>
+        {isOpen &&
+          matrix.map((array: any, idx: number) => {
+            return (
+              <Grid key={idx} item container sx={{ height: 27 }}>
+                {StatStroka(idx)}
+              </Grid>
+            );
+          })}
+      </>
+    );
   };
 
   const CreateMatrix = () => {
@@ -486,7 +498,7 @@ const StatisticXTArchive = (props: {
     //React.useEffect(() => {
     setTimeout(() => {
       setOpenLoader(false);
-    }, 100);
+    }, 500);
     //}, []);
   };
 
@@ -501,7 +513,7 @@ const StatisticXTArchive = (props: {
   if (isOpen) {
     CreateMatrix();
     CompletMatrix();
-    StatSpis();
+    //StatSpis();
   }
 
   if (openLoader) Output();
@@ -516,16 +528,10 @@ const StatisticXTArchive = (props: {
       <Grid container item sx={{ marginTop: 1, height: "56vh" }}>
         <Grid item xs={24} sx={styleStatMain}>
           <StatisticHeader />
-          <Grid container item>
+          <Box sx={{ overflowX: "auto", height: "59vh" }}>
             {openLoader && <Dinama />}
-            {!openLoader && (
-              <Box sx={{ overflowX: "auto", height: "59vh" }}>
-                <Grid container item>
-                  {resSps}
-                </Grid>
-              </Box>
-            )}
-          </Grid>
+            {!openLoader && <>{StatSpis()}</>}
+          </Box>
         </Grid>
       </Grid>
     </Box>

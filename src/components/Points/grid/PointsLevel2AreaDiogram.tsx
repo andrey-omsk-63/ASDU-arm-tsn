@@ -73,8 +73,8 @@ const PointsLevel2AreaDiogram = (props: {
 
   let coler = "red";
   let colerOld = "";
-  let masStr = [];
-  let masCol = [];
+  let masStr: any = [];
+  let masCol: any = [];
   let colBl = 0;
 
   if (
@@ -120,13 +120,13 @@ const PointsLevel2AreaDiogram = (props: {
   };
 
   const PointsXt112Comp1Tab4 = () => {
-    let resStr = [];
+    //let resStr = [];
     let resSps = [];
 
     MakeMatrix();
 
     const PointsXt112Comp1Tab4StrOptim = (j: number) => {
-      resStr = [];
+      //resStr = [];
       coler = "red";
       colerOld = matrix[j / scale][0 / scale];
       masStr = [];
@@ -147,21 +147,34 @@ const PointsLevel2AreaDiogram = (props: {
       masStr.push(colBl);
       masCol.push(coler);
 
-      for (let i = 0; i < masStr.length; i++) {
-        resStr.push(
-          <Grid
-            key={i}
-            xs={steepHorizon * scale * masStr[i]}
-            item
-            sx={{
-              backgroundColor: masCol[i],
+      // for (let i = 0; i < masStr.length; i++) {
+      //   resStr.push(
+      //     <Grid
+      //       key={i}
+      //       xs={steepHorizon * scale * masStr[i]}
+      //       item
+      //       sx={{
+      //         backgroundColor: masCol[i],
+      //         height: String(steepVertical * scale) + "vh",
+      //         borderRadius: 3,
+      //       }}
+      //     ></Grid>
+      //   );
+      // }
+      // return resStr;
+      return (
+        <>
+          {masStr.map((masstr: any, idx: number) => {
+            let xss = steepHorizon * scale * masstr;
+            const stylePict = {
+              backgroundColor: masCol[idx],
               height: String(steepVertical * scale) + "vh",
               borderRadius: 3,
-            }}
-          ></Grid>
-        );
-      }
-      return resStr;
+            };
+            return <Grid key={idx} xs={xss} item sx={stylePict}></Grid>;
+          })}
+        </>
+      );
     };
 
     for (let j = 0; j < vertical; j += scale) {
@@ -266,7 +279,7 @@ const PointsLevel2AreaDiogram = (props: {
   const Output = () => {
     setTimeout(() => {
       setOpenLoader(false);
-    }, 100);
+    }, 500);
   };
 
   const Dinama = () => {

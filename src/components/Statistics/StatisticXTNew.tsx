@@ -87,7 +87,7 @@ const StatisticXTNew = (props: {
   const [trigger, setTrigger] = React.useState(true);
 
   let resStr: any = [];
-  let resSps: any = [];
+  //let resSps: any = [];
   let matrix: any = [];
   let MATRIX: any = [];
   let kakchestvo = " ";
@@ -344,17 +344,29 @@ const StatisticXTNew = (props: {
   };
 
   const StatSpis = () => {
-    if (isOpen) {
-      resSps = [];
-      for (let i = 0; i < matrix.length; i++) {
-        resSps.push(
-          <Grid key={i} item container sx={{ height: 27 }}>
-            {StatStroka(i)}
-          </Grid>
-        );
-      }
-    }
-    return resSps;
+    // if (isOpen) {
+    //   resSps = [];
+    //   for (let i = 0; i < matrix.length; i++) {
+    //     resSps.push(
+    //       <Grid key={i} item container sx={{ height: 27 }}>
+    //         {StatStroka(i)}
+    //       </Grid>
+    //     );
+    //   }
+    // }
+    // return resSps;
+    return (
+      <>
+        {isOpen &&
+          matrix.map((array: any, idx: number) => {
+            return (
+              <Grid key={idx} container sx={{ height: 27 }}>
+                {StatStroka(idx)}
+              </Grid>
+            );
+          })}
+      </>
+    );
   };
 
   const CreateMatrix = () => {
@@ -483,7 +495,7 @@ const StatisticXTNew = (props: {
   const Output = () => {
     setTimeout(() => {
       setOpenLoader(false);
-    }, 100);
+    }, 500);
   };
 
   const Dinama = () => {
@@ -497,7 +509,6 @@ const StatisticXTNew = (props: {
   if (isOpen) {
     CreateMatrix();
     CompletMatrix();
-    StatSpis();
   }
 
   Output();
@@ -513,14 +524,8 @@ const StatisticXTNew = (props: {
         <Grid item xs={24} sx={styleStatMain}>
           <StatisticHeader />
           <Box sx={{ overflowX: "auto", height: "59vh" }}>
-            <Grid container item>
-              {openLoader && <Dinama />}
-              {!openLoader && (
-                <Grid container item>
-                  {resSps}
-                </Grid>
-              )}
-            </Grid>
+            {openLoader && <Dinama />}
+            {!openLoader && <>{StatSpis()}</>}
           </Box>
         </Grid>
       </Grid>

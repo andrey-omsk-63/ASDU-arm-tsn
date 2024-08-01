@@ -21,8 +21,11 @@ let phGl = -1;
 let pvGl = -1;
 let IDX = -1;
 let massRatio: Array<number> = [];
-let resStr: any = [];
+//let resStr: any = [];
 //let flagOutput = false;
+
+//let openloader = true;
+let pictinfo = false;
 
 const PointsLevel2BazaDiogram = (props: {
   xctrll: XctrlInfo[];
@@ -30,7 +33,7 @@ const PointsLevel2BazaDiogram = (props: {
   crossroad: number;
   update: boolean;
 }) => {
-  //console.log("PointsLevel2BazaDiogram: пришло обновление", props.update);
+  //console.log("PointsLevel2BazaDiogram:", props.xtt, props.crossroad);
   const points = props.xctrll[props.xtt];
   const crRoad = props.crossroad;
   const namer = points.xctrls[props.crossroad].name;
@@ -63,7 +66,7 @@ const PointsLevel2BazaDiogram = (props: {
   ];
 
   const [openLoader, setOpenLoader] = React.useState(true);
-  const [pictInfo, setPictInfo] = React.useState(false);
+  // const [pictInfo, setPictInfo] = React.useState(false);
 
   let dlMas = points.xctrls[crRoad].StrategyB.length;
   const horizonLimit = points.xctrls[crRoad].StrategyB[dlMas - 1].xright;
@@ -99,11 +102,16 @@ const PointsLevel2BazaDiogram = (props: {
     crossRoadOld = crRoad;
     pointsOld = points;
     setOpenLoader(true);
-    pictInfo && setPictInfo(false);
+    //pictInfo && setPictInfo(false);
+    //openloader = true;
+    pictinfo = false;
   }
 
+  //const [openLoader, setOpenLoader] = React.useState(openloader);
+  const [pictInfo, setPictInfo] = React.useState(pictinfo);
+
   const PointsXt112Comp1Tab4 = (update: boolean) => {
-    resStr = [];
+    //resStr = [];
     let resSps = [];
 
     const MakeMatrix = () => {
@@ -163,7 +171,7 @@ const PointsLevel2BazaDiogram = (props: {
     };
 
     const PointsXt112Comp1Tab4Str = (j: number) => {
-      resStr = [];
+      //resStr = [];
       coler = "red";
       colerOld = matrix[j / scale][0 / scale];
       masStr = [];
@@ -184,15 +192,27 @@ const PointsLevel2BazaDiogram = (props: {
       masStr.push(colBl);
       masCol.push(coler);
 
-      for (let i = 0; i < masStr.length; i++) {
-        let xss = steepHorizon * scale * masStr[i];
-        const stylePict = {
-          backgroundColor: masCol[i],
-          height: String(steepVertical * scale) + "vh",
-        };
-        resStr.push(<Grid key={i} xs={xss} item sx={stylePict}></Grid>);
-      }
-      return resStr;
+      // for (let i = 0; i < masStr.length; i++) {
+      //   let xss = steepHorizon * scale * masStr[i];
+      //   const stylePict = {
+      //     backgroundColor: masCol[i],
+      //     height: String(steepVertical * scale) + "vh",
+      //   };
+      //   resStr.push(<Grid key={i} xs={xss} item sx={stylePict}></Grid>);
+      // }
+      // return resStr;
+      return (
+        <>
+          {masStr.map((masstr: any, idx: number) => {
+            let xss = steepHorizon * scale * masstr;
+            const stylePict = {
+              backgroundColor: masCol[idx],
+              height: String(steepVertical * scale) + "vh",
+            };
+            return <Grid key={idx} xs={xss} item sx={stylePict}></Grid>;
+          })}
+        </>
+      );
     };
 
     MakeMatrix();
@@ -246,7 +266,7 @@ const PointsLevel2BazaDiogram = (props: {
     }
     resStr.push(
       <Grid key={Math.random()} item sx={stylePointInf1}>
-        <Box sx={{fontWeight: 500}}>
+        <Box sx={{ fontWeight: 500 }}>
           Прямой {"["}
           <b>{mass1}</b>
           {"]"}
@@ -312,7 +332,7 @@ const PointsLevel2BazaDiogram = (props: {
   const Output = () => {
     setTimeout(() => {
       setOpenLoader(false);
-    }, 100);
+    }, 500);
   };
 
   const Dinama = () => {
@@ -347,7 +367,7 @@ const PointsLevel2BazaDiogram = (props: {
               </>
             )}
           </>
-        )}
+        )}{" "}
       </Grid>
       {!openLoader && <>{PointInfoStr()}</>}
     </>
