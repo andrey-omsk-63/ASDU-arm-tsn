@@ -114,7 +114,7 @@ const PointsLevel2Calc = (props: {
   };
 
   const PointsGraf00 = () => {
-    //console.log("!!!######:", namer, pointer[namer], pointer);
+    
     const colMin = 60 / pointer[namer][0].Time;
     for (let i = 0; i < pointer[namer].length; i++) {
       let int = "";
@@ -128,9 +128,6 @@ const PointsLevel2Calc = (props: {
     let int = 0;
     //график прямого
     let datas = [];
-    // for (let i = 0; i < pointer[namer].length; i++) {
-    //   datas.push(pointer[namer][i].Value[0]);
-    // }
     if (pointer[namer].length !== 0)
       int = pointer[namer][pointer[namer].length - 1].Value[0];
     datas.push(int);
@@ -142,9 +139,6 @@ const PointsLevel2Calc = (props: {
     data.datasets[0].data = datas;
     //график обратного
     datas = [];
-    // for (let i = 0; i < pointer[namer].length; i++) {
-    //   datas.push(pointer[namer][i].Value[1]);
-    // }
     if (pointer[namer].length !== 0)
       int = pointer[namer][pointer[namer].length - 1].Value[1];
     datas.push(int);

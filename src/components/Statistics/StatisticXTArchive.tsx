@@ -117,14 +117,14 @@ const StatisticXTArchive = (props: {
   }
 
   if (isOpen) {
-    //начало работы (первый вход)
     if (oldAreaid < 0) {
+      //начало работы (первый вход)
       massId.push({ id: areaId, canall: [], lbl: [], labels, datasets: [] });
       oldAreaid = areaId;
       canal = [];
     }
-    //сменился ID
     if (oldAreaid !== areaId) {
+      //сменился ID
       let nomInMas = -1;
       for (let i = 0; i < massId.length; i++) {
         if (massId[i].id === areaId) {
@@ -223,9 +223,11 @@ const StatisticXTArchive = (props: {
     }
 
     return (
-      <Grid item xs sx={{ height: "28vh" }}>
-        <Line options={options} data={massId[numIdInMas]} />
-      </Grid>
+      <>
+        <Grid item xs sx={{ height: "28vh" }}>
+          <Line options={options} data={massId[numIdInMas]} />
+        </Grid>
+      </>
     );
   };
   //=========================================================================

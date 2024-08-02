@@ -88,6 +88,7 @@ const PointsMainScr = (props: {
             fontSize: 15,
             margin: 1,
             marginLeft: 1,
+            color: "#5B1080", // сиреневый
           }}
         >
           Расчёт ХТ
@@ -103,7 +104,7 @@ const PointsMainScr = (props: {
                 &nbsp;&nbsp;&nbsp;{rachet}&nbsp;&nbsp;<b>{uprBP}</b>
               </Box>
             </Grid>
-            <Grid item xs={2.4} sx={{ fontSize: 14, border: 0 }}>
+            <Grid item xs={2.4} sx={{ fontSize: 14, color: "#5B1080" }}>
               <Box sx={{ textAlign: "right" }}>
                 <b>{yellowSoob}</b> c <b>{TimeStr(points.yellow.start)}</b>
                 {" до "}

@@ -17,6 +17,8 @@ import { PickersDay } from "@mui/x-date-pickers/PickersDay";
 import Badge from "@mui/material/Badge";
 import { BiSolidDownload } from "react-icons/bi";
 
+import ButtonMenu from "./AppButtonMenu";
+
 import { styleDatePicker, styleModalMenu } from "./AppStyle";
 import { styleInpOk, styleButOk } from "./AppStyle";
 //import { styleEndInf } from "./components/Points/grid/PointsGridStyle";
@@ -71,11 +73,13 @@ export const MakeInterval = (mode: number) => {
   return dat;
 };
 
-export const ButtonMenu = (
+export const OldButtonMenu = (
   mode: string,
   soob: string,
   SetValue: Function,
-  tekValue: string
+  tekValue: string,
+  hint: boolean,
+  setHint: Function
 ) => {
   let dlSoob = soob !== "⇩" ? (soob.length + 10) * 6.5 : 33;
   const styleApp02 = {
@@ -111,12 +115,42 @@ export const ButtonMenu = (
     textAlign: "center",
   };
 
+  // const [hint, setHint] = React.useState(false);
+
+  const TurnOnHint = () => {
+    soob === "⇩" && setHint(true);
+  };
+
+  const TurnOffHint = () => {
+    soob === "⇩" && setHint(false);
+  };
+
   let illum = mode === tekValue ? styleApp02 : styleApp021;
 
   return (
-    <Button sx={illum} onClick={() => SetValue(mode)}>
-      {soob === "⇩" ? <BiSolidDownload /> : <b>{soob}</b>}
-    </Button>
+    <>
+      <Button
+        sx={illum}
+        onClick={() => SetValue(mode)}
+        onMouseEnter={() => TurnOnHint()}
+        onMouseLeave={() => TurnOffHint()}
+      >
+        {soob === "⇩" ? <BiSolidDownload /> : <b>{soob}</b>}
+      </Button>
+      {hint && (
+        <Box
+          sx={{
+            position: "absolute",
+            left: "38.2%",
+            top: "0.4%",
+            fontSize: 11,
+            color: "#969696",
+          }}
+        >
+          Сохранить
+        </Box>
+      )}
+    </>
   );
 };
 
@@ -148,7 +182,12 @@ export const MenuSpisRegion = (
   );
 };
 
-export const PunktMenuSaveFile = (SetValue: Function, tekValue: string) => {
+export const PunktMenuSaveFile = (
+  SetValue: Function,
+  tekValue: string,
+  hint: boolean,
+  setHint: Function
+) => {
   return (
     <Grid
       item
@@ -156,8 +195,13 @@ export const PunktMenuSaveFile = (SetValue: Function, tekValue: string) => {
       sx={{ marginTop: -0.25, marginRight: 0.3, width: "140px" }}
     >
       <Grid item xs sx={{ textAlign: "left" }}>
-        {/* {ButtonMenu("5", "Сохр.в файл", SetValue, tekValue)} */}
-        {ButtonMenu("5", "⇩", SetValue, tekValue)}
+        {/* {ButtonMenu("5", "⇩", SetValue, tekValue, hint, setHint)} */}
+        <ButtonMenu
+            mode={"5"}
+            soob={"⇩"}
+            SetValue={SetValue}
+            tekValue={tekValue}
+          />
       </Grid>
     </Grid>
   );
@@ -665,9 +709,7 @@ export const PictInfoBox = (
       if (pointer.Value[1] > pointer.Value[0] * luchP * ratio)
         numArea = pStB[num - 1].pkr;
     }
-    //console.log('0###:',numArea, POINT.ext)
     for (let i = 0; i < POINT.ext.length; i++) {
-      //console.log('###:',i,numArea, POINT.ext[i][0])
       if (POINT.ext[i][0] === pointer.Value[2]) pk = POINT.ext[i][1];
     }
   } else {

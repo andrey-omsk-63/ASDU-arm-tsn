@@ -18,6 +18,7 @@ import StatisticsArchive from "./components/Statistics/StatisticsArchive";
 import BeginSeans from "./AppBeginSeans";
 import EndSeans from "./AppEndSeans";
 import InputInterval from "./AppInpInerval";
+import ButtonMenu from "./AppButtonMenu";
 import AppWriteToAllFileForXT from "./AppWriteToAllFileForXT";
 
 import { Tflight } from "./interfaceMNG.d";
@@ -26,12 +27,12 @@ import { Statistic } from "./interfaceStat.d";
 import { RegionInfo } from "./interfaceGl.d";
 
 import { MakeInterval, WriteToCsvFileForStat } from "./AppServiceFunctions";
-import { ButtonMenu, DispatchXctrl } from "./AppServiceFunctions";
+import { DispatchXctrl } from "./AppServiceFunctions";
 import { InputerDate, MakeDate, InputerOk } from "./AppServiceFunctions";
 import { PunktMenuSaveFile } from "./AppServiceFunctions";
 
 import { styleImpServis, styleInp, styleInt01 } from "./AppStyle";
-import { styleImpBlock, styleBoxTabContext } from "./AppStyle";
+import { styleImpBlock, styleBoxTabContext, styleInt02 } from "./AppStyle";
 
 import { dataStatNow } from "./NullStatNow";
 
@@ -157,13 +158,9 @@ const App = () => {
   const [write, setWrite] = React.useState(false);
   const [openSetErrLog, setOpenSetErrLog] = React.useState(false);
   const [calculate, setCalculate] = React.useState(true);
+  const [hint, setHint] = React.useState(false);
 
   const UpdateXctrl = () => {
-    // console.log(
-    //   "РАЗНОСКА обновлений Xctrl",
-    //   new Date().toTimeString().slice(0, 5),
-    //   pointsXctrl
-    // );
     if (isOpenInf && !flagEtalonInf) {
       let pointsAdd = []; // разноска обновлений Xctrl
       let newRecord = true;
@@ -489,9 +486,9 @@ const App = () => {
       <>
         {props.mode !== 0 && ( // работает только в статистике
           <>
-            {PunktMenuSaveFile(SetValue, tekValue)}
+            {PunktMenuSaveFile(SetValue, tekValue, hint, setHint)}
             <Grid item container sx={{ width: "120px" }}>
-              <Grid item xs={7} sx={{ textAlign: "left" }}>
+              <Grid item xs={7} sx={styleInt02}>
                 Интервал:
               </Grid>
               <Grid item xs={5}>
@@ -570,6 +567,48 @@ const App = () => {
     }
   };
 
+  const ContentContext = () => {
+    return (
+      <Box sx={styleBoxTabContext}>
+        {!bsLogin && (
+          <ButtonMenu
+            mode={"1"}
+            soob={"Управление"}
+            SetValue={SetValue}
+            tekValue={tekValue}
+          />
+        )}
+        {!bsLogin && (
+          <ButtonMenu
+            mode={"2"}
+            soob={"Характерные точки"}
+            SetValue={SetValue}
+            tekValue={tekValue}
+          />
+        )}
+        <ButtonMenu
+          mode={"3"}
+          soob={"Статистика"}
+          SetValue={SetValue}
+          tekValue={tekValue}
+        />
+        {!bsLogin && value === "2" && saveXT && (
+          <ButtonMenu
+            mode={"7"}
+            soob={"⇩"}
+            SetValue={SetValue}
+            tekValue={tekValue}
+          />
+        )}
+        {value === "2" && <InputNewDateInterval mode={0} />}
+        {value === "3" && isOpenSt && <InputNewDateInterval mode={1} />}
+        {value === "4" && isOpenOldSt && !nullOldStatistics && (
+          <InputNewDateInterval mode={1} />
+        )}
+      </Box>
+    );
+  };
+
   UpdateXctrl(); // разноска обновлений Xctrl
 
   return (
@@ -585,26 +624,44 @@ const App = () => {
           {write && <AppWriteToAllFileForXT setOpen={setWrite} />}
           <Box sx={{ width: "98.8%" }}>
             <TabContext value={value}>
-              <Box sx={styleBoxTabContext}>
+              {ContentContext()}
+              {/* <Box sx={styleBoxTabContext}>
                 {!bsLogin && (
-                  <>{ButtonMenu("1", "Управление", SetValue, tekValue)}</>
+                  <ButtonMenu
+                    mode={"1"}
+                    soob={"Управление"}
+                    SetValue={SetValue}
+                    tekValue={tekValue}
+                  />
                 )}
                 {!bsLogin && (
-                  <>
-                    {ButtonMenu("2", "Характерные точки", SetValue, tekValue)}
-                  </>
+                  <ButtonMenu
+                    mode={"2"}
+                    soob={"Характерные точки"}
+                    SetValue={SetValue}
+                    tekValue={tekValue}
+                  />
                 )}
-                {ButtonMenu("3", "Статистика", SetValue, tekValue)}
+                <ButtonMenu
+                  mode={"3"}
+                  soob={"Статистика"}
+                  SetValue={SetValue}
+                  tekValue={tekValue}
+                />
                 {!bsLogin && value === "2" && saveXT && (
-                  // <>{ButtonMenu("7", "Сохр.в файл", SetValue, tekValue)}</>
-                  <>{ButtonMenu("7", "⇩", SetValue, tekValue)}</>
+                  <ButtonMenu
+                    mode={"7"}
+                    soob={"⇩"}
+                    SetValue={SetValue}
+                    tekValue={tekValue}
+                  />
                 )}
                 {value === "2" && <InputNewDateInterval mode={0} />}
                 {value === "3" && isOpenSt && <InputNewDateInterval mode={1} />}
                 {value === "4" && isOpenOldSt && !nullOldStatistics && (
                   <InputNewDateInterval mode={1} />
                 )}
-              </Box>
+              </Box> */}
               <TabPanel value="1">
                 {WS !== null && regionGlob !== 0 && (
                   <Management

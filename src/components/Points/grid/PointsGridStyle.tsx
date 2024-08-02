@@ -523,6 +523,12 @@ export const styleXTGl05 = {
   backgroundColor: "#E5E5E5",
   textAlign: "center",
 };
+
+export const styleXTGl06 = {
+  color: "#5B1080", // сиреневый
+  textAlign: "center",
+  textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
+};
 //====== PointsLevel2Calc =======================================================
 export const styleXTC011 = {
   fontSize: 11,

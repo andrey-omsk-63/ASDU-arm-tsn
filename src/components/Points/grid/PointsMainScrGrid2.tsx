@@ -14,7 +14,7 @@ import { MakeDate, MakeDateRus } from "../../../AppServiceFunctions";
 import { styleXTGl02, styleXTGl021, styleBut02 } from "./PointsGridStyle";
 import { styleModalEnd, styleSetInf, styleInpArg } from "./PointsGridStyle";
 import { styleXTGl05, styleBut021, styleXTGrid } from "./PointsGridStyle";
-import { styleXTGHeader } from "./PointsGridStyle";
+import { styleXTGHeader, styleXTGl06 } from "./PointsGridStyle";
 import { styleXTG101 } from "../../../AppStyle";
 
 let nomStr = 0;
@@ -122,7 +122,7 @@ const PointsMainScrGrid2 = (props: {
           <Button sx={styleModalEnd} onClick={handleClose}>
             <b>&#10006;</b>
           </Button>
-          <Typography sx={{ color: "#5B1080", textAlign: "center" }}>
+          <Typography sx={styleXTGl06}>
             Номер записи <b> {nom + 1} </b>
           </Typography>{" "}
           <br />

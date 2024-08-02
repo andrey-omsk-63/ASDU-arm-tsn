@@ -54,9 +54,9 @@ export const styleModalMenu = {
   fontSize: 14,
   maxHeight: "20px",
   minHeight: "20px",
-  bgcolor: '#E6F5D6', // светло-салатовый
-  border: '1px solid #000',
-  borderColor: '#d4d4d4', // серый
+  bgcolor: "#E6F5D6", // светло-салатовый
+  border: "1px solid #000",
+  borderColor: "#d4d4d4", // серый
   borderRadius: 1,
   boxShadow: 6,
   color: "black",
@@ -139,7 +139,6 @@ export const styleDatePicker = {
 };
 //====== Interval =========================================================
 export const styleInt01 = {
-  //border: 1,
   fontSize: 14,
   marginLeft: "auto",
   marginRight: 1,
@@ -148,8 +147,13 @@ export const styleInt01 = {
   minHeight: "18px",
   maxWidth: "35px",
   minWidth: "35px",
+  backgroundColor: "#FFFBE5", // молоко
+};
 
-  backgroundColor: "#FFFBE5",
+export const styleInt02 = {
+  textAlign: "left",
+  color: "#5B1080", // сиреневый
+  textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
 };
 
 export const styleBoxFormInt = {
