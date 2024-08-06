@@ -51,7 +51,6 @@ const ButtonMenu = (props: {
   const styleApp022 = {
     position: "absolute",
     left: "484px",
-    // top: "0.4%",
     top: "2px",
     width: "63px",
     fontSize: 12.5,
