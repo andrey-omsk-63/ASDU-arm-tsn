@@ -120,13 +120,11 @@ const PointsLevel2AreaDiogram = (props: {
   };
 
   const PointsXt112Comp1Tab4 = () => {
-    //let resStr = [];
     let resSps = [];
 
     MakeMatrix();
 
     const PointsXt112Comp1Tab4StrOptim = (j: number) => {
-      //resStr = [];
       coler = "red";
       colerOld = matrix[j / scale][0 / scale];
       masStr = [];
@@ -179,7 +177,7 @@ const PointsLevel2AreaDiogram = (props: {
 
     for (let j = 0; j < vertical; j += scale) {
       resSps.push(
-        <Grid key={j} item container>
+        <Grid key={j} container>
           {PointsXt112Comp1Tab4StrOptim(j)}
         </Grid>
       );
@@ -222,7 +220,7 @@ const PointsLevel2AreaDiogram = (props: {
           if (pointer[namer][i].Value[0] || pointer[namer][i].Value[1]) {
             resStrr.push(
               <>
-                <Grid key={i} item container>
+                <Grid key={i} container>
                   {OutputPict(i, pv, ph, PictInfo, setPictInfo, flagEnd)}
                 </Grid>
               </>

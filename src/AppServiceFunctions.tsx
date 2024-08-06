@@ -182,12 +182,7 @@ export const MenuSpisRegion = (
   );
 };
 
-export const PunktMenuSaveFile = (
-  SetValue: Function,
-  tekValue: string,
-  hint: boolean,
-  setHint: Function
-) => {
+export const PunktMenuSaveFile = (SetValue: Function, tekValue: string) => {
   return (
     <Grid
       item
@@ -197,11 +192,11 @@ export const PunktMenuSaveFile = (
       <Grid item xs sx={{ textAlign: "left" }}>
         {/* {ButtonMenu("5", "⇩", SetValue, tekValue, hint, setHint)} */}
         <ButtonMenu
-            mode={"5"}
-            soob={"⇩"}
-            SetValue={SetValue}
-            tekValue={tekValue}
-          />
+          mode={"5"}
+          soob={"⇩"}
+          SetValue={SetValue}
+          tekValue={tekValue}
+        />
       </Grid>
     </Grid>
   );

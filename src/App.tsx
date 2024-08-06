@@ -158,7 +158,6 @@ const App = () => {
   const [write, setWrite] = React.useState(false);
   const [openSetErrLog, setOpenSetErrLog] = React.useState(false);
   const [calculate, setCalculate] = React.useState(true);
-  const [hint, setHint] = React.useState(false);
 
   const UpdateXctrl = () => {
     if (isOpenInf && !flagEtalonInf) {
@@ -239,7 +238,6 @@ const App = () => {
     WS.onmessage = function (event: any) {
       let allData = JSON.parse(event.data);
       let data = allData.data;
-      //console.log("ПРИШЛО:", data);
       switch (allData.type) {
         case "getDevices":
           console.log("Пришло tflight:", data.tflight);
@@ -397,9 +395,7 @@ const App = () => {
           eventInp = event;
           inpDate = true;
           setValueDate(eventInp);
-        } else {
-          inpDate = false;
-        }
+        } else inpDate = false;
       };
       return <>{InputerDate(valueDate, handleChangeDP, goodDate)}</>;
     }, []);
@@ -486,7 +482,7 @@ const App = () => {
       <>
         {props.mode !== 0 && ( // работает только в статистике
           <>
-            {PunktMenuSaveFile(SetValue, tekValue, hint, setHint)}
+            {PunktMenuSaveFile(SetValue, tekValue)}
             <Grid item container sx={{ width: "120px" }}>
               <Grid item xs={7} sx={styleInt02}>
                 Интервал:
@@ -625,43 +621,6 @@ const App = () => {
           <Box sx={{ width: "98.8%" }}>
             <TabContext value={value}>
               {ContentContext()}
-              {/* <Box sx={styleBoxTabContext}>
-                {!bsLogin && (
-                  <ButtonMenu
-                    mode={"1"}
-                    soob={"Управление"}
-                    SetValue={SetValue}
-                    tekValue={tekValue}
-                  />
-                )}
-                {!bsLogin && (
-                  <ButtonMenu
-                    mode={"2"}
-                    soob={"Характерные точки"}
-                    SetValue={SetValue}
-                    tekValue={tekValue}
-                  />
-                )}
-                <ButtonMenu
-                  mode={"3"}
-                  soob={"Статистика"}
-                  SetValue={SetValue}
-                  tekValue={tekValue}
-                />
-                {!bsLogin && value === "2" && saveXT && (
-                  <ButtonMenu
-                    mode={"7"}
-                    soob={"⇩"}
-                    SetValue={SetValue}
-                    tekValue={tekValue}
-                  />
-                )}
-                {value === "2" && <InputNewDateInterval mode={0} />}
-                {value === "3" && isOpenSt && <InputNewDateInterval mode={1} />}
-                {value === "4" && isOpenOldSt && !nullOldStatistics && (
-                  <InputNewDateInterval mode={1} />
-                )}
-              </Box> */}
               <TabPanel value="1">
                 {WS !== null && regionGlob !== 0 && (
                   <Management

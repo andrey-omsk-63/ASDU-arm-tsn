@@ -10,8 +10,6 @@ const ButtonMenu = (props: {
   soob: string;
   SetValue: Function;
   tekValue: string;
-  //hint: boolean;
-  //setHint: Function;
 }) => {
   const [hint, setHint] = React.useState(false);
 
@@ -50,6 +48,17 @@ const ButtonMenu = (props: {
     textAlign: "center",
   };
 
+  const styleApp022 = {
+    position: "absolute",
+    left: "484px",
+    // top: "0.4%",
+    top: "2px",
+    width: "63px",
+    fontSize: 12.5,
+    fontWeight: 500,
+    color: "#797A7B", // тёмно-серый
+  };
+
   const TurnOnHint = () => {
     props.soob === "⇩" && setHint(true);
   };
@@ -70,20 +79,7 @@ const ButtonMenu = (props: {
       >
         {props.soob === "⇩" ? <BiSolidDownload /> : <b>{props.soob}</b>}
       </Button>
-      {hint && (
-        <Box
-          sx={{
-            position: "absolute",
-            left: "38.3%",
-            top: "0.4%",
-            fontSize: 12.5,
-            fontWeight: 500,
-            color: "#797A7B", // тёмно-серый
-          }}
-        >
-          Сохранить
-        </Box>
-      )}
+      {hint && <Box sx={styleApp022}>Сохранить</Box>}
     </>
   );
 };
