@@ -41,7 +41,7 @@ const PointsMainScrGrid2 = (props: {
   const xtProps = props.xtt;
   const points = maskpoint.pointForRedax;
 
-  const [openSetStr, setOpenSetStr] = React.useState(false);
+  const [openStr, setOpenStr] = React.useState(false);
   const [valuen1, setValuen1] = React.useState(0);
   const [valuen2, setValuen2] = React.useState(0);
 
@@ -86,7 +86,7 @@ const PointsMainScrGrid2 = (props: {
 
   const SetStr = (nom: number) => {
     const handleClose = () => {
-      setOpenSetStr(false);
+      setOpenStr(false);
     };
 
     const handleCloseStr = () => {
@@ -100,7 +100,7 @@ const PointsMainScrGrid2 = (props: {
       datestat.needSave = true;
       dispatch(statsaveCreate(datestat));
       //==================================================================
-      setOpenSetStr(false);
+      setOpenStr(false);
       props.trigger();
     };
 
@@ -117,7 +117,7 @@ const PointsMainScrGrid2 = (props: {
     const hBlur = () => {};
 
     return (
-      <Modal open={openSetStr} onClose={handleClose} hideBackdrop={false}>
+      <Modal open={openStr} onClose={handleClose} hideBackdrop={false}>
         <Box sx={styleSetInf}>
           <Button sx={styleModalEnd} onClick={handleClose}>
             <b>&#10006;</b>
@@ -139,7 +139,7 @@ const PointsMainScrGrid2 = (props: {
     nomIllum = nom;
     setValuen1(points.ext[nom][0]);
     setValuen2(points.ext[nom][1]);
-    setOpenSetStr(true);
+    setOpenStr(true);
   };
 
   const StrokaMainScrGrid2 = () => {
@@ -192,7 +192,7 @@ const PointsMainScrGrid2 = (props: {
     <Grid item sx={styleXTGrid}>
       <HeaderMainScrGrid2 />
       {props.open && <>{StrokaMainScrGrid2()}</>}
-      {openSetStr && <> {SetStr(nomStr)}</>}
+      {openStr && <> {SetStr(nomStr)}</>}
     </Grid>
   );
 };

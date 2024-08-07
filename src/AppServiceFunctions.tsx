@@ -500,9 +500,9 @@ export const SaveFunc = (func: any) => {
     marginTop: 1,
     maxHeight: "21px",
     minHeight: "21px",
+    padding: "2px 5px 0px 5px",
     bgcolor: "#E6F5D6", // светло-салатовый
-    border: "1px solid #000",
-    borderColor: "#d4d4d4", // серый
+    border: "1px solid#d4d4d4", // серый
     borderRadius: 1,
     boxShadow: 6,
     textAlign: "center",
@@ -510,14 +510,11 @@ export const SaveFunc = (func: any) => {
   };
 
   return (
-    <>
-      <br />
-      <Box sx={{ textAlign: "center" }}>
-        <Button sx={styleInpKnop} onClick={func}>
-          <b>Сохранить</b>
-        </Button>
-      </Box>
-    </>
+    <Box sx={{ marginTop: 1, textAlign: "center" }}>
+      <Button sx={styleInpKnop} onClick={func}>
+        <b>Сохранить</b>
+      </Button>
+    </Box>
   );
 };
 

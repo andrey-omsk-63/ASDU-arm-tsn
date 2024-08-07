@@ -259,6 +259,7 @@ export const styleBut02 = {
   maxWidth: "33px",
   minWidth: "33px",
   color: "black",
+  padding: "1px 0px 0px 0px",
   bgcolor: "#E6F5D6", // светло-салатовый
   border: "1px solid #000",
   borderColor: "#d4d4d4", // серый
