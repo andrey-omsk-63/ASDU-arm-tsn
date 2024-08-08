@@ -18,6 +18,7 @@ import { colorsGraf, styleSt02, options } from "./StatisticXTStyle";
 import { styleSt04, styleSt05, styleStatMain } from "./StatisticXTStyle";
 import { styleSt06, styleHeader03, styleHeader033 } from "./StatisticXTStyle";
 import { styleBatton02, styleBatton01 } from "./StatisticXTStyle";
+import { styleBackdrop } from "./StatisticXTStyle";
 import { styleXTG101 } from "../../AppStyle";
 
 import { Chart as ChartJS, CategoryScale } from "chart.js";
@@ -87,7 +88,6 @@ const StatisticXTNew = (props: {
   const [trigger, setTrigger] = React.useState(true);
 
   let resStr: any = [];
-  //let resSps: any = [];
   let matrix: any = [];
   let MATRIX: any = [];
   let kakchestvo = " ";
@@ -127,9 +127,8 @@ const StatisticXTNew = (props: {
       } else {
         numIdInMas = nomInMas;
         canal = massId[numIdInMas].canall;
-        for (let i = 0; i < massId[numIdInMas].lbl.length; i++) {
+        for (let i = 0; i < massId[numIdInMas].lbl.length; i++)
           labels.push(massId[numIdInMas].lbl[i]);
-        }
       }
       oldAreaid = areaId;
       setValue("0");
@@ -242,23 +241,12 @@ const StatisticXTNew = (props: {
         let xss = 12 / leng;
         for (let i = 1; i <= leng; i++) {
           let illum = canal.indexOf(i - 1) >= 0 ? styleBatton01 : styleBatton02;
-          const ButtonCanal = () => {
-            return (
-              <Button sx={illum} onClick={() => SetValue(i.toString())}>
-                <b>{i.toString()}</b>
-              </Button>
-            );
-          };
-
           resStr.push(
             <Grid item key={i} xs={xss}>
-              <Grid
-                container
-                key={i}
-                justifyContent="center"
-                sx={styleHeader03}
-              >
-                {ButtonCanal()}
+              <Grid container justifyContent="center" sx={styleHeader03}>
+                <Button sx={illum} onClick={() => SetValue(i.toString())}>
+                  <b>{i.toString()}</b>
+                </Button>
               </Grid>
             </Grid>
           );
@@ -313,9 +301,8 @@ const StatisticXTNew = (props: {
       );
       if (!matrix[numMas].Avail) {
         //нет данных
-        for (let i = 0; i < colChanel; i++) {
+        for (let i = 0; i < colChanel; i++)
           resStr.push(<Grid key={i} item xs={0.5122} sx={styleSt02}></Grid>);
-        }
         //формирование конца строки
         resStr.push(
           <Grid key={Math.random()} item xs={3.3} sx={styleSt06}>
@@ -344,17 +331,6 @@ const StatisticXTNew = (props: {
   };
 
   const StatSpis = () => {
-    // if (isOpen) {
-    //   resSps = [];
-    //   for (let i = 0; i < matrix.length; i++) {
-    //     resSps.push(
-    //       <Grid key={i} item container sx={{ height: 27 }}>
-    //         {StatStroka(i)}
-    //       </Grid>
-    //     );
-    //   }
-    // }
-    // return resSps;
     return (
       <>
         {isOpen &&
@@ -396,10 +372,10 @@ const StatisticXTNew = (props: {
         Avail: false,
         Datas: [],
       };
-      maskMmatrix.Hour = hours;
-      maskMmatrix.Min = minutes;
-      maskMATRIX.Hour = hours;
-      maskMATRIX.Min = minutes;
+      // maskMmatrix.Hour = hours;
+      // maskMmatrix.Min = minutes;
+      // maskMATRIX.Hour = hours;
+      // maskMATRIX.Min = minutes;
       let datas: any = [];
       for (let j = 0; j < kolDatas; j++) {
         let maskMatrixDatas = {
@@ -481,15 +457,6 @@ const StatisticXTNew = (props: {
   //============ Dinama =====================================================
   const handleClose = () => {
     setOpenLoader(false);
-  };
-
-  const styleBackdrop = {
-    color: "#fff",
-    marginLeft: "0.3vh",
-    marginRight: "1.7vh",
-    marginTop: "34vh",
-    marginBottom: "4vh",
-    zIndex: (theme: any) => theme.zIndex.drawer + 1,
   };
 
   const Output = () => {

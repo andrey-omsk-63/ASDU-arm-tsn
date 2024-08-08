@@ -70,7 +70,6 @@ const BeginSeans = (props: {
     width: dlStrMenu,
     bgcolor: "background.paper",
     border: "1px solid #fff",
-    //borderColor: "primary.main",
     borderRadius: 1,
     boxShadow: 24,
     p: 3,

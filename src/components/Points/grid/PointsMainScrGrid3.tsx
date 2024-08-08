@@ -154,52 +154,98 @@ const PointsMainScrGrid3 = (props: {
   };
 
   const StrokaMainScrGrid3 = () => {
-    let resStr = [];
-    for (let i = 0; i < points.prioryty.length; i++) {
-      let bordBott = "1px solid #d4d4d4"; // серый
-      if (i === points.prioryty.length - 1) bordBott = "0px solid #d4d4d4"; // серый
-      const styleXTG03 = {
-        borderRight: "1px solid #d4d4d4",
-        borderBottom: bordBott,
-        padding: 0.7,
-        textAlign: "center",
-      };
+    // let resStr = [];
+    // for (let i = 0; i < points.prioryty.length; i++) {
+    //   let bordBott = "1px solid #d4d4d4"; // серый
+    //   if (i === points.prioryty.length - 1) bordBott = "0px solid #d4d4d4"; // серый
+    //   const styleXTG03 = {
+    //     borderRight: "1px solid #d4d4d4",
+    //     borderBottom: bordBott,
+    //     padding: 0.7,
+    //     textAlign: "center",
+    //   };
 
-      const styleXTG033 = {
-        borderBottom: bordBott,
-        padding: 0.7,
-        textAlign: "center",
-      };
+    //   const styleXTG033 = {
+    //     borderBottom: bordBott,
+    //     padding: 0.7,
+    //     textAlign: "center",
+    //   };
 
-      let illum = nomIllum === i ? styleBut021 : styleBut02;
+    //   let illum = nomIllum === i ? styleBut021 : styleBut02;
 
-      resStr.push(
-        <Grid key={i} container item xs={12} sx={{ fontSize: 14 }}>
-          <Grid xs={1.5} item sx={styleXTG03}>
-            {!flagEdit && (
-              <Button sx={illum} onClick={() => SetOpenSetStr(i)}>
-                {i + 1}
-              </Button>
-            )}
-            {flagEdit && (
-              <Box sx={{ p: 0.2 }}>
-                <Box sx={styleXTG101}>{i + 1}</Box>
-              </Box>
-            )}
+    //   resStr.push(
+    //     <Grid key={i} container item xs={12} sx={{ fontSize: 14 }}>
+    //       <Grid xs={1.5} item sx={styleXTG03}>
+    //         {!flagEdit && (
+    //           <Button sx={illum} onClick={() => SetOpenSetStr(i)}>
+    //             {i + 1}
+    //           </Button>
+    //         )}
+    //         {flagEdit && (
+    //           <Box sx={{ p: 0.2 }}>
+    //             <Box sx={styleXTG101}>{i + 1}</Box>
+    //           </Box>
+    //         )}
+    //       </Grid>
+    //       <Grid xs={3.5} item sx={styleXTG03}>
+    //         {points.prioryty[i][0]}
+    //       </Grid>
+    //       <Grid xs={3.5} item sx={styleXTG03}>
+    //         {points.prioryty[i][1]}
+    //       </Grid>
+    //       <Grid xs={3.5} item sx={styleXTG033}>
+    //         {points.prioryty[i][2]}
+    //       </Grid>
+    //     </Grid>
+    //   );
+    // }
+    // return resStr;
+    return points.prioryty.map(
+      (pointsPrioryty: any, idx: number, array: any) => {
+        let bordBott = "1px solid #d4d4d4"; // серый
+        if (idx === array.length - 1) bordBott = "0px solid #d4d4d4"; // серый
+        const styleXTG03 = {
+          borderRight: "1px solid #d4d4d4",
+          borderBottom: bordBott,
+          padding: 0.7,
+          textAlign: "center",
+        };
+
+        const styleXTG033 = {
+          borderBottom: bordBott,
+          padding: 0.7,
+          textAlign: "center",
+        };
+
+        let illum = nomIllum === idx ? styleBut021 : styleBut02;
+
+        return (
+          <Grid key={idx} container item xs={12} sx={{ fontSize: 14 }}>
+            <Grid xs={1.5} item sx={styleXTG03}>
+              {!flagEdit && (
+                <Button sx={illum} onClick={() => SetOpenSetStr(idx)}>
+                  {idx + 1}
+                </Button>
+              )}
+              {flagEdit && (
+                <Box sx={{ p: 0.2 }}>
+                  <Box sx={styleXTG101}>{idx + 1}</Box>
+                </Box>
+              )}
+            </Grid>
+            <Grid xs={3.5} item sx={styleXTG03}>
+              {pointsPrioryty[0]}
+            </Grid>
+            <Grid xs={3.5} item sx={styleXTG03}>
+              {pointsPrioryty[1]}
+            </Grid>
+            <Grid xs={3.5} item sx={styleXTG033}>
+              {pointsPrioryty[2]}
+            </Grid>
           </Grid>
-          <Grid xs={3.5} item sx={styleXTG03}>
-            {points.prioryty[i][0]}
-          </Grid>
-          <Grid xs={3.5} item sx={styleXTG03}>
-            {points.prioryty[i][1]}
-          </Grid>
-          <Grid xs={3.5} item sx={styleXTG033}>
-            {points.prioryty[i][2]}
-          </Grid>
-        </Grid>
-      );
-    }
-    return resStr;
+        );
+      }
+    );
   };
 
   return (

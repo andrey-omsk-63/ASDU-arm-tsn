@@ -27,6 +27,15 @@ export const colorsGraf = [
   "Yellow",
 ];
 
+export const styleBackdrop = {
+  color: "#fff",
+  marginLeft: "0.3vh",
+  marginRight: "1.7vh",
+  marginTop: "34vh",
+  marginBottom: "4vh",
+  zIndex: (theme: any) => theme.zIndex.drawer + 1,
+};
+
 export const styleSt1 = {
   fontSize: 14.1,
   maxHeight: "22px",

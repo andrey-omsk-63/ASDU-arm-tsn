@@ -500,7 +500,7 @@ export const SaveFunc = (func: any) => {
     marginTop: 1,
     maxHeight: "21px",
     minHeight: "21px",
-    padding: "2px 5px 0px 5px",
+    padding: "2px 8px 0px 8px",
     bgcolor: "#E6F5D6", // светло-салатовый
     border: "1px solid#d4d4d4", // серый
     borderRadius: 1,
