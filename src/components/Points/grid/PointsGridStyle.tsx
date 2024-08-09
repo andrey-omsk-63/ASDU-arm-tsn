@@ -381,9 +381,9 @@ export const styleInpKnop = {
   maxHeight: "21px",
   minHeight: "21px",
   color: "black",
+  padding: "2px 8px 0px 8px",
   bgcolor: "#E6F5D6", // светло-салатовый
-  border: "1px solid #000",
-  borderColor: "#d4d4d4", // серый
+  border: "1px solid #d4d4d4", // серый
   borderRadius: 1,
   boxShadow: 6,
   textAlign: "center",

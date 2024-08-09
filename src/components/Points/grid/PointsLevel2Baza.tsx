@@ -46,6 +46,7 @@ let rightTemp = 0;
 let pointRab: any = null;
 let pointGraf: XctrlInfo[] = [];
 let soobError = "";
+let HAVE = 0;
 
 const PointsLevel2Baza = (props: {
   open: boolean;
@@ -96,8 +97,6 @@ const PointsLevel2Baza = (props: {
     flagExit = false;
     pointsTemp = pointsEt;
 
-    //console.log("pointsEt:", pointsEt);
-
     setFormName(pointsEt.xctrls[crossRoad].name);
     setMaxLeft(pointsEt.xctrls[crossRoad].left);
     setMaxRight(pointsEt.xctrls[crossRoad].right);
@@ -125,10 +124,7 @@ const PointsLevel2Baza = (props: {
         flagExit = false;
         flagEdit = true;
         flagSave = false;
-      } else {
-        pointGraf = props.xctrll;
-        //console.log('ОБНОВЛЕНИЕ Baza pointGraf ============') //============
-      }
+      } else pointGraf = props.xctrll;
     }
   }
 
@@ -141,9 +137,7 @@ const PointsLevel2Baza = (props: {
         xctrLl[i].subarea === points.subarea
       ) {
         pointGraf.push(pointRab);
-      } else {
-        pointGraf.push(xctrLl[i]);
-      }
+      } else pointGraf.push(xctrLl[i]);
     }
   };
 
@@ -174,20 +168,24 @@ const PointsLevel2Baza = (props: {
     const hChange1 = (event: any) => {
       let form = event.target.value.trimStart(); // удаление пробелов в начале строки
       setValuen1(form);
+      HAVE++;
     };
 
     const hChange2 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
       form && setValuen2(Math.abs(form));
+      HAVE++;
     };
 
     const hBlur2 = () => {
       !EvilInput(valuen2, minLeft) && setValuen2(maxLeft);
+      HAVE++;
     };
 
     const hChange3 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
       form && setValuen3(Math.abs(form));
+      HAVE++;
     };
 
     const hBlur3 = () => {
@@ -197,21 +195,25 @@ const PointsLevel2Baza = (props: {
     const handleChange5 = (event: any) => {
       let form = event.target.value.trimStart(); // удаление пробелов в начале строки
       if (Number(form) < 24) setValuen5(Math.abs(form).toString());
+      HAVE++;
     };
 
     const handleChange6 = (event: any) => {
       let form = event.target.value.trimStart(); // удаление пробелов в начале строки
       if (Number(form) < 60) setValuen6(Math.abs(form).toString());
+      HAVE++;
     };
 
     const handleChange7 = (event: any) => {
       let form = event.target.value.trimStart(); // удаление пробелов в начале строки
       if (Number(form) < 24) setValuen7(Math.abs(form).toString());
+      HAVE++;
     };
 
     const handleChange8 = (event: any) => {
       let form = event.target.value.trimStart(); // удаление пробелов в начале строки
       if (Number(form) < 60) setValuen8(Math.abs(form).toString());
+      HAVE++;
     };
 
     const handleClose = () => {
@@ -235,8 +237,6 @@ const PointsLevel2Baza = (props: {
       pointRab.yellow.stop = timeStop;
       setPoints(pointRab);
       maskpoint.pointForRedax = pointRab;
-
-      //console.log("###:", pointRab);
 
       pointsEt = pointRab;
       setFormName(valuen1);
@@ -264,6 +264,7 @@ const PointsLevel2Baza = (props: {
       const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setCurrency(Number(event.target.value));
         setValuen4(Number(event.target.value));
+        HAVE++;
       };
 
       let dat = ["Выкл", "Вкл"];
@@ -359,7 +360,11 @@ const PointsLevel2Baza = (props: {
             {InputTimeAndMode("Работа по НК и СК", InputerMode)}
             {InputTimeAndMode("Начало", FuncStart)}
             {InputTimeAndMode("Конец", FuncStop)}
-            {SaveFunc(handleClose)}
+            {HAVE > 0 ? (
+              <>{SaveFunc(handleClose)}</>
+            ) : (
+              <Box sx={{ marginTop: 2, height: "21px" }}></Box>
+            )}
           </Box>
           {badInput && <>{BadInput(badInput, setBadInput, soobError)}</>}
         </>
@@ -438,50 +443,62 @@ const PointsLevel2Baza = (props: {
 
     const handleChange1 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
-      form && setValuen1(Math.abs(form));
+      if (form) {
+        HAVE++;
+        setValuen1(Math.abs(form));
+      }
     };
 
     const hBlur1 = () => {
       !EvilInput(valuen1, max1, min1) && setValuen1(elem.xleft);
+      HAVE++;
     };
 
     const handleChange2 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
       form && setValuen2(Math.abs(form));
+      HAVE++;
     };
 
     const hBlur2 = () => {
       !EvilInput(valuen2, max2, min2) && setValuen2(elem.xright);
+      HAVE++;
     };
 
     const handleChange3 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
       if (form) setValuen3(Math.abs(form));
+      HAVE++;
     };
 
     const handleChange4 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
       if (form) setValuen4(Math.abs(form));
+      HAVE++;
     };
 
     const handleChange5 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
       if (form) setValuen5(Math.abs(form));
+      HAVE++;
     };
 
     const handleChange6 = (event: any) => {
       let form = event.target.value.trimStart(); // удаление пробелов в начале строки
       setValuen6(form);
+      HAVE++;
     };
 
     const handleChange7 = (event: any) => {
       let form = event.target.value.trimStart(); // удаление пробелов в начале строки
       setValuen7(form);
+      HAVE++;
     };
 
     const handleChange8 = (event: any) => {
       let form = event.target.value.trimStart(); // удаление пробелов в начале строки
       setValuen8(form);
+      HAVE++;
     };
 
     const hBlur = () => {};
@@ -505,7 +522,11 @@ const PointsLevel2Baza = (props: {
             {Inputer("Луч П", valuen6, handleChange6, hBlur, styleInpArg)}
             {Inputer("Луч О", valuen7, handleChange7, hBlur, styleInpArg)}
             {Inputer("Описание", valuen8, handleChange8, hBlur, styleInpArg)}
-            {SaveFunc(handleCloseStr)}
+            {HAVE > 0 ? (
+              <>{SaveFunc(handleCloseStr)}</>
+            ) : (
+              <Box sx={{ marginTop: 2, height: "21px" }}></Box>
+            )}
           </Box>
           {badInput && <>{BadInput(badInput, setBadInput, soobError)}</>}
         </>
@@ -515,11 +536,13 @@ const PointsLevel2Baza = (props: {
 
   const SetOpenSetName = () => {
     setOpenSetName(true);
+    HAVE = 0;
   };
 
   const SetOpenSetStr = (nom: number) => {
     nomStr = nomIllum = nom;
     setOpenSetStr(true);
+    HAVE = 0;
   };
 
   const PointsLevel2BazaTab1 = () => {
@@ -613,7 +636,7 @@ const PointsLevel2Baza = (props: {
               </Button>
             )}
             {flagEdit && (
-              <Box sx={{ p: 0.2 }}>
+              <Box sx={{ p: 0.35 }}>
                 <Box sx={styleXTG101}>{i + 1}</Box>
               </Box>
             )}
@@ -640,7 +663,7 @@ const PointsLevel2Baza = (props: {
       resStr.push(
         <Grid key={i} container item xs={12}>
           <Grid xs={0.5} item sx={styleXTG01}>
-            {i + 1}
+            <Box sx={{ p: 0.35 }}>{i + 1}</Box>
           </Grid>
           {ConclStr(1.75, elem.region, styleXTG01)}
           {ConclStr(1.75, elem.area, styleXTG01)}

@@ -21,6 +21,7 @@ let nomStr = 0;
 let flagEdit = true;
 let xtPropsOld = -1;
 let nomIllum = -1;
+let HAVE = 0;
 
 const PointsMainScrGrid3 = (props: {
   open: boolean;
@@ -111,16 +112,19 @@ const PointsMainScrGrid3 = (props: {
     const handleChange1 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
       form && setValuen1(Math.abs(form));
+      HAVE++;
     };
 
     const handleChange2 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
       form && setValuen2(Math.abs(form));
+      HAVE++;
     };
 
     const handleChange3 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
       form && setValuen3(Math.abs(form));
+      HAVE++;
     };
 
     const hBlur = () => {};
@@ -138,7 +142,11 @@ const PointsMainScrGrid3 = (props: {
           {Inputer("« 0 »", valuen1, handleChange1, hBlur, styleInpArg)}
           {Inputer("« 1 »", valuen2, handleChange2, hBlur, styleInpArg)}
           {Inputer("« 2 »", valuen3, handleChange3, hBlur, styleInpArg)}
-          {SaveFunc(handleCloseStr)}
+          {HAVE > 0 ? (
+            <>{SaveFunc(handleCloseStr)}</>
+          ) : (
+            <Box sx={{ marginTop: 2, height: "21px" }}></Box>
+          )}
         </Box>
       </Modal>
     );
@@ -147,6 +155,7 @@ const PointsMainScrGrid3 = (props: {
   const SetOpenSetStr = (nom: number) => {
     nomStr = nom;
     nomIllum = nom;
+    HAVE = 0;
     setValuen1(points.prioryty[nom][0]);
     setValuen2(points.prioryty[nom][1]);
     setValuen3(points.prioryty[nom][2]);

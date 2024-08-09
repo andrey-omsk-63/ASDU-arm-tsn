@@ -36,6 +36,7 @@ let soobError = "";
 let pointsTemp: any = null;
 let pointRab: any = null;
 let pointGraf: XctrlInfo[] = [];
+let HAVE = 0;
 
 const PointsLevel2Area = (props: {
   open: boolean;
@@ -188,24 +189,29 @@ const PointsLevel2Area = (props: {
     const handleChange1 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
       form && setValuen1(Math.abs(form));
+      HAVE++;
     };
 
     const hBlur1 = () => {
       !EvilInput(valuen1, max1, min1) && setValuen1(elem.xleft);
+      HAVE++;
     };
 
     const handleChange2 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
       form && setValuen2(Math.abs(form));
+      HAVE++;
     };
 
     const hBlur2 = () => {
       !EvilInput(valuen2, max2, min2) && setValuen2(elem.xright);
+      HAVE++;
     };
 
     const handleChange3 = (event: any) => {
       let form = event.target.value.trimStart(); // удаление пробелов в начале строки
       setValuen3(form);
+      HAVE++;
     };
 
     const hBlur = () => {};
@@ -224,11 +230,15 @@ const PointsLevel2Area = (props: {
             {Inputer("Прямой", valuen1, handleChange1, hBlur1, styleInpArg)}
             {Inputer("Обратный", valuen2, handleChange2, hBlur2, styleInpArg)}
             {Inputer("Описание", valuen3, handleChange3, hBlur, styleInpArg)}
-            <Box sx={{ textAlign: "center", marginTop: 1 }}>
-              <Button sx={styleInpKnop} onClick={() => handleCloseStr(0)}>
-                <b>Сохранить</b>
-              </Button>
-            </Box>
+            {HAVE > 0 ? (
+              <Box sx={{ textAlign: "center", marginTop: 1 }}>
+                <Button sx={styleInpKnop} onClick={() => handleCloseStr(0)}>
+                  <b>Сохранить</b>
+                </Button>
+              </Box>
+            ) : (
+              <Box sx={{ marginTop: 2, height: "21px" }}></Box>
+            )}
           </Box>
           {badInput && <>{BadInput(badInput, setBadInput, soobError)}</>}
         </>
@@ -240,6 +250,7 @@ const PointsLevel2Area = (props: {
     nomStr = nom;
     nomIllum = nom;
     setOpenSetStr(true);
+    HAVE = 0;
   };
 
   const PointsLevel2AreaTab1Header = () => {
@@ -277,7 +288,7 @@ const PointsLevel2Area = (props: {
               </Button>
             )}
             {flagEdit && (
-              <Box sx={{ p: 0.2 }}>
+              <Box sx={{ p: 0.35 }}>
                 <Box sx={styleXTG101}>{elem}</Box>
               </Box>
             )}

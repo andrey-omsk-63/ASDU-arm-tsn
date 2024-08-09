@@ -21,6 +21,7 @@ let nomStr = 0;
 let flagEdit = true;
 let xtPropsOld = -1;
 let nomIllum = -1;
+let HAVE = 0;
 
 const PointsMainScrGrid2 = (props: {
   open: boolean;
@@ -53,9 +54,7 @@ const PointsMainScrGrid2 = (props: {
     if (!maskpoint.redaxPoint && flagEdit) {
       flagEdit = false; // Start
     } else {
-      if (maskpoint.redaxPoint && !flagEdit) {
-        flagEdit = true; // Stop
-      }
+      if (maskpoint.redaxPoint && !flagEdit) flagEdit = true; // Stop
     }
   }
 
@@ -107,11 +106,13 @@ const PointsMainScrGrid2 = (props: {
     const handleChange1 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
       form && setValuen1(Math.abs(form));
+      HAVE++;
     };
 
     const handleChange2 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
       form && setValuen2(Math.abs(form));
+      HAVE++;
     };
 
     const hBlur = () => {};
@@ -128,7 +129,11 @@ const PointsMainScrGrid2 = (props: {
           <br />
           {Inputer("КС на ДК", valuen1, handleChange1, hBlur, styleInpArg)}
           {Inputer("ПК", valuen2, handleChange2, hBlur, styleInpArg)}
-          {SaveFunc(handleCloseStr)}
+          {HAVE > 0 ? (
+            <>{SaveFunc(handleCloseStr)}</>
+          ) : (
+            <Box sx={{ marginTop: 2, height: "21px" }}></Box>
+          )}
         </Box>
       </Modal>
     );
@@ -137,6 +142,7 @@ const PointsMainScrGrid2 = (props: {
   const SetOpenSetStr = (nom: number) => {
     nomStr = nom;
     nomIllum = nom;
+    HAVE = 0;
     setValuen1(points.ext[nom][0]);
     setValuen2(points.ext[nom][1]);
     setOpenStr(true);
