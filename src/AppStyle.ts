@@ -94,7 +94,7 @@ export const styleImpServis = {
 };
 
 export const styleInp = {
-  backgroundColor: "#FFFBE5",
+  backgroundColor: "#FFFBE5", // молоко
   maxHeight: "21px",
   minHeight: "21px",
   width: "140px",
@@ -152,7 +152,7 @@ export const styleInt01 = {
 
 export const styleInt02 = {
   textAlign: "left",
-  color: "#5B1080", // сиреневый
+  color: "#6F139B", // сиреневый
   textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
 };
 

@@ -308,7 +308,7 @@ export const styleModalEnd = {
   height: "21px",
   maxWidth: "2%",
   minWidth: "2%",
-  color: "black",
+  color: "#5B1080", // сиреневый
 };
 
 export const styleSetInf = {

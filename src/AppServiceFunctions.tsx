@@ -21,7 +21,6 @@ import ButtonMenu from "./AppButtonMenu";
 
 import { styleDatePicker, styleModalMenu } from "./AppStyle";
 import { styleInpOk, styleButOk } from "./AppStyle";
-//import { styleEndInf } from "./components/Points/grid/PointsGridStyle";
 import { styleModalEnd } from "./components/Points/grid/PointsGridStyle";
 
 import { XctrlInfo } from "./interfaceGl.d";
@@ -230,6 +229,8 @@ export const InputerDate = (
   handleChangeDP: any,
   massGoodDate: any
 ) => {
+  const color = "#6F139B"; // сиреневый
+
   return (
     <Box sx={styleDatePicker}>
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={"ru"}>
@@ -239,7 +240,9 @@ export const InputerDate = (
           inputFormat="DD-MM-YYYY"
           InputProps={{ style: { fontSize: 14 } }}
           onChange={handleChangeDP}
-          renderInput={(params: any) => <TextField {...params} />}
+          renderInput={(params: any) => (
+            <TextField sx={{ svg: { color }, input: { color } }} {...params} />
+          )}
           renderLoading={() => <CalendarPickerSkeleton />}
           renderDay={(day, _value, DayComponentProps) => {
             const isSelected =
