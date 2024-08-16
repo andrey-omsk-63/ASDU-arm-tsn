@@ -346,8 +346,7 @@ export const styleInpName = {
     m: 0,
     width: "27ch",
     bgcolor: "#FFFBE5",
-    border: "1px solid #000",
-    borderColor: "#d4d4d4", // серый
+    border: "1px solid #d4d4d4", // серый
     borderRadius: 1,
     boxShadow: 6,
   },
@@ -369,8 +368,7 @@ export const styleInpTime = {
     maxHeight: "21px",
     minHeight: "21px",
     bgcolor: "#FFFBE5",
-    border: "1px solid #000",
-    borderColor: "#d4d4d4", // серый
+    border: "1px solid #d4d4d4", // серый
     borderRadius: 1,
     boxShadow: 6,
   },

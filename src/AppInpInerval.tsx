@@ -19,7 +19,10 @@ const InputInterval = (props: { curr: any; cur: string; func: any }) => {
         onKeyPress={handleKey} //отключение Enter
         value={props.cur}
         onChange={props.func}
-        InputProps={{ disableUnderline: true, style: { fontSize: 12.5 } }}
+        InputProps={{
+          disableUnderline: true,
+          style: { fontSize: 12.5, color: "#6F139B" },
+        }}
         variant="standard"
         color="secondary"
       >
@@ -27,7 +30,7 @@ const InputInterval = (props: { curr: any; cur: string; func: any }) => {
           <MenuItem
             key={option.value}
             value={option.value}
-            sx={{ fontSize: 12.5 }}
+            sx={{ fontSize: 12.5, color: "#6F139B" }}
           >
             {option.label}
           </MenuItem>

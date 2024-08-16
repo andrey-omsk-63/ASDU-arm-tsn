@@ -252,6 +252,8 @@ export const InputerDate = (
               <Badge
                 key={day.toString()}
                 overlap="circular"
+                //color="secondary"
+                color="success"
                 badgeContent={isSelected ? "👍" : undefined}
               >
                 <PickersDay {...DayComponentProps} />
