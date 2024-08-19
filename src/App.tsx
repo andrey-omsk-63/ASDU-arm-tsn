@@ -262,10 +262,9 @@ const App = () => {
           !isOpenInf && setIsOpenInf(true);
           break;
         case "getStatisticsList":
-          if (data.dates) {
+          if (data.dates)
             for (let i = 0; i < data.dates.length; i++)
               massGoodDate.push(data.dates[i].slice(0, 10));
-          }
           break;
         case "getStatistics":
           setPointsSt(data.statistics ?? []);
@@ -438,10 +437,8 @@ const App = () => {
     let dat = MakeInterval(massIntervalNowStart[tekIdNow]);
     if (value === "4") {
       dat = MakeInterval(massIntervalOldStart[tekIdOld]);
-    } else {
-      if (formSett !== formSettToday)
-        dat = MakeInterval(massIntervalOldStart[tekIdOld]);
-    }
+    } else if (formSett !== formSettToday)
+      dat = MakeInterval(massIntervalOldStart[tekIdOld]);
 
     let massKey = [];
     let massDat: any = [];

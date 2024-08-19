@@ -261,8 +261,7 @@ export const styleBut02 = {
   color: "black",
   padding: "1px 0px 0px 0px",
   bgcolor: "#E6F5D6", // светло-салатовый
-  border: "1px solid #000",
-  borderColor: "#d4d4d4", // серый
+  border: "1px solid #d4d4d4", // серый
   borderRadius: 1,
   boxShadow: 1,
   textTransform: "unset !important",
@@ -277,8 +276,7 @@ export const styleBut021 = {
   minWidth: "33px",
   color: "black",
   bgcolor: "#BAE186", // тёмно-салатовый
-  border: "1px solid #000",
-  borderColor: "#93D145", // ярко-салатовый
+  border: "1px solid #93D145", // ярко-салатовый
   borderRadius: 1,
   boxShadow: 12,
   textTransform: "unset !important",
@@ -292,8 +290,7 @@ export const styleBut03 = {
   maxWidth: "193px",
   minWidth: "193px",
   bgcolor: "#E6F5D6", // светло-салатовый
-  border: "1px solid #000",
-  borderColor: "#d4d4d4", // серый
+  border: "1px solid #d4d4d4", // серый
   borderRadius: 1,
   boxShadow: 6,
   color: "black",
@@ -450,8 +447,7 @@ export const styleXTG045 = {
 export const styleBoxForm = {
   "& > :not(style)": {
     backgroundColor: "#FFFBE5", // молоко
-    border: "1px solid #000",
-    borderColor: "#d4d4d4", // серый
+    border: "1px solid #d4d4d4", // серый
     borderRadius: 1,
     boxShadow: 6,
     marginTop: "0px",

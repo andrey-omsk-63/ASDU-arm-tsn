@@ -38,6 +38,7 @@ const PointsMainScrGrid1 = (props: {
   MakeDateRus(MakeDate(new Date()));
 
   const HeaderMainScrGrid1 = () => {
+    //console.log('###:',datestat.xttData)
     return (
       <>
         <Grid container sx={styleXTGHeader}>
