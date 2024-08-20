@@ -602,4 +602,12 @@ export const styleXt05 = {
   marginRight: 1.5,
   height: "69%",
 };
+
+export const styleXt06 = {
+  textShadow: "2px 2px 3px rgba(0,0,0,0.3)",
+  fontSize: 15,
+  margin: 1,
+  marginLeft: 1,
+  color: "#5B1080", // сиреневый
+};
 //===============================================================================

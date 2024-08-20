@@ -429,9 +429,7 @@ const ManagementRightGrid = (props: {
         }
         if (soobBP === "") {
           soobBP = "Назначен ВР";
-        } else {
-          soobBP = "Назначен" + soobBP;
-        }
+        } else soobBP = "Назначен" + soobBP;
       }
     }
 

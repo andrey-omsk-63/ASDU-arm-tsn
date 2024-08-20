@@ -24,7 +24,6 @@ const PointsMainScrGrid1 = (props: {
     const { statsaveReducer } = state;
     return statsaveReducer.datestat;
   });
-  //const dispatch = useDispatch();
   //===========================================================
   const xtProps = props.xtt;
   const points = props.xctrll[xtProps];
@@ -38,7 +37,6 @@ const PointsMainScrGrid1 = (props: {
   MakeDateRus(MakeDate(new Date()));
 
   const HeaderMainScrGrid1 = () => {
-    //console.log('###:',datestat.xttData)
     return (
       <>
         <Grid container sx={styleXTGHeader}>

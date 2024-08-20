@@ -114,7 +114,13 @@ export const OldButtonMenu = (
     textAlign: "center",
   };
 
-  // const [hint, setHint] = React.useState(false);
+  const styleHint = {
+    position: "absolute",
+    left: "38.2%",
+    top: "0.4%",
+    fontSize: 11,
+    color: "#969696",
+  };
 
   const TurnOnHint = () => {
     soob === "⇩" && setHint(true);
@@ -136,19 +142,7 @@ export const OldButtonMenu = (
       >
         {soob === "⇩" ? <BiSolidDownload /> : <b>{soob}</b>}
       </Button>
-      {hint && (
-        <Box
-          sx={{
-            position: "absolute",
-            left: "38.2%",
-            top: "0.4%",
-            fontSize: 11,
-            color: "#969696",
-          }}
-        >
-          Сохранить
-        </Box>
-      )}
+      {hint && <Box sx={styleHint}>Сохранить</Box>}
     </>
   );
 };
@@ -182,14 +176,15 @@ export const MenuSpisRegion = (
 };
 
 export const PunktMenuSaveFile = (SetValue: Function, tekValue: string) => {
+  const styleMenu = {
+    marginTop: -0.25,
+    marginRight: 0.3,
+    width: "140px",
+  };
+
   return (
-    <Grid
-      item
-      container
-      sx={{ marginTop: -0.25, marginRight: 0.3, width: "140px" }}
-    >
+    <Grid item container sx={styleMenu}>
       <Grid item xs sx={{ textAlign: "left" }}>
-        {/* {ButtonMenu("5", "⇩", SetValue, tekValue, hint, setHint)} */}
         <ButtonMenu
           mode={"5"}
           soob={"⇩"}
@@ -343,7 +338,6 @@ export const BadInput = (
     width: 400,
     bgcolor: "background.paper",
     border: "1px solid #fff",
-    //borderColor: "red",
     borderRadius: 1,
     boxShadow: 24,
     textAlign: "center",
@@ -649,8 +643,6 @@ export const OutputPict = (
 ) => {
   const styleBox = {
     position: "absolute",
-    //left: ph - 0.7 + '%', // 27.2
-    //top: pv - 0.4 + '%', //7.7
     left: ph - 0.8 + "%",
     top: pv - 1.2 + "%",
     maxWidth: 5,
@@ -667,7 +659,6 @@ export const OutputPict = (
     <Button
       sx={styleBox}
       onMouseEnter={() => PictInfo(idx, pv, ph)}
-      //onClick={() => PictInfo(idx, pv, ph)}
       onMouseLeave={() => setPictInfo(false)}
     >
       {soob}
@@ -764,7 +755,6 @@ export const PictInfoBox = (
   );
 };
 //=== StatisticXTNew ===============================
-
 export const KnobBatCl = (setValue: Function) => {
   const styleBattonCl = {
     fontSize: 10.1,

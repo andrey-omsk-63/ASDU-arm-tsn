@@ -12,7 +12,6 @@ import { styleSt1, styleSt11, styleSt2 } from "./StatisticXTStyle";
 import { styleStError } from "../../AppStyle";
 
 import { Statistic } from "../../interfaceStat.d";
-//import { Tflight } from "../../interfaceMNG.d";
 
 let tekValue = 0;
 let pointsEtalon: Statistic[];

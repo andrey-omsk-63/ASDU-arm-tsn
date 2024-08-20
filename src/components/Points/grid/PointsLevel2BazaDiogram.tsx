@@ -21,10 +21,6 @@ let phGl = -1;
 let pvGl = -1;
 let IDX = -1;
 let massRatio: Array<number> = [];
-//let resStr: any = [];
-//let flagOutput = false;
-
-//let openloader = true;
 let pictinfo = false;
 
 const PointsLevel2BazaDiogram = (props: {
@@ -66,7 +62,6 @@ const PointsLevel2BazaDiogram = (props: {
   ];
 
   const [openLoader, setOpenLoader] = React.useState(true);
-  // const [pictInfo, setPictInfo] = React.useState(false);
 
   let dlMas = points.xctrls[crRoad].StrategyB.length;
   const horizonLimit = points.xctrls[crRoad].StrategyB[dlMas - 1].xright;
@@ -102,16 +97,13 @@ const PointsLevel2BazaDiogram = (props: {
     crossRoadOld = crRoad;
     pointsOld = points;
     setOpenLoader(true);
-    //pictInfo && setPictInfo(false);
-    //openloader = true;
     pictinfo = false;
   }
 
-  //const [openLoader, setOpenLoader] = React.useState(openloader);
+
   const [pictInfo, setPictInfo] = React.useState(pictinfo);
 
   const PointsXt112Comp1Tab4 = (update: boolean) => {
-    //resStr = [];
     let resSps = [];
 
     const MakeMatrix = () => {
@@ -171,7 +163,6 @@ const PointsLevel2BazaDiogram = (props: {
     };
 
     const PointsXt112Comp1Tab4Str = (j: number) => {
-      //resStr = [];
       coler = "red";
       colerOld = matrix[j / scale][0 / scale];
       masStr = [];
@@ -192,15 +183,6 @@ const PointsLevel2BazaDiogram = (props: {
       masStr.push(colBl);
       masCol.push(coler);
 
-      // for (let i = 0; i < masStr.length; i++) {
-      //   let xss = steepHorizon * scale * masStr[i];
-      //   const stylePict = {
-      //     backgroundColor: masCol[i],
-      //     height: String(steepVertical * scale) + "vh",
-      //   };
-      //   resStr.push(<Grid key={i} xs={xss} item sx={stylePict}></Grid>);
-      // }
-      // return resStr;
       return (
         <>
           {masStr.map((masstr: any, idx: number) => {

@@ -372,10 +372,6 @@ const StatisticXTNew = (props: {
         Avail: false,
         Datas: [],
       };
-      // maskMmatrix.Hour = hours;
-      // maskMmatrix.Min = minutes;
-      // maskMATRIX.Hour = hours;
-      // maskMATRIX.Min = minutes;
       let datas: any = [];
       for (let j = 0; j < kolDatas; j++) {
         let maskMatrixDatas = {

@@ -90,7 +90,6 @@ export let maskPoint: Pointer = {
 
 let flagOpenWS = true;
 let WS: any = null;
-
 let debug = false;
 let flagOpenDebug = true;
 
@@ -105,7 +104,6 @@ let formSettOld = MakeDate(date);
 
 let eventInp: any = null;
 let inpDate = false;
-
 let interval = 5;
 let tekIdNow = 0;
 let tekIdOld = 0;
@@ -447,16 +445,11 @@ const App = () => {
       massKey.push(key);
       massDat.push(dat[key]);
     }
-    for (let i = 0; i < massKey.length; i++) {
-      let maskCurrencies = {
-        value: "",
-        label: "",
-      };
-      maskCurrencies.value = massKey[i];
-      maskCurrencies.label = massDat[i];
-      currencies.push(maskCurrencies);
-    }
-
+    for (let i = 0; i < massKey.length; i++)
+      currencies.push({
+        value: massKey[i],
+        label: massDat[i],
+      });
     if (!interval) interval = 5;
     const [currency, setCurrency] = React.useState(
       massKey[massDat.indexOf(interval.toString())]

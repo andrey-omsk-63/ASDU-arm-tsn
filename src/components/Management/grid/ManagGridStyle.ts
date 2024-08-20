@@ -22,13 +22,11 @@ export const styleMRG02 = {
 export const styleMRG02Center = {
   borderRight: "1px solid #d4d4d4", // серый
   borderBottom: "1px solid #d4d4d4", // серый
-  //borderColor: 'primary.main',
   padding: 0.4,
   textAlign: "center",
 };
 
 export const styleMRGHeader = {
-  //bgcolor: "#C0E2C3", // серый
   bgcolor: "#B8CBB9", // серо-салатовый
   borderColor: "#C0C0C0",
   borderTopLeftRadius: 3,
@@ -43,8 +41,7 @@ export const styleMRG03 = {
 };
 
 export const styleMRG04 = {
-  //bgcolor: "#F1F5FB", // светло серый
-  background: 'linear-gradient(180deg, #F1F5FB 59%, #CBDAEF )',
+  background: "linear-gradient(180deg, #F1F5FB 59%, #CBDAEF )",
   border: "1px solid #d4d4d4", // серый
   borderRadius: 1,
   marginTop: "0.5vh",
@@ -55,9 +52,7 @@ export const styleMRG04 = {
 export const styleMG01 = {
   border: "1px solid #d4d4d4", // серый
   borderRadius: 1,
-  //bgcolor: "#F1F5FB", // светло серый
-  //bgcolor: "#F0F0F0", // светло серый
-  background: 'linear-gradient(160deg, #F1F5FB 63%, #D0DEF0 )',
+  background: "linear-gradient(160deg, #F1F5FB 63%, #D0DEF0 )",
   marginTop: "0.5vh",
   marginLeft: 0.5,
   marginRight: 0.5,
@@ -156,7 +151,6 @@ export const stylePK = {
   width: 77,
   bgcolor: "background.paper",
   border: "1px solid #d4d4d4", // серый
-  //borderColor: 'primary.main',
   borderRadius: 1,
   boxShadow: 24,
   p: 5,
@@ -170,7 +164,6 @@ export const styleModalEnd = {
   height: "21px",
   maxWidth: "2%",
   minWidth: "2%",
-  //color: "black",
   color: "#5B1080", // сиреневый
   textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
 };
@@ -241,7 +234,6 @@ export const stylePKXt = {
 export const styleBatMenuXt = {
   fontSize: 12.9,
   textAlign: "center",
-  //backgroundColor: "#E9F5D8",
   color: "black",
   bgcolor: "#E6F5D6", // светло-салатовый
   border: "1px solid #000",
@@ -266,5 +258,10 @@ export const styleMenuXt = {
   marginLeft: 2.6,
   width: "121px",
   padding: "6px 0px 9px 0px",
+};
+
+export const styleXtSoob = {
+  padding: "0px 0px 6px 0px",
+  textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
 };
 //===============================================================================

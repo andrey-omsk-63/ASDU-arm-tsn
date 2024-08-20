@@ -9,7 +9,7 @@ import PointsMainScrGrid1 from "./grid/PointsMainScrGrid1";
 import PointsMainScrGrid2 from "./grid/PointsMainScrGrid2";
 import PointsMainScrGrid3 from "./grid/PointsMainScrGrid3";
 
-import { styleXt02, styleXt03 } from "./grid/PointsGridStyle";
+import { styleXt02, styleXt03, styleXt06 } from "./grid/PointsGridStyle";
 import { styleXt04, styleXt05 } from "./grid/PointsGridStyle";
 
 import { TimeStr, WorkMenuEditMain } from "../../AppServiceFunctions";
@@ -80,17 +80,7 @@ const PointsMainScr = (props: {
   const HeaderMainScr = () => {
     return (
       <>
-        <Grid
-          item
-          xs={12}
-          sx={{
-            textShadow: "2px 2px 3px rgba(0,0,0,0.3)",
-            fontSize: 15,
-            margin: 1,
-            marginLeft: 1,
-            color: "#5B1080", // сиреневый
-          }}
-        >
+        <Grid item xs={12} sx={styleXt06}>
           Расчёт ХТ
         </Grid>
         <Grid item xs={12} sx={styleXt02}>

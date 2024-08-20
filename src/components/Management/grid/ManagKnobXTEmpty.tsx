@@ -18,7 +18,6 @@ const ManagKnobXTEmpty = (props: { soob: string; setOpen: any }) => {
     width: 380,
     bgcolor: "background.paper",
     border: "1px solid #fff",
-    //borderColor: "red",
     borderRadius: 1,
     boxShadow: 24,
     textShadow: "2px 2px 3px rgba(0,0,0,0.3)",

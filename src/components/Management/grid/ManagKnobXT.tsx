@@ -9,7 +9,7 @@ import ManagKnobXTEmpty from "./ManagKnobXTEmpty";
 
 import { styleSoobPusto, styleSoob, styleModalEnd } from "./ManagGridStyle";
 import { stylePKXt, styleBatMenuXt, styleMenuXt } from "./ManagGridStyle";
-import { styleBatKnop01, styleBatKnop02 } from "./ManagGridStyle";
+import { styleBatKnop01, styleBatKnop02, styleXtSoob } from "./ManagGridStyle";
 
 //import { Tflight } from "../../../interfaceMNG.d";
 
@@ -49,13 +49,8 @@ const ManagementKnobXT = (props: {
   areaa: string;
   subArea: number;
   setDataKn: Function;
-  //tflightt: Tflight[];
   masxt: any;
 }) => {
-  //console.log("MASXT:", props.areaa, props.subArea, props.masxt);
-  // let MASXT = props.masxt;
-  // MASXT[2].areaXT = 3;
-  //let points = props.tflightt;
   const [value, setValue] = React.useState(21);
   const [open, setOpen] = React.useState(false);
   const [openSoobErr, setOpenSoobErr] = React.useState(false);
@@ -193,14 +188,7 @@ const ManagementKnobXT = (props: {
       <>
         {props.subArea && !tip ? (
           <Box sx={styleMenuXt}>
-            <Box
-              sx={{
-                padding: "0px 0px 6px 0px",
-                textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
-              }}
-            >
-              {masSoob[0]}
-            </Box>
+            <Box sx={styleXtSoob}>{masSoob[0]}</Box>
             <Box sx={{ textShadow: "1px 1px 2px rgba(0,0,0,0.3)" }}>
               {masSoob[1]}
             </Box>

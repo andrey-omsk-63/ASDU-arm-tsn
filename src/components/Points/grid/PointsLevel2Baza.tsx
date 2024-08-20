@@ -233,7 +233,6 @@ const PointsLevel2Baza = (props: {
       let timeStart = Number(valuen5) * 60 + Number(valuen6);
       pointRab.yellow.start = timeStart;
       let timeStop = Number(valuen7) * 60 + Number(valuen8);
-      //if (timeStop < timeStart) timeStop = timeStart; //!!!!!!
       pointRab.yellow.stop = timeStop;
       setPoints(pointRab);
       maskpoint.pointForRedax = pointRab;
@@ -276,13 +275,10 @@ const PointsLevel2Baza = (props: {
         massDat.push(dat[key]);
       }
       for (let i = 0; i < massKey.length; i++) {
-        let maskCurrencies = {
-          value: "",
-          label: "",
-        };
-        maskCurrencies.value = massKey[i];
-        maskCurrencies.label = massDat[i];
-        currencies.push(maskCurrencies);
+        currencies.push({
+          value: massKey[i],
+          label: massDat[i],
+        });
       }
 
       const [currency, setCurrency] = React.useState(valuen4);

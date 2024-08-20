@@ -51,8 +51,11 @@ const Points = (props: {
   let reGion = props.region;
   let isOpen = props.open;
   let pointsGl = props.xctrll;
-  let debug = false;
-  if (props.ws.url === "wss://localhost:3000/W") debug = true;
+  let debug =
+    props.ws.url === "wss://localhost:3000/W" ||
+    props.ws.url.slice(0, 27) === "wss://andrey-omsk-63.github"
+      ? true
+      : false;
 
   let points = pointsGl.filter(
     (pointsGl) => pointsGl.region === Number(reGion)

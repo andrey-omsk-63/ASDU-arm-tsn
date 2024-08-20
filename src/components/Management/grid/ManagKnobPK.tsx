@@ -150,9 +150,7 @@ const ManagementKnobPK = (props: {
       soobDispatch = "Отправлено";
       if (value !== 0) {
         nomDispatch = "ПК " + value;
-      } else {
-        nomDispatch = "Авт";
-      }
+      } else nomDispatch = "Авт";
       otpravka = false;
     }
 

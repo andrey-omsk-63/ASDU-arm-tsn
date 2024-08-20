@@ -94,7 +94,6 @@ export const styleSt04 = {
   borderBottom: "1px solid #d4d4d4", // серый
   fontSize: 12.9,
   lineHeight: 2,
-  //backgroundColor: "#FF80C0", // розовый
   backgroundColor: "#ff97ca", // розовый
   color: "white",
   textAlign: "center",
@@ -199,7 +198,6 @@ export const options = {
 };
 
 export const styleStatMain = {
-  //bgcolor: "#F1F5FB", // светло серый
   background: "linear-gradient(160deg, #F1F5FB 63%, #D0DEF0 )",
   border: "1px solid #d4d4d4", // серый
   borderRadius: 1,
