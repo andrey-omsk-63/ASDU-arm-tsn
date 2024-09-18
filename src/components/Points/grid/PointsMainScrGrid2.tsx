@@ -149,10 +149,10 @@ const PointsMainScrGrid2 = (props: {
   };
 
   const StrokaMainScrGrid2 = () => {
-    let resStr = [];
-    for (let i = 0; i < points.ext.length; i++) {
+    return points.ext.map((pointsExt: any, idx: number) => {
       let bordBott = "1px solid #d4d4d4"; // серый
-      if (i === points.ext.length - 1) bordBott = "0px solid #d4d4d4"; // серый
+      if (idx === points.ext.length - 1) bordBott = "0px solid #d4d4d4"; // серый
+
       const styleXTG03 = {
         borderRight: "1px solid #d4d4d4",
         borderBottom: bordBott,
@@ -166,32 +166,31 @@ const PointsMainScrGrid2 = (props: {
         textAlign: "center",
       };
 
-      let illum = nomIllum === i ? styleBut021 : styleBut02;
+      let illum = nomIllum === idx ? styleBut021 : styleBut02;
 
-      resStr.push(
-        <Grid key={i} container item xs={12} sx={{ fontSize: 14 }}>
+      return (
+        <Grid key={idx} container item xs={12} sx={{ fontSize: 14 }}>
           <Grid xs={1.5} item sx={styleXTG03}>
             {!flagEdit && (
-              <Button sx={illum} onClick={() => SetOpenSetStr(i)}>
-                {i + 1}
+              <Button sx={illum} onClick={() => SetOpenSetStr(idx)}>
+                {idx + 1}
               </Button>
             )}
             {flagEdit && (
               <Box sx={{ p: 0.2 }}>
-                <Box sx={styleXTG101}>{i + 1}</Box>
+                <Box sx={styleXTG101}>{idx + 1}</Box>
               </Box>
             )}
           </Grid>
           <Grid xs={5.25} item sx={styleXTG03}>
-            {points.ext[i][0]}
+            {pointsExt[0]}
           </Grid>
           <Grid xs={5.25} item sx={styleXTG033}>
-            {points.ext[i][1]}
+            {pointsExt[1]}
           </Grid>
         </Grid>
       );
-    }
-    return resStr;
+    });
   };
 
   return (

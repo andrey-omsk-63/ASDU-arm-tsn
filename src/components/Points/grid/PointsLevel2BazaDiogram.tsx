@@ -314,7 +314,7 @@ const PointsLevel2BazaDiogram = (props: {
   const Output = () => {
     setTimeout(() => {
       setOpenLoader(false);
-    }, 500);
+    }, 1000);
   };
 
   const Dinama = () => {

@@ -114,7 +114,6 @@ const PointsLevel2Calc = (props: {
   };
 
   const PointsGraf00 = () => {
-    
     const colMin = 60 / pointer[namer][0].Time;
     for (let i = 0; i < pointer[namer].length; i++) {
       let int = "";
@@ -353,23 +352,20 @@ const PointsLevel2Calc = (props: {
     }
     for (let i = 0; i < masKs.length; i++) masKs[i] = AccordKStoPK(masKs[i]);
 
-    let resStr = [];
-    for (let i = 0; i < masTime.length; i++) {
-      let int = masTime[i] + " - ";
-      int += i !== masTime.length - 1 ? masTime[i + 1] : "24:00";
-
-      resStr.push(
-        <Grid key={i} container item xs={12}>
+    return masTime.map((mastime: any, idx: number) => {
+      let int = mastime + " - ";
+      int += idx !== masTime.length - 1 ? masTime[idx + 1] : "24:00";
+      return (
+        <Grid key={idx} container item xs={12}>
           <Grid xs={6} item sx={styleXTC011}>
             <Box sx={styleXTG101}>{int}</Box>
           </Grid>
           <Grid xs={6} item sx={styleXTC011}>
-            {!masKs[i] ? "Нет информациии" : masKs[i]}
+            {!masKs[idx] ? "Нет информациии" : masKs[idx]}
           </Grid>
         </Grid>
       );
-    }
-    return resStr;
+    });
   };
 
   const OutputNotMainTabl = () => {

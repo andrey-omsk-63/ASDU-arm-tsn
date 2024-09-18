@@ -405,6 +405,7 @@ export const PointInfoDirStyle = (mt01: string, ml01: string, fs: number) => {
     marginLeft: ml01,
     textAlign: "right",
     width: "132px",
+    color: "blue",
   };
   return stylePointInf;
 };
@@ -422,6 +423,7 @@ export const PointInfoDirRotStyle = (
     transform: "rotate(270deg)",
     textAlign: "right",
     width: "128px",
+    color: "blue",
   };
   return stylePointInf;
 };
