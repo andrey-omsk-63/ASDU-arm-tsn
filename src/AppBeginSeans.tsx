@@ -49,15 +49,20 @@ const BeginSeans = (props: {
   };
 
   const SpisRegion = () => {
-    let resStr = [];
-    for (let i = 0; i < massRegion.length; i++) {
-      resStr.push(
-        <>
-          {MenuSpisRegion(massRegion[i], massNameRegion[i], handleCloseModal)}
-        </>
+    // let resStr = [];
+    // for (let i = 0; i < massRegion.length; i++) {
+    //   resStr.push(
+    //     <>
+    //       {MenuSpisRegion(massRegion[i], massNameRegion[i], handleCloseModal)}
+    //     </>
+    //   );
+    // }
+    // return resStr;
+    return massRegion.map((masregion: any, idx: number) => {
+      return (
+        <>{MenuSpisRegion(masregion, massNameRegion[idx], handleCloseModal)}</>
       );
-    }
-    return resStr;
+    });
   };
 
   const styleModal = {

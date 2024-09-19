@@ -28,19 +28,19 @@ export const styleApp99 = {
   textTransform: "unset !important",
 };
 
-export const styleMod = {
-  position: "absolute",
-  top: "22.8%",
-  left: "47.7%",
-  transform: "translate(-50%, -50%)",
-  width: 500,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  borderColor: "red",
-  borderRadius: 2,
-  boxShadow: 24,
-  p: 4,
-};
+// export const styleMod = {
+//   position: "absolute",
+//   top: "22.8%",
+//   left: "47.7%",
+//   transform: "translate(-50%, -50%)",
+//   width: 500,
+//   bgcolor: "background.paper",
+//   border: "2px solid #000",
+//   borderColor: "red",
+//   borderRadius: 2,
+//   boxShadow: 24,
+//   p: 4,
+// };
 
 export const styleBatMenu = {
   fontSize: 14,
@@ -55,8 +55,7 @@ export const styleModalMenu = {
   maxHeight: "20px",
   minHeight: "20px",
   bgcolor: "#E6F5D6", // светло-салатовый
-  border: "1px solid #000",
-  borderColor: "#d4d4d4", // серый
+  border: "1px solid #d4d4d4", // серый
   borderRadius: 1,
   boxShadow: 6,
   color: "black",
@@ -117,8 +116,7 @@ export const styleButOk = {
   minHeight: "21px",
   bgcolor: "#E9F5D8",
   color: "black",
-  border: "1px solid #000",
-  borderColor: "#d4d4d4", // серый
+  border: "1px solid #d4d4d4", // серый
   borderRadius: 1,
   boxShadow: 4,
   textTransform: "unset !important",
@@ -163,8 +161,7 @@ export const styleBoxFormInt = {
     maxHeight: "18px",
     minHeight: "18px",
     width: "35px",
-    border: "1px solid #000",
-    borderColor: "#d4d4d4", // серый
+    border: "1px solid #d4d4d4", // серый
     borderRadius: 1,
     boxShadow: 4,
   },
