@@ -41,8 +41,7 @@ export const styleSt1 = {
   maxHeight: "22px",
   minHeight: "22px",
   bgcolor: "#BAE186", // тёмно-салатовый
-  border: "1px solid #000",
-  borderColor: "#93D145", // ярко-салатовый
+  border: "1px solid #93D145", // ярко-салатовый
   boxShadow: "4px -6px 6px #d4d4d4",
   color: "black",
   marginRight: 0.4,
@@ -55,8 +54,7 @@ export const styleSt11 = {
   maxHeight: "20px",
   minHeight: "20px",
   bgcolor: "#E6F5D6", // светло-салатовый
-  border: "1px solid #000",
-  borderColor: "#d4d4d4", // серый
+  border: "1px solid #d4d4d4", // серый
   boxShadow: 2,
   color: "black",
   marginRight: 0.4,
@@ -138,8 +136,7 @@ export const styleBatton01 = {
   marginLeft: 0.4,
   fontSize: 12,
   bgcolor: "#BAE186", // тёмно-салатовый
-  border: "1px solid #000",
-  borderColor: "#BAE186", // тёмно-салатовый
+  border: "1px solid #BAE186", // тёмно-салатовый
   borderRadius: 1,
   boxShadow: 10,
   color: "black",
@@ -155,8 +152,7 @@ export const styleBatton02 = {
   marginLeft: 0.4,
   fontSize: 11,
   bgcolor: "#E6F5D6", // светло-салатовый
-  border: "1px solid #000",
-  borderColor: "#BAE186", // тёмно-салатовый
+  border: "1px solid #BAE186", // тёмно-салатовый
   borderRadius: 1,
   boxShadow: 1,
   color: "black",
@@ -182,8 +178,7 @@ export const styleBattonCl = {
   maxWidth: "5vh",
   minWidth: "5vh",
   textTransform: "unset !important",
-  border: "1px solid #000",
-  borderColor: "#d4d4d4", // серый
+  border: "1px solid #d4d4d4", // серый
   borderRadius: 1,
   boxShadow: 6,
 };

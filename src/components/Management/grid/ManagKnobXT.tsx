@@ -204,7 +204,6 @@ const ManagementKnobXT = (props: {
 
   const ButtonKnop = () => {
     let illum = open ? styleBatKnop01 : styleBatKnop02;
-
     return (
       <Button sx={illum} onClick={handleOpen}>
         <b>XT</b>
@@ -226,17 +225,15 @@ const ManagementKnobXT = (props: {
     let have = false;
     if (props.areaa !== "0" && !props.subArea && beginWork) {
       // выбран весь район
-      for (let j = 0; j < props.masxt.length; j++) {
+      for (let j = 0; j < props.masxt.length; j++)
         if (Number(props.areaa) === props.masxt[j].areaXT) have = true;
-        //if (Number(props.areaa) === MASXT[j].areaXT) have = true;
-      }
       if (!have) {
         soobEmpty = "В выбранном районе ХТ отсутствуют";
         setOpenEmpty(true);
       }
       setBeginWork(false);
     } else {
-      // выбран кон,beginWorkкретный подрайон
+      // выбран beginWork - конкретный подрайон
       if (beginWork) {
         for (let j = 0; j < props.masxt.length; j++) {
           if (
@@ -256,7 +253,6 @@ const ManagementKnobXT = (props: {
       }
     }
   }
-
   //========================================================
   return (
     <>

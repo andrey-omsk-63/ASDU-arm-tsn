@@ -674,7 +674,6 @@ export const PictInfoBox = (
   mode: number,
   POINT: any
 ) => {
-  console.log("POINTER:", pointer);
   let snos = mode ? 1000 : 850;
   let sdvigH = (window.innerWidth - snos) * 0.012;
   let sdvigV = pvGl < 50 ? 0 : 15;

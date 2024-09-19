@@ -67,7 +67,6 @@ const PointsLevel2Calc = (props: {
   });
   const dispatch = useDispatch();
   //========================================================
-
   const xtProps = props.xtt;
   const points = props.xctrll[xtProps];
   let namer = points.xctrls[props.crossroad].name;
@@ -288,7 +287,7 @@ const PointsLevel2Calc = (props: {
 
   const OutputGraf = () => {
     return (
-      <Grid container item sx={{}}>
+      <Grid container>
         <Grid ref={printRef} item xs sx={styleXTC03}>
           {pointer !== null && (
             <>{pointer[namer].length !== 0 && <>{PointsGraf00()}</>}</>
@@ -324,9 +323,8 @@ const PointsLevel2Calc = (props: {
 
   const AccordKStoPK = (ks: number) => {
     let pk = 0;
-    for (let i = 0; i < points.ext.length; i++) {
+    for (let i = 0; i < points.ext.length; i++)
       if (points.ext[i][0] === ks) pk = points.ext[i][1];
-    }
     return pk;
   };
 

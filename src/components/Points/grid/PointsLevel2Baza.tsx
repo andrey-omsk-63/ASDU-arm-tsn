@@ -274,12 +274,8 @@ const PointsLevel2Baza = (props: {
         massKey.push(key);
         massDat.push(dat[key]);
       }
-      for (let i = 0; i < massKey.length; i++) {
-        currencies.push({
-          value: massKey[i],
-          label: massDat[i],
-        });
-      }
+      for (let i = 0; i < massKey.length; i++)
+        currencies.push({ value: massKey[i], label: massDat[i] });
 
       const [currency, setCurrency] = React.useState(valuen4);
 
@@ -565,15 +561,14 @@ const PointsLevel2Baza = (props: {
         </Grid>
         <Grid item xs>
           <Grid container sx={{ marginTop: 0.4, fontSize: 11 }}>
-            {flagEdit && (
+            {flagEdit ? (
               <>
                 {Grider(name, 0, false)}
                 {Grider(rec1, 2, false)}
                 {Grider(rec2, 2, false)}
                 {Grider(yellowSoob, 2, false)}
               </>
-            )}
-            {!flagEdit && (
+            ) : (
               <>
                 {Grider(ButtRec(name, SetOpenSetName), 0, false)}
                 {Grider(ButtRec(rec1, SetOpenSetName), 2, false)}
@@ -617,23 +612,19 @@ const PointsLevel2Baza = (props: {
   };
 
   const PointsLevel2BazaTab2Stroka = () => {
-    let resStr = [];
     let elemm = maskpoint.pointForRedax.xctrls[crossRoad].StrategyB;
-
-    for (let i = 0; i < elemm.length; i++) {
-      let elem = elemm[i];
-      let illum = nomIllum === i ? styleBut021 : styleBut02;
-      resStr.push(
-        <Grid key={i} container item xs={12}>
+    return elemm.map((elem: any, idx: number) => {
+      let illum = nomIllum === idx ? styleBut021 : styleBut02;
+      return (
+        <Grid key={idx} container item xs={12}>
           <Grid xs={1.3} item sx={styleXTG011}>
-            {!flagEdit && (
-              <Button sx={illum} onClick={() => SetOpenSetStr(i)}>
-                {i + 1}
+            {!flagEdit ? (
+              <Button sx={illum} onClick={() => SetOpenSetStr(idx)}>
+                {idx + 1}
               </Button>
-            )}
-            {flagEdit && (
+            ) : (
               <Box sx={{ p: 0.35 }}>
-                <Box sx={styleXTG101}>{i + 1}</Box>
+                <Box sx={styleXTG101}>{idx + 1}</Box>
               </Box>
             )}
           </Grid>
@@ -647,19 +638,16 @@ const PointsLevel2Baza = (props: {
           {ConclStr(2.1, elem.desc, styleXTG00)}
         </Grid>
       );
-    }
-    return resStr;
+    });
   };
 
   const PointsLevel2BazaTab3Stroka = () => {
-    let resStr = [];
     let elemm = maskpoint.pointForRedax.xctrls[props.crossroad].Calculates;
-    for (let i = 0; i < elemm.length; i++) {
-      let elem = elemm[i];
-      resStr.push(
-        <Grid key={i} container item xs={12}>
+    return elemm.map((elem: any, idx: number) => {
+      return (
+        <Grid key={idx} container item xs={12}>
           <Grid xs={0.5} item sx={styleXTG01}>
-            <Box sx={{ p: 0.35 }}>{i + 1}</Box>
+            <Box sx={{ p: 0.35 }}>{idx + 1}</Box>
           </Grid>
           {ConclStr(1.75, elem.region, styleXTG01)}
           {ConclStr(1.75, elem.area, styleXTG01)}
@@ -668,8 +656,7 @@ const PointsLevel2Baza = (props: {
           {ConclStr(3, elem.chanR[0], styleXTG00)}
         </Grid>
       );
-    }
-    return resStr;
+    });
   };
 
   const StartEdit = () => {

@@ -119,61 +119,45 @@ const PointsLevel2AreaDiogram = (props: {
     matrix.reverse(); //переворачиваем матрицу
   };
 
-  const PointsXt112Comp1Tab4 = () => {
-    let resSps = [];
+  const PointsXt112Comp1Tab4StrOptim = (j: number) => {
+    coler = "red";
+    colerOld = matrix[j / scale][0 / scale];
+    masStr = [];
+    masCol = [];
+    colBl = 0;
 
-    MakeMatrix();
-
-    const PointsXt112Comp1Tab4StrOptim = (j: number) => {
-      coler = "red";
-      colerOld = matrix[j / scale][0 / scale];
-      masStr = [];
-      masCol = [];
-      colBl = 0;
-
-      for (let i = 0; i < horizon; i += scale) {
-        coler = matrix[j / scale][i / scale];
-        if (coler === colerOld) {
-          colBl++;
-        } else {
-          masStr.push(colBl);
-          masCol.push(colerOld);
-          colBl = 1;
-          colerOld = coler;
-        }
+    for (let i = 0; i < horizon; i += scale) {
+      coler = matrix[j / scale][i / scale];
+      if (coler === colerOld) {
+        colBl++;
+      } else {
+        masStr.push(colBl);
+        masCol.push(colerOld);
+        colBl = 1;
+        colerOld = coler;
       }
-      masStr.push(colBl);
-      masCol.push(coler);
+    }
+    masStr.push(colBl);
+    masCol.push(coler);
 
-      // for (let i = 0; i < masStr.length; i++) {
-      //   resStr.push(
-      //     <Grid
-      //       key={i}
-      //       xs={steepHorizon * scale * masStr[i]}
-      //       item
-      //       sx={{
-      //         backgroundColor: masCol[i],
-      //         height: String(steepVertical * scale) + "vh",
-      //         borderRadius: 3,
-      //       }}
-      //     ></Grid>
-      //   );
-      // }
-      // return resStr;
-      return (
-        <>
-          {masStr.map((masstr: any, idx: number) => {
-            let xss = steepHorizon * scale * masstr;
-            const stylePict = {
-              backgroundColor: masCol[idx],
-              height: String(steepVertical * scale) + "vh",
-              borderRadius: 3,
-            };
-            return <Grid key={idx} xs={xss} item sx={stylePict}></Grid>;
-          })}
-        </>
-      );
-    };
+    return (
+      <>
+        {masStr.map((masstr: any, idx: number) => {
+          let xss = steepHorizon * scale * masstr;
+          const stylePict = {
+            backgroundColor: masCol[idx],
+            height: String(steepVertical * scale) + "vh",
+            borderRadius: 3,
+          };
+          return <Grid key={idx} xs={xss} item sx={stylePict}></Grid>;
+        })}
+      </>
+    );
+  };
+
+  const PointsXt112Comp1Tab4 = () => {
+    MakeMatrix();
+    let resSps = [];
 
     for (let j = 0; j < vertical; j += scale) {
       resSps.push(
@@ -208,9 +192,8 @@ const PointsLevel2AreaDiogram = (props: {
     if (pointer !== null) {
       if (pointer[namer]) {
         let I = 0;
-        for (let i = 0; i < pointer[namer].length; i++) {
+        for (let i = 0; i < pointer[namer].length; i++) 
           if (pointer[namer][i].Value[0] || pointer[namer][i].Value[1]) I = i;
-        }
         for (let i = 0; i < pointer[namer].length; i++) {
           let prpv = vertical / 100;
           let pv = 100 - pointer[namer][i].Value[0] / prpv;

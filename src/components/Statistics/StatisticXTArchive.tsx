@@ -177,9 +177,8 @@ const StatisticXTArchive = (props: {
           }
           labels.push(int);
         }
-        for (let i = 0; i < labels.length; i++) {
+        for (let i = 0; i < labels.length; i++)
           massId[numIdInMas].lbl.push(labels[i]);
-        }
       }
       if (val === 16) {
         ZeroMassIdCanal(); // очистка графиков

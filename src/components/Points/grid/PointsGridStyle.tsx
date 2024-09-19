@@ -33,21 +33,18 @@ export const stylePoint01 = {
   maxHeight: "22px",
   minHeight: "22px",
   bgcolor: "#BAE186", // тёмно-салатовый
-  border: "1px solid #000",
-  borderColor: "#93D145", // ярко-салатовый
+  border: "1px solid #93D145", // ярко-салатовый
   boxShadow: "6px -6px 6px #d4d4d4",
   color: "black",
   marginRight: 0.4,
   padding: "1px 0px 1px 0px",
-  //textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
 };
 export const stylePoint02 = {
   fontSize: 13.5,
   maxHeight: "20px",
   minHeight: "20px",
   bgcolor: "#E6F5D6", // светло-салатовый
-  border: "1px solid #000",
-  borderColor: "#d4d4d4", // серый
+  border: "1px solid #d4d4d4", // серый
   boxShadow: 2,
   color: "black",
   marginRight: 0.4,
@@ -84,8 +81,7 @@ export const stylePLevel02 = {
   minHeight: "20px",
   color: "black",
   bgcolor: "#BAE186", // тёмно-салатовый
-  border: "1px solid #000",
-  borderColor: "#93D145", // ярко-салатовый
+  border: "1px solid #93D145", // ярко-салатовый
   borderRadius: 1,
   boxShadow: 6,
   marginRight: 1,
@@ -98,8 +94,7 @@ export const stylePLevel03 = {
   maxHeight: "20px",
   minHeight: "20px",
   bgcolor: "#E6F5D6", // светло-салатовый
-  border: "1px solid #000",
-  borderColor: "#d4d4d4", // серый
+  border: "1px solid #d4d4d4", // серый
   borderRadius: 1,
   boxShadow: 4,
   color: "black",
@@ -113,14 +108,12 @@ export const stylePLevel04 = {
   height: "21px",
   color: "black",
   bgcolor: "#BAE186", // тёмно-салатовый
-  border: "1px solid #000",
-  borderColor: "#93D145", // ярко-салатовый
+  border: "1px solid #93D145", // ярко-салатовый
   borderRadius: 1,
   boxShadow: 8,
   marginRight: 0.4,
   marginTop: 0.7,
   textTransform: "unset !important",
-  //textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
 };
 
 export const stylePLevel05 = {
@@ -128,8 +121,7 @@ export const stylePLevel05 = {
   height: "20px",
   color: "black",
   bgcolor: "#E6F5D6", // светло-салатовый
-  border: "1px solid #000",
-  borderColor: "#d4d4d4", // серый
+  border: "1px solid #d4d4d4", // серый
   borderRadius: 1,
   boxShadow: 2,
   marginRight: 0.4,
@@ -158,7 +150,6 @@ export const stylePLevel06 = {
   color: "black",
   marginBottom: 5.9,
   textTransform: "unset !important",
-  //textShadow: "1px 1px 1px rgba(0,0,0,0.3)",
 };
 
 export const stylePLevel07 = {
@@ -245,7 +236,6 @@ export const styleBut01 = {
   minHeight: "15px",
   maxWidth: "205px",
   minWidth: "205px",
-  // backgroundColor: '#FFFBE5', // молоко
   backgroundColor: "#E9F5D8", // салатовый
   color: "black",
   textTransform: "unset !important",

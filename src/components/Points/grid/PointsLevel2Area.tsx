@@ -52,7 +52,6 @@ const PointsLevel2Area = (props: {
     const { maskpointReducer } = state;
     return maskpointReducer.maskpoint;
   });
-  //console.log("maskpoint_Area:", flagEdit, maskpoint);
   const dispatch = useDispatch();
   //===========================================================
   const xtProps = props.xtt;
@@ -273,17 +272,16 @@ const PointsLevel2Area = (props: {
   };
 
   const PointsLevel2AreaTab1Stroka = () => {
-    let resStr = [];
     let elemm = maskpoint.pointForRedax.xctrls[props.crossroad].StrategyA;
 
-    for (let i = 0; i < elemm.length; i++) {
-      let elem = elemm[i].pk;
-      let illum = nomIllum === i ? styleBut021 : styleBut02;
-      resStr.push(
-        <Grid key={i} container>
+    return elemm.map((elemn: any, idx: number) => {
+      let elem = elemn.pk;
+      let illum = nomIllum === idx ? styleBut021 : styleBut02;
+      return (
+        <Grid key={idx} container>
           <Grid xs={2} item sx={styleXTG01}>
             {!flagEdit && (
-              <Button sx={illum} onClick={() => SetOpenSetStr(i)}>
+              <Button sx={illum} onClick={() => SetOpenSetStr(idx)}>
                 {elem}
               </Button>
             )}
@@ -294,18 +292,17 @@ const PointsLevel2Area = (props: {
             )}
           </Grid>
           <Grid xs={3} item sx={styleXTG01}>
-            {elemm[i].xleft}
+            {elemn.xleft}
           </Grid>
           <Grid xs={3.5} item sx={styleXTG01}>
-            {elemm[i].xright}
+            {elemn.xright}
           </Grid>
           <Grid xs={3.5} item sx={styleXTG00}>
-            {elemm[i].desc}
+            {elemn.desc}
           </Grid>
         </Grid>
       );
-    }
-    return resStr;
+    });
   };
 
   const StartEdit = (mode: number) => {

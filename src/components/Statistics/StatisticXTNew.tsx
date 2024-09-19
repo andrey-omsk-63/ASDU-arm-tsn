@@ -383,7 +383,7 @@ const StatisticXTNew = (props: {
           o: 0,
           g: 0,
         };
-        maskMatrixDatas.ch = j + 1;
+        // maskMatrixDatas.ch = j + 1;
         datas.push(maskMatrixDatas);
       }
       maskMmatrix.Datas = datas;
@@ -433,7 +433,7 @@ const StatisticXTNew = (props: {
     let stepInterval = interval / step;
     if (stepInterval > 1) {
       let pointsMatrix: any = [];
-      for (let i = 0; i < matrix.length; i = i + stepInterval) {
+      for (let i = 0; i < matrix.length; i += stepInterval) {
         let sumRec = matrix[i];
         for (let j = 0; j < matrix[i].Datas.length; j++) {
           for (let k = 1; k < stepInterval; k++) {

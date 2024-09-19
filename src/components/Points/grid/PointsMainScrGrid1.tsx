@@ -29,10 +29,7 @@ const PointsMainScrGrid1 = (props: {
   const points = props.xctrll[xtProps];
 
   let pointRec = points.results;
-
   if (datestat.xttData !== MakeDate(new Date())) pointRec = datestat.result;
-
-  let resStr = [];
 
   MakeDateRus(MakeDate(new Date()));
 
@@ -63,33 +60,30 @@ const PointsMainScrGrid1 = (props: {
   };
 
   const StrokaMainScrGrid1 = () => {
-    resStr = [];
-
     if (pointRec !== null) {
       if (Object.keys(pointRec).length > 0) {
-        for (let i = 0; i < pointRec.result.length; i++) {
+        return pointRec.result.map((pointRecResult: any, idx: number) => {
           let kakchectvo = "";
-          if (!pointRec.result[i].Good) kakchectvo = "н/д";
-          resStr.push(
-            <Grid key={i} container xs={12} item>
+          if (!pointRecResult.Good) kakchectvo = "н/д";
+          return (
+            <Grid key={idx} container xs={12} item>
               <Grid xs={2} item sx={styleXTG103}>
-                <Box sx={styleXTG101}>{TimeStr(pointRec.result[i].Time)}</Box>
+                <Box sx={styleXTG101}>{TimeStr(pointRecResult.Time)}</Box>
               </Grid>
               <Grid xs={3} item sx={styleXTG103}>
-                {pointRec.result[i].Value[0]}
+                {pointRecResult.Value[0]}
               </Grid>
               <Grid xs={3} item sx={styleXTG103}>
-                {pointRec.result[i].Value[1]}
+                {pointRecResult.Value[1]}
               </Grid>
               <Grid xs={4} item sx={styleXTG103}>
                 {kakchectvo}
               </Grid>
             </Grid>
           );
-        }
+        });
       }
     }
-    return resStr;
   };
 
   return (

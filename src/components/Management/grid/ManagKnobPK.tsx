@@ -94,7 +94,6 @@ const ManagementKnobPK = (props: {
   const ButtonKnob = (val: number) => {
     let valumeKnob: string = "Авт";
     if (val !== 0) valumeKnob = val.toString();
-
     return (
       <Box sx={{ textAlign: "center" }}>
         <Button sx={styleBatMenu} onClick={() => setValue(val)}>
@@ -174,7 +173,6 @@ const ManagementKnobPK = (props: {
 
   const ButtonKnop = () => {
     let illum = open ? styleBatKnop01 : styleBatKnop02;
-
     return (
       <Button sx={illum} onClick={handleOpen}>
         <b>ПК</b>

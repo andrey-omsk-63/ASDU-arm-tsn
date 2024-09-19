@@ -98,10 +98,9 @@ const PointsMenuLevel1 = (props: {
 
     if (points) {
       if (isOpen && points.xctrls.length !== 0) {
-        for (let i = 0; i < points.xctrls.length; i++) {
+        for (let i = 0; i < points.xctrls.length; i++)
           if (points.xctrls[i].name.length > dlStrMenu)
             dlStrMenu = points.xctrls[i].name.length;
-        }
 
         const SpisPerekr = () => {
           let resStr = [];
@@ -168,7 +167,7 @@ const PointsMenuLevel1 = (props: {
         <Box>
           <TabContext value={valueLevel2}>
             <Box sx={{ marginLeft: 0.5 }}>
-              <Stack sx={{ marginLeft: 0.5, marginTop: 0 }} direction="row">
+              <Stack sx={{ marginLeft: 0.5 }} direction="row">
                 {ButtonMenu("1", "Основной:", SetValueLavel21)}
                 {MenuCrossRoad()}
               </Stack>

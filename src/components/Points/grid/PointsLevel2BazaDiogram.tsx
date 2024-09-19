@@ -29,7 +29,6 @@ const PointsLevel2BazaDiogram = (props: {
   crossroad: number;
   update: boolean;
 }) => {
-  //console.log("PointsLevel2BazaDiogram:", props.xtt, props.crossroad);
   const points = props.xctrll[props.xtt];
   const crRoad = props.crossroad;
   const namer = points.xctrls[props.crossroad].name;
@@ -100,104 +99,97 @@ const PointsLevel2BazaDiogram = (props: {
     pictinfo = false;
   }
 
-
   const [pictInfo, setPictInfo] = React.useState(pictinfo);
 
-  const PointsXt112Comp1Tab4 = (update: boolean) => {
-    let resSps = [];
+  const MakeMatrix = () => {
+    let ratio = 0;
+    let luchP = 1;
+    let luchO = 1;
+    let coler = "red";
+    let pStB = points.xctrls[crRoad].StrategyB;
 
-    const MakeMatrix = () => {
-      let ratio = 0;
-      let luchP = 1;
-      let luchO = 1;
-      let coler = "red";
-      let pStB = points.xctrls[crRoad].StrategyB;
+    const MakeMatrixColor = (num: number, i: number, j: number) => {
+      luchO = pStB[num].vleft * massRatio[num];
+      luchP = pStB[num].vright * massRatio[num];
+      ratio = pStB[num].xright / pStB[num].xleft;
+      coler = colorsGraf[pStB[num].pks];
+      if (i < j * luchO * ratio) coler = colorsGraf[pStB[num].pkl];
+      if (i >= j * luchP * ratio) coler = colorsGraf[pStB[num].pkr];
+    };
 
-      const MakeMatrixColor = (num: number, i: number, j: number) => {
-        luchO = pStB[num].vleft * massRatio[num];
-        luchP = pStB[num].vright * massRatio[num];
-        ratio = pStB[num].xright / pStB[num].xleft;
-        coler = colorsGraf[pStB[num].pks];
-        if (i < j * luchO * ratio) coler = colorsGraf[pStB[num].pkl];
-        if (i >= j * luchP * ratio) coler = colorsGraf[pStB[num].pkr];
-      };
-
-      for (let j = 0; j < vertical; j += scale) {
-        matrix[j] = [];
-        for (let i = 0; i < horizon; i += scale) {
-          if (dlMas >= 1 && pStB[0].xright >= i && pStB[0].xleft >= j) {
-            MakeMatrixColor(0, i, j);
+    for (let j = 0; j < vertical; j += scale) {
+      matrix[j] = [];
+      for (let i = 0; i < horizon; i += scale) {
+        if (dlMas >= 1 && pStB[0].xright >= i && pStB[0].xleft >= j) {
+          MakeMatrixColor(0, i, j);
+        } else {
+          if (dlMas >= 2 && pStB[1].xright >= i && pStB[1].xleft >= j) {
+            MakeMatrixColor(1, i, j);
           } else {
-            if (dlMas >= 2 && pStB[1].xright >= i && pStB[1].xleft >= j) {
-              MakeMatrixColor(1, i, j);
+            if (dlMas >= 3 && pStB[2].xright >= i && pStB[2].xleft >= j) {
+              MakeMatrixColor(2, i, j);
             } else {
-              if (dlMas >= 3 && pStB[2].xright >= i && pStB[2].xleft >= j) {
-                MakeMatrixColor(2, i, j);
+              if (dlMas >= 4 && pStB[3].xright >= i && pStB[3].xleft >= j) {
+                MakeMatrixColor(3, i, j);
               } else {
-                if (dlMas >= 4 && pStB[3].xright >= i && pStB[3].xleft >= j) {
-                  MakeMatrixColor(3, i, j);
+                if (dlMas >= 5 && pStB[4].xright >= i && pStB[4].xleft >= j) {
+                  MakeMatrixColor(4, i, j);
                 } else {
-                  if (dlMas >= 5 && pStB[4].xright >= i && pStB[4].xleft >= j) {
-                    MakeMatrixColor(4, i, j);
-                  } else {
-                    if (
-                      dlMas >= 6 &&
-                      pStB[5].xright >= i &&
-                      pStB[5].xleft >= j
-                    ) {
-                      MakeMatrixColor(5, i, j);
-                    }
-                  }
+                  if (dlMas >= 6 && pStB[5].xright >= i && pStB[5].xleft >= j)
+                    MakeMatrixColor(5, i, j);
                 }
               }
             }
           }
-          if (i > horizonLimit || j > verticalLimit) coler = "#F1F5FB"; // светло серый
-          matrix[j].push(coler);
         }
+        if (i > horizonLimit || j > verticalLimit) coler = "#F1F5FB"; // светло серый
+        matrix[j].push(coler);
       }
-      matrix = matrix.filter(function (el) {
-        return el != null; //избавляемся от пустых значений
-      });
-      matrix.reverse(); //переворачиваем матрицу
-    };
+    }
+    matrix = matrix.filter(function (el) {
+      return el != null; //избавляемся от пустых значений
+    });
+    matrix.reverse(); //переворачиваем матрицу
+  };
 
-    const PointsXt112Comp1Tab4Str = (j: number) => {
-      coler = "red";
-      colerOld = matrix[j / scale][0 / scale];
-      masStr = [];
-      masCol = [];
-      colBl = 0;
+  const PointsXt112Comp1Tab4Str = (j: number) => {
+    coler = "red";
+    colerOld = matrix[j / scale][0 / scale];
+    masStr = [];
+    masCol = [];
+    colBl = 0;
 
-      for (let i = 0; i < horizon; i += scale) {
-        coler = matrix[j / scale][i / scale];
-        if (coler === colerOld) {
-          colBl++;
-        } else {
-          masStr.push(colBl);
-          masCol.push(colerOld);
-          colBl = 1;
-          colerOld = coler;
-        }
+    for (let i = 0; i < horizon; i += scale) {
+      coler = matrix[j / scale][i / scale];
+      if (coler === colerOld) {
+        colBl++;
+      } else {
+        masStr.push(colBl);
+        masCol.push(colerOld);
+        colBl = 1;
+        colerOld = coler;
       }
-      masStr.push(colBl);
-      masCol.push(coler);
+    }
+    masStr.push(colBl);
+    masCol.push(coler);
 
-      return (
-        <>
-          {masStr.map((masstr: any, idx: number) => {
-            let xss = steepHorizon * scale * masstr;
-            const stylePict = {
-              backgroundColor: masCol[idx],
-              height: String(steepVertical * scale) + "vh",
-            };
-            return <Grid key={idx} xs={xss} item sx={stylePict}></Grid>;
-          })}
-        </>
-      );
-    };
+    return (
+      <>
+        {masStr.map((masstr: any, idx: number) => {
+          let xss = steepHorizon * scale * masstr;
+          const stylePict = {
+            backgroundColor: masCol[idx],
+            height: String(steepVertical * scale) + "vh",
+          };
+          return <Grid key={idx} xs={xss} item sx={stylePict}></Grid>;
+        })}
+      </>
+    );
+  };
 
+  const PointsXt112Comp1Tab4 = (update: boolean) => {
     MakeMatrix();
+    let resSps = [];
 
     for (let j = 0; j < vertical; j += scale) {
       resSps.push(
