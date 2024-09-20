@@ -74,9 +74,8 @@ const StatisticsArchive = (props: {
     pointsEtalon = points;
     flagEtalon = false;
     massInterval = [];
-    for (let i = 0; i < points.length; i++) {
+    for (let i = 0; i < points.length; i++)
       massInterval.push(points[i].Statistics[0].TLen);
-    }
     points = [];
     tekValue = 0;
 
@@ -201,4 +200,3 @@ const StatisticsArchive = (props: {
 };
 
 export default StatisticsArchive;
-

@@ -22,8 +22,7 @@ const ButtonMenu = (props: {
     maxWidth: dlSoob,
     height: "22px",
     bgcolor: "#BAE186", // тёмно-салатовый
-    border: "1px solid #000",
-    borderColor: "#93D145", // ярко-салатовый
+    border: "1px solid #93D145", // ярко-салатовый
     borderRadius: 1,
     color: "black",
     textTransform: "unset !important",
@@ -40,8 +39,7 @@ const ButtonMenu = (props: {
     maxHeight: "21px",
     padding: "2px 0px 0px 0px",
     bgcolor: "#E6F5D6", // светло-салатовый
-    border: "1px solid #000",
-    borderColor: "#d4d4d4", // серый
+    border: "1px solid #d4d4d4", // серый
     borderRadius: 1,
     color: "black",
     textTransform: "unset !important",

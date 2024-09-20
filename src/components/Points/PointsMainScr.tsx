@@ -41,7 +41,6 @@ const PointsMainScr = (props: {
     const { statsaveReducer } = state;
     return statsaveReducer.datestat;
   });
-  //console.log("maskpoint_PointsMainScr:", maskpoint);
   const dispatch = useDispatch();
   //========================================================
   const xtProps = props.xtt;

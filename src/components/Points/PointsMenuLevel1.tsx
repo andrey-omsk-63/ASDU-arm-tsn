@@ -38,7 +38,6 @@ const PointsMenuLevel1 = (props: {
     const { maskpointReducer } = state;
     return maskpointReducer.maskpoint;
   });
-  //console.log("maskpoint_Level1:", maskpoint);
   let datestat = useSelector((state: any) => {
     const { statsaveReducer } = state;
     return statsaveReducer.datestat;

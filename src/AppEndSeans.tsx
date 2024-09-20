@@ -29,8 +29,7 @@ const EndSeans = (props: { bsLogin: string; setOpen: any }) => {
     maxHeight: "20px",
     minHeight: "20px",
     bgcolor: "#E6F5D6", // светло-салатовый
-    border: "1px solid #000",
-    borderColor: "#d4d4d4", // серый
+    border: "1px solid #d4d4d4", // серый
     borderRadius: 1,
     boxShadow: 6,
     color: "red",

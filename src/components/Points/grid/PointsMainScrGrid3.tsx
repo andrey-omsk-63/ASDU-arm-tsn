@@ -54,11 +54,7 @@ const PointsMainScrGrid3 = (props: {
   } else {
     if (!maskpoint.redaxPoint && flagEdit) {
       flagEdit = false; // Start
-    } else {
-      if (maskpoint.redaxPoint && !flagEdit) {
-        flagEdit = true; // Stop
-      }
-    }
+    } else if (maskpoint.redaxPoint && !flagEdit) flagEdit = true; // Stop
   }
 
   const HeaderMainScrGrid3 = () => {
@@ -185,12 +181,11 @@ const PointsMainScrGrid3 = (props: {
         return (
           <Grid key={idx} container item xs={12} sx={{ fontSize: 14 }}>
             <Grid xs={1.5} item sx={styleXTG03}>
-              {!flagEdit && (
+              {!flagEdit ? (
                 <Button sx={illum} onClick={() => SetOpenSetStr(idx)}>
                   {idx + 1}
                 </Button>
-              )}
-              {flagEdit && (
+              ) : (
                 <Box sx={{ p: 0.2 }}>
                   <Box sx={styleXTG101}>{idx + 1}</Box>
                 </Box>
