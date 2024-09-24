@@ -320,12 +320,13 @@ export const styleSetInff = {
   left: "50%",
   top: "36%",
   transform: "translate(-50%, -50%)",
-  width: 380,
+  width: 390,
   bgcolor: "background.paper",
   border: "1px solid #FFFFFF",
   borderRadius: 1,
   boxShadow: 24,
-  p: 1.5,
+  //p: 1.5,
+  padding: "20px 15px 15px 15px",
 };
 
 export const styleInpName = {
@@ -445,6 +446,8 @@ export const styleBoxForm = {
     marginTop: "0px",
     marginLeft: "-0px",
     width: "63px",
+    maxHeight: "21px",
+    minHeight: "21px",
   },
 };
 //====== PointsMainScrGrid1 =====================================================

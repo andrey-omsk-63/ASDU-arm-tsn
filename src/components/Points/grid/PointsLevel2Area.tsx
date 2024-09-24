@@ -8,11 +8,10 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
 
 import PointsLevel2AreaDiogram from "./PointsLevel2AreaDiogram";
 
-import { BadInput } from "../../../AppServiceFunctions";
+import { BadInput, Inputer } from "../../../AppServiceFunctions";
 
 import { styleSetInf, styleModalEnd, styleXTGHeader } from "./PointsGridStyle";
 import { styleInpArg, styleInpKnop, styleBut021 } from "./PointsGridStyle";
@@ -97,39 +96,6 @@ const PointsLevel2Area = (props: {
     }
   }
 
-  const handleKey = (event: any) => {
-    if (event.key === "Enter") event.preventDefault();
-  };
-
-  const Inputer = (
-    name: string,
-    argum: any,
-    hChange: any,
-    hBlur: any,
-    styleX: any
-  ) => {
-    return (
-      <Grid container sx={{ fontSize: 15 }}>
-        <Grid item xs={5} sx={{ marginTop: 1 }}>
-          {name}
-        </Grid>
-        <Grid item xs sx={{ marginTop: 0 }}>
-          <Box sx={styleX}>
-            <TextField
-              size="small"
-              onKeyPress={handleKey} //отключение Enter
-              InputProps={{ disableUnderline: true, style: { fontSize: 14 } }}
-              value={argum}
-              onChange={hChange}
-              onBlur={hBlur}
-              variant="standard"
-            />
-          </Box>
-        </Grid>
-      </Grid>
-    );
-  };
-
   const SetStr = (props: { nom: number }) => {
     let StrA = maskpoint.pointForRedax.xctrls[crossRoad].StrategyA;
     let elem = StrA[props.nom];
@@ -142,9 +108,7 @@ const PointsLevel2Area = (props: {
     const [valuen3, setValuen3] = React.useState(elem.desc);
     const [badInput, setBadInput] = React.useState(false);
 
-    const handleClose = () => {
-      setOpenSetStr(false);
-    };
+    const handleClose = () => setOpenSetStr(false);
 
     const handleCloseEnd = (event: any, reason: string) => {
       if (reason === "escapeKeyDown") handleClose();
@@ -223,8 +187,10 @@ const PointsLevel2Area = (props: {
               <b>&#10006;</b>
             </Button>
             <Typography sx={{ color: "#5B1080", textAlign: "center" }}>
-              КС <b> &nbsp;{elem.pk} </b>
-            </Typography>{" "}
+              <em>
+                КС <b> &nbsp;{elem.pk} </b>
+              </em>
+            </Typography>
             <br />
             {Inputer("Прямой", valuen1, handleChange1, hBlur1, styleInpArg)}
             {Inputer("Обратный", valuen2, handleChange2, hBlur2, styleInpArg)}

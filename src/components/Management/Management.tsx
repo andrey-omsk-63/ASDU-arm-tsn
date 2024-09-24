@@ -86,13 +86,11 @@ const Management = (props: {
         pointsAdd.push(points[i]);
       }
     }
-    if (pointsAdd.length > 0) {
-      for (let i = 0; i < pointsAdd.length; i++) {
+    if (pointsAdd.length > 0)
+      for (let i = 0; i < pointsAdd.length; i++)
         pointsEtalon.push(pointsAdd[i]);
-      }
-    } 
     //else console.log("OБНОВИЛСЯ эталон Device");
-    
+
     // разноска обновлений Xctrl
     // let pointsAddd = [];
     // newRecord = true;

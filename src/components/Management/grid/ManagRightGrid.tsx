@@ -40,9 +40,8 @@ const ManagementRightGrid = (props: {
   const massClinch = [16, 17, 18, 38, 39];
 
   const SearchInMassKnob = (cmd: number) => {
-    for (let i = 0; i < massknob.length; i++) {
+    for (let i = 0; i < massknob.length; i++)
       if (massknob[i].cmd === cmd) return massknob[i].param;
-    }
     return -1;
   };
 
@@ -117,9 +116,8 @@ const ManagementRightGrid = (props: {
           if (
             parseInt(points[i].area.num) === props.masxt[k].areaXT &&
             points[i].subarea === props.masxt[k].subareaXT
-          ) {
+          )
             mass[j].releaseXT = true;
-          }
         }
       }
     }
@@ -248,9 +246,8 @@ const ManagementRightGrid = (props: {
         if (soobBP === "Назначен") soobBP += " ВР";
         if (mass[i].isXT) {
           soobXT += "назначен";
-        } else {
-          soobXT += "отсутствует";
-        }
+        } else soobXT += "отсутствует";
+        
         resStr.push(
           <Grid item key={i} container>
             {StrokaGridInfo(0.3, styleMRG02Center, String(i + 1))}
@@ -322,12 +319,9 @@ const ManagementRightGrid = (props: {
           soobXT = soobXT + "назначен/";
           if (mass[i].releaseXT) {
             soobXT += "включён";
-          } else {
-            soobXT += "выключен";
-          }
-        } else {
-          soobXT += "отсутствует";
-        }
+          } else soobXT += "выключен";
+        } else soobXT += "отсутствует";
+
         resStr.push(
           <Grid item key={i} container>
             {StrokaGridInfo(0.3, styleMRG02Center, String(i + 1))}
@@ -603,9 +597,8 @@ const ManagementRightGrid = (props: {
                 if (
                   parseInt(points[0].area.num) === props.masxt[j].areaXT &&
                   points[0].subarea === props.masxt[j].subareaXT
-                ) {
+                )
                   if (props.masxt[j].pknowXT > 0) podchGl++;
-                }
               }
               break;
             case 9:

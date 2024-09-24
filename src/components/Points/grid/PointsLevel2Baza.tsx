@@ -57,13 +57,11 @@ const PointsLevel2Baza = (props: {
   setPoint: any;
   update: boolean;
 }) => {
-  //console.log("PointsLevel2Baza: пришло", props.update);
   //== Piece of Redux =======================================
   let maskpoint = useSelector((state: any) => {
     const { maskpointReducer } = state;
     return maskpointReducer.maskpoint;
   });
-  //console.log("maskpoint_Baza:", maskpoint);
   const dispatch = useDispatch();
   //===========================================================
   const xtProps = props.xtt;
@@ -251,13 +249,10 @@ const PointsLevel2Baza = (props: {
       dispatch(maskpointCreate(maskpoint));
     };
 
-    const handleCloseEnd = () => {
-      setOpenSetName(false);
-    };
+    const handleCloseEnd = () => setOpenSetName(false);
 
-    const handleCloseClinch = (event: any, reason: string) => {
+    const handleCloseClinch = (event: any, reason: string) =>
       reason === "escapeKeyDown" && handleCloseEnd();
-    };
 
     const InputerMode = () => {
       const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -287,7 +282,10 @@ const PointsLevel2Baza = (props: {
             onKeyPress={handleKey} //отключение Enter
             value={currency}
             onChange={handleChange}
-            InputProps={{ disableUnderline: true, style: { fontSize: 14 } }}
+            InputProps={{
+              disableUnderline: true,
+              style: { padding: "1px 0px 0px 2px", fontSize: 14 },
+            }}
             variant="standard"
             color="secondary"
           >
@@ -503,7 +501,9 @@ const PointsLevel2Baza = (props: {
               <b>&#10006;</b>
             </Button>
             <Typography sx={{ color: "#5B1080", textAlign: "center" }}>
-              Номер записи <b> {props.nom} </b>
+              <em>
+                Номер записи <b> {props.nom + 1} </b>
+              </em>
             </Typography>
             <br />
             {Inputer("Прямой", valuen1, handleChange1, hBlur1, styleInpArg)}

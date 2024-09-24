@@ -95,9 +95,7 @@ const Points = (props: {
       if (debug) {
         datestat.xttData = props.date;
         setCalculate(!calculate);
-      } else {
-        datestat.xttData = "sss";
-      }
+      } else datestat.xttData = "sss";
       datestat.xtt = tekValue;
       SendSocketOldDateXt(props.ws, props.date, pointsEtalon, tekValue);
       oldXt = tekValue;

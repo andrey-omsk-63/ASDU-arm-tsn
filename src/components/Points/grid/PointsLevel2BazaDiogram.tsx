@@ -271,9 +271,7 @@ const PointsLevel2BazaDiogram = (props: {
       setTimeout(() => {
         PuskBalloon();
       }, 10);
-    } else {
-      PuskBalloon();
-    }
+    } else PuskBalloon();
   };
 
   const OutputerPict = (update: boolean) => {
@@ -299,9 +297,7 @@ const PointsLevel2BazaDiogram = (props: {
     return resStrr;
   };
   //============ Dinama =====================================================
-  const handleClose = () => {
-    setOpenLoader(false);
-  };
+  const handleClose = () => setOpenLoader(false);
 
   const Output = () => {
     setTimeout(() => {

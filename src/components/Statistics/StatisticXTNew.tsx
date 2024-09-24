@@ -383,7 +383,6 @@ const StatisticXTNew = (props: {
           o: 0,
           g: 0,
         };
-        // maskMatrixDatas.ch = j + 1;
         datas.push(maskMatrixDatas);
       }
       maskMmatrix.Datas = datas;
@@ -451,9 +450,7 @@ const StatisticXTNew = (props: {
     }
   };
   //============ Dinama =====================================================
-  const handleClose = () => {
-    setOpenLoader(false);
-  };
+  const handleClose = () => setOpenLoader(false);
 
   const Output = () => {
     setTimeout(() => {

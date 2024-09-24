@@ -137,8 +137,6 @@ const ManagementLeftGrid = (props: {
     );
 
     const SpisSubAreaMLG = () => {
-      let resStr = [];
-
       const ButtonSubArea = (i: number) => {
         let illum =
           mode === 3 &&
@@ -157,17 +155,16 @@ const ManagementLeftGrid = (props: {
         );
       };
 
-      for (let i = 0; i < masSpis.length; i++) {
-        resStr.push(
-          <Grid container key={i}>
+      return masSpis.map((masspis: any, idx: number) => {
+        return (
+          <Grid container key={idx}>
             <Grid item xs={0.5} sx={styleMG03}></Grid>
             <Grid item xs sx={styleMG03}>
-              {ButtonSubArea(i)}
+              {ButtonSubArea(idx)}
             </Grid>
           </Grid>
         );
-      }
-      return resStr;
+      });
     };
 
     const ButtonArea = () => {
@@ -199,11 +196,9 @@ const ManagementLeftGrid = (props: {
 
   const SpisMLG = () => {
     const SpisAreaGlob = () => {
-      let resStr = [];
-      for (let i = 0; i < masAreaNum.length; i++) {
-        resStr.push(<SpisAreaMLG nom={masAreaNum[i]} key={Math.random()} />);
-      }
-      return resStr;
+      return masAreaNum.map((masAN: any, idx: number) => {
+        return <SpisAreaMLG nom={masAN} key={idx} />;
+      });
     };
 
     const ButtonRegion = () => {
@@ -243,9 +238,8 @@ const ManagementLeftGrid = (props: {
             massKnop[i].region === massKnop[j].region &&
             massKnop[i].area === massKnop[j].area &&
             massKnop[i].subarea === massKnop[j].subarea
-          ) {
+          )
             dubl = true;
-          }
         }
       }
       if (!dubl && massKnop[i].param !== 99) massTemp.push(massKnop[i]);
@@ -274,7 +268,6 @@ const ManagementLeftGrid = (props: {
       dataKnobTemp[0].region = dataKnob[0].region;
       dataKnobTemp[0].area = mass[i].areaNum;
       dataKnobTemp[0].subarea = mass[i].subarea;
-      //massKnopTemp[i] = dataKnobTemp[0];
       massKnopTemp.push(dataKnobTemp[0]);
       masAreaRab.push(mass[i].areaNum);
     }
@@ -309,9 +302,8 @@ const ManagementLeftGrid = (props: {
       if (
         massKnop[i].cmd === dataKnob[0].cmd &&
         massKnop[i].region === dataKnob[0].region
-      ) {
+      )
         massKnop[i].param = dataKnob[0].param;
-      }
     }
     DelateDublRecords(); //удаление дубликатов
   };
@@ -346,9 +338,8 @@ const ManagementLeftGrid = (props: {
           massKnop[i].cmd === dataKnob[0].cmd &&
           massKnop[i].region === dataKnob[0].region &&
           massKnop[i].area === dataKnob[0].area
-        ) {
+        )
           massKnop[i].param = dataKnob[0].param;
-        }
       }
       DelateDublRecords(); //удаление дубликатов
     }
@@ -381,9 +372,7 @@ const ManagementLeftGrid = (props: {
       }
       if (dataKnob[0].area === "0" && dataKnob[0].subarea === 0) {
         RecordInAria();
-      } else {
-        RecordInSubaria();
-      }
+      } else RecordInSubaria();
       // сортировка по cmd
       massKnop.sort((prev, next) => prev.cmd - next.cmd);
     }

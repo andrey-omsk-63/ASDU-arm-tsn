@@ -376,7 +376,7 @@ export const BoxTextField = (argum: any, hChange: any, hBlur: any) => {
       onKeyPress={handleKey} //отключение Enter
       InputProps={{ disableUnderline: true }}
       inputProps={{
-        style: { cursor: "pointer", paddingLeft: 2, fontSize: 14 },
+        style: { cursor: "pointer", padding: "2px 0px 0px 2px", fontSize: 14 },
       }}
       value={argum}
       onChange={hChange}

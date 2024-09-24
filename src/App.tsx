@@ -446,10 +446,7 @@ const App = () => {
       massDat.push(dat[key]);
     }
     for (let i = 0; i < massKey.length; i++)
-      currencies.push({
-        value: massKey[i],
-        label: massDat[i],
-      });
+      currencies.push({ value: massKey[i], label: massDat[i] });
     if (!interval) interval = 5;
     const [currency, setCurrency] = React.useState(
       massKey[massDat.indexOf(interval.toString())]

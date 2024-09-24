@@ -57,13 +57,9 @@ const ButtonMenu = (props: {
     color: "#797A7B", // тёмно-серый
   };
 
-  const TurnOnHint = () => {
-    props.soob === "⇩" && setHint(true);
-  };
+  const TurnOnHint = () => props.soob === "⇩" && setHint(true);
 
-  const TurnOffHint = () => {
-    props.soob === "⇩" && setHint(false);
-  };
+  const TurnOffHint = () => props.soob === "⇩" && setHint(false);
 
   let illum = props.mode === props.tekValue ? styleApp02 : styleApp021;
 

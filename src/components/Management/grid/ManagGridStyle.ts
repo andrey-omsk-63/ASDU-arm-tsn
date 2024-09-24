@@ -182,7 +182,7 @@ export const styleSoobPusto = {
 
 export const styleBatMenu = {
   fontSize: 12.9,
-  marginTop: 0.5,
+  marginTop: 0.75,
   color: "black",
   bgcolor: "#E6F5D6", // светло-салатовый
   border: "1px solid #000",

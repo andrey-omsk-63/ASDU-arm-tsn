@@ -456,9 +456,7 @@ const StatisticXTArchive = (props: {
     }
   };
   //============ Dinama =====================================================
-  const handleClose = () => {
-    setOpenLoader(false);
-  };
+  const handleClose = () => setOpenLoader(false);
 
   const Output = () => {
     setTimeout(() => {

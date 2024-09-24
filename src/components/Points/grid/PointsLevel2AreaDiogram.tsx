@@ -192,7 +192,7 @@ const PointsLevel2AreaDiogram = (props: {
     if (pointer !== null) {
       if (pointer[namer]) {
         let I = 0;
-        for (let i = 0; i < pointer[namer].length; i++) 
+        for (let i = 0; i < pointer[namer].length; i++)
           if (pointer[namer][i].Value[0] || pointer[namer][i].Value[1]) I = i;
         for (let i = 0; i < pointer[namer].length; i++) {
           let prpv = vertical / 100;
@@ -253,9 +253,7 @@ const PointsLevel2AreaDiogram = (props: {
     return resStr;
   };
   //============ Dinama =====================================================
-  const handleClose = () => {
-    setOpenLoader(false);
-  };
+  const handleClose = () => setOpenLoader(false);
 
   const Output = () => {
     setTimeout(() => {

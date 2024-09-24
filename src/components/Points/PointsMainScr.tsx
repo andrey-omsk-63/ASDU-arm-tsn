@@ -148,9 +148,7 @@ const PointsMainScr = (props: {
     StatusQuo();
   };
 
-  const SetTrigger = () => {
-    setTrigger(!trigger);
-  };
+  const SetTrigger = () => setTrigger(!trigger);
 
   return (
     <>
