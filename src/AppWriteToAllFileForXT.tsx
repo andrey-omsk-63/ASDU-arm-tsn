@@ -116,7 +116,7 @@ const AppWriteToAllFileForXT = (props: { setOpen: Function }) => {
       let imgProperties = pdf.getImageProperties(data);
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
-      pdf.addImage(data, "PNG", 0, 69, pdfWidth, pdfHeight + 33);
+      pdf.addImage(data, "PNG", 1, 69, pdfWidth - 5, pdfHeight + 33);
       pdf.save(nameFile + ".pdf");
     }
   };
@@ -127,11 +127,11 @@ const AppWriteToAllFileForXT = (props: { setOpen: Function }) => {
   };
 
   const handleClose = (mode: number) => {
+    handleCloseSet();
     if (mode) {
+      handleDownloadPdf();
       handleDownloadTxt();
     } else handleDownloadCsv();
-    handleDownloadPdf();
-    handleCloseSet();
   };
 
   return (

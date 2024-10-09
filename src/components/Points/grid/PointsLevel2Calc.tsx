@@ -148,7 +148,7 @@ const PointsLevel2Calc = (props: {
     data.datasets[1].data = datas;
 
     return (
-      <Grid container item>
+      <Grid container ref={printRef}>
         <Grid item xs sx={{ width: "99vh", height: "28vh" }}>
           <PointsGraf01 />
         </Grid>
@@ -288,7 +288,7 @@ const PointsLevel2Calc = (props: {
   const OutputGraf = () => {
     return (
       <Grid container>
-        <Grid ref={printRef} item xs sx={styleXTC03}>
+        <Grid item xs sx={styleXTC03}>
           {pointer !== null && (
             <>{pointer[namer].length !== 0 && <>{PointsGraf00()}</>}</>
           )}

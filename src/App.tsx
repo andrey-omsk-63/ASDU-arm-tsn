@@ -544,10 +544,7 @@ const App = () => {
   };
 
   const SetSaveXT = (mode: boolean) => {
-    if (saveXt !== mode) {
-      saveXt = mode;
-      setSaveXT(mode);
-    }
+    if (saveXt !== mode) setSaveXT((saveXt = mode));
   };
 
   const ContentContext = () => {
