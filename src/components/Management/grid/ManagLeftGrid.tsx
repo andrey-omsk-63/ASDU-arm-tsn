@@ -10,6 +10,8 @@ import ManagementKnobSK from "./ManagKnobSK";
 import ManagementKnobNK from "./ManagKnobNK";
 import ManagementKnobXT from "./ManagKnobXT";
 
+//import { WS } from "../../../App";
+
 import { Tflight } from "../../../interfaceMNG.d";
 import { XctrlInfo } from "../../../interfaceGl.d";
 
@@ -35,7 +37,7 @@ let massKnopTemp: Knob[] = [];
 
 const ManagementLeftGrid = (props: {
   open: boolean;
-  ws: WebSocket;
+  //ws: WebSocket;
   tflightt: Tflight[];
   xctrll: XctrlInfo[];
 }) => {
@@ -47,6 +49,7 @@ const ManagementLeftGrid = (props: {
   let reGion = "1";
   const [areaa, setAreaa] = React.useState("0");
   const [subArea, setSubArea] = React.useState(0);
+  const [trigger, setTrigger] = React.useState(false);
 
   const [dataKnob, setDataKnob] = React.useState<Array<Knob>>([
     {
@@ -57,6 +60,13 @@ const ManagementLeftGrid = (props: {
       subarea: 88,
     },
   ]);
+
+  const SetDataKnob = (knob: any) => {
+    console.log("SetDataKnob:", knob);
+
+    setDataKnob(knob);
+    setTrigger(!trigger);
+  };
 
   const massKnob: Knob[] = [
     {
@@ -352,17 +362,17 @@ const ManagementLeftGrid = (props: {
       for (let i = 0; i < massKnop.length; i++) {
         if (
           massKnop[i].cmd === dataKnob[0].cmd &&
-          massKnop[i].param === dataKnob[0].param &&
+          //massKnop[i].param === dataKnob[0].param &&   // исправление 20.11.24
           massKnop[i].region === dataKnob[0].region &&
           massKnop[i].area === dataKnob[0].area &&
           massKnop[i].subarea === dataKnob[0].subarea
         ) {
-          flagDubl = false; //console.log(i, 'Дубликат')
+          flagDubl = false; //console.log(i, "Дубликат");
           massKnop[i].param = dataKnob[0].param;
         }
       }
       if (flagDubl) {
-        //console.log('Запись');
+        //console.log("Запись");
         massKnob[0].cmd = dataKnob[0].cmd;
         massKnob[0].param = dataKnob[0].param;
         massKnob[0].region = dataKnob[0].region;
@@ -380,40 +390,39 @@ const ManagementLeftGrid = (props: {
 
   const FourKnops = () => {
     return (
-      <Grid item xs={12} sx={{ border: 0, height: "4vh", marginTop: "0.5vh" }}>
+      <Grid item xs={12} sx={{ height: "4vh", marginTop: "0.5vh" }}>
         <Stack direction="row">
           <ManagementKnobPK
             open={props.open}
-            ws={props.ws}
+            //ws={WS}
             region={reGion}
             areaa={areaa}
             subArea={subArea}
-            setDataKn={setDataKnob}
+            setDataKn={SetDataKnob}
           />
           <ManagementKnobSK
             open={props.open}
-            ws={props.ws}
+            //ws={WS}
             region={reGion}
             areaa={areaa}
             subArea={subArea}
-            setDataKn={setDataKnob}
+            setDataKn={SetDataKnob}
           />
           <ManagementKnobNK
             open={props.open}
-            ws={props.ws}
+            //ws={WS}
             region={reGion}
             areaa={areaa}
             subArea={subArea}
-            setDataKn={setDataKnob}
+            setDataKn={SetDataKnob}
           />
           <ManagementKnobXT
             open={props.open}
-            ws={props.ws}
+            //ws={WS}
             region={reGion}
             areaa={areaa}
             subArea={subArea}
-            setDataKn={setDataKnob}
-            //tflightt={points}
+            setDataKn={SetDataKnob}
             masxt={masXT}
           />
         </Stack>

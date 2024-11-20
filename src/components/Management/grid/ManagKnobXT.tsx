@@ -7,6 +7,8 @@ import Button from "@mui/material/Button";
 import ManagKnobError from "./ManagKnobError";
 import ManagKnobXTEmpty from "./ManagKnobXTEmpty";
 
+import { debug, WS } from "../../../App";
+
 import { styleSoobPusto, styleSoob, styleModalEnd } from "./ManagGridStyle";
 import { stylePKXt, styleBatMenuXt, styleMenuXt } from "./ManagGridStyle";
 import { styleBatKnop01, styleBatKnop02, styleXtSoob } from "./ManagGridStyle";
@@ -44,7 +46,7 @@ let switchXT = false;
 
 const ManagementKnobXT = (props: {
   open: boolean;
-  ws: WebSocket;
+  //ws: WebSocket;
   region: string;
   areaa: string;
   subArea: number;
@@ -61,9 +63,9 @@ const ManagementKnobXT = (props: {
   const handleOpen = () => {
     setOpen(true);
     const handleSendOpen = () => {
-      if (props.ws !== null) {
-        if (props.ws.readyState === WebSocket.OPEN) {
-          props.ws.send(
+      if (WS !== null) {
+        if (WS.readyState === WebSocket.OPEN) {
+          WS.send(
             JSON.stringify({ type: "stopDevices", region: props.region })
           );
           otpravka = true;
@@ -74,14 +76,14 @@ const ManagementKnobXT = (props: {
         }
       }
     };
-    handleSendOpen();
+    if (!debug) handleSendOpen();
   };
 
   const handleClose = () => {
     const handleSendOpen = () => {
-      if (props.ws !== null) {
-        if (props.ws.readyState === WebSocket.OPEN) {
-          props.ws.send(
+      if (WS !== null) {
+        if (WS.readyState === WebSocket.OPEN) {
+          WS.send(
             JSON.stringify({ type: "getDevices", region: props.region })
           );
         } else {
@@ -94,7 +96,7 @@ const ManagementKnobXT = (props: {
 
     setOpen(false);
     setValue(21);
-    handleSendOpen();
+    if (!debug) handleSendOpen();
     otpravka = true;
     soobDispatch = "";
     nomDispatch = "Вкл";
@@ -106,9 +108,9 @@ const ManagementKnobXT = (props: {
   const ButtonDo = () => {
     if (value !== 21 && otpravka) {
       const handleSendOpen = () => {
-        if (props.ws !== null) {
-          if (props.ws.readyState === WebSocket.OPEN) {
-            props.ws.send(
+        if (WS !== null) {
+          if (WS.readyState === WebSocket.OPEN) {
+            WS.send(
               JSON.stringify({
                 type: "dispatch",
                 data: {
@@ -122,7 +124,7 @@ const ManagementKnobXT = (props: {
             );
             if (!value) {
               // включение PK - авт
-              props.ws.send(
+              WS.send(
                 JSON.stringify({
                   type: "dispatch",
                   data: {
@@ -147,7 +149,15 @@ const ManagementKnobXT = (props: {
         }
       };
 
-      handleSendOpen();
+      if (!debug) {
+        handleSendOpen();
+      } else {
+        dataKnob[0].param = value;
+        dataKnob[0].region = props.region;
+        dataKnob[0].area = props.areaa;
+        dataKnob[0].subarea = props.subArea;
+      }
+
       soobDispatch = "Отправлено";
       if (value === 0) nomDispatch = "Отключить исполнение";
       if (value === 1) nomDispatch = "Включить исполнение";

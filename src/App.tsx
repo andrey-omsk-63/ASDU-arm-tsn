@@ -88,11 +88,12 @@ export let maskPoint: Pointer = {
   pointForRedax: [],
 };
 
-let flagOpenWS = true;
-let WS: any = null;
-let debug = false;
-let flagOpenDebug = true;
+export let debug = false; // режим отладки или демо
+export let WS: any = null; // WebSocket
 
+let flagOpenWS = true;
+
+let flagOpenDebug = true;
 let pointsEtalonXctrl: XctrlInfo[];
 let flagEtalonInf = true;
 
@@ -609,7 +610,7 @@ const App = () => {
                 {WS !== null && regionGlob !== 0 && (
                   <Management
                     open={isOpenDev}
-                    ws={WS}
+                    //ws={WS}
                     points={pointsTfl}
                     xctrll={pointsEtalonXctrl}
                     region={String(regionGlob)}

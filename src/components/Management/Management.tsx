@@ -4,6 +4,9 @@ import Grid from "@mui/material/Grid";
 
 import ManagementLeftGrid from "./grid/ManagLeftGrid";
 
+
+import { debug, WS } from "../../App";
+
 import { Tflight } from "../../interfaceMNG.d";
 import { XctrlInfo } from "../../interfaceGl.d";
 
@@ -13,7 +16,7 @@ let flagEtalon = true;
 
 const Management = (props: {
   open: boolean;
-  ws: WebSocket;
+  //ws: WebSocket;
   points: Tflight[];
   xctrll: XctrlInfo[];
   region: string;
@@ -37,15 +40,15 @@ const Management = (props: {
 
   React.useEffect(() => {
     const handleSendOpen = () => {
-      if (props.ws !== null) {
-        if (props.ws.readyState === WebSocket.OPEN) {
-          props.ws.send(
+      if (WS !== null) {
+        if (WS.readyState === WebSocket.OPEN) {
+          WS.send(
             JSON.stringify({ type: "stopStatistics", region: reGion })
           );
-          props.ws.send(
+          WS.send(
             JSON.stringify({ type: "stopOldStatistics", region: reGion })
           );
-          props.ws.send(JSON.stringify({ type: "getDevices", region: reGion }));
+          WS.send(JSON.stringify({ type: "getDevices", region: reGion }));
         } else {
           setTimeout(() => {
             handleSendOpen();
@@ -53,8 +56,8 @@ const Management = (props: {
         }
       }
     };
-    handleSendOpen();
-  }, [props.ws, reGion]);
+    if (!debug) handleSendOpen();
+  }, [reGion]);
 
   if (isOpen && flagEtalon) {
     if (points.length) {
@@ -125,7 +128,7 @@ const Management = (props: {
           <>
             <ManagementLeftGrid
               open={isOpen}
-              ws={props.ws}
+              //ws={WS}
               tflightt={pointsEtalon}
               xctrll={pointsXctrlEtalon}
             />

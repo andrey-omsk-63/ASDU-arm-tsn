@@ -29,6 +29,8 @@ const ManagementRightGrid = (props: {
   masxt: any;
   masknob: Knob[];
 }) => {
+  //console.log('props.masknob',props.masknob)
+
   let points = props.tflightt;
   let masSpis = [];
   let mass: any = [];
@@ -40,6 +42,8 @@ const ManagementRightGrid = (props: {
   const massClinch = [16, 17, 18, 38, 39];
 
   const SearchInMassKnob = (cmd: number) => {
+    //console.log("SearchInMassKnob:", cmd, massknob);
+
     for (let i = 0; i < massknob.length; i++)
       if (massknob[i].cmd === cmd) return massknob[i].param;
     return -1;
@@ -54,11 +58,13 @@ const ManagementRightGrid = (props: {
       switch (points[i].techMode) {
         case 2:
           if (
+            // =========================================== нужна ли проверка? =================
             !points[i].StatusCommandDU.isCK && // назначен ВР
             !points[i].StatusCommandDU.IsPK &&
             !points[i].StatusCommandDU.IsNK
           ) {
             if (
+              // =========================================== нужна ли проверка? =================
               SearchInMassKnob(5) <= 0 &&
               SearchInMassKnob(6) <= 0 && // не было ручного упр-я
               SearchInMassKnob(7) <= 0
@@ -247,7 +253,7 @@ const ManagementRightGrid = (props: {
         if (mass[i].isXT) {
           soobXT += "назначен";
         } else soobXT += "отсутствует";
-        
+
         resStr.push(
           <Grid item key={i} container>
             {StrokaGridInfo(0.3, styleMRG02Center, String(i + 1))}
@@ -576,6 +582,9 @@ const ManagementRightGrid = (props: {
         if (!massClinch.includes(points[i].tlsost.num)) {
           sostGl++;
           let podchGlOld = podchGl;
+
+          /////////////////////////////////console.log("1@@@:", i, podchGl, points[i].techMode, points[i]);
+
           switch (points[i].techMode) {
             case 2: // назначен ВР
               if (
@@ -590,6 +599,8 @@ const ManagementRightGrid = (props: {
                 ) {
                   podchGl++;
                 }
+
+                //console.log("2@@@: зашёл", podchGl, massknob);
               }
               break;
             case 5:
