@@ -39,7 +39,6 @@ let dataKnob: Knob[] = [
 
 const ManagementKnobSK = (props: {
   open: boolean;
-  //ws: WebSocket;
   region: string;
   areaa: string;
   subArea: number;

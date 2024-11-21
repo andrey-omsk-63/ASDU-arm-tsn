@@ -170,14 +170,15 @@ export const styleModalEnd = {
 
 export const styleSoob = {
   fontSize: 11,
-  backgroundColor: "#F1F3F4",
-  color: "#5B1080",
+  backgroundColor: "#F1F3F4", // светло-серый
+  color: "#5B1080", // светло-серый
   textAlign: "center",
 };
 
 export const styleSoobPusto = {
-  backgroundColor: "#F1F3F4",
-  color: "#F1F3F4",
+  backgroundColor: "#F1F3F4", // светло-серый
+  color: "#F1F3F4", // сиреневый
+  //border: "1px solid #000",
 };
 
 export const styleBatMenu = {

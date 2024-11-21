@@ -351,6 +351,7 @@ const StatisticXTNew = (props: {
     const kolDatas = colChanel;
     let rows = 1440 / step;
     let time = 0;
+    //let time = -step;
     matrix = [];
     MATRIX = [];
     for (let i = 0; i < rows; i++) {

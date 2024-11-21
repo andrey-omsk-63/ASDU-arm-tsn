@@ -39,7 +39,6 @@ let dataKnob: Knob[] = [
 
 const ManagementKnobPK = (props: {
   open: boolean;
-  //ws: WebSocket;
   region: string;
   areaa: string;
   subArea: number;
@@ -75,9 +74,7 @@ const ManagementKnobPK = (props: {
     const handleSendOpen = () => {
       if (WS !== null) {
         if (WS.readyState === WebSocket.OPEN) {
-          WS.send(
-            JSON.stringify({ type: "getDevices", region: props.region })
-          );
+          WS.send(JSON.stringify({ type: "getDevices", region: props.region }));
           otpravka = true;
           soobDispatch = "";
           nomDispatch = "Авт";
@@ -89,9 +86,6 @@ const ManagementKnobPK = (props: {
       }
     };
     if (!debug) handleSendOpen();
-
-    //console.log("Выход из ПК:", dataKnob[0].param, dataKnob);
-
     props.setDataKn(dataKnob);
     setBeginWork(true);
   };
@@ -158,8 +152,6 @@ const ManagementKnobPK = (props: {
         dataKnob[0].area = props.areaa;
         dataKnob[0].subarea = props.subArea;
       }
-
-      //console.log("ButtonDo:", value, dataKnob[0].param);
 
       soobDispatch = "Отправлено";
       if (value !== 0) {

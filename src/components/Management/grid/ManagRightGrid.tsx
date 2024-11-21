@@ -596,11 +596,8 @@ const ManagementRightGrid = (props: {
                   SearchInMassKnob(5) <= 0 &&
                   SearchInMassKnob(6) <= 0 && // не было ручного упр-я
                   SearchInMassKnob(7) <= 0
-                ) {
+                )
                   podchGl++;
-                }
-
-                //console.log("2@@@: зашёл", podchGl, massknob);
               }
               break;
             case 5:

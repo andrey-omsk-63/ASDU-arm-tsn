@@ -37,7 +37,6 @@ let massKnopTemp: Knob[] = [];
 
 const ManagementLeftGrid = (props: {
   open: boolean;
-  //ws: WebSocket;
   tflightt: Tflight[];
   xctrll: XctrlInfo[];
 }) => {
@@ -62,8 +61,8 @@ const ManagementLeftGrid = (props: {
   ]);
 
   const SetDataKnob = (knob: any) => {
-    console.log("SetDataKnob:", knob);
-
+    console.log("SetDataKnob:", knob[0].cmd, knob);
+    
     setDataKnob(knob);
     setTrigger(!trigger);
   };
@@ -394,7 +393,6 @@ const ManagementLeftGrid = (props: {
         <Stack direction="row">
           <ManagementKnobPK
             open={props.open}
-            //ws={WS}
             region={reGion}
             areaa={areaa}
             subArea={subArea}
@@ -402,7 +400,6 @@ const ManagementLeftGrid = (props: {
           />
           <ManagementKnobSK
             open={props.open}
-            //ws={WS}
             region={reGion}
             areaa={areaa}
             subArea={subArea}
@@ -410,7 +407,6 @@ const ManagementLeftGrid = (props: {
           />
           <ManagementKnobNK
             open={props.open}
-            //ws={WS}
             region={reGion}
             areaa={areaa}
             subArea={subArea}
@@ -418,7 +414,6 @@ const ManagementLeftGrid = (props: {
           />
           <ManagementKnobXT
             open={props.open}
-            //ws={WS}
             region={reGion}
             areaa={areaa}
             subArea={subArea}
@@ -433,11 +428,11 @@ const ManagementLeftGrid = (props: {
   return (
     <Grid container>
       <Grid item xs={2.5} sx={styleMG01}>
-        <Box sx={{ border: 0, overflowX: "auto", height: "94.5vh" }}>
+        <Box sx={{ overflowX: "auto", height: "94.5vh" }}>
           {props.open && <SpisMLG />}
         </Box>
       </Grid>
-      <Grid item xs sx={{ border: 0, height: "94.5vh", marginTop: "0.5vh" }}>
+      <Grid item xs sx={{ height: "94.5vh", marginTop: "0.5vh" }}>
         <Grid container>
           <FourKnops />
           {CheckFourKnops()}

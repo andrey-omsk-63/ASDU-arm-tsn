@@ -46,7 +46,6 @@ let switchXT = false;
 
 const ManagementKnobXT = (props: {
   open: boolean;
-  //ws: WebSocket;
   region: string;
   areaa: string;
   subArea: number;
@@ -83,9 +82,7 @@ const ManagementKnobXT = (props: {
     const handleSendOpen = () => {
       if (WS !== null) {
         if (WS.readyState === WebSocket.OPEN) {
-          WS.send(
-            JSON.stringify({ type: "getDevices", region: props.region })
-          );
+          WS.send(JSON.stringify({ type: "getDevices", region: props.region }));
         } else {
           setTimeout(() => {
             handleSendOpen();
@@ -269,10 +266,9 @@ const ManagementKnobXT = (props: {
       {ButtonKnop()}
       <Modal open={open} hideBackdrop={false}>
         <>
-          {openEmpty && (
+          {openEmpty ? (
             <ManagKnobXTEmpty soob={soobEmpty} setOpen={SetOpenEmpty} />
-          )}
-          {!openEmpty && (
+          ) : (
             <Box sx={stylePKXt}>
               <Button sx={styleModalEnd} onClick={handleClose}>
                 <b>&#10006;</b>
