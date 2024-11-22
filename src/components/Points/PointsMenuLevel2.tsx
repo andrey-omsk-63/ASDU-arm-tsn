@@ -11,6 +11,8 @@ import PointsLevel2Calc from "./grid/PointsLevel2Calc";
 
 import { MakeDate } from "../../AppServiceFunctions";
 
+//import { WS } from "../../App";
+
 import { styleXTl201 } from "./grid/PointsGridStyle";
 import { stylePLevel06, stylePLevel07 } from "./grid/PointsGridStyle";
 
@@ -19,7 +21,7 @@ import { XctrlInfo } from "../../interfaceGl.d";
 // Диспеспетчер меню второго уровня (вертикального)
 const PointsMenuLevel2 = (props: {
   open: boolean;
-  ws: WebSocket;
+  //ws: WebSocket;
   xctrll: XctrlInfo[];
   xtt: number;
   crossroad: number;
@@ -84,7 +86,7 @@ const PointsMenuLevel2 = (props: {
             {value === "1" && datestat.xttData === MakeDate(new Date()) && (
               <PointsLevel2Baza
                 open={props.open}
-                ws={props.ws}
+                //ws={WS}
                 xctrll={props.xctrll}
                 xtt={xtProps}
                 crossroad={props.crossroad}
@@ -95,7 +97,7 @@ const PointsMenuLevel2 = (props: {
             {value === "2" && datestat.xttData === MakeDate(new Date()) && (
               <PointsLevel2Area
                 open={props.open}
-                ws={props.ws}
+                //ws={WS}
                 xctrll={props.xctrll}
                 xtt={xtProps}
                 crossroad={props.crossroad}
@@ -106,7 +108,7 @@ const PointsMenuLevel2 = (props: {
             {value === "3" && (
               <PointsLevel2Calc
                 open={props.open}
-                ws={props.ws}
+                //ws={WS}
                 xctrll={props.xctrll}
                 xtt={xtProps}
                 crossroad={props.crossroad}

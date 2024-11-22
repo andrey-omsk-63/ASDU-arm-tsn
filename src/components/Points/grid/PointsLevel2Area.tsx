@@ -13,6 +13,8 @@ import PointsLevel2AreaDiogram from "./PointsLevel2AreaDiogram";
 
 import { BadInput, Inputer } from "../../../AppServiceFunctions";
 
+import { WS } from "../../../App";
+
 import { styleSetInf, styleModalEnd, styleXTGHeader } from "./PointsGridStyle";
 import { styleInpArg, styleInpKnop, styleBut021 } from "./PointsGridStyle";
 import { styleXTG05, styleBut02, styleBut03 } from "./PointsGridStyle";
@@ -39,7 +41,7 @@ let HAVE = 0;
 
 const PointsLevel2Area = (props: {
   open: boolean;
-  ws: WebSocket;
+  //ws: WebSocket;
   xctrll: XctrlInfo[];
   xtt: number;
   crossroad: number;
@@ -296,9 +298,9 @@ const PointsLevel2Area = (props: {
 
   const SaveEdit = (mode: number) => {
     const handleSend = () => {
-      if (props.ws !== null) {
-        if (props.ws.readyState === WebSocket.OPEN) {
-          props.ws.send(
+      if (WS !== null) {
+        if (WS.readyState === WebSocket.OPEN) {
+          WS.send(
             JSON.stringify({
               type: "changeXctrl",
               data: maskpoint.pointForRedax,

@@ -19,6 +19,8 @@ import { SendHandleSend, ConclHeader } from "../../../AppServiceFunctions";
 import { InputTimeAndMode, SaveFunc } from "../../../AppServiceFunctions";
 import { Grider, BadInput, handleKey } from "../../../AppServiceFunctions";
 
+import { WS } from "../../../App";
+
 import { styleXTG00, styleXTG01, styleXTG011 } from "./PointsGridStyle";
 import { styleXTG021, styleXTG02, styleXTG03 } from "./PointsGridStyle";
 import { styleXTG04, styleBoxForm, styleBut021 } from "./PointsGridStyle";
@@ -50,7 +52,7 @@ let HAVE = 0;
 
 const PointsLevel2Baza = (props: {
   open: boolean;
-  ws: WebSocket;
+  //ws: WebSocket;
   xctrll: XctrlInfo[];
   xtt: number;
   crossroad: number;
@@ -689,7 +691,7 @@ const PointsLevel2Baza = (props: {
   };
 
   const SaveEdit = () => {
-    SendHandleSend(props.ws, maskpoint.pointForRedax); // прокидываем изменения на сервер
+    SendHandleSend( WS, maskpoint.pointForRedax); // прокидываем изменения на сервер
     props.setPoint(maskpoint.pointForRedax); // прокидываем изменения в App
     flagExit = false;
     flagEdit = true;

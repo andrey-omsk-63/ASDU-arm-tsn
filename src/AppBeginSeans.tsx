@@ -7,6 +7,8 @@ import Modal from "@mui/material/Modal";
 import { MenuSpisRegion } from "./AppServiceFunctions";
 import { SendSocketgetStatisticsList } from "./AppServiceFunctions";
 
+import { debug, WS } from "./App";
+
 let massRegion: Array<number> = [];
 let massNameRegion: Array<string> = [];
 let regionGlob = 0;
@@ -14,21 +16,16 @@ let pointsReg: any = null;
 let dlStrMenu = 0;
 
 const BeginSeans = (props: {
-  ws: WebSocket;
+  //ws: WebSocket;
   pointsReg: any;
   SetRegion: Function;
 }) => {
+  console.log("BeginSeans:", props.pointsReg);
   const [open, setOpen] = React.useState(true);
 
-  let debug = false;
-  if (props.ws.url === "wss://localhost:3000/W") debug = true;
+  // let debug = false;
+  // if (props.ws.url === "wss://localhost:3000/W") debug = true;
   if (!pointsReg) pointsReg = props.pointsReg;
-
-  const handleCloseModal = (numer: number) => {
-    SendSocketgetStatisticsList(debug, props.ws, numer.toString());
-    props.SetRegion(numer);
-    setOpen(false);
-  };
 
   if (regionGlob === 0) {
     for (let key in pointsReg) {
@@ -43,8 +40,18 @@ const BeginSeans = (props: {
     dlStrMenu = (dlStrMenu + 8) * 10;
   }
 
+  const handleCloseModal = (numer: number) => {
+    SendSocketgetStatisticsList(debug, WS, numer.toString());
+    props.SetRegion(numer);
+    setOpen(false);
+  };
+
+  const CloseEnd = (event: any, reason: string) => {
+    if (reason === "escapeKeyDown") window.close(); // нажали Esc
+  };
+
   const OneRegin = () => {
-    SendSocketgetStatisticsList(debug, props.ws, massRegion[0].toString());
+    SendSocketgetStatisticsList(debug, WS, massRegion[0].toString());
     props.SetRegion(massRegion[0]);
   };
 
@@ -83,7 +90,7 @@ const BeginSeans = (props: {
   return (
     <>
       {massRegion.length > 1 && (
-        <Modal open={open}>
+        <Modal open={open} onClose={CloseEnd}>
           <Box sx={styleModal}>
             <Stack direction="column">
               <Box sx={{ textAlign: "center" }}>Выбор региона:</Box>

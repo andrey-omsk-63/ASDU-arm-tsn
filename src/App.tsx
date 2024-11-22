@@ -598,7 +598,7 @@ const App = () => {
         <EndSeans bsLogin={bsLogin} setOpen={setOpenSetErrLog} />
       )}
       {regionGlob === 0 && isOpenInf && (
-        <BeginSeans ws={WS} pointsReg={pointsReg} SetRegion={setRegionGlob} />
+        <BeginSeans pointsReg={pointsReg} SetRegion={setRegionGlob} />
       )}
       {!openSetErrLog && (
         <>
@@ -610,7 +610,6 @@ const App = () => {
                 {WS !== null && regionGlob !== 0 && (
                   <Management
                     open={isOpenDev}
-                    //ws={WS}
                     points={pointsTfl}
                     xctrll={pointsEtalonXctrl}
                     region={String(regionGlob)}
@@ -622,7 +621,7 @@ const App = () => {
                 {WS !== null && regionGlob !== 0 && (
                   <Points
                     open={isOpenInf}
-                    ws={WS}
+                    //ws={WS}
                     xctrll={pointsEtalonXctrl}
                     region={String(regionGlob)}
                     setPoint={SetPointsXctrl}
@@ -640,7 +639,7 @@ const App = () => {
                   !nullNewStatistics && (
                     <StatisticsNew
                       open={isOpenSt}
-                      ws={WS}
+                      //ws={WS}
                       points={pointsSt}
                       region={String(regionGlob)}
                       date={formSett}
@@ -654,7 +653,7 @@ const App = () => {
                   formSett !== formSettToday && (
                     <StatisticsArchive
                       open={true}
-                      ws={WS}
+                      //ws={WS}
                       points={pointsOldSt}
                       region={String(regionGlob)}
                       date={formSett}
@@ -667,7 +666,7 @@ const App = () => {
                 {WS !== null && regionGlob !== 0 && !nullOldStatistics && (
                   <StatisticsArchive
                     open={isOpenOldSt}
-                    ws={WS}
+                    //ws={WS}
                     points={pointsOldSt}
                     region={String(regionGlob)}
                     date={formSett}

@@ -9,6 +9,8 @@ import PointsMainScrGrid1 from "./grid/PointsMainScrGrid1";
 import PointsMainScrGrid2 from "./grid/PointsMainScrGrid2";
 import PointsMainScrGrid3 from "./grid/PointsMainScrGrid3";
 
+import { WS } from "../../App";
+
 import { styleXt02, styleXt03, styleXt06 } from "./grid/PointsGridStyle";
 import { styleXt04, styleXt05 } from "./grid/PointsGridStyle";
 
@@ -25,7 +27,7 @@ let xtPropsOld = -1;
 
 const PointsMainScr = (props: {
   open: boolean;
-  ws: WebSocket;
+  //ws: WebSocket;
   xctrll: XctrlInfo[];
   xtt: number;
   setPoint: Function;
@@ -142,7 +144,7 @@ const PointsMainScr = (props: {
   };
 
   const SaveEdit = () => {
-    SendHandleSend(props.ws, maskpoint.pointForRedax); // прокидываем изменения на сервер
+    SendHandleSend(WS, maskpoint.pointForRedax); // прокидываем изменения на сервер
     props.setPoint(maskpoint.pointForRedax); // прокидываем изменения в App
     pointsEt = maskpoint.pointForRedax;
     StatusQuo();

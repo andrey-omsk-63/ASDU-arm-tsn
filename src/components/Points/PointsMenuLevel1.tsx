@@ -12,6 +12,8 @@ import Modal from "@mui/material/Modal";
 import PointsMainScr from "./PointsMainScr";
 import PointsMenuLevel2 from "./PointsMenuLevel2";
 
+//import { WS } from "../../App";
+
 import { stylePLevel01, styleModalEnd } from "./grid/PointsGridStyle";
 import { stylePLevel02, stylePLevel03 } from "./grid/PointsGridStyle";
 import { stylePLevel04, stylePLevel05 } from "./grid/PointsGridStyle";
@@ -24,7 +26,7 @@ let nomIllum = -1;
 
 const PointsMenuLevel1 = (props: {
   open: boolean;
-  ws: WebSocket;
+  //ws: WebSocket;
   xctrll: XctrlInfo[];
   xtt: number;
   setPoint: any;
@@ -174,7 +176,7 @@ const PointsMenuLevel1 = (props: {
             <TabPanel value="1">
               <PointsMainScr
                 open={isOpen}
-                ws={props.ws}
+                //ws={WS}
                 xctrll={props.xctrll}
                 xtt={xtProps}
                 setPoint={props.setPoint}
@@ -188,7 +190,7 @@ const PointsMenuLevel1 = (props: {
                   <>
                     <PointsMenuLevel2
                       open={isOpen}
-                      ws={props.ws}
+                      //ws={WS}
                       xctrll={props.xctrll}
                       xtt={xtProps}
                       crossroad={crossRoad}

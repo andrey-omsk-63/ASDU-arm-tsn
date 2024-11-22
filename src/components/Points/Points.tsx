@@ -10,6 +10,8 @@ import PointsMenuLevel1 from "./PointsMenuLevel1";
 
 import { MakeDate, SendSocketOldDateXt } from "../../AppServiceFunctions";
 
+import { debug, WS } from "../../App";
+
 import { stylePoint01, stylePoint02 } from "./grid/PointsGridStyle";
 import { stylePoint03 } from "./grid/PointsGridStyle";
 import { styleStError } from "../../AppStyle";
@@ -27,7 +29,7 @@ let oldXt = -1;
 
 const Points = (props: {
   open: boolean;
-  ws: WebSocket;
+  //ws: WebSocket;
   xctrll: XctrlInfo[];
   region: string;
   setPoint: any;
@@ -51,11 +53,11 @@ const Points = (props: {
   let reGion = props.region;
   let isOpen = props.open;
   let pointsGl = props.xctrll;
-  let debug =
-    props.ws.url === "wss://localhost:3000/W" ||
-    props.ws.url.slice(0, 27) === "wss://andrey-omsk-63.github"
-      ? true
-      : false;
+  // let debug =
+  //   props.ws.url === "wss://localhost:3000/W" ||
+  //   props.ws.url.slice(0, 27) === "wss://andrey-omsk-63.github"
+  //     ? true
+  //     : false;
 
   let points = pointsGl.filter(
     (pointsGl) => pointsGl.region === Number(reGion)
@@ -68,15 +70,11 @@ const Points = (props: {
 
   React.useEffect(() => {
     const handleSend = () => {
-      if (props.ws !== null) {
-        if (props.ws.readyState === WebSocket.OPEN) {
-          props.ws.send(
-            JSON.stringify({ type: "stopDevices", region: reGion })
-          );
-          props.ws.send(
-            JSON.stringify({ type: "stopStatistics", region: reGion })
-          );
-          props.ws.send(
+      if (WS !== null) {
+        if (WS.readyState === WebSocket.OPEN) {
+          WS.send(JSON.stringify({ type: "stopDevices", region: reGion }));
+          WS.send(JSON.stringify({ type: "stopStatistics", region: reGion }));
+          WS.send(
             JSON.stringify({ type: "stopOldStatistics", region: reGion })
           );
         } else {
@@ -87,7 +85,7 @@ const Points = (props: {
       }
     };
     handleSend();
-  }, [props.ws, reGion]);
+  }, [reGion]);
 
   if (isOpen) pointsEtalon = points; // замена проверки обновления - проверка теперь в App
   if (props.date !== tekDate) {
@@ -97,7 +95,7 @@ const Points = (props: {
         setCalculate(!calculate);
       } else datestat.xttData = "sss";
       datestat.xtt = tekValue;
-      SendSocketOldDateXt(props.ws, props.date, pointsEtalon, tekValue);
+      SendSocketOldDateXt(WS, props.date, pointsEtalon, tekValue);
       oldXt = tekValue;
       oldDate = props.date;
     }
@@ -168,7 +166,7 @@ const Points = (props: {
           </Box>
           <PointsMenuLevel1
             open={isOpen}
-            ws={props.ws}
+            //ws={WS}
             xctrll={pointsEtalon}
             xtt={tekValue}
             setPoint={props.setPoint}

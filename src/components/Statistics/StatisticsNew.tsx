@@ -6,6 +6,8 @@ import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 
+import { WS } from "../../App";
+
 import StatisticXTNew from "./StatisticXTNew";
 
 import { styleSt1, styleSt11, styleSt2 } from "./StatisticXTStyle";
@@ -21,7 +23,7 @@ let massIntervalEt: any = [];
 
 const StatisticsNew = (props: {
   open: boolean;
-  ws: WebSocket;
+  //ws: WebSocket;
   points: Statistic[];
   region: string;
   date: string;
@@ -41,14 +43,10 @@ const StatisticsNew = (props: {
 
   React.useEffect(() => {
     const handleSend = () => {
-      if (props.ws !== null) {
-        if (props.ws.readyState === WebSocket.OPEN) {
-          props.ws.send(
-            JSON.stringify({ type: "stopDevices", region: reGion })
-          );
-          props.ws.send(
-            JSON.stringify({ type: "getStatistics", region: reGion })
-          );
+      if (WS !== null) {
+        if (WS.readyState === WebSocket.OPEN) {
+          WS.send(JSON.stringify({ type: "stopDevices", region: reGion }));
+          WS.send(JSON.stringify({ type: "getStatistics", region: reGion }));
         } else {
           setTimeout(() => {
             handleSend();
@@ -57,7 +55,7 @@ const StatisticsNew = (props: {
       }
     };
     handleSend();
-  }, [props.ws, reGion]);
+  }, [reGion]);
 
   if (isOpen && flagEtalon) {
     pointsEtalon = points;

@@ -8,6 +8,8 @@ import Tab from "@mui/material/Tab";
 
 import StatisticXTArchive from "./StatisticXTArchive";
 
+import { WS } from "../../App";
+
 import { styleSt1, styleSt11, styleSt2 } from "./StatisticXTStyle";
 import { styleStError } from "../../AppStyle";
 
@@ -23,7 +25,7 @@ let oldDate = "";
 
 const StatisticsArchive = (props: {
   open: boolean;
-  ws: WebSocket;
+  //ws: WebSocket;
   points: Statistic[];
   region: string;
   date: string;
@@ -44,15 +46,15 @@ const StatisticsArchive = (props: {
 
   React.useEffect(() => {
     const handleSend = () => {
-      if (props.ws !== null && oldDate !== props.date) {
-        if (props.ws.readyState === WebSocket.OPEN) {
-          props.ws.send(
+      if (WS !== null && oldDate !== props.date) {
+        if (WS.readyState === WebSocket.OPEN) {
+          WS.send(
             JSON.stringify({ type: "stopDevices", region: reGion })
           );
-          props.ws.send(
+          WS.send(
             JSON.stringify({ type: "stopStatistics", region: reGion })
           );
-          props.ws.send(
+          WS.send(
             JSON.stringify({
               type: "getOldStatistics",
               region: reGion,
@@ -68,7 +70,7 @@ const StatisticsArchive = (props: {
     };
     handleSend();
     oldDate = props.date;
-  }, [reGion, props.date, props.ws]);
+  }, [reGion, props.date]);
 
   if (isOpen && flagEtalon) {
     pointsEtalon = points;

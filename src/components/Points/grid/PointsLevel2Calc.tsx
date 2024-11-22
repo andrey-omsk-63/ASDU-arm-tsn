@@ -7,6 +7,8 @@ import Box from "@mui/material/Box";
 
 import { MakeDate, TimeStr } from "../../../AppServiceFunctions";
 
+import { debug } from "../../../App";
+
 import { styleXTC011, styleXTC01, styleXTC02 } from "./PointsGridStyle";
 import { styleXTC03, styleXTC033 } from "./PointsGridStyle";
 import { styleStError, styleXTG101 } from "../../../AppStyle";
@@ -51,7 +53,7 @@ export interface Datasets {
 
 const PointsLevel2Calc = (props: {
   open: boolean;
-  ws: WebSocket;
+  //ws: WebSocket;
   xctrll: XctrlInfo[];
   xtt: number;
   crossroad: number;
@@ -71,8 +73,8 @@ const PointsLevel2Calc = (props: {
   const points = props.xctrll[xtProps];
   let namer = points.xctrls[props.crossroad].name;
 
-  let debug = false;
-  if (props.ws.url === "wss://localhost:3000/W") debug = true;
+  // let debug = false;
+  // if (props.ws.url === "wss://localhost:3000/W") debug = true;
 
   const printRef = React.useRef(null);
   let pointer = points.results;

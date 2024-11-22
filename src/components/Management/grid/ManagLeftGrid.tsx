@@ -43,9 +43,9 @@ const ManagementLeftGrid = (props: {
   const points = props.tflightt;
   const pointsXT = props.xctrll;
   let masXT: any = [];
+  let reGion = "1";
 
   const [mode, setMode] = React.useState(1);
-  let reGion = "1";
   const [areaa, setAreaa] = React.useState("0");
   const [subArea, setSubArea] = React.useState(0);
   const [trigger, setTrigger] = React.useState(false);
@@ -62,7 +62,7 @@ const ManagementLeftGrid = (props: {
 
   const SetDataKnob = (knob: any) => {
     console.log("SetDataKnob:", knob[0].cmd, knob);
-    
+
     setDataKnob(knob);
     setTrigger(!trigger);
   };

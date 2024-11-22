@@ -16,7 +16,6 @@ let flagEtalon = true;
 
 const Management = (props: {
   open: boolean;
-  //ws: WebSocket;
   points: Tflight[];
   xctrll: XctrlInfo[];
   region: string;
