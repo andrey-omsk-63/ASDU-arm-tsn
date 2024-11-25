@@ -24,6 +24,8 @@ export interface Knob {
   subarea: number;
 }
 
+//let begin = 0; // кнопка в ожидании
+
 let otpravka = true;
 let soobDispatch = "";
 let nomDispatch = "Авт";
@@ -50,7 +52,11 @@ const ManagementKnobPK = (props: {
   const [beginWork, setBeginWork] = React.useState(true);
 
   const handleOpen = () => {
+    console.log("Нажали ПК");
+
     setOpen(true);
+    props.setDataKn(dataKnob, 1);
+
     const handleSendOpen = () => {
       if (WS !== null) {
         if (WS.readyState === WebSocket.OPEN) {
@@ -74,6 +80,8 @@ const ManagementKnobPK = (props: {
     const handleSendOpen = () => {
       if (WS !== null) {
         if (WS.readyState === WebSocket.OPEN) {
+          console.log("Отпр: getDevices");
+
           WS.send(JSON.stringify({ type: "getDevices", region: props.region }));
           otpravka = true;
           soobDispatch = "";
@@ -86,7 +94,10 @@ const ManagementKnobPK = (props: {
       }
     };
     if (!debug) handleSendOpen();
-    props.setDataKn(dataKnob);
+
+    console.log("handleClose:", debug, dataKnob);
+
+    props.setDataKn(dataKnob, 0);
     setBeginWork(true);
   };
 
@@ -104,9 +115,13 @@ const ManagementKnobPK = (props: {
 
   const ButtonDo = () => {
     if (value !== 21 && otpravka) {
+      console.log("1ButtonDo:", value);
+
       const handleSendOpen = () => {
         if (WS !== null) {
           if (WS.readyState === WebSocket.OPEN) {
+            console.log("Отпр: getDevdispatch");
+
             WS.send(
               JSON.stringify({
                 type: "dispatch",
@@ -137,27 +152,32 @@ const ManagementKnobPK = (props: {
               handleSendOpen();
             }, 1000);
           }
-          dataKnob[0].param = value;
-          dataKnob[0].region = props.region;
-          dataKnob[0].area = props.areaa;
-          dataKnob[0].subarea = props.subArea;
+          // dataKnob[0].param = value;
+          // dataKnob[0].region = props.region;
+          // dataKnob[0].area = props.areaa;
+          // dataKnob[0].subarea = props.subArea;
         }
       };
 
+      console.log("2ButtonDo:", value, debug);
+
       if (!debug) {
         handleSendOpen();
-      } else {
-        dataKnob[0].param = value;
-        dataKnob[0].region = props.region;
-        dataKnob[0].area = props.areaa;
-        dataKnob[0].subarea = props.subArea;
       }
+      //else {
+      dataKnob[0].param = value;
+      dataKnob[0].region = props.region;
+      dataKnob[0].area = props.areaa;
+      dataKnob[0].subarea = props.subArea;
+      //}
 
       soobDispatch = "Отправлено";
       if (value !== 0) {
         nomDispatch = "ПК " + value;
       } else nomDispatch = "Авт";
       otpravka = false;
+
+      console.log("3ButtonDo:", dataKnob, soobDispatch);
     }
 
     return (
@@ -191,6 +211,10 @@ const ManagementKnobPK = (props: {
     setOpenSoobErr(true);
     setBeginWork(false);
   }
+
+  //console.log("ПК:", open, begin);
+
+  //if ( begin) setOpen(true);
 
   return (
     <>

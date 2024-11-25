@@ -11,8 +11,6 @@ import PointsLevel2Calc from "./grid/PointsLevel2Calc";
 
 import { MakeDate } from "../../AppServiceFunctions";
 
-//import { WS } from "../../App";
-
 import { styleXTl201 } from "./grid/PointsGridStyle";
 import { stylePLevel06, stylePLevel07 } from "./grid/PointsGridStyle";
 
@@ -21,7 +19,6 @@ import { XctrlInfo } from "../../interfaceGl.d";
 // Диспеспетчер меню второго уровня (вертикального)
 const PointsMenuLevel2 = (props: {
   open: boolean;
-  //ws: WebSocket;
   xctrll: XctrlInfo[];
   xtt: number;
   crossroad: number;

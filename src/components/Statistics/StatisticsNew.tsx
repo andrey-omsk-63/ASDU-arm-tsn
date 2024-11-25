@@ -23,7 +23,6 @@ let massIntervalEt: any = [];
 
 const StatisticsNew = (props: {
   open: boolean;
-  //ws: WebSocket;
   points: Statistic[];
   region: string;
   date: string;

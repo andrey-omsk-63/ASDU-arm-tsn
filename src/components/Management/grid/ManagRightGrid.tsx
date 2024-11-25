@@ -6,7 +6,7 @@ import { Tflight } from "../../../interfaceMNG.d";
 
 import { styleMgl, styleMRG01, styleMRG02 } from "./ManagGridStyle";
 import { styleMRG02Center, styleMRGHeader } from "./ManagGridStyle";
-import { styleMRG03, styleMRG04 } from "./ManagGridStyle";
+import { styleMRG03, styleMRG04, massEtalon } from "./ManagGridStyle";
 
 export interface DataKnob {
   knop: Knob[];
@@ -29,7 +29,7 @@ const ManagementRightGrid = (props: {
   masxt: any;
   masknob: Knob[];
 }) => {
-  //console.log('props.masknob',props.masknob)
+  //console.log("props.masknob", props.masknob);
 
   let points = props.tflightt;
   let masSpis = [];
@@ -42,8 +42,6 @@ const ManagementRightGrid = (props: {
   const massClinch = [16, 17, 18, 38, 39];
 
   const SearchInMassKnob = (cmd: number) => {
-    //console.log("SearchInMassKnob:", cmd, massknob);
-
     for (let i = 0; i < massknob.length; i++)
       if (massknob[i].cmd === cmd) return massknob[i].param;
     return -1;
@@ -460,33 +458,37 @@ const ManagementRightGrid = (props: {
     case 1:
       points = props.tflightt;
       if (props.open) {
-        mass[0] = {
-          areaNum: points[0].area.num,
-          koldk: 1,
-          sost: 0,
-          podch: 0,
-          isPK: false,
-          isCK: false,
-          isNK: false,
-          isXT: false,
-          releaseXT: false,
-        };
+        mass[0] = massEtalon;
+        mass[0].areaNum = points[0].area.num;
+        // mass[0] = {
+        //   areaNum: points[0].area.num,
+        //   koldk: 1,
+        //   sost: 0,
+        //   podch: 0,
+        //   isPK: false,
+        //   isCK: false,
+        //   isNK: false,
+        //   isXT: false,
+        //   releaseXT: false,
+        // };
         CounterMode(0, 0);
         j = 0;
         for (let i = 1; i < points.length; i++) {
           if (mass[j].areaNum !== points[i].area.num) {
             j++;
-            mass[j] = {
-              areaNum: points[i].area.num,
-              koldk: 1,
-              sost: 0,
-              podch: 0,
-              isPK: false,
-              isCK: false,
-              isNK: false,
-              isXT: false,
-              releaseXT: false,
-            };
+            mass[j] = massEtalon;
+            mass[j].areaNum = points[i].area.num;
+            // mass[j] = {
+            //   areaNum: points[i].area.num,
+            //   koldk: 1,
+            //   sost: 0,
+            //   podch: 0,
+            //   isPK: false,
+            //   isCK: false,
+            //   isNK: false,
+            //   isXT: false,
+            //   releaseXT: false,
+            // };
             CounterMode(i, j);
           } else {
             mass[j].koldk++;
@@ -524,35 +526,41 @@ const ManagementRightGrid = (props: {
       points = masSpis;
 
       if (props.open) {
-        mass[0] = {
-          areaNum: points[0].area.num,
-          subareaNum: points[0].subarea,
-          koldk: 1,
-          sost: 0,
-          podch: 0,
-          isPK: false,
-          isCK: false,
-          isNK: false,
-          isXT: false,
-          releaseXT: false,
-        };
+        mass[0] = massEtalon;
+        mass[0].areaNum = points[0].area.num;
+        mass[0].subareaNum = points[0].subarea;
+        // mass[0] = {
+        //   areaNum: points[0].area.num,
+        //   subareaNum: points[0].subarea,
+        //   koldk: 1,
+        //   sost: 0,
+        //   podch: 0,
+        //   isPK: false,
+        //   isCK: false,
+        //   isNK: false,
+        //   isXT: false,
+        //   releaseXT: false,
+        // };
         CounterMode(0, 0);
         j = 0;
         for (let i = 1; i < points.length; i++) {
           if (mass[j].subareaNum !== points[i].subarea) {
             j++;
-            mass[j] = {
-              areaNum: points[i].area.num,
-              subareaNum: points[i].subarea,
-              koldk: 1,
-              sost: 0,
-              podch: 0,
-              isPK: false,
-              isCK: false,
-              isNK: false,
-              isXT: false,
-              releaseXT: false,
-            };
+            mass[j] = massEtalon;
+            mass[j].areaNum = points[i].area.num;
+            mass[j].subareaNum = points[i].subarea;
+            // mass[j] = {
+            //   areaNum: points[i].area.num,
+            //   subareaNum: points[i].subarea,
+            //   koldk: 1,
+            //   sost: 0,
+            //   podch: 0,
+            //   isPK: false,
+            //   isCK: false,
+            //   isNK: false,
+            //   isXT: false,
+            //   releaseXT: false,
+            // };
             CounterMode(i, j);
           } else {
             mass[j].koldk++;
@@ -582,9 +590,6 @@ const ManagementRightGrid = (props: {
         if (!massClinch.includes(points[i].tlsost.num)) {
           sostGl++;
           let podchGlOld = podchGl;
-
-          /////////////////////////////////console.log("1@@@:", i, podchGl, points[i].techMode, points[i]);
-
           switch (points[i].techMode) {
             case 2: // назначен ВР
               if (

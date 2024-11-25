@@ -61,6 +61,8 @@ const ManagementKnobXT = (props: {
 
   const handleOpen = () => {
     setOpen(true);
+    props.setDataKn(dataKnob, 1);
+
     const handleSendOpen = () => {
       if (WS !== null) {
         if (WS.readyState === WebSocket.OPEN) {
@@ -97,7 +99,7 @@ const ManagementKnobXT = (props: {
     otpravka = true;
     soobDispatch = "";
     nomDispatch = "Вкл";
-    props.setDataKn(dataKnob);
+    props.setDataKn(dataKnob,0);
     setTrigger(false);
     setBeginWork(true);
   };

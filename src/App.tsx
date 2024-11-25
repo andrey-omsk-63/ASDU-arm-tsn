@@ -245,8 +245,15 @@ const App = () => {
           updateDevice = !updateDevice;
           break;
         case "dispatch":
-          console.log("Пришло dispatch:", data.msg);
-          if (data.status) {
+          console.log("Пришло dispatch:", data.msg, data.msg.cmd);
+          let cmd = data.msg.cmd;
+          if (
+            data.status &&
+            cmd !== 5 &&
+            cmd !== 6 &&
+            cmd !== 7 &&
+            cmd !== 13
+          ) {
             pointsEtalonXctrl = DispatchXctrl(data, pointsEtalonXctrl);
             updateDevice = !updateDevice; // для обновления строки состояния в ManagementRightGrid
             setPointsXctrl(pointsEtalonXctrl);
@@ -621,7 +628,6 @@ const App = () => {
                 {WS !== null && regionGlob !== 0 && (
                   <Points
                     open={isOpenInf}
-                    //ws={WS}
                     xctrll={pointsEtalonXctrl}
                     region={String(regionGlob)}
                     setPoint={SetPointsXctrl}
@@ -639,7 +645,6 @@ const App = () => {
                   !nullNewStatistics && (
                     <StatisticsNew
                       open={isOpenSt}
-                      //ws={WS}
                       points={pointsSt}
                       region={String(regionGlob)}
                       date={formSett}
@@ -653,7 +658,6 @@ const App = () => {
                   formSett !== formSettToday && (
                     <StatisticsArchive
                       open={true}
-                      //ws={WS}
                       points={pointsOldSt}
                       region={String(regionGlob)}
                       date={formSett}
@@ -666,7 +670,6 @@ const App = () => {
                 {WS !== null && regionGlob !== 0 && !nullOldStatistics && (
                   <StatisticsArchive
                     open={isOpenOldSt}
-                    //ws={WS}
                     points={pointsOldSt}
                     region={String(regionGlob)}
                     date={formSett}

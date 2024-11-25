@@ -51,6 +51,8 @@ const ManagementKnobSK = (props: {
 
   const handleOpen = () => {
     setOpen(true);
+    props.setDataKn(dataKnob, 1);
+
     const handleSendOpen = () => {
       if (WS !== null) {
         if (WS.readyState === WebSocket.OPEN) {
@@ -74,9 +76,7 @@ const ManagementKnobSK = (props: {
     const handleSendOpen = () => {
       if (WS !== null) {
         if (WS.readyState === WebSocket.OPEN) {
-          WS.send(
-            JSON.stringify({ type: "getDevices", region: props.region })
-          );
+          WS.send(JSON.stringify({ type: "getDevices", region: props.region }));
           otpravka = true;
           soobDispatch = "";
           nomDispatch = "Авт";
@@ -88,7 +88,7 @@ const ManagementKnobSK = (props: {
       }
     };
     if (!debug) handleSendOpen();
-    props.setDataKn(dataKnob);
+    props.setDataKn(dataKnob, 0);
     setBeginWork(true);
   };
 

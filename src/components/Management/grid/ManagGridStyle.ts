@@ -1,3 +1,16 @@
+export const massEtalon = {
+  areaNum: -1,
+  subareaNum: -1,
+  koldk: 1,
+  sost: 0,
+  podch: 0,
+  isPK: false,
+  isCK: false,
+  isNK: false,
+  isXT: false,
+  releaseXT: false,
+};
+
 //====== ManagementRightGrid ====================================================
 export const styleMgl = {
   border: 0,

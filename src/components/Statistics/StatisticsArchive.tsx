@@ -25,7 +25,6 @@ let oldDate = "";
 
 const StatisticsArchive = (props: {
   open: boolean;
-  //ws: WebSocket;
   points: Statistic[];
   region: string;
   date: string;

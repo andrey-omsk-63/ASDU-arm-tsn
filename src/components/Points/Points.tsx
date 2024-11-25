@@ -29,7 +29,6 @@ let oldXt = -1;
 
 const Points = (props: {
   open: boolean;
-  //ws: WebSocket;
   xctrll: XctrlInfo[];
   region: string;
   setPoint: any;
@@ -166,7 +165,6 @@ const Points = (props: {
           </Box>
           <PointsMenuLevel1
             open={isOpen}
-            //ws={WS}
             xctrll={pointsEtalon}
             xtt={tekValue}
             setPoint={props.setPoint}

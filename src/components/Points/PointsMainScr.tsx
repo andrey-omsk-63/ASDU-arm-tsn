@@ -27,7 +27,6 @@ let xtPropsOld = -1;
 
 const PointsMainScr = (props: {
   open: boolean;
-  //ws: WebSocket;
   xctrll: XctrlInfo[];
   xtt: number;
   setPoint: Function;

@@ -10,8 +10,6 @@ import ManagementKnobSK from "./ManagKnobSK";
 import ManagementKnobNK from "./ManagKnobNK";
 import ManagementKnobXT from "./ManagKnobXT";
 
-//import { WS } from "../../../App";
-
 import { Tflight } from "../../../interfaceMNG.d";
 import { XctrlInfo } from "../../../interfaceGl.d";
 
@@ -31,6 +29,8 @@ export interface Knob {
   area: string;
   subarea: number;
 }
+
+let begin = 0; // кнопка в ожидании
 
 let massKnop: Knob[] = [];
 let massKnopTemp: Knob[] = [];
@@ -60,11 +60,15 @@ const ManagementLeftGrid = (props: {
     },
   ]);
 
-  const SetDataKnob = (knob: any) => {
-    console.log("SetDataKnob:", knob[0].cmd, knob);
-
-    setDataKnob(knob);
-    setTrigger(!trigger);
+  const SetDataKnob = (knob: any, mode: number) => {
+    console.log("SetDataKnob:", mode, knob[0].cmd, knob);
+    if (mode) {
+      begin = 1;
+    } else {
+      begin = 0;
+      setDataKnob(knob);
+      setTrigger(!trigger);
+    }
   };
 
   const massKnob: Knob[] = [
@@ -271,12 +275,6 @@ const ManagementLeftGrid = (props: {
           subarea: mass[i].subarea,
         },
       ];
-      // костыль
-      dataKnobTemp[0].cmd = dataKnob[0].cmd;
-      dataKnobTemp[0].param = dataKnob[0].param;
-      dataKnobTemp[0].region = dataKnob[0].region;
-      dataKnobTemp[0].area = mass[i].areaNum;
-      dataKnobTemp[0].subarea = mass[i].subarea;
       massKnopTemp.push(dataKnobTemp[0]);
       masAreaRab.push(mass[i].areaNum);
     }
@@ -296,12 +294,6 @@ const ManagementLeftGrid = (props: {
           subarea: 0,
         },
       ];
-      // костыль
-      dataKnobTemp[0].cmd = dataKnob[0].cmd;
-      dataKnobTemp[0].param = dataKnob[0].param;
-      dataKnobTemp[0].region = dataKnob[0].region;
-      dataKnobTemp[0].area = masArea[i];
-      dataKnobTemp[0].subarea = 0;
       massKnopTemp.push(dataKnobTemp[0]);
     }
     massKnop = massKnop.concat(massKnopTemp); // ОбЪединение массивов
@@ -328,15 +320,9 @@ const ManagementLeftGrid = (props: {
               param: dataKnob[0].param,
               region: dataKnob[0].region,
               area: mass[i].areaNum,
-              subarea: mass[i].areaNum,
+              subarea: mass[i].subarea,
             },
           ];
-          // костыль
-          dataKnobTemp[0].cmd = dataKnob[0].cmd;
-          dataKnobTemp[0].param = dataKnob[0].param;
-          dataKnobTemp[0].region = dataKnob[0].region;
-          dataKnobTemp[0].area = mass[i].areaNum;
-          dataKnobTemp[0].subarea = mass[i].areaNum;
           massKnopTemp.push(dataKnobTemp[0]);
         }
       }
@@ -356,8 +342,7 @@ const ManagementLeftGrid = (props: {
 
   const CheckFourKnops = () => {
     if (dataKnob[0].cmd !== 0) {
-      // проверка дубликатов
-      let flagDubl = true;
+      let flagDubl = true; // проверка дубликатов
       for (let i = 0; i < massKnop.length; i++) {
         if (
           massKnop[i].cmd === dataKnob[0].cmd &&
@@ -371,8 +356,7 @@ const ManagementLeftGrid = (props: {
         }
       }
       if (flagDubl) {
-        //console.log("Запись");
-        massKnob[0].cmd = dataKnob[0].cmd;
+        massKnob[0].cmd = dataKnob[0].cmd; //console.log("Запись");
         massKnob[0].param = dataKnob[0].param;
         massKnob[0].region = dataKnob[0].region;
         massKnob[0].area = dataKnob[0].area;
@@ -390,40 +374,42 @@ const ManagementLeftGrid = (props: {
   const FourKnops = () => {
     return (
       <Grid item xs={12} sx={{ height: "4vh", marginTop: "0.5vh" }}>
-        <Stack direction="row">
-          <ManagementKnobPK
-            open={props.open}
-            region={reGion}
-            areaa={areaa}
-            subArea={subArea}
-            setDataKn={SetDataKnob}
-          />
-          <ManagementKnobSK
-            open={props.open}
-            region={reGion}
-            areaa={areaa}
-            subArea={subArea}
-            setDataKn={SetDataKnob}
-          />
-          <ManagementKnobNK
-            open={props.open}
-            region={reGion}
-            areaa={areaa}
-            subArea={subArea}
-            setDataKn={SetDataKnob}
-          />
-          <ManagementKnobXT
-            open={props.open}
-            region={reGion}
-            areaa={areaa}
-            subArea={subArea}
-            setDataKn={SetDataKnob}
-            masxt={masXT}
-          />
-        </Stack>
+        {/* <Stack direction="row"> */}
+        <ManagementKnobPK
+          open={props.open}
+          region={reGion}
+          areaa={areaa}
+          subArea={subArea}
+          setDataKn={SetDataKnob}
+        />
+        <ManagementKnobSK
+          open={props.open}
+          region={reGion}
+          areaa={areaa}
+          subArea={subArea}
+          setDataKn={SetDataKnob}
+        />
+        <ManagementKnobNK
+          open={props.open}
+          region={reGion}
+          areaa={areaa}
+          subArea={subArea}
+          setDataKn={SetDataKnob}
+        />
+        <ManagementKnobXT
+          open={props.open}
+          region={reGion}
+          areaa={areaa}
+          subArea={subArea}
+          setDataKn={SetDataKnob}
+          masxt={masXT}
+        />
+        {/* </Stack> */}
       </Grid>
     );
   };
+
+  console.log("BEGIN:", begin);
 
   return (
     <Grid container>

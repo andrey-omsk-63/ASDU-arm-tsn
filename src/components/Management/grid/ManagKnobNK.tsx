@@ -51,6 +51,8 @@ const ManagementKnobSK = (props: {
 
   const handleOpen = () => {
     setOpen(true);
+    props.setDataKn(dataKnob, 1);
+
     const handleSendOpen = () => {
       if (WS !== null) {
         if (WS.readyState === WebSocket.OPEN) {
@@ -86,7 +88,7 @@ const ManagementKnobSK = (props: {
       }
     };
     if (!debug) handleSendOpen();
-    props.setDataKn(dataKnob);
+    props.setDataKn(dataKnob,0);
     setBeginWork(true);
   };
 
