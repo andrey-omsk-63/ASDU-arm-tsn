@@ -51,7 +51,6 @@ const ManagementKnobSK = (props: {
 
   const handleOpen = () => {
     setOpen(true);
-    props.setDataKn(dataKnob, 1);
 
     const handleSendOpen = () => {
       if (WS !== null) {
@@ -70,7 +69,7 @@ const ManagementKnobSK = (props: {
     otpravka = true;
   };
 
-  const handleClose = () => {
+  const handleClose = (mode: number) => {
     setOpen(false);
     setValue(21);
     const handleSendOpen = () => {
@@ -88,14 +87,13 @@ const ManagementKnobSK = (props: {
       }
     };
     if (!debug) handleSendOpen();
-    props.setDataKn(dataKnob,0);
+    props.setDataKn(dataKnob, mode);
     setBeginWork(true);
   };
 
   const ButtonKnob = (val: number) => {
     let valumeKnob: string = "Авт";
     if (val !== 0) valumeKnob = val.toString();
-
     return (
       <Box sx={{ textAlign: "center" }}>
         <Button sx={styleBatMenu} onClick={() => setValue(val)}>
@@ -110,6 +108,8 @@ const ManagementKnobSK = (props: {
       const handleSendOpen = () => {
         if (WS !== null) {
           if (WS.readyState === WebSocket.OPEN) {
+            console.log("Отпр: dispatch из HК", 7, value);
+
             WS.send(
               JSON.stringify({
                 type: "dispatch",
@@ -140,27 +140,23 @@ const ManagementKnobSK = (props: {
               handleSendOpen();
             }, 1000);
           }
-          dataKnob[0].param = value;
-          dataKnob[0].region = props.region;
-          dataKnob[0].area = props.areaa;
-          dataKnob[0].subarea = props.subArea;
         }
       };
 
-      if (!debug) {
-        handleSendOpen();
-      } else {
-        dataKnob[0].param = value;
-        dataKnob[0].region = props.region;
-        dataKnob[0].area = props.areaa;
-        dataKnob[0].subarea = props.subArea;
-      }
+      if (!debug) handleSendOpen();
+
+      dataKnob[0].param = value;
+      dataKnob[0].region = props.region;
+      dataKnob[0].area = props.areaa;
+      dataKnob[0].subarea = props.subArea;
 
       soobDispatch = "Отправлено";
       if (value !== 0) {
         nomDispatch = "НК " + value;
       } else nomDispatch = "Авт";
       otpravka = false;
+
+      if (!debug) handleClose(0); // выход без подтверждения
     }
 
     return (
@@ -201,7 +197,7 @@ const ManagementKnobSK = (props: {
       {ButtonKnop()}
       <Modal open={open} hideBackdrop={false}>
         <Box sx={stylePK}>
-          <Button sx={styleModalEnd} onClick={handleClose}>
+          <Button sx={styleModalEnd} onClick={() => handleClose(1)}>
             <b>&#10006;</b>
           </Button>
           {openSoobErr && <ManagKnobError setOpen={setOpenSoobErr} />}
@@ -223,7 +219,7 @@ const ManagementKnobSK = (props: {
             </>
           )}
           <Box sx={{ textAlign: "center" }}>
-            <Button sx={styleBatMenu} onClick={handleClose}>
+            <Button sx={styleBatMenu} onClick={() => handleClose(0)}>
               Выход
             </Button>
           </Box>

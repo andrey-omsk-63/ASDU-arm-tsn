@@ -21,6 +21,8 @@ import ButtonMenu from "./AppButtonMenu";
 
 import { styleDatePicker, styleModalMenu } from "./AppStyle";
 import { styleInpOk, styleButOk } from "./AppStyle";
+import { styleMRG03 } from "./components/Management/grid/ManagGridStyle";
+import { styleMRGHeader } from "./components/Management/grid/ManagGridStyle";
 import { styleModalEnd } from "./components/Points/grid/PointsGridStyle";
 
 import { XctrlInfo } from "./interfaceGl.d";
@@ -310,6 +312,97 @@ export const DispatchXctrl = (data: any, pointsEtalon: XctrlInfo[]) => {
     }
   }
   return pointsEtalonXctrl;
+};
+//=== ManagementRightGrid ==========================
+const StrokaGridHeader = (xss: number, write: string) => {
+  return (
+    <Grid item xs={xss} sx={styleMRG03}>
+      <b>{write}</b>
+    </Grid>
+  );
+};
+
+export const StrokaHeaderMode1 = () => {
+  return (
+    <Grid container sx={styleMRGHeader}>
+      {StrokaGridHeader(0.3, "№")}
+      {StrokaGridHeader(0.7, "Район")}
+      {StrokaGridHeader(4.8, "Устройствa")}
+      {StrokaGridHeader(2.5, "Текущее состояние")}
+      {StrokaGridHeader(3.7, "Состояние ХТ")}
+    </Grid>
+  );
+};
+
+export const StrokaHeaderMode2 = () => {
+  return (
+    <Grid container sx={styleMRGHeader}>
+      {StrokaGridHeader(0.3, "№")}
+      {StrokaGridHeader(1.1, "Подрайон")}
+      {StrokaGridHeader(4.5, "Устройствa")}
+      {StrokaGridHeader(2.4, "Текущее состояние")}
+      {StrokaGridHeader(3.7, "Состояние ХТ")}
+    </Grid>
+  );
+};
+
+export const StrokaHeaderMode3 = () => {
+  return (
+    <Grid container sx={styleMRGHeader}>
+      {StrokaGridHeader(0.3, "№")}
+      {StrokaGridHeader(1.1, "Подрайон")}
+      {StrokaGridHeader(0.4, "ДК")}
+      {StrokaGridHeader(4.0, "Наименование")}
+      {StrokaGridHeader(1.5, "Устройствo")}
+      {StrokaGridHeader(2.0, "Состояние")}
+      {StrokaGridHeader(0.5, "ПК")}
+      {StrokaGridHeader(0.5, "СК")}
+      {StrokaGridHeader(0.5, "НК")}
+      {StrokaGridHeader(1.2, "Статус")}
+    </Grid>
+  );
+};
+
+export const StrokaGridInfo = (xss: number, stylXX: any, write: any) => {
+  return (
+    <Grid item xs={xss} sx={stylXX}>
+      {write}
+    </Grid>
+  );
+};
+
+
+export const FormingSoobBPmin = (
+  massKnob: any,
+  cmd: number,
+  soobBP: string,
+  soob: string
+) => {
+  let soobbp = soobBP;
+  for (let i = 0; i < massKnob.length; i++) {
+    if (massKnob[i].cmd === cmd) {
+      soobbp += soob;
+      break;
+    }
+  }
+  return soobbp;
+};
+
+export const FormingSoobBPmax = (massKnob: any, soobBP: string) => {
+  let soobbp = soobBP;
+  for (let i = 0; i < massKnob.length; i++) {
+    switch (massKnob[i].cmd) {
+      case 5:
+        soobbp += " ПК";
+        break;
+      case 6:
+        soobbp += " CК";
+        break;
+      case 7:
+        soobbp += " HК";
+    }
+  }
+  return soobbp;
 };
 //=== PointsLevel2Baza =============================
 export const TimeStr = (tim: number) => {

@@ -30,8 +30,6 @@ export interface Knob {
   subarea: number;
 }
 
-let begin = 0; // кнопка в ожидании
-
 let massKnop: Knob[] = [];
 let massKnopTemp: Knob[] = [];
 
@@ -62,10 +60,8 @@ const ManagementLeftGrid = (props: {
 
   const SetDataKnob = (knob: any, mode: number) => {
     console.log("SetDataKnob:", mode, knob[0].cmd, knob);
-    if (mode) {
-      begin = 1;
-    } else {
-      begin = 0;
+
+    if (!mode) {
       setDataKnob(knob);
       setTrigger(!trigger);
     }
@@ -374,7 +370,6 @@ const ManagementLeftGrid = (props: {
   const FourKnops = () => {
     return (
       <Grid item xs={12} sx={{ height: "4vh", marginTop: "0.5vh" }}>
-        {/* <Stack direction="row"> */}
         <ManagementKnobPK
           open={props.open}
           region={reGion}
@@ -404,12 +399,11 @@ const ManagementLeftGrid = (props: {
           setDataKn={SetDataKnob}
           masxt={masXT}
         />
-        {/* </Stack> */}
       </Grid>
     );
   };
 
-  console.log("BEGIN:", begin);
+  //console.log("BEGIN:", begin);
 
   return (
     <Grid container>

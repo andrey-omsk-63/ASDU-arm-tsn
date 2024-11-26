@@ -239,21 +239,14 @@ const App = () => {
       let data = allData.data;
       switch (allData.type) {
         case "getDevices":
-          console.log("Пришло tflight:", data.tflight);
+          //console.log("Пришло tflight:", data.tflight);
           setPointsTfl(data.tflight ?? []);
           !isOpenDev && setIsOpenDev(true);
           updateDevice = !updateDevice;
           break;
         case "dispatch":
-          console.log("Пришло dispatch:", data.msg, data.msg.cmd);
-          let cmd = data.msg.cmd;
-          if (
-            data.status &&
-            cmd !== 5 &&
-            cmd !== 6 &&
-            cmd !== 7 &&
-            cmd !== 13
-          ) {
+          console.log("Пришло dispatch:", data.msg);
+          if (data.status) {
             pointsEtalonXctrl = DispatchXctrl(data, pointsEtalonXctrl);
             updateDevice = !updateDevice; // для обновления строки состояния в ManagementRightGrid
             setPointsXctrl(pointsEtalonXctrl);

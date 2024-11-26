@@ -61,7 +61,6 @@ const ManagementKnobXT = (props: {
 
   const handleOpen = () => {
     setOpen(true);
-    props.setDataKn(dataKnob, 1);
 
     const handleSendOpen = () => {
       if (WS !== null) {
@@ -80,7 +79,7 @@ const ManagementKnobXT = (props: {
     if (!debug) handleSendOpen();
   };
 
-  const handleClose = () => {
+  const handleClose = (mode: number) => {
     const handleSendOpen = () => {
       if (WS !== null) {
         if (WS.readyState === WebSocket.OPEN) {
@@ -99,7 +98,7 @@ const ManagementKnobXT = (props: {
     otpravka = true;
     soobDispatch = "";
     nomDispatch = "Вкл";
-    props.setDataKn(dataKnob,0);
+    props.setDataKn(dataKnob, mode);
     setTrigger(false);
     setBeginWork(true);
   };
@@ -109,6 +108,7 @@ const ManagementKnobXT = (props: {
       const handleSendOpen = () => {
         if (WS !== null) {
           if (WS.readyState === WebSocket.OPEN) {
+            console.log("Отпр: dispatch из XT", 13, value);
             WS.send(
               JSON.stringify({
                 type: "dispatch",
@@ -122,6 +122,7 @@ const ManagementKnobXT = (props: {
               })
             );
             if (!value) {
+              console.log("Отпр: dispatch из XT", 5, 0);
               // включение PK - авт
               WS.send(
                 JSON.stringify({
@@ -141,21 +142,15 @@ const ManagementKnobXT = (props: {
               handleSendOpen();
             }, 1000);
           }
-          dataKnob[0].param = value;
-          dataKnob[0].region = props.region;
-          dataKnob[0].area = props.areaa;
-          dataKnob[0].subarea = props.subArea;
         }
       };
 
-      if (!debug) {
-        handleSendOpen();
-      } else {
-        dataKnob[0].param = value;
-        dataKnob[0].region = props.region;
-        dataKnob[0].area = props.areaa;
-        dataKnob[0].subarea = props.subArea;
-      }
+      if (!debug) handleSendOpen();
+
+      dataKnob[0].param = value;
+      dataKnob[0].region = props.region;
+      dataKnob[0].area = props.areaa;
+      dataKnob[0].subarea = props.subArea;
 
       soobDispatch = "Отправлено";
       if (value === 0) nomDispatch = "Отключить исполнение";
@@ -163,6 +158,8 @@ const ManagementKnobXT = (props: {
       if (value === 2) nomDispatch = "Отключить расчёт";
       if (value === 3) nomDispatch = "Включить расчёт";
       otpravka = false;
+
+      if (!debug) handleClose(0); // выход без подтверждения
     } else {
       soobDispatch = "";
       nomDispatch = "Вкл";
@@ -272,7 +269,7 @@ const ManagementKnobXT = (props: {
             <ManagKnobXTEmpty soob={soobEmpty} setOpen={SetOpenEmpty} />
           ) : (
             <Box sx={stylePKXt}>
-              <Button sx={styleModalEnd} onClick={handleClose}>
+              <Button sx={styleModalEnd} onClick={() => handleClose(1)}>
                 <b>&#10006;</b>
               </Button>
               {openSoobErr && <ManagKnobError setOpen={setOpenSoobErr} />}
@@ -285,7 +282,7 @@ const ManagementKnobXT = (props: {
                     {ButtMenu("Отключить расчёт", switchXT, 2)}
                   </>
                 )}
-                <Button sx={styleBatMenuXt} onClick={handleClose}>
+                <Button sx={styleBatMenuXt} onClick={() => handleClose(0)}>
                   Выход
                 </Button>
                 {trigger && <>{ButtonDo()}</>}
