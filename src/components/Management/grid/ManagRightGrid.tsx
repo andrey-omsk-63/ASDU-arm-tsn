@@ -4,9 +4,8 @@ import Box from "@mui/material/Box";
 
 import { FormingSoobBPmin } from "../../../AppServiceFunctions";
 import { FormingSoobBPmax } from "../../../AppServiceFunctions";
-import { StrokaHeaderMode1 } from "../../../AppServiceFunctions";
-import { StrokaHeaderMode2 } from "../../../AppServiceFunctions";
-import { StrokaHeaderMode3 } from "../../../AppServiceFunctions";
+import { HeaderMode1 } from "../../../AppServiceFunctions";
+import { HeaderMode2, HeaderMode3 } from "../../../AppServiceFunctions";
 import { StrokaGridInfo } from "../../../AppServiceFunctions";
 
 import { Tflight } from "../../../interfaceMNG.d";
@@ -45,9 +44,20 @@ const ManagementRightGrid = (props: {
   let massknob: Knob[] = [];
   const massClinch = [16, 17, 18, 38, 39];
 
-  const SearchInMassKnob = (cmd: number) => {
+  const SearchInMassKnob = (
+    region: string,
+    area: string,
+    subarea: number,
+    cmd: number
+  ) => {
     for (let i = 0; i < massknob.length; i++)
-      if (massknob[i].cmd === cmd) return massknob[i].param;
+      if (
+        massknob[i].region === region &&
+        massknob[i].area === area &&
+        massknob[i].subarea === subarea &&
+        massknob[i].cmd === cmd
+      )
+        return massknob[i].param;
     return -1;
   };
 
@@ -62,6 +72,9 @@ const ManagementRightGrid = (props: {
       mass[j].sost++;
       sostGl++;
       let podchGlOld = podchGl;
+      let reg = points[i].region.num;
+      let area = points[i].area.num;
+      let subarea = points[i].subarea;
       switch (points[i].techMode) {
         case 2:
           if (
@@ -72,9 +85,9 @@ const ManagementRightGrid = (props: {
           ) {
             if (
               // =========================================== нужна ли проверка? =================
-              SearchInMassKnob(5) <= 0 &&
-              SearchInMassKnob(6) <= 0 && // не было ручного упр-я
-              SearchInMassKnob(7) <= 0
+              SearchInMassKnob(reg, area, subarea, 5) <= 0 &&
+              SearchInMassKnob(reg, area, subarea, 6) <= 0 && // не было ручного упр-я
+              SearchInMassKnob(reg, area, subarea, 7) <= 0
             )
               CountSubordinates();
           }
@@ -94,13 +107,22 @@ const ManagementRightGrid = (props: {
       // подчинён вручную?
       if (podchGl === podchGlOld) {
         if (points[i].StatusCommandDU.IsPK) {
-          if (points[i].pk === SearchInMassKnob(5)) CountSubordinates();
+          if (points[i].pk === SearchInMassKnob(reg, area, subarea, 5))
+            CountSubordinates();
         } else {
-          if (points[i].StatusCommandDU.IsCK && SearchInMassKnob(5) <= 0) {
-            if (points[i].ck === SearchInMassKnob(6)) CountSubordinates();
+          if (
+            points[i].StatusCommandDU.IsCK &&
+            SearchInMassKnob(reg, area, subarea, 5) <= 0
+          ) {
+            if (points[i].ck === SearchInMassKnob(reg, area, subarea, 6))
+              CountSubordinates();
           } else {
-            if (points[i].StatusCommandDU.IsNK && SearchInMassKnob(6) <= 0)
-              if (points[i].nk === SearchInMassKnob(7)) CountSubordinates();
+            if (
+              points[i].StatusCommandDU.IsNK &&
+              SearchInMassKnob(reg, area, subarea, 6) <= 0
+            )
+              if (points[i].nk === SearchInMassKnob(reg, area, subarea, 7))
+                CountSubordinates();
           }
         }
       }
@@ -121,11 +143,11 @@ const ManagementRightGrid = (props: {
 
   const HeaderMRG03 = () => {
     return props.mode === 1 ? (
-      <>{StrokaHeaderMode1()}</>
+      <>{HeaderMode1()}</>
     ) : props.mode === 2 ? (
-      <>{StrokaHeaderMode2()}</>
+      <>{HeaderMode2()}</>
     ) : (
-      <>{StrokaHeaderMode3()}</>
+      <>{HeaderMode3()}</>
     );
   };
 
@@ -185,22 +207,17 @@ const ManagementRightGrid = (props: {
           soobBP += " HК";
         } else soobBP = FormingSoobBPmin(massKnob, 7, soobBP, " нк");
         if (soobBP === "Назначен") soobBP = FormingSoobBPmax(massKnob, soobBP);
-        if (soobBP === "Назначен") soobBP = soobBP + " ВР";
+        if (soobBP === "Назначен") soobBP += " ВР";
         if (mass[i].isXT) {
-          soobXT = soobXT + "назначен/";
-          if (mass[i].releaseXT) {
-            soobXT += "включён";
-          } else soobXT += "выключен";
+          soobXT += "назначен/";
+          soobXT += mass[i].releaseXT ? "включён" : "выключен";
         } else soobXT += "отсутствует";
+        let rec = mass[i].areaNum + ":" + mass[i].subareaNum;
 
         resStr.push(
           <Grid item key={i} container>
             {StrokaGridInfo(0.3, styleMRG02Center, i + 1)}
-            {StrokaGridInfo(
-              1.1,
-              styleMRG02Center,
-              mass[i].areaNum + ":" + mass[i].subareaNum
-            )}
+            {StrokaGridInfo(1.1, styleMRG02Center, rec)}
             <Grid item xs={4.5} sx={styleMRG02}>
               Всего ДК&nbsp;<b>{mass[i].koldk}</b>&nbsp; на связи&nbsp;
               <b>{mass[i].sost}</b>&nbsp; подчинены&nbsp;<b>{mass[i].podch}</b>
@@ -258,21 +275,16 @@ const ManagementRightGrid = (props: {
       prosSv = sostGl.toString();
       prosPch = podchGl.toString();
       proXT = "ХТ для подрайона отсутствует";
-
       for (let j = 0; j < props.masxt.length; j++) {
         if (
           parseInt(points[0].area.num) === props.masxt[j].areaXT &&
           points[0].subarea === props.masxt[j].subareaXT
         ) {
           proXT = "Для данного подрайона проект ХТ загружен. ХТ ";
-          if (props.masxt[j].releaseXT) proXT += "включён. ";
-          if (!props.masxt[j].releaseXT) proXT += "выключен. ";
-
-          if (props.masxt[j].switchXT) proXT += "Pасчёт включён.";
-          if (!props.masxt[j].switchXT) proXT += "Pасчёт выключен.";
-
-          if (props.masxt[j].pknowXT > 0)
-            soobBP = " Выбран план №" + props.masxt[j].pknowXT.toString();
+          let masxt = props.masxt[j];
+          proXT += masxt.releaseXT ? "включён. " : "выключен. ";
+          proXT += masxt.switchXT ? "Pасчёт включён." : "Pасчёт выключен.";
+          soobBP = masxt.pknowXT ? " Выбран план №" + masxt.pknowXT : "";
         }
       }
     }
@@ -283,13 +295,13 @@ const ManagementRightGrid = (props: {
         for (let i = 0; i < massKnob.length; i++) {
           switch (massKnob[i].cmd) {
             case 5:
-              soobBP += " ПК" + massKnob[i].param.toString();
+              soobBP += " ПК" + massKnob[i].param;
               break;
             case 6:
-              soobBP += " CК" + massKnob[i].param.toString();
+              soobBP += " CК" + massKnob[i].param;
               break;
             case 7:
-              soobBP += " HК" + massKnob[i].param.toString();
+              soobBP += " HК" + massKnob[i].param;
           }
         }
         if (soobBP === "") {
@@ -320,10 +332,8 @@ const ManagementRightGrid = (props: {
       if (props.masknob[i].param > 0) massKnob.push(props.masknob[i]);
   }
 
-  console.log('props.mode:',props.mode)
-
   switch (props.mode) {
-    case 1:
+    case 1: // весь регион
       points = props.tflightt;
       if (props.open) {
         mass[0] = JSON.parse(JSON.stringify(massEtalon));
@@ -367,7 +377,7 @@ const ManagementRightGrid = (props: {
       }
       break;
 
-    case 2:
+    case 2: // весь район
       masSpis = points.filter((points) => points.area.num === props.areaa);
       points = masSpis;
       if (props.open) {
@@ -400,7 +410,7 @@ const ManagementRightGrid = (props: {
       }
       break;
 
-    default:
+    case 3: // весь подрайон
       masSpis = points.filter(
         (points) =>
           points.area.num === props.areaa && points.subarea === props.subArea
@@ -411,6 +421,9 @@ const ManagementRightGrid = (props: {
         if (!massClinch.includes(points[i].tlsost.num)) {
           sostGl++;
           let podchGlOld = podchGl;
+          let reg = points[i].region.num;
+          let area = points[i].area.num;
+          let subarea = points[i].subarea;
           switch (points[i].techMode) {
             case 2: // назначен ВР
               if (
@@ -419,9 +432,9 @@ const ManagementRightGrid = (props: {
                 !points[i].StatusCommandDU.IsNK
               ) {
                 if (
-                  SearchInMassKnob(5) <= 0 &&
-                  SearchInMassKnob(6) <= 0 && // не было ручного упр-я
-                  SearchInMassKnob(7) <= 0
+                  SearchInMassKnob(reg, area, subarea, 5) <= 0 &&
+                  SearchInMassKnob(reg, area, subarea, 6) <= 0 && // не было ручного упр-я
+                  SearchInMassKnob(reg, area, subarea, 7) <= 0
                 )
                   podchGl++;
               }
@@ -441,13 +454,22 @@ const ManagementRightGrid = (props: {
           // подчинён вручную?
           if (podchGl === podchGlOld) {
             if (points[i].StatusCommandDU.IsPK) {
-              if (points[i].pk === SearchInMassKnob(5)) podchGl++;
+              if (points[i].pk === SearchInMassKnob(reg, area, subarea, 5))
+                podchGl++;
             } else {
-              if (points[i].StatusCommandDU.IsCK && SearchInMassKnob(7) <= 0) {
-                if (points[i].ck === SearchInMassKnob(6)) podchGl++;
+              if (
+                points[i].StatusCommandDU.IsCK &&
+                SearchInMassKnob(reg, area, subarea, 7) <= 0
+              ) {
+                if (points[i].ck === SearchInMassKnob(reg, area, subarea, 6))
+                  podchGl++;
               } else {
-                if (points[i].StatusCommandDU.IsNK && SearchInMassKnob(6) <= 0)
-                  if (points[i].nk === SearchInMassKnob(7)) podchGl++;
+                if (
+                  points[i].StatusCommandDU.IsNK &&
+                  SearchInMassKnob(reg, area, subarea, 6) <= 0
+                )
+                  if (points[i].nk === SearchInMassKnob(reg, area, subarea, 7))
+                    podchGl++;
               }
             }
           }
@@ -457,12 +479,12 @@ const ManagementRightGrid = (props: {
 
   return (
     <>
-      <StrokaInfo />
+      {StrokaInfo()}
       <Grid item container sx={styleMRG04}>
         <Grid item xs={12}>
-          <HeaderMRG03 />
-          <Box sx={{ border: 0, overflowX: "auto", height: "81.6vh" }}>
-            {props.open && <StrokaMRG03 />}
+          {HeaderMRG03()}
+          <Box sx={{ overflowX: "auto", height: "81.6vh" }}>
+            {props.open && <>{StrokaMRG03()}</>}
           </Box>
         </Grid>
       </Grid>

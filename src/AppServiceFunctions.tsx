@@ -322,7 +322,7 @@ const StrokaGridHeader = (xss: number, write: string) => {
   );
 };
 
-export const StrokaHeaderMode1 = () => {
+export const HeaderMode1 = () => {
   return (
     <Grid container sx={styleMRGHeader}>
       {StrokaGridHeader(0.3, "№")}
@@ -334,7 +334,7 @@ export const StrokaHeaderMode1 = () => {
   );
 };
 
-export const StrokaHeaderMode2 = () => {
+export const HeaderMode2 = () => {
   return (
     <Grid container sx={styleMRGHeader}>
       {StrokaGridHeader(0.3, "№")}
@@ -346,7 +346,7 @@ export const StrokaHeaderMode2 = () => {
   );
 };
 
-export const StrokaHeaderMode3 = () => {
+export const HeaderMode3 = () => {
   return (
     <Grid container sx={styleMRGHeader}>
       {StrokaGridHeader(0.3, "№")}
@@ -370,7 +370,6 @@ export const StrokaGridInfo = (xss: number, stylXX: any, write: any) => {
     </Grid>
   );
 };
-
 
 export const FormingSoobBPmin = (
   massKnob: any,
@@ -410,11 +409,9 @@ export const TimeStr = (tim: number) => {
   let hour = Math.trunc(tim / 60);
   let min = tim % 60;
   if (hour < 10) timLiner = "0";
-  timLiner += hour.toString();
-  timLiner += ":";
+  timLiner += hour + ":";
   if (min < 10) timLiner += "0";
-  timLiner += min.toString();
-  return timLiner;
+  return (timLiner += min);
 };
 
 export const BadInput = (
