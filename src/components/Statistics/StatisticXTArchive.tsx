@@ -408,12 +408,14 @@ const StatisticXTArchive = (props: {
     for (let i = 0; i < points[areaId].Statistics.length; i++) {
       let inHour = points[areaId].Statistics[i].Hour;
       let inTime = inHour * 60 + points[areaId].Statistics[i].Min;
-      if (inHour < 24) {
+      //if (inHour < 24) {
+      let timeOffset = inHour === 0 && points[areaId].Statistics[i].Min === 0;
+      if (!timeOffset) {
         if (inTime % step === 0) {
           let numInMatrix = inTime / step - 1;
-          if (inHour === 0 && points[areaId].Statistics[i].Min === 0) {
-            numInMatrix = matrix.length - 1;
-          }
+          // if (inHour === 0 && points[areaId].Statistics[i].Min === 0) {
+          //   numInMatrix = matrix.length - 1;
+          // }
           for (let j = 0; j < points[areaId].Statistics[i].Datas.length; j++) {
             matrix[numInMatrix].Datas[j] = {
               ...points[areaId].Statistics[i].Datas[j],
