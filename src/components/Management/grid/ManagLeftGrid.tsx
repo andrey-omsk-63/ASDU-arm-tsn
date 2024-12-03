@@ -10,6 +10,8 @@ import ManagementKnobSK from "./ManagKnobSK";
 import ManagementKnobNK from "./ManagKnobNK";
 import ManagementKnobXT from "./ManagKnobXT";
 
+import { MesssgeLength } from "../../../AppServiceFunctions";
+
 import { Tflight } from "../../../interfaceMNG.d";
 import { XctrlInfo } from "../../../interfaceGl.d";
 
@@ -32,6 +34,7 @@ export interface Knob {
 
 let massKnop: Knob[] = [];
 let massKnopTemp: Knob[] = [];
+//let leftWidth = 0; // ширина левой части таблицы
 
 const ManagementLeftGrid = (props: {
   open: boolean;
@@ -47,6 +50,8 @@ const ManagementLeftGrid = (props: {
   const [areaa, setAreaa] = React.useState("0");
   const [subArea, setSubArea] = React.useState(0);
   const [trigger, setTrigger] = React.useState(false);
+  const [leftWidth, setLeftWidth] = React.useState(0);
+  const ref = React.useRef<any>(null);
 
   const [dataKnob, setDataKnob] = React.useState<Array<Knob>>([
     {
@@ -210,15 +215,24 @@ const ManagementLeftGrid = (props: {
       });
     };
 
+    //let reg = "Очень длинное название Иркутского региона длинное длинное";
+    let reg = points[0].region.nameRegion;
+    let regionWidth = MesssgeLength(reg, 14);
+
+    let aa = regionWidth / leftWidth;
+    let addition = aa <= 1 ? 20 : aa <= 2 ? 30 : aa <= 3 ? 60 : 80;
+    //console.log("MesssgeLength", regionWidth, leftWidth, aa, addition);
+
     const ButtonRegion = () => {
       let illum =
         mode === 1 && areaa === "0" && subArea === 0
-          ? styleButRegion01
-          : styleButRegion02;
+          ? styleButRegion01(addition)
+          : styleButRegion02(addition);
 
       return (
         <Button sx={illum} onClick={handleClickGl}>
-          <b>{points[0].region.nameRegion}</b>
+          {/* <b>{points[0].region.nameRegion}</b> */}
+          <b>{reg}</b>
         </Button>
       );
     };
@@ -226,7 +240,7 @@ const ManagementLeftGrid = (props: {
     return (
       <Stack direction="column">
         <Grid container>
-          <Grid item xs sx={{ p: 0.1, border: 0 }}>
+          <Grid item xs sx={{ p: 0.0, border: 0 }}>
             {ButtonRegion()}
           </Grid>
         </Grid>
@@ -403,11 +417,13 @@ const ManagementLeftGrid = (props: {
     );
   };
 
-  //console.log("BEGIN:", begin);
+  React.useLayoutEffect(() => {
+    setLeftWidth(ref.current.offsetWidth);
+  }, []);
 
   return (
     <Grid container>
-      <Grid item xs={2.5} sx={styleMG01}>
+      <Grid ref={ref} item xs={2.5} sx={styleMG01}>
         <Box sx={{ overflowX: "auto", height: "94.5vh" }}>
           {props.open && <SpisMLG />}
         </Box>

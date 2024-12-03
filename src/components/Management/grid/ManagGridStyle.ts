@@ -130,29 +130,61 @@ export const styleButArea02 = {
   textTransform: "unset !important",
 };
 
-export const styleButRegion01 = {
-  fontSize: 16,
-  marginTop: 0.5,
-  height: "21px",
-  bgcolor: "#BAE186", // тёмно-салатовый
-  border: "1px solid #93D145", // ярко-салатовый
-  color: "#5B1080",
-  borderRadius: 1,
-  boxShadow: 10,
-  textTransform: "unset !important",
+export const styleButRegion01 = (ht: number) => {
+  const styleButReg1 = {
+    fontSize: 14,
+    marginTop: 0.5,
+    marginRight: "5px",
+    height: 21,
+    bgcolor: "#BAE186", // тёмно-салатовый
+    border: "1px solid #93D145", // ярко-салатовый
+    color: "#5B1080",
+    borderRadius: 1,
+    boxShadow: 10,
+    textTransform: "unset !important",
+  };
+  const styleButReg2 = {
+    fontSize: 14,
+    marginTop: 0.5,
+    marginRight: "5px",
+    bgcolor: "#BAE186", // тёмно-салатовый
+    border: "1px solid #93D145", // ярко-салатовый
+    color: "#5B1080",
+    borderRadius: 1,
+    boxShadow: 10,
+    textTransform: "unset !important",
+  };
+  return ht === 20 ? styleButReg1 : styleButReg2;
 };
 
-export const styleButRegion02 = {
-  fontSize: 15,
-  marginTop: 0.5,
-  height: "20px",
-  bgcolor: "#E6F5D6", // светло-салатовый
-  color: "#5B1080",
-  border: "1px solid #000",
-  borderColor: "#d4d4d4", // серый
-  borderRadius: 1,
-  boxShadow: 1,
-  textTransform: "unset !important",
+export const styleButRegion02 = (ht: number) => {
+  const styleButReg1 = {
+    fontSize: 14,
+    marginTop: 0.5,
+    marginRight: "5px",
+    height: 21,
+    bgcolor: "#E6F5D6", // светло-салатовый
+    color: "#5B1080",
+    border: "1px solid #000",
+    borderColor: "#d4d4d4", // серый
+    borderRadius: 1,
+    boxShadow: 1,
+    textTransform: "unset !important",
+  };
+  const styleButReg2 = {
+    fontSize: 14,
+    marginTop: 0.5,
+    marginRight: "5px",
+    bgcolor: "#E6F5D6", // светло-салатовый
+    color: "#5B1080",
+    border: "1px solid #000",
+    borderColor: "#d4d4d4", // серый
+    borderRadius: 1,
+    boxShadow: 1,
+    textTransform: "unset !important",
+  };
+
+  return ht === 20 ? styleButReg1 : styleButReg2;
 };
 //====== ManagementKnob =========================================================
 export const stylePK = {

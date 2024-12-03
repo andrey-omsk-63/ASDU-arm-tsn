@@ -74,6 +74,29 @@ export const MakeInterval = (mode: number) => {
   return dat;
 };
 
+export const MesssgeLength = (text: string, fontSize: number) => {
+  function textWidth(text: string, fontProp: any) {
+    let tag = document.createElement("div");
+    tag.style.position = "absolute";
+    tag.style.left = "-999em";
+    tag.style.whiteSpace = "nowrap";
+    tag.style.font = fontProp;
+    tag.innerHTML = text;
+    document.body.appendChild(tag);
+    let result = tag.clientWidth;
+    document.body.removeChild(tag);
+    return result;
+  }
+
+  let theCSSprop = window
+    .getComputedStyle(document.body, null)
+    .getPropertyValue("font-family");
+  let bb = "bold " + fontSize + "px " + theCSSprop;
+  // let aa = textWidth('🐷🤡🐷', 'bold 13px Segoe UI');
+  // console.log('AA:', aa);
+  return textWidth(text, bb);
+};
+
 export const OldButtonMenu = (
   mode: string,
   soob: string,
