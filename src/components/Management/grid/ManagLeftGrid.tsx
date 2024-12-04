@@ -34,7 +34,9 @@ export interface Knob {
 
 let massKnop: Knob[] = [];
 let massKnopTemp: Knob[] = [];
-//let leftWidth = 0; // ширина левой части таблицы
+
+let addition = 80;
+let reg = "Очень длинное название Иркутского региона длинное длинное";
 
 const ManagementLeftGrid = (props: {
   open: boolean;
@@ -50,7 +52,7 @@ const ManagementLeftGrid = (props: {
   const [areaa, setAreaa] = React.useState("0");
   const [subArea, setSubArea] = React.useState(0);
   const [trigger, setTrigger] = React.useState(false);
-  const [leftWidth, setLeftWidth] = React.useState(0);
+  //const [leftWidth, setLeftWidth] = React.useState(0); // ширина левой части таблицы
   const ref = React.useRef<any>(null);
 
   const [dataKnob, setDataKnob] = React.useState<Array<Knob>>([
@@ -215,13 +217,7 @@ const ManagementLeftGrid = (props: {
       });
     };
 
-    //let reg = "Очень длинное название Иркутского региона длинное длинное";
-    let reg = points[0].region.nameRegion;
-    let regionWidth = MesssgeLength(reg, 14);
-
-    let aa = regionWidth / leftWidth;
-    let addition = aa <= 1 ? 20 : aa <= 2 ? 30 : aa <= 3 ? 60 : 80;
-    //console.log("MesssgeLength", regionWidth, leftWidth, aa, addition);
+    //console.log("MesssgeLength", addition);
 
     const ButtonRegion = () => {
       let illum =
@@ -231,8 +227,8 @@ const ManagementLeftGrid = (props: {
 
       return (
         <Button sx={illum} onClick={handleClickGl}>
-          {/* <b>{points[0].region.nameRegion}</b> */}
-          <b>{reg}</b>
+          <b>{points[0].region.nameRegion}</b>
+          {/* <b>{reg}</b> */}
         </Button>
       );
     };
@@ -418,8 +414,12 @@ const ManagementLeftGrid = (props: {
   };
 
   React.useLayoutEffect(() => {
-    setLeftWidth(ref.current.offsetWidth);
-  }, []);
+    //let regionWidth = MesssgeLength(reg, 14);
+    let regionWidth = MesssgeLength(points[0].region.nameRegion, 14);
+    let aa = regionWidth / ref.current.offsetWidth;
+    addition = aa <= 1 ? 20 : aa <= 2 ? 30 : aa <= 3 ? 60 : 80;
+    console.log("addition:", addition);
+  }, [points]);
 
   return (
     <Grid container>
