@@ -35,8 +35,30 @@ export interface Knob {
 let massKnop: Knob[] = [];
 let massKnopTemp: Knob[] = [];
 
+let dataKnob: Knob[] = [
+  {
+    cmd: 0,
+    param: 99,
+    region: "",
+    area: "",
+    subarea: 88,
+  },
+];
+
 let addition = 80;
-let reg = "Очень длинное название Иркутского региона длинное длинное";
+const colorSalat = "#E6F5D6"; // светло-салатовый
+const colorCrayola = "#BAE186"; // ярко-салатовый
+
+const colorCuan = "#D7EDFF"; // светло-голубой
+const colorSky = "#6ABCFF"; // ярко-голубой
+
+const colorGolden = "#FFFAC6"; // золотистый
+const colorBrightYell = "#FEE500"; // ярко-жёлтый
+
+const colorPinkish = "#F8CBDC"; // светло-розовый
+const colorAmaranth = "#F097B9"; // ярко-розовый
+
+//let reg = "Очень длинное название Иркутского региона длинное длинное";
 
 const ManagementLeftGrid = (props: {
   open: boolean;
@@ -52,27 +74,7 @@ const ManagementLeftGrid = (props: {
   const [areaa, setAreaa] = React.useState("0");
   const [subArea, setSubArea] = React.useState(0);
   const [trigger, setTrigger] = React.useState(false);
-  //const [leftWidth, setLeftWidth] = React.useState(0); // ширина левой части таблицы
   const ref = React.useRef<any>(null);
-
-  const [dataKnob, setDataKnob] = React.useState<Array<Knob>>([
-    {
-      cmd: 0,
-      param: 99,
-      region: "",
-      area: "",
-      subarea: 88,
-    },
-  ]);
-
-  const SetDataKnob = (knob: any, mode: number) => {
-    console.log("SetDataKnob:", mode, knob[0].cmd, knob);
-
-    if (!mode) {
-      setDataKnob(knob);
-      setTrigger(!trigger);
-    }
-  };
 
   const massKnob: Knob[] = [
     {
@@ -146,6 +148,8 @@ const ManagementLeftGrid = (props: {
     setSubArea(subarea);
   };
 
+  //const ColorSelection = () => {};
+
   const SpisAreaMLG = (props: { nom: string }) => {
     let masSpis: any = [];
     masSpis = mass.filter(
@@ -154,12 +158,43 @@ const ManagementLeftGrid = (props: {
 
     const SpisSubAreaMLG = () => {
       const ButtonSubArea = (i: number) => {
+        let coler = colorSalat;
+        let colerGl = colorCrayola;
+        let pk = 0;
+        let ck = 0;
+        for (let j = 0; j < massKnop.length; j++) {
+          if (
+            massKnop[j].area === masSpis[i].areaNum &&
+            massKnop[j].subarea === masSpis[i].subarea
+          ) {
+            if (massKnop[j].cmd === 5 && massKnop[j].param) {
+              coler = colorCuan; // ПК
+              colerGl = colorSky;
+              pk++;
+            } else {
+              if (massKnop[j].cmd === 6 && massKnop[j].param) {
+                if (!pk) {
+                  coler = colorGolden; // CК
+                  colerGl = colorBrightYell;
+                  ck++;
+                }
+              } else {
+                if (massKnop[j].cmd === 7 && massKnop[j].param)
+                  if (!pk && !ck) {
+                    coler = colorPinkish; // HК
+                    colerGl = colorAmaranth;
+                  }
+              }
+            }
+          }
+        }
+
         let illum =
           mode === 3 &&
           areaa === masSpis[i].areaNum &&
           subArea === masSpis[i].subarea
-            ? styleButSubArea01
-            : styleButSubArea02;
+            ? styleButSubArea01(colerGl)
+            : styleButSubArea02(coler);
 
         return (
           <Button
@@ -184,10 +219,40 @@ const ManagementLeftGrid = (props: {
     };
 
     const ButtonArea = () => {
+      let coler = colorSalat;
+      let colerGl = colorCrayola;
+      let pk = 0;
+      let ck = 0;
+      for (let j = 0; j < massKnop.length; j++) {
+        if (
+          massKnop[j].area === masSpis[0].areaNum &&
+          massKnop[j].subarea === 0
+        )
+          if (massKnop[j].cmd === 5 && massKnop[j].param) {
+            coler = colorCuan; // ПК
+            colerGl = colorSky;
+            pk++;
+          } else {
+            if (massKnop[j].cmd === 6 && massKnop[j].param) {
+              if (!pk) {
+                coler = colorGolden; // CК
+                colerGl = colorBrightYell;
+                ck++;
+              }
+            } else {
+              if (massKnop[j].cmd === 7 && massKnop[j].param)
+                if (!pk && !ck) {
+                  coler = colorPinkish; // HК
+                  colerGl = colorAmaranth;
+                }
+            }
+          }
+      }
+
       let illum =
         mode === 2 && areaa === masSpis[0].areaNum && subArea === 0
-          ? styleButArea01
-          : styleButArea02;
+          ? styleButArea01(colerGl)
+          : styleButArea02(coler);
 
       return (
         <Button sx={illum} onClick={() => handleClock(props.nom)}>
@@ -217,13 +282,39 @@ const ManagementLeftGrid = (props: {
       });
     };
 
-    //console.log("MesssgeLength", addition);
-
     const ButtonRegion = () => {
+      let coler = colorSalat;
+      let colerGl = colorCrayola;
+      let pk = 0;
+      let ck = 0;
+      for (let j = 0; j < massKnop.length; j++) {
+        if (massKnop[j].area === "0" && massKnop[j].subarea === 0) {
+          if (massKnop[j].cmd === 5 && massKnop[j].param) {
+            coler = colorCuan; // ПК
+            colerGl = colorSky;
+            pk++;
+          } else {
+            if (massKnop[j].cmd === 6 && massKnop[j].param) {
+              if (!pk) {
+                coler = colorGolden; // CК
+                colerGl = colorBrightYell;
+                ck++;
+              }
+            } else {
+              if (massKnop[j].cmd === 7 && massKnop[j].param)
+                if (!pk && !ck) {
+                  coler = colorPinkish; // HК
+                  colerGl = colorAmaranth;
+                }
+            }
+          }
+        }
+      }
+
       let illum =
         mode === 1 && areaa === "0" && subArea === 0
-          ? styleButRegion01(addition)
-          : styleButRegion02(addition);
+          ? styleButRegion01(addition, colerGl)
+          : styleButRegion02(addition, coler);
 
       return (
         <Button sx={illum} onClick={handleClickGl}>
@@ -234,14 +325,14 @@ const ManagementLeftGrid = (props: {
     };
 
     return (
-      <Stack direction="column">
+      <>
         <Grid container>
           <Grid item xs sx={{ p: 0.0, border: 0 }}>
             {ButtonRegion()}
           </Grid>
         </Grid>
         {SpisAreaGlob()}
-      </Stack>
+      </>
     );
   };
 
@@ -261,7 +352,8 @@ const ManagementLeftGrid = (props: {
             dubl = true;
         }
       }
-      if (!dubl && massKnop[i].param !== 99) massTemp.push(massKnop[i]);
+      if (!dubl && massKnop[i].param !== 99 && massKnop[i].param)
+        massTemp.push(massKnop[i]);
     }
     massKnop = massTemp;
   };
@@ -346,6 +438,17 @@ const ManagementLeftGrid = (props: {
     }
   };
 
+  const SetDataKnob = (knob: any, mode: number) => {
+    console.log("SetDataKnob:", mode, knob[0].cmd, knob);
+
+    if (!mode) {
+      //setDataKnob(knob);
+      dataKnob = knob;
+      CheckFourKnops();
+      setTrigger(!trigger);
+    }
+  };
+
   const CheckFourKnops = () => {
     if (dataKnob[0].cmd !== 0) {
       let flagDubl = true; // проверка дубликатов
@@ -421,6 +524,8 @@ const ManagementLeftGrid = (props: {
     console.log("addition:", addition);
   }, [points]);
 
+  //console.log("massKnop:", massKnop);
+
   return (
     <Grid container>
       <Grid ref={ref} item xs={2.5} sx={styleMG01}>
@@ -431,7 +536,7 @@ const ManagementLeftGrid = (props: {
       <Grid item xs sx={{ height: "94.5vh", marginTop: "0.5vh" }}>
         <Grid container>
           <FourKnops />
-          {CheckFourKnops()}
+          {/* {CheckFourKnops()} */}
           <ManagementRightGrid
             open={props.open}
             tflightt={points}

@@ -78,65 +78,82 @@ export const styleMG03 = {
   padding: 0.3,
 };
 
-export const styleButSubArea01 = {
-  fontSize: 13.3,
-  marginTop: 0.2,
-  height: "20px",
-  color: "black",
-  bgcolor: "#BAE186", // тёмно-салатовый
-  border: "1px solid #000",
-  borderColor: "#93D145", // ярко-салатовый
-  borderRadius: 1,
-  boxShadow: 10,
-  textTransform: "unset !important",
+export const styleButSubArea01 = (coler: string) => {
+  const styleButSubArea00 = {
+    fontSize: 13.3,
+    marginTop: 0.2,
+    height: "20px",
+    color: "black",
+    //bgcolor: "#BAE186", // тёмно-салатовый
+    bgcolor: coler,
+    border: "1px solid #000",
+    borderColor: "#93D145", // ярко-салатовый
+    borderRadius: 1,
+    boxShadow: 10,
+    textTransform: "unset !important",
+  };
+  return styleButSubArea00;
 };
 
-export const styleButSubArea02 = {
-  fontSize: 12,
-  marginTop: 0.2,
-  height: "18px",
-  color: "black",
-  bgcolor: "#E6F5D6", // светло-салатовый
-  border: "1px solid #000",
-  borderColor: "#d4d4d4", // серый
-  borderRadius: 1,
-  boxShadow: 1,
-  textTransform: "unset !important",
+export const styleButSubArea02 = (coler: string) => {
+  const styleButSubArea00 = {
+    fontSize: 12,
+    marginTop: 0.2,
+    height: "18px",
+    color: "black",
+    //bgcolor: "#E6F5D6", // светло-салатовый
+    bgcolor: coler,
+    border: "1px solid #000",
+    borderColor: "#d4d4d4", // серый
+    borderRadius: 1,
+    boxShadow: 1,
+    textTransform: "unset !important",
+  };
+  return styleButSubArea00;
 };
 
-export const styleButArea01 = {
-  fontSize: 12.5,
-  marginTop: 0.3,
-  height: "21px",
-  color: "black",
-  bgcolor: "#BAE186", // тёмно-салатовый
-  border: "1px solid #000",
-  borderColor: "#93D145", // ярко-салатовый
-  borderRadius: 1,
-  boxShadow: 10,
-  textTransform: "unset !important",
+export const styleButArea01 = (coler: string) => {
+  const styleButArea00 = {
+    fontSize: 12.5,
+    marginTop: 0.3,
+    height: "21px",
+    color: "black",
+    //bgcolor: "#BAE186", // тёмно-салатовый
+    bgcolor: coler,
+    border: "1px solid #000",
+    borderColor: "#93D145", // ярко-салатовый
+    borderRadius: 1,
+    boxShadow: 10,
+    textTransform: "unset !important",
+  };
+  return styleButArea00;
 };
 
-export const styleButArea02 = {
-  fontSize: 12,
-  marginTop: 0.3,
-  height: "20px",
-  color: "black",
-  bgcolor: "#E6F5D6", // светло-салатовый
-  border: "1px solid #000",
-  borderColor: "#d4d4d4", // серый
-  borderRadius: 1,
-  boxShadow: 1,
-  textTransform: "unset !important",
+export const styleButArea02 = (coler: string) => {
+  const styleButArea00 = {
+    fontSize: 12,
+    marginTop: 0.3,
+    height: "20px",
+    color: "black",
+    //bgcolor: "#E6F5D6", // светло-салатовый
+    bgcolor: coler,
+    border: "1px solid #000",
+    borderColor: "#d4d4d4", // серый
+    borderRadius: 1,
+    boxShadow: 1,
+    textTransform: "unset !important",
+  };
+  return styleButArea00;
 };
 
-export const styleButRegion01 = (ht: number) => {
+export const styleButRegion01 = (ht: number, coler: string) => {
   const styleButReg1 = {
     fontSize: 14,
     marginTop: 0.5,
     marginRight: "5px",
     height: 21,
-    bgcolor: "#BAE186", // тёмно-салатовый
+    //bgcolor: "#BAE186", // тёмно-салатовый
+    bgcolor: coler,
     border: "1px solid #93D145", // ярко-салатовый
     color: "#5B1080",
     borderRadius: 1,
@@ -147,7 +164,8 @@ export const styleButRegion01 = (ht: number) => {
     fontSize: 14,
     marginTop: 0.5,
     marginRight: "5px",
-    bgcolor: "#BAE186", // тёмно-салатовый
+    //bgcolor: "#BAE186", // тёмно-салатовый
+    bgcolor: coler,
     border: "1px solid #93D145", // ярко-салатовый
     color: "#5B1080",
     borderRadius: 1,
@@ -157,13 +175,14 @@ export const styleButRegion01 = (ht: number) => {
   return ht === 20 ? styleButReg1 : styleButReg2;
 };
 
-export const styleButRegion02 = (ht: number) => {
+export const styleButRegion02 = (ht: number, coler: string) => {
   const styleButReg1 = {
     fontSize: 14,
     marginTop: 0.5,
     marginRight: "5px",
     height: 21,
-    bgcolor: "#E6F5D6", // светло-салатовый
+    //bgcolor: "#E6F5D6", // светло-салатовый
+    bgcolor: coler,
     color: "#5B1080",
     border: "1px solid #000",
     borderColor: "#d4d4d4", // серый
@@ -175,7 +194,8 @@ export const styleButRegion02 = (ht: number) => {
     fontSize: 14,
     marginTop: 0.5,
     marginRight: "5px",
-    bgcolor: "#E6F5D6", // светло-салатовый
+    //bgcolor: "#E6F5D6", // светло-салатовый
+    bgcolor: coler,
     color: "#5B1080",
     border: "1px solid #000",
     borderColor: "#d4d4d4", // серый
@@ -183,7 +203,6 @@ export const styleButRegion02 = (ht: number) => {
     boxShadow: 1,
     textTransform: "unset !important",
   };
-
   return ht === 20 ? styleButReg1 : styleButReg2;
 };
 //====== ManagementKnob =========================================================
