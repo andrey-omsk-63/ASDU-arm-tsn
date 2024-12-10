@@ -55,8 +55,6 @@ let coler = colorSalat;
 let colerGl = colorCrayola;
 let pk = 0;
 let ck = 0;
-
-//let addition = 80;
 //let reg = "Очень длинное название Иркутского региона длинное длинное";
 
 const ManagementLeftGrid = (props: {
@@ -236,11 +234,9 @@ const ManagementLeftGrid = (props: {
       pk = 0;
       ck = 0;
       for (let j = 0; j < massKnop.length; j++) {
-        if (
-          massKnop[j].area === masSpis[0].areaNum &&
-          massKnop[j].subarea === 0
-        )
-          ColorSelection(j);
+        let area = massKnop[j].area;
+        let subar = massKnop[j].subarea;
+        if (area === masSpis[0].areaNum && !subar) ColorSelection(j);
       }
 
       let illum =
@@ -497,7 +493,7 @@ const ManagementLeftGrid = (props: {
     let aa = regionWidth / ref.current.offsetWidth;
     let addit = aa <= 1 ? 20 : aa <= 2 ? 30 : aa <= 3 ? 60 : 80;
     console.log("addition:", addit);
-    setAddition(addit)
+    setAddition(addit);
   }, [points]);
 
   return (
