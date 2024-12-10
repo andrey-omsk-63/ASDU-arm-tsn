@@ -21,7 +21,7 @@ const ButtonMenu = (props: {
     minWidth: dlSoob,
     maxWidth: dlSoob,
     height: "22px",
-    bgcolor: "#BAE186", // тёмно-салатовый
+    bgcolor: "#82e94a", // ярко-салатовый
     border: "1px solid #93D145", // ярко-салатовый
     borderRadius: 1,
     color: "black",

@@ -11,6 +11,24 @@ export const massEtalon = {
   releaseXT: false,
 };
 
+// Цвета для дерева  регион -> район -> подрайон:
+// ничего не назначено
+export const colorSalat = "#E6F5D6"; // светло-салатовый
+export const colorCrayola = "#82e94a"; // ярко-салатовый
+// назначено ПК
+export const colorCuan = "#D7EDFF"; // светло-голубой
+export const colorSky = "#6ABCFF"; // ярко-голубой
+// назначено СК
+export const colorGolden = "#FFFAC6"; // золотистый
+export const colorBrightYell = "#FEE500"; // ярко-жёлтый
+// назначено НК
+export const colorPinkish = "#F8CBDC"; // светло-розовый
+export const colorAmaranth = "#F097B9"; // ярко-розовый
+// назначено XT
+export const colorApricot = "#FDE8D9"; // абрикосовый
+export const colorBronze = "#D3AC7C"; // желто-коричневый
+
+
 //====== ManagementRightGrid ====================================================
 export const styleMgl = {
   border: 0,
@@ -257,28 +275,34 @@ export const styleBatMenu = {
   textTransform: "unset !important",
 };
 
-export const styleBatKnop01 = {
-  fontSize: 11,
-  height: "3.5vh",
-  color: "black",
-  bgcolor: "#BAE186", // тёмно-салатовый
-  border: "1px solid #000",
-  borderColor: "#93D145", // ярко-салатовый
-  borderRadius: 1,
-  boxShadow: 8,
-  marginRight: 1,
+export const styleBatKnop01 = (coler: string) => {
+  const styleBatKnop = {
+    fontSize: 11,
+    height: "3.5vh",
+    color: "black",
+    //bgcolor: "#BAE186", // тёмно-салатовый
+    bgcolor: coler,
+    border: "1px solid #d4d4d4", // серый
+    borderRadius: 1,
+    boxShadow: 8,
+    marginRight: 1,
+  };
+  return styleBatKnop;
 };
 
-export const styleBatKnop02 = {
-  fontSize: 11,
-  height: "3.5vh",
-  color: "black",
-  bgcolor: "#E6F5D6", // светло-салатовый
-  border: "1px solid #000",
-  borderColor: "#d4d4d4", // серый
-  borderRadius: 1,
-  boxShadow: 1,
-  marginRight: 1,
+export const styleBatKnop02 = (coler: string) => {
+  const styleBatKnop = {
+    fontSize: 11,
+    height: "3.5vh",
+    color: "black",
+    //bgcolor: "#E6F5D6", // светло-салатовый
+    bgcolor: coler,
+    border: "1px solid #d4d4d4", // серый
+    borderRadius: 1,
+    boxShadow: 1,
+    marginRight: 1,
+  };
+  return styleBatKnop;
 };
 //====== ManagementKnobXT =======================================================
 export const stylePKXt = {

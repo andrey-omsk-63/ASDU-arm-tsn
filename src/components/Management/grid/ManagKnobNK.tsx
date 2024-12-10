@@ -12,6 +12,8 @@ import { stylePK, styleSoob, styleModalEnd } from "./ManagGridStyle";
 import { styleSoobPusto, styleBatMenu } from "./ManagGridStyle";
 import { styleBatKnop01, styleBatKnop02 } from "./ManagGridStyle";
 
+import { colorPinkish, colorAmaranth } from "./ManagGridStyle"; // назначено НК
+
 export interface DataKnob {
   knop: Knob[];
 }
@@ -178,7 +180,7 @@ const ManagementKnobSK = (props: {
   };
 
   const ButtonKnop = () => {
-    let illum = open ? styleBatKnop01 : styleBatKnop02;
+    let illum = !open ? styleBatKnop01(colorPinkish) : styleBatKnop02(colorAmaranth);
 
     return (
       <Button sx={illum} onClick={handleOpen}>

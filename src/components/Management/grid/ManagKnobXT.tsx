@@ -13,6 +13,8 @@ import { styleSoobPusto, styleSoob, styleModalEnd } from "./ManagGridStyle";
 import { stylePKXt, styleBatMenuXt, styleMenuXt } from "./ManagGridStyle";
 import { styleBatKnop01, styleBatKnop02, styleXtSoob } from "./ManagGridStyle";
 
+import { colorApricot, colorBronze } from "./ManagGridStyle"; // назначено XT
+
 //import { Tflight } from "../../../interfaceMNG.d";
 
 export interface DataKnob {
@@ -209,7 +211,9 @@ const ManagementKnobXT = (props: {
   };
 
   const ButtonKnop = () => {
-    let illum = open ? styleBatKnop01 : styleBatKnop02;
+    let illum = !open
+      ? styleBatKnop01(colorApricot)
+      : styleBatKnop02(colorBronze);
     return (
       <Button sx={illum} onClick={handleOpen}>
         <b>XT</b>
@@ -224,6 +228,7 @@ const ManagementKnobXT = (props: {
   };
   //== Начало работы =======================================
   if (props.areaa === "0" && !props.subArea && beginWork) {
+    //if (props.areaa === "0" && !props.subArea) {
     // выбран весь регион
     setOpenSoobErr(true);
     setBeginWork(false);

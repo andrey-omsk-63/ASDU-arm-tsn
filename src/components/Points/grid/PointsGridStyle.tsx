@@ -32,7 +32,7 @@ export const stylePoint01 = {
   fontSize: 14.1,
   maxHeight: "22px",
   minHeight: "22px",
-  bgcolor: "#BAE186", // тёмно-салатовый
+  bgcolor: "#82e94a", // ярко-салатовый
   border: "1px solid #93D145", // ярко-салатовый
   boxShadow: "6px -6px 6px #d4d4d4",
   color: "black",
@@ -80,7 +80,7 @@ export const stylePLevel02 = {
   maxHeight: "20px",
   minHeight: "20px",
   color: "black",
-  bgcolor: "#BAE186", // тёмно-салатовый
+  bgcolor: "#82e94a", // ярко-салатовый
   border: "1px solid #93D145", // ярко-салатовый
   borderRadius: 1,
   boxShadow: 6,
@@ -107,7 +107,7 @@ export const stylePLevel04 = {
   fontSize: 14.5,
   height: "21px",
   color: "black",
-  bgcolor: "#BAE186", // тёмно-салатовый
+  bgcolor: "#82e94a", // ярко-салатовый
   border: "1px solid #93D145", // ярко-салатовый
   borderRadius: 1,
   boxShadow: 8,
@@ -143,7 +143,7 @@ export const stylePLevel06 = {
   height: "22px",
   width: "60px",
   transform: "rotate(270deg)",
-  bgcolor: "#BAE186", // тёмно-салатовый
+  bgcolor: "#82e94a", // ярко-салатовый
   border: "1px solid #93D145", // ярко-салатовый
   borderRadius: 1,
   boxShadow: 8,
@@ -265,7 +265,7 @@ export const styleBut021 = {
   maxWidth: "33px",
   minWidth: "33px",
   color: "black",
-  bgcolor: "#BAE186", // тёмно-салатовый
+  bgcolor: "#82e94a", // ярко-салатовый
   border: "1px solid #93D145", // ярко-салатовый
   borderRadius: 1,
   boxShadow: 12,

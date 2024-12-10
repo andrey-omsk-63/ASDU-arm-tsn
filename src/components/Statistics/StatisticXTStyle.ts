@@ -40,7 +40,7 @@ export const styleSt1 = {
   fontSize: 14.1,
   maxHeight: "22px",
   minHeight: "22px",
-  bgcolor: "#BAE186", // тёмно-салатовый
+  bgcolor: "#82e94a", // ярко-салатовый
   border: "1px solid #93D145", // ярко-салатовый
   boxShadow: "4px -6px 6px #d4d4d4",
   color: "black",
@@ -135,7 +135,7 @@ export const styleHeader033 = {
 export const styleBatton01 = {
   marginLeft: 0.4,
   fontSize: 12,
-  bgcolor: "#BAE186", // тёмно-салатовый
+  bgcolor: "#82e94a", // ярко-салатовый
   border: "1px solid #BAE186", // тёмно-салатовый
   borderRadius: 1,
   boxShadow: 10,
