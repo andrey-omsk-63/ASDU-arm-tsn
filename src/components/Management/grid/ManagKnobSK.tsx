@@ -6,6 +6,8 @@ import Button from "@mui/material/Button";
 
 import ManagKnobError from "./ManagKnobError";
 
+import { SendStopDevices } from "../../../AppServiceFunctions";
+
 import { debug, WS } from "../../../App";
 
 import { stylePK, styleSoob, styleModalEnd } from "./ManagGridStyle";
@@ -13,6 +15,8 @@ import { styleSoobPusto, styleBatMenu } from "./ManagGridStyle";
 import { styleBatKnop01, styleBatKnop02 } from "./ManagGridStyle";
 
 import { colorGolden, colorBrightYell } from "./ManagGridStyle"; // назначено СК
+
+import { massKnop } from "./ManagLeftGrid";
 
 export interface DataKnob {
   knop: Knob[];
@@ -53,21 +57,7 @@ const ManagementKnobSK = (props: {
 
   const handleOpen = () => {
     setOpen(true);
-    
-    const handleSendOpen = () => {
-      if (WS !== null) {
-        if (WS.readyState === WebSocket.OPEN) {
-          WS.send(
-            JSON.stringify({ type: "stopDevices", region: props.region })
-          );
-        } else {
-          setTimeout(() => {
-            handleSendOpen();
-          }, 1000);
-        }
-      }
-    };
-    if (!debug) handleSendOpen();
+    SendStopDevices(props.region);
     otpravka = true;
   };
 
@@ -181,7 +171,17 @@ const ManagementKnobSK = (props: {
   };
 
   const ButtonKnop = () => {
-    let illum = !open ? styleBatKnop01(colorGolden) : styleBatKnop02(colorBrightYell);
+    let coler = colorGolden;
+    for (let j = 0; j < massKnop.length; j++) {
+      if (
+        massKnop[j].area === props.areaa &&
+        massKnop[j].subarea === props.subArea &&
+        massKnop[j].cmd === 6 // CК
+      )
+        coler = colorBrightYell;
+    }
+
+    let illum = !open ? styleBatKnop01(coler) : styleBatKnop02(colorBrightYell);
 
     return (
       <Button sx={illum} onClick={handleOpen}>
@@ -200,7 +200,7 @@ const ManagementKnobSK = (props: {
       {ButtonKnop()}
       <Modal open={open} hideBackdrop={false}>
         <Box sx={stylePK}>
-        <Button sx={styleModalEnd} onClick={() => handleClose(1)}>
+          <Button sx={styleModalEnd} onClick={() => handleClose(1)}>
             <b>&#10006;</b>
           </Button>
           {openSoobErr && <ManagKnobError setOpen={setOpenSoobErr} />}

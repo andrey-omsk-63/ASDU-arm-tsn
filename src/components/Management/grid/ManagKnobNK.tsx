@@ -6,6 +6,8 @@ import Button from "@mui/material/Button";
 
 import ManagKnobError from "./ManagKnobError";
 
+import { SendStopDevices } from "../../../AppServiceFunctions";
+
 import { debug, WS } from "../../../App";
 
 import { stylePK, styleSoob, styleModalEnd } from "./ManagGridStyle";
@@ -13,6 +15,8 @@ import { styleSoobPusto, styleBatMenu } from "./ManagGridStyle";
 import { styleBatKnop01, styleBatKnop02 } from "./ManagGridStyle";
 
 import { colorPinkish, colorAmaranth } from "./ManagGridStyle"; // назначено НК
+
+import { massKnop } from "./ManagLeftGrid";
 
 export interface DataKnob {
   knop: Knob[];
@@ -53,21 +57,7 @@ const ManagementKnobSK = (props: {
 
   const handleOpen = () => {
     setOpen(true);
-
-    const handleSendOpen = () => {
-      if (WS !== null) {
-        if (WS.readyState === WebSocket.OPEN) {
-          WS.send(
-            JSON.stringify({ type: "stopDevices", region: props.region })
-          );
-        } else {
-          setTimeout(() => {
-            handleSendOpen();
-          }, 1000);
-        }
-      }
-    };
-    if (!debug) handleSendOpen();
+    SendStopDevices(props.region);
     otpravka = true;
   };
 
@@ -180,7 +170,17 @@ const ManagementKnobSK = (props: {
   };
 
   const ButtonKnop = () => {
-    let illum = !open ? styleBatKnop01(colorPinkish) : styleBatKnop02(colorAmaranth);
+    let coler = colorPinkish;
+    for (let j = 0; j < massKnop.length; j++) {
+      if (
+        massKnop[j].area === props.areaa &&
+        massKnop[j].subarea === props.subArea &&
+        massKnop[j].cmd === 7 // HК
+      )
+        coler = colorAmaranth;
+    }
+
+    let illum = !open ? styleBatKnop01(coler) : styleBatKnop02(colorAmaranth);
 
     return (
       <Button sx={illum} onClick={handleOpen}>

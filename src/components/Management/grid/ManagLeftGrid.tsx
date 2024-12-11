@@ -38,7 +38,8 @@ export interface Knob {
   subarea: number;
 }
 
-let massKnop: Knob[] = [];
+export let masXT: any = [];
+export let massKnop: Knob[] = [];
 let massKnopTemp: Knob[] = [];
 
 let dataKnob: Knob[] = [
@@ -64,8 +65,8 @@ const ManagementLeftGrid = (props: {
 }) => {
   const points = props.tflightt;
   const pointsXT = props.xctrll;
-  let masXT: any = [];
   let reGion = "1";
+  masXT = [];
 
   const [mode, setMode] = React.useState(1);
   const [areaa, setAreaa] = React.useState("0");
@@ -413,8 +414,8 @@ const ManagementLeftGrid = (props: {
     console.log("SetDataKnob:", mode, knob[0].cmd, knob);
 
     if (!mode) {
-      //setDataKnob(knob);
       dataKnob = knob;
+      if (knob[0].cmd === 13 ) {}
       CheckFourKnops();
       setTrigger(!trigger);
     }

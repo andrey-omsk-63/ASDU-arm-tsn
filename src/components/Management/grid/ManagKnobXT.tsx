@@ -7,6 +7,8 @@ import Button from "@mui/material/Button";
 import ManagKnobError from "./ManagKnobError";
 import ManagKnobXTEmpty from "./ManagKnobXTEmpty";
 
+import { SendStopDevices } from "../../../AppServiceFunctions";
+
 import { debug, WS } from "../../../App";
 
 import { styleSoobPusto, styleSoob, styleModalEnd } from "./ManagGridStyle";
@@ -14,6 +16,8 @@ import { stylePKXt, styleBatMenuXt, styleMenuXt } from "./ManagGridStyle";
 import { styleBatKnop01, styleBatKnop02, styleXtSoob } from "./ManagGridStyle";
 
 import { colorApricot, colorBronze } from "./ManagGridStyle"; // назначено XT
+
+import { masXT } from "./ManagLeftGrid";
 
 //import { Tflight } from "../../../interfaceMNG.d";
 
@@ -63,22 +67,8 @@ const ManagementKnobXT = (props: {
 
   const handleOpen = () => {
     setOpen(true);
-
-    const handleSendOpen = () => {
-      if (WS !== null) {
-        if (WS.readyState === WebSocket.OPEN) {
-          WS.send(
-            JSON.stringify({ type: "stopDevices", region: props.region })
-          );
-          otpravka = true;
-        } else {
-          setTimeout(() => {
-            handleSendOpen();
-          }, 1000);
-        }
-      }
-    };
-    if (!debug) handleSendOpen();
+    SendStopDevices(props.region);
+    otpravka = true;
   };
 
   const handleClose = (mode: number) => {
@@ -211,9 +201,19 @@ const ManagementKnobXT = (props: {
   };
 
   const ButtonKnop = () => {
-    let illum = !open
-      ? styleBatKnop01(colorApricot)
-      : styleBatKnop02(colorBronze);
+    let coler = colorApricot;
+
+    for (let j = 0; j < masXT.length; j++) {
+      if (
+        masXT[j].areaXT === Number(props.areaa) &&
+        masXT[j].subareaXT === props.subArea &&
+        masXT[j].releaseXT // XT
+      )
+        coler = colorBronze;
+    }
+
+    let illum = !open ? styleBatKnop01(coler) : styleBatKnop02(colorBronze);
+
     return (
       <Button sx={illum} onClick={handleOpen}>
         <b>XT</b>
@@ -228,7 +228,6 @@ const ManagementKnobXT = (props: {
   };
   //== Начало работы =======================================
   if (props.areaa === "0" && !props.subArea && beginWork) {
-    //if (props.areaa === "0" && !props.subArea) {
     // выбран весь регион
     setOpenSoobErr(true);
     setBeginWork(false);

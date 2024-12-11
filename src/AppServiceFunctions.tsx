@@ -25,6 +25,8 @@ import { styleMRG03 } from "./components/Management/grid/ManagGridStyle";
 import { styleMRGHeader } from "./components/Management/grid/ManagGridStyle";
 import { styleModalEnd } from "./components/Points/grid/PointsGridStyle";
 
+import { debug, WS } from "./App";
+
 import { XctrlInfo } from "./interfaceGl.d";
 
 export const handleKey = (event: any) => {
@@ -72,6 +74,21 @@ export const MakeInterval = (mode: number) => {
       dat = ["1", "5", "10", "15", "30", "60"];
   }
   return dat;
+};
+
+export const SendStopDevices = (propsRegion: string) => {
+  const handleSendOpen = () => {
+    if (WS !== null) {
+      if (WS.readyState === WebSocket.OPEN) {
+        WS.send(JSON.stringify({ type: "stopDevices", region: propsRegion }));
+      } else {
+        setTimeout(() => {
+          handleSendOpen();
+        }, 1000);
+      }
+    }
+  };
+  if (!debug) handleSendOpen();
 };
 
 export const MesssgeLength = (text: string, fontSize: number) => {
@@ -312,7 +329,7 @@ export const SendSocketgetStatisticsList = (
 };
 
 export const DispatchXctrl = (data: any, pointsEtalon: XctrlInfo[]) => {
-  let pointsEtalonXctrl = pointsEtalon;
+  let pointsEtalonXctrl = JSON.parse(JSON.stringify(pointsEtalon));
   for (let i = 0; i < pointsEtalonXctrl.length; i++) {
     if (
       data.msg.subarea === pointsEtalonXctrl[i].subarea &&
