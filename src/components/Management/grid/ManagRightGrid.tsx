@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 
 import { FormingSoobBPmin } from "../../../AppServiceFunctions";
 import { FormingSoobBPmax } from "../../../AppServiceFunctions";
-import { HeaderMode1 } from "../../../AppServiceFunctions";
+import { HeaderMode1, FormingSoobBPinfo } from "../../../AppServiceFunctions";
 import { HeaderMode2, HeaderMode3 } from "../../../AppServiceFunctions";
 import { StrokaGridInfo } from "../../../AppServiceFunctions";
 
@@ -171,9 +171,7 @@ const ManagementRightGrid = (props: {
         } else soobBP = FormingSoobBPmin(massKnob, 7, soobBP, " нк");
         if (soobBP === "Назначен") soobBP = FormingSoobBPmax(massKnob, soobBP);
         if (soobBP === "Назначен") soobBP += " ВР";
-        if (mass[i].isXT) {
-          soobXT += "назначен";
-        } else soobXT += "отсутствует";
+        soobXT += mass[i].isXT ? "назначен" : "отсутствует";
 
         resStr.push(
           <Grid item key={i} container>
@@ -288,27 +286,7 @@ const ManagementRightGrid = (props: {
         }
       }
     }
-    if (soobBP === "") {
-      soobBP = "Назначен ВР";
-      if (massKnob.length > 0) {
-        soobBP = "";
-        for (let i = 0; i < massKnob.length; i++) {
-          switch (massKnob[i].cmd) {
-            case 5:
-              soobBP += " ПК" + massKnob[i].param;
-              break;
-            case 6:
-              soobBP += " CК" + massKnob[i].param;
-              break;
-            case 7:
-              soobBP += " HК" + massKnob[i].param;
-          }
-        }
-        if (soobBP === "") {
-          soobBP = "Назначен ВР";
-        } else soobBP = "Назначен" + soobBP;
-      }
-    }
+    soobBP = FormingSoobBPinfo(massKnob, soobBP); // информация о запущенных ПК, СК, НК
 
     return (
       <Grid item xs={12} sx={styleMgl}>

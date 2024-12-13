@@ -12,6 +12,8 @@ import ManagementKnobXT from "./ManagKnobXT";
 
 import { MesssgeLength } from "../../../AppServiceFunctions";
 
+//import { debug } from "../../../App";
+
 import { Tflight } from "../../../interfaceMNG.d";
 import { XctrlInfo } from "../../../interfaceGl.d";
 
@@ -41,6 +43,7 @@ export interface Knob {
 export let masXT: any = [];
 export let massKnop: Knob[] = [];
 let massKnopTemp: Knob[] = [];
+let firstEntry = true;
 
 let dataKnob: Knob[] = [
   {
@@ -100,6 +103,37 @@ const ManagementLeftGrid = (props: {
     let j = 0;
 
     for (let i = 1; i < points.length; i++) {
+      if (firstEntry) {
+        // создание массива massKnop
+        if (points[i].pk || points[i].ck || points[i].nk) {
+          let dataKnobTemp: Knob[] = [
+            {
+              cmd: 0,
+              param: 0,
+              region: points[i].region.num,
+              area: points[i].area.num,
+              subarea: points[i].subarea,
+            },
+          ];
+          dataKnob[0].subarea = points[i].subarea;
+          if (points[i].pk && points[i].StatusCommandDU.isPK) {
+            dataKnobTemp[0].cmd = 5; // ПК
+            dataKnobTemp[0].param = points[i].pk;
+            massKnop.push(JSON.parse(JSON.stringify(dataKnobTemp[0])));
+          }
+          if (points[i].ck && points[i].StatusCommandDU.isCK) {
+            dataKnobTemp[0].cmd = 6; // CК
+            dataKnobTemp[0].param = points[i].ck;
+            massKnop.push(JSON.parse(JSON.stringify(dataKnobTemp[0])));
+          }
+          if (points[i].nk && points[i].StatusCommandDU.isNK) {
+            dataKnobTemp[0].cmd = 7; // HК
+            dataKnobTemp[0].param = points[i].nk;
+            massKnop.push(JSON.parse(JSON.stringify(dataKnobTemp[0])));
+          }
+        }
+      }
+      // создание массива номеров районов
       if (
         mass[j].areaNum !== points[i].area.num ||
         mass[j].subarea !== points[i].subarea
@@ -113,7 +147,26 @@ const ManagementLeftGrid = (props: {
         };
       }
     }
-    //убираем дубликаты
+    if (firstEntry) {
+      console.log("Points:", points);
+      console.log("###:", JSON.parse(JSON.stringify(massKnop)));
+
+      //убираем дубликаты в massKnop
+      massKnop = massKnop.filter(
+        (value, index, self) =>
+          index ===
+          self.findIndex(
+            (t) =>
+              t.cmd === value.cmd &&
+              t.param === value.param &&
+              t.region === value.region &&
+              t.area === value.area &&
+              t.subarea === value.subarea
+          )
+      );
+      firstEntry = false;
+    }
+    //убираем дубликаты в masAreaNum
     masAreaNum = masRab.filter((element: any, index: any) => {
       return masRab.indexOf(element) === index;
     });
@@ -188,6 +241,7 @@ const ManagementLeftGrid = (props: {
             ColorSelection(j);
         }
         if (coler === colorSalat) {
+          // проверка наличия ХТ - самый нижний приоритет
           for (let j = 0; j < masXT.length; j++) {
             if (
               masXT[j].areaXT === Number(area) &&
@@ -415,7 +469,8 @@ const ManagementLeftGrid = (props: {
 
     if (!mode) {
       dataKnob = knob;
-      if (knob[0].cmd === 13 ) {}
+      if (knob[0].cmd === 13) {
+      }
       CheckFourKnops();
       setTrigger(!trigger);
     }
@@ -447,8 +502,11 @@ const ManagementLeftGrid = (props: {
       if (dataKnob[0].area === "0" && dataKnob[0].subarea === 0) {
         RecordInAria();
       } else RecordInSubaria();
-      // сортировка по cmd
-      massKnop.sort((prev, next) => prev.cmd - next.cmd);
+      massKnop.sort((prev, next) => prev.cmd - next.cmd); // сортировка по cmd
+      let masrab: Knob[] = []; // удаление записей с param = 0
+      for (let i = 0; i < massKnop.length; i++)
+        if (massKnop[i].param) masrab.push(massKnop[i]);
+      if (masrab.length) massKnop = masrab;
     }
   };
 

@@ -443,6 +443,32 @@ export const FormingSoobBPmax = (massKnob: any, soobBP: string) => {
   }
   return soobbp;
 };
+
+export const FormingSoobBPinfo = (massKnob: any, SoobBP: string) => {
+  let soobBP = SoobBP;
+  if (soobBP === "") {
+    soobBP = "Назначен ВР";
+    if (massKnob.length > 0) {
+      soobBP = "";
+      for (let i = 0; i < massKnob.length; i++) {
+        switch (massKnob[i].cmd) {
+          case 5:
+            soobBP += " ПК" + massKnob[i].param;
+            break;
+          case 6:
+            soobBP += " CК" + massKnob[i].param;
+            break;
+          case 7:
+            soobBP += " HК" + massKnob[i].param;
+        }
+      }
+      if (soobBP === "") {
+        soobBP = "Назначен ВР";
+      } else soobBP = "Назначен" + soobBP;
+    }
+  }
+  return soobBP;
+};
 //=== PointsLevel2Baza =============================
 export const TimeStr = (tim: number) => {
   let timLiner = "";
