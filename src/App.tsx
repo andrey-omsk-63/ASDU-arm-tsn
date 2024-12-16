@@ -96,6 +96,7 @@ let flagOpenWS = true;
 let flagOpenDebug = true;
 let pointsEtalonXctrl: XctrlInfo[];
 let flagEtalonInf = true;
+export let pointsTFL: Tflight[];
 
 const date = new Date();
 const tekYear = date.getFullYear();
@@ -241,6 +242,7 @@ const App = () => {
         case "getDevices":
           //console.log("Пришло tflight:", data.tflight);
           setPointsTfl(data.tflight ?? []);
+          pointsTFL = data.tflight ?? [];
           !isOpenDev && setIsOpenDev(true);
           updateDevice = !updateDevice;
           break;
@@ -330,6 +332,7 @@ const App = () => {
         : "./";
     axios.get(road + "otladkaPoints.json").then(({ data }) => {
       setPointsTfl(data.data.tflight);
+      pointsTFL = data.data.tflight ?? [];
       setIsOpenDev(true);
     });
     axios.get(road + "otladkaXctrl.json").then(({ data }) => {

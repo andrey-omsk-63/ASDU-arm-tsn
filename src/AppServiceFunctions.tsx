@@ -25,7 +25,7 @@ import { styleMRG03 } from "./components/Management/grid/ManagGridStyle";
 import { styleMRGHeader } from "./components/Management/grid/ManagGridStyle";
 import { styleModalEnd } from "./components/Points/grid/PointsGridStyle";
 
-import { debug, WS } from "./App";
+import { debug, WS, pointsTFL } from "./App";
 
 import { XctrlInfo } from "./interfaceGl.d";
 
@@ -929,5 +929,20 @@ export const KnobBatCl = (setValue: Function) => {
       <b>Чистка</b>
     </Button>
   );
+};
+//=== StatisticsNew ================================
+export const NameVertex = (area: number, subarea: number, id: number) => {
+  let nameId = "";
+  for (let j = 0; j < pointsTFL.length; j++) {
+    if (
+      Number(pointsTFL[j].area.num) === area &&
+      pointsTFL[j].subarea === subarea &&
+      pointsTFL[j].ID === id
+    ) {
+      nameId = pointsTFL[j].description;
+      break;
+    }
+  }
+  return nameId;
 };
 //==================================================

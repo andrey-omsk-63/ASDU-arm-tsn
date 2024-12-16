@@ -10,6 +10,8 @@ import { WS } from "../../App";
 
 import StatisticXTNew from "./StatisticXTNew";
 
+import { NameVertex } from "../../AppServiceFunctions";
+
 import { styleSt1, styleSt11, styleSt2 } from "./StatisticXTStyle";
 import { styleStError } from "../../AppStyle";
 
@@ -142,8 +144,14 @@ const StatisticsNew = (props: {
         </Box>
       );
     } else {
+      //console.log("###:", pointsEtalon, pointsTFL);
+
       for (let i = 0; i < pointsEtalon.length; i++) {
         let pEt = pointsEtalon[i];
+        let nameId = NameVertex(pEt.area, pEt.subarea, pEt.id);
+
+        console.log("Name:", i, nameId);
+
         labl = pEt.area + ":" + pEt.subarea + ":" + pEt.id;
         let illum = value === i ? styleSt1 : styleSt11;
         resSps.push(<Tab key={i} sx={illum} label={labl} />);

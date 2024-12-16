@@ -8,6 +8,8 @@ import Tab from "@mui/material/Tab";
 
 import StatisticXTArchive from "./StatisticXTArchive";
 
+import { NameVertex } from "../../AppServiceFunctions";
+
 import { WS } from "../../App";
 
 import { styleSt1, styleSt11, styleSt2 } from "./StatisticXTStyle";
@@ -134,6 +136,10 @@ const StatisticsArchive = (props: {
     } else {
       for (let i = 0; i < pointsEtalon.length; i++) {
         let pEt = pointsEtalon[i];
+        let nameId = NameVertex(pEt.area, pEt.subarea, pEt.id);
+
+        console.log("Name:", i, nameId);
+
         labl = pEt.area + ":" + pEt.subarea + ":" + pEt.id;
         let illum = value === i ? styleSt1 : styleSt11;
         resSps.push(<Tab key={i} sx={illum} label={labl} />);
