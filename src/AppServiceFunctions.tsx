@@ -161,7 +161,7 @@ export const OldButtonMenu = (
     left: "38.2%",
     top: "0.4%",
     fontSize: 11,
-    color: "#969696",
+    color: "#969696", // серый
   };
 
   const TurnOnHint = () => {

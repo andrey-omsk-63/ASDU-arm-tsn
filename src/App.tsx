@@ -322,7 +322,7 @@ const App = () => {
   //   update = !update
   //   setTrigger(!trigger);
   //   console.log("DoTimerId:", timerId, update);
-  // };
+  // }; Сохранить
 
   if (debug && flagOpenDebug) {
     console.log("РЕЖИМ ОТЛАДКИ!!! ");

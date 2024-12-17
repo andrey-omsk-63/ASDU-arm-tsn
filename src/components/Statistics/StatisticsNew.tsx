@@ -12,7 +12,8 @@ import StatisticXTNew from "./StatisticXTNew";
 
 import { NameVertex } from "../../AppServiceFunctions";
 
-import { styleSt1, styleSt11, styleSt2 } from "./StatisticXTStyle";
+import { styleSt1, styleSt11, styleSt2, styleHead } from "./StatisticXTStyle";
+import { styleHint } from "./StatisticXTStyle";
 import { styleStError } from "../../AppStyle";
 
 import { Statistic } from "../../interfaceStat.d";
@@ -22,6 +23,8 @@ let pointsEtalon: Statistic[];
 let flagEtalon = true;
 let massInterval: any = [];
 let massIntervalEt: any = [];
+let head = "";
+let nameHint = "";
 
 const StatisticsNew = (props: {
   open: boolean;
@@ -133,31 +136,69 @@ const StatisticsNew = (props: {
     );
   };
 
-  const SpisXT = () => {
-    let resSps: any = [];
-    let labl: string = "";
+  const MainMenu = () => {
+    const [hint, setHint] = React.useState(false);
 
-    if (pointsEtalon.length === 0) {
-      resSps.push(
-        <Box key={1} sx={styleStError}>
-          <h1>Нет данных по статистике</h1>
-        </Box>
-      );
-    } else {
-      //console.log("###:", pointsEtalon, pointsTFL);
+    const SetHint = (i: number, mode: boolean) => {
+      let pEt = pointsEtalon[i];
+      nameHint = NameVertex(pEt.area, pEt.subarea, pEt.id);
+      setHint(mode);
+    };
 
-      for (let i = 0; i < pointsEtalon.length; i++) {
-        let pEt = pointsEtalon[i];
-        let nameId = NameVertex(pEt.area, pEt.subarea, pEt.id);
+    const SpisXT = () => {
+      let resSps: any = [];
+      let labl: string = "";
+      head = "";
 
-        console.log("Name:", i, nameId);
+      if (pointsEtalon.length === 0) {
+        resSps.push(
+          <Box key={1} sx={styleStError}>
+            <h1>Нет данных по статистике</h1>
+          </Box>
+        );
+      } else {
+        for (let i = 0; i < pointsEtalon.length; i++) {
+          let pEt = pointsEtalon[i];
+          let nameId = NameVertex(pEt.area, pEt.subarea, pEt.id);
 
-        labl = pEt.area + ":" + pEt.subarea + ":" + pEt.id;
-        let illum = value === i ? styleSt1 : styleSt11;
-        resSps.push(<Tab key={i} sx={illum} label={labl} />);
+          if (value === i) head = nameId;
+          labl = pEt.area + ":" + pEt.subarea + ":" + pEt.id;
+          let illum = value === i ? styleSt1 : styleSt11;
+          resSps.push(
+            <Tab
+              key={i}
+              sx={illum}
+              label={labl}
+              onMouseEnter={() => SetHint(i, true)}
+              onMouseLeave={() => SetHint(i, false)}
+            />
+          );
+        }
       }
-    }
-    return resSps;
+      return resSps;
+    };
+
+    return (
+      <>
+        <Box sx={styleSt2}>
+          {hint && <Box sx={styleHint}>{nameHint}</Box>}
+          <Tabs
+            sx={{ maxHeight: "20px", minHeight: "20px" }}
+            value={value}
+            onChange={handleChange}
+            variant="scrollable"
+            textColor="inherit"
+            scrollButtons={true}
+            allowScrollButtonsMobile
+            TabIndicatorProps={{ sx: { backgroundColor: "#93D145" } }}
+          >
+            {SpisXT()}
+          </Tabs>
+        </Box>
+        <Box sx={{ height: "12px" }}></Box>
+        <Box sx={styleHead}>{head}</Box>
+      </>
+    );
   };
 
   const CheckClinch = () => {
@@ -181,20 +222,7 @@ const StatisticsNew = (props: {
       {isOpen && pointsEtalon.length === 0 && <>{handleChangeNull()} </>}
       {isOpen && pointsEtalon.length !== 0 && (
         <>
-          <Box sx={styleSt2}>
-            <Tabs
-              sx={{ maxHeight: "20px", minHeight: "20px" }}
-              value={value}
-              onChange={handleChange}
-              variant="scrollable"
-              textColor="inherit"
-              scrollButtons={true}
-              allowScrollButtonsMobile
-              TabIndicatorProps={{ sx: { backgroundColor: "#93D145" } }}
-            >
-              {SpisXT()}
-            </Tabs>
-          </Box>
+          <MainMenu />
           {pointsEtalon.length > 0 && !clinch && (
             <StatisticXTNew
               open={isOpen}

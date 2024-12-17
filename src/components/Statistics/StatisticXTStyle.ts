@@ -31,8 +31,8 @@ export const styleBackdrop = {
   color: "#fff",
   marginLeft: "0.3vh",
   marginRight: "1.7vh",
-  marginTop: "34vh",
-  marginBottom: "4vh",
+  marginTop: "37vh",
+  marginBottom: "2vh",
   zIndex: (theme: any) => theme.zIndex.drawer + 1,
 };
 
@@ -132,6 +132,16 @@ export const styleHeader033 = {
   lineHeight: 1.5,
 };
 
+export const styleHead = {
+  height: "20px",
+  textAlign: "center",
+  fontSize: 15.0,
+  fontWeight: 500,
+  //color: "#5B1080", // сиреневый
+  color: "#97139B", // светло-сиреневый
+  textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
+};
+
 export const styleBatton01 = {
   marginLeft: 0.4,
   fontSize: 12,
@@ -197,4 +207,13 @@ export const styleStatMain = {
   border: "1px solid #d4d4d4", // серый
   borderRadius: 1,
   boxShadow: 12,
+};
+
+export const styleHint = {
+  position: "absolute",
+  left: "12px",
+  marginTop: "20px",
+  fontSize: 12.5,
+  color: "#969696", // серый
+  textShadow: "0px 0px 0px rgba(0,0,0,0.3)",
 };
