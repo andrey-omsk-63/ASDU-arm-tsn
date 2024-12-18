@@ -133,13 +133,14 @@ export const styleHeader033 = {
 };
 
 export const styleHead = {
-  height: "20px",
+  height: "16px",
   textAlign: "center",
   fontSize: 15.0,
   fontWeight: 500,
   //color: "#5B1080", // сиреневый
   color: "#97139B", // светло-сиреневый
   textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
+  //border: 1,
 };
 
 export const styleBatton01 = {

@@ -477,7 +477,7 @@ const StatisticXTNew = (props: {
   Output();
 
   return (
-    <Box sx={{ marginTop: 0.1, marginLeft: -2.5, marginRight: -4 }}>
+    <Box sx={{ marginTop: 0.3, marginLeft: -2.5, marginRight: -4 }}>
       <Grid container item sx={{ height: "28vh" }}>
         <Grid item xs={12} sx={styleStatMain}>
           <StatGraf00 />
@@ -486,7 +486,7 @@ const StatisticXTNew = (props: {
       <Grid container item sx={{ marginTop: 1 }}>
         <Grid item xs={24} sx={styleStatMain}>
           <StatisticHeader />
-          <Box sx={{ overflowX: "auto", height: "57vh" }}>
+          <Box sx={{ overflowX: "auto", height: "56.5vh" }}>
             {openLoader && <Dinama />}
             {!openLoader && <>{StatSpis()}</>}
           </Box>

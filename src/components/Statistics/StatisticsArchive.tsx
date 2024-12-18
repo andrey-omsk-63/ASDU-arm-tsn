@@ -186,33 +186,6 @@ const StatisticsArchive = (props: {
     );
   };
 
-  // const SpisXT = () => {
-  //   let resSps: any = [];
-  //   let labl: string = "";
-  //   head = "";
-
-  //   if (pointsEtalon.length === 0) {
-  //     resSps.push(
-  //       <Box key={1}>
-  //         <h1>Нет данных по статистике</h1>
-  //       </Box>
-  //     );
-  //   } else {
-  //     for (let i = 0; i < pointsEtalon.length; i++) {
-  //       let pEt = pointsEtalon[i];
-  //       let nameId = NameVertex(pEt.area, pEt.subarea, pEt.id);
-
-  //       console.log("Name:", i, nameId);
-
-  //       if (value === i) head = nameId;
-  //       labl = pEt.area + ":" + pEt.subarea + ":" + pEt.id;
-  //       let illum = value === i ? styleSt1 : styleSt11;
-  //       resSps.push(<Tab key={i} sx={illum} label={labl} />);
-  //     }
-  //   }
-  //   return resSps;
-  // };
-
   const CheckClinch = () => {
     let clinch = false;
     if (!flagEtalon) {

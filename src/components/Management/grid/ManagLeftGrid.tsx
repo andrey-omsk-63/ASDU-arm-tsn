@@ -551,7 +551,7 @@ const ManagementLeftGrid = (props: {
     let regionWidth = MesssgeLength(points[0].region.nameRegion, 14);
     let aa = regionWidth / ref.current.offsetWidth;
     let addit = aa <= 1 ? 20 : aa <= 2 ? 30 : aa <= 3 ? 60 : 80;
-    console.log("addition:", addit);
+    //console.log("addition:", addit);
     setAddition(addit);
   }, [points]);
 
