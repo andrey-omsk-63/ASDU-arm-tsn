@@ -45,10 +45,8 @@ export const MakeDate = (tekData: Date) => {
   return sDate;
 };
 
-export const MakeDateRus = (dat: string) => {
-  let rusDat = dat.slice(8) + "-" + dat.slice(5, 7);
-  rusDat += "-" + dat.slice(0, 4);
-  return rusDat;
+export const MakeDateRus = (dt: string) => {
+  return dt.slice(-2) + "-" + dt.slice(5, 7) + "-" + dt.slice(0, 4);
 };
 
 export const MakeInterval = (mode: number) => {

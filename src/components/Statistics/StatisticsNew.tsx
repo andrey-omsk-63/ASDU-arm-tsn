@@ -10,7 +10,7 @@ import { WS } from "../../App";
 
 import StatisticXTNew from "./StatisticXTNew";
 
-import { NameVertex } from "../../AppServiceFunctions";
+import { NameVertex, MakeDateRus } from "../../AppServiceFunctions";
 
 import { styleSt1, styleSt11, styleSt2 } from "./StatisticXTStyle";
 import { styleHint } from "./StatisticXTStyle";
@@ -24,6 +24,7 @@ let flagEtalon = true;
 let massInterval: any = [];
 let massIntervalEt: any = [];
 export let head = "";
+
 let nameHint = "";
 
 const StatisticsNew = (props: {
@@ -162,7 +163,7 @@ const StatisticsNew = (props: {
           let pEt = pointsEtalon[i];
           let nameId = NameVertex(pEt.area, pEt.subarea, pEt.id);
 
-          if (value === i) head = nameId;
+          if (value === i) head = nameId + " за " + MakeDateRus(props.date);
           labl = pEt.area + ":" + pEt.subarea + ":" + pEt.id;
           let illum = value === i ? styleSt1 : styleSt11;
           resSps.push(

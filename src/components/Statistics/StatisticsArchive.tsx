@@ -8,7 +8,7 @@ import Tab from "@mui/material/Tab";
 
 import StatisticXTArchive from "./StatisticXTArchive";
 
-import { NameVertex } from "../../AppServiceFunctions";
+import { NameVertex, MakeDateRus } from "../../AppServiceFunctions";
 
 import { WS } from "../../App";
 
@@ -147,7 +147,7 @@ const StatisticsArchive = (props: {
           let pEt = pointsEtalon[i];
           let nameId = NameVertex(pEt.area, pEt.subarea, pEt.id);
 
-          if (value === i) head = nameId;
+          if (value === i) head = nameId + " за " + MakeDateRus(props.date);
           labl = pEt.area + ":" + pEt.subarea + ":" + pEt.id;
           let illum = value === i ? styleSt1 : styleSt11;
           resSps.push(

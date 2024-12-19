@@ -504,8 +504,6 @@ const App = () => {
   };
 
   const SetValue = (mode: string) => {
-    console.log("SetValue:", mode,datestat);
-
     switch (mode) {
       case "1":
         setValue(mode);
