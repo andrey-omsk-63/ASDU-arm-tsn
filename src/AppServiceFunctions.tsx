@@ -15,7 +15,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { CalendarPickerSkeleton } from "@mui/x-date-pickers/CalendarPickerSkeleton";
 import { PickersDay } from "@mui/x-date-pickers/PickersDay";
 import Badge from "@mui/material/Badge";
-import { BiSolidDownload } from "react-icons/bi";
+//import { BiSolidDownload } from "react-icons/bi";
 
 import ButtonMenu from "./AppButtonMenu";
 
@@ -114,81 +114,6 @@ export const MesssgeLength = (text: string, fontSize: number) => {
   return textWidth(text, bb);
 };
 
-export const OldButtonMenu = (
-  mode: string,
-  soob: string,
-  SetValue: Function,
-  tekValue: string,
-  hint: boolean,
-  setHint: Function
-) => {
-  let dlSoob = soob !== "⇩" ? (soob.length + 10) * 6.5 : 33;
-  const styleApp02 = {
-    fontSize: 14.5,
-    marginRight: "3px",
-    minWidth: dlSoob,
-    maxWidth: dlSoob,
-    height: "22px",
-    bgcolor: "#BAE186", // тёмно-салатовый
-    border: "1px solid #000",
-    borderColor: "#93D145", // ярко-салатовый
-    borderRadius: 1,
-    color: "black",
-    textTransform: "unset !important",
-    boxShadow: 8,
-    textAlign: "center",
-  };
-
-  const styleApp021 = {
-    fontSize: 14,
-    marginRight: "3px",
-    minWidth: dlSoob,
-    maxWidth: dlSoob,
-    minHeight: "21px",
-    maxHeight: "21px",
-    bgcolor: "#E6F5D6", // светло-салатовый
-    border: "1px solid #000",
-    borderColor: "#d4d4d4", // серый
-    borderRadius: 1,
-    color: "black",
-    textTransform: "unset !important",
-    boxShadow: 1,
-    textAlign: "center",
-  };
-
-  const styleHint = {
-    position: "absolute",
-    left: "38.2%",
-    top: "0.4%",
-    fontSize: 11,
-    color: "#969696", // серый
-  };
-
-  const TurnOnHint = () => {
-    soob === "⇩" && setHint(true);
-  };
-
-  const TurnOffHint = () => {
-    soob === "⇩" && setHint(false);
-  };
-
-  let illum = mode === tekValue ? styleApp02 : styleApp021;
-
-  return (
-    <>
-      <Button
-        sx={illum}
-        onClick={() => SetValue(mode)}
-        onMouseEnter={() => TurnOnHint()}
-        onMouseLeave={() => TurnOffHint()}
-      >
-        {soob === "⇩" ? <BiSolidDownload /> : <b>{soob}</b>}
-      </Button>
-      {hint && <Box sx={styleHint}>Сохранить</Box>}
-    </>
-  );
-};
-
 export const InputerOk = (inpDate: boolean, InputOk: Function) => {
   return (
     <Grid item xs={2.3} sx={styleInpOk}>
@@ -240,7 +165,7 @@ export const PunktMenuSaveFile = (SetValue: Function, tekValue: string) => {
 
 export const WriteToCsvFileForStat = (datestat: Stater) => {
   const element = document.createElement("a");
-  let textFile = "";
+  let textFile = ""; //" ;Название перекрёстка; \n";
   for (let i = 0; i < datestat.stat.length; i++) {
     textFile += datestat.stat[i].Hour + ";";
     textFile += datestat.stat[i].Min + ";";
@@ -252,7 +177,8 @@ export const WriteToCsvFileForStat = (datestat: Stater) => {
   }
   const file = new Blob([textFile], { type: "text/plain" });
   element.href = URL.createObjectURL(file);
-  let nameFile = datestat.area + "." + datestat.id + " ";
+  let nameFile =
+    datestat.area + "." + datestat.tekSubarea + "." + datestat.id + " ";
   nameFile += datestat.data + " " + datestat.time + ".csv";
   element.download = nameFile;
   document.body.appendChild(element); // Required for this to work in FireFox

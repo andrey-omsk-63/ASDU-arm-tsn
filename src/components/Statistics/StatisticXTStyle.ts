@@ -140,7 +140,6 @@ export const styleHead = {
   //color: "#5B1080", // сиреневый
   color: "#97139B", // светло-сиреневый
   textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
-  //border: 1,
 };
 
 export const styleBatton01 = {
@@ -194,14 +193,14 @@ export const styleBattonCl = {
   boxShadow: 6,
 };
 
-export const options = {
-  responsive: true,
-  maintainAspectRatio: false,
-  plugins: {
-    legend: { display: true, position: "top" as const },
-    title: { display: false },
-  },
-};
+// export const options = {
+//   responsive: true,
+//   maintainAspectRatio: false,
+//   plugins: {
+//     legend: { display: true, position: "top" as const },
+//     title: { display: false },
+//   },
+// };
 
 export const styleStatMain = {
   background: "linear-gradient(160deg, #F1F5FB 63%, #D0DEF0 )",

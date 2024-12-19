@@ -128,8 +128,8 @@ const AppWriteToAllFileForXT = (props: { setOpen: Function }) => {
 
   const handleClose = (mode: number) => {
     handleCloseSet();
+    handleDownloadPdf();
     if (mode) {
-      handleDownloadPdf();
       handleDownloadTxt();
     } else handleDownloadCsv();
   };

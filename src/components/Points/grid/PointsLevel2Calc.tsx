@@ -151,7 +151,7 @@ const PointsLevel2Calc = (props: {
 
     return (
       <Grid container ref={printRef}>
-        <Grid item xs sx={{ width: "99vh", height: "28vh" }}>
+        <Grid item xs sx={{ width: "99vh", height: "30vh" }}>
           <PointsGraf01 />
         </Grid>
       </Grid>
@@ -163,11 +163,11 @@ const PointsLevel2Calc = (props: {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: {
-          position: "top" as const,
-        },
+        legend: { position: "top" as const },
         title: {
-          display: false,
+          display: true,
+          text: points.xctrls[props.crossroad].name,
+          color: "#97139B", // светло-сиреневый
         },
       },
     };
@@ -372,19 +372,21 @@ const PointsLevel2Calc = (props: {
     return (
       <Grid item xs={3.95} sx={styleXTC033}>
         {HeaderSupportiveTabl()}
-        <Box sx={{ overflowX: "auto", height: "54.1vh" }}>
+        <Box sx={{ overflowX: "auto", height: "52.1vh" }}>
           <Grid container>{CalcSupportiveTabl()}</Grid>
         </Box>
       </Grid>
     );
   };
 
+  //let nameForm = points.xctrls[props.crossroad].name;
+
   return (
     <>
       {datestat.xttData !== "sss" && (
         <Box sx={{ marginTop: 0, border: 0 }}>
           {OutputGraf()}
-          <Grid container sx={{ marginTop: "0.6vh", height: "57.5vh" }}>
+          <Grid container sx={{ marginTop: "0.6vh", height: "55.4vh" }}>
             {pointer !== null ? (
               <>
                 {pointer[namer].length !== 0 ? (

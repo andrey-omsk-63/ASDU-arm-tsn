@@ -44,6 +44,7 @@ export interface Stater {
   TLen: number;
   stat: Array<any>;
   tekArea: number;
+  tekSubarea: number;
   tekId: number;
   xtCsv: string;
   xtTxt: string;
@@ -63,6 +64,7 @@ export let dateStat: Stater = {
   TLen: 0,
   stat: [],
   tekArea: 0,
+  tekSubarea: 0,
   tekId: 0,
   xtCsv: "",
   xtTxt: "",
@@ -502,6 +504,8 @@ const App = () => {
   };
 
   const SetValue = (mode: string) => {
+    console.log("SetValue:", mode,datestat);
+
     switch (mode) {
       case "1":
         setValue(mode);

@@ -12,7 +12,7 @@ import { NameVertex } from "../../AppServiceFunctions";
 
 import { WS } from "../../App";
 
-import { styleSt1, styleSt11, styleSt2, styleHead } from "./StatisticXTStyle";
+import { styleSt1, styleSt11, styleSt2 } from "./StatisticXTStyle";
 import { styleHint } from "./StatisticXTStyle";
 import { styleStError } from "../../AppStyle";
 
@@ -22,7 +22,7 @@ let tekValue = 0;
 let pointsEtalon: Statistic[];
 let flagEtalon = true;
 let massInterval: any = [];
-let head = "";
+export let head = "";
 let nameHint = "";
 
 let oldDate = "";
@@ -108,6 +108,7 @@ const StatisticsArchive = (props: {
     setValue(newValue);
     tekValue = newValue;
     datestat.tekArea = pointsEtalon[tekValue].area;
+    datestat.tekSubarea = pointsEtalon[tekValue].subarea;
     datestat.tekId = pointsEtalon[tekValue].id;
     dispatch(statsaveCreate(datestat));
     props.func(tekValue, massInterval[tekValue]);
@@ -181,7 +182,7 @@ const StatisticsArchive = (props: {
           </Tabs>
         </Box>
         <Box sx={{ height: "12px" }}></Box>
-        <Box sx={styleHead}>{head}</Box>
+        {/* <Box sx={styleHead}>{head}</Box> */}
       </>
     );
   };

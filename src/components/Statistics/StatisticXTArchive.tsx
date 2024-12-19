@@ -14,7 +14,9 @@ import { Statistic } from "../../interfaceStat.d";
 
 import { KnobBatCl } from "../../AppServiceFunctions";
 
-import { colorsGraf, styleSt02, options } from "./StatisticXTStyle";
+import { head } from "./StatisticsArchive";
+
+import { colorsGraf, styleSt02 } from "./StatisticXTStyle";
 import { styleSt04, styleSt05, styleStatMain } from "./StatisticXTStyle";
 import { styleSt06, styleHeader03, styleHeader033 } from "./StatisticXTStyle";
 import { styleBatton02, styleBatton01 } from "./StatisticXTStyle";
@@ -219,9 +221,22 @@ const StatisticXTArchive = (props: {
       canal = massсanal;
     }
 
+    const options = {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: true, position: "top" as const },
+        title: {
+          display: true,
+          text: head,
+          color: "#540E76", // светло-сиреневый
+        },
+      },
+    };
+
     return (
       <>
-        <Grid item xs sx={{ height: "28vh" }}>
+        <Grid item xs sx={{ height: "33.0vh" }}>
           <Line options={options} data={massId[numIdInMas]} />
         </Grid>
       </>
@@ -484,7 +499,7 @@ const StatisticXTArchive = (props: {
 
   return (
     <Box sx={{ marginTop: 0.3, marginLeft: -2.5, marginRight: -4 }}>
-      <Grid container item sx={{ height: "28vh" }}>
+      <Grid container item>
         <Grid item xs={12} sx={styleStatMain}>
           <StatGraf00 />
         </Grid>
@@ -492,7 +507,7 @@ const StatisticXTArchive = (props: {
       <Grid container item sx={{ marginTop: 1 }}>
         <Grid item xs={24} sx={styleStatMain}>
           <StatisticHeader />
-          <Box sx={{ overflowX: "auto", height: "56.5vh" }}>
+          <Box sx={{ overflowX: "auto", height: "54.0vh" }}>
             {openLoader && <Dinama />}
             {!openLoader && <>{StatSpis()}</>}
           </Box>

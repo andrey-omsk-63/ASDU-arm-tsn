@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 
 import PointsLevel2AreaDiogram from "./PointsLevel2AreaDiogram";
 
-import { BadInput, Inputer } from "../../../AppServiceFunctions";
+import { BadInput, Inputer, Grider } from "../../../AppServiceFunctions";
 
 import { WS } from "../../../App";
 
@@ -326,6 +326,8 @@ const PointsLevel2Area = (props: {
     setTrigger(!trigger);
   };
 
+  //let formName = pointsEt.xctrls[crossRoad].name;
+
   return (
     <>
       {(maskpoint.savePoint || flagSave) && (
@@ -363,7 +365,18 @@ const PointsLevel2Area = (props: {
 
       <Stack direction="row">
         <Grid item xs={3} sx={{ height: "85.8vh", border: 0 }}>
-          <Grid container sx={{ height: "20vh" }}></Grid>
+          <Grid container sx={{ height: "20vh" }}>
+            <Grid item xs={4.3}>
+              <Grid container sx={{ fontSize: 10.7, marginTop: 0.4 }}>
+                {Grider("Наименование ХТ", 0, true)}
+              </Grid>
+            </Grid>
+            <Grid item xs>
+              <Grid container sx={{ marginTop: 0.4, fontSize: 11 }}>
+                {Grider(pointsEt.xctrls[crossRoad].name, 0, false)}
+              </Grid>
+            </Grid>
+          </Grid>
           <Grid container>
             <Grid item xs={12} sx={styleXTG035}>
               {PointsLevel2AreaTab1Header()}
