@@ -6,6 +6,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 
 import { MakeDate, TimeStr } from "../../../AppServiceFunctions";
+import { OptionsForLine } from "../../../AppServiceFunctions";
 
 import { debug } from "../../../App";
 
@@ -72,9 +73,6 @@ const PointsLevel2Calc = (props: {
   const xtProps = props.xtt;
   const points = props.xctrll[xtProps];
   let namer = points.xctrls[props.crossroad].name;
-
-  // let debug = false;
-  // if (props.ws.url === "wss://localhost:3000/W") debug = true;
 
   const printRef = React.useRef(null);
   let pointer = points.results;
@@ -152,26 +150,13 @@ const PointsLevel2Calc = (props: {
     return (
       <Grid container ref={printRef}>
         <Grid item xs sx={{ width: "99vh", height: "30vh" }}>
-          <PointsGraf01 />
+          <Line
+            options={OptionsForLine(points.xctrls[props.crossroad].name)}
+            data={data}
+          />
         </Grid>
       </Grid>
     );
-  };
-
-  const PointsGraf01 = () => {
-    const options = {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { position: "top" as const },
-        title: {
-          display: true,
-          text: points.xctrls[props.crossroad].name,
-          color: "#97139B", // светло-сиреневый
-        },
-      },
-    };
-    return <Line options={options} data={data} />;
   };
 
   const PointsLevel2CalcTab2Header = () => {
@@ -378,8 +363,6 @@ const PointsLevel2Calc = (props: {
       </Grid>
     );
   };
-
-  //let nameForm = points.xctrls[props.crossroad].name;
 
   return (
     <>

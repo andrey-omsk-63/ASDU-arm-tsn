@@ -12,7 +12,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 import { Statistic } from "../../interfaceStat.d";
 
-import { KnobBatCl } from "../../AppServiceFunctions";
+import { KnobBatCl, OptionsForLine } from "../../AppServiceFunctions";
 
 import { head } from "./StatisticsArchive";
 
@@ -90,6 +90,7 @@ const StatisticXTArchive = (props: {
   const [value, setValue] = React.useState("0");
   const [openLoader, setOpenLoader] = React.useState(true);
   const [trigger, setTrigger] = React.useState(true);
+  const printRef = React.useRef(null);
 
   let resStr: any = [];
   let matrix: any = [];
@@ -221,23 +222,10 @@ const StatisticXTArchive = (props: {
       canal = massсanal;
     }
 
-    const options = {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: true, position: "top" as const },
-        title: {
-          display: true,
-          text: head,
-          color: "#540E76", // светло-сиреневый
-        },
-      },
-    };
-
     return (
       <>
-        <Grid item xs sx={{ height: "33.0vh" }}>
-          <Line options={options} data={massId[numIdInMas]} />
+        <Grid item xs ref={printRef} sx={{ height: "33.0vh" }}>
+          <Line options={OptionsForLine(head)} data={massId[numIdInMas]} />
         </Grid>
       </>
     );
@@ -451,6 +439,8 @@ const StatisticXTArchive = (props: {
     datestat.stat = JSON.parse(JSON.stringify(MATRIX));
     datestat.data = new Date(props.date).toLocaleDateString();
     datestat.time = "24:00";
+    datestat.xtName = head;
+    datestat.xtGraf = printRef;
     dispatch(statsaveCreate(datestat));
     //========================================================
     let stepInterval = interval / step;

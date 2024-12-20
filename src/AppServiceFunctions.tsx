@@ -17,6 +17,9 @@ import { PickersDay } from "@mui/x-date-pickers/PickersDay";
 import Badge from "@mui/material/Badge";
 //import { BiSolidDownload } from "react-icons/bi";
 
+import html2canvas from "html2canvas";
+import { jsPDF } from "jspdf";
+
 import ButtonMenu from "./AppButtonMenu";
 
 import { styleDatePicker, styleModalMenu } from "./AppStyle";
@@ -161,7 +164,8 @@ export const PunktMenuSaveFile = (SetValue: Function, tekValue: string) => {
   );
 };
 
-export const WriteToCsvFileForStat = (datestat: Stater) => {
+export const WriteToCsvFileForStat = async (datestat: Stater) => {
+  // создание CSV файла
   const element = document.createElement("a");
   let textFile = ""; //" ;Название перекрёстка; \n";
   for (let i = 0; i < datestat.stat.length; i++) {
@@ -177,12 +181,24 @@ export const WriteToCsvFileForStat = (datestat: Stater) => {
   element.href = URL.createObjectURL(file);
   let nameFile =
     datestat.area + "." + datestat.tekSubarea + "." + datestat.id + " ";
-  nameFile += datestat.data + " " + datestat.time + ".csv";
-  element.download = nameFile;
+  nameFile += datestat.data + " " + datestat.time;
+  element.download = nameFile + ".csv";
   document.body.appendChild(element); // Required for this to work in FireFox
   element.click();
-  // const dataURI = "data:text/plain;base64," + encodeBase64("Hello World!");
-  // saveAs(dataURI, "test.txt");
+  
+  // создание PDF файла
+  if (datestat.xtGraf) {
+    const element = datestat.xtGraf.current;
+    const canvas = await html2canvas(element);
+    const data = canvas.toDataURL("image/png");
+    let pdf = new jsPDF("l", "pt", "dl");
+    let imgProperties = pdf.getImageProperties(data);
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
+    pdf.addImage(data, "PNG", 1, 69, pdfWidth - 5, pdfHeight + 33);
+    nameFile = "Stat." + nameFile;
+    pdf.save(nameFile + ".pdf");
+  }
 };
 
 export const InputerDate = (
@@ -853,6 +869,22 @@ export const KnobBatCl = (setValue: Function) => {
       <b>Чистка</b>
     </Button>
   );
+};
+
+export const OptionsForLine = (head: string) => {
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: true, position: "top" as const },
+      title: {
+        display: true,
+        text: head,
+        color: "#480C65", // сиреневый
+      },
+    },
+  };
+  return options;
 };
 //=== StatisticsNew ================================
 export const NameVertex = (area: number, subarea: number, id: number) => {

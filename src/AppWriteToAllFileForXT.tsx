@@ -25,17 +25,18 @@ const AppWriteToAllFileForXT = (props: { setOpen: Function }) => {
   let nameXt = datestat.xtName;
   if (!datestat.xtName) nameXt = "НетИмени";
 
-  let nameFile = "." + new Date().getDate();
-  let dat: any = new Date().getMonth() + 1;
-  if (dat < 10) dat = "0" + dat;
-  nameFile += dat + new Date().getFullYear().toString().slice(2);
-  dat = new Date().getHours();
-  if (dat < 10) dat = "0" + dat;
-  nameFile += dat;
-  dat = new Date().getMinutes();
-  if (dat < 10) dat = "0" + dat;
-  nameFile += dat;
-  nameFile = "XT." + nameXt + nameFile;
+  // let nameFile = "." + new Date().getDate();
+  // let dat: any = new Date().getMonth() + 1;
+  // if (dat < 10) dat = "0" + dat;
+  // nameFile += dat + new Date().getFullYear().toString().slice(2);
+  // dat = new Date().getHours();
+  // if (dat < 10) dat = "0" + dat;
+  // nameFile += dat;
+  // dat = new Date().getMinutes();
+  // if (dat < 10) dat = "0" + dat;
+  // nameFile += dat;
+
+  let nameFile = "XT." + nameXt + " " + datestat.data + " " + datestat.time;
 
   const styleModalEnd = {
     position: "absolute",
