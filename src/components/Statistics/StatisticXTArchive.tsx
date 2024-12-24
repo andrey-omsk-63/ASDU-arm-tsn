@@ -4,7 +4,6 @@ import { statsaveCreate } from "./../../redux/actions";
 
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 
 import Backdrop from "@mui/material/Backdrop";
@@ -272,9 +271,7 @@ const StatisticXTArchive = (props: {
       return (
         <Grid container>
           <Grid item xs={12} sx={{ height: 24 }}>
-            <Stack direction="row">
               <Grid container>{SpisBatt(colChanel)}</Grid>
-            </Stack>
           </Grid>
         </Grid>
       );

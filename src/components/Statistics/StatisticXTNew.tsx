@@ -4,7 +4,6 @@ import { statsaveCreate } from "./../../redux/actions";
 
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 
 import Backdrop from "@mui/material/Backdrop";
@@ -260,9 +259,7 @@ const StatisticXTNew = (props: {
       return (
         <Grid container>
           <Grid item xs={12}>
-            <Stack direction="row">
-              <Grid container>{SpisBatt(colChanel)}</Grid>
-            </Stack>
+            <Grid container>{SpisBatt(colChanel)}</Grid>
           </Grid>
         </Grid>
       );
@@ -378,7 +375,7 @@ const StatisticXTNew = (props: {
       };
       let datas: any = [];
       for (let j = 0; j < kolDatas; j++) {
-        let maskMatrixDatas = {
+        datas.push({
           ch: j + 1,
           st: 0,
           in: 0,
@@ -386,8 +383,7 @@ const StatisticXTNew = (props: {
           d: 0,
           o: 0,
           g: 0,
-        };
-        datas.push(maskMatrixDatas);
+        });
       }
       maskMmatrix.Datas = datas;
       maskMATRIX.Datas = datas;

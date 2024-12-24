@@ -31,7 +31,7 @@ export const styleBackdrop = {
   color: "#fff",
   marginLeft: "0.3vh",
   marginRight: "1.7vh",
-  marginTop: "37vh",
+  marginTop: "40vh",
   marginBottom: "2vh",
   zIndex: (theme: any) => theme.zIndex.drawer + 1,
 };

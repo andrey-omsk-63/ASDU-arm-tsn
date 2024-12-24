@@ -72,9 +72,9 @@ const PointsLevel2Calc = (props: {
   //========================================================
   const xtProps = props.xtt;
   const points = props.xctrll[xtProps];
-  let namer = points.xctrls[props.crossroad].name;
-
   const printRef = React.useRef(null);
+
+  let namer = points.xctrls[props.crossroad].name;
   let pointer = points.results;
   let extDesc: any = points.extdesc;
   if (extDesc === undefined)
@@ -276,13 +276,15 @@ const PointsLevel2Calc = (props: {
     return (
       <Grid container>
         <Grid item xs sx={styleXTC03}>
-          {pointer !== null && (
-            <>{pointer[namer].length !== 0 && <>{PointsGraf00()}</>}</>
-          )}
+          {!!pointer && <>{!!pointer[namer].length && <>{PointsGraf00()}</>}</>}
         </Grid>
       </Grid>
     );
   };
+
+  // {pointer !== null && (
+  //   <>{pointer[namer].length !== 0 && <>{PointsGraf00()}</>}</>
+  // )}
 
   const OutputMainTabl = (update: boolean) => {
     return (
@@ -370,9 +372,9 @@ const PointsLevel2Calc = (props: {
         <Box sx={{ marginTop: 0, border: 0 }}>
           {OutputGraf()}
           <Grid container sx={{ marginTop: "0.6vh", height: "55.4vh" }}>
-            {pointer !== null ? (
+            {!!pointer ? (
               <>
-                {pointer[namer].length !== 0 ? (
+                {!!pointer[namer].length ? (
                   <Grid item xs={12}>
                     <Grid container>
                       {OutputMainTabl(props.update)}

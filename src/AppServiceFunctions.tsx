@@ -185,7 +185,7 @@ export const WriteToCsvFileForStat = async (datestat: Stater) => {
   element.download = nameFile + ".csv";
   document.body.appendChild(element); // Required for this to work in FireFox
   element.click();
-  
+
   // создание PDF файла
   if (datestat.xtGraf) {
     const element = datestat.xtGraf.current;
@@ -510,8 +510,7 @@ export const WorkMenuEdit = (xss: number, soob: string, servisFunc: any) => {
     maxWidth: "193px",
     minWidth: "193px",
     bgcolor: "#E6F5D6", // светло-салатовый
-    border: "1px solid #000",
-    borderColor: "#d4d4d4", // серый
+    border: "1px solid #d4d4d4", // серый
     borderRadius: 1,
     boxShadow: 6,
     color: "black",
@@ -545,8 +544,7 @@ export const ButtRec = (rec: any, func: any) => {
     maxWidth: "205px",
     minWidth: "205px",
     bgcolor: "#E6F5D6", // светло-салатовый
-    border: "1px solid #000",
-    borderColor: "#d4d4d4", // серый
+    border: "1px solid #d4d4d4", // серый
     borderRadius: 1,
     boxShadow: 4,
     color: "black",
@@ -668,8 +666,7 @@ export const WorkMenuEditMain = (
     minWidth: "193px",
     color: "black",
     bgcolor: "#E6F5D6", // светло-салатовый
-    border: "1px solid #000",
-    borderColor: "#d4d4d4", // серый
+    border: "1px solid #d4d4d4", // серый
     borderRadius: 1,
     boxShadow: 6,
     textTransform: "unset !important",
@@ -792,9 +789,8 @@ export const PictInfoBox = (
       if (pointer.Value[1] > pointer.Value[0] * luchP * ratio)
         numArea = pStB[num - 1].pkr;
     }
-    for (let i = 0; i < POINT.ext.length; i++) {
+    for (let i = 0; i < POINT.ext.length; i++)
       if (POINT.ext[i][0] === pointer.Value[2]) pk = POINT.ext[i][1];
-    }
   } else {
     let pStA = point.StrategyA; // Диограмма областей
     numArea = -1;
