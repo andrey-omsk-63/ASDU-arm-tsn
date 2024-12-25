@@ -72,7 +72,7 @@ export const MakeInterval = (mode: number) => {
       break;
     default:
       //console.log("В БД некорректный интервал");
-      dat = ["1", "5", "10", "15", "30", "60"];
+      dat = ["5", "10", "15", "30", "60"];
   }
   return dat;
 };
@@ -111,7 +111,6 @@ export const MesssgeLength = (text: string, fontSize: number) => {
     .getPropertyValue("font-family");
   let bb = "bold " + fontSize + "px " + theCSSprop;
   // let aa = textWidth('🐷🤡🐷', 'bold 13px Segoe UI');
-  // console.log('AA:', aa);
   return textWidth(text, bb);
 };
 

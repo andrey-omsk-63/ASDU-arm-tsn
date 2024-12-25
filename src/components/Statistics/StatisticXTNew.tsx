@@ -59,11 +59,18 @@ const labels: string[] = [];
 const massId: any = [];
 let canal: number[] = [];
 let oldAreaid = -1;
+let oldInterval = -1;
 let numIdInMas = 0;
 let intervalGraf = [
   -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
 ];
 let colorStat = "#E6EEF5"; // голубой
+
+let needMakeMatrix = false;
+let resStr: any = [];
+let matrix: any = [];
+let MATRIX: any = [];
+let kakchestvo = " ";
 
 const StatisticXTNew = (props: {
   open: boolean;
@@ -85,14 +92,9 @@ const StatisticXTNew = (props: {
 
   let colChanel = 0;
   const [value, setValue] = React.useState("0");
-  const [openLoader, setOpenLoader] = React.useState(true);
+  const [openLoader, setOpenLoader] = React.useState(false);
   const [trigger, setTrigger] = React.useState(true);
   const printRef = React.useRef(null);
-
-  let resStr: any = [];
-  let matrix: any = [];
-  let MATRIX: any = [];
-  let kakchestvo = " ";
 
   const ZeroLabelsCanal = () => {
     canal = [];
@@ -110,11 +112,13 @@ const StatisticXTNew = (props: {
     if (oldAreaid < 0) {
       //начало работы (первый вход)
       massId.push({ id: areaId, canall: [], lbl: [], labels, datasets: [] });
-      oldAreaid = areaId;
+      //oldAreaid = areaId;
       canal = [];
     }
     if (oldAreaid !== areaId) {
       //сменился ID
+      needMakeMatrix = true;
+
       let nomInMas = -1;
       for (let i = 0; i < massId.length; i++) {
         if (massId[i].id === areaId) {
@@ -134,8 +138,9 @@ const StatisticXTNew = (props: {
       }
       oldAreaid = areaId;
       setValue("0");
-      setOpenLoader(true);
+      //setOpenLoader(true);
     }
+    if (oldInterval !== interval) needMakeMatrix = true;
   }
 
   const StatGraf00 = () => {
@@ -459,7 +464,7 @@ const StatisticXTNew = (props: {
   const Output = () => {
     setTimeout(() => {
       setOpenLoader(false);
-    }, 1000);
+    }, 500);
   };
 
   const Dinama = () => {
@@ -470,9 +475,11 @@ const StatisticXTNew = (props: {
     );
   };
   //=========================================================================
-  if (isOpen) {
+  if (isOpen && needMakeMatrix) {
     CreateMatrix();
     CompletMatrix();
+    needMakeMatrix = false;
+    oldInterval = interval;
   }
 
   Output();

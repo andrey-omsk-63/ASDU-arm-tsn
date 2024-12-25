@@ -148,8 +148,8 @@ const ManagementLeftGrid = (props: {
       }
     }
     if (firstEntry) {
-      console.log("Points:", points);
-      console.log("###:", JSON.parse(JSON.stringify(massKnop)));
+      // console.log("Points:", points);
+      // console.log("###:", JSON.parse(JSON.stringify(massKnop)));
 
       //убираем дубликаты в massKnop
       massKnop = massKnop.filter(

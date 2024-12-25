@@ -194,6 +194,8 @@ const App = () => {
   };
 
   const SetStatisticsIntervalNow = (points: any) => {
+    console.log("POINTS:", points);
+
     for (let i = 0; i < points.length; i++) {
       massIntervalNow.push(points[i].Statistics[0].TLen);
       massIntervalNowStart.push(points[i].Statistics[0].TLen);
@@ -352,17 +354,13 @@ const App = () => {
     axios.get(road + "otladkaStatNow.json").then(({ data }) => {
       setPointsSt(data.data.statistics);
       dispatch(statsaveCreate(datestat));
-      let st = dataStatNow.data.statistics;
-      if (data.statistics) st = data.statistics;
-      SetStatisticsIntervalNow(st);
+      SetStatisticsIntervalNow(data.data.statistics);
       setIsOpenSt(true);
     });
     axios.get(road + "otladkaStatOld.json").then(({ data }) => {
       formSettOld = formSett;
       setPointsOldSt(data.data.statistics);
-      let st = dataStatNow.data.statistics;
-      if (data.statistics) st = data.statistics;
-      SetStatisticsIntervalOld(st);
+      SetStatisticsIntervalOld(data.data.statistics);
       setIsOpenOldSt(true);
     });
     axios.get(road + "otladkaXctrll.json").then(({ data }) => {

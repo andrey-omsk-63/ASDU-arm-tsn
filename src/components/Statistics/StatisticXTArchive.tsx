@@ -59,12 +59,19 @@ const labels: string[] = [];
 let massId: any = [];
 let canal: number[] = [];
 let oldAreaid = -1;
+let oldInterval = -1;
 let numIdInMas = 0;
 let intervalGraf = [
   -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
 ];
 let colorStat = "#E6EEF5"; // голубой
 let oldDate = "";
+
+let needMakeMatrix = false;
+let resStr: any = [];
+let matrix: any = [];
+let MATRIX: any = [];
+let kakchestvo = " ";
 
 const StatisticXTArchive = (props: {
   open: boolean;
@@ -87,14 +94,9 @@ const StatisticXTArchive = (props: {
 
   let colChanel = 0;
   const [value, setValue] = React.useState("0");
-  const [openLoader, setOpenLoader] = React.useState(true);
+  const [openLoader, setOpenLoader] = React.useState(false);
   const [trigger, setTrigger] = React.useState(true);
   const printRef = React.useRef(null);
-
-  let resStr: any = [];
-  let matrix: any = [];
-  let MATRIX: any = [];
-  let kakchestvo = " ";
 
   const ZeroLabelsCanal = () => {
     canal = [];
@@ -121,7 +123,7 @@ const StatisticXTArchive = (props: {
     if (oldAreaid < 0) {
       //начало работы (первый вход)
       massId.push({ id: areaId, canall: [], lbl: [], labels, datasets: [] });
-      oldAreaid = areaId;
+      //oldAreaid = areaId;
       canal = [];
     }
     if (oldAreaid !== areaId) {
@@ -145,8 +147,9 @@ const StatisticXTArchive = (props: {
       }
       oldAreaid = areaId;
       setValue("0");
-      setOpenLoader(true);
+      //setOpenLoader(true);
     }
+    if (oldInterval !== interval) needMakeMatrix = true;
   }
 
   const StatGraf00 = () => {
@@ -271,7 +274,7 @@ const StatisticXTArchive = (props: {
       return (
         <Grid container>
           <Grid item xs={12} sx={{ height: 24 }}>
-              <Grid container>{SpisBatt(colChanel)}</Grid>
+            <Grid container>{SpisBatt(colChanel)}</Grid>
           </Grid>
         </Grid>
       );
@@ -361,7 +364,7 @@ const StatisticXTArchive = (props: {
     const step: number = points[areaId].Statistics[0].TLen;
     const typer = points[areaId].Statistics[0].Type;
     const kolDatas = colChanel;
-    let rows = 1440 / step;
+    const rows = 1440 / step;
     let time = 0;
     //let time = -step;
     MATRIX = [];
@@ -440,7 +443,7 @@ const StatisticXTArchive = (props: {
     datestat.xtGraf = printRef;
     dispatch(statsaveCreate(datestat));
     //========================================================
-    let stepInterval = interval / step;
+    const stepInterval = interval / step;
     if (stepInterval > 1) {
       let pointsMatrix: any = [];
       for (let i = 0; i < matrix.length; i = i + stepInterval) {
@@ -466,7 +469,7 @@ const StatisticXTArchive = (props: {
   const Output = () => {
     setTimeout(() => {
       setOpenLoader(false);
-    }, 1000);
+    }, 500);
   };
 
   const Dinama = () => {
@@ -477,9 +480,11 @@ const StatisticXTArchive = (props: {
     );
   };
   //=========================================================================
-  if (isOpen) {
+  if (isOpen && needMakeMatrix) {
     CreateMatrix();
     CompletMatrix();
+    needMakeMatrix = false;
+    oldInterval = interval;
   }
 
   if (openLoader) Output();
