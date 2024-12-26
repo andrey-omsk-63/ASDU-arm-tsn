@@ -118,7 +118,6 @@ const StatisticXTNew = (props: {
     if (oldAreaid !== areaId) {
       //сменился ID
       needMakeMatrix = true;
-
       let nomInMas = -1;
       for (let i = 0; i < massId.length; i++) {
         if (massId[i].id === areaId) {
