@@ -54,7 +54,6 @@ export interface Datasets {
 
 const PointsLevel2Calc = (props: {
   open: boolean;
-  //ws: WebSocket;
   xctrll: XctrlInfo[];
   xtt: number;
   crossroad: number;
@@ -281,10 +280,6 @@ const PointsLevel2Calc = (props: {
       </Grid>
     );
   };
-
-  // {pointer !== null && (
-  //   <>{pointer[namer].length !== 0 && <>{PointsGraf00()}</>}</>
-  // )}
 
   const OutputMainTabl = (update: boolean) => {
     return (
