@@ -60,7 +60,7 @@ const PointsLevel2BazaDiogram = (props: {
     "Violet",
   ];
 
-  const [openLoader, setOpenLoader] = React.useState(true);
+  const [openLoader, setOpenLoader] = React.useState(false);
 
   let dlMas = points.xctrls[crRoad].StrategyB.length;
   const horizonLimit = points.xctrls[crRoad].StrategyB[dlMas - 1].xright;

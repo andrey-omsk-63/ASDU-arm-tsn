@@ -60,7 +60,7 @@ const PointsLevel2AreaDiogram = (props: {
     "Violet",
   ];
 
-  const [openLoader, setOpenLoader] = React.useState(true);
+  const [openLoader, setOpenLoader] = React.useState(false);
   const [pictInfo, setPictInfo] = React.useState(false);
 
   const horizon = points.xctrls[crRoad].right;
