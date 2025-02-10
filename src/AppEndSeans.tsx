@@ -16,23 +16,23 @@ const EndSeans = (props: { bsLogin: string; setOpen: any }) => {
     top: "46%",
     transform: "translate(-50%, -50%)",
     width: 380,
-    bgcolor: "background.paper",
-    border: "1px solid #000",
-    borderColor: "red",
+    bgcolor: "#FFDB4D", // жёлтый
+    border: "1px solid #FFEDA6",// бледно-жёлтый
     borderRadius: 1,
+    textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
     boxShadow: 24,
     p: 1.5,
   };
 
   const styleBatMenu = {
     fontSize: 14,
-    maxHeight: "20px",
-    minHeight: "20px",
-    bgcolor: "#E6F5D6", // светло-салатовый
+    maxHeight: "24px",
+    minHeight: "24px",
+    bgcolor: "#CFECB0", // светло-салатовый
     border: "1px solid #d4d4d4", // серый
     borderRadius: 1,
     boxShadow: 6,
-    color: "red",
+    color: "black",
     marginTop: 1,
     marginRight: 1,
     textTransform: "unset !important",
@@ -47,15 +47,15 @@ const EndSeans = (props: { bsLogin: string; setOpen: any }) => {
   return (
     <Modal open={openSet} onClose={handleClose} hideBackdrop>
       <Box sx={styleSetInf}>
-        <Typography variant="h6" sx={{ textAlign: "center", color: "red" }}>
+        <Typography variant="h6" sx={{ textAlign: "center" }}>
           {soob}
         </Typography>
         <Box sx={{ textAlign: "center" }}>
           <Button sx={styleBatMenu} onClick={() => handleClose(1)}>
-            <b>Переход в «Статистику»</b>
+            Переход в «Статистику»
           </Button>
           <Button sx={styleBatMenu} onClick={() => handleClose(0)}>
-            <b>Выход</b>
+            Выход
           </Button>
         </Box>
       </Box>
