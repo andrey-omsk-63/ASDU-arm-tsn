@@ -645,9 +645,6 @@ const PointsLevel2Baza = (props: {
 
   const PointsLevel2BazaTab3Stroka = () => {
     let elemm = maskpoint.pointForRedax.xctrls[props.crossroad].Calculates;
-    let subb = maskpoint.pointForRedax.subarea
-
-    console.log("###:", elemm,subb, maskpoint.pointForRedax.subarea);
 
     return elemm.map((elem: any, idx: number) => {
       return (
