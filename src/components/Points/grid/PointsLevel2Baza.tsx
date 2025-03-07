@@ -604,8 +604,8 @@ const PointsLevel2Baza = (props: {
     return (
       <Grid container sx={styleXTGHeader}>
         <Grid xs={0.5} item sx={styleXTG02}></Grid>
-        {ConclHeader(1.75, "Регион", styleXTG02)}
         {ConclHeader(1.75, "Район", styleXTG02)}
+        {ConclHeader(1.75, "Подрайон", styleXTG02)}
         {ConclHeader(2, "Перекрёсток", styleXTG02)}
         {ConclHeader(3, "Номера каналов прямого", styleXTG02)}
         {ConclHeader(3, "Номера каналов обратного", styleXTG021)}
@@ -645,14 +645,18 @@ const PointsLevel2Baza = (props: {
 
   const PointsLevel2BazaTab3Stroka = () => {
     let elemm = maskpoint.pointForRedax.xctrls[props.crossroad].Calculates;
+    let subb = maskpoint.pointForRedax.subarea
+
+    console.log("###:", elemm,subb, maskpoint.pointForRedax.subarea);
+
     return elemm.map((elem: any, idx: number) => {
       return (
         <Grid key={idx} container item xs={12}>
           <Grid xs={0.5} item sx={styleXTG01}>
             <Box sx={{ p: 0.35 }}>{idx + 1}</Box>
           </Grid>
-          {ConclStr(1.75, elem.region, styleXTG01)}
           {ConclStr(1.75, elem.area, styleXTG01)}
+          {ConclStr(1.75, maskpoint.pointForRedax.subarea, styleXTG01)}
           {ConclStr(2, elem.id, styleXTG01)}
           {ConclStr(3, elem.chanL[0], styleXTG01)}
           {ConclStr(3, elem.chanR[0], styleXTG00)}
@@ -691,7 +695,7 @@ const PointsLevel2Baza = (props: {
   };
 
   const SaveEdit = () => {
-    SendHandleSend( WS, maskpoint.pointForRedax); // прокидываем изменения на сервер
+    SendHandleSend(WS, maskpoint.pointForRedax); // прокидываем изменения на сервер
     props.setPoint(maskpoint.pointForRedax); // прокидываем изменения в App
     flagExit = false;
     flagEdit = true;
