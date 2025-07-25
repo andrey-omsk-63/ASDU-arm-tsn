@@ -160,7 +160,12 @@ const PointsLevel2Calc = (props: {
 
   const PointsLevel2CalcTab2Header = () => {
     return (
-      <Grid container item xs={12} sx={{ marginRight: 0.74 }}>
+      <Grid
+        container
+        item
+        xs={12}
+        sx={{ marginRight: 0.74, cursor: "default" }}
+      >
         <Grid xs={1} item sx={styleXTC02}></Grid>
         <Grid xs={2} item sx={styleXTC02}>
           <b>Прямой</b>
@@ -239,7 +244,7 @@ const PointsLevel2Calc = (props: {
           datestat.xtTxt += stroka;
 
           resStr.push(
-            <Grid key={i} container item xs={12}>
+            <Grid key={i} container sx={{ cursor: "default" }}>
               <Grid xs={1} item sx={!pusto ? styleXTC011 : styleXTC01}>
                 <Box sx={styleXTG101}>{TimeStr(pointer[namer][i].Time)}</Box>
               </Grid>
@@ -294,7 +299,7 @@ const PointsLevel2Calc = (props: {
 
   const HeaderSupportiveTabl = () => {
     return (
-      <Grid container item xs={12} sx={{ marginRight: 0.74 }}>
+      <Grid container sx={{ marginRight: 0.74, cursor: "default" }}>
         <Grid xs={6} item sx={styleXTC02}>
           <b>Время</b>
         </Grid>
@@ -338,7 +343,7 @@ const PointsLevel2Calc = (props: {
       let int = mastime + " - ";
       int += idx !== masTime.length - 1 ? masTime[idx + 1] : "24:00";
       return (
-        <Grid key={idx} container item xs={12}>
+        <Grid key={idx} container sx={{cursor: "default"}}>
           <Grid xs={6} item sx={styleXTC011}>
             <Box sx={styleXTG101}>{int}</Box>
           </Grid>

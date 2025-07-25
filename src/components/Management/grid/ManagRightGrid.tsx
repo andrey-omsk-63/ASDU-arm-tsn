@@ -174,7 +174,7 @@ const ManagementRightGrid = (props: {
         soobXT += mass[i].isXT ? "назначен" : "отсутствует";
 
         resStr.push(
-          <Grid item key={i} container>
+          <Grid item key={i} container sx={{cursor: "default"}}>
             {StrokaGridInfo(0.3, styleMRG02Center, i + 1)}
             {StrokaGridInfo(0.7, styleMRG02Center, mass[i].areaNum)}
             <Grid item xs={4.8} sx={styleMRG02}>
@@ -213,7 +213,7 @@ const ManagementRightGrid = (props: {
         let rec = mass[i].areaNum + ":" + mass[i].subareaNum;
 
         resStr.push(
-          <Grid item key={i} container>
+          <Grid item key={i} container sx={{cursor: "default"}}>
             {StrokaGridInfo(0.3, styleMRG02Center, i + 1)}
             {StrokaGridInfo(1.1, styleMRG02Center, rec)}
             <Grid item xs={4.5} sx={styleMRG02}>
@@ -234,7 +234,7 @@ const ManagementRightGrid = (props: {
         let rec1 = points[i].area.num + ":" + points[i].subarea;
         let rec2 = points[i].tlsost.description;
         resStr.push(
-          <Grid item key={i} container>
+          <Grid item key={i} container sx={{cursor: "default"}}>
             {StrokaGridInfo(0.3, styleMRG02Center, i + 1)}
             {StrokaGridInfo(1.1, styleMRG02Center, rec1)}
             {StrokaGridInfo(0.4, styleMRG02Center, points[i].ID)}

@@ -311,6 +311,7 @@ export const styleSetInf = {
   borderRadius: 1,
   boxShadow: 24,
   p: 1.5,
+  cursor: "default",
 };
 
 export const styleSetInff = {
@@ -325,7 +326,7 @@ export const styleSetInff = {
   border: "1px solid #FFFFFF",
   borderRadius: 1,
   boxShadow: 24,
-  //p: 1.5,
+  cursor: "default",
   padding: "20px 15px 15px 15px",
 };
 
@@ -384,6 +385,7 @@ export const PointInfoStrStyle = (mt01: string, ml01: string) => {
     marginLeft: ml01,
     textAlign: "right",
     width: "69px",
+    cursor: "default",
   };
   return stylePointInf;
 };
@@ -397,6 +399,7 @@ export const PointInfoDirStyle = (mt01: string, ml01: string, fs: number) => {
     textAlign: "right",
     width: "132px",
     color: "blue",
+    cursor: "default",
   };
   return stylePointInf;
 };
@@ -415,6 +418,7 @@ export const PointInfoDirRotStyle = (
     textAlign: "right",
     width: "128px",
     color: "blue",
+    cursor: "default",
   };
   return stylePointInf;
 };
@@ -456,6 +460,7 @@ export const styleXTGHeader = {
   borderColor: "#C0C0C0",
   borderTopLeftRadius: 3,
   borderTopRightRadius: 3,
+  cursor: "default",
 };
 
 export const styleXTG102 = {
@@ -485,6 +490,7 @@ export const styleXTG105 = {
   borderRight: "1px solid #d4d4d4", // серый
   backgroundColor: "#E5E5E5",
   textAlign: "center",
+  cursor: "default",
 };
 //====== PointsMainScrGrid2 =====================================================
 export const styleXTGrid = {
@@ -510,8 +516,9 @@ export const styleXTGl021 = {
 export const styleXTGl05 = {
   fontSize: 11,
   borderColor: "primary.main",
-  backgroundColor: "#E5E5E5",
+  backgroundColor: "#E5E5E5", // серый
   textAlign: "center",
+  cursor: "default",
 };
 
 export const styleXTGl06 = {
@@ -568,6 +575,7 @@ export const styleXt02 = {
   marginRight: 1,
   boxShadow: 12,
   textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
+  cursor: "default",
 };
 
 export const styleXt03 = {
@@ -604,5 +612,6 @@ export const styleXt06 = {
   margin: 1,
   marginLeft: 1,
   color: "#5B1080", // сиреневый
+  cursor: "default",
 };
 //===============================================================================

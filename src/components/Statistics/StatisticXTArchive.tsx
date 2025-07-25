@@ -351,7 +351,12 @@ const StatisticXTArchive = (props: {
         {isOpen &&
           matrix.map((array: any, idx: number) => {
             return (
-              <Grid key={idx} item container sx={{ height: 27 }}>
+              <Grid
+                key={idx}
+                item
+                container
+                sx={{ cursor: "default", height: 27 }}
+              >
                 {StatStroka(idx)}
               </Grid>
             );

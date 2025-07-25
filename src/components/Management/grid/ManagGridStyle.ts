@@ -28,7 +28,6 @@ export const colorAmaranth = "#F097B9"; // ярко-розовый
 export const colorApricot = "#FDE8D9"; // абрикосовый
 export const colorBronze = "#D3AC7C"; // желто-коричневый
 
-
 //====== ManagementRightGrid ====================================================
 export const styleMgl = {
   border: 0,
@@ -37,6 +36,7 @@ export const styleMgl = {
   marginLeft: -0.5,
   marginTop: "0.5vh",
   marginBottom: 0,
+  cursor: "default",
 };
 
 export const styleMRG01 = {
@@ -62,6 +62,7 @@ export const styleMRGHeader = {
   borderColor: "#C0C0C0",
   borderTopLeftRadius: 3,
   borderTopRightRadius: 3,
+  cursor: "default",
 };
 
 export const styleMRG03 = {

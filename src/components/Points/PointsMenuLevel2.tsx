@@ -83,7 +83,6 @@ const PointsMenuLevel2 = (props: {
             {value === "1" && datestat.xttData === MakeDate(new Date()) && (
               <PointsLevel2Baza
                 open={props.open}
-                //ws={WS}
                 xctrll={props.xctrll}
                 xtt={xtProps}
                 crossroad={props.crossroad}
@@ -94,7 +93,6 @@ const PointsMenuLevel2 = (props: {
             {value === "2" && datestat.xttData === MakeDate(new Date()) && (
               <PointsLevel2Area
                 open={props.open}
-                //ws={WS}
                 xctrll={props.xctrll}
                 xtt={xtProps}
                 crossroad={props.crossroad}
@@ -105,7 +103,6 @@ const PointsMenuLevel2 = (props: {
             {value === "3" && (
               <PointsLevel2Calc
                 open={props.open}
-                //ws={WS}
                 xctrll={props.xctrll}
                 xtt={xtProps}
                 crossroad={props.crossroad}

@@ -111,6 +111,7 @@ export const styleSt06 = {
   borderBottom: "1px solid #d4d4d4", // серый
   lineHeight: 2,
   fontSize: 12.9,
+  cursor: "default", 
 };
 
 export const styleHeader03 = {

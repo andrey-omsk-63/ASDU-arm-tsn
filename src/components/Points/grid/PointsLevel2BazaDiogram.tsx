@@ -273,7 +273,7 @@ const PointsLevel2BazaDiogram = (props: {
       }, 10);
     } else PuskBalloon();
   };
-
+//x//
   const OutputerPict = (update: boolean) => {
     let resStrr = [];
     if (pointer !== null) {

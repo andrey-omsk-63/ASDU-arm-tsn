@@ -246,7 +246,7 @@ const PointsLevel2Area = (props: {
       let elem = elemn.pk;
       let illum = nomIllum === idx ? styleBut021 : styleBut02;
       return (
-        <Grid key={idx} container>
+        <Grid key={idx} container sx={{ cursor: "default" }}>
           <Grid xs={2} item sx={styleXTG01}>
             {!flagEdit && (
               <Button sx={illum} onClick={() => SetOpenSetStr(idx)}>
@@ -365,7 +365,7 @@ const PointsLevel2Area = (props: {
 
       <Stack direction="row">
         <Grid item xs={3} sx={{ height: "85.8vh", border: 0 }}>
-          <Grid container sx={{ height: "20vh" }}>
+          <Grid container sx={{ height: "20vh", cursor: "default" }}>
             <Grid item xs={4.3}>
               <Grid container sx={{ fontSize: 10.7, marginTop: 0.4 }}>
                 {Grider("Наименование ХТ", 0, true)}

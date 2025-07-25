@@ -179,7 +179,7 @@ const PointsMainScrGrid3 = (props: {
         let illum = nomIllum === idx ? styleBut021 : styleBut02;
 
         return (
-          <Grid key={idx} container item xs={12} sx={{ fontSize: 14 }}>
+          <Grid key={idx} container sx={{ cursor: "default", fontSize: 14 }}>
             <Grid xs={1.5} item sx={styleXTG03}>
               {!flagEdit ? (
                 <Button sx={illum} onClick={() => SetOpenSetStr(idx)}>

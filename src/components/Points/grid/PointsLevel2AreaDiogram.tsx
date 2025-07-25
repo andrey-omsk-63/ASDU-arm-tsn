@@ -301,3 +301,4 @@ const PointsLevel2AreaDiogram = (props: {
 };
 
 export default PointsLevel2AreaDiogram;
+//Обратный

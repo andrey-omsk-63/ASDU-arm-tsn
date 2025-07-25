@@ -340,7 +340,7 @@ const StatisticXTNew = (props: {
         {isOpen &&
           matrix.map((array: any, idx: number) => {
             return (
-              <Grid key={idx} container sx={{ height: 27 }}>
+              <Grid key={idx} container sx={{ cursor: "default", height: 27 }}>
                 {StatStroka(idx)}
               </Grid>
             );

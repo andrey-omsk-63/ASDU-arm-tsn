@@ -552,7 +552,7 @@ const PointsLevel2Baza = (props: {
     let rec2 = maskpoint.pointForRedax.xctrls[props.crossroad].right;
 
     return (
-      <Grid container sx={{ height: "19.5vh" }}>
+      <Grid container sx={{ height: "19.5vh", cursor: "default" }}>
         <Grid item xs={4.3}>
           <Grid container sx={{ fontSize: 10.7, marginTop: 0.4 }}>
             {Grider("Наименование ХТ", 0, true)}
@@ -618,7 +618,7 @@ const PointsLevel2Baza = (props: {
     return elemm.map((elem: any, idx: number) => {
       let illum = nomIllum === idx ? styleBut021 : styleBut02;
       return (
-        <Grid key={idx} container item xs={12}>
+        <Grid key={idx} container sx={{ cursor: "default" }}>
           <Grid xs={1.3} item sx={styleXTG011}>
             {!flagEdit ? (
               <Button sx={illum} onClick={() => SetOpenSetStr(idx)}>
@@ -648,7 +648,7 @@ const PointsLevel2Baza = (props: {
 
     return elemm.map((elem: any, idx: number) => {
       return (
-        <Grid key={idx} container item xs={12}>
+        <Grid key={idx} container sx={{ cursor: "default" }}>
           <Grid xs={0.5} item sx={styleXTG01}>
             <Box sx={{ p: 0.35 }}>{idx + 1}</Box>
           </Grid>

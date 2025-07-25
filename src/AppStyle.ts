@@ -68,6 +68,7 @@ export const styleStError = {
   textAlign: "center",
   textShadow: "2px 2px 3px rgba(0,0,0,0.3)",
   color: "red",
+  cursor: "default",
 };
 
 export const styleXTG101 = {
@@ -97,6 +98,7 @@ export const styleInp = {
   maxHeight: "21px",
   minHeight: "21px",
   width: "140px",
+  cursor: "pointer",
 };
 
 export const styleInpOk = {
@@ -152,6 +154,7 @@ export const styleInt02 = {
   textAlign: "left",
   color: "#6F139B", // сиреневый
   textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
+  cursor: "default",
 };
 
 export const styleBoxFormInt = {
