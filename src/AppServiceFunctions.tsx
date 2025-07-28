@@ -897,3 +897,4 @@ export const NameVertex = (area: number, subarea: number, id: number) => {
   return nameId;
 };
 //==================================================
+//Формат сохранения таблицы:

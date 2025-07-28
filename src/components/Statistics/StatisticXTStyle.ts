@@ -131,6 +131,7 @@ export const styleHeader033 = {
   textAlign: "center",
   height: 24,
   lineHeight: 1.5,
+  cursor: "default", 
 };
 
 export const styleHead = {
@@ -138,7 +139,6 @@ export const styleHead = {
   textAlign: "center",
   fontSize: 15.0,
   fontWeight: 500,
-  //color: "#5B1080", // сиреневый
   color: "#97139B", // светло-сиреневый
   textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
 };

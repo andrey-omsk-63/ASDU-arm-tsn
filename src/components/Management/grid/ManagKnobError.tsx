@@ -23,6 +23,7 @@ const ManagKnobError = (props: { setOpen: any }) => {
     boxShadow: 24,
     textShadow: "2px 2px 3px rgba(0,0,0,0.3)",
     p: 1.5,
+    cursor: "default",
   };
 
   const styleModalEnd = {

@@ -256,6 +256,7 @@ export const styleSoob = {
   backgroundColor: "#F1F3F4", // светло-серый
   color: "#5B1080", // светло-серый
   textAlign: "center",
+  cursor: "default",
 };
 
 export const styleSoobPusto = {

@@ -147,6 +147,7 @@ const AppWriteToAllFileForXT = (props: { setOpen: Function }) => {
             color: "#5B1080",
             textAlign: "center",
             textShadow: "2px 2px 3px rgba(0,0,0,0.3)",
+            cursor: "default",
           }}
         >
           <b>Формат сохранения таблицы:</b>

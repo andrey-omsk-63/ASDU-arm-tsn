@@ -112,7 +112,6 @@ const StatisticXTNew = (props: {
     if (oldAreaid < 0) {
       //начало работы (первый вход)
       massId.push({ id: areaId, canall: [], lbl: [], labels, datasets: [] });
-      //oldAreaid = areaId;
       canal = [];
     }
     if (oldAreaid !== areaId) {
@@ -137,7 +136,6 @@ const StatisticXTNew = (props: {
       }
       oldAreaid = areaId;
       setValue("0");
-      //setOpenLoader(true);
     }
     if (oldInterval !== interval) needMakeMatrix = true;
   }
@@ -223,7 +221,6 @@ const StatisticXTNew = (props: {
   };
   //=========================================================================
   const styleSt03 = {
-    //textIndent: 6,
     borderRight: "1px solid #d4d4d4", // серый,
     borderBottom: "1px solid #d4d4d4", // серый,
     fontSize: 12.9,
@@ -355,7 +352,6 @@ const StatisticXTNew = (props: {
     const kolDatas = colChanel;
     let rows = 1440 / step;
     let time = 0;
-    //let time = -step;
     matrix = [];
     MATRIX = [];
     for (let i = 0; i < rows; i++) {
@@ -401,18 +397,13 @@ const StatisticXTNew = (props: {
     const typeStat = points[areaId].Statistics[0].Type;
     colorStat = "#E6EEF5"; // голубой
     if (typeStat > 1) colorStat = "#D8F5DF"; //зелёный
-
     for (let i = 0; i < points[areaId].Statistics.length; i++) {
       let inHour = points[areaId].Statistics[i].Hour;
       let inTime = inHour * 60 + points[areaId].Statistics[i].Min;
-      //if (inHour < 24) {
       let timeOffset = inHour === 0 && points[areaId].Statistics[i].Min === 0;
       if (!timeOffset) {
         if (inTime % step === 0) {
           let numInMatrix = inTime / step - 1;
-          // if (inHour === 0 && points[areaId].Statistics[i].Min === 0) {
-          //   numInMatrix = matrix.length - 1;
-          // }
           for (let j = 0; j < points[areaId].Statistics[i].Datas.length; j++) {
             matrix[numInMatrix].Datas[j] = {
               ...points[areaId].Statistics[i].Datas[j],
