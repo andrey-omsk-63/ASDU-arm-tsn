@@ -73,6 +73,8 @@ let matrix: any = [];
 let MATRIX: any = [];
 let kakchestvo = " ";
 
+let oldPoins: any = null;
+
 const StatisticXTArchive = (props: {
   open: boolean;
   statist: Statistic[];
@@ -91,6 +93,11 @@ const StatisticXTArchive = (props: {
   const points = props.statist;
   const areaId = props.areaid;
   const interval = props.interval;
+
+  if (points !== oldPoins) {
+    oldPoins = points;
+    needMakeMatrix = true;
+  }
 
   let colChanel = 0;
   const [value, setValue] = React.useState("0");

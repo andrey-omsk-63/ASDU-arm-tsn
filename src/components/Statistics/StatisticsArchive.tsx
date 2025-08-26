@@ -45,7 +45,7 @@ const StatisticsArchive = (props: {
   let isOpen = props.open;
   let points = props.points;
   let reGion = props.region;
-  if (oldDate !== props.date) flagEtalon = true;
+  // if (oldDate !== props.date) flagEtalon = true;
 
   React.useEffect(() => {
     const handleSend = () => {
@@ -69,6 +69,7 @@ const StatisticsArchive = (props: {
     };
     handleSend();
     oldDate = props.date;
+    flagEtalon = true;
   }, [reGion, props.date]);
 
   if (isOpen && flagEtalon) {
@@ -182,7 +183,6 @@ const StatisticsArchive = (props: {
           </Tabs>
         </Box>
         <Box sx={{ height: "12px" }}></Box>
-        {/* <Box sx={styleHead}>{head}</Box> */}
       </>
     );
   };
