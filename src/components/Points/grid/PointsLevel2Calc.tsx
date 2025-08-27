@@ -84,6 +84,8 @@ const PointsLevel2Calc = (props: {
     if (debug) namer = "Без имени_12.09.2022_10-12-57";
   }
 
+  //console.log("POINTS:", xtProps, namer, props.crossroad, points);
+
   React.useEffect(() => {
     if (pointer !== null) props.saveXt(true);
   }, [pointer, props]);
@@ -277,10 +279,18 @@ const PointsLevel2Calc = (props: {
   };
 
   const OutputGraf = () => {
+    //console.log("OutputGraf:", pointer, !!pointer, !!pointer[namer]);
+
     return (
       <Grid container>
         <Grid item xs sx={styleXTC03}>
-          {!!pointer && <>{!!pointer[namer].length && <>{PointsGraf00()}</>}</>}
+          {!!pointer && (
+            <>
+              {!!pointer[namer] && (
+                <>{!!pointer[namer].length && <>{PointsGraf00()}</>}</>
+              )}
+            </>
+          )}
         </Grid>
       </Grid>
     );
@@ -343,7 +353,7 @@ const PointsLevel2Calc = (props: {
       let int = mastime + " - ";
       int += idx !== masTime.length - 1 ? masTime[idx + 1] : "24:00";
       return (
-        <Grid key={idx} container sx={{cursor: "default"}}>
+        <Grid key={idx} container sx={{ cursor: "default" }}>
           <Grid xs={6} item sx={styleXTC011}>
             <Box sx={styleXTG101}>{int}</Box>
           </Grid>
@@ -366,6 +376,8 @@ const PointsLevel2Calc = (props: {
     );
   };
 
+  //console.log("######:", !!pointer, !!pointer[namer], namer);
+
   return (
     <>
       {datestat.xttData !== "sss" && (
@@ -374,14 +386,20 @@ const PointsLevel2Calc = (props: {
           <Grid container sx={{ marginTop: "0.6vh", height: "55.4vh" }}>
             {!!pointer ? (
               <>
-                {!!pointer[namer].length ? (
-                  <Grid item xs={12}>
-                    <Grid container>
-                      {OutputMainTabl(props.update)}
-                      <Grid item xs={0.05}></Grid>
-                      {OutputNotMainTabl()}
-                    </Grid>
-                  </Grid>
+                {!!pointer[namer] ? (
+                  <>
+                    {!!pointer[namer].length ? (
+                      <Grid item xs={12}>
+                        <Grid container>
+                          {OutputMainTabl(props.update)}
+                          <Grid item xs={0.05}></Grid>
+                          {OutputNotMainTabl()}
+                        </Grid>
+                      </Grid>
+                    ) : (
+                      <>{EmptyInfo()}</>
+                    )}
+                  </>
                 ) : (
                   <>{EmptyInfo()}</>
                 )}

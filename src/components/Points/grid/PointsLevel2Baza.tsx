@@ -238,6 +238,9 @@ const PointsLevel2Baza = (props: {
       maskpoint.pointForRedax = pointRab;
 
       pointsEt = pointRab;
+
+      //console.log("pointsEt:", pointsEt);
+
       setFormName(valuen1);
       setMaxLeft(valuen2);
       setMaxRight(valuen3);
@@ -334,7 +337,7 @@ const PointsLevel2Baza = (props: {
             <Button sx={styleModalEnd} onClick={handleCloseEnd}>
               <b>&#10006;</b>
             </Button>
-            {Inputer("Наименование ХТ", valuen1, hChange1, hBlur, styleInpName)}
+            {/* {Inputer("Наименование ХТ", valuen1, hChange1, hBlur, styleInpName)} */}
             {Inputer(
               "Максимум прямого",
               valuen2,
@@ -572,7 +575,8 @@ const PointsLevel2Baza = (props: {
               </>
             ) : (
               <>
-                {Grider(ButtRec(name, SetOpenSetName), 0, false)}
+                {/* {Grider(ButtRec(name, SetOpenSetName), 0, false)} */}
+                {Grider(name, 0, false)}
                 {Grider(ButtRec(rec1, SetOpenSetName), 2, false)}
                 {Grider(ButtRec(rec2, SetOpenSetName), 2, false)}
                 {Grider(ButtRec(yellowSoob, SetOpenSetName), 2, false)}
