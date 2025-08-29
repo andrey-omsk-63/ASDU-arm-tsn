@@ -306,7 +306,7 @@ const App = () => {
           window.close();
           break;
         default:
-          console.log("data_default:", allData.data);
+          console.log("!!!data_default:", allData.data);
       }
     };
   }, [
