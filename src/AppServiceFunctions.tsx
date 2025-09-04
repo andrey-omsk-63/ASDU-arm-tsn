@@ -775,9 +775,13 @@ export const PictInfoBox = (
     let num = 1; // Диограмма лучей
     let pStB = point.StrategyB;
     for (let i = 0; i < pStB.length; i++) {
-      if (pointer.Value[0] > pStB[i].xright || pointer.Value[1] > pStB[i].xleft)
-        num = i + 2;
+      //if (pointer.Value[0] > pStB[i].xright || pointer.Value[1] > pStB[i].xleft)
+        if (pointer.Value[0] > pStB[i].xleft || pointer.Value[1] > pStB[i].xright)
+        num = i + 1;  //num = i + 2;
     }
+
+    //console.log("1PictInfoBox:", num, pStB, point, pointer);
+
     let luchO = pStB[num - 1].vleft;
     let luchP = pStB[num - 1].vright;
     let ratio = pStB[num - 1].xright / pStB[num - 1].xleft;
