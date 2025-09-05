@@ -26,7 +26,10 @@ import { styleXTG021, styleXTG02, styleXTG03 } from "./PointsGridStyle";
 import { styleXTG04, styleBoxForm, styleBut021 } from "./PointsGridStyle";
 import { styleBut02, styleModalEnd } from "./PointsGridStyle";
 import { styleSetInf, styleSetInff } from "./PointsGridStyle";
-import { styleInpName, styleXTGHeader } from "./PointsGridStyle";
+import {
+  //styleInpName,
+  styleXTGHeader,
+} from "./PointsGridStyle";
 import { styleInpArg, styleInpTime } from "./PointsGridStyle";
 import { styleXTG101 } from "../../../AppStyle";
 
@@ -146,7 +149,7 @@ const PointsLevel2Baza = (props: {
     let elem = maskpoint.pointForRedax.xctrls[crossRoad].StrategyB;
     let minLeft = elem[elem.length - 1].xleft;
     let minRight = elem[elem.length - 1].xright;
-    const [valuen1, setValuen1] = React.useState(formName);
+    //const [valuen1, setValuen1] = React.useState(formName);
     const [valuen2, setValuen2] = React.useState(maxLeft);
     const [valuen3, setValuen3] = React.useState(maxRight);
     const [valuen4, setValuen4] = React.useState(yell);
@@ -165,11 +168,11 @@ const PointsLevel2Baza = (props: {
       return true;
     };
 
-    const hChange1 = (event: any) => {
-      let form = event.target.value.trimStart(); // удаление пробелов в начале строки
-      setValuen1(form);
-      HAVE++;
-    };
+    // const hChange1 = (event: any) => {
+    //   let form = event.target.value.trimStart(); // удаление пробелов в начале строки
+    //   setValuen1(form);
+    //   HAVE++;
+    // };
 
     const hChange2 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
@@ -220,11 +223,13 @@ const PointsLevel2Baza = (props: {
       let rend = false;
       let pointRab = JSON.parse(JSON.stringify(maskpoint.pointForRedax));
       if (
-        pointRab.xctrls[props.crossroad].name !== valuen1 ||
+        //pointRab.xctrls[props.crossroad].name !== valuen1 ||
+        pointRab.xctrls[props.crossroad].name !== formName ||
         pointRab.xctrls[props.crossroad].left !== valuen2
       )
         rend = true;
-      pointRab.xctrls[props.crossroad].name = valuen1;
+      //pointRab.xctrls[props.crossroad].name = valuen1;
+      pointRab.xctrls[props.crossroad].name = formName;
       pointRab.xctrls[props.crossroad].left = valuen2;
       pointRab.xctrls[props.crossroad].right = valuen3;
       let yell = true;
@@ -241,7 +246,7 @@ const PointsLevel2Baza = (props: {
 
       //console.log("pointsEt:", pointsEt);
 
-      setFormName(valuen1);
+      //setFormName(valuen1);
       setMaxLeft(valuen2);
       setMaxRight(valuen3);
       setYellow(yell);
