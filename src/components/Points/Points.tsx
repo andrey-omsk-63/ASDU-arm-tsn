@@ -134,11 +134,7 @@ const Points = (props: {
     } else {
       for (let i = 0; i < pointsEtalon.length; i++) {
         let illum = value === i ? stylePoint01 : stylePoint02;
-        labl =
-          "ХТ:" +
-          pointsEtalon[i].area.toString() +
-          ":" +
-          pointsEtalon[i].subarea.toString();
+        labl = "ХТ:" + pointsEtalon[i].area + ":" + pointsEtalon[i].subarea;
         resSps.push(<Tab key={i} sx={illum} label={labl} />);
       }
     }

@@ -107,7 +107,7 @@ const PointsMenuLevel1 = (props: {
             resStr.push(
               <Button key={i} sx={illum} onClick={() => handleClose(i)}>
                 <b>
-                  XT:{points.area}:1:&nbsp;&nbsp;{points.xctrls[i].name}
+                  XT:{points.area}:{points.subarea}:id:&nbsp;&nbsp;{points.xctrls[i].name}
                 </b>
               </Button>
             );
@@ -124,7 +124,14 @@ const PointsMenuLevel1 = (props: {
           return resStr;
         };
 
-        let soob = "XT:" + points.area + ":1 Перечень перекрёстков";
+        console.log("POINTS:", points);
+
+        let soob =
+          "XT:" +
+          points.area +
+          ":" +
+          points.subarea +
+          " Перечень перекрёстков";
 
         return (
           <>

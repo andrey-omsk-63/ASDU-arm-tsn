@@ -39,6 +39,7 @@ export const stylePoint01 = {
   marginRight: 0.4,
   padding: "1px 0px 1px 0px",
 };
+
 export const stylePoint02 = {
   fontSize: 13.5,
   maxHeight: "20px",
@@ -68,7 +69,7 @@ export const stylePLevel01 = (dlStrMenu: number) => {
     width: (dlStrMenu + 8) * 10,
     bgcolor: "background.paper",
     border: "1px solid #FFFFFF",
-    borderRadius: 2,
+    borderRadius: 1,
     boxShadow: 24,
     p: 3,
   };
