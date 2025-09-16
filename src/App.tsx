@@ -544,6 +544,9 @@ const App = () => {
         masRab.push(points);
       } else masRab.push(pointsXctrl[i]);
     }
+
+    console.log("APP:", points, masRab);
+
     setPointsXctrl(masRab);
   };
 

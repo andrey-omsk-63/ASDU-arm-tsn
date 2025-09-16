@@ -26,10 +26,7 @@ import { styleXTG021, styleXTG02, styleXTG03 } from "./PointsGridStyle";
 import { styleXTG04, styleBoxForm, styleBut021 } from "./PointsGridStyle";
 import { styleBut02, styleModalEnd } from "./PointsGridStyle";
 import { styleSetInf, styleSetInff } from "./PointsGridStyle";
-import {
-  //styleInpName,
-  styleXTGHeader,
-} from "./PointsGridStyle";
+import { styleXTGHeader } from "./PointsGridStyle";
 import { styleInpArg, styleInpTime } from "./PointsGridStyle";
 import { styleXTG101 } from "../../../AppStyle";
 
@@ -55,7 +52,6 @@ let HAVE = 0;
 
 const PointsLevel2Baza = (props: {
   open: boolean;
-  //ws: WebSocket;
   xctrll: XctrlInfo[];
   xtt: number;
   crossroad: number;
@@ -167,12 +163,6 @@ const PointsLevel2Baza = (props: {
       }
       return true;
     };
-
-    // const hChange1 = (event: any) => {
-    //   let form = event.target.value.trimStart(); // удаление пробелов в начале строки
-    //   setValuen1(form);
-    //   HAVE++;
-    // };
 
     const hChange2 = (event: any) => {
       let form = Number(event.target.value.trimStart()); // удаление пробелов в начале строки
@@ -372,7 +362,7 @@ const PointsLevel2Baza = (props: {
     );
   };
 
-  const SetStr = (props: { nom: number }) => {
+  const SetStr = (props: { nom: number; setPoint: any }) => {
     let StrB = maskpoint.pointForRedax.xctrls[crossRoad].StrategyB;
     let elem = StrB[props.nom];
     let max1 = props.nom < StrB.length - 1 ? StrB[props.nom + 1].xleft : 0;
@@ -428,6 +418,8 @@ const PointsLevel2Baza = (props: {
       maskpoint.savePoint = true;
       dispatch(maskpointCreate(maskpoint));
       setOpenSetStr(false);
+
+      props.setPoint(maskpoint.pointForRedax); // прокидываем изменения в App
     };
 
     const EvilInput = (form: number, max: number, min: number) => {
@@ -690,6 +682,11 @@ const PointsLevel2Baza = (props: {
     setMaxRight(rightTemp);
     setPoints(pointsTemp);
     maskpoint.pointForRedax = props.xctrll[xtProps];
+
+    console.log('***:',maskpoint.pointForRedax,pointsEt)
+
+    props.setPoint(maskpoint.pointForRedax); // прокидываем изменения в App
+
     pointGraf = JSON.parse(JSON.stringify(props.xctrll));
     flagExit = false;
     flagEdit = true;
@@ -751,7 +748,7 @@ const PointsLevel2Baza = (props: {
         </Grid>
       </Stack>
       {openSetName && <SetName />}
-      {openSetStr && <SetStr nom={nomStr} />}
+      {openSetStr && <SetStr nom={nomStr} setPoint={props.setPoint} />}
     </>
   );
 };

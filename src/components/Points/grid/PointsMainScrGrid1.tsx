@@ -66,7 +66,7 @@ const PointsMainScrGrid1 = (props: {
           let kakchectvo = "";
           if (!pointRecResult.Good) kakchectvo = "н/д";
           return (
-            <Grid key={idx} container xs={12} sx={{ cursor: "default" }}>
+            <Grid key={idx} container sx={{ cursor: "default" }}>
               <Grid xs={2} item sx={styleXTG103}>
                 <Box sx={styleXTG101}>{TimeStr(pointRecResult.Time)}</Box>
               </Grid>

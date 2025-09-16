@@ -104,20 +104,18 @@ const PointsMenuLevel1 = (props: {
           let resStr = [];
           for (let i = 0; i < points.xctrls.length; i++) {
             let illum = nomIllum === i ? stylePLevel02 : stylePLevel03;
+            let cont = "XT:" + points.area + ":" + points.subarea;
+            //cont += ":id:" + points.xctrls[i].name;
+            cont += points.xctrls[i].name;
+
             resStr.push(
               <Button key={i} sx={illum} onClick={() => handleClose(i)}>
-                <b>
-                  XT:{points.area}:{points.subarea}:id:&nbsp;&nbsp;{points.xctrls[i].name}
-                </b>
+                <b>{cont}</b>
               </Button>
             );
           }
           resStr.push(
-            <Button
-              key={Math.random()}
-              sx={styleModalEnd}
-              onClick={() => handleClose(777)}
-            >
+            <Button sx={styleModalEnd} onClick={() => handleClose(777)}>
               <b>&#10006;</b>
             </Button>
           );
@@ -127,11 +125,7 @@ const PointsMenuLevel1 = (props: {
         console.log("POINTS:", points);
 
         let soob =
-          "XT:" +
-          points.area +
-          ":" +
-          points.subarea +
-          " Перечень перекрёстков";
+          "XT:" + points.area + ":" + points.subarea + " Перечень перекрёстков";
 
         return (
           <>
