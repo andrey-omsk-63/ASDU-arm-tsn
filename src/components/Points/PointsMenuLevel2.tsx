@@ -24,7 +24,7 @@ const PointsMenuLevel2 = (props: {
   crossroad: number;
   setPoint: Function;
   saveXt: Function;
-  calc: boolean;
+  calc: boolean;  // calculate из App
   calcDeb: boolean;
   update: boolean;
 }) => {

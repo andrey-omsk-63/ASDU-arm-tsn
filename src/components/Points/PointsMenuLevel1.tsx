@@ -28,7 +28,7 @@ const PointsMenuLevel1 = (props: {
   xtt: number;
   setPoint: any;
   saveXt: Function;
-  calc: boolean;
+  calc: boolean; // calculate из App
   calcDeb: boolean;
   update: boolean;
 }) => {
@@ -105,8 +105,7 @@ const PointsMenuLevel1 = (props: {
           for (let i = 0; i < points.xctrls.length; i++) {
             let illum = nomIllum === i ? stylePLevel02 : stylePLevel03;
             let cont = "XT:" + points.area + ":" + points.subarea;
-            //cont += ":id:" + points.xctrls[i].name;
-            cont += points.xctrls[i].name;
+            cont += ":" + points.xctrls[i].name;
 
             resStr.push(
               <Button key={i} sx={illum} onClick={() => handleClose(i)}>
@@ -115,14 +114,16 @@ const PointsMenuLevel1 = (props: {
             );
           }
           resStr.push(
-            <Button sx={styleModalEnd} onClick={() => handleClose(777)}>
+            <Button
+              key={Math.random()}
+              sx={styleModalEnd}
+              onClick={() => handleClose(777)}
+            >
               <b>&#10006;</b>
             </Button>
           );
           return resStr;
         };
-
-        console.log("POINTS:", points);
 
         let soob =
           "XT:" + points.area + ":" + points.subarea + " Перечень перекрёстков";
@@ -138,7 +139,7 @@ const PointsMenuLevel1 = (props: {
       }
     }
   };
-
+  //Math
   const SetValueLavel21 = () => {
     //==================================================================
     maskpoint.savePoint = false;

@@ -194,8 +194,6 @@ const App = () => {
   };
 
   const SetStatisticsIntervalNow = (points: any) => {
-    console.log("POINTS:", points);
-
     for (let i = 0; i < points.length; i++) {
       massIntervalNow.push(points[i].Statistics[0].TLen);
       massIntervalNowStart.push(points[i].Statistics[0].TLen);
@@ -544,8 +542,6 @@ const App = () => {
         masRab.push(points);
       } else masRab.push(pointsXctrl[i]);
     }
-
-    console.log("APP:", points, masRab);
 
     setPointsXctrl(masRab);
   };

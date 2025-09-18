@@ -195,7 +195,7 @@ const PointsLevel2BazaDiogram = (props: {
 
     for (let j = 0; j < vertical; j += scale) {
       resSps.push(
-        <Grid key={j} item container>
+        <Grid key={j} container>
           {PointsXt112Comp1Tab4Str(j)}
         </Grid>
       );

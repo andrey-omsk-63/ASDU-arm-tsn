@@ -133,7 +133,7 @@ export const MenuSpisRegion = (
 ) => {
   return (
     <Button
-      key={Math.random()}
+      //key={Math.random()}
       sx={styleModalMenu}
       onClick={() => handleCloseModal(region)}
     >
@@ -431,8 +431,8 @@ export const BadInput = (
     top: "63%",
     transform: "translate(-50%, -50%)",
     width: 400,
-    bgcolor: "background.paper",
-    border: "1px solid #fff",
+    bgcolor: "#fff6d2", // светло-жёлтый
+    border: "1px solid #FFEDA6", // блендно-жёлтый,
     borderRadius: 1,
     boxShadow: 24,
     textAlign: "center",
@@ -749,6 +749,7 @@ export const OutputPict = (
 
   return (
     <Button
+      //key={Math.random()}
       sx={styleBox}
       onMouseEnter={() => PictInfo(idx, pv, ph)}
       onMouseLeave={() => setPictInfo(false)}
@@ -776,11 +777,9 @@ export const PictInfoBox = (
     let pStB = point.StrategyB;
     for (let i = 0; i < pStB.length; i++) {
       //if (pointer.Value[0] > pStB[i].xright || pointer.Value[1] > pStB[i].xleft)
-        if (pointer.Value[0] > pStB[i].xleft || pointer.Value[1] > pStB[i].xright)
-        num = i + 1;  //num = i + 2;
+      if (pointer.Value[0] > pStB[i].xleft || pointer.Value[1] > pStB[i].xright)
+        num = i + 1; //num = i + 2;
     }
-
-    //console.log("1PictInfoBox:", num, pStB, point, pointer);
 
     let luchO = pStB[num - 1].vleft;
     let luchP = pStB[num - 1].vright;

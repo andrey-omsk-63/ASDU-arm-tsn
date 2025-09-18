@@ -148,9 +148,6 @@ const ManagementLeftGrid = (props: {
       }
     }
     if (firstEntry) {
-      // console.log("Points:", points);
-      // console.log("###:", JSON.parse(JSON.stringify(massKnop)));
-
       //убираем дубликаты в massKnop
       massKnop = massKnop.filter(
         (value, index, self) =>
@@ -465,8 +462,6 @@ const ManagementLeftGrid = (props: {
   };
 
   const SetDataKnob = (knob: any, mode: number) => {
-    console.log("SetDataKnob:", mode, knob[0].cmd, knob);
-
     if (!mode) {
       dataKnob = knob;
       if (knob[0].cmd === 13) {
@@ -551,7 +546,6 @@ const ManagementLeftGrid = (props: {
     let regionWidth = MesssgeLength(points[0].region.nameRegion, 14);
     let aa = regionWidth / ref.current.offsetWidth;
     let addit = aa <= 1 ? 20 : aa <= 2 ? 30 : aa <= 3 ? 60 : 80;
-    //console.log("addition:", addit);
     setAddition(addit);
   }, [points]);
 

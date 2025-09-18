@@ -4,7 +4,6 @@ import Grid from "@mui/material/Grid";
 
 import ManagementLeftGrid from "./grid/ManagLeftGrid";
 
-
 import { debug, WS } from "../../App";
 
 import { Tflight } from "../../interfaceMNG.d";
@@ -41,9 +40,7 @@ const Management = (props: {
     const handleSendOpen = () => {
       if (WS !== null) {
         if (WS.readyState === WebSocket.OPEN) {
-          WS.send(
-            JSON.stringify({ type: "stopStatistics", region: reGion })
-          );
+          WS.send(JSON.stringify({ type: "stopStatistics", region: reGion }));
           WS.send(
             JSON.stringify({ type: "stopOldStatistics", region: reGion })
           );
@@ -127,7 +124,6 @@ const Management = (props: {
           <>
             <ManagementLeftGrid
               open={isOpen}
-              //ws={WS}
               tflightt={pointsEtalon}
               xctrll={pointsXctrlEtalon}
             />

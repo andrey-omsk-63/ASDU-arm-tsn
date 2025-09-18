@@ -42,6 +42,7 @@ let xtPropsOld = -1;
 let crossRoadOld = -1;
 
 let pointsTemp: any = null;
+let pointStatusQuo: any = null;
 let formTemp = "";
 let leftTemp = 0;
 let rightTemp = 0;
@@ -95,6 +96,7 @@ const PointsLevel2Baza = (props: {
     flagEdit = true;
     flagExit = false;
     pointsTemp = pointsEt;
+    pointStatusQuo = JSON.parse(JSON.stringify(pointsEt));
 
     setFormName(pointsEt.xctrls[crossRoad].name);
     setMaxLeft(pointsEt.xctrls[crossRoad].left);
@@ -681,11 +683,12 @@ const PointsLevel2Baza = (props: {
     setMaxLeft(leftTemp);
     setMaxRight(rightTemp);
     setPoints(pointsTemp);
-    maskpoint.pointForRedax = props.xctrll[xtProps];
+    //maskpoint.pointForRedax = props.xctrll[xtProps];
 
-    console.log('***:',maskpoint.pointForRedax,pointsEt)
+    console.log("***:", pointStatusQuo, maskpoint.pointForRedax, pointsEt);
 
-    props.setPoint(maskpoint.pointForRedax); // прокидываем изменения в App
+    maskpoint.pointForRedax = pointStatusQuo
+    props.setPoint(pointStatusQuo); // прокидываем изменения в App
 
     pointGraf = JSON.parse(JSON.stringify(props.xctrll));
     flagExit = false;
