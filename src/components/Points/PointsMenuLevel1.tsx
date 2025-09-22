@@ -139,7 +139,7 @@ const PointsMenuLevel1 = (props: {
       }
     }
   };
-  //Math
+
   const SetValueLavel21 = () => {
     //==================================================================
     maskpoint.savePoint = false;
