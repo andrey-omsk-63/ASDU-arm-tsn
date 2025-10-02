@@ -16,8 +16,9 @@ const ManagKnobXTEmpty = (props: { soob: string; setOpen: any }) => {
     marginTop: "15vh",
     marginLeft: "24vh",
     width: 380,
-    bgcolor: "background.paper",
-    border: "1px solid #fff",
+    bgcolor: "#fff6d2", // светло-жёлтый
+    border: "1px solid #FFEDA6", // блендно-жёлтый
+    color: "#5B1080", // сиреневый
     borderRadius: 1,
     boxShadow: 24,
     textShadow: "2px 2px 3px rgba(0,0,0,0.3)",
@@ -32,7 +33,7 @@ const ManagKnobXTEmpty = (props: { soob: string; setOpen: any }) => {
     height: "21px",
     maxWidth: "2%",
     minWidth: "2%",
-    color: "red",
+    color: "#5B1080", // сиреневый
   };
 
   const handleClose = () => {
@@ -41,13 +42,13 @@ const ManagKnobXTEmpty = (props: { soob: string; setOpen: any }) => {
   };
 
   return (
-    <Modal open={openSet} onClose={handleClose}  hideBackdrop={true}>
+    <Modal open={openSet} onClose={handleClose} hideBackdrop={true}>
       <Box sx={styleSetInf}>
         <Button sx={styleModalEnd} onClick={handleClose}>
           <b>&#10006;</b>
         </Button>
 
-        <Typography variant="h6" sx={{ textAlign: "center", color: "red" }}>
+        <Typography variant="h6" sx={{ textAlign: "center" }}>
           ⚠️{props.soob}
         </Typography>
       </Box>
