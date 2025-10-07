@@ -108,8 +108,6 @@ const PointsLevel2BazaDiogram = (props: {
     let coler = "red";
     let pStB = points.xctrls[crRoad].StrategyB;
 
-    //console.log("PTSB:", pStB, points.xctrls[crRoad]);
-
     const MakeMatrixColor = (num: number, i: number, j: number) => {
       luchO = pStB[num].vleft * massRatio[num];
       luchP = pStB[num].vright * massRatio[num];
@@ -316,7 +314,7 @@ const PointsLevel2BazaDiogram = (props: {
   };
   //=========================================================================
 
-  if (openLoader) Output();
+  openLoader && Output();
 
   return (
     <>

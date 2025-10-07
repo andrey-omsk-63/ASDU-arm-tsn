@@ -182,9 +182,7 @@ const PointsLevel2AreaDiogram = (props: {
       setTimeout(() => {
         PuskBalloon();
       }, 10);
-    } else {
-      PuskBalloon();
-    }
+    } else PuskBalloon();
   };
 
   const OutputerPict = (update: boolean) => {
@@ -202,11 +200,9 @@ const PointsLevel2AreaDiogram = (props: {
           let flagEnd = i === I ? true : false;
           if (pointer[namer][i].Value[0] || pointer[namer][i].Value[1]) {
             resStrr.push(
-              <>
-                <Grid key={i} container>
-                  {OutputPict(i, pv, ph, PictInfo, setPictInfo, flagEnd)}
-                </Grid>
-              </>
+              <Grid key={i} container>
+                {OutputPict(i, pv, ph, PictInfo, setPictInfo, flagEnd)}
+              </Grid>
             );
           }
         }
@@ -270,7 +266,7 @@ const PointsLevel2AreaDiogram = (props: {
   };
   //=========================================================================
 
-  if (openLoader) Output();
+  openLoader && Output();
 
   return (
     <>
@@ -301,4 +297,3 @@ const PointsLevel2AreaDiogram = (props: {
 };
 
 export default PointsLevel2AreaDiogram;
-//Обратный
