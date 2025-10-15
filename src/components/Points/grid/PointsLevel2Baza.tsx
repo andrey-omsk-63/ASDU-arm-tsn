@@ -147,7 +147,6 @@ const PointsLevel2Baza = (props: {
     let elem = maskpoint.pointForRedax.xctrls[crossRoad].StrategyB;
     let minLeft = elem[elem.length - 1].xleft;
     let minRight = elem[elem.length - 1].xright;
-    //const [valuen1, setValuen1] = React.useState(formName);
     const [valuen2, setValuen2] = React.useState(maxLeft);
     const [valuen3, setValuen3] = React.useState(maxRight);
     const [valuen4, setValuen4] = React.useState(yell);
@@ -215,12 +214,10 @@ const PointsLevel2Baza = (props: {
       let rend = false;
       let pointRab = JSON.parse(JSON.stringify(maskpoint.pointForRedax));
       if (
-        //pointRab.xctrls[props.crossroad].name !== valuen1 ||
         pointRab.xctrls[props.crossroad].name !== formName ||
         pointRab.xctrls[props.crossroad].left !== valuen2
       )
         rend = true;
-      //pointRab.xctrls[props.crossroad].name = valuen1;
       pointRab.xctrls[props.crossroad].name = formName;
       pointRab.xctrls[props.crossroad].left = valuen2;
       pointRab.xctrls[props.crossroad].right = valuen3;
@@ -233,12 +230,7 @@ const PointsLevel2Baza = (props: {
       pointRab.yellow.stop = timeStop;
       setPoints(pointRab);
       maskpoint.pointForRedax = pointRab;
-
       pointsEt = pointRab;
-
-      //console.log("pointsEt:", pointsEt);
-
-      //setFormName(valuen1);
       setMaxLeft(valuen2);
       setMaxRight(valuen3);
       setYellow(yell);
@@ -334,7 +326,6 @@ const PointsLevel2Baza = (props: {
             <Button sx={styleModalEnd} onClick={handleCloseEnd}>
               <b>&#10006;</b>
             </Button>
-            {/* {Inputer("Наименование ХТ", valuen1, hChange1, hBlur, styleInpName)} */}
             {Inputer(
               "Максимум прямого",
               valuen2,
@@ -420,7 +411,6 @@ const PointsLevel2Baza = (props: {
       maskpoint.savePoint = true;
       dispatch(maskpointCreate(maskpoint));
       setOpenSetStr(false);
-
       props.setPoint(maskpoint.pointForRedax); // прокидываем изменения в App
     };
 
@@ -574,7 +564,6 @@ const PointsLevel2Baza = (props: {
               </>
             ) : (
               <>
-                {/* {Grider(ButtRec(name, SetOpenSetName), 0, false)} */}
                 {Grider(name, 0, false)}
                 {Grider(ButtRec(rec1, SetOpenSetName), 2, false)}
                 {Grider(ButtRec(rec2, SetOpenSetName), 2, false)}
@@ -683,11 +672,10 @@ const PointsLevel2Baza = (props: {
     setMaxLeft(leftTemp);
     setMaxRight(rightTemp);
     setPoints(pointsTemp);
-    //maskpoint.pointForRedax = props.xctrll[xtProps];
-
+    
     console.log("***:", pointStatusQuo, maskpoint.pointForRedax, pointsEt);
 
-    maskpoint.pointForRedax = pointStatusQuo
+    maskpoint.pointForRedax = pointStatusQuo;
     props.setPoint(pointStatusQuo); // прокидываем изменения в App
 
     pointGraf = JSON.parse(JSON.stringify(props.xctrll));
