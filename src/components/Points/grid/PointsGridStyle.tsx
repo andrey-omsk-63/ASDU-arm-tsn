@@ -141,7 +141,7 @@ export const styleXTl201 = {
 
 export const stylePLevel06 = {
   fontSize: 12.9,
-  height: "22px",
+  height: "21px",
   width: "60px",
   transform: "rotate(270deg)",
   bgcolor: "#82e94a", // ярко-салатовый
@@ -165,6 +165,23 @@ export const stylePLevel07 = {
   color: "black",
   marginBottom: 5.9,
   textTransform: "unset !important",
+};
+
+export const stylePLevel08 = {
+  fontSize: 12.5,
+  height: "20px",
+  width: "60px",
+  transform: "rotate(270deg)",
+  bgcolor: "#FDFEFA", // оч светло-салатовый
+  border: "1px solid #d4d4d4", // серый
+  borderRadius: 1,
+  //boxShadow: 2,
+  color: "black",
+  marginBottom: 5.9,
+  marginLeft: -0.2,
+  textTransform: "unset !important",
+  padding: "0px 0px 0px 7px",
+  cursor: "default",
 };
 //====== PointsLevel2Baza =======================================================
 export const styleXTG00 = {
@@ -434,11 +451,11 @@ export const styleXTG035 = {
 
 export const styleXTG045 = {
   height: "85.8vh",
-  bgcolor: "#BBBBBB", // серый
-  border: 1,
+  //bgcolor: "#BBBBBB", // серый
+  //border: 1,
   marginLeft: 0.5,
   borderRadius: 1,
-  borderColor: "#BBBBBB", // серый
+  //borderColor: "#BBBBBB", // серый
   boxShadow: 12,
 };
 

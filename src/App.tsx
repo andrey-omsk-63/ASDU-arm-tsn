@@ -34,6 +34,8 @@ import { PunktMenuSaveFile } from "./AppServiceFunctions";
 import { styleImpServis, styleInp, styleInt01 } from "./AppStyle";
 import { styleImpBlock, styleBoxTabContext, styleInt02 } from "./AppStyle";
 
+import { Priority } from "./AppConst"; // приоритет доступа ко всем функциям АРМ-а при отладке
+
 import { dataStatNow } from "./NullStatNow";
 
 export interface Stater {
@@ -92,6 +94,7 @@ export let maskPoint: Pointer = {
 
 export let debug = false; // режим отладки или демо
 export let WS: any = null; // WebSocket
+export let PRIORITY: boolean = true; // приоритет доступа ко всем функциям АРМ-а
 
 let flagOpenWS = true;
 
@@ -223,8 +226,13 @@ const App = () => {
     if (
       WS.url.slice(0, 20) === "wss://localhost:3000" ||
       WS.url.slice(0, 27) === "wss://andrey-omsk-63.github"
-    )
-      debug = true;
+    ) {
+      debug = true; // режим отладки или DEMO-режим
+      PRIORITY = Priority;
+    } else {
+      let mass = WS.url.split("/");
+      if (mass[mass.length - 2] !== "TechAutomatic") PRIORITY = false;
+    }
   }
 
   React.useEffect(() => {

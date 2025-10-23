@@ -32,6 +32,8 @@ import { styleXTG101 } from "../../../AppStyle";
 
 import { XctrlInfo } from "../../../interfaceGl.d";
 
+import { PRIORITY } from "../../../App";
+
 let nomStr = 0;
 let nomIllum = -1;
 let flagSave = false;
@@ -672,7 +674,7 @@ const PointsLevel2Baza = (props: {
     setMaxLeft(leftTemp);
     setMaxRight(rightTemp);
     setPoints(pointsTemp);
-    
+
     console.log("***:", pointStatusQuo, maskpoint.pointForRedax, pointsEt);
 
     maskpoint.pointForRedax = pointStatusQuo;
@@ -730,12 +732,14 @@ const PointsLevel2Baza = (props: {
         </Grid>
 
         <Grid item xs sx={styleXTG04}>
-          <PointsLevel2BazaDiogram
-            xctrll={pointGraf}
-            xtt={xtProps}
-            crossroad={props.crossroad}
-            update={props.update}
-          />
+          {PRIORITY && (
+            <PointsLevel2BazaDiogram
+              xctrll={pointGraf}
+              xtt={xtProps}
+              crossroad={props.crossroad}
+              update={props.update}
+            />
+          )}
         </Grid>
       </Stack>
       {openSetName && <SetName />}

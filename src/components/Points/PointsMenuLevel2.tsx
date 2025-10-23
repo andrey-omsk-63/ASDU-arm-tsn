@@ -13,8 +13,10 @@ import { MakeDate } from "../../AppServiceFunctions";
 
 import { styleXTl201 } from "./grid/PointsGridStyle";
 import { stylePLevel06, stylePLevel07 } from "./grid/PointsGridStyle";
+//import { stylePLevel08 } from "./grid/PointsGridStyle";
 
 import { XctrlInfo } from "../../interfaceGl.d";
+//import { PRIORITY } from "../../App";
 
 // Диспеспетчер меню второго уровня (вертикального)
 const PointsMenuLevel2 = (props: {
@@ -24,7 +26,7 @@ const PointsMenuLevel2 = (props: {
   crossroad: number;
   setPoint: Function;
   saveXt: Function;
-  calc: boolean;  // calculate из App
+  calc: boolean; // calculate из App
   calcDeb: boolean;
   update: boolean;
 }) => {
@@ -55,10 +57,25 @@ const PointsMenuLevel2 = (props: {
     );
   };
 
+  // const BoxMenu = (soob: any) => {
+  //   return (
+  //     <Box sx={stylePLevel08}>
+  //       <b>{soob}</b>
+  //     </Box>
+  //   );
+  // };
+
   const PointsMenuLevel2Menu = () => {
     return (
       <Box sx={styleXTl201}>
         {ButtonMenu("1", "Базовые")}
+
+        {/* {PRIORITY ? (
+          <>{ButtonMenu("2", "Oбласти")}</>
+        ) : (
+          <>{BoxMenu("Oбласти")}</>
+        )} */}
+
         {ButtonMenu("2", "Oбласти")}
         {ButtonMenu("3", "Расчёт")}
       </Box>

@@ -24,6 +24,8 @@ import { styleXTG101 } from "../../../AppStyle";
 
 import { XctrlInfo } from "../../../interfaceGl.d";
 
+import { PRIORITY } from "../../../App";
+
 let nomStr = -1;
 let nomIllum = -1;
 let flagSave = false;
@@ -386,14 +388,14 @@ const PointsLevel2Area = (props: {
         </Grid>
 
         <Grid item xs sx={styleXTG045}>
-          <Grid container>
+          {PRIORITY && (
             <PointsLevel2AreaDiogram
               xctrll={pointGraf}
               xtt={xtProps}
               crossroad={props.crossroad}
               update={props.update}
             />
-          </Grid>
+          )}
         </Grid>
       </Stack>
       {openSetStr && <SetStr nom={nomStr} />}
