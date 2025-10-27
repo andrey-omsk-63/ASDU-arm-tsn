@@ -27,7 +27,7 @@ import { Statistic } from "./interfaceStat.d";
 import { RegionInfo } from "./interfaceGl.d";
 
 import { MakeInterval, WriteToCsvFileForStat } from "./AppServiceFunctions";
-import { DispatchXctrl } from "./AppServiceFunctions";
+import { DispatchXctrl, SendSocketDevices } from "./AppServiceFunctions";
 import { InputerDate, MakeDate, InputerOk } from "./AppServiceFunctions";
 import { PunktMenuSaveFile } from "./AppServiceFunctions";
 
@@ -35,6 +35,7 @@ import { styleImpServis, styleInp, styleInt01 } from "./AppStyle";
 import { styleImpBlock, styleBoxTabContext, styleInt02 } from "./AppStyle";
 
 import { Priority } from "./AppConst"; // приоритет доступа ко всем функциям АРМ-а при отладке
+import { StatOnly } from "./AppConst"; // работа только в статистике при отладке
 
 import { dataStatNow } from "./NullStatNow";
 
@@ -161,7 +162,7 @@ const App = () => {
   const [trigger, setTrigger] = React.useState(true);
   const [saveXT, setSaveXT] = React.useState(false);
   const [write, setWrite] = React.useState(false);
-  const [openSetErrLog, setOpenSetErrLog] = React.useState(false);
+  const [openErrLog, setOpenErrLog] = React.useState(false);
   const [calculate, setCalculate] = React.useState(true);
 
   const UpdateXctrl = () => {
@@ -218,6 +219,12 @@ const App = () => {
     }
   };
 
+  const SetModeStat = () => {
+    setValue("3");
+    setValueDate(dayjs(formSett));
+    tekValue = "3";
+  };
+
   let host = "wss://" + window.location.host + window.location.pathname;
   host += "W" + window.location.search;
   if (flagOpenWS) {
@@ -228,10 +235,20 @@ const App = () => {
       WS.url.slice(0, 27) === "wss://andrey-omsk-63.github"
     ) {
       debug = true; // режим отладки или DEMO-режим
-      PRIORITY = Priority;
+      if (StatOnly) {
+        setBsLogin("!!!");
+        SetModeStat();
+      } else PRIORITY = Priority;
     } else {
       let mass = WS.url.split("/");
-      if (mass[mass.length - 2] !== "TechAutomatic") PRIORITY = false;
+
+      console.log("MASS:", mass, mass[mass.length - 1].slice(0, 10)); // charPoints
+
+      if (StatOnly || mass[mass.length - 1].slice(0, 10) !== "charPoints") {
+        setBsLogin("!!!");
+        SetModeStat();
+        //SendSocketDevices()
+      } else if (mass[mass.length - 2] !== "TechAutomatic") PRIORITY = false;
     }
   }
 
@@ -250,7 +267,7 @@ const App = () => {
       let data = allData.data;
       switch (allData.type) {
         case "getDevices":
-          //console.log("Пришло tflight:", data.tflight);
+          //console.log("Пришло tflight:", data.tflight); // =================================
           setPointsTfl(data.tflight ?? []);
           pointsTFL = data.tflight ?? [];
           !isOpenDev && setIsOpenDev(true);
@@ -286,6 +303,7 @@ const App = () => {
           !isOpenSt && setIsOpenSt(true);
           break;
         case "getOldStatistics":
+          console.log("getOldStatistics:", data); // =================================
           setPointsOldSt(data.statistics ?? []);
           let stOld = dataStatNow.data.statistics;
           if (data.statistics) stOld = data.statistics;
@@ -300,19 +318,21 @@ const App = () => {
           setCalculate(!calculate);
           break;
         case "busy":
+          console.log("BUSY:", data); // =================================
           setBsLogin(data.login);
           if (data.login) {
-            setValue("3");
-            setValueDate(dayjs(formSett));
-            setOpenSetErrLog(true);
-            tekValue = "3";
+            SetModeStat();
+            // setValue("3");
+            // setValueDate(dayjs(formSett));
+            // tekValue = "3";
+            setOpenErrLog(true);
           }
           break;
         case "close":
           window.close();
           break;
         default:
-          console.log("!!!data_default:", allData.data);
+          console.log("!!!data_default:", allData.type, data);
       }
     };
   }, [
@@ -604,13 +624,13 @@ const App = () => {
 
   return (
     <>
-      {openSetErrLog && (
-        <EndSeans bsLogin={bsLogin} setOpen={setOpenSetErrLog} />
+      {openErrLog && (
+        <EndSeans bsLogin={bsLogin} setOpen={setOpenErrLog} reg={regionGlob} />
       )}
       {regionGlob === 0 && isOpenInf && (
         <BeginSeans pointsReg={pointsReg} SetRegion={setRegionGlob} />
       )}
-      {!openSetErrLog && (
+      {!openErrLog && (
         <>
           {write && <AppWriteToAllFileForXT setOpen={setWrite} />}
           <Box sx={{ width: "98.8%" }}>

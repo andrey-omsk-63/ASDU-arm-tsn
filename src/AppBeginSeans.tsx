@@ -4,10 +4,10 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Modal from "@mui/material/Modal";
 
-import { MenuSpisRegion } from "./AppServiceFunctions";
+import { MenuSpisRegion, SendSocketDevices } from "./AppServiceFunctions";
 import { SendSocketgetStatisticsList } from "./AppServiceFunctions";
 
-import { debug, WS } from "./App";
+//import { debug, WS } from "./App";
 
 let massRegion: Array<number> = [];
 let massNameRegion: Array<string> = [];
@@ -15,11 +15,7 @@ let regionGlob = 0;
 let pointsReg: any = null;
 let dlStrMenu = 0;
 
-const BeginSeans = (props: {
-  //ws: WebSocket;
-  pointsReg: any;
-  SetRegion: Function;
-}) => {
+const BeginSeans = (props: { pointsReg: any; SetRegion: Function }) => {
   console.log("BeginSeans:", props.pointsReg);
   const [open, setOpen] = React.useState(true);
 
@@ -41,7 +37,8 @@ const BeginSeans = (props: {
   }
 
   const handleCloseModal = (numer: number) => {
-    SendSocketgetStatisticsList(debug, WS, numer.toString());
+    SendSocketgetStatisticsList(numer.toString());
+    SendSocketDevices(numer);
     props.SetRegion(numer);
     setOpen(false);
   };
@@ -51,7 +48,8 @@ const BeginSeans = (props: {
   };
 
   const OneRegin = () => {
-    SendSocketgetStatisticsList(debug, WS, massRegion[0].toString());
+    SendSocketgetStatisticsList(massRegion[0].toString());
+    SendSocketDevices(massRegion[0]);
     props.SetRegion(massRegion[0]);
   };
 

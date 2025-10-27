@@ -5,7 +5,10 @@ import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 
-const EndSeans = (props: { bsLogin: string; setOpen: any }) => {
+import { debug, WS } from "./App";
+
+const EndSeans = (props: { bsLogin: string; setOpen: any; reg: number }) => {
+  const reGion = props.reg;
   const [openSet, setOpenSet] = React.useState(true);
   let soob = "В Арм-е Технолога системы работает пользователь " + props.bsLogin;
 
@@ -17,7 +20,7 @@ const EndSeans = (props: { bsLogin: string; setOpen: any }) => {
     transform: "translate(-50%, -50%)",
     width: 380,
     bgcolor: "#FFDB4D", // жёлтый
-    border: "1px solid #FFEDA6",// бледно-жёлтый
+    border: "1px solid #FFEDA6", // бледно-жёлтый
     borderRadius: 1,
     textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
     boxShadow: 24,
@@ -40,6 +43,24 @@ const EndSeans = (props: { bsLogin: string; setOpen: any }) => {
 
   const handleClose = (mode: number) => {
     if (!mode) window.close();
+
+    console.log("getDevices", reGion);
+
+    const handleSendOpen = () => {
+      if (WS !== null) {
+        if (WS.readyState === WebSocket.OPEN) {
+          WS.send(
+            JSON.stringify({ type: "getDevices", region: reGion.toString() })
+          );
+        } else {
+          setTimeout(() => {
+            handleSendOpen();
+          }, 1000);
+        }
+      }
+    };
+    if (!debug) handleSendOpen();
+
     props.setOpen(false);
     setOpenSet(false);
   };

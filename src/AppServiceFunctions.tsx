@@ -243,15 +243,15 @@ export const InputerDate = (
 };
 
 export const SendSocketgetStatisticsList = (
-  debug: boolean,
-  ws: WebSocket,
+  //debug: boolean,
+  //ws: WebSocket,
   region: string
 ) => {
   console.log("getStatisticsList:", region);
   const handleSendOpen = () => {
     if (!debug) {
-      if (ws.readyState === WebSocket.OPEN) {
-        ws.send(
+      if (WS.readyState === WebSocket.OPEN) {
+        WS.send(
           JSON.stringify({
             type: "getStatisticsList",
             region,
@@ -900,4 +900,21 @@ export const NameVertex = (area: number, subarea: number, id: number) => {
   return nameId;
 };
 //==================================================
-//Формат сохранения таблицы:
+export const SendSocketDevices = (reGion: number) => {
+  console.log("SendGetDevices", reGion);
+
+  const handleSendOpen = () => {
+    if (WS !== null) {
+      if (WS.readyState === WebSocket.OPEN) {
+        WS.send(
+          JSON.stringify({ type: "getDevices", region: reGion.toString() })
+        );
+      } else {
+        setTimeout(() => {
+          handleSendOpen();
+        }, 1000);
+      }
+    }
+  };
+  if (!debug) handleSendOpen();
+};

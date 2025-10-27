@@ -47,6 +47,8 @@ const StatisticsArchive = (props: {
   let reGion = props.region;
   // if (oldDate !== props.date) flagEtalon = true;
 
+  console.log("Poins:", points);
+
   React.useEffect(() => {
     const handleSend = () => {
       if (WS !== null && oldDate !== props.date) {
