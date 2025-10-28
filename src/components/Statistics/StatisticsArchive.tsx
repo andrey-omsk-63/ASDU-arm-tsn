@@ -45,9 +45,8 @@ const StatisticsArchive = (props: {
   let isOpen = props.open;
   let points = props.points;
   let reGion = props.region;
-  // if (oldDate !== props.date) flagEtalon = true;
-
-  console.log("Poins:", points);
+  
+  //console.log("Poins:", points);
 
   React.useEffect(() => {
     const handleSend = () => {

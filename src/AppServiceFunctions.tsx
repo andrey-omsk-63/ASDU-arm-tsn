@@ -242,12 +242,9 @@ export const InputerDate = (
   );
 };
 
-export const SendSocketgetStatisticsList = (
-  //debug: boolean,
-  //ws: WebSocket,
-  region: string
-) => {
+export const SendSocketgetStatisticsList = (region: string) => {
   console.log("getStatisticsList:", region);
+  
   const handleSendOpen = () => {
     if (!debug) {
       if (WS.readyState === WebSocket.OPEN) {
@@ -691,22 +688,15 @@ export const WorkMenuEditMain = (
 };
 //=== Points =======================================
 export const SendSocketOldDateXt = (
-  ws: any,
+  // ws: any,
   date: any,
   pointsEtalon: any,
   tekValue: number
 ) => {
-  console.log(
-    "SendSocketOldDateXt",
-    date,
-    pointsEtalon[tekValue].region,
-    pointsEtalon[tekValue].area,
-    pointsEtalon[tekValue].subarea
-  );
   const handleSendOpen = () => {
-    if (ws !== null) {
-      if (ws.readyState === WebSocket.OPEN) {
-        ws.send(
+    if (WS !== null) {
+      if (WS.readyState === WebSocket.OPEN) {
+        WS.send(
           JSON.stringify({
             type: "getCalculation",
             date: new Date(date).toISOString(),
@@ -901,7 +891,7 @@ export const NameVertex = (area: number, subarea: number, id: number) => {
 };
 //==================================================
 export const SendSocketDevices = (reGion: number) => {
-  console.log("SendGetDevices", reGion);
+  console.log("SendSocketDevices:", reGion);
 
   const handleSendOpen = () => {
     if (WS !== null) {

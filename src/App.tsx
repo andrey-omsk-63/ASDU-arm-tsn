@@ -241,13 +241,9 @@ const App = () => {
       } else PRIORITY = Priority;
     } else {
       let mass = WS.url.split("/");
-
-      console.log("MASS:", mass, mass[mass.length - 1].slice(0, 10)); // charPoints
-
       if (StatOnly || mass[mass.length - 1].slice(0, 10) !== "charPoints") {
         setBsLogin("!!!");
         SetModeStat();
-        //SendSocketDevices()
       } else if (mass[mass.length - 2] !== "TechAutomatic") PRIORITY = false;
     }
   }
@@ -267,7 +263,7 @@ const App = () => {
       let data = allData.data;
       switch (allData.type) {
         case "getDevices":
-          //console.log("Пришло tflight:", data.tflight); // =================================
+          console.log("Пришло tflight:", data.tflight); // =================================
           setPointsTfl(data.tflight ?? []);
           pointsTFL = data.tflight ?? [];
           !isOpenDev && setIsOpenDev(true);
@@ -283,7 +279,9 @@ const App = () => {
           }
           break;
         case "xctrlInfo":
-          console.log("Пришло xctrlInfo:", data.xctrlInfo);
+          let d = new Date();
+          let h = d.getHours();
+          console.log("xctrlInfo:", h, d.getMinutes(), data.xctrlInfo);
           setPointsXctrl(data.xctrlInfo ?? []);
           if (regionGlob === 0) setPointsReg(data.regionInfo ?? []);
           update = !update; // для обновдения точек в графиках
@@ -332,7 +330,7 @@ const App = () => {
           window.close();
           break;
         default:
-          console.log("!!!data_default:", allData.type, data);
+          console.log("data_default:", allData.type, data);
       }
     };
   }, [

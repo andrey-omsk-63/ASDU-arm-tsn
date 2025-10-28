@@ -7,8 +7,6 @@ import Modal from "@mui/material/Modal";
 import { MenuSpisRegion, SendSocketDevices } from "./AppServiceFunctions";
 import { SendSocketgetStatisticsList } from "./AppServiceFunctions";
 
-//import { debug, WS } from "./App";
-
 let massRegion: Array<number> = [];
 let massNameRegion: Array<string> = [];
 let regionGlob = 0;
@@ -16,11 +14,9 @@ let pointsReg: any = null;
 let dlStrMenu = 0;
 
 const BeginSeans = (props: { pointsReg: any; SetRegion: Function }) => {
-  console.log("BeginSeans:", props.pointsReg);
+  //console.log("BeginSeans:", props.pointsReg);
   const [open, setOpen] = React.useState(true);
 
-  // let debug = false;
-  // if (props.ws.url === "wss://localhost:3000/W") debug = true;
   if (!pointsReg) pointsReg = props.pointsReg;
 
   if (regionGlob === 0) {
@@ -54,15 +50,6 @@ const BeginSeans = (props: { pointsReg: any; SetRegion: Function }) => {
   };
 
   const SpisRegion = () => {
-    // let resStr = [];
-    // for (let i = 0; i < massRegion.length; i++) {
-    //   resStr.push(
-    //     <>
-    //       {MenuSpisRegion(massRegion[i], massNameRegion[i], handleCloseModal)}
-    //     </>
-    //   );
-    // }
-    // return resStr;
     return massRegion.map((masregion: any, idx: number) => {
       return (
         <>{MenuSpisRegion(masregion, massNameRegion[idx], handleCloseModal)}</>

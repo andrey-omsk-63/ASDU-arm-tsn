@@ -52,17 +52,10 @@ const Points = (props: {
   let reGion = props.region;
   let isOpen = props.open;
   let pointsGl = props.xctrll;
-  // let debug =
-  //   props.ws.url === "wss://localhost:3000/W" ||
-  //   props.ws.url.slice(0, 27) === "wss://andrey-omsk-63.github"
-  //     ? true
-  //     : false;
 
   let points = pointsGl.filter(
     (pointsGl) => pointsGl.region === Number(reGion)
   );
-
-  //console.log("Points:", props.xctrll, points);
 
   const [value, setValue] = React.useState(tekValue);
   const [calculate, setCalculate] = React.useState(true);
@@ -94,7 +87,7 @@ const Points = (props: {
         setCalculate(!calculate);
       } else datestat.xttData = "sss";
       datestat.xtt = tekValue;
-      SendSocketOldDateXt(WS, props.date, pointsEtalon, tekValue);
+      SendSocketOldDateXt(props.date, pointsEtalon, tekValue);
       oldXt = tekValue;
       oldDate = props.date;
     }
