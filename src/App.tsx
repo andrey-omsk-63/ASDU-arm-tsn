@@ -129,9 +129,6 @@ let tekValue = "1";
 let update = true;
 let updateDevice = true;
 
-//let timerId: any = null;
-//let timer = 20000;
-
 const App = () => {
   //== Piece of Redux ======================================
   let maskpoint = useSelector((state: any) => {
@@ -301,7 +298,7 @@ const App = () => {
           !isOpenSt && setIsOpenSt(true);
           break;
         case "getOldStatistics":
-          console.log("getOldStatistics:", data); // =================================
+          //console.log("getOldStatistics:", data); // =================================
           setPointsOldSt(data.statistics ?? []);
           let stOld = dataStatNow.data.statistics;
           if (data.statistics) stOld = data.statistics;
@@ -320,9 +317,6 @@ const App = () => {
           setBsLogin(data.login);
           if (data.login) {
             SetModeStat();
-            // setValue("3");
-            // setValueDate(dayjs(formSett));
-            // tekValue = "3";
             setOpenErrLog(true);
           }
           break;
@@ -345,13 +339,6 @@ const App = () => {
     isOpenOldSt,
   ]);
 
-  // const DoTimerId = () => {
-  //   //setUpdate(!update);
-  //   update = !update
-  //   setTrigger(!trigger);
-  //   console.log("DoTimerId:", timerId, update);
-  // }; Сохранить
-
   if (debug && flagOpenDebug) {
     console.log("РЕЖИМ ОТЛАДКИ!!! ");
     let road =
@@ -365,9 +352,6 @@ const App = () => {
     });
     axios.get(road + "otladkaXctrl.json").then(({ data }) => {
       setPointsXctrl(data.data.xctrlInfo ?? []);
-      //===============
-      //timerId = setInterval(() => DoTimerId(), 20000);
-      //===============
       if (regionGlob === 0) setPointsReg(data.data.regionInfo ?? []);
       if (data.data.xctrlInfo !== null) {
         maskPoint.pointForRedax = data.data.xctrlInfo[0];
@@ -568,7 +552,6 @@ const App = () => {
         masRab.push(points);
       } else masRab.push(pointsXctrl[i]);
     }
-
     setPointsXctrl(masRab);
   };
 
