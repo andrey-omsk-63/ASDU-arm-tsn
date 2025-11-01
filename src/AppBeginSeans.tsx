@@ -65,7 +65,7 @@ const BeginSeans = (props: { pointsReg: any; SetRegion: Function }) => {
     marginBottom: 1,
     transform: "translate(-50%, -50%)",
     width: dlStrMenu,
-    bgcolor: "background.paper",
+    background: "linear-gradient(160deg, #F1F5FB 63%, #D0DEF0 )",
     border: "1px solid #fff",
     borderRadius: 1,
     boxShadow: 24,
@@ -74,18 +74,21 @@ const BeginSeans = (props: { pointsReg: any; SetRegion: Function }) => {
 
   return (
     <>
-      {massRegion.length > 1 && (
+      {massRegion.length === 1 ? (
+        <>{OneRegin()}</>
+      ) : (
         <Modal open={open} onClose={CloseEnd}>
           <Box sx={styleModal}>
             <Stack direction="column">
-              <Box sx={{ textAlign: "center" }}>Выбор региона:</Box>
+              <Box sx={{ color: "#6F139B", textAlign: "center" }}>
+                Выбор региона:
+              </Box>
               {SpisRegion()}
               <Box sx={{ marginBottom: 0.5 }}> </Box>
             </Stack>
           </Box>
         </Modal>
       )}
-      {massRegion.length === 1 && <>{OneRegin()}</>}
     </>
   );
 };

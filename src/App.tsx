@@ -27,7 +27,7 @@ import { Statistic } from "./interfaceStat.d";
 import { RegionInfo } from "./interfaceGl.d";
 
 import { MakeInterval, WriteToCsvFileForStat } from "./AppServiceFunctions";
-import { DispatchXctrl, SendSocketDevices } from "./AppServiceFunctions";
+import { DispatchXctrl } from "./AppServiceFunctions";
 import { InputerDate, MakeDate, InputerOk } from "./AppServiceFunctions";
 import { PunktMenuSaveFile } from "./AppServiceFunctions";
 
