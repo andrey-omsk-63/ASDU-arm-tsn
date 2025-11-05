@@ -111,7 +111,7 @@ export const styleSt06 = {
   borderBottom: "1px solid #d4d4d4", // серый
   lineHeight: 2,
   fontSize: 12.9,
-  cursor: "default", 
+  cursor: "default",
 };
 
 export const styleHeader03 = {
@@ -131,7 +131,7 @@ export const styleHeader033 = {
   textAlign: "center",
   height: 24,
   lineHeight: 1.5,
-  cursor: "default", 
+  cursor: "default",
 };
 
 export const styleHead = {
@@ -193,15 +193,6 @@ export const styleBattonCl = {
   borderRadius: 1,
   boxShadow: 6,
 };
-
-// export const options = {
-//   responsive: true,
-//   maintainAspectRatio: false,
-//   plugins: {
-//     legend: { display: true, position: "top" as const },
-//     title: { display: false },
-//   },
-// };
 
 export const styleStatMain = {
   background: "linear-gradient(160deg, #F1F5FB 63%, #D0DEF0 )",

@@ -45,8 +45,6 @@ const StatisticsArchive = (props: {
   let isOpen = props.open;
   let points = props.points;
   let reGion = props.region;
-  
-  //console.log("Poins:", points);
 
   React.useEffect(() => {
     const handleSend = () => {

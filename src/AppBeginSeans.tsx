@@ -14,7 +14,6 @@ let pointsReg: any = null;
 let dlStrMenu = 0;
 
 const BeginSeans = (props: { pointsReg: any; SetRegion: Function }) => {
-  //console.log("BeginSeans:", props.pointsReg);
   const [open, setOpen] = React.useState(true);
 
   if (!pointsReg) pointsReg = props.pointsReg;

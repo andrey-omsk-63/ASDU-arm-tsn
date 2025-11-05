@@ -78,8 +78,8 @@ export const stylePLevel01 = (dlStrMenu: number) => {
 
 export const stylePLevel02 = {
   fontSize: 13.9,
-  maxHeight: "20px",
-  minHeight: "20px",
+  maxHeight: "21px",
+  minHeight: "21px",
   color: "black",
   bgcolor: "#82e94a", // ярко-салатовый
   border: "1px solid #93D145", // ярко-салатовый
@@ -92,8 +92,8 @@ export const stylePLevel02 = {
 
 export const stylePLevel03 = {
   fontSize: 13.9,
-  maxHeight: "20px",
-  minHeight: "20px",
+  maxHeight: "21px",
+  minHeight: "21px",
   bgcolor: "#E6F5D6", // светло-салатовый
   border: "1px solid #d4d4d4", // серый
   borderRadius: 1,

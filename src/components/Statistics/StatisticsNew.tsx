@@ -198,7 +198,6 @@ const StatisticsNew = (props: {
           </Tabs>
         </Box>
         <Box sx={{ height: "12px" }}></Box>
-        {/* <Box sx={styleHead}>{head}</Box> */}
       </>
     );
   };

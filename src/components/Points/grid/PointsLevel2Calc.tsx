@@ -84,8 +84,6 @@ const PointsLevel2Calc = (props: {
     if (debug) namer = "Без имени_12.09.2022_10-12-57";
   }
 
-  //console.log("POINTS:", xtProps, namer, props.crossroad, points);
-
   React.useEffect(() => {
     if (pointer !== null) props.saveXt(true);
   }, [pointer, props]);
@@ -279,8 +277,6 @@ const PointsLevel2Calc = (props: {
   };
 
   const OutputGraf = () => {
-    //console.log("OutputGraf:", pointer, !!pointer, !!pointer[namer]);
-
     return (
       <Grid container>
         <Grid item xs sx={styleXTC03}>
@@ -375,8 +371,6 @@ const PointsLevel2Calc = (props: {
       </Grid>
     );
   };
-
-  //console.log("######:", !!pointer, !!pointer[namer], namer);
 
   return (
     <>

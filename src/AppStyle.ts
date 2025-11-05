@@ -28,20 +28,6 @@ export const styleApp99 = {
   textTransform: "unset !important",
 };
 
-// export const styleMod = {
-//   position: "absolute",
-//   top: "22.8%",
-//   left: "47.7%",
-//   transform: "translate(-50%, -50%)",
-//   width: 500,
-//   bgcolor: "background.paper",
-//   border: "2px solid #000",
-//   borderColor: "red",
-//   borderRadius: 2,
-//   boxShadow: 24,
-//   p: 4,
-// };
-
 export const styleBatMenu = {
   fontSize: 14,
   backgroundColor: "#E9F5D8",
@@ -52,8 +38,8 @@ export const styleBatMenu = {
 
 export const styleModalMenu = {
   fontSize: 14,
-  maxHeight: "20px",
-  minHeight: "20px",
+  maxHeight: "21px",
+  minHeight: "21px",
   bgcolor: "#E6F5D6", // светло-салатовый
   border: "1px solid #d4d4d4", // серый
   borderRadius: 1,
@@ -62,6 +48,7 @@ export const styleModalMenu = {
   marginRight: 1,
   marginTop: 1,
   textTransform: "unset !important",
+  padding: "2px 0px 0px 0px",
 };
 
 export const styleStError = {

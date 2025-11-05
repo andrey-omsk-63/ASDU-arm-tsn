@@ -130,10 +130,6 @@ const PointsMainScr = (props: {
     maskpoint.redaxPoint = false;
     maskpoint.savePoint = true;
     dispatch(maskpointCreate(maskpoint));
-    //==================================================================
-    //datestat.needSave = true;
-    //dispatch(statsaveCreate(datestat));
-    //==================================================================
     setTrigger(!trigger);
   };
 
