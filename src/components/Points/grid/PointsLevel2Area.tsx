@@ -43,7 +43,6 @@ let HAVE = 0;
 
 const PointsLevel2Area = (props: {
   open: boolean;
-  //ws: WebSocket;
   xctrll: XctrlInfo[];
   xtt: number;
   crossroad: number;
@@ -327,8 +326,6 @@ const PointsLevel2Area = (props: {
     pointsEt = maskpoint.pointForRedax;
     setTrigger(!trigger);
   };
-
-  //let formName = pointsEt.xctrls[crossRoad].name;
 
   return (
     <>

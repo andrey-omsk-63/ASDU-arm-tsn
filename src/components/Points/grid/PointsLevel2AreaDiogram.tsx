@@ -12,7 +12,6 @@ import { PointInfoDirStyle, PointInfoDirRotStyle } from "./PointsGridStyle";
 import { styleBackdropArea } from "./PointsGridStyle";
 
 import { XctrlInfo } from "../../../interfaceGl.d";
-//import { styleBoxFormInt } from "../../../AppStyle";
 
 let xtPropsOld = -1;
 let crossRoadOld = -1;

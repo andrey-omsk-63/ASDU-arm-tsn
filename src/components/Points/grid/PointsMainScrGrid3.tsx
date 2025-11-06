@@ -74,7 +74,7 @@ const PointsMainScrGrid3 = (props: {
             <b>« 2 »</b>
           </Grid>
         </Grid>
-        <Grid item container>
+        <Grid container>
           {datestat.xttData !== MakeDate(new Date()) && (
             <Grid item xs={12} sx={styleXTGl05}>
               {MakeDateRus(MakeDate(new Date()))}

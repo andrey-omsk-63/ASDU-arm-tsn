@@ -147,8 +147,6 @@ const ManagementKnobPK = (props: {
         nomDispatch = "ПК " + value;
       } else nomDispatch = "Авт";
       otpravka = false;
-
-      //console.log("3ButtonDo:", dataKnob, soobDispatch);
       if (!debug) handleClose(0); // выход без подтверждения
     }
 

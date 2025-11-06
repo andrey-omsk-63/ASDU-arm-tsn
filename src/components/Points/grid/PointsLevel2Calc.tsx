@@ -160,12 +160,7 @@ const PointsLevel2Calc = (props: {
 
   const PointsLevel2CalcTab2Header = () => {
     return (
-      <Grid
-        container
-        item
-        xs={12}
-        sx={{ marginRight: 0.74, cursor: "default" }}
-      >
+      <Grid container sx={{ marginRight: 0.74, cursor: "default" }}>
         <Grid xs={1} item sx={styleXTC02}></Grid>
         <Grid xs={2} item sx={styleXTC02}>
           <b>Прямой</b>

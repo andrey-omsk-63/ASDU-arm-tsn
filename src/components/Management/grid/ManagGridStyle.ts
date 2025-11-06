@@ -103,7 +103,6 @@ export const styleButSubArea01 = (coler: string) => {
     marginTop: 0.2,
     height: "20px",
     color: "black",
-    //bgcolor: "#BAE186", // тёмно-салатовый
     bgcolor: coler,
     border: "1px solid #000",
     borderColor: "#93D145", // ярко-салатовый
@@ -120,7 +119,6 @@ export const styleButSubArea02 = (coler: string) => {
     marginTop: 0.2,
     height: "18px",
     color: "black",
-    //bgcolor: "#E6F5D6", // светло-салатовый
     bgcolor: coler,
     border: "1px solid #000",
     borderColor: "#d4d4d4", // серый
@@ -137,7 +135,6 @@ export const styleButArea01 = (coler: string) => {
     marginTop: 0.3,
     height: "21px",
     color: "black",
-    //bgcolor: "#BAE186", // тёмно-салатовый
     bgcolor: coler,
     border: "1px solid #000",
     borderColor: "#93D145", // ярко-салатовый
@@ -154,7 +151,6 @@ export const styleButArea02 = (coler: string) => {
     marginTop: 0.3,
     height: "20px",
     color: "black",
-    //bgcolor: "#E6F5D6", // светло-салатовый
     bgcolor: coler,
     border: "1px solid #000",
     borderColor: "#d4d4d4", // серый
@@ -171,7 +167,6 @@ export const styleButRegion01 = (ht: number, coler: string) => {
     marginTop: 0.5,
     marginRight: "5px",
     height: 21,
-    //bgcolor: "#BAE186", // тёмно-салатовый
     bgcolor: coler,
     border: "1px solid #93D145", // ярко-салатовый
     color: "#5B1080",
@@ -183,7 +178,6 @@ export const styleButRegion01 = (ht: number, coler: string) => {
     fontSize: 14,
     marginTop: 0.5,
     marginRight: "5px",
-    //bgcolor: "#BAE186", // тёмно-салатовый
     bgcolor: coler,
     border: "1px solid #93D145", // ярко-салатовый
     color: "#5B1080",
@@ -200,7 +194,6 @@ export const styleButRegion02 = (ht: number, coler: string) => {
     marginTop: 0.5,
     marginRight: "5px",
     height: 21,
-    //bgcolor: "#E6F5D6", // светло-салатовый
     bgcolor: coler,
     color: "#5B1080",
     border: "1px solid #000",
@@ -213,7 +206,6 @@ export const styleButRegion02 = (ht: number, coler: string) => {
     fontSize: 14,
     marginTop: 0.5,
     marginRight: "5px",
-    //bgcolor: "#E6F5D6", // светло-салатовый
     bgcolor: coler,
     color: "#5B1080",
     border: "1px solid #000",
@@ -262,7 +254,6 @@ export const styleSoob = {
 export const styleSoobPusto = {
   backgroundColor: "#F1F3F4", // светло-серый
   color: "#F1F3F4", // сиреневый
-  //border: "1px solid #000",
 };
 
 export const styleBatMenu = {
@@ -282,7 +273,6 @@ export const styleBatKnop01 = (coler: string) => {
     fontSize: 11,
     height: "3.5vh",
     color: "black",
-    //bgcolor: "#BAE186", // тёмно-салатовый
     bgcolor: coler,
     border: "1px solid #d4d4d4", // серый
     borderRadius: 1,
@@ -297,7 +287,6 @@ export const styleBatKnop02 = (coler: string) => {
     fontSize: 11,
     height: "3.5vh",
     color: "black",
-    //bgcolor: "#E6F5D6", // светло-салатовый
     bgcolor: coler,
     border: "1px solid #d4d4d4", // серый
     borderRadius: 1,

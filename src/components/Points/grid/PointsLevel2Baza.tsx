@@ -536,7 +536,6 @@ const PointsLevel2Baza = (props: {
   const PointsLevel2BazaTab1 = () => {
     let name = formName.slice(0, 29);
     let yellowSoob = "Выкл с ";
-    //====================================================================
     if (maskpoint.pointForRedax.yellow.make) yellowSoob = "Вкл с ";
     yellowSoob +=
       TimeStr(maskpoint.pointForRedax.yellow.start) +

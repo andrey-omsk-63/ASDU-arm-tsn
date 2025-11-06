@@ -5,8 +5,6 @@ import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
 
-//import { styleModalEnd, styleSetInf } from "./components/MainMapStyle";
-
 const ManagKnobXTEmpty = (props: { soob: string; setOpen: any }) => {
   const [openSet, setOpenSet] = React.useState(true);
 
