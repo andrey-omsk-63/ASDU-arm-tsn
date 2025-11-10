@@ -122,6 +122,7 @@ export const styleDatePicker = {
     border: "1px solid #d4d4d4", // серый
     borderRadius: 1,
     boxShadow: 4,
+    //cursor: "zoom-in",
   },
 };
 //====== Interval =========================================================

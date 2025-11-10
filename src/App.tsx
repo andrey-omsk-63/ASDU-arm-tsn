@@ -244,16 +244,16 @@ const App = () => {
       } else if (mass[mass.length - 2] !== "TechAutomatic") PRIORITY = false;
     }
   }
-
+  //ref
   React.useEffect(() => {
     WS.onopen = function (event: any) {
       console.log("WS.current.onopen:", event);
     };
     WS.onclose = function (event: any) {
-      console.log("WS.current.onclose:", event);
+      //console.log("WS.current.onclose:", event);
     };
     WS.onerror = function (event: any) {
-      console.log("WS.current.onerror:", event);
+      //console.log("WS.current.onerror:", event);
     };
     WS.onmessage = function (event: any) {
       let allData = JSON.parse(event.data);
@@ -285,6 +285,7 @@ const App = () => {
           !isOpenInf && setIsOpenInf(true);
           break;
         case "getStatisticsList":
+          console.log("getStatisticsList:", data); // =================================
           if (data.dates)
             for (let i = 0; i < data.dates.length; i++)
               massGoodDate.push(data.dates[i].slice(0, 10));
@@ -477,6 +478,10 @@ const App = () => {
       setTrigger(!trigger);
     };
 
+    const handleMouseDown = (event: any) => {
+      console.log("Mouse Button:", event.button);
+    };
+
     return (
       <>
         {props.mode !== 0 && ( // работает только в статистике
@@ -499,7 +504,14 @@ const App = () => {
           </>
         )}
 
-        <Grid item container sx={styleImpBlock}>
+        <Grid
+          container
+          onMouseDown={handleMouseDown}
+          onContextMenu={(e) => {
+            e.preventDefault();
+          }}
+          sx={styleImpBlock}
+        >
           {InputerOk(inpDate, InputOk)}
           <Grid item xs sx={styleImpServis}>
             <Box sx={styleInp}>{InputDate()}</Box>

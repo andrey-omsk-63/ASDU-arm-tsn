@@ -244,7 +244,7 @@ export const InputerDate = (
 
 export const SendSocketgetStatisticsList = (region: string) => {
   console.log("getStatisticsList:", region);
-  
+
   const handleSendOpen = () => {
     if (!debug) {
       if (WS.readyState === WebSocket.OPEN) {

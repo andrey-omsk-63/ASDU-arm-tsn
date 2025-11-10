@@ -19,16 +19,19 @@ import { styleStError } from "../../AppStyle";
 import { Statistic } from "../../interfaceStat.d";
 
 let tekValue = 0;
+//let pointsEtalon: Statistic[] | null;
 let pointsEtalon: Statistic[];
 let flagEtalon = true;
 let massInterval: any = [];
 let massIntervalEt: any = [];
 export let head = "";
+//const [ymaps, setYmaps] = React.useState<YMapsApi | null>(null);
 
 let nameHint = "";
 
 const StatisticsNew = (props: {
   open: boolean;
+  //points: Statistic[] | null;
   points: Statistic[];
   region: string;
   date: string;
@@ -50,6 +53,7 @@ const StatisticsNew = (props: {
     const handleSend = () => {
       if (WS !== null) {
         if (WS.readyState === WebSocket.OPEN) {
+          console.log("STAT_отправка:");
           WS.send(JSON.stringify({ type: "stopDevices", region: reGion }));
           WS.send(JSON.stringify({ type: "getStatistics", region: reGion }));
         } else {
