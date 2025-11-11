@@ -53,7 +53,6 @@ const StatisticsNew = (props: {
     const handleSend = () => {
       if (WS !== null) {
         if (WS.readyState === WebSocket.OPEN) {
-          console.log("STAT_отправка:");
           WS.send(JSON.stringify({ type: "stopDevices", region: reGion }));
           WS.send(JSON.stringify({ type: "getStatistics", region: reGion }));
         } else {
@@ -169,7 +168,7 @@ const StatisticsNew = (props: {
 
           if (value === i) head = nameId + " за " + MakeDateRus(props.date);
           labl = pEt.area + ":" + pEt.subarea + ":" + pEt.id;
-          let illum = value === i ? styleSt1 : styleSt11;
+          let illum = value === i ? styleSt1("black") : styleSt11("black");
           resSps.push(
             <Tab
               key={i}

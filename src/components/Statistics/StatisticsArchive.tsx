@@ -149,7 +149,7 @@ const StatisticsArchive = (props: {
 
           if (value === i) head = nameId + " за " + MakeDateRus(props.date);
           labl = pEt.area + ":" + pEt.subarea + ":" + pEt.id;
-          let illum = value === i ? styleSt1 : styleSt11;
+          let illum = value === i ? styleSt1("black") : styleSt11("black");
           resSps.push(
             <Tab
               key={i}

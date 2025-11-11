@@ -479,7 +479,7 @@ const App = () => {
     };
 
     const handleMouseDown = (event: any) => {
-      console.log("Mouse Button:", event.button);
+      event.button === 2 && console.log("Mouse Button:", event.button);
     };
 
     return (
