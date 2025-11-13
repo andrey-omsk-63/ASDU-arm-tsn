@@ -89,6 +89,9 @@ const StatisticXTNew = (props: {
   const points = props.statist;
   const areaId = props.areaid;
   const interval = props.interval;
+  const haveStat = points[areaId].Statistics ? true : false;
+
+  console.log("***:", haveStat, points);
 
   let colChanel = 0;
   const [value, setValue] = React.useState("0");
@@ -275,7 +278,7 @@ const StatisticXTNew = (props: {
           <Grid item xs={0.512 * colChanel} sx={styleHeader03}>
             <MenuKnobBat />
           </Grid>
-          <Grid item xs={3.3} sx={styleHeader033}>
+          <Grid item xs sx={styleHeader033}>
             <b>Качество</b>
           </Grid>
         </Grid>
@@ -306,7 +309,7 @@ const StatisticXTNew = (props: {
           resStr.push(<Grid key={i} item xs={0.5122} sx={styleSt02}></Grid>);
         //формирование конца строки
         resStr.push(
-          <Grid key={Math.random()} item xs={3.3} sx={styleSt06}>
+          <Grid key={Math.random()} item xs sx={styleSt06}>
             нет данных
           </Grid>
         );
@@ -322,7 +325,7 @@ const StatisticXTNew = (props: {
         }
         //формирование конца строки
         resStr.push(
-          <Grid key={Math.random()} item xs={3.3} sx={styleSt06}>
+          <Grid key={Math.random()} item xs sx={styleSt06}>
             {kakchestvo.slice(0, -2)}
           </Grid>
         );

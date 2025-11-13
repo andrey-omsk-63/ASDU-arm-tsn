@@ -71,6 +71,8 @@ const ManagementLeftGrid = (props: {
   let reGion = "1";
   masXT = [];
 
+  //console.log("Manag:", points, pointsXT);
+
   const [mode, setMode] = React.useState(1);
   const [areaa, setAreaa] = React.useState("0");
   const [subArea, setSubArea] = React.useState(0);

@@ -69,8 +69,11 @@ const StatisticsNew = (props: {
     pointsEtalon = points;
     flagEtalon = false;
     for (let i = 0; i < points.length; i++) {
-      massInterval.push(points[i].Statistics[0].TLen);
-      massIntervalEt.push(points[i].Statistics[0].TLen);
+      let rec1 = points[i].Statistics ? points[i].Statistics[0].TLen : 5;
+      // massInterval.push(points[i].Statistics[0].TLen);
+      // massIntervalEt.push(points[i].Statistics[0].TLen);
+      massInterval.push(rec1);
+      massIntervalEt.push(rec1);
     }
     if (!massInterval.length) {
       massInterval.push(5);
@@ -165,10 +168,10 @@ const StatisticsNew = (props: {
         for (let i = 0; i < pointsEtalon.length; i++) {
           let pEt = pointsEtalon[i];
           let nameId = NameVertex(pEt.area, pEt.subarea, pEt.id);
-
           if (value === i) head = nameId + " за " + MakeDateRus(props.date);
           labl = pEt.area + ":" + pEt.subarea + ":" + pEt.id;
-          let illum = value === i ? styleSt1("black") : styleSt11("black");
+          let alive = pEt.Statistics ? "black" : "red";
+          let illum = value === i ? styleSt1(alive) : styleSt11(alive);
           resSps.push(
             <Tab
               key={i}
@@ -212,8 +215,10 @@ const StatisticsNew = (props: {
         clinch = true;
       } else {
         let val = tekValue !== value ? tekValue : value;
-        for (let i = 0; i < pointsEtalon[val].Statistics.length; i++)
-          if (pointsEtalon[val].Statistics[i].Datas === null) clinch = true;
+        if (pointsEtalon[val].Statistics) {
+          for (let i = 0; i < pointsEtalon[val].Statistics.length; i++)
+            if (pointsEtalon[val].Statistics[i].Datas === null) clinch = true;
+        }
       }
     }
     return clinch;
@@ -221,20 +226,34 @@ const StatisticsNew = (props: {
 
   let clinch = CheckClinch();
 
+  const Ff1 = () => {
+    return (
+      <>
+        {pointsEtalon.length > 0 && !clinch && (
+          <StatisticXTNew
+            open={isOpen}
+            statist={pointsEtalon}
+            areaid={value}
+            interval={massInterval[tekValue]}
+          />
+        )}
+      </>
+    );
+  };
+
   return (
     <>
       {isOpen && pointsEtalon.length === 0 && <>{handleChangeNull()} </>}
       {isOpen && pointsEtalon.length !== 0 && (
         <>
           <MainMenu />
-          {pointsEtalon.length > 0 && !clinch && (
-            <StatisticXTNew
-              open={isOpen}
-              statist={pointsEtalon}
-              areaid={value}
-              interval={massInterval[tekValue]}
-            />
-          )}
+          <>
+            {pointsEtalon[value].Statistics === null ? (
+              <h1>!!!</h1>
+            ) : (
+              <>{Ff1()}</>
+            )}
+          </>
           {clinch && (
             <Box sx={styleStError}>
               <h1>Некорректная структура статистики по данному ХТ</h1>

@@ -11,7 +11,7 @@ import { OptionsForLine } from "../../../AppServiceFunctions";
 import { debug } from "../../../App";
 
 import { styleXTC011, styleXTC01, styleXTC02 } from "./PointsGridStyle";
-import { styleXTC03, styleXTC033 } from "./PointsGridStyle";
+import { styleXTC03, styleXTC033, styleXTC04 } from "./PointsGridStyle";
 import { styleStError, styleXTG101 } from "../../../AppStyle";
 
 import { XctrlInfo } from "../../../interfaceGl.d";
@@ -72,6 +72,8 @@ const PointsLevel2Calc = (props: {
   const xtProps = props.xtt;
   const points = props.xctrll[xtProps];
   const printRef = React.useRef(null);
+
+  console.log("PointsLevel2Calc:", points.release, points.switch, points);
 
   let namer = points.xctrls[props.crossroad].name;
   let pointer = points.results;
@@ -371,6 +373,7 @@ const PointsLevel2Calc = (props: {
     <>
       {datestat.xttData !== "sss" && (
         <Box sx={{ marginTop: 0, border: 0 }}>
+          {/* <Box sx={styleXTC04}>Расчёт</Box> */}
           {OutputGraf()}
           <Grid container sx={{ marginTop: "0.6vh", height: "55.4vh" }}>
             {!!pointer ? (

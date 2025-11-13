@@ -96,6 +96,8 @@ const ManagementKnobXT = (props: {
   };
 
   const ButtonDo = () => {
+    console.log("ButtonDo:", value, otpravka);
+
     if (value !== 21 && otpravka) {
       const handleSendOpen = () => {
         if (WS !== null) {

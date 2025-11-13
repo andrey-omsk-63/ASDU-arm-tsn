@@ -583,6 +583,15 @@ export const styleXTC033 = {
   borderRadius: 1,
   boxShadow: 12,
 };
+
+export const styleXTC04 = {
+  fontSize: 15,
+  fontWeight: 600,
+  marginTop: -2.5,
+  textAlign: "center",
+  color: "#480C65", // сиреневый
+  //textShadow: "1px 1px 3px rgba(0, 0, 0, 0.3)",
+};
 //====== PointsMainScr ==========================================================
 export const styleXt02 = {
   bgcolor: "#F1F5FB", // светло серый

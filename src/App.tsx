@@ -196,8 +196,11 @@ const App = () => {
 
   const SetStatisticsIntervalNow = (points: any) => {
     for (let i = 0; i < points.length; i++) {
-      massIntervalNow.push(points[i].Statistics[0].TLen);
-      massIntervalNowStart.push(points[i].Statistics[0].TLen);
+      let rec1 = points[i].Statistics ? points[i].Statistics[0].TLen : 5;
+      // massIntervalNow.push(points[i].Statistics[0].TLen);
+      massIntervalNow.push(rec1);
+      // massIntervalNowStart.push(points[i].Statistics[0].TLen);
+      massIntervalNowStart.push(rec1);
       if (!i) interval = massIntervalNow[0];
     }
   };
@@ -293,13 +296,16 @@ const App = () => {
         case "getStatistics":
           setPointsSt(data.statistics ?? []);
           let st = dataStatNow.data.statistics;
+
+          console.log("getStatistics:", data); // =================================
+
           if (data.statistics) st = data.statistics;
           SetStatisticsIntervalNow(st);
           nullNewStatistics = false;
           !isOpenSt && setIsOpenSt(true);
           break;
         case "getOldStatistics":
-          //console.log("getOldStatistics:", data); // =================================
+          console.log("getOldStatistics:", data); // =================================
           setPointsOldSt(data.statistics ?? []);
           let stOld = dataStatNow.data.statistics;
           if (data.statistics) stOld = data.statistics;
