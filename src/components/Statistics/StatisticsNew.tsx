@@ -31,7 +31,6 @@ let nameHint = "";
 
 const StatisticsNew = (props: {
   open: boolean;
-  //points: Statistic[] | null;
   points: Statistic[];
   region: string;
   date: string;
@@ -136,11 +135,21 @@ const StatisticsNew = (props: {
     props.func(tekValue, massInterval[tekValue]);
   };
 
-  const handleChangeNull = () => {
+  const ErrorMessage = (soob: string) => {
     return (
       <Box sx={styleStError}>
-        <h1>На текущюю дату данных по статистике НЕТ</h1>
+        <h1>{soob}</h1>
       </Box>
+    );
+  };
+
+  const handleChangeNull = () => {
+    return (
+      <>
+        {ErrorMessage(
+          "На " + MakeDateRus(props.date) + " данных по статистике НЕТ"
+        )}
+      </>
     );
   };
 
@@ -226,7 +235,7 @@ const StatisticsNew = (props: {
 
   let clinch = CheckClinch();
 
-  const Ff1 = () => {
+  const StatisticsOutput = () => {
     return (
       <>
         {pointsEtalon.length > 0 && !clinch && (
@@ -249,15 +258,15 @@ const StatisticsNew = (props: {
           <MainMenu />
           <>
             {pointsEtalon[value].Statistics === null ? (
-              <h1>!!!</h1>
+              <>{handleChangeNull()}</>
             ) : (
-              <>{Ff1()}</>
+              <>{StatisticsOutput()}</>
             )}
           </>
           {clinch && (
-            <Box sx={styleStError}>
-              <h1>Некорректная структура статистики по данному ХТ</h1>
-            </Box>
+            <>
+              {ErrorMessage("Некорректная структура статистики по данному ХТ")}
+            </>
           )}
         </>
       )}

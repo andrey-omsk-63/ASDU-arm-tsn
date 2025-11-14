@@ -72,6 +72,8 @@ const PointsLevel2Calc = (props: {
   const xtProps = props.xtt;
   const points = props.xctrll[xtProps];
   const printRef = React.useRef(null);
+  let statusXT = false;
+  if (!points.release && points.switch) statusXT = true; // исполнение выкл и расчёт вкл
 
   console.log("PointsLevel2Calc:", points.release, points.switch, points);
 
@@ -207,6 +209,8 @@ const PointsLevel2Calc = (props: {
             tim <= points.yellow.stop
           )
             kakchestvo = "Работа по НК и СК";
+
+          if (statusXT) kakchestvo = "Работа по СК";
           //====== переход через 24:00 ======
           if (points.yellow.start > points.yellow.stop && points.yellow.make) {
             if (tim <= points.yellow.stop || tim >= points.yellow.start)
@@ -373,7 +377,7 @@ const PointsLevel2Calc = (props: {
     <>
       {datestat.xttData !== "sss" && (
         <Box sx={{ marginTop: 0, border: 0 }}>
-          {/* <Box sx={styleXTC04}>Расчёт</Box> */}
+          {statusXT && <Box sx={styleXTC04}>Расчёт</Box>}
           {OutputGraf()}
           <Grid container sx={{ marginTop: "0.6vh", height: "55.4vh" }}>
             {!!pointer ? (

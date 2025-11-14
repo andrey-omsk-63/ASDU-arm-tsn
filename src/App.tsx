@@ -263,7 +263,7 @@ const App = () => {
       let data = allData.data;
       switch (allData.type) {
         case "getDevices":
-          console.log("Пришло tflight:", data.tflight); // =================================
+          //console.log("Пришло tflight:", data.tflight); // =================================
           setPointsTfl(data.tflight ?? []);
           pointsTFL = data.tflight ?? [];
           !isOpenDev && setIsOpenDev(true);
@@ -296,9 +296,7 @@ const App = () => {
         case "getStatistics":
           setPointsSt(data.statistics ?? []);
           let st = dataStatNow.data.statistics;
-
           console.log("getStatistics:", data); // =================================
-
           if (data.statistics) st = data.statistics;
           SetStatisticsIntervalNow(st);
           nullNewStatistics = false;

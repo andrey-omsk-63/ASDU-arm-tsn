@@ -75,8 +75,11 @@ const StatisticsArchive = (props: {
     pointsEtalon = points;
     flagEtalon = false;
     massInterval = [];
-    for (let i = 0; i < points.length; i++)
-      massInterval.push(points[i].Statistics[0].TLen);
+    for (let i = 0; i < points.length; i++) {
+      let rec1 = points[i].Statistics ? points[i].Statistics[0].TLen : 5;
+      //massInterval.push(points[i].Statistics[0].TLen);
+      massInterval.push(rec1);
+    }
     points = [];
     tekValue = 0;
 
@@ -114,11 +117,29 @@ const StatisticsArchive = (props: {
     props.func(tekValue, massInterval[tekValue]);
   };
 
-  const handleChangeNull = () => {
+  // const handleChangeNull = () => {
+  //   return (
+  //     <Box sx={styleStError}>
+  //       <h1>На текущюю дату данных по статистике НЕТ</h1>
+  //     </Box>
+  //   );
+  // };
+
+  const ErrorMessage = (soob: string) => {
     return (
       <Box sx={styleStError}>
-        <h1>На текущюю дату данных по статистике НЕТ</h1>
+        <h1>{soob}</h1>
       </Box>
+    );
+  };
+
+  const handleChangeNull = () => {
+    return (
+      <>
+        {ErrorMessage(
+          "На " + MakeDateRus(props.date) + " данных по статистике НЕТ"
+        )}
+      </>
     );
   };
 
@@ -193,8 +214,10 @@ const StatisticsArchive = (props: {
         clinch = true;
       } else {
         let val = tekValue !== value ? tekValue : value;
-        for (let i = 0; i < pointsEtalon[val].Statistics.length; i++)
-          if (pointsEtalon[val].Statistics[i].Datas === null) clinch = true;
+        if (pointsEtalon[val].Statistics) {
+          for (let i = 0; i < pointsEtalon[val].Statistics.length; i++)
+            if (pointsEtalon[val].Statistics[i].Datas === null) clinch = true;
+        }
       }
     }
     return clinch;
@@ -205,6 +228,22 @@ const StatisticsArchive = (props: {
 
   let clinch = CheckClinch();
 
+  const StatisticsOutput = () => {
+    return (
+      <>
+        {pointsEtalon.length > 0 && !clinch && (
+          <StatisticXTArchive
+            open={isOpen}
+            statist={pointsEtalon}
+            areaid={value}
+            date={props.date}
+            interval={massInterval[tekValue]}
+          />
+        )}
+      </>
+    );
+  };
+
   return (
     <>
       {isOpen && pointsEtalon.length === 0 && <>{handleChangeNull()} </>}
@@ -212,13 +251,14 @@ const StatisticsArchive = (props: {
         <>
           <MainMenu />
           {pointsEtalon.length > 0 && !clinch && (
-            <StatisticXTArchive
-              open={isOpen}
-              statist={pointsEtalon}
-              areaid={value}
-              date={props.date}
-              interval={massInterval[tekValue]}
-            />
+            <>{StatisticsOutput()}</>
+            // <StatisticXTArchive
+            //   open={isOpen}
+            //   statist={pointsEtalon}
+            //   areaid={value}
+            //   date={props.date}
+            //   interval={massInterval[tekValue]}
+            // />
           )}
           {clinch && (
             <Box sx={styleStError}>

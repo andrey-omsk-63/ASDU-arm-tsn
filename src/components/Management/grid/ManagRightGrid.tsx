@@ -44,7 +44,7 @@ const ManagementRightGrid = (props: {
   let massknob: Knob[] = [];
   const massClinch = [16, 17, 18, 38, 39];
 
-  console.log('Right:',props.masxt)
+  //console.log('Right:',props.masxt)
 
   const SearchInMassKnob = (
     region: string,
