@@ -158,19 +158,16 @@ const StatisticsArchive = (props: {
       head = "";
 
       if (pointsEtalon.length === 0) {
-        resSps.push(
-          <Box key={1} sx={styleStError}>
-            <h1>Нет данных по статистике</h1>
-          </Box>
-        );
+        resSps.push(<>{handleChangeNull}</>);
       } else {
         for (let i = 0; i < pointsEtalon.length; i++) {
           let pEt = pointsEtalon[i];
           let nameId = NameVertex(pEt.area, pEt.subarea, pEt.id);
+          let alive = pEt.Statistics ? "black" : "red";
+          let illum = value === i ? styleSt1(alive) : styleSt11(alive);
 
           if (value === i) head = nameId + " за " + MakeDateRus(props.date);
           labl = pEt.area + ":" + pEt.subarea + ":" + pEt.id;
-          let illum = value === i ? styleSt1("black") : styleSt11("black");
           resSps.push(
             <Tab
               key={i}
@@ -250,7 +247,14 @@ const StatisticsArchive = (props: {
       {isOpen && pointsEtalon.length !== 0 && (
         <>
           <MainMenu />
-          {pointsEtalon.length > 0 && !clinch && (
+          <>
+            {pointsEtalon[value].Statistics === null ? (
+              <>{handleChangeNull()}</>
+            ) : (
+              <>{StatisticsOutput()}</>
+            )}
+          </>
+          {/* {pointsEtalon.length > 0 && !clinch && (
             <>{StatisticsOutput()}</>
             // <StatisticXTArchive
             //   open={isOpen}
@@ -259,7 +263,7 @@ const StatisticsArchive = (props: {
             //   date={props.date}
             //   interval={massInterval[tekValue]}
             // />
-          )}
+          )} */}
           {clinch && (
             <Box sx={styleStError}>
               <h1>Некорректная структура статистики по данному ХТ</h1>

@@ -197,9 +197,7 @@ const App = () => {
   const SetStatisticsIntervalNow = (points: any) => {
     for (let i = 0; i < points.length; i++) {
       let rec1 = points[i].Statistics ? points[i].Statistics[0].TLen : 5;
-      // massIntervalNow.push(points[i].Statistics[0].TLen);
       massIntervalNow.push(rec1);
-      // massIntervalNowStart.push(points[i].Statistics[0].TLen);
       massIntervalNowStart.push(rec1);
       if (!i) interval = massIntervalNow[0];
     }
@@ -210,8 +208,9 @@ const App = () => {
       massIntervalOld = [];
       massIntervalOldStart = [];
       for (let i = 0; i < points.length; i++) {
-        massIntervalOld.push(points[i].Statistics[0].TLen);
-        massIntervalOldStart.push(points[i].Statistics[0].TLen);
+        let rec1 = points[i].Statistics ? points[i].Statistics[0].TLen : 5;
+        massIntervalOld.push(rec1);
+        massIntervalOldStart.push(rec1);
         if (!i) interval = massIntervalOld[0];
       }
       tekIdOld = 0;
@@ -486,6 +485,8 @@ const App = () => {
       event.button === 2 && console.log("Mouse Button:", event.button);
     };
 
+    props.mode !== 0 && console.log("datestat:", datestat);
+
     return (
       <>
         {props.mode !== 0 && ( // работает только в статистике
@@ -536,18 +537,17 @@ const App = () => {
         datestat.xttData = MakeDate(new Date());
         dispatch(statsaveCreate(datestat));
         setValueDate(dayjs(formSett));
-        setValue(mode);
-        tekValue = mode;
+        setValue((tekValue = mode));
         break;
       case "3":
         formSett = formSettToday;
         interval = massIntervalNow[tekIdNow];
         setValueDate(dayjs(formSett));
-        setValue(mode);
-        tekValue = mode;
+        setValue((tekValue = mode));
         break;
       case "5":
-        WriteToCsvFileForStat(datestat);
+        console.log("###", datestat.stat, datestat.stat.length);
+        if (datestat.stat.length) WriteToCsvFileForStat(datestat);
         break;
       case "7":
         setWrite(true);
@@ -571,9 +571,8 @@ const App = () => {
     setPointsXctrl(masRab);
   };
 
-  const SetSaveXT = (mode: boolean) => {
-    if (saveXt !== mode) setSaveXT((saveXt = mode));
-  };
+  const SetSaveXT = (mode: boolean) =>
+    saveXt !== mode && setSaveXT((saveXt = mode));
 
   const ContentContext = () => {
     return (
@@ -631,10 +630,10 @@ const App = () => {
         <>
           {write && <AppWriteToAllFileForXT setOpen={setWrite} />}
           <Box sx={{ width: "98.8%" }}>
-            <TabContext value={value}>
-              {ContentContext()}
-              <TabPanel value="1">
-                {WS !== null && regionGlob !== 0 && (
+            {WS !== null && regionGlob !== 0 && (
+              <TabContext value={value}>
+                {ContentContext()}
+                <TabPanel value="1">
                   <Management
                     open={isOpenDev}
                     points={pointsTfl}
@@ -642,10 +641,8 @@ const App = () => {
                     region={String(regionGlob)}
                     update={updateDevice}
                   />
-                )}
-              </TabPanel>
-              <TabPanel value="2">
-                {WS !== null && regionGlob !== 0 && (
+                </TabPanel>
+                <TabPanel value="2">
                   <Points
                     open={isOpenInf}
                     xctrll={pointsEtalonXctrl}
@@ -656,13 +653,9 @@ const App = () => {
                     calc={calculate}
                     update={update}
                   />
-                )}
-              </TabPanel>
-              <TabPanel value="3">
-                {WS !== null &&
-                  regionGlob !== 0 &&
-                  formSett === formSettToday &&
-                  !nullNewStatistics && (
+                </TabPanel>
+                <TabPanel value="3">
+                  {formSett === formSettToday && !nullNewStatistics && (
                     <StatisticsNew
                       open={isOpenSt}
                       points={pointsSt}
@@ -672,10 +665,7 @@ const App = () => {
                       func={SetIdNow}
                     />
                   )}
-                {WS !== null &&
-                  regionGlob !== 0 &&
-                  !nullOldStatistics &&
-                  formSett !== formSettToday && (
+                  {formSett !== formSettToday && !nullOldStatistics && (
                     <StatisticsArchive
                       open={true}
                       points={pointsOldSt}
@@ -685,20 +675,21 @@ const App = () => {
                       func={SetIdOld}
                     />
                   )}
-              </TabPanel>
-              <TabPanel value="4">
-                {WS !== null && regionGlob !== 0 && !nullOldStatistics && (
-                  <StatisticsArchive
-                    open={isOpenOldSt}
-                    points={pointsOldSt}
-                    region={String(regionGlob)}
-                    date={formSett}
-                    interval={interval}
-                    func={SetIdOld}
-                  />
-                )}
-              </TabPanel>
-            </TabContext>
+                </TabPanel>
+                <TabPanel value="4">
+                  {!nullOldStatistics && (
+                    <StatisticsArchive
+                      open={isOpenOldSt}
+                      points={pointsOldSt}
+                      region={String(regionGlob)}
+                      date={formSett}
+                      interval={interval}
+                      func={SetIdOld}
+                    />
+                  )}
+                </TabPanel>
+              </TabContext>
+            )}
           </Box>
         </>
       )}
