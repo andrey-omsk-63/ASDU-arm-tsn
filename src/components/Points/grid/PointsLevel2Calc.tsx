@@ -75,8 +75,6 @@ const PointsLevel2Calc = (props: {
   let statusXT = false;
   if (!points.release && points.switch) statusXT = true; // исполнение выкл и расчёт вкл
 
-  console.log("PointsLevel2Calc:", points.release, points.switch, points);
-
   let namer = points.xctrls[props.crossroad].name;
   let pointer = points.results;
   let extDesc: any = points.extdesc;

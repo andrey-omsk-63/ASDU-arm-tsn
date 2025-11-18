@@ -27,7 +27,7 @@ import { Statistic } from "./interfaceStat.d";
 import { RegionInfo } from "./interfaceGl.d";
 
 import { MakeInterval, WriteToCsvFileForStat } from "./AppServiceFunctions";
-import { DispatchXctrl } from "./AppServiceFunctions";
+import { DispatchXctrl, Notprint } from "./AppServiceFunctions";
 import { InputerDate, MakeDate, InputerOk } from "./AppServiceFunctions";
 import { PunktMenuSaveFile } from "./AppServiceFunctions";
 
@@ -128,6 +128,7 @@ let tekValue = "1";
 
 let update = true;
 let updateDevice = true;
+let notPrint = false;
 
 const App = () => {
   //== Piece of Redux ======================================
@@ -485,8 +486,6 @@ const App = () => {
       event.button === 2 && console.log("Mouse Button:", event.button);
     };
 
-    props.mode !== 0 && console.log("datestat:", datestat);
-
     return (
       <>
         {props.mode !== 0 && ( // работает только в статистике
@@ -527,6 +526,7 @@ const App = () => {
   };
 
   const SetValue = (mode: string) => {
+    //notPrint = false;
     switch (mode) {
       case "1":
         setValue(mode);
@@ -546,8 +546,12 @@ const App = () => {
         setValue((tekValue = mode));
         break;
       case "5":
-        console.log("###", datestat.stat, datestat.stat.length);
-        if (datestat.stat.length) WriteToCsvFileForStat(datestat);
+        if (datestat.stat.length) {
+          WriteToCsvFileForStat(datestat);
+        } else {
+          notPrint = true;
+          setTrigger(!trigger);
+        }
         break;
       case "7":
         setWrite(true);
@@ -617,6 +621,11 @@ const App = () => {
   };
 
   UpdateXctrl(); // разноска обновлений Xctrl
+
+  const NotPrint = () => {
+    notPrint = false;
+    return <>{Notprint()}</>;
+  };
 
   return (
     <>
@@ -690,6 +699,7 @@ const App = () => {
                 </TabPanel>
               </TabContext>
             )}
+            {notPrint && <>{NotPrint()}</>}
           </Box>
         </>
       )}

@@ -19,13 +19,11 @@ import { styleStError } from "../../AppStyle";
 import { Statistic } from "../../interfaceStat.d";
 
 let tekValue = 0;
-//let pointsEtalon: Statistic[] | null;
 let pointsEtalon: Statistic[];
 let flagEtalon = true;
 let massInterval: any = [];
 let massIntervalEt: any = [];
 export let head = "";
-//const [ymaps, setYmaps] = React.useState<YMapsApi | null>(null);
 
 let nameHint = "";
 
@@ -69,8 +67,6 @@ const StatisticsNew = (props: {
     flagEtalon = false;
     for (let i = 0; i < points.length; i++) {
       let rec1 = points[i].Statistics ? points[i].Statistics[0].TLen : 5;
-      // massInterval.push(points[i].Statistics[0].TLen);
-      // massIntervalEt.push(points[i].Statistics[0].TLen);
       massInterval.push(rec1);
       massIntervalEt.push(rec1);
     }
@@ -144,10 +140,15 @@ const StatisticsNew = (props: {
   };
 
   const handleChangeNull = () => {
+    datestat.stat = [];
+    dispatch(statsaveCreate(datestat));
+
     return (
       <>
         {ErrorMessage(
-          "На " + MakeDateRus(props.date) + " данных по статистике НЕТ"
+          "По выбраному перекрёстку на " +
+            MakeDateRus(props.date) +
+            " данных по статистике НЕТ"
         )}
       </>
     );
@@ -226,6 +227,10 @@ const StatisticsNew = (props: {
             if (pointsEtalon[val].Statistics[i].Datas === null) clinch = true;
         }
       }
+    }
+    if (clinch) {
+      datestat.stat = [];
+      dispatch(statsaveCreate(datestat));
     }
     return clinch;
   };

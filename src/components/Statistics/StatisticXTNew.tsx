@@ -89,9 +89,6 @@ const StatisticXTNew = (props: {
   const points = props.statist;
   const areaId = props.areaid;
   const interval = props.interval;
-  const haveStat = points[areaId].Statistics ? true : false;
-
-  console.log("***:", haveStat, points);
 
   let colChanel = 0;
   const [value, setValue] = React.useState("0");

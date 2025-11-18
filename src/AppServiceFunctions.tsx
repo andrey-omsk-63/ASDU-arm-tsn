@@ -142,6 +142,22 @@ export const MenuSpisRegion = (
   );
 };
 
+export const Notprint = () => {
+  const stylePrintError = {
+    marginTop: 8,
+    textAlign: "center",
+    textShadow: "2px 2px 3px rgba(0,0,0,0.3)",
+    color: "#7b15aaff", // сиреневый
+    cursor: "default",
+  };
+  
+  return (
+    <Box sx={stylePrintError}>
+      <h1>Нет информации для сохранения в файл</h1>
+    </Box>
+  );
+};
+
 export const PunktMenuSaveFile = (SetValue: Function, tekValue: string) => {
   const styleMenu = {
     marginTop: -0.25,

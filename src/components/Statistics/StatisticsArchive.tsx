@@ -77,7 +77,6 @@ const StatisticsArchive = (props: {
     massInterval = [];
     for (let i = 0; i < points.length; i++) {
       let rec1 = points[i].Statistics ? points[i].Statistics[0].TLen : 5;
-      //massInterval.push(points[i].Statistics[0].TLen);
       massInterval.push(rec1);
     }
     points = [];
@@ -117,14 +116,6 @@ const StatisticsArchive = (props: {
     props.func(tekValue, massInterval[tekValue]);
   };
 
-  // const handleChangeNull = () => {
-  //   return (
-  //     <Box sx={styleStError}>
-  //       <h1>На текущюю дату данных по статистике НЕТ</h1>
-  //     </Box>
-  //   );
-  // };
-
   const ErrorMessage = (soob: string) => {
     return (
       <Box sx={styleStError}>
@@ -134,10 +125,15 @@ const StatisticsArchive = (props: {
   };
 
   const handleChangeNull = () => {
+    datestat.stat = [];
+    dispatch(statsaveCreate(datestat));
+
     return (
       <>
         {ErrorMessage(
-          "На " + MakeDateRus(props.date) + " данных по статистике НЕТ"
+          "По выбраному перекрёстку на " +
+            MakeDateRus(props.date) +
+            " данных по статистике НЕТ"
         )}
       </>
     );
@@ -217,6 +213,10 @@ const StatisticsArchive = (props: {
         }
       }
     }
+    if (clinch) {
+      datestat.stat = [];
+      dispatch(statsaveCreate(datestat));
+    }
     return clinch;
   };
 
@@ -254,16 +254,6 @@ const StatisticsArchive = (props: {
               <>{StatisticsOutput()}</>
             )}
           </>
-          {/* {pointsEtalon.length > 0 && !clinch && (
-            <>{StatisticsOutput()}</>
-            // <StatisticXTArchive
-            //   open={isOpen}
-            //   statist={pointsEtalon}
-            //   areaid={value}
-            //   date={props.date}
-            //   interval={massInterval[tekValue]}
-            // />
-          )} */}
           {clinch && (
             <Box sx={styleStError}>
               <h1>Некорректная структура статистики по данному ХТ</h1>
