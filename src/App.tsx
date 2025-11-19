@@ -270,7 +270,7 @@ const App = () => {
           updateDevice = !updateDevice;
           break;
         case "dispatch":
-          console.log("Пришло dispatch:", data.msg);
+          console.log("Пришло dispatch:", data.msg); // =================================
           if (data.status) {
             pointsEtalonXctrl = DispatchXctrl(data, pointsEtalonXctrl);
             updateDevice = !updateDevice; // для обновления строки состояния в ManagementRightGrid
@@ -281,7 +281,7 @@ const App = () => {
         case "xctrlInfo":
           let d = new Date();
           let h = d.getHours();
-          console.log("xctrlInfo:", h, d.getMinutes(), data.xctrlInfo);
+          console.log("xctrlInfo:", h, d.getMinutes(), data.xctrlInfo); // =================================
           setPointsXctrl(data.xctrlInfo ?? []);
           if (regionGlob === 0) setPointsReg(data.regionInfo ?? []);
           update = !update; // для обновдения точек в графиках
@@ -329,7 +329,7 @@ const App = () => {
           window.close();
           break;
         default:
-          console.log("data_default:", allData.type, data);
+          console.log("data_default:", allData.type, data); // =================================
       }
     };
   }, [
@@ -526,7 +526,6 @@ const App = () => {
   };
 
   const SetValue = (mode: string) => {
-    //notPrint = false;
     switch (mode) {
       case "1":
         setValue(mode);

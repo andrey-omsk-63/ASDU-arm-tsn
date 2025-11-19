@@ -12,8 +12,6 @@ import ManagementKnobXT from "./ManagKnobXT";
 
 import { MesssgeLength } from "../../../AppServiceFunctions";
 
-//import { debug } from "../../../App";
-
 import { Tflight } from "../../../interfaceMNG.d";
 import { XctrlInfo } from "../../../interfaceGl.d";
 
@@ -70,8 +68,6 @@ const ManagementLeftGrid = (props: {
   const pointsXT = props.xctrll;
   let reGion = "1";
   masXT = [];
-
-  //console.log("Manag:", points, pointsXT);
 
   const [mode, setMode] = React.useState(1);
   const [areaa, setAreaa] = React.useState("0");
@@ -344,7 +340,6 @@ const ManagementLeftGrid = (props: {
       return (
         <Button sx={illum} onClick={handleClickGl}>
           <b>{points[0].region.nameRegion}</b>
-          {/* <b>{reg}</b> */}
         </Button>
       );
     };
@@ -544,7 +539,6 @@ const ManagementLeftGrid = (props: {
   };
 
   React.useLayoutEffect(() => {
-    //let regionWidth = MesssgeLength(reg, 14);
     let regionWidth = MesssgeLength(points[0].region.nameRegion, 14);
     let aa = regionWidth / ref.current.offsetWidth;
     let addit = aa <= 1 ? 20 : aa <= 2 ? 30 : aa <= 3 ? 60 : 80;
