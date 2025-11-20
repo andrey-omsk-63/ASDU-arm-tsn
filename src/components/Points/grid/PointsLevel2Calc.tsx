@@ -5,7 +5,7 @@ import { statsaveCreate } from "../../../redux/actions";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 
-import { MakeDate, TimeStr } from "../../../AppServiceFunctions";
+import { MakeDate, TimeStr, MakeDateRus } from "../../../AppServiceFunctions";
 import { OptionsForLine } from "../../../AppServiceFunctions";
 
 import { debug } from "../../../App";
@@ -152,7 +152,11 @@ const PointsLevel2Calc = (props: {
       <Grid container ref={printRef}>
         <Grid item xs sx={{ width: "99vh", height: "30vh" }}>
           <Line
-            options={OptionsForLine(points.xctrls[props.crossroad].name)}
+            options={OptionsForLine(
+              points.xctrls[props.crossroad].name +
+                " за " +
+                MakeDateRus(datestat.xttData)
+            )}
             data={data}
           />
         </Grid>
@@ -324,7 +328,7 @@ const PointsLevel2Calc = (props: {
 
   const EmptyInfo = () => {
     return (
-      <Grid item xs={12}>
+      <Grid item>
         <Box sx={styleStError}>
           <h1>Нет информациии</h1>
         </Box>
