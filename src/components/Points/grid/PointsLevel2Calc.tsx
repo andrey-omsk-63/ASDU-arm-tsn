@@ -282,15 +282,13 @@ const PointsLevel2Calc = (props: {
   const OutputGraf = () => {
     return (
       <Grid container>
-        <Grid item xs sx={styleXTC03}>
-          {!!pointer && (
-            <>
-              {!!pointer[namer] && (
-                <>{!!pointer[namer].length && <>{PointsGraf00()}</>}</>
-              )}
-            </>
-          )}
-        </Grid>
+        {!!pointer && (
+          <Grid item xs sx={styleXTC03}>
+            {!!pointer[namer] && (
+              <>{!!pointer[namer].length && <>{PointsGraf00()}</>}</>
+            )}
+          </Grid>
+        )}
       </Grid>
     );
   };
@@ -328,7 +326,7 @@ const PointsLevel2Calc = (props: {
 
   const EmptyInfo = () => {
     return (
-      <Grid item>
+      <Grid item xs={12}>
         <Box sx={styleStError}>
           <h1>Нет информациии</h1>
         </Box>
@@ -387,13 +385,11 @@ const PointsLevel2Calc = (props: {
                 {!!pointer[namer] ? (
                   <>
                     {!!pointer[namer].length ? (
-                      <Grid item xs={12}>
-                        <Grid container>
-                          {OutputMainTabl(props.update)}
-                          <Grid item xs={0.05}></Grid>
-                          {OutputNotMainTabl()}
-                        </Grid>
-                      </Grid>
+                      <>
+                        {OutputMainTabl(props.update)}
+                        <Grid item xs={0.05}></Grid>
+                        {OutputNotMainTabl()}
+                      </>
                     ) : (
                       <>{EmptyInfo()}</>
                     )}

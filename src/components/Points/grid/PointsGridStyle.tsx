@@ -222,7 +222,6 @@ export const styleXTG02 = {
 };
 
 export const styleXTG03 = {
-  //bgcolor: "#F1F5FB", // светло серый
   background: "linear-gradient(160deg, #F1F5FB 63%, #D0DEF0 )",
   marginTop: "0.5vh",
   border: "1px solid #d4d4d4", // серый
@@ -233,9 +232,7 @@ export const styleXTG03 = {
 
 export const styleXTG04 = {
   height: "85.7vh",
-  //bgcolor: "#BBBBBB", // серый
-  //background: 'linear-gradient(160deg, #F1F5FB 63%, #D0DEF0 )',
-  //border: "1px solid #BBBBBB", // серый
+  background: 'linear-gradient(160deg, #F1F5FB 63%, #D0DEF0 )',
   marginLeft: 0.5,
   borderRadius: 1,
   boxShadow: 12,
@@ -451,11 +448,9 @@ export const styleXTG035 = {
 
 export const styleXTG045 = {
   height: "85.8vh",
-  //bgcolor: "#BBBBBB", // серый
-  //border: 1,
+  background: 'linear-gradient(160deg, #F1F5FB 63%, #D0DEF0 )',
   marginLeft: 0.5,
   borderRadius: 1,
-  //borderColor: "#BBBBBB", // серый
   boxShadow: 12,
 };
 
