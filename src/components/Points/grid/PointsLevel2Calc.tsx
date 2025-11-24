@@ -325,10 +325,12 @@ const PointsLevel2Calc = (props: {
   };
 
   const EmptyInfo = () => {
+    let soob =
+      "На " + MakeDateRus(datestat.xttData) + " по данному ХТ информации НЕТ";
     return (
       <Grid item xs={12}>
         <Box sx={styleStError}>
-          <h1>Нет информациии</h1>
+          <h1>{soob}</h1>
         </Box>
       </Grid>
     );
