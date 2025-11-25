@@ -150,7 +150,7 @@ export const Notprint = () => {
     color: "#7b15aaff", // сиреневый
     cursor: "default",
   };
-  
+
   return (
     <Box sx={stylePrintError}>
       <h1>Нет информации для сохранения в файл</h1>
@@ -258,8 +258,12 @@ export const InputerDate = (
   );
 };
 
-export const SendSocketgetStatisticsList = (region: string) => {
-  console.log("getStatisticsList:", region);
+export const SendSocketgetStatisticsList = (
+  region: string,
+  area: string,
+  id: string
+) => {
+  console.log("getStatisticsList:", region, area, id);
 
   const handleSendOpen = () => {
     if (!debug) {
@@ -268,6 +272,8 @@ export const SendSocketgetStatisticsList = (region: string) => {
           JSON.stringify({
             type: "getStatisticsList",
             region,
+            area,
+            id,
           })
         );
       } else {

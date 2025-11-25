@@ -11,6 +11,9 @@ import { WS } from "../../App";
 import StatisticXTNew from "./StatisticXTNew";
 
 import { NameVertex, MakeDateRus } from "../../AppServiceFunctions";
+import { SendSocketgetStatisticsList } from "../../AppServiceFunctions";
+
+import { massKeyGoodDate } from "../../App"; // массив ключей area-id для 'хороших дат'
 
 import { styleSt1, styleSt11, styleSt2 } from "./StatisticXTStyle";
 import { styleHint } from "./StatisticXTStyle";
@@ -45,6 +48,7 @@ const StatisticsNew = (props: {
   let isOpen = props.open;
   let points = props.points;
   let reGion = props.region;
+  let massKey = JSON.parse(JSON.stringify(massKeyGoodDate));
 
   React.useEffect(() => {
     const handleSend = () => {
@@ -179,6 +183,16 @@ const StatisticsNew = (props: {
 
           if (value === i) head = nameId + " за " + MakeDateRus(props.date);
           labl = pEt.area + ":" + pEt.subarea + ":" + pEt.id;
+
+          let areaSt = pEt.area.toString();
+          let idSt = pEt.id.toString();
+          let have = 0;
+          for (let j = 0; j < massKey.length; j++) {
+            let arr = massKey[i].split(",");
+            if (areaSt === arr[0] && idSt === arr[1]) have++;
+          }
+          !have && SendSocketgetStatisticsList("1", areaSt, idSt);
+
           resSps.push(
             <Tab
               key={i}

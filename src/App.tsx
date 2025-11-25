@@ -123,6 +123,7 @@ let massIntervalNowStart: any = [];
 let massIntervalOldStart: any = [1, 5, 10, 15, 30, 60];
 let nullOldStatistics = false;
 let nullNewStatistics = false;
+export let massKeyGoodDate: Array<string> = [];
 let massGoodDate: Array<string> = [];
 let tekValue = "1";
 
@@ -287,11 +288,17 @@ const App = () => {
           update = !update; // для обновдения точек в графиках
           !isOpenInf && setIsOpenInf(true);
           break;
-        case "getStatisticsList":
-          console.log("getStatisticsList:", data); // =================================
-          if (data.dates)
-            for (let i = 0; i < data.dates.length; i++)
-              massGoodDate.push(data.dates[i].slice(0, 10));
+        case "getStatisticsList": // даты со статистикой
+          // if (data.dates)
+          //   for (let i = 0; i < data.dates.length; i++)
+          //     massGoodDate.push(data.dates[i].slice(0, 10));
+          let have = 0;
+          for (let i = 0; i < massKeyGoodDate.length; i++) {
+            let arr = massKeyGoodDate[i].split(",");
+            if (data.area === arr[0] && data.id === arr[1]) have++;
+          }
+          !have && massKeyGoodDate.push(data.area + "," + data.id);
+          console.log("getStatisticsList:", massKeyGoodDate, data); // =================================
           break;
         case "getStatistics":
           setPointsSt(data.statistics ?? []);
@@ -312,6 +319,7 @@ const App = () => {
           !isOpenOldSt && setIsOpenOldSt(true);
           break;
         case "getCalculation":
+          console.log("getCalculation:", data); // =================================
           datestat.result = data.results;
           datestat.xttData = formSett;
           dispatch(statsaveCreate(datestat));
