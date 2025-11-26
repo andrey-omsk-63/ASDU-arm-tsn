@@ -13,7 +13,7 @@ import StatisticXTNew from "./StatisticXTNew";
 import { NameVertex, MakeDateRus } from "../../AppServiceFunctions";
 import { SendSocketgetStatisticsList } from "../../AppServiceFunctions";
 
-import { massKeyGoodDate } from "../../App"; // массив ключей area-id для 'хороших дат'
+//import { massKeyGoodDate } from "../../App"; // массив ключей area-id для 'хороших дат'
 
 import { styleSt1, styleSt11, styleSt2 } from "./StatisticXTStyle";
 import { styleHint } from "./StatisticXTStyle";
@@ -37,6 +37,7 @@ const StatisticsNew = (props: {
   date: string;
   interval: number;
   func: any;
+  funcGoodDate: any;
 }) => {
   //== Piece of Redux ======================================
   let datestat = useSelector((state: any) => {
@@ -48,7 +49,7 @@ const StatisticsNew = (props: {
   let isOpen = props.open;
   let points = props.points;
   let reGion = props.region;
-  let massKey = JSON.parse(JSON.stringify(massKeyGoodDate));
+  //let massKey = JSON.parse(JSON.stringify(massKeyGoodDate));
 
   React.useEffect(() => {
     const handleSend = () => {
@@ -69,6 +70,12 @@ const StatisticsNew = (props: {
   if (isOpen && flagEtalon) {
     pointsEtalon = points;
     flagEtalon = false;
+
+    // datestat.tekArea = points[tekValue].area;
+    // datestat.tekSubarea = points[tekValue].subarea;
+    // datestat.tekId = points[tekValue].id;
+    // dispatch(statsaveCreate(datestat));
+
     for (let i = 0; i < points.length; i++) {
       let rec1 = points[i].Statistics ? points[i].Statistics[0].TLen : 5;
       massInterval.push(rec1);
@@ -120,6 +127,22 @@ const StatisticsNew = (props: {
         pointsEtalon[i].id === datestat.tekId
       )
         tekValue = i;
+    }
+  }
+
+  // отправка запросов на получение 'хороших дат' для каждого id
+  for (let i = 0; i < points.length; i++) {
+    let areaSt = points[i].area.toString();
+    let idSt = points[i].id.toString();
+    let have = 0;
+    for (let j = 0; j < datestat.massKey.length; j++) {
+      let arr = datestat.massKey[j].split(",");
+      if (areaSt === arr[0] && idSt === arr[1]) have++;
+    }
+    if (!have) {
+      datestat.massKey.push(areaSt + "," + idSt);
+      SendSocketgetStatisticsList(areaSt, idSt); // запрос на получение 'хороших дат' для данного id
+      dispatch(statsaveCreate(datestat));
     }
   }
 
@@ -180,19 +203,8 @@ const StatisticsNew = (props: {
           let nameId = NameVertex(pEt.area, pEt.subarea, pEt.id);
           let alive = pEt.Statistics ? "black" : "red";
           let illum = value === i ? styleSt1(alive) : styleSt11(alive);
-
           if (value === i) head = nameId + " за " + MakeDateRus(props.date);
           labl = pEt.area + ":" + pEt.subarea + ":" + pEt.id;
-
-          let areaSt = pEt.area.toString();
-          let idSt = pEt.id.toString();
-          let have = 0;
-          for (let j = 0; j < massKey.length; j++) {
-            let arr = massKey[i].split(",");
-            if (areaSt === arr[0] && idSt === arr[1]) have++;
-          }
-          !have && SendSocketgetStatisticsList("1", areaSt, idSt);
-
           resSps.push(
             <Tab
               key={i}
@@ -252,6 +264,11 @@ const StatisticsNew = (props: {
   let clinch = CheckClinch();
 
   const StatisticsOutput = () => {
+    datestat.area = pointsEtalon[value].area;
+    datestat.id = pointsEtalon[value].id;
+    dispatch(statsaveCreate(datestat));
+    props.funcGoodDate();
+
     return (
       <>
         {pointsEtalon.length > 0 && !clinch && (

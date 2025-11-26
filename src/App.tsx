@@ -57,6 +57,7 @@ export interface Stater {
   xtt: number;
   result: Array<any>;
   needSave: boolean;
+  massKey: Array<string>; // массив ключей area-id для 'хороших дат'
 }
 
 export let dateStat: Stater = {
@@ -77,6 +78,7 @@ export let dateStat: Stater = {
   xtt: -1,
   result: [],
   needSave: false,
+  massKey: [], // массив ключей area-id для 'хороших дат'
 };
 
 export interface Pointer {
@@ -123,13 +125,19 @@ let massIntervalNowStart: any = [];
 let massIntervalOldStart: any = [1, 5, 10, 15, 30, 60];
 let nullOldStatistics = false;
 let nullNewStatistics = false;
-export let massKeyGoodDate: Array<string> = [];
-let massGoodDate: Array<string> = [];
+let massKeyGoodDate: Array<string> = [];
+//let masGoodDate: Array<string> = [];
+//let masGoodDate: any = [];
+let massGoodDate: any[][] = []; // массив 'хороших дат' для id
+export let RegionGlob = 0;
 let tekValue = "1";
 
 let update = true;
 let updateDevice = true;
 let notPrint = false;
+
+let AREA = 0;
+let ID = 0;
 
 const App = () => {
   //== Piece of Redux ======================================
@@ -248,7 +256,7 @@ const App = () => {
       } else if (mass[mass.length - 2] !== "TechAutomatic") PRIORITY = false;
     }
   }
-  //ref
+
   React.useEffect(() => {
     WS.onopen = function (event: any) {
       console.log("WS.current.onopen:", event);
@@ -284,7 +292,10 @@ const App = () => {
           let h = d.getHours();
           console.log("xctrlInfo:", h, d.getMinutes(), data.xctrlInfo); // =================================
           setPointsXctrl(data.xctrlInfo ?? []);
-          if (regionGlob === 0) setPointsReg(data.regionInfo ?? []);
+
+          !regionGlob && setPointsReg(data.regionInfo ?? []);
+          //if (regionGlob === 0) setPointsReg(data.regionInfo ?? []);
+
           update = !update; // для обновдения точек в графиках
           !isOpenInf && setIsOpenInf(true);
           break;
@@ -297,8 +308,17 @@ const App = () => {
             let arr = massKeyGoodDate[i].split(",");
             if (data.area === arr[0] && data.id === arr[1]) have++;
           }
-          !have && massKeyGoodDate.push(data.area + "," + data.id);
-          console.log("getStatisticsList:", massKeyGoodDate, data); // =================================
+          if (!have) {
+            massKeyGoodDate.push(data.area + "," + data.id);
+            let mass = [];
+            if (data.dates) {
+              for (let i = 0; i < data.dates.length; i++)
+                mass.push(data.dates[i].slice(0, 10));
+            }
+            massGoodDate.push(mass);
+          }
+          console.log("getStatisticsList:", massKeyGoodDate); // =================================
+          console.log("###:", massGoodDate);
           break;
         case "getStatistics":
           setPointsSt(data.statistics ?? []);
@@ -308,6 +328,14 @@ const App = () => {
           SetStatisticsIntervalNow(st);
           nullNewStatistics = false;
           !isOpenSt && setIsOpenSt(true);
+
+          if (!datestat.id) {
+            datestat.area = data.statistics[0].area;
+            datestat.subarea = data.statistics[0].subarea;
+            datestat.id = data.statistics[0].id;
+            dispatch(statsaveCreate(datestat));
+          }
+
           break;
         case "getOldStatistics":
           console.log("getOldStatistics:", data); // =================================
@@ -375,6 +403,12 @@ const App = () => {
     axios.get(road + "otladkaStatNow.json").then(({ data }) => {
       setPointsSt(data.data.statistics);
       dispatch(statsaveCreate(datestat));
+
+      datestat.area = data.data.statistics[0].area;
+      datestat.subarea = data.data.statistics[0].subarea;
+      datestat.id = data.data.statistics[0].id;
+      dispatch(statsaveCreate(datestat));
+
       SetStatisticsIntervalNow(data.data.statistics);
       setIsOpenSt(true);
     });
@@ -401,6 +435,14 @@ const App = () => {
     setTrigger(!trigger);
   };
 
+  const FuncGoodDate = () => {
+    if (datestat.area !== AREA || datestat.id !== ID) {
+      AREA = datestat.area;
+      ID = datestat.id;
+      setTrigger(!trigger);
+    }
+  };
+
   const SetIdOld = (newId: number, intervalId: number) => {
     tekIdOld = newId;
     if (intervalId) interval = intervalId;
@@ -409,7 +451,17 @@ const App = () => {
 
   const InputDate = () => {
     const InputDat = React.useMemo(() => {
-      let goodDate = massGoodDate;
+      console.log("!!!!!!:", datestat.area, datestat.id);
+      let key = -1;
+      for (let i = 0; i < massKeyGoodDate.length; i++) {
+        let arr = massKeyGoodDate[i].split(",");
+        if (datestat.area === Number(arr[0]) && datestat.id === Number(arr[1]))
+          key = i;
+      }
+      let goodDate = key < 0 ? [] : massGoodDate[key];
+
+      console.log("%%%%%%:", key, massKeyGoodDate, massGoodDate);
+
       if (value === "2") goodDate = [];
       const handleChangeDP = (event: any) => {
         let god = new Date(event.toString()).getFullYear();
@@ -491,7 +543,8 @@ const App = () => {
     };
 
     const handleMouseDown = (event: any) => {
-      event.button === 2 && console.log("Mouse Button:", event.button);
+      event.button === 2 && console.log("Mouse Button:", event.button); // правая кнопка
+      //event.button === 0 && console.log("Левая:", dateStat); // левая кнопка
     };
 
     return (
@@ -627,12 +680,17 @@ const App = () => {
     );
   };
 
-  UpdateXctrl(); // разноска обновлений Xctrl
-
   const NotPrint = () => {
     notPrint = false;
     return <>{Notprint()}</>;
   };
+
+  const SetRegionGlob = (reg: any) => {
+    RegionGlob = reg;
+    setRegionGlob(reg);
+  };
+
+  UpdateXctrl(); // разноска обновлений Xctrl
 
   return (
     <>
@@ -640,7 +698,7 @@ const App = () => {
         <EndSeans bsLogin={bsLogin} setOpen={setOpenErrLog} reg={regionGlob} />
       )}
       {regionGlob === 0 && isOpenInf && (
-        <BeginSeans pointsReg={pointsReg} SetRegion={setRegionGlob} />
+        <BeginSeans pointsReg={pointsReg} SetRegion={SetRegionGlob} />
       )}
       {!openErrLog && (
         <>
@@ -679,6 +737,7 @@ const App = () => {
                       date={formSett}
                       interval={interval}
                       func={SetIdNow}
+                      funcGoodDate={FuncGoodDate}
                     />
                   )}
                   {formSett !== formSettToday && !nullOldStatistics && (
@@ -689,6 +748,7 @@ const App = () => {
                       date={formSett}
                       interval={interval}
                       func={SetIdOld}
+                      funcGoodDate={FuncGoodDate}
                     />
                   )}
                 </TabPanel>
@@ -701,6 +761,7 @@ const App = () => {
                       date={formSett}
                       interval={interval}
                       func={SetIdOld}
+                      funcGoodDate={FuncGoodDate}
                     />
                   )}
                 </TabPanel>

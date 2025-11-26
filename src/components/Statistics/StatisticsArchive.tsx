@@ -9,6 +9,7 @@ import Tab from "@mui/material/Tab";
 import StatisticXTArchive from "./StatisticXTArchive";
 
 import { NameVertex, MakeDateRus } from "../../AppServiceFunctions";
+import { SendSocketgetStatisticsList } from "../../AppServiceFunctions";
 
 import { WS } from "../../App";
 
@@ -34,6 +35,7 @@ const StatisticsArchive = (props: {
   date: string;
   interval: number;
   func: any;
+  funcGoodDate: any;
 }) => {
   //== Piece of Redux ======================================
   let datestat = useSelector((state: any) => {
@@ -74,6 +76,12 @@ const StatisticsArchive = (props: {
   if (isOpen && flagEtalon) {
     pointsEtalon = points;
     flagEtalon = false;
+
+    // datestat.tekArea = points[tekValue].area;
+    // datestat.tekSubarea = points[tekValue].subarea;
+    // datestat.tekId = points[tekValue].id;
+    // dispatch(statsaveCreate(datestat));
+
     massInterval = [];
     for (let i = 0; i < points.length; i++) {
       let rec1 = points[i].Statistics ? points[i].Statistics[0].TLen : 5;
@@ -101,6 +109,22 @@ const StatisticsArchive = (props: {
         pointsEtalon[i].id === datestat.tekId
       )
         tekValue = i;
+    }
+  }
+
+  // отправка запросов на получение 'хороших дат' для каждого id
+  for (let i = 0; i < points.length; i++) {
+    let areaSt = points[i].area.toString();
+    let idSt = points[i].id.toString();
+    let have = 0;
+    for (let j = 0; j < datestat.massKey.length; j++) {
+      let arr = datestat.massKey[j].split(",");
+      if (areaSt === arr[0] && idSt === arr[1]) have++;
+    }
+    if (!have) {
+      datestat.massKey.push(areaSt + "," + idSt);
+      SendSocketgetStatisticsList(areaSt, idSt); // запрос на получение 'хороших дат' для данного id
+      dispatch(statsaveCreate(datestat));
     }
   }
 
@@ -226,6 +250,11 @@ const StatisticsArchive = (props: {
   let clinch = CheckClinch();
 
   const StatisticsOutput = () => {
+    datestat.area = pointsEtalon[value].area;
+    datestat.id = pointsEtalon[value].id;
+    dispatch(statsaveCreate(datestat));
+    props.funcGoodDate();
+
     return (
       <>
         {pointsEtalon.length > 0 && !clinch && (

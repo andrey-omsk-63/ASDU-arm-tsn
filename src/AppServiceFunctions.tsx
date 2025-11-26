@@ -28,7 +28,7 @@ import { styleMRG03 } from "./components/Management/grid/ManagGridStyle";
 import { styleMRGHeader } from "./components/Management/grid/ManagGridStyle";
 import { styleModalEnd } from "./components/Points/grid/PointsGridStyle";
 
-import { debug, WS, pointsTFL } from "./App";
+import { debug, WS, pointsTFL, RegionGlob } from "./App";
 
 import { XctrlInfo } from "./interfaceGl.d";
 
@@ -221,6 +221,7 @@ export const InputerDate = (
   handleChangeDP: any,
   massGoodDate: any
 ) => {
+  //console.log("InputerDate:", massGoodDate);
   const color = "#6F139B"; // сиреневый
 
   return (
@@ -259,11 +260,12 @@ export const InputerDate = (
 };
 
 export const SendSocketgetStatisticsList = (
-  region: string,
+  //region: string,
   area: string,
   id: string
 ) => {
-  console.log("getStatisticsList:", region, area, id);
+  console.log("getStatisticsList:", RegionGlob, area, id);
+  let region = RegionGlob.toString();
 
   const handleSendOpen = () => {
     if (!debug) {
