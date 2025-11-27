@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 
-import { WS } from "../../App";
+import { WS, RegionGlob } from "../../App";
 
 import StatisticXTNew from "./StatisticXTNew";
 
@@ -33,7 +33,7 @@ let nameHint = "";
 const StatisticsNew = (props: {
   open: boolean;
   points: Statistic[];
-  region: string;
+  //region: string;
   date: string;
   interval: number;
   func: any;
@@ -48,8 +48,7 @@ const StatisticsNew = (props: {
   //========================================================
   let isOpen = props.open;
   let points = props.points;
-  let reGion = props.region;
-  //let massKey = JSON.parse(JSON.stringify(massKeyGoodDate));
+  let reGion = RegionGlob.toString();
 
   React.useEffect(() => {
     const handleSend = () => {
@@ -70,12 +69,6 @@ const StatisticsNew = (props: {
   if (isOpen && flagEtalon) {
     pointsEtalon = points;
     flagEtalon = false;
-
-    // datestat.tekArea = points[tekValue].area;
-    // datestat.tekSubarea = points[tekValue].subarea;
-    // datestat.tekId = points[tekValue].id;
-    // dispatch(statsaveCreate(datestat));
-
     for (let i = 0; i < points.length; i++) {
       let rec1 = points[i].Statistics ? points[i].Statistics[0].TLen : 5;
       massInterval.push(rec1);
@@ -146,15 +139,17 @@ const StatisticsNew = (props: {
     }
   }
 
+  if (!datestat.id) tekValue = 0; // начать по новой
   const [value, setValue] = React.useState(tekValue);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
     tekValue = newValue;
-    datestat.tekArea = pointsEtalon[tekValue].area;
-    datestat.tekSubarea = pointsEtalon[tekValue].subarea;
-    datestat.tekId = pointsEtalon[tekValue].id;
+    datestat.tekArea = datestat.area = pointsEtalon[tekValue].area;
+    datestat.tekSubarea = datestat.subarea = pointsEtalon[tekValue].subarea;
+    datestat.tekId = datestat.id = pointsEtalon[tekValue].id;
     dispatch(statsaveCreate(datestat));
+    props.funcGoodDate();
     props.func(tekValue, massInterval[tekValue]);
   };
 
@@ -173,7 +168,13 @@ const StatisticsNew = (props: {
     return (
       <>
         {ErrorMessage(
-          "По выбраному перекрёстку на " +
+          "По перекрёстку " +
+            datestat.area +
+            ":" +
+            datestat.subarea +
+            ":" +
+            datestat.id +
+            " на " +
             MakeDateRus(props.date) +
             " данных по статистике НЕТ"
         )}
@@ -264,11 +265,6 @@ const StatisticsNew = (props: {
   let clinch = CheckClinch();
 
   const StatisticsOutput = () => {
-    datestat.area = pointsEtalon[value].area;
-    datestat.id = pointsEtalon[value].id;
-    dispatch(statsaveCreate(datestat));
-    props.funcGoodDate();
-
     return (
       <>
         {pointsEtalon.length > 0 && !clinch && (

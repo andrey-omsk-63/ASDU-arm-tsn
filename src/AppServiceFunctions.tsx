@@ -77,7 +77,8 @@ export const MakeInterval = (mode: number) => {
   return dat;
 };
 
-export const SendStopDevices = (propsRegion: string) => {
+export const SendStopDevices = () => {
+  let propsRegion = RegionGlob.toString()
   const handleSendOpen = () => {
     if (WS !== null) {
       if (WS.readyState === WebSocket.OPEN) {
@@ -260,7 +261,6 @@ export const InputerDate = (
 };
 
 export const SendSocketgetStatisticsList = (
-  //region: string,
   area: string,
   id: string
 ) => {
@@ -631,11 +631,11 @@ export const SaveFunc = (func: any) => {
   );
 };
 
-export const SendHandleSend = (ws: any, mask: any) => {
+export const SendHandleSend = (mask: any) => {
   const handleSendOpen = () => {
-    if (ws !== null) {
-      if (ws.readyState === WebSocket.OPEN) {
-        ws.send(
+    if (WS !== null) {
+      if (WS.readyState === WebSocket.OPEN) {
+        WS.send(
           JSON.stringify({
             type: "changeXctrl",
             data: mask,
@@ -712,7 +712,6 @@ export const WorkMenuEditMain = (
 };
 //=== Points =======================================
 export const SendSocketOldDateXt = (
-  // ws: any,
   date: any,
   pointsEtalon: any,
   tekValue: number

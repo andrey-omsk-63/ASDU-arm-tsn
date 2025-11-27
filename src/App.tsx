@@ -125,9 +125,7 @@ let massIntervalNowStart: any = [];
 let massIntervalOldStart: any = [1, 5, 10, 15, 30, 60];
 let nullOldStatistics = false;
 let nullNewStatistics = false;
-let massKeyGoodDate: Array<string> = [];
-//let masGoodDate: Array<string> = [];
-//let masGoodDate: any = [];
+let massKeyGoodDate: Array<string> = []; // массив ключей area-id для 'хороших дат'
 let massGoodDate: any[][] = []; // массив 'хороших дат' для id
 export let RegionGlob = 0;
 let tekValue = "1";
@@ -292,22 +290,14 @@ const App = () => {
           let h = d.getHours();
           console.log("xctrlInfo:", h, d.getMinutes(), data.xctrlInfo); // =================================
           setPointsXctrl(data.xctrlInfo ?? []);
-
           !regionGlob && setPointsReg(data.regionInfo ?? []);
-          //if (regionGlob === 0) setPointsReg(data.regionInfo ?? []);
-
           update = !update; // для обновдения точек в графиках
           !isOpenInf && setIsOpenInf(true);
           break;
         case "getStatisticsList": // даты со статистикой
-          // if (data.dates)
-          //   for (let i = 0; i < data.dates.length; i++)
-          //     massGoodDate.push(data.dates[i].slice(0, 10));
           let have = 0;
-          for (let i = 0; i < massKeyGoodDate.length; i++) {
-            let arr = massKeyGoodDate[i].split(",");
-            if (data.area === arr[0] && data.id === arr[1]) have++;
-          }
+          for (let i = 0; i < massKeyGoodDate.length; i++)
+            if (massKeyGoodDate[i] === data.area + "," + data.id) have++;
           if (!have) {
             massKeyGoodDate.push(data.area + "," + data.id);
             let mass = [];
@@ -316,9 +306,9 @@ const App = () => {
                 mass.push(data.dates[i].slice(0, 10));
             }
             massGoodDate.push(mass);
+            setTrigger(!trigger);
           }
-          console.log("getStatisticsList:", massKeyGoodDate); // =================================
-          console.log("###:", massGoodDate);
+          console.log("getStatisticsList:", massKeyGoodDate, massGoodDate); // =================================
           break;
         case "getStatistics":
           setPointsSt(data.statistics ?? []);
@@ -328,14 +318,13 @@ const App = () => {
           SetStatisticsIntervalNow(st);
           nullNewStatistics = false;
           !isOpenSt && setIsOpenSt(true);
-
           if (!datestat.id) {
-            datestat.area = data.statistics[0].area;
+            datestat.area = AREA = data.statistics[0].area; // начало работы
             datestat.subarea = data.statistics[0].subarea;
-            datestat.id = data.statistics[0].id;
+            datestat.id = ID = data.statistics[0].id;
             dispatch(statsaveCreate(datestat));
+            setTrigger(!trigger);
           }
-
           break;
         case "getOldStatistics":
           console.log("getOldStatistics:", data); // =================================
@@ -403,12 +392,10 @@ const App = () => {
     axios.get(road + "otladkaStatNow.json").then(({ data }) => {
       setPointsSt(data.data.statistics);
       dispatch(statsaveCreate(datestat));
-
-      datestat.area = data.data.statistics[0].area;
+      datestat.area = AREA = data.data.statistics[0].area;
       datestat.subarea = data.data.statistics[0].subarea;
-      datestat.id = data.data.statistics[0].id;
+      datestat.id = ID = data.data.statistics[0].id;
       dispatch(statsaveCreate(datestat));
-
       SetStatisticsIntervalNow(data.data.statistics);
       setIsOpenSt(true);
     });
@@ -451,18 +438,6 @@ const App = () => {
 
   const InputDate = () => {
     const InputDat = React.useMemo(() => {
-      console.log("!!!!!!:", datestat.area, datestat.id);
-      let key = -1;
-      for (let i = 0; i < massKeyGoodDate.length; i++) {
-        let arr = massKeyGoodDate[i].split(",");
-        if (datestat.area === Number(arr[0]) && datestat.id === Number(arr[1]))
-          key = i;
-      }
-      let goodDate = key < 0 ? [] : massGoodDate[key];
-
-      console.log("%%%%%%:", key, massKeyGoodDate, massGoodDate);
-
-      if (value === "2") goodDate = [];
       const handleChangeDP = (event: any) => {
         let god = new Date(event.toString()).getFullYear();
         if (event.toString() !== "Invalid Date" && tekYear - god <= 5) {
@@ -471,6 +446,20 @@ const App = () => {
           setValueDate(eventInp);
         } else inpDate = false;
       };
+
+      let goodDate: Array<string> = [];
+      if (value !== "2") {
+        let key = -1;
+        for (let i = 0; i < massKeyGoodDate.length; i++) {
+          if (massKeyGoodDate[i] === datestat.area + "," + datestat.id) {
+            key = i;
+            break;
+          }
+        }
+        goodDate = key < 0 ? [] : massGoodDate[key];
+        //console.log("!!!!!!:", datestat.area, datestat.id);
+        //console.log("Key:", key, massKeyGoodDate, massGoodDate);
+      }
       return <>{InputerDate(valueDate, handleChangeDP, goodDate)}</>;
     }, []);
     return InputDat;
@@ -712,7 +701,6 @@ const App = () => {
                     open={isOpenDev}
                     points={pointsTfl}
                     xctrll={pointsEtalonXctrl}
-                    region={String(regionGlob)}
                     update={updateDevice}
                   />
                 </TabPanel>
@@ -720,7 +708,6 @@ const App = () => {
                   <Points
                     open={isOpenInf}
                     xctrll={pointsEtalonXctrl}
-                    region={String(regionGlob)}
                     setPoint={SetPointsXctrl}
                     saveXt={SetSaveXT}
                     date={formSett}
@@ -733,7 +720,6 @@ const App = () => {
                     <StatisticsNew
                       open={isOpenSt}
                       points={pointsSt}
-                      region={String(regionGlob)}
                       date={formSett}
                       interval={interval}
                       func={SetIdNow}
@@ -744,7 +730,6 @@ const App = () => {
                     <StatisticsArchive
                       open={true}
                       points={pointsOldSt}
-                      region={String(regionGlob)}
                       date={formSett}
                       interval={interval}
                       func={SetIdOld}
@@ -757,7 +742,6 @@ const App = () => {
                     <StatisticsArchive
                       open={isOpenOldSt}
                       points={pointsOldSt}
-                      region={String(regionGlob)}
                       date={formSett}
                       interval={interval}
                       func={SetIdOld}

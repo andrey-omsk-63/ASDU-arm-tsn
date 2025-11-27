@@ -269,8 +269,8 @@ const PointsLevel2Calc = (props: {
 
         datestat.data = new Date().toLocaleDateString();
         datestat.time = new Date().toLocaleTimeString().slice(0, -3);
-        datestat.area = points.area;
-        datestat.id = points.subarea;
+        //datestat.area = points.area;
+        //datestat.id = points.subarea;
         datestat.xtName = namer;
         datestat.xtGraf = printRef;
         dispatch(statsaveCreate(datestat));

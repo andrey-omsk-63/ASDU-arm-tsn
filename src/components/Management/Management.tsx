@@ -1,10 +1,13 @@
 import * as React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { statsaveCreate } from "./../../redux/actions";
+
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 
 import ManagementLeftGrid from "./grid/ManagLeftGrid";
 
-import { debug, WS } from "../../App";
+import { debug, WS, RegionGlob } from "../../App";
 
 import { Tflight } from "../../interfaceMNG.d";
 import { XctrlInfo } from "../../interfaceGl.d";
@@ -17,13 +20,20 @@ const Management = (props: {
   open: boolean;
   points: Tflight[];
   xctrll: XctrlInfo[];
-  region: string;
+  //region: string;
   update: boolean;
 }) => {
+  //== Piece of Redux =======================================
+  let datestat = useSelector((state: any) => {
+    const { statsaveReducer } = state;
+    return statsaveReducer.datestat;
+  });
+  const dispatch = useDispatch();
+  //===========================================================
   let isOpen = props.open;
   let points = props.points;
   let pointsAdd: Tflight[] = [];
-  let reGion = props.region;
+  let reGion = RegionGlob.toString();
 
   let pointsGl = props.xctrll;
   let pointsXctrll: any = [];
@@ -89,6 +99,9 @@ const Management = (props: {
       for (let i = 0; i < pointsAdd.length; i++)
         pointsEtalon.push(pointsAdd[i]);
     //else console.log("OБНОВИЛСЯ эталон Device");
+
+    datestat.id = 0; // для статистики
+    dispatch(statsaveCreate(datestat));
 
     // разноска обновлений Xctrl
     // let pointsAddd = [];

@@ -5,7 +5,6 @@ import Stack from "@mui/material/Stack";
 import Modal from "@mui/material/Modal";
 
 import { MenuSpisRegion, SendSocketDevices } from "./AppServiceFunctions";
-//import { SendSocketgetStatisticsList } from "./AppServiceFunctions";
 
 let massRegion: Array<number> = [];
 let massNameRegion: Array<string> = [];
@@ -32,8 +31,6 @@ const BeginSeans = (props: { pointsReg: any; SetRegion: Function }) => {
   }
 
   const handleCloseModal = (numer: number) => {
-    // SendSocketgetStatisticsList(numer.toString(),'1','1');
-    // SendSocketgetStatisticsList(numer.toString(),'1','5');
     SendSocketDevices(numer);
     props.SetRegion(numer);
     setOpen(false);
@@ -44,8 +41,6 @@ const BeginSeans = (props: { pointsReg: any; SetRegion: Function }) => {
   };
 
   const OneRegin = () => {
-    // SendSocketgetStatisticsList(massRegion[0].toString(),'1','1');
-    // SendSocketgetStatisticsList(massRegion[0].toString(),'1','5');
     SendSocketDevices(massRegion[0]);
     props.SetRegion(massRegion[0]);
   };

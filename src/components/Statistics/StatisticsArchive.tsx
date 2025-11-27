@@ -11,7 +11,7 @@ import StatisticXTArchive from "./StatisticXTArchive";
 import { NameVertex, MakeDateRus } from "../../AppServiceFunctions";
 import { SendSocketgetStatisticsList } from "../../AppServiceFunctions";
 
-import { WS } from "../../App";
+import { WS, RegionGlob } from "../../App";
 
 import { styleSt1, styleSt11, styleSt2 } from "./StatisticXTStyle";
 import { styleHint } from "./StatisticXTStyle";
@@ -31,7 +31,7 @@ let oldDate = "";
 const StatisticsArchive = (props: {
   open: boolean;
   points: Statistic[];
-  region: string;
+  //region: string;
   date: string;
   interval: number;
   func: any;
@@ -46,7 +46,7 @@ const StatisticsArchive = (props: {
   //========================================================
   let isOpen = props.open;
   let points = props.points;
-  let reGion = props.region;
+  let reGion = RegionGlob.toString();
 
   React.useEffect(() => {
     const handleSend = () => {
@@ -76,12 +76,6 @@ const StatisticsArchive = (props: {
   if (isOpen && flagEtalon) {
     pointsEtalon = points;
     flagEtalon = false;
-
-    // datestat.tekArea = points[tekValue].area;
-    // datestat.tekSubarea = points[tekValue].subarea;
-    // datestat.tekId = points[tekValue].id;
-    // dispatch(statsaveCreate(datestat));
-
     massInterval = [];
     for (let i = 0; i < points.length; i++) {
       let rec1 = points[i].Statistics ? points[i].Statistics[0].TLen : 5;
@@ -133,10 +127,11 @@ const StatisticsArchive = (props: {
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
     tekValue = newValue;
-    datestat.tekArea = pointsEtalon[tekValue].area;
-    datestat.tekSubarea = pointsEtalon[tekValue].subarea;
-    datestat.tekId = pointsEtalon[tekValue].id;
+    datestat.tekArea = datestat.area = pointsEtalon[tekValue].area;
+    datestat.tekSubarea = datestat.subarea = pointsEtalon[tekValue].subarea;
+    datestat.tekId = datestat.id = pointsEtalon[tekValue].id;
     dispatch(statsaveCreate(datestat));
+    props.funcGoodDate();
     props.func(tekValue, massInterval[tekValue]);
   };
 
@@ -155,7 +150,13 @@ const StatisticsArchive = (props: {
     return (
       <>
         {ErrorMessage(
-          "По выбраному перекрёстку на " +
+          "По перекрёстку " +
+            datestat.area +
+            ":" +
+            datestat.subarea +
+            ":" +
+            datestat.id +
+            " на " +
             MakeDateRus(props.date) +
             " данных по статистике НЕТ"
         )}
@@ -250,11 +251,6 @@ const StatisticsArchive = (props: {
   let clinch = CheckClinch();
 
   const StatisticsOutput = () => {
-    datestat.area = pointsEtalon[value].area;
-    datestat.id = pointsEtalon[value].id;
-    dispatch(statsaveCreate(datestat));
-    props.funcGoodDate();
-
     return (
       <>
         {pointsEtalon.length > 0 && !clinch && (

@@ -57,7 +57,7 @@ const ManagementKnobPK = (props: {
 
   const handleOpen = () => {
     setOpen(true);
-    SendStopDevices(props.region);
+    SendStopDevices();
     otpravka = true;
   };
 
