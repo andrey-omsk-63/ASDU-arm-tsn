@@ -10,7 +10,7 @@ import PointsMenuLevel1 from "./PointsMenuLevel1";
 
 import { MakeDate, SendSocketOldDateXt } from "../../AppServiceFunctions";
 
-import { debug, WS, RegionGlob } from "../../App";
+import { debug, WS, RegionGlob, pointsEtalonXctrl } from "../../App";
 
 import { stylePoint01, stylePoint02 } from "./grid/PointsGridStyle";
 import { stylePoint03 } from "./grid/PointsGridStyle";
@@ -29,8 +29,6 @@ let oldXt = -1;
 
 const Points = (props: {
   open: boolean;
-  xctrll: XctrlInfo[];
-  //region: string;
   setPoint: any;
   saveXt: Function;
   date: string;
@@ -51,8 +49,8 @@ const Points = (props: {
   //===========================================================
   let reGion = String(RegionGlob);
   let isOpen = props.open;
-  let pointsGl = props.xctrll;
-  
+  let pointsGl = pointsEtalonXctrl;
+
   let points = pointsGl.filter(
     (pointsGl) => pointsGl.region === Number(reGion)
   );
@@ -98,7 +96,7 @@ const Points = (props: {
       setCalculate(!calculate);
     }
   }
-  datestat.id = 0  // для статистики
+  datestat.id = 0; // для статистики
   dispatch(statsaveCreate(datestat));
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {

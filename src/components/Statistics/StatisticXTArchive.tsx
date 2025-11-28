@@ -11,6 +11,8 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 import { Statistic } from "../../interfaceStat.d";
 
+import { DatasForStat } from "../../AppConst";
+
 import { KnobBatCl, OptionsForLine } from "../../AppServiceFunctions";
 
 import { head } from "./StatisticsArchive";
@@ -134,6 +136,7 @@ const StatisticXTArchive = (props: {
     }
     if (oldAreaid !== areaId) {
       //сменился ID
+      needMakeMatrix = true;
       let nomInMas = -1;
       for (let i = 0; i < massId.length; i++) {
         if (massId[i].id === areaId) {
@@ -392,15 +395,9 @@ const StatisticXTArchive = (props: {
         Datas: [],
       };
       for (let j = 0; j < kolDatas; j++) {
-        matrix[i].Datas[j] = {
-          ch: j + 1,
-          st: 0,
-          in: 0,
-          sp: 0,
-          d: 0,
-          o: 0,
-          g: 0,
-        };
+        let mass = DatasForStat;
+        mass.ch = j + 1;
+        matrix[i].Datas[j] = mass;
       }
       maskMATRIX.Datas = matrix[i].Datas;
       MATRIX.push(maskMATRIX);
@@ -420,12 +417,9 @@ const StatisticXTArchive = (props: {
         if (inTime % step === 0) {
           let numInMatrix = inTime / step - 1;
           for (let j = 0; j < points[areaId].Statistics[i].Datas.length; j++) {
-            matrix[numInMatrix].Datas[j] = {
-              ...points[areaId].Statistics[i].Datas[j],
-            };
-            MATRIX[numInMatrix].Datas[j] = {
-              ...points[areaId].Statistics[i].Datas[j],
-            };
+            let rec = points[areaId].Statistics[i].Datas[j];
+            matrix[numInMatrix].Datas[j] = { ...rec };
+            MATRIX[numInMatrix].Datas[j] = { ...rec };
           }
           matrix[numInMatrix].Avail = true;
           MATRIX[numInMatrix].Avail = true;

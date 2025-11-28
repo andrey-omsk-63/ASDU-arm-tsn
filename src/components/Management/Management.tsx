@@ -7,7 +7,7 @@ import Grid from "@mui/material/Grid";
 
 import ManagementLeftGrid from "./grid/ManagLeftGrid";
 
-import { debug, WS, RegionGlob } from "../../App";
+import { debug, WS, RegionGlob, pointsEtalonXctrl } from "../../App";
 
 import { Tflight } from "../../interfaceMNG.d";
 import { XctrlInfo } from "../../interfaceGl.d";
@@ -19,8 +19,6 @@ let flagEtalon = true;
 const Management = (props: {
   open: boolean;
   points: Tflight[];
-  xctrll: XctrlInfo[];
-  //region: string;
   update: boolean;
 }) => {
   //== Piece of Redux =======================================
@@ -35,8 +33,8 @@ const Management = (props: {
   let pointsAdd: Tflight[] = [];
   let reGion = RegionGlob.toString();
 
-  let pointsGl = props.xctrll;
-  let pointsXctrll: any = [];
+  let pointsGl = pointsEtalonXctrl;
+    let pointsXctrll: any = [];
 
   if (pointsGl !== null) {
     pointsXctrll = pointsGl.filter(

@@ -98,14 +98,11 @@ export let maskPoint: Pointer = {
 export let debug = false; // режим отладки или демо
 export let WS: any = null; // WebSocket
 export let PRIORITY: boolean = true; // приоритет доступа ко всем функциям АРМ-а
-
 let flagOpenWS = true;
-
 let flagOpenDebug = true;
-let pointsEtalonXctrl: XctrlInfo[];
+export let pointsEtalonXctrl: XctrlInfo[];
 let flagEtalonInf = true;
 export let pointsTFL: Tflight[];
-
 const date = new Date();
 const tekYear = date.getFullYear();
 let formSett = MakeDate(date);
@@ -133,7 +130,6 @@ let tekValue = "1";
 let update = true;
 let updateDevice = true;
 let notPrint = false;
-
 let AREA = 0;
 let ID = 0;
 
@@ -301,10 +297,9 @@ const App = () => {
           if (!have) {
             massKeyGoodDate.push(data.area + "," + data.id);
             let mass = [];
-            if (data.dates) {
+            if (data.dates)
               for (let i = 0; i < data.dates.length; i++)
                 mass.push(data.dates[i].slice(0, 10));
-            }
             massGoodDate.push(mass);
             setTrigger(!trigger);
           }
@@ -382,7 +377,7 @@ const App = () => {
     });
     axios.get(road + "otladkaXctrl.json").then(({ data }) => {
       setPointsXctrl(data.data.xctrlInfo ?? []);
-      if (regionGlob === 0) setPointsReg(data.data.regionInfo ?? []);
+      !regionGlob && setPointsReg(data.data.regionInfo ?? []);
       if (data.data.xctrlInfo !== null) {
         maskPoint.pointForRedax = data.data.xctrlInfo[0];
         dispatch(maskpointCreate(maskpoint));
@@ -396,6 +391,9 @@ const App = () => {
       datestat.subarea = data.data.statistics[0].subarea;
       datestat.id = ID = data.data.statistics[0].id;
       dispatch(statsaveCreate(datestat));
+
+      console.log("9###:", datestat);
+
       SetStatisticsIntervalNow(data.data.statistics);
       setIsOpenSt(true);
     });
@@ -503,7 +501,6 @@ const App = () => {
       dat = MakeInterval(massIntervalOldStart[tekIdOld]);
     } else if (formSett !== formSettToday)
       dat = MakeInterval(massIntervalOldStart[tekIdOld]);
-
     let massKey = [];
     let massDat: any = [];
     const currencies: any = [];
@@ -578,20 +575,17 @@ const App = () => {
   const SetValue = (mode: string) => {
     switch (mode) {
       case "1":
-        setValue(mode);
-        tekValue = mode;
+        setValue((tekValue = mode));
         break;
       case "2":
-        formSett = formSettToday;
         datestat.xttData = MakeDate(new Date());
         dispatch(statsaveCreate(datestat));
-        setValueDate(dayjs(formSett));
+        setValueDate(dayjs((formSett = formSettToday)));
         setValue((tekValue = mode));
         break;
       case "3":
-        formSett = formSettToday;
         interval = massIntervalNow[tekIdNow];
-        setValueDate(dayjs(formSett));
+        setValueDate(dayjs((formSett = formSettToday)));
         setValue((tekValue = mode));
         break;
       case "5":
@@ -675,8 +669,7 @@ const App = () => {
   };
 
   const SetRegionGlob = (reg: any) => {
-    RegionGlob = reg;
-    setRegionGlob(reg);
+    setRegionGlob((RegionGlob = reg));
   };
 
   UpdateXctrl(); // разноска обновлений Xctrl
@@ -700,14 +693,12 @@ const App = () => {
                   <Management
                     open={isOpenDev}
                     points={pointsTfl}
-                    xctrll={pointsEtalonXctrl}
                     update={updateDevice}
                   />
                 </TabPanel>
                 <TabPanel value="2">
                   <Points
                     open={isOpenInf}
-                    xctrll={pointsEtalonXctrl}
                     setPoint={SetPointsXctrl}
                     saveXt={SetSaveXT}
                     date={formSett}

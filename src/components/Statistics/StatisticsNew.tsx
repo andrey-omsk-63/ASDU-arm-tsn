@@ -29,11 +29,13 @@ let massIntervalEt: any = [];
 export let head = "";
 
 let nameHint = "";
+let clinchAr = 0;
+let clinchSu = 0;
+let clinchId = 0;
 
 const StatisticsNew = (props: {
   open: boolean;
   points: Statistic[];
-  //region: string;
   date: string;
   interval: number;
   func: any;
@@ -244,11 +246,11 @@ const StatisticsNew = (props: {
 
   const CheckClinch = () => {
     let clinch = false;
+    let val = tekValue !== value ? tekValue : value;
     if (!flagEtalon) {
       if (pointsEtalon.length === 0) {
         clinch = true;
       } else {
-        let val = tekValue !== value ? tekValue : value;
         if (pointsEtalon[val].Statistics) {
           for (let i = 0; i < pointsEtalon[val].Statistics.length; i++)
             if (pointsEtalon[val].Statistics[i].Datas === null) clinch = true;
@@ -258,6 +260,9 @@ const StatisticsNew = (props: {
     if (clinch) {
       datestat.stat = [];
       dispatch(statsaveCreate(datestat));
+      clinchAr = !datestat.id ? pointsEtalon[val].area : datestat.area;
+      clinchSu = !datestat.id ? pointsEtalon[val].subarea : datestat.subarea;
+      clinchId = !datestat.id ? pointsEtalon[val].id : datestat.id;
     }
     return clinch;
   };
@@ -294,7 +299,14 @@ const StatisticsNew = (props: {
           </>
           {clinch && (
             <>
-              {ErrorMessage("Некорректная структура статистики по данному ХТ")}
+              {ErrorMessage(
+                "Некорректная структура статистики по перекрёстку " +
+                  clinchAr +
+                  ":" +
+                  clinchSu +
+                  ":" +
+                  clinchId
+              )}
             </>
           )}
         </>

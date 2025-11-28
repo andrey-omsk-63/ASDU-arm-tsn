@@ -11,6 +11,8 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 import { Statistic } from "../../interfaceStat.d";
 
+import { DatasForStat } from "../../AppConst";
+
 import { KnobBatCl, OptionsForLine } from "../../AppServiceFunctions";
 
 import { head } from "./StatisticsNew";
@@ -375,15 +377,9 @@ const StatisticXTNew = (props: {
       };
       let datas: any = [];
       for (let j = 0; j < kolDatas; j++) {
-        datas.push({
-          ch: j + 1,
-          st: 0,
-          in: 0,
-          sp: 0,
-          d: 0,
-          o: 0,
-          g: 0,
-        });
+        let mass = DatasForStat;
+        mass.ch = j + 1;
+        datas.push(mass);
       }
       maskMmatrix.Datas = datas;
       maskMATRIX.Datas = datas;
@@ -405,12 +401,9 @@ const StatisticXTNew = (props: {
         if (inTime % step === 0) {
           let numInMatrix = inTime / step - 1;
           for (let j = 0; j < points[areaId].Statistics[i].Datas.length; j++) {
-            matrix[numInMatrix].Datas[j] = {
-              ...points[areaId].Statistics[i].Datas[j],
-            };
-            MATRIX[numInMatrix].Datas[j] = {
-              ...points[areaId].Statistics[i].Datas[j],
-            };
+            let rec = points[areaId].Statistics[i].Datas[j];
+            matrix[numInMatrix].Datas[j] = { ...rec };
+            MATRIX[numInMatrix].Datas[j] = { ...rec };
           }
           matrix[numInMatrix].Avail = true;
           MATRIX[numInMatrix].Avail = true;
