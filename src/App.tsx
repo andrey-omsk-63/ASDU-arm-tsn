@@ -455,8 +455,6 @@ const App = () => {
           }
         }
         goodDate = key < 0 ? [] : massGoodDate[key];
-        //console.log("!!!!!!:", datestat.area, datestat.id);
-        //console.log("Key:", key, massKeyGoodDate, massGoodDate);
       }
       return <>{InputerDate(valueDate, handleChangeDP, goodDate)}</>;
     }, []);

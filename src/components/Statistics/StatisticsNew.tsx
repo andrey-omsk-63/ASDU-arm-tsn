@@ -13,8 +13,6 @@ import StatisticXTNew from "./StatisticXTNew";
 import { NameVertex, MakeDateRus } from "../../AppServiceFunctions";
 import { SendSocketgetStatisticsList } from "../../AppServiceFunctions";
 
-//import { massKeyGoodDate } from "../../App"; // массив ключей area-id для 'хороших дат'
-
 import { styleSt1, styleSt11, styleSt2 } from "./StatisticXTStyle";
 import { styleHint } from "./StatisticXTStyle";
 import { styleStError } from "../../AppStyle";
@@ -251,10 +249,9 @@ const StatisticsNew = (props: {
       if (pointsEtalon.length === 0) {
         clinch = true;
       } else {
-        if (pointsEtalon[val].Statistics) {
+        if (pointsEtalon[val].Statistics)
           for (let i = 0; i < pointsEtalon[val].Statistics.length; i++)
             if (pointsEtalon[val].Statistics[i].Datas === null) clinch = true;
-        }
       }
     }
     if (clinch) {

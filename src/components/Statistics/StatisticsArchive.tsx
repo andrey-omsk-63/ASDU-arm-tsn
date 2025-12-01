@@ -31,7 +31,6 @@ let oldDate = "";
 const StatisticsArchive = (props: {
   open: boolean;
   points: Statistic[];
-  //region: string;
   date: string;
   interval: number;
   func: any;
@@ -273,7 +272,7 @@ const StatisticsArchive = (props: {
         <>
           <MainMenu />
           <>
-            {pointsEtalon[value].Statistics === null ? (
+            {pointsEtalon[tekValue].Statistics === null ? (
               <>{handleChangeNull()}</>
             ) : (
               <>{StatisticsOutput()}</>
