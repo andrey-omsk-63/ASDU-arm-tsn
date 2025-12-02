@@ -391,9 +391,6 @@ const App = () => {
       datestat.subarea = data.data.statistics[0].subarea;
       datestat.id = ID = data.data.statistics[0].id;
       dispatch(statsaveCreate(datestat));
-
-      console.log("9###:", datestat);
-
       SetStatisticsIntervalNow(data.data.statistics);
       setIsOpenSt(true);
     });

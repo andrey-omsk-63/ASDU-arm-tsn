@@ -20,7 +20,7 @@ import { styleStError } from "../../AppStyle";
 import { Statistic } from "../../interfaceStat.d";
 
 let tekValue = 0;
-let pointsEtalon: Statistic[];
+let pointsEtalon: Statistic[] = [];
 let flagEtalon = true;
 let massInterval: any = [];
 export let head = "";
@@ -72,6 +72,14 @@ const StatisticsArchive = (props: {
     flagEtalon = true;
   }, [reGion, props.date]);
 
+  const IdentifyTekValue = () => {
+    let pEt = pointsEtalon;
+    for (let i = 0; i < pointsEtalon.length; i++) {
+      if (pEt[i].area === datestat.tekArea && pEt[i].id === datestat.tekId)
+        tekValue = i;
+    }
+  };
+
   if (isOpen && flagEtalon) {
     pointsEtalon = points;
     flagEtalon = false;
@@ -83,26 +91,16 @@ const StatisticsArchive = (props: {
     points = [];
     tekValue = 0;
 
-    if (datestat.tekArea && datestat.tekId) {
-      for (let i = 0; i < pointsEtalon.length; i++) {
-        if (
-          pointsEtalon[i].area === datestat.tekArea &&
-          pointsEtalon[i].id === datestat.tekId
-        )
-          tekValue = i;
-      }
-    }
+    //console.log("Points:", points, pointsEtalon);
+
+    datestat.tekArea && datestat.tekId && IdentifyTekValue();
   } else if (massInterval.length) massInterval[tekValue] = props.interval;
 
-  if (datestat.tekArea && datestat.tekId && pointsEtalon) {
+  //console.log("PointsEt:", points, pointsEtalon);
+
+  if (datestat.tekArea && datestat.tekId) {
     tekValue = 0;
-    for (let i = 0; i < pointsEtalon.length; i++) {
-      if (
-        pointsEtalon[i].area === datestat.tekArea &&
-        pointsEtalon[i].id === datestat.tekId
-      )
-        tekValue = i;
-    }
+    IdentifyTekValue();
   }
 
   // отправка запросов на получение 'хороших дат' для каждого id
@@ -231,10 +229,9 @@ const StatisticsArchive = (props: {
         clinch = true;
       } else {
         let val = tekValue !== value ? tekValue : value;
-        if (pointsEtalon[val].Statistics) {
+        if (pointsEtalon[val].Statistics)
           for (let i = 0; i < pointsEtalon[val].Statistics.length; i++)
             if (pointsEtalon[val].Statistics[i].Datas === null) clinch = true;
-        }
       }
     }
     if (clinch) {

@@ -20,7 +20,7 @@ import { styleStError } from "../../AppStyle";
 import { Statistic } from "../../interfaceStat.d";
 
 let tekValue = 0;
-let pointsEtalon: Statistic[];
+let pointsEtalon: Statistic[] = [];
 let flagEtalon = true;
 let massInterval: any = [];
 let massIntervalEt: any = [];
@@ -67,6 +67,7 @@ const StatisticsNew = (props: {
   }, [reGion]);
 
   if (isOpen && flagEtalon) {
+    //pointsEtalon = JSON.parse(JSON.stringify(points));
     pointsEtalon = points;
     flagEtalon = false;
     for (let i = 0; i < points.length; i++) {
@@ -113,12 +114,10 @@ const StatisticsNew = (props: {
   }
 
   if (datestat.tekArea && datestat.tekId) {
+    let pEt = pointsEtalon;
     tekValue = 0;
     for (let i = 0; i < pointsEtalon.length; i++) {
-      if (
-        pointsEtalon[i].area === datestat.tekArea &&
-        pointsEtalon[i].id === datestat.tekId
-      )
+      if (pEt[i].area === datestat.tekArea && pEt[i].id === datestat.tekId)
         tekValue = i;
     }
   }
