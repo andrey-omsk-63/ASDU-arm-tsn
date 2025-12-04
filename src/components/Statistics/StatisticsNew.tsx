@@ -25,11 +25,7 @@ let flagEtalon = true;
 let massInterval: any = [];
 let massIntervalEt: any = [];
 export let head = "";
-
 let nameHint = "";
-let clinchAr = 0;
-let clinchSu = 0;
-let clinchId = 0;
 
 const StatisticsNew = (props: {
   open: boolean;
@@ -67,8 +63,7 @@ const StatisticsNew = (props: {
   }, [reGion]);
 
   if (isOpen && flagEtalon) {
-    //pointsEtalon = JSON.parse(JSON.stringify(points));
-    pointsEtalon = points;
+    pointsEtalon = JSON.parse(JSON.stringify(points));
     flagEtalon = false;
     for (let i = 0; i < points.length; i++) {
       let rec1 = points[i].Statistics ? points[i].Statistics[0].TLen : 5;
@@ -256,9 +251,6 @@ const StatisticsNew = (props: {
     if (clinch) {
       datestat.stat = [];
       dispatch(statsaveCreate(datestat));
-      clinchAr = !datestat.id ? pointsEtalon[val].area : datestat.area;
-      clinchSu = !datestat.id ? pointsEtalon[val].subarea : datestat.subarea;
-      clinchId = !datestat.id ? pointsEtalon[val].id : datestat.id;
     }
     return clinch;
   };
@@ -296,12 +288,7 @@ const StatisticsNew = (props: {
           {clinch && (
             <>
               {ErrorMessage(
-                "Некорректная структура статистики по перекрёстку " +
-                  clinchAr +
-                  ":" +
-                  clinchSu +
-                  ":" +
-                  clinchId
+                "Некорректная структура статистики по данному перекрёстку"
               )}
             </>
           )}

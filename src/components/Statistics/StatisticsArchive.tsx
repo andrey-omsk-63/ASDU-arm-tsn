@@ -81,7 +81,7 @@ const StatisticsArchive = (props: {
   };
 
   if (isOpen && flagEtalon) {
-    pointsEtalon = points;
+    pointsEtalon = JSON.parse(JSON.stringify(points));
     flagEtalon = false;
     massInterval = [];
     for (let i = 0; i < points.length; i++) {
@@ -90,13 +90,8 @@ const StatisticsArchive = (props: {
     }
     points = [];
     tekValue = 0;
-
-    //console.log("Points:", points, pointsEtalon);
-
     datestat.tekArea && datestat.tekId && IdentifyTekValue();
   } else if (massInterval.length) massInterval[tekValue] = props.interval;
-
-  //console.log("PointsEt:", points, pointsEtalon);
 
   if (datestat.tekArea && datestat.tekId) {
     tekValue = 0;
@@ -277,7 +272,7 @@ const StatisticsArchive = (props: {
           </>
           {clinch && (
             <Box sx={styleStError}>
-              <h1>Некорректная структура статистики по данному ХТ</h1>
+              <h1>Некорректная структура статистики по данному перекрёстку</h1>
             </Box>
           )}
         </>
