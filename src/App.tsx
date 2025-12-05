@@ -105,7 +105,7 @@ let flagEtalonInf = true;
 export let pointsTFL: Tflight[];
 const date = new Date();
 const tekYear = date.getFullYear();
-let formSett = MakeDate(date);
+export let formSett = MakeDate(date);
 let formSettToday = MakeDate(date);
 let formSettOld = MakeDate(date);
 
@@ -706,7 +706,6 @@ const App = () => {
                     <StatisticsNew
                       open={isOpenSt}
                       points={pointsSt}
-                      date={formSett}
                       interval={interval}
                       func={SetIdNow}
                       funcGoodDate={FuncGoodDate}

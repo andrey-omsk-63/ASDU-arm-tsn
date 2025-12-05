@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 
-import { WS, RegionGlob } from "../../App";
+import { WS, RegionGlob, formSett } from "../../App";
 
 import StatisticXTNew from "./StatisticXTNew";
 
@@ -30,7 +30,7 @@ let nameHint = "";
 const StatisticsNew = (props: {
   open: boolean;
   points: Statistic[];
-  date: string;
+  //date: string;
   interval: number;
   func: any;
   funcGoodDate: any;
@@ -169,7 +169,7 @@ const StatisticsNew = (props: {
             ":" +
             datestat.id +
             " на " +
-            MakeDateRus(props.date) +
+            MakeDateRus(formSett) +
             " данных по статистике НЕТ"
         )}
       </>
@@ -198,7 +198,7 @@ const StatisticsNew = (props: {
           let nameId = NameVertex(pEt.area, pEt.subarea, pEt.id);
           let alive = pEt.Statistics ? "black" : "red";
           let illum = value === i ? styleSt1(alive) : styleSt11(alive);
-          if (value === i) head = nameId + " за " + MakeDateRus(props.date);
+          if (value === i) head = nameId + " за " + MakeDateRus(formSett);
           labl = pEt.area + ":" + pEt.subarea + ":" + pEt.id;
           resSps.push(
             <Tab

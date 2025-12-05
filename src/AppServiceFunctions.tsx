@@ -78,7 +78,7 @@ export const MakeInterval = (mode: number) => {
 };
 
 export const SendStopDevices = () => {
-  let propsRegion = RegionGlob.toString()
+  let propsRegion = RegionGlob.toString();
   const handleSendOpen = () => {
     if (WS !== null) {
       if (WS.readyState === WebSocket.OPEN) {
@@ -260,11 +260,8 @@ export const InputerDate = (
   );
 };
 
-export const SendSocketgetStatisticsList = (
-  area: string,
-  id: string
-) => {
-  console.log("getStatisticsList:", RegionGlob, area, id);
+export const SendSocketgetStatisticsList = (area: string, id: string) => {
+  console.log("SendStatisticsList:", RegionGlob, area, id);
   let region = RegionGlob.toString();
 
   const handleSendOpen = () => {
