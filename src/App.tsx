@@ -41,6 +41,7 @@ import { dataStatNow } from "./NullStatNow";
 
 export interface Stater {
   area: number;
+  subarea: number;
   id: number;
   data: string;
   time: string;
@@ -62,6 +63,7 @@ export interface Stater {
 
 export let dateStat: Stater = {
   area: 0,
+  subarea: 0,
   id: 0,
   data: MakeDate(new Date()),
   time: "24:00",
