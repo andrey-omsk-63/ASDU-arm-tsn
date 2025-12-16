@@ -158,22 +158,19 @@ const StatisticsNew = (props: {
   const handleChangeNull = () => {
     datestat.stat = [];
     dispatch(statsaveCreate(datestat));
+    let soob = datestat.id
+      ? "По перекрёстку " +
+        datestat.area +
+        ":" +
+        datestat.subarea +
+        ":" +
+        datestat.id +
+        " на " +
+        MakeDateRus(formSett) +
+        " данных по статистике НЕТ"
+      : "За предыдущий месяц данных по статистика НЕТ";
 
-    return (
-      <>
-        {ErrorMessage(
-          "По перекрёстку " +
-            datestat.area +
-            ":" +
-            datestat.subarea +
-            ":" +
-            datestat.id +
-            " на " +
-            MakeDateRus(formSett) +
-            " данных по статистике НЕТ"
-        )}
-      </>
-    );
+    return <>{ErrorMessage(soob)}</>;
   };
 
   const MainMenu = () => {
