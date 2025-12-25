@@ -258,10 +258,10 @@ const App = () => {
       console.log("WS.current.onopen:", event);
     };
     WS.onclose = function (event: any) {
-      //console.log("WS.current.onclose:", event);
+      console.log("WS.current.onclose:", event);
     };
     WS.onerror = function (event: any) {
-      //console.log("WS.current.onerror:", event);
+      console.log("WS.current.onerror:", event);
     };
     WS.onmessage = function (event: any) {
       let allData = JSON.parse(event.data);
