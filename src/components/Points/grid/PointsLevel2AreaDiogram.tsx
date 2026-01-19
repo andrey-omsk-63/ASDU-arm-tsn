@@ -214,7 +214,8 @@ const PointsLevel2AreaDiogram = (props: {
     let resStr: any = [];
     const dlBlok = (window.innerWidth / 12.55) * 9;
     let elem = points.xctrls[props.crossroad].Calculates;
-    let stylePointInf1 = PointInfoDirRotStyle("5.2vh", "-67px", 17);
+    //let stylePointInf1 = PointInfoDirRotStyle("5.2vh", "-67px", 17);
+    let stylePointInf1 = PointInfoDirRotStyle("-79.6vh", "-67px", 17);
     let mass1 = "";
     let mass2 = "";
     for (let i = 0; i < elem.length; i++) {
@@ -236,7 +237,8 @@ const PointsLevel2AreaDiogram = (props: {
       </Grid>
     );
     let ml01 = dlBlok - 129 + "px";
-    let stylePointInf2 = PointInfoDirStyle("84.2vh", ml01, 16);
+    //let stylePointInf2 = PointInfoDirStyle("84.2vh", ml01, 16);
+    let stylePointInf2 = PointInfoDirStyle("-0.8vh", ml01, 16);
     resStr.push(
       <Grid key={Math.random()} item sx={stylePointInf2}>
         Обратный {"["}
