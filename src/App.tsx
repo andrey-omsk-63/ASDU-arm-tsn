@@ -315,7 +315,7 @@ const App = () => {
           SetStatisticsIntervalNow(st);
           nullNewStatistics = false;
           !isOpenSt && setIsOpenSt(true);
-          if (!datestat.id) {
+          if (!datestat.id && data.statistics !== null) {
             datestat.area = AREA = data.statistics[0].area; // начало работы
             datestat.subarea = data.statistics[0].subarea;
             datestat.id = ID = data.statistics[0].id;

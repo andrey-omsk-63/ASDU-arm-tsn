@@ -232,7 +232,7 @@ const PointsLevel2Calc = (props: {
           stroka += kakchestvo + ";\n";
           datestat.xtCsv += stroka;
 
-          stroka = TimeStr(pointer[namer][i].Time) + " ";
+          stroka = TimeStr(pointer[namer][i].Time) + " "; // генерация строки для файла печати
           let st = pointer[namer][i].Value[0].toString();
           let stt = "     " + st;
           stroka += stt.slice(st.length) + "  ";
@@ -266,11 +266,8 @@ const PointsLevel2Calc = (props: {
             </Grid>
           );
         }
-
         datestat.data = new Date().toLocaleDateString();
         datestat.time = new Date().toLocaleTimeString().slice(0, -3);
-        //datestat.area = points.area;
-        //datestat.id = points.subarea;
         datestat.xtName = namer;
         datestat.xtGraf = printRef;
         dispatch(statsaveCreate(datestat));
