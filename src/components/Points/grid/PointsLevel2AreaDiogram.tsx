@@ -30,7 +30,8 @@ const PointsLevel2AreaDiogram = (props: {
   const xtProps = props.xtt;
   const points = props.xctrll[xtProps];
   const crRoad = props.crossroad;
-  const namer = points.xctrls[props.crossroad].name;
+  const pointsXctrls = points.xctrls[crRoad];
+  const namer = pointsXctrls.name;
   const pointer = points.results;
 
   const colorsGraf = [
@@ -62,12 +63,12 @@ const PointsLevel2AreaDiogram = (props: {
   const [openLoader, setOpenLoader] = React.useState(false);
   const [pictInfo, setPictInfo] = React.useState(false);
 
-  const horizon = points.xctrls[crRoad].right;
-  const vertical = points.xctrls[crRoad].left;
+  const horizon = pointsXctrls.right;
+  const vertical = pointsXctrls.left;
   const steepHorizon = 12 / horizon;
   const steepVertical = 85.6 / vertical;
   let matrix: string[][] = [[]];
-  let scale = points.xctrls[crRoad].StrategyA.length > 4 ? 2 : 1;
+  let scale = pointsXctrls.StrategyA.length > 4 ? 2 : 1;
   scale = horizon > 999 || vertical > 999 ? 4 : scale;
 
   let coler = "red";
@@ -89,7 +90,7 @@ const PointsLevel2AreaDiogram = (props: {
   }
 
   const MakeMatrix = () => {
-    let pStA = points.xctrls[crRoad].StrategyA;
+    let pStA = pointsXctrls.StrategyA;
 
     for (let j = 0; j < vertical + 1; j += scale) {
       matrix[j] = [];
@@ -142,7 +143,7 @@ const PointsLevel2AreaDiogram = (props: {
     return (
       <>
         {masStr.map((masstr: any, idx: number) => {
-          let xss = steepHorizon * scale * masstr;
+          const xss = steepHorizon * scale * masstr;
           const stylePict = {
             backgroundColor: masCol[idx],
             height: String(steepVertical * scale) + "vh",
@@ -162,7 +163,7 @@ const PointsLevel2AreaDiogram = (props: {
       resSps.push(
         <Grid key={j} container>
           {PointsXt112Comp1Tab4StrOptim(j)}
-        </Grid>
+        </Grid>,
       );
     }
     return resSps;
@@ -201,7 +202,7 @@ const PointsLevel2AreaDiogram = (props: {
             resStrr.push(
               <Grid key={i} container>
                 {OutputPict(i, pv, ph, PictInfo, setPictInfo, flagEnd)}
-              </Grid>
+              </Grid>,
             );
           }
         }
@@ -213,7 +214,7 @@ const PointsLevel2AreaDiogram = (props: {
   const PointInfoStr = () => {
     let resStr: any = [];
     const dlBlok = (window.innerWidth / 12.55) * 9;
-    let elem = points.xctrls[props.crossroad].Calculates;
+    const elem = pointsXctrls.Calculates;
     let stylePointInf1 = PointInfoDirRotStyle("-79.6vh", "-67px", 17);
     let mass1 = "";
     let mass2 = "";
@@ -233,7 +234,7 @@ const PointsLevel2AreaDiogram = (props: {
           <b>{mass1}</b>
           {"]"}
         </Box>
-      </Grid>
+      </Grid>,
     );
     let ml01 = dlBlok - 129 + "px";
     let stylePointInf2 = PointInfoDirStyle("-0.8vh", ml01, 16);
@@ -242,7 +243,7 @@ const PointsLevel2AreaDiogram = (props: {
         Обратный {"["}
         <b>{mass2}</b>
         {"]"}
-      </Grid>
+      </Grid>,
     );
 
     return resStr;
@@ -281,9 +282,9 @@ const PointsLevel2AreaDiogram = (props: {
                   pvGl,
                   phGl,
                   pointer[namer][IDX],
-                  points.xctrls[crRoad],
+                  pointsXctrls,
                   0,
-                  points
+                  points,
                 )}
               </>
             )}
