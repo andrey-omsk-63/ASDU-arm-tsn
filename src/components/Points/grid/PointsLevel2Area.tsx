@@ -400,3 +400,4 @@ const PointsLevel2Area = (props: {
 };
 
 export default PointsLevel2Area;
+//console.log

@@ -322,7 +322,7 @@ const PointsLevel2BazaDiogram = (props: {
   return (
     <>
       <Grid container sx={{ height: "85.8vh", position: "relative" }}>
-        {openLoader && <Dinama key={Math.random()} />}
+        {openLoader && <Dinama />}
         {!openLoader && (
           <>
             {PointsXt112Comp1Tab4(props.update)}
