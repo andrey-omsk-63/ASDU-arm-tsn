@@ -4,7 +4,6 @@ import { maskpointCreate } from "./../../../redux/actions";
 
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
@@ -75,11 +74,11 @@ const PointsLevel2Baza = (props: {
   const [openSetStr, setOpenSetStr] = React.useState(false);
   const [points, setPoints] = React.useState(pointsEt);
   const [formName, setFormName] = React.useState(
-    pointsEt.xctrls[crossRoad].name
+    pointsEt.xctrls[crossRoad].name,
   );
   const [maxLeft, setMaxLeft] = React.useState(pointsEt.xctrls[crossRoad].left);
   const [maxRight, setMaxRight] = React.useState(
-    pointsEt.xctrls[crossRoad].right
+    pointsEt.xctrls[crossRoad].right,
   );
   const [yellow, setYellow] = React.useState(pointsEt.yellow.make);
   const [tmStart, setTmStart] = React.useState(pointsEt.yellow.start);
@@ -331,14 +330,14 @@ const PointsLevel2Baza = (props: {
               valuen2,
               hChange2,
               hBlur2,
-              styleInpArg
+              styleInpArg,
             )}
             {Inputer(
               "Максимум обратного",
               valuen3,
               hChange3,
               hBlur3,
-              styleInpArg
+              styleInpArg,
             )}
             {InputTimeAndMode("Работа по НК и СК", InputerMode)}
             {InputTimeAndMode("Начало", FuncStart)}
@@ -711,7 +710,7 @@ const PointsLevel2Baza = (props: {
       )}
       {flagExit && <>{WorkMenuEdit(9, "Выйти без сохранения", StopEdit)}</>}
 
-      <Stack direction="row">
+      <Grid container>
         <Grid item xs={4} sx={{ height: "85.8vh" }}>
           <PointsLevel2BazaTab1 />
           <Grid container>
@@ -738,7 +737,7 @@ const PointsLevel2Baza = (props: {
             />
           )}
         </Grid>
-      </Stack>
+      </Grid>
       {openSetName && <SetName />}
       {openSetStr && <SetStr nom={nomStr} setPoint={props.setPoint} />}
     </>

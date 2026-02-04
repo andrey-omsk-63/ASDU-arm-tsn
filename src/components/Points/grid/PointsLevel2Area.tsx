@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { maskpointCreate } from "./../../../redux/actions";
 
 import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
@@ -305,7 +304,7 @@ const PointsLevel2Area = (props: {
             JSON.stringify({
               type: "changeXctrl",
               data: maskpoint.pointForRedax,
-            })
+            }),
           );
         } else {
           setTimeout(() => {
@@ -362,7 +361,7 @@ const PointsLevel2Area = (props: {
         </Grid>
       )}
 
-      <Stack direction="row">
+      <Grid container>
         <Grid item xs={3} sx={{ height: "85.8vh", border: 0 }}>
           <Grid container sx={{ height: "20vh", cursor: "default" }}>
             <Grid item xs={4.3}>
@@ -394,7 +393,7 @@ const PointsLevel2Area = (props: {
             />
           )}
         </Grid>
-      </Stack>
+      </Grid>
       {openSetStr && <SetStr nom={nomStr} />}
     </>
   );

@@ -759,7 +759,7 @@ export const OutputPict = (
 
   return (
     <Button
-      //key={Math.random()}
+      key={Math.random()}
       sx={styleBox}
       onMouseEnter={() => PictInfo(idx, pv, ph)}
       onMouseLeave={() => setPictInfo(false)}

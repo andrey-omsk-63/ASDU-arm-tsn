@@ -30,8 +30,8 @@ const PointsLevel2AreaDiogram = (props: {
   const xtProps = props.xtt;
   const points = props.xctrll[xtProps];
   const crRoad = props.crossroad;
-  const pointsXctrls = points.xctrls[crRoad];
-  const namer = pointsXctrls.name;
+  //const pointsXctrls = points.xctrls[crRoad];
+  const namer = points.xctrls[crRoad].name;
   const pointer = points.results;
 
   const colorsGraf = [
@@ -63,12 +63,12 @@ const PointsLevel2AreaDiogram = (props: {
   const [openLoader, setOpenLoader] = React.useState(false);
   const [pictInfo, setPictInfo] = React.useState(false);
 
-  const horizon = pointsXctrls.right;
-  const vertical = pointsXctrls.left;
+  const horizon = points.xctrls[crRoad].right;
+  const vertical = points.xctrls[crRoad].left;
   const steepHorizon = 12 / horizon;
   const steepVertical = 85.6 / vertical;
   let matrix: string[][] = [[]];
-  let scale = pointsXctrls.StrategyA.length > 4 ? 2 : 1;
+  let scale = points.xctrls[crRoad].StrategyA.length > 4 ? 2 : 1;
   scale = horizon > 999 || vertical > 999 ? 4 : scale;
 
   let coler = "red";
@@ -90,7 +90,7 @@ const PointsLevel2AreaDiogram = (props: {
   }
 
   const MakeMatrix = () => {
-    let pStA = pointsXctrls.StrategyA;
+    let pStA = points.xctrls[crRoad].StrategyA;
 
     for (let j = 0; j < vertical + 1; j += scale) {
       matrix[j] = [];
@@ -214,7 +214,7 @@ const PointsLevel2AreaDiogram = (props: {
   const PointInfoStr = () => {
     let resStr: any = [];
     const dlBlok = (window.innerWidth / 12.55) * 9;
-    const elem = pointsXctrls.Calculates;
+    const elem = points.xctrls[crRoad].Calculates;
     let stylePointInf1 = PointInfoDirRotStyle("-79.6vh", "-67px", 17);
     let mass1 = "";
     let mass2 = "";
@@ -282,7 +282,7 @@ const PointsLevel2AreaDiogram = (props: {
                   pvGl,
                   phGl,
                   pointer[namer][IDX],
-                  pointsXctrls,
+                  points.xctrls[crRoad],
                   0,
                   points,
                 )}

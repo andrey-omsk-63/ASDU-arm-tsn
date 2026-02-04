@@ -149,7 +149,7 @@ const App = () => {
   //========================================================
   const [pointsXctrl, setPointsXctrl] = React.useState<Array<XctrlInfo>>([]);
   const [pointsReg, setPointsReg] = React.useState<RegionInfo>(
-    {} as RegionInfo
+    {} as RegionInfo,
   );
   const [regionGlob, setRegionGlob] = React.useState(0);
   const [isOpenInf, setIsOpenInf] = React.useState(false);
@@ -509,7 +509,7 @@ const App = () => {
       currencies.push({ value: massKey[i], label: massDat[i] });
     if (!interval) interval = 5;
     const [currency, setCurrency] = React.useState(
-      massKey[massDat.indexOf(interval.toString())]
+      massKey[massDat.indexOf(interval.toString())],
     );
 
     const ChangeInt = (event: any) => {

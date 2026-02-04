@@ -31,8 +31,8 @@ const PointsLevel2BazaDiogram = (props: {
 }) => {
   const points = props.xctrll[props.xtt];
   const crRoad = props.crossroad;
-  const pointsXctrls = points.xctrls[crRoad];
-  const namer = pointsXctrls.name;
+  //const pointsXctrls = points.xctrls[crRoad];
+  const namer = points.xctrls[crRoad].name;
   const pointer = points.results;
 
   const colorsGraf = [
@@ -63,11 +63,11 @@ const PointsLevel2BazaDiogram = (props: {
 
   const [openLoader, setOpenLoader] = React.useState(false);
 
-  let dlMas = pointsXctrls.StrategyB.length;
-  const horizonLimit = pointsXctrls.StrategyB[dlMas - 1].xright;
-  const verticalLimit = pointsXctrls.StrategyB[dlMas - 1].xleft;
-  const horizon = pointsXctrls.right;
-  const vertical = pointsXctrls.left;
+  let dlMas = points.xctrls[crRoad].StrategyB.length;
+  const horizonLimit = points.xctrls[crRoad].StrategyB[dlMas - 1].xright;
+  const verticalLimit = points.xctrls[crRoad].StrategyB[dlMas - 1].xleft;
+  const horizon = points.xctrls[crRoad].right;
+  const vertical = points.xctrls[crRoad].left;
 
   const steepHorizon = 12 / horizon;
   const steepVertical = 85.9 / vertical;
@@ -83,8 +83,8 @@ const PointsLevel2BazaDiogram = (props: {
 
   massRatio = [];
   for (let i = 0; i < dlMas; i++) {
-    let vert = pointsXctrls.StrategyB[i].xleft; // прямое
-    let hor = pointsXctrls.StrategyB[i].xright; // обратное
+    let vert = points.xctrls[crRoad].StrategyB[i].xleft; // прямое
+    let hor = points.xctrls[crRoad].StrategyB[i].xright; // обратное
     massRatio.push(vert / hor);
   }
 
@@ -107,7 +107,7 @@ const PointsLevel2BazaDiogram = (props: {
     let luchP = 1;
     let luchO = 1;
     let coler = "red";
-    let pStB = pointsXctrls.StrategyB;
+    let pStB = points.xctrls[crRoad].StrategyB;
 
     const MakeMatrixColor = (num: number, i: number, j: number) => {
       luchO = pStB[num].vleft * massRatio[num];
@@ -204,17 +204,17 @@ const PointsLevel2BazaDiogram = (props: {
 
   const PointInfoStr = () => {
     let resStr = [];
-    let lengStrategyB = pointsXctrls.StrategyB.length;
+    let lengStrategyB = points.xctrls[crRoad].StrategyB.length;
 
     for (let i = 0; i < lengStrategyB; i++) {
-      let vl01 = vertical / pointsXctrls.StrategyB[i].xleft;
+      let vl01 = vertical / points.xctrls[crRoad].StrategyB[i].xleft;
       let mt01 = "-" + 86.3 / vl01 + "vh";
-      let hl01 = horizon / pointsXctrls.StrategyB[i].xright;
+      let hl01 = horizon / points.xctrls[crRoad].StrategyB[i].xright;
       let ml01 = dlBlok / hl01 - 67 + "px";
       let title =
-        pointsXctrls.StrategyB[i].xleft +
+        points.xctrls[crRoad].StrategyB[i].xleft +
         "x" +
-        pointsXctrls.StrategyB[i].xright;
+        points.xctrls[crRoad].StrategyB[i].xright;
 
       let stylePointInf0 = PointInfoStrStyle(mt01, ml01);
 
@@ -224,7 +224,7 @@ const PointsLevel2BazaDiogram = (props: {
         </Grid>,
       );
     }
-    let elem = pointsXctrls.Calculates;
+    let elem = points.xctrls[crRoad].Calculates;
     let stylePointInf1 = PointInfoDirRotStyle("-80.5vh", "-67px", 17);
     let ml01 = dlBlok - 130 + "px";
     let stylePointInf2 = PointInfoDirStyle("-1.6vh", ml01, 16);
@@ -290,7 +290,9 @@ const PointsLevel2BazaDiogram = (props: {
           let flagEnd = i === I ? true : false;
           if (pointer[namer][i].Value[0] || pointer[namer][i].Value[1])
             resStrr.push(
-              <>{OutputPict(i, pv, ph, PictInfo, setPictInfo, flagEnd)}</>,
+              <Grid key={i} container>
+                {OutputPict(i, pv, ph, PictInfo, setPictInfo, flagEnd)}
+              </Grid>,
             );
         }
       }
@@ -320,7 +322,7 @@ const PointsLevel2BazaDiogram = (props: {
   return (
     <>
       <Grid container sx={{ height: "85.8vh", position: "relative" }}>
-        {openLoader && <Dinama />}
+        {openLoader && <Dinama key={Math.random()} />}
         {!openLoader && (
           <>
             {PointsXt112Comp1Tab4(props.update)}
@@ -331,7 +333,7 @@ const PointsLevel2BazaDiogram = (props: {
                   pvGl,
                   phGl,
                   pointer[namer][IDX],
-                  pointsXctrls,
+                  points.xctrls[crRoad],
                   1,
                   points,
                 )}
