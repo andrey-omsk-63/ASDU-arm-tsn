@@ -33,7 +33,7 @@ const PointsLevel2BazaDiogram = (props: {
   const crRoad = props.crossroad;
   //const pointsXctrls = points.xctrls[crRoad];
   const namer = props.xctrll[props.xtt].xctrls[crRoad].name;
-  const pointer = props.xctrll[props.xtt].results;
+  const pointerr = props.xctrll[props.xtt].results;
 
   const colorsGraf = [
     "#d6bf36", // хаки
@@ -281,18 +281,18 @@ const PointsLevel2BazaDiogram = (props: {
 
   const OutputerPict = (update: boolean) => {
     let resStrr = [];
-    if (pointer !== null) {
-      if (pointer[namer]) {
+    if (pointerr !== null) {
+      if (pointerr[namer]) {
         let I = 0;
-        for (let i = 0; i < pointer[namer].length; i++)
-          if (pointer[namer][i].Value[0] || pointer[namer][i].Value[1]) I = i;
+        for (let i = 0; i < pointerr[namer].length; i++)
+          if (pointerr[namer][i].Value[0] || pointerr[namer][i].Value[1]) I = i;
         let prpv = vertical / 100;
         let prph = horizon / 100;
-        for (let i = 0; i < pointer[namer].length; i++) {
-          let pv = 100 - pointer[namer][i].Value[0] / prpv;
-          let ph = pointer[namer][i].Value[1] / prph;
+        for (let i = 0; i < pointerr[namer].length; i++) {
+          let pv = 100 - pointerr[namer][i].Value[0] / prpv;
+          let ph = pointerr[namer][i].Value[1] / prph;
           let flagEnd = i === I ? true : false;
-          if (pointer[namer][i].Value[0] || pointer[namer][i].Value[1])
+          if (pointerr[namer][i].Value[0] || pointerr[namer][i].Value[1])
             resStrr.push(
               <Grid key={i} container>
                 {OutputPict(i, pv, ph, PictInfo, setPictInfo, flagEnd)}
@@ -336,7 +336,7 @@ const PointsLevel2BazaDiogram = (props: {
                 {PictInfoBox(
                   pvGl,
                   phGl,
-                  pointer[namer][IDX],
+                  pointerr[namer][IDX],
                   props.xctrll[props.xtt].xctrls[crRoad],
                   1,
                   props.xctrll[props.xtt],

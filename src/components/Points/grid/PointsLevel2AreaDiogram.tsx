@@ -32,7 +32,7 @@ const PointsLevel2AreaDiogram = (props: {
   const crRoad = props.crossroad;
   //const pointsXctrls = points.xctrls[crRoad];
   const namer = props.xctrll[xtProps].xctrls[crRoad].name;
-  const pointer = props.xctrll[xtProps].results;
+  const pointerr = props.xctrll[xtProps].results;
 
   const colorsGraf = [
     "#d6bf36", // хаки
@@ -187,18 +187,18 @@ const PointsLevel2AreaDiogram = (props: {
 
   const OutputerPict = (update: boolean) => {
     let resStrr = [];
-    if (pointer !== null) {
-      if (pointer[namer]) {
+    if (pointerr !== null) {
+      if (pointerr[namer]) {
         let I = 0;
-        for (let i = 0; i < pointer[namer].length; i++)
-          if (pointer[namer][i].Value[0] || pointer[namer][i].Value[1]) I = i;
-        for (let i = 0; i < pointer[namer].length; i++) {
+        for (let i = 0; i < pointerr[namer].length; i++)
+          if (pointerr[namer][i].Value[0] || pointerr[namer][i].Value[1]) I = i;
+        for (let i = 0; i < pointerr[namer].length; i++) {
           let prpv = vertical / 100;
-          let pv = 100 - pointer[namer][i].Value[0] / prpv;
+          let pv = 100 - pointerr[namer][i].Value[0] / prpv;
           let prph = horizon / 100;
-          let ph = pointer[namer][i].Value[1] / prph;
+          let ph = pointerr[namer][i].Value[1] / prph;
           let flagEnd = i === I ? true : false;
-          if (pointer[namer][i].Value[0] || pointer[namer][i].Value[1]) {
+          if (pointerr[namer][i].Value[0] || pointerr[namer][i].Value[1]) {
             resStrr.push(
               <Grid key={i} container>
                 {OutputPict(i, pv, ph, PictInfo, setPictInfo, flagEnd)}
@@ -281,7 +281,7 @@ const PointsLevel2AreaDiogram = (props: {
                 {PictInfoBox(
                   pvGl,
                   phGl,
-                  pointer[namer][IDX],
+                  pointerr[namer][IDX],
                   props.xctrll[xtProps].xctrls[crRoad],
                   0,
                   props.xctrll[xtProps],

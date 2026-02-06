@@ -76,19 +76,19 @@ const PointsLevel2Calc = (props: {
   if (!points.release && points.switch) statusXT = true; // исполнение выкл и расчёт вкл
 
   let namer = points.xctrls[props.crossroad].name;
-  let pointer = points.results;
+  let pointerr = points.results;
   let extDesc: any = points.extdesc;
   if (extDesc === undefined)
     extDesc = new Array(16).fill("поменяйте структуру");
 
   if (datestat.xttData !== MakeDate(new Date())) {
-    pointer = datestat.result;
+    pointerr = datestat.result;
     if (debug) namer = "Без имени_12.09.2022_10-12-57";
   }
 
   React.useEffect(() => {
-    if (pointer !== null) props.saveXt(true);
-  }, [pointer, props]);
+    if (pointerr !== null) props.saveXt(true);
+  }, [pointerr, props]);
 
   const labels: string[] = [];
   let data: DataGl = {
@@ -114,8 +114,8 @@ const PointsLevel2Calc = (props: {
   };
 
   const PointsGraf00 = () => {
-    const colMin = 60 / pointer[namer][0].Time;
-    for (let i = 0; i < pointer[namer].length; i++) {
+    const colMin = 60 / pointerr[namer][0].Time;
+    for (let i = 0; i < pointerr[namer].length; i++) {
       let int = "";
       if (i % colMin === 0) {
         if (i / colMin < 10) int += "0";
@@ -127,23 +127,23 @@ const PointsLevel2Calc = (props: {
     let int = 0;
     //график прямого
     let datas = [];
-    if (pointer[namer].length !== 0)
-      int = pointer[namer][pointer[namer].length - 1].Value[0];
+    if (pointerr[namer].length !== 0)
+      int = pointerr[namer][pointerr[namer].length - 1].Value[0];
     datas.push(int);
-    for (let i = 0; i < pointer[namer].length - 1; i++) {
+    for (let i = 0; i < pointerr[namer].length - 1; i++) {
       int = 0;
-      if (pointer[namer].length !== 0) int = pointer[namer][i].Value[0];
+      if (pointerr[namer].length !== 0) int = pointerr[namer][i].Value[0];
       datas.push(int);
     }
     data.datasets[0].data = datas;
     //график обратного
     datas = [];
-    if (pointer[namer].length !== 0)
-      int = pointer[namer][pointer[namer].length - 1].Value[1];
+    if (pointerr[namer].length !== 0)
+      int = pointerr[namer][pointerr[namer].length - 1].Value[1];
     datas.push(int);
-    for (let i = 0; i < pointer[namer].length - 1; i++) {
+    for (let i = 0; i < pointerr[namer].length - 1; i++) {
       int = 0;
-      if (pointer[namer].length !== 0) int = pointer[namer][i].Value[1];
+      if (pointerr[namer].length !== 0) int = pointerr[namer][i].Value[1];
       datas.push(int);
     }
     data.datasets[1].data = datas;
@@ -191,19 +191,19 @@ const PointsLevel2Calc = (props: {
     let pusto = false;
     let kakchestvo = "";
 
-    if (pointer !== null) {
-      if (pointer[namer].length !== 0) {
-        for (let i = 0; i < pointer[namer].length; i++) {
+    if (pointerr !== null) {
+      if (pointerr[namer].length !== 0) {
+        for (let i = 0; i < pointerr[namer].length; i++) {
           pusto = true;
           kakchestvo = "";
-          let ksdk = pointer[namer][i].Value[2];
+          let ksdk = pointerr[namer][i].Value[2];
           if (ksdk) kakchestvo = extDesc[ksdk - 1];
-          if (!pointer[namer][i].Good) {
+          if (!pointerr[namer][i].Good) {
             pusto = true;
             kakchestvo = "Работа по СК";
           }
 
-          let tim = pointer[namer][i].Time;
+          let tim = pointerr[namer][i].Time;
 
           if (
             points.yellow.make &&
@@ -219,27 +219,27 @@ const PointsLevel2Calc = (props: {
               kakchestvo = "Работа по НК и СК";
           }
           if (
-            !pointer[namer][i].Value[0] &&
-            !pointer[namer][i].Value[1] &&
-            !pointer[namer][i].Value[2]
+            !pointerr[namer][i].Value[0] &&
+            !pointerr[namer][i].Value[1] &&
+            !pointerr[namer][i].Value[2]
           )
             pusto = false;
           // создание символьного файла
-          let stroka = TimeStr(pointer[namer][i].Time) + ";";
-          stroka += pointer[namer][i].Value[0] + ";";
-          stroka += pointer[namer][i].Value[1] + ";";
-          stroka += pointer[namer][i].Value[2] + ";";
+          let stroka = TimeStr(pointerr[namer][i].Time) + ";";
+          stroka += pointerr[namer][i].Value[0] + ";";
+          stroka += pointerr[namer][i].Value[1] + ";";
+          stroka += pointerr[namer][i].Value[2] + ";";
           stroka += kakchestvo + ";\n";
           datestat.xtCsv += stroka;
 
-          stroka = TimeStr(pointer[namer][i].Time) + " "; // генерация строки для файла печати
-          let st = pointer[namer][i].Value[0].toString();
+          stroka = TimeStr(pointerr[namer][i].Time) + " "; // генерация строки для файла печати
+          let st = pointerr[namer][i].Value[0].toString();
           let stt = "     " + st;
           stroka += stt.slice(st.length) + "  ";
-          st = pointer[namer][i].Value[1].toString();
+          st = pointerr[namer][i].Value[1].toString();
           stt = "       " + st;
           stroka += stt.slice(st.length) + "  ";
-          st = pointer[namer][i].Value[2].toString();
+          st = pointerr[namer][i].Value[2].toString();
           stt = "       " + st;
           stroka += stt.slice(st.length) + "  ";
           stt = "                 " + kakchestvo;
@@ -249,16 +249,16 @@ const PointsLevel2Calc = (props: {
           resStr.push(
             <Grid key={i} container sx={{ cursor: "default" }}>
               <Grid xs={1} item sx={!pusto ? styleXTC011 : styleXTC01}>
-                <Box sx={styleXTG101}>{TimeStr(pointer[namer][i].Time)}</Box>
+                <Box sx={styleXTG101}>{TimeStr(pointerr[namer][i].Time)}</Box>
               </Grid>
               <Grid xs={2} item sx={!pusto ? styleXTC011 : styleXTC01}>
-                {pointer[namer][i].Value[0]}
+                {pointerr[namer][i].Value[0]}
               </Grid>
               <Grid xs={2} item sx={!pusto ? styleXTC011 : styleXTC01}>
-                {pointer[namer][i].Value[1]}
+                {pointerr[namer][i].Value[1]}
               </Grid>
               <Grid xs={2} item sx={!pusto ? styleXTC011 : styleXTC01}>
-                {pointer[namer][i].Value[2]}
+                {pointerr[namer][i].Value[2]}
               </Grid>
               <Grid xs={5} item sx={!pusto ? styleXTC011 : styleXTC01}>
                 {kakchestvo}
@@ -279,10 +279,10 @@ const PointsLevel2Calc = (props: {
   const OutputGraf = () => {
     return (
       <Grid container>
-        {!!pointer && (
+        {!!pointerr && (
           <Grid item xs sx={styleXTC03}>
-            {!!pointer[namer] && (
-              <>{!!pointer[namer].length && <>{PointsGraf00()}</>}</>
+            {!!pointerr[namer] && (
+              <>{!!pointerr[namer].length && <>{PointsGraf00()}</>}</>
             )}
           </Grid>
         )}
@@ -334,13 +334,13 @@ const PointsLevel2Calc = (props: {
   };
 
   const CalcSupportiveTabl = () => {
-    let masTime = [TimeStr(pointer[namer][0].Time)];
-    let masKs = [pointer[namer][0].Value[2]];
+    let masTime = [TimeStr(pointerr[namer][0].Time)];
+    let masKs = [pointerr[namer][0].Value[2]];
 
-    for (let i = 1; i < pointer[namer].length; i++) {
-      if (pointer[namer][i].Value[2] !== masKs[masKs.length - 1]) {
-        masTime.push(TimeStr(pointer[namer][i].Time));
-        masKs.push(pointer[namer][i].Value[2]);
+    for (let i = 1; i < pointerr[namer].length; i++) {
+      if (pointerr[namer][i].Value[2] !== masKs[masKs.length - 1]) {
+        masTime.push(TimeStr(pointerr[namer][i].Time));
+        masKs.push(pointerr[namer][i].Value[2]);
       }
     }
     for (let i = 0; i < masKs.length; i++) masKs[i] = AccordKStoPK(masKs[i]);
@@ -379,11 +379,11 @@ const PointsLevel2Calc = (props: {
           {statusXT && <Box sx={styleXTC04}>Расчёт</Box>}
           {OutputGraf()}
           <Grid container sx={{ marginTop: "0.6vh", height: "55.4vh" }}>
-            {!!pointer ? (
+            {!!pointerr ? (
               <>
-                {!!pointer[namer] ? (
+                {!!pointerr[namer] ? (
                   <>
-                    {!!pointer[namer].length ? (
+                    {!!pointerr[namer].length ? (
                       <>
                         {OutputMainTabl(props.update)}
                         <Grid item xs={0.05}></Grid>
