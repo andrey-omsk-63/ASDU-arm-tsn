@@ -275,7 +275,7 @@ const PointsLevel2BazaDiogram = (props: {
       setPictInfo(false);
       setTimeout(() => {
         PuskBalloon();
-      }, 1000);
+      }, 10);
     } else PuskBalloon();
   };
 
