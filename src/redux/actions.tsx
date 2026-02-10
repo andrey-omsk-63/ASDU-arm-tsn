@@ -1,10 +1,10 @@
 import { MASKPOINT_CREATE } from './types';
 import { STATSAVE_CREATE } from './types';
 
-import { Pointer } from './../App';
+import { Pointerr } from './../App';
 import { Stater } from './../App';
 
-export function maskpointCreate(maskPoint: Pointer[] = []) {
+export function maskpointCreate(maskPoint: Pointerr[] = []) {
   return {
     type: MASKPOINT_CREATE,
     data: maskPoint,

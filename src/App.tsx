@@ -83,14 +83,14 @@ export let dateStat: Stater = {
   massKey: [], // массив ключей area-id для 'хороших дат'
 };
 
-export interface Pointer {
+export interface Pointerr {
   newXt: boolean;
   redaxPoint: boolean;
   savePoint: boolean;
   pointForRedax: any;
 }
 
-export let maskPoint: Pointer = {
+export let maskPoint: Pointerr = {
   newXt: true,
   redaxPoint: true,
   savePoint: false,

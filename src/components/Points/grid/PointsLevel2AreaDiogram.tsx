@@ -181,7 +181,7 @@ const PointsLevel2AreaDiogram = (props: {
       setPictInfo(false);
       setTimeout(() => {
         PuskBalloon();
-      }, 10);
+      }, 1000);
     } else PuskBalloon();
   };
 
