@@ -232,7 +232,7 @@ export const styleXTG03 = {
 
 export const styleXTG04 = {
   height: "85.7vh",
-  background: 'linear-gradient(160deg, #F1F5FB 63%, #D0DEF0 )',
+  background: "linear-gradient(160deg, #F1F5FB 63%, #D0DEF0 )",
   marginLeft: 0.5,
   borderRadius: 1,
   boxShadow: 12,
@@ -422,7 +422,7 @@ export const PointInfoDirStyle = (mt01: string, ml01: string, fs: number) => {
 export const PointInfoDirRotStyle = (
   mt01: string,
   ml01: string,
-  fs: number
+  fs: number,
 ) => {
   const stylePointInf = {
     fontSize: fs,
@@ -448,7 +448,7 @@ export const styleXTG035 = {
 
 export const styleXTG045 = {
   height: "85.8vh",
-  background: 'linear-gradient(160deg, #F1F5FB 63%, #D0DEF0 )',
+  background: "linear-gradient(160deg, #F1F5FB 63%, #D0DEF0 )",
   marginLeft: 0.5,
   borderRadius: 1,
   boxShadow: 12,

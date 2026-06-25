@@ -17,6 +17,7 @@ import StatisticsNew from "./components/Statistics/StatisticsNew";
 import StatisticsArchive from "./components/Statistics/StatisticsArchive";
 import BeginSeans from "./AppBeginSeans";
 import EndSeans from "./AppEndSeans";
+import ServerError from "./AppServerError";
 import InputInterval from "./AppInpInerval";
 import ButtonMenu from "./AppButtonMenu";
 import AppWriteToAllFileForXT from "./AppWriteToAllFileForXT";
@@ -134,6 +135,7 @@ let updateDevice = true;
 let notPrint = false;
 let AREA = 0;
 let ID = 0;
+let notServerError = true; // не было ошибки сервера
 
 const App = () => {
   //== Piece of Redux ======================================
@@ -259,9 +261,11 @@ const App = () => {
     };
     WS.onclose = function (event: any) {
       console.log("WS.current.onclose:", event);
+      if (!debug) notServerError = false;
     };
     WS.onerror = function (event: any) {
       console.log("WS.current.onerror:", event);
+      if (!debug) notServerError = false;
     };
     WS.onmessage = function (event: any) {
       let allData = JSON.parse(event.data);
@@ -673,13 +677,14 @@ const App = () => {
 
   return (
     <>
-      {openErrLog && (
+      {!notServerError && <ServerError />}
+      {openErrLog && notServerError &&(
         <EndSeans bsLogin={bsLogin} setOpen={setOpenErrLog} reg={regionGlob} />
       )}
-      {regionGlob === 0 && isOpenInf && (
+      {RegionGlob === 0 && isOpenInf && notServerError &&(
         <BeginSeans pointsReg={pointsReg} SetRegion={SetRegionGlob} />
       )}
-      {!openErrLog && (
+      {!openErrLog && notServerError &&(
         <>
           {write && <AppWriteToAllFileForXT setOpen={setWrite} />}
           <Box sx={{ width: "98.8%" }}>

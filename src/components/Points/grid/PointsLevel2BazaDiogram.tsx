@@ -29,9 +29,7 @@ const PointsLevel2BazaDiogram = (props: {
   crossroad: number;
   update: boolean;
 }) => {
-  //const points = props.xctrll[props.xtt];
   const crRoad = props.crossroad;
-  //const pointsXctrls = points.xctrls[crRoad];
   const namer = props.xctrll[props.xtt].xctrls[crRoad].name;
   const pointerr = props.xctrll[props.xtt].results;
 
@@ -231,6 +229,7 @@ const PointsLevel2BazaDiogram = (props: {
     let elem = props.xctrll[props.xtt].xctrls[crRoad].Calculates;
     let stylePointInf1 = PointInfoDirRotStyle("-80.5vh", "-67px", 17);
     let ml01 = dlBlok - 130 + "px";
+
     let stylePointInf2 = PointInfoDirStyle("-1.6vh", ml01, 16);
     let mass1 = "";
     let mass2 = "";
