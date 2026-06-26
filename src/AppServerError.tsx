@@ -36,6 +36,7 @@ const ServerError = () => {
     marginTop: 1,
     marginRight: 1,
     textTransform: "unset !important",
+    padding: "3px 8px 0px 8px",
   };
 
   const handleClose = () => {

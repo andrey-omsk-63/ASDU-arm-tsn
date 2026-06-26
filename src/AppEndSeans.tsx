@@ -39,6 +39,7 @@ const EndSeans = (props: { bsLogin: string; setOpen: any; reg: number }) => {
     marginTop: 1,
     marginRight: 1,
     textTransform: "unset !important",
+    padding: "3px 8px 0px 8px",
   };
 
   const handleClose = (mode: number) => {

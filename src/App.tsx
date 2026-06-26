@@ -257,14 +257,14 @@ const App = () => {
 
   React.useEffect(() => {
     WS.onopen = function (event: any) {
-      console.log("WS.current.onopen:", event);
+      console.log("WS.current.onopen:", notServerError, event);
     };
     WS.onclose = function (event: any) {
-      console.log("WS.current.onclose:", event);
       if (!debug) notServerError = false;
+      console.log("WS.current.onclose:", notServerError, event);
     };
     WS.onerror = function (event: any) {
-      console.log("WS.current.onerror:", event);
+      console.log("WS.current.onerror:", notServerError, event);
       if (!debug) notServerError = false;
     };
     WS.onmessage = function (event: any) {
@@ -678,13 +678,13 @@ const App = () => {
   return (
     <>
       {!notServerError && <ServerError />}
-      {openErrLog && notServerError &&(
+      {openErrLog && notServerError && (
         <EndSeans bsLogin={bsLogin} setOpen={setOpenErrLog} reg={regionGlob} />
       )}
-      {RegionGlob === 0 && isOpenInf && notServerError &&(
+      {RegionGlob === 0 && isOpenInf && notServerError && (
         <BeginSeans pointsReg={pointsReg} SetRegion={SetRegionGlob} />
       )}
-      {!openErrLog && notServerError &&(
+      {!openErrLog && notServerError && (
         <>
           {write && <AppWriteToAllFileForXT setOpen={setWrite} />}
           <Box sx={{ width: "98.8%" }}>
