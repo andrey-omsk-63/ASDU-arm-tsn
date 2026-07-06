@@ -79,6 +79,14 @@ const AppWriteToAllFileForXT = (props: { setOpen: Function }) => {
     textAlign: "center",
   };
 
+  const styleModalTabl = {
+    marginTop: 1,
+    color: "#5B1080",
+    textAlign: "center",
+    textShadow: "2px 2px 3px rgba(0,0,0,0.3)",
+    cursor: "default",
+  };
+
   const handleDownloadCsv = () => {
     const element = document.createElement("a");
     let textFile = " ;Прямой;Обратный;КС на ДК;Примечание;\n";
@@ -141,15 +149,7 @@ const AppWriteToAllFileForXT = (props: { setOpen: Function }) => {
         <Button sx={styleModalEnd} onClick={handleCloseSet}>
           &#10006;
         </Button>
-        <Box
-          sx={{
-            marginTop: 1,
-            color: "#5B1080",
-            textAlign: "center",
-            textShadow: "2px 2px 3px rgba(0,0,0,0.3)",
-            cursor: "default",
-          }}
-        >
+        <Box sx={styleModalTabl}>
           <b>Формат сохранения таблицы:</b>
         </Box>
         <Box sx={{ marginTop: 2, textAlign: "center" }}>
