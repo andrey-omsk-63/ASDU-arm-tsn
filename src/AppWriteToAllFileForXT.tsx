@@ -1,9 +1,5 @@
 import * as React from "react";
-import {
-  //useDispatch,
-  useSelector,
-} from "react-redux";
-//import { statsaveCreate } from './redux/actions';
+import { useSelector } from "react-redux";
 
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -18,7 +14,6 @@ const AppWriteToAllFileForXT = (props: { setOpen: Function }) => {
     const { statsaveReducer } = state;
     return statsaveReducer.datestat;
   });
-  //const dispatch = useDispatch();
   //========================================================
   const [openSet, setOpenSet] = React.useState(true);
 
