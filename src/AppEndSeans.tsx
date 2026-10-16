@@ -45,7 +45,7 @@ const EndSeans = (props: { bsLogin: string; setOpen: any; reg: number }) => {
   const handleClose = (mode: number) => {
     if (!mode) window.close();
 
-    console.log("getDevices", reGion);
+    console.log("getDevices", reGion); //======================
 
     const handleSendOpen = () => {
       if (WS !== null) {
