@@ -53,6 +53,7 @@ const Management = (props: {
             JSON.stringify({ type: "stopOldStatistics", region: reGion })
           );
           WS.send(JSON.stringify({ type: "getDevices", region: reGion }));
+          console.log('Отправка getDevices,stopStatistics,stopOldStatistics',reGion)
         } else {
           setTimeout(() => {
             handleSendOpen();

@@ -4,7 +4,10 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Modal from "@mui/material/Modal";
 
-import { MenuSpisRegion, SendSocketDevices } from "./AppServiceFunctions";
+import {
+  MenuSpisRegion,
+  //SendSocketDevices
+} from "./AppServiceFunctions";
 
 let massRegion: Array<number> = [];
 let massNameRegion: Array<string> = [];
@@ -31,7 +34,7 @@ const BeginSeans = (props: { pointsReg: any; SetRegion: Function }) => {
   }
 
   const handleCloseModal = (numer: number) => {
-    SendSocketDevices(numer);
+    //SendSocketDevices(numer);
     props.SetRegion(numer);
     setOpen(false);
   };
@@ -41,7 +44,7 @@ const BeginSeans = (props: { pointsReg: any; SetRegion: Function }) => {
   };
 
   const OneRegin = () => {
-    SendSocketDevices(massRegion[0]);
+    //SendSocketDevices(massRegion[0]);
     props.SetRegion(massRegion[0]);
   };
 

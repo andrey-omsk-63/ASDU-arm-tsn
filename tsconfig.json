@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
-    //"target": "es2016", // изменить
-    "target": "es5",
+    "target": "es2016", // изменить
+    //"target": "es5",
     "lib": [
       "dom",
       "dom.iterable",
       "esnext"
     ],
-    //"ignoreDeprecations": "6.0",  // добавить
-    //"noUncheckedSideEffectImports": false,  // добавить
+    "ignoreDeprecations": "6.0",  // добавить
+    "noUncheckedSideEffectImports": false,  // добавить
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
