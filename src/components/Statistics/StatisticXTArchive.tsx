@@ -35,7 +35,7 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
 );
 
 export interface GrafGlob {
@@ -273,7 +273,7 @@ const StatisticXTArchive = (props: {
                   <b>{i.toString()}</b>
                 </Button>
               </Grid>
-            </Grid>
+            </Grid>,
           );
         }
         return resStr;
@@ -320,7 +320,7 @@ const StatisticXTArchive = (props: {
       resStr.push(
         <Grid key={Math.random()} item xs={0.5} sx={styleSt05}>
           <Box sx={styleXTG101}>{timLiner}</Box>
-        </Grid>
+        </Grid>,
       );
       if (!matrix[numMas].Avail) {
         //нет данных
@@ -330,7 +330,7 @@ const StatisticXTArchive = (props: {
         resStr.push(
           <Grid key={Math.random()} item xs sx={styleSt06}>
             нет данных
-          </Grid>
+          </Grid>,
         );
       } else {
         for (let i = 0; i < colChanel; i++) {
@@ -339,14 +339,14 @@ const StatisticXTArchive = (props: {
           resStr.push(
             <Grid key={Math.random()} item xs={0.5122} sx={styleSt}>
               {matrix[numMas].Datas[i].in}
-            </Grid>
+            </Grid>,
           );
         }
         //формирование конца строки
         resStr.push(
           <Grid key={Math.random()} item xs sx={styleSt06}>
             {kakchestvo.slice(0, -2)}
-          </Grid>
+          </Grid>,
         );
       }
     }
@@ -413,6 +413,9 @@ const StatisticXTArchive = (props: {
       let inHour = points[areaId].Statistics[i].Hour;
       let inTime = inHour * 60 + points[areaId].Statistics[i].Min;
       let timeOffset = inHour === 0 && points[areaId].Statistics[i].Min === 0;
+
+      //console.log("timeOffset:", i, timeOffset);
+
       if (!timeOffset) {
         if (inTime % step === 0) {
           let numInMatrix = inTime / step - 1;
@@ -426,6 +429,8 @@ const StatisticXTArchive = (props: {
         }
       }
     }
+
+    //console.log("MATRIX:", MATRIX);
     //== Piece of Redux ======================================
     datestat.area = points[areaId].area;
     datestat.id = points[areaId].id;
@@ -441,7 +446,7 @@ const StatisticXTArchive = (props: {
     if (stepInterval > 1) {
       let pointsMatrix: any = [];
       for (let i = 0; i < matrix.length; i = i + stepInterval) {
-        let sumRec = matrix[i];
+        let sumRec = JSON.parse(JSON.stringify(matrix[i])); // тут косяк был
         for (let j = 0; j < matrix[i].Datas.length; j++) {
           for (let k = 1; k < stepInterval; k++) {
             sumRec.Datas[j].in = sumRec.Datas[j].in + matrix[i + k].Datas[j].in;
@@ -456,6 +461,8 @@ const StatisticXTArchive = (props: {
       }
       matrix = pointsMatrix;
     }
+
+    //console.log("matrix:", interval, step, stepInterval, matrix);
   };
   //============ Dinama =====================================================
   const handleClose = () => setOpenLoader(false);

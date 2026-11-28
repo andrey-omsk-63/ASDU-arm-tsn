@@ -425,7 +425,7 @@ const StatisticXTNew = (props: {
     if (stepInterval > 1) {
       let pointsMatrix: any = [];
       for (let i = 0; i < matrix.length; i += stepInterval) {
-        let sumRec = matrix[i];
+        let sumRec = JSON.parse(JSON.stringify(matrix[i]));  // тут косяк был
         for (let j = 0; j < matrix[i].Datas.length; j++) {
           for (let k = 1; k < stepInterval; k++) {
             sumRec.Datas[j].in = sumRec.Datas[j].in + matrix[i + k].Datas[j].in;
